@@ -34,7 +34,6 @@
     "jest/__tests__/unit",
     "src/build",
     "src/config",
-    "cypress",
     "dist",
     "**.js"
   ]

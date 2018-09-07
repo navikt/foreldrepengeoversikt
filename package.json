@@ -17,8 +17,6 @@
     "start": "node ./src/build/scripts/start-dev.js",
     "start-no-decorator": "node ./src/build/scripts/start-dev-nodecorator.js",
     "precommit": "pretty-quick --staged",
-    "cypress": "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && echo $(npm config get prefix)/bin/cypress run",
-    "cy": "cypress open & npm run build && export PORT=8081 && npm run start-express",
     "jest": "jest --verbose --config ./jest/jest.config.js",
     "jest-watch": "jest --watch --verbose --config ./jest/jest.config.js"
   },
@@ -36,7 +34,6 @@
     "babel-preset-react": "^6.24.1",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "css-loader": "^1.0.0",
-    "cypress": "2.1.0",
     "dotenv": "^5.0.1",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "fs-extra": "6.0.1",
