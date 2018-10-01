@@ -1,9 +1,11 @@
 import * as React from 'react';
 import Api from './api/api';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { redirectToLogin } from './utils/login';
 import { AxiosError } from 'axios';
 import Sak from './types/Sak';
 import Header from './components/header/Header';
+import Innsyn from './pages/Innsyn';
 
 interface State {
     saker: Sak[];
@@ -35,9 +37,14 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 <Header />
-            </React.Fragment>
+                <Router>
+                    <Switch>
+                        <Route path="/" render={(props) => <Innsyn saker={this.state.saker} {...props} />} />
+                    </Switch>
+                </Router>
+            </>
         );
     }
 }
