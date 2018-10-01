@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 
-import Foreldrepengeoversikt from './components/Foreldrepengeoversikt';
+import Foreldrepengeoversikt from './Foreldrepengeoversikt';
 
 import './styles/app.less';
 
