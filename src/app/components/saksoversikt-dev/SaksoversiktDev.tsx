@@ -5,7 +5,7 @@ import Sak from '../../types/Sak';
 import Behandling from '../../types/Behandling';
 import { Status } from '../../types/Status';
 
-import './saksoversikt.less';
+import './saksoversiktDev.less';
 
 interface Props {
     title: string;
@@ -13,7 +13,7 @@ interface Props {
     saker: Sak[];
 }
 
-class Saksoversikt extends React.Component<Props> {
+class SaksoversiktDev extends React.Component<Props> {
     renderSaksinformasjon(sak: Sak) {
         return (
             <div className={'saksoversiktList__item'}>
@@ -52,4 +52,4 @@ class Saksoversikt extends React.Component<Props> {
         );
     }
 }
-export default Saksoversikt;
+export default SaksoversiktDev;
