@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Sidetittel } from 'nav-frontend-typografi';
 import FamilyIcon from '../../ikoner/FamilyIcon';
 import BEMHelper from '../../utils/bem';
+
 import './header.less';
 
 const Header: React.StatelessComponent = () => {
@@ -10,7 +11,7 @@ const Header: React.StatelessComponent = () => {
         <div className={cls.className}>
             <div className={cls.element('content')}>
                 <Sidetittel className={cls.element('title')}>
-                    Foreldrepenger, engangsstønad og svangerskapspenger
+                    Dine foreldrepenger
                 </Sidetittel>
                 <FamilyIcon className={cls.element('icon')} />
             </div>
