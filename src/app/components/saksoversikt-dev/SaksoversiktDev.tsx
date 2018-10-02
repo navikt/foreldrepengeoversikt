@@ -16,13 +16,13 @@ interface Props {
 class SaksoversiktDev extends React.Component<Props> {
     renderSaksinformasjon(sak: Sak) {
         return (
-            <div className={'saksoversiktList__item'}>
+            <div className={'saksoversiktListDev__item'}>
                 <Normaltekst> Saksnummer: {sak.saksnummer}</Normaltekst>
                 <Normaltekst> Behandlingstema: {sak.behandlingTema}</Normaltekst>
                 <Normaltekst> Behandlinger: </Normaltekst>
-                <ul className="behandlinger">
+                <ul className="behandlingerDev">
                     {sak.behandlinger.map((behandling: Behandling) => (
-                        <li className={'behandlinger__item'} key={behandling.id}>
+                        <li className={'behandlingerDev__item'} key={behandling.id}>
                             <Normaltekst> Status: {behandling.status}</Normaltekst>
                             <Normaltekst> Id: {behandling.id}</Normaltekst>
                             <Normaltekst> Type: {behandling.type}</Normaltekst>
@@ -47,7 +47,7 @@ class SaksoversiktDev extends React.Component<Props> {
         return (
             <React.Fragment>
                 <Undertittel>{this.props.title}</Undertittel>
-                <ul className="saksoversiktList">{this.renderSaksoversikt()}</ul>
+                <ul className="saksoversiktListDev">{this.renderSaksoversikt()}</ul>
             </React.Fragment>
         );
     }
