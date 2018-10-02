@@ -3,28 +3,48 @@ import Sak from '../../types/Sak';
 import Saksoversikt from '../../components/saksoversikt/Saksoversikt';
 
 import './innsyn.less';
+import Header from '../../components/header/Header';
+import { History } from 'history';
 
 interface Props {
     saker: Sak[];
+    history: History;
 }
 
 class Innsyn extends React.Component<Props> {
+    constructor(props: Props) {
+        super(props);
+        this.onEttersendVedlegg = this.onEttersendVedlegg.bind(this);
+        this.onEndreSøknad = this.onEndreSøknad.bind(this);
+    }
 
-    handleSaksoversikt() {
+    onEttersendVedlegg(sak: Sak): void {
+        this.props.history.push('/ettersendelse', { sak });
+    }
 
+    // TODO
+    onEndreSøknad(sak: Sak): void {
+        console.log('not implemented yet');
     }
 
     render() {
         return (
-            <div className={'innsyn'}>
-                <ul className={'innsyn__saksoversiktList'}>
-                    {this.props.saker.map((sak: Sak) => (
-                        <li key={sak.saksnummer}>
-                            <Saksoversikt sak={sak} />
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <>
+                <Header />
+                <div className={'innsyn'}>
+                    <ul className={'innsyn__saksoversiktList'}>
+                        {this.props.saker.map((sak: Sak) => (
+                            <li key={sak.saksnummer}>
+                                <Saksoversikt
+                                    sak={sak}
+                                    onEttersendVedlegg={this.onEttersendVedlegg}
+                                    onEndreSøknad={this.onEndreSøknad}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </>
         );
     }
 }

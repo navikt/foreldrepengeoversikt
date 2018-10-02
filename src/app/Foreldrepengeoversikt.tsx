@@ -4,19 +4,20 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { redirectToLogin } from './utils/login';
 import { AxiosError } from 'axios';
 import Sak from './types/Sak';
-import Header from './components/header/Header';
 import Innsyn from './pages/innsyn/Innsyn';
 import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
 import InnsynDev from './pages/innsyn-dev/InnsynDev';
+import Ettersendelse from './pages/ettersendelse/Ettersendelse';
 
 interface State {
     saker: Sak[];
-    error?: AxiosError;
     loading: boolean;
+    error?: AxiosError;
+    selectedSak?: Sak;
 }
 
 class Foreldrepengeoversikt extends React.Component<{}, State> {
-    constructor(props: State) {
+    constructor(props: {}) {
         super(props);
         this.state = {
             saker: [],
@@ -48,10 +49,10 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
 
         return (
             <>
-                <Header />
                 <Router>
                     <Switch>
-                        <Route path="/dev" render={(props) => <InnsynDev saker={this.state.saker} {...props} />} />
+                        <Route path="/dev" render={() => <InnsynDev saker={this.state.saker} />} />
+                        <Route path="/ettersendelse" render={(props) => <Ettersendelse {...props} />} />
                         <Route path="/" render={(props) => <Innsyn saker={this.state.saker} {...props} />} />
                     </Switch>
                 </Router>

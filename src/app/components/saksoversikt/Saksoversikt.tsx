@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 
-import './saksoversikt.less';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import Sak from '../../types/Sak';
 import { Knapp } from 'nav-frontend-knapper';
 
+import './saksoversikt.less';
+
 interface Props {
     sak: Sak;
+    onEttersendVedlegg: (sak: Sak) => void;
+    onEndreSøknad: (sak: Sak) => void;
 }
 
 class Saksoversikt extends React.Component<Props> {
@@ -21,18 +24,18 @@ class Saksoversikt extends React.Component<Props> {
     }
 
     render() {
-        const sak = this.props.sak;
+        const { sak, onEttersendVedlegg, onEndreSøknad } = this.props;
         return (
             <EkspanderbartpanelBase
                 heading={this.renderSaksoversiktHeader(sak)}
                 ariaTittel={'søknad om foreldrepenger'}>
                 <Normaltekst>Saksnummer: {sak.saksnummer}</Normaltekst>
                 <Normaltekst>Her kan du ettersende dokumentasjon til søknaden din</Normaltekst>
-                <Knapp onClick={() => console.log('last opp vedlegg')}>Last opp vedlegg</Knapp>{' '}
+                <Knapp onClick={() => onEttersendVedlegg(sak)}>Last opp vedlegg</Knapp>{' '}
                 <Normaltekst>
                     Endre din periode med foreldrepenger (legge til ferie, hvis du skal jobbe eller har vært syk)
                 </Normaltekst>
-                <Knapp onClick={() => console.log('endre periode')}>Endre perioden din</Knapp>
+                <Knapp onClick={() => onEndreSøknad(sak)}>Endre perioden din</Knapp>
             </EkspanderbartpanelBase>
         );
     }
