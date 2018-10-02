@@ -5,7 +5,7 @@ export default interface Sak {
     aktørId: string;
     aktørIdAnnenPart: string;
     aktørIdBarn: string[];
-    behandlingstema: string;
+    behandlingTema: string;
     behandlinger: Behandling[];
     status: Status;
     saksnummer: string;

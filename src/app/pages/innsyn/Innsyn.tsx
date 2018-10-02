@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Sak from '../types/Sak';
+import Sak from '../../types/Sak';
 
 interface Props {
     saker: Sak[];
