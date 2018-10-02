@@ -6,10 +6,12 @@ import { AxiosError } from 'axios';
 import Sak from './types/Sak';
 import Header from './components/header/Header';
 import Innsyn from './pages/Innsyn';
+import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
 
 interface State {
     saker: Sak[];
     error?: AxiosError;
+    loading: boolean;
 }
 
 class Foreldrepengeoversikt extends React.Component<{}, State> {
@@ -17,25 +19,32 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
         super(props);
         this.state = {
             saker: [],
-            error: undefined
+            loading: false
         };
     }
 
-    componentWillMount() {
+    componentWillMount(): void {
         this.fetchSaker();
     }
 
-    fetchSaker() {
-        Api.getSøkerInfo()
-            .then((response) => this.setState({ saker: response.data }))
-            .catch((error: AxiosError) => {
-                if (error.response) {
-                    error.response.status === 401 ? redirectToLogin() : this.setState({ error });
-                }
-            });
+    fetchSaker(): void {
+        this.setState({ loading: true }, () => {
+            Api.getSøkerInfo()
+                .then((response) => this.setState({ saker: response.data }))
+                .catch((error: AxiosError) => {
+                    if (error.response) {
+                        error.response.status === 401 ? redirectToLogin() : this.setState({ error });
+                    }
+                })
+                .finally(() => this.setState({ loading: false }));
+        });
     }
 
-    render() {
+    render(): JSX.Element {
+        if (this.state.loading) {
+            return <ApplicationSpinner />;
+        }
+
         return (
             <>
                 <Header />
