@@ -18,7 +18,7 @@ class Saksoversikt extends React.Component<Props> {
         return (
             <div className={'saksoversiktList__item'}>
                 <Normaltekst> Saksnummer: {sak.saksnummer}</Normaltekst>
-                <Normaltekst> Behandlingstema: {sak.behandlingstema}</Normaltekst>
+                <Normaltekst> Behandlingstema: {sak.behandlingTema}</Normaltekst>
                 <Normaltekst> Behandlinger: </Normaltekst>
                 <ul className="behandlinger">
                     {sak.behandlinger.map((behandling: Behandling) => (
