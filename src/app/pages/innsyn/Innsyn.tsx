@@ -5,6 +5,7 @@ import Saksoversikt from '../../components/saksoversikt/Saksoversikt';
 import './innsyn.less';
 import Header from '../../components/header/Header';
 import { History } from 'history';
+import BEMHelper from '../../utils/bem';
 
 interface Props {
     saker: Sak[];
@@ -28,11 +29,12 @@ class Innsyn extends React.Component<Props> {
     }
 
     render() {
+        const cls = BEMHelper('innsyn');
         return (
             <>
                 <Header />
-                <div className={'innsyn'}>
-                    <ul className={'innsyn__saksoversiktList'}>
+                <div className={cls.className}>
+                    <ul className={cls.element('saksoversiktList')}>
                         {this.props.saker.map((sak: Sak) => (
                             <li key={sak.saksnummer}>
                                 <Saksoversikt

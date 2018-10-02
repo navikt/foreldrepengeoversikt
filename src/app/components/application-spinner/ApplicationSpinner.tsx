@@ -1,16 +1,19 @@
 import * as React from 'react';
 import Spinner from 'nav-frontend-spinner';
+import BEMHelper from '../../utils/bem';
+import './applicationSpinner.less';
 
 export interface Props {}
 
-import './applicationSpinner.less';
-
-const ApplicationSpinner: React.StatelessComponent<Props> = (props) => (
-    <div className="applicationSpinner">
-        <div className="applicationSpinner__spinner">
-            <Spinner type="XXL" />
+const ApplicationSpinner: React.StatelessComponent<Props> = () => {
+    const cls = BEMHelper('applicationSpinner');
+    return (
+        <div className={cls.className}>
+            <div className={cls.element('spinner')}>
+                <Spinner type="XXL" />
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 export default ApplicationSpinner;
