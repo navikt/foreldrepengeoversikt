@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Sidetittel } from 'nav-frontend-typografi';
 import FamilyIcon from '../../ikoner/FamilyIcon';
-import BEMHelper from '../../utils/bem';
+import BEMHelper from '../../../common/util/bem';
 
 import './header.less';
 

@@ -5,7 +5,7 @@ import Saksoversikt from '../../components/saksoversikt/Saksoversikt';
 import './innsyn.less';
 import Header from '../../components/header/Header';
 import { History } from 'history';
-import BEMHelper from '../../utils/bem';
+import BEMHelper from '../../../common/util/bem';
 
 interface Props {
     saker: Sak[];
