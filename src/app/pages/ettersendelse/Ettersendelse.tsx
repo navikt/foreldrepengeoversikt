@@ -8,6 +8,7 @@ import AttachmentsUploader from 'common/storage/attachment/components/Attachment
 import './ettersendelse.less';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
+import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
 
 interface Props {
     history: History;
@@ -60,25 +61,33 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     handleSendOnClick() {
-        console.log("handleSendOnClick");
-    };
+        console.log('handleSendOnClick');
+    }
 
     render() {
         const cls = BEMHelper('ettersendelse');
-        console.log(this.state.attachments);
         return (
             <div className={cls.className}>
-                <Innholdstittel>Last opp dokumentasjon til sak {this.state.sak.saksnummer}</Innholdstittel>
-                <AttachmentsUploader
-                    attachments={this.state.attachments}
-                    attachmentType={AttachmentType.ALENEOMSORG}
-                    skjemanummer={Skjemanummer.ANNET}
-                    onFilesUploadStart={this.addAttachment}
-                    onFileUploadFinish={this.editAttachment}
-                    onFileDeleteStart={this.editAttachment}
-                    onFileDeleteFinish={this.deleteAttachemnt}
-                />
-                <Hovedknapp onClick={this.handleSendOnClick}>Ettersend vedlegg</Hovedknapp>
+                <Søknadstittel>Ettersending av vedlegg</Søknadstittel>
+                <div className={cls.element('content')}>
+                    <Innholdstittel className={cls.element('title')}>
+                        Last opp dokumentasjon til sak {this.state.sak.saksnummer}
+                    </Innholdstittel>
+                    <div className={cls.element('uploader')}>
+                        <AttachmentsUploader
+                            attachments={this.state.attachments}
+                            attachmentType={AttachmentType.ALENEOMSORG}
+                            skjemanummer={Skjemanummer.ANNET}
+                            onFilesUploadStart={this.addAttachment}
+                            onFileUploadFinish={this.editAttachment}
+                            onFileDeleteStart={this.editAttachment}
+                            onFileDeleteFinish={this.deleteAttachemnt}
+                        />
+                    </div>
+                    <Hovedknapp className={cls.element('sendButton')} onClick={this.handleSendOnClick}>
+                        Ettersend vedlegg
+                    </Hovedknapp>
+                </div>
             </div>
         );
     }
