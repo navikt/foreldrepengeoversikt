@@ -78,7 +78,7 @@ class AttachmentInput extends React.Component<Props> {
     }
 
     render() {
-        const { id, onClick, attachmentType, intl } = this.props;
+        const { id, onClick, intl } = this.props;
         const inputId = `${id}-input`;
 
         const BEM = BEMHelper('attachmentButton');
@@ -100,7 +100,7 @@ class AttachmentInput extends React.Component<Props> {
                     <CustomSVG iconRef={uploadIcon} size={22} />
                 </div>
                 <Element className={BEM.element('label')}>
-                    <FormattedMessage id={`vedlegg.lastoppknapp.${attachmentType}`} />
+                    <FormattedMessage id={'vedlegg.lastoppknapp'} />
                 </Element>
                 <input
                     id={inputId}

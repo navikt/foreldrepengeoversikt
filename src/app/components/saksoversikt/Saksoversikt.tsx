@@ -17,7 +17,7 @@ interface Props {
 class Saksoversikt extends React.Component<Props> {
     renderSaksoversiktHeader(sak: Sak) {
         return (
-            <div className={'saksoversikt__header'}>
+            <div className={'saksoversiktHeader'}>
                 <Undertittel>Søknad om foreldrepenger</Undertittel>
                 <Normaltekst>Dato: {sak.opprettet}</Normaltekst>
             </div>

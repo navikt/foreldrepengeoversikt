@@ -9,6 +9,7 @@ import './ettersendelse.less';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
+import ResponsiveWrapper from '../ResponsiveWrapper';
 
 interface Props {
     history: History;
@@ -37,15 +38,15 @@ class Ettersendelse extends React.Component<Props, State> {
         this.deleteAttachemnt = this.deleteAttachemnt.bind(this);
     }
 
-    addAttachment(attachments: Attachment[]) {
+    addAttachment(attachments: Attachment[]): void {
         this.setState({ attachments: this.state.attachments.concat(attachments) });
     }
 
-    editAttachment(attachment: Attachment) {
+    editAttachment(attachment: Attachment): void {
         this.setState({ attachments: this.updateAttachmentList(this.state.attachments, attachment, Operation.EDIT) });
     }
 
-    deleteAttachemnt(attachment: Attachment) {
+    deleteAttachemnt(attachment: Attachment): void {
         const newAttachmentList = [...this.state.attachments];
         newAttachmentList.splice(newAttachmentList.indexOf(attachment), 1);
         this.setState({ attachments: newAttachmentList });
@@ -69,25 +70,27 @@ class Ettersendelse extends React.Component<Props, State> {
         return (
             <div className={cls.className}>
                 <Søknadstittel>Ettersending av vedlegg</Søknadstittel>
-                <div className={cls.element('content')}>
-                    <Innholdstittel className={cls.element('title')}>
-                        Last opp dokumentasjon til sak {this.state.sak.saksnummer}
-                    </Innholdstittel>
-                    <div className={cls.element('uploader')}>
-                        <AttachmentsUploader
-                            attachments={this.state.attachments}
-                            attachmentType={AttachmentType.ALENEOMSORG}
-                            skjemanummer={Skjemanummer.ANNET}
-                            onFilesUploadStart={this.addAttachment}
-                            onFileUploadFinish={this.editAttachment}
-                            onFileDeleteStart={this.editAttachment}
-                            onFileDeleteFinish={this.deleteAttachemnt}
-                        />
+                <ResponsiveWrapper>
+                    <div className={cls.modifier('content')}>
+                        <Innholdstittel className={cls.element('title')}>
+                            Last opp dokumentasjon til sak {this.state.sak.saksnummer}
+                        </Innholdstittel>
+                        <div className={cls.element('uploader')}>
+                            <AttachmentsUploader
+                                attachments={this.state.attachments}
+                                attachmentType={AttachmentType.ALENEOMSORG}
+                                skjemanummer={Skjemanummer.ANNET}
+                                onFilesUploadStart={this.addAttachment}
+                                onFileUploadFinish={this.editAttachment}
+                                onFileDeleteStart={this.editAttachment}
+                                onFileDeleteFinish={this.deleteAttachemnt}
+                            />
+                        </div>
+                        <div className={cls.element('sendButton')}>
+                            <Hovedknapp onClick={this.handleSendOnClick}>Ettersend vedlegg</Hovedknapp>
+                        </div>
                     </div>
-                    <Hovedknapp className={cls.element('sendButton')} onClick={this.handleSendOnClick}>
-                        Ettersend vedlegg
-                    </Hovedknapp>
-                </div>
+                </ResponsiveWrapper>
             </div>
         );
     }
