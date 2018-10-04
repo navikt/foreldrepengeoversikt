@@ -7,6 +7,7 @@ import { History } from 'history';
 import BEMHelper from '../../../common/util/bem';
 import { Systemtittel } from 'nav-frontend-typografi';
 import './innsyn.less';
+import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjon';
 
 interface Props {
     saker: Sak[];
@@ -54,6 +55,7 @@ class Innsyn extends React.Component<Props> {
                         </ul>
                     )}
                 </div>
+                <AnnenInformasjon />
             </>
         );
     }
