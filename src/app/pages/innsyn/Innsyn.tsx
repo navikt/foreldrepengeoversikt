@@ -2,10 +2,11 @@ import * as React from 'react';
 import Sak from '../../types/Sak';
 import Saksoversikt from '../../components/saksoversikt/Saksoversikt';
 
-import './innsyn.less';
 import Header from '../../components/header/Header';
 import { History } from 'history';
 import BEMHelper from '../../../common/util/bem';
+import { Systemtittel } from 'nav-frontend-typografi';
+import './innsyn.less';
 
 interface Props {
     saker: Sak[];
@@ -34,17 +35,24 @@ class Innsyn extends React.Component<Props> {
             <>
                 <Header />
                 <div className="innsyn">
-                    <ul className={cls.className}>
-                        {this.props.saker.map((sak: Sak) => (
-                            <li className={cls.element('element')} key={sak.saksnummer}>
-                                <Saksoversikt
-                                    sak={sak}
-                                    onEttersendVedlegg={this.onEttersendVedlegg}
-                                    onEndreSøknad={this.onEndreSøknad}
-                                />
-                            </li>
-                        ))}
-                    </ul>
+                    {(this.props.saker === undefined || this.props.saker.length === 0) && (
+                        <div>
+                            <Systemtittel>Vi fant ingen saker</Systemtittel>
+                        </div>
+                    )}
+                    {this.props.saker !== undefined && (
+                        <ul className={cls.className}>
+                            {this.props.saker.map((sak: Sak) => (
+                                <li className={cls.element('element')} key={sak.saksnummer}>
+                                    <Saksoversikt
+                                        sak={sak}
+                                        onEttersendVedlegg={this.onEttersendVedlegg}
+                                        onEndreSøknad={this.onEndreSøknad}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </>
         );
