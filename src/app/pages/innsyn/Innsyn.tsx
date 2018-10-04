@@ -29,14 +29,14 @@ class Innsyn extends React.Component<Props> {
     }
 
     render() {
-        const cls = BEMHelper('innsyn');
+        const cls = BEMHelper('saksoversiktList');
         return (
             <>
                 <Header />
-                <div className={cls.className}>
-                    <ul className={cls.element('saksoversiktList')}>
+                <div className="innsyn">
+                    <ul className={cls.className}>
                         {this.props.saker.map((sak: Sak) => (
-                            <li key={sak.saksnummer}>
+                            <li className={cls.element('element')} key={sak.saksnummer}>
                                 <Saksoversikt
                                     sak={sak}
                                     onEttersendVedlegg={this.onEttersendVedlegg}
