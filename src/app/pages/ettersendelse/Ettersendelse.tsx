@@ -29,6 +29,10 @@ class Ettersendelse extends React.Component<Props, State> {
             attachments: []
         };
 
+        if (!this.state.sak) {
+            this.props.history.push('/');
+        }
+
         this.addAttachment = this.addAttachment.bind(this);
         this.editAttachment = this.editAttachment.bind(this);
         this.deleteAttachemnt = this.deleteAttachemnt.bind(this);
@@ -56,6 +60,10 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     render() {
+        if (!this.state.sak) {
+            return null;
+        }
+
         const cls = BEMHelper('ettersendelse');
         return (
             <div className={cls.className}>

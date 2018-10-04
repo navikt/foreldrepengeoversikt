@@ -38,7 +38,7 @@ class Innsyn extends React.Component<Props> {
                 <Header />
                 <div className={'innsyn'}>
                     {(this.props.saker === undefined || this.props.saker.length === 0) && (
-                        <div>
+                        <div className={'innsyn__ingenSaker'}>
                             <Systemtittel>Vi fant ingen saker</Systemtittel>
                         </div>
                     )}

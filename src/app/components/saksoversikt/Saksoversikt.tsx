@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import Sak from '../../types/Sak';
 import { Knapp } from 'nav-frontend-knapper';
 
-import './saksoversikt.less';
+import Sak from '../../types/Sak';
 import Block from 'common/components/block/Block';
+
+import './saksoversikt.less';
 
 interface Props {
     sak: Sak;
