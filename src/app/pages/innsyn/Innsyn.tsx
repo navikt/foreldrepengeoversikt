@@ -28,7 +28,7 @@ class Innsyn extends React.Component<Props> {
 
     // TODO
     onEndreSøknad(sak: Sak): void {
-        console.log('not implemented yet');
+        alert('ikke implementert enda');
     }
 
     render() {

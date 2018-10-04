@@ -5,11 +5,12 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import BEMHelper from '../../../common/util/bem';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
-import './ettersendelse.less';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
 import ResponsiveWrapper from '../ResponsiveWrapper';
+
+import './ettersendelse.less';
 
 interface Props {
     history: History;
@@ -18,11 +19,6 @@ interface Props {
 interface State {
     sak: Sak;
     attachments: Attachment[];
-}
-
-enum Operation {
-    'EDIT' = 'edit',
-    'DELETE' = 'delete'
 }
 
 class Ettersendelse extends React.Component<Props, State> {
@@ -43,7 +39,10 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     editAttachment(attachment: Attachment): void {
-        this.setState({ attachments: this.updateAttachmentList(this.state.attachments, attachment, Operation.EDIT) });
+        const attachmentsCopy = this.state.attachments.slice();
+        const index = this.state.attachments.indexOf(attachment);
+        attachmentsCopy[index] = attachment;
+        this.setState({ attachments: attachmentsCopy });
     }
 
     deleteAttachemnt(attachment: Attachment): void {
@@ -52,17 +51,8 @@ class Ettersendelse extends React.Component<Props, State> {
         this.setState({ attachments: newAttachmentList });
     }
 
-    updateAttachmentList(attachments: Attachment[], attachment: Attachment, operation: Operation): Attachment[] {
-        if (operation === Operation.EDIT) {
-            attachments[attachments.indexOf(attachment)] = attachment;
-        } else if (operation === Operation.DELETE) {
-            attachments.splice(attachments.indexOf(attachment), 1);
-        }
-        return attachments;
-    }
-
     handleSendOnClick() {
-        console.log('handleSendOnClick');
+        alert('ikke implementert enda');
     }
 
     render() {
@@ -77,7 +67,7 @@ class Ettersendelse extends React.Component<Props, State> {
                         </Innholdstittel>
                         <div className={cls.element('uploader')}>
                             <AttachmentsUploader
-                                attachments={this.state.attachments}
+                                attachments={this.state.attachments.slice()}
                                 attachmentType={AttachmentType.ALENEOMSORG}
                                 skjemanummer={Skjemanummer.ANNET}
                                 onFilesUploadStart={this.addAttachment}
