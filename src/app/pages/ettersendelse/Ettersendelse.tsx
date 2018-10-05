@@ -10,6 +10,8 @@ import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attach
 import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
 import ResponsiveWrapper from '../ResponsiveWrapper';
 
+import { AxiosError } from '../../../../node_modules/axios';
+import Api from '../../api/api';
 import './ettersendelse.less';
 
 interface Props {
@@ -19,6 +21,7 @@ interface Props {
 interface State {
     sak: Sak;
     attachments: Attachment[];
+    error?: AxiosError;
 }
 
 class Ettersendelse extends React.Component<Props, State> {
@@ -36,6 +39,7 @@ class Ettersendelse extends React.Component<Props, State> {
         this.addAttachment = this.addAttachment.bind(this);
         this.editAttachment = this.editAttachment.bind(this);
         this.deleteAttachemnt = this.deleteAttachemnt.bind(this);
+        this.handleSendOnClick = this.handleSendOnClick.bind(this);
     }
 
     addAttachment(attachments: Attachment[]): void {
@@ -56,7 +60,16 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     handleSendOnClick() {
-        alert('ikke implementert enda');
+        Api.sendEttersending({
+            saksnummer: this.state.sak.saksnummer,
+            vedlegg: this.state.attachments
+        })
+            .then((response) => alert(response))
+            .catch((error: AxiosError) => {
+                if (error.response) {
+                    this.setState({ error });
+                }
+            });
     }
 
     render() {
