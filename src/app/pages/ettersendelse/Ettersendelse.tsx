@@ -89,7 +89,7 @@ class Ettersendelse extends React.Component<Props, State> {
                         <div className={cls.element('uploader')}>
                             <AttachmentsUploader
                                 attachments={this.state.attachments.slice()}
-                                attachmentType={AttachmentType.ALENEOMSORG}
+                                attachmentType={AttachmentType.ETTERSENDELSE}
                                 skjemanummer={Skjemanummer.ANNET}
                                 onFilesUploadStart={this.addAttachment}
                                 onFileUploadFinish={this.editAttachment}
