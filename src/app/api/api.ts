@@ -13,7 +13,6 @@ const getSøkerInfo = () => {
 
 const sendEttersending = (ettersending: Ettersending) => {
     return axios.post(`${apiBaseUrl}/soknad/ettersend`, ettersending, {
-        timeout: 10 * 1000,
         withCredentials: true
     });
 };
