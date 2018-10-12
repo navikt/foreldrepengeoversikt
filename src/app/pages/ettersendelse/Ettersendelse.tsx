@@ -61,7 +61,7 @@ class Ettersendelse extends React.Component<Props, State> {
 
     handleSendOnClick() {
         Api.sendEttersending({
-            saksnummer: this.state.sak.fagsystemSakId,
+            saksnummer: this.state.sak.saksnummer,
             vedlegg: this.state.attachments
         })
             .then((response) => alert(response))
