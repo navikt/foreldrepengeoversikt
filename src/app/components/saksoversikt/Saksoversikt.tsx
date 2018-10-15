@@ -14,37 +14,37 @@ interface Props {
     onEndreSøknad: (sak: Sak) => void;
 }
 
-class Saksoversikt extends React.Component<Props> {
-    render() {
-        const { sak, onEttersendVedlegg, onEndreSøknad } = this.props;
-        const cls = BEMHelper('saksoversikt');
-        return (
+const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
+    const { sak, onEttersendVedlegg, onEndreSøknad } =props;
+    const cls = BEMHelper('saksoversikt');
+    return (
+        <div className={cls.className}>
             <EkspanderbartpanelBase
                 heading={
-                    <div className={cls.className}>
+                    <div>
                         <Undertittel>Søknad om foreldrepenger</Undertittel>
                         <Normaltekst>Dato: {formatDate(sak.opprettet)}</Normaltekst>
                     </div>
                 }
                 ariaTittel={'søknad om foreldrepenger'}>
                 <Normaltekst className={cls.element('saksnummer')}>Saksnummer: {sak.saksnummer}</Normaltekst>
-                <Normaltekst className={cls.element('ettersend-vedlegg')}>
+                <Normaltekst className={cls.element('ettersendelse-intro')}>
                     Her kan du ettersende dokumentasjon til søknaden din
                 </Normaltekst>
                 <Knapp
-                    className={cls.element('ettersend-vedlegg-btn')}
+                    className={cls.element('ettersendelse-btn')}
                     onClick={() => onEttersendVedlegg(sak)}
                     disabled={isSakTooOldForEttersendelse(sak.opprettet)}>
                     Last opp vedlegg
                 </Knapp>
-                <Normaltekst className={cls.element('endringssoknad')}>
+                <Normaltekst className={cls.element('endringssoknad-intro')}>
                     Endre din periode med foreldrepenger (legge til ferie, hvis du skal jobbe eller har vært syk)
                 </Normaltekst>
                 <Knapp className={cls.element('endringssoknad-btn')} onClick={() => onEndreSøknad(sak)}>
                     Endre perioden din
                 </Knapp>
             </EkspanderbartpanelBase>
-        );
-    }
-}
+        </div>
+    );
+};
 export default Saksoversikt;
