@@ -18,38 +18,4 @@
     }
 }
 
-.chromeSvgRenderFix() {
-    -webkit-backface-visibility: hidden;
-    -webkit-transform: translateZ(0) scale(1, 1);
-    transform: translateZ(0);
-}
 
-.periodeBox() {
-    background-color: white;
-    border-radius: 4px;
-    padding: 1.5rem;
-
-    &--utsettelse {
-        border-left: 8px solid #06893a;
-    }
-
-    &--uttak {
-        border-left: 8px solid #634689;
-    }
-}
-
-.deleteButton() {
-    .lenke-mixin();
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    color: @redError;
-
-    &:hover {
-        border-bottom-color: @redError;
-    }
-
-    &:active {
-        border-bottom-color: @redError;
-    }
-}

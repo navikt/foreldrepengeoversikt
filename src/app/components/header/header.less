@@ -1,10 +1,13 @@
 @import '../../styles/variables.less';
+@import '../../styles/colors.less';
+@import '../../styles/mixins.less';
 
 .header {
     display: flex;
     justify-content: center;
-    background: #e0dae7;
-    border-bottom: 6px solid #826ba1;
+    background: @header-background-color;
+    .headerBottomBorder();
+
 
     &__content {
         display: flex;
