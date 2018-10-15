@@ -5,6 +5,7 @@ import { Knapp } from 'nav-frontend-knapper';
 
 import Sak from '../../types/Sak';
 import Block from 'common/components/block/Block';
+import { isSakTooOldForEttersendelse } from './util';
 
 import './saksoversikt.less';
 
@@ -37,7 +38,11 @@ class Saksoversikt extends React.Component<Props> {
                     <Normaltekst>Her kan du ettersende dokumentasjon til søknaden din</Normaltekst>
                 </Block>
                 <Block>
-                    <Knapp onClick={() => onEttersendVedlegg(sak)}>Last opp vedlegg</Knapp>{' '}
+                    <Knapp
+                        onClick={() => onEttersendVedlegg(sak)}
+                        disabled={isSakTooOldForEttersendelse(sak.opprettet)}>
+                        Last opp vedlegg
+                    </Knapp>
                 </Block>
                 <Block margin={'xs'}>
                     <Normaltekst>
