@@ -21,6 +21,7 @@ interface Props {
 interface State {
     sak: Sak;
     attachments: Attachment[];
+    sendingEttersendelse: boolean;
     error?: AxiosError;
 }
 
@@ -29,6 +30,7 @@ class Ettersendelse extends React.Component<Props, State> {
         super(props);
         this.state = {
             ...this.props.history.location.state,
+            sendingEttersendelse: false,
             attachments: []
         };
 
@@ -60,6 +62,10 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     handleSendOnClick() {
+        this.setState({ sendingEttersendelse: true }, this.sendEttersendelse);
+    }
+
+    sendEttersendelse() {
         Api.sendEttersending({
             saksnummer: this.state.sak.saksnummer,
             vedlegg: this.state.attachments
@@ -69,6 +75,9 @@ class Ettersendelse extends React.Component<Props, State> {
                 if (error.response) {
                     this.setState({ error });
                 }
+            })
+            .finally(() => {
+                this.setState({ sendingEttersendelse: false });
             });
     }
 
@@ -98,7 +107,12 @@ class Ettersendelse extends React.Component<Props, State> {
                             />
                         </div>
                         <div className={cls.element('sendButton')}>
-                            <Hovedknapp onClick={this.handleSendOnClick}>Ettersend vedlegg</Hovedknapp>
+                            <Hovedknapp
+                                onClick={this.handleSendOnClick}
+                                disabled={this.state.sendingEttersendelse}
+                                spinner={this.state.sendingEttersendelse}>
+                                Ettersend vedlegg
+                            </Hovedknapp>
                         </div>
                     </div>
                 </ResponsiveWrapper>
