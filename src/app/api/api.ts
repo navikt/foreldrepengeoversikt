@@ -6,7 +6,7 @@ const apiBaseUrl: string = Environment.REST_API_URL;
 
 const getSøkerInfo = () => {
     return axios.get(`${apiBaseUrl}/saker`, {
-        timeout: 10 * 1000,
+        timeout: 15 * 1000,
         withCredentials: true
     });
 };

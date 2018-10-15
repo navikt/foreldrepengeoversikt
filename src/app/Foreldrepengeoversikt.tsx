@@ -5,7 +5,6 @@ import { redirectToLogin } from './utils/login';
 import { AxiosError } from 'axios';
 import Sak from './types/Sak';
 import Innsyn from './pages/innsyn/Innsyn';
-import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
 import InnsynDev from './pages/innsyn-dev/InnsynDev';
 import Ettersendelse from './pages/ettersendelse/Ettersendelse';
 
@@ -13,7 +12,6 @@ interface State {
     saker: Sak[];
     loading: boolean;
     error?: AxiosError;
-    selectedSak?: Sak;
 }
 
 class Foreldrepengeoversikt extends React.Component<{}, State> {
@@ -43,20 +41,17 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
     }
 
     render(): JSX.Element {
-        if (this.state.loading) {
-            return <ApplicationSpinner />;
-        }
-
         return (
-            <>
-                <Router>
-                    <Switch>
-                        <Route path="/dev" render={() => <InnsynDev saker={this.state.saker} />} />
-                        <Route path="/ettersendelse" render={(props) => <Ettersendelse {...props} />} />
-                        <Route path="/" render={(props) => <Innsyn saker={this.state.saker} {...props} />} />
-                    </Switch>
-                </Router>
-            </>
+            <Router>
+                <Switch>
+                    <Route path="/dev" render={() => <InnsynDev saker={this.state.saker} />} />
+                    <Route path="/ettersendelse" render={(props) => <Ettersendelse {...props} />} />
+                    <Route
+                        path="/"
+                        render={(props) => <Innsyn saker={this.state.saker} loading={this.state.loading} {...props} />}
+                    />
+                </Switch>
+            </Router>
         );
     }
 }

@@ -9,10 +9,12 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import './innsyn.less';
 import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjon';
 import ResponsiveWrapper from '../ResponsiveWrapper';
+import ApplicationSpinner from '../../components/application-spinner/ApplicationSpinner';
 
 interface Props {
     saker: Sak[];
     history: History;
+    loading: boolean;
 }
 
 class Innsyn extends React.Component<Props> {
@@ -33,19 +35,22 @@ class Innsyn extends React.Component<Props> {
 
     render() {
         const cls = BEMHelper('saksoversiktList');
+        const { saker, loading } = this.props;
         return (
             <>
                 <Header />
                 <div className={'innsyn'}>
-                    {(this.props.saker === undefined || this.props.saker.length === 0) && (
-                        <div className={'innsyn__ingenSaker'}>
-                            <Systemtittel>Vi fant ingen saker</Systemtittel>
-                        </div>
-                    )}
                     <ResponsiveWrapper>
-                        {this.props.saker !== undefined && (
+                        {loading && <ApplicationSpinner />}
+                        {!loading &&
+                            (saker === undefined || saker.length === 0) && (
+                                <div className={'innsyn__ingenSaker'}>
+                                    <Systemtittel>Vi fant ingen saker</Systemtittel>
+                                </div>
+                            )}
+                        {saker !== undefined && (
                             <ul className={cls.className}>
-                                {this.props.saker.map((sak: Sak) => (
+                                {saker.map((sak: Sak) => (
                                     <li className={cls.element('element')} key={sak.saksnummer}>
                                         <Saksoversikt
                                             sak={sak}
