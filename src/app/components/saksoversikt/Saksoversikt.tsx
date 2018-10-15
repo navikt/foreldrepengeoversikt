@@ -5,7 +5,7 @@ import { Knapp } from 'nav-frontend-knapper';
 
 import Sak from '../../types/Sak';
 import Block from 'common/components/block/Block';
-import { isSakTooOldForEttersendelse } from './util';
+import { formatDate, isSakTooOldForEttersendelse } from './util';
 
 import './saksoversikt.less';
 
@@ -20,7 +20,7 @@ class Saksoversikt extends React.Component<Props> {
         return (
             <div className={'saksoversiktHeader'}>
                 <Undertittel>Søknad om foreldrepenger</Undertittel>
-                <Normaltekst>Dato: {sak.opprettet}</Normaltekst>
+                <Normaltekst>Dato: {formatDate(sak.opprettet)}</Normaltekst>
             </div>
         );
     }
