@@ -15,7 +15,7 @@ interface Props {
 }
 
 const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
-    const { sak, onEttersendVedlegg, onEndreSøknad } =props;
+    const { sak, onEttersendVedlegg, onEndreSøknad } = props;
     const cls = BEMHelper('saksoversikt');
     return (
         <div className={cls.className}>

@@ -21,7 +21,7 @@ class SaksoversiktDev extends React.Component<Props> {
                 <Normaltekst> Behandlingstema: {sak.behandlingTema}</Normaltekst>
                 <Normaltekst> Behandlinger: </Normaltekst>
                 <ul className="behandlingerDev">
-                    {sak.behandlinger.map((behandling: Behandling) => (
+                    {sak.behandlinger && sak.behandlinger.map((behandling: Behandling) => (
                         <li className={'behandlingerDev__item'} key={behandling.id}>
                             <Normaltekst> Status: {behandling.status}</Normaltekst>
                             <Normaltekst> Id: {behandling.id}</Normaltekst>

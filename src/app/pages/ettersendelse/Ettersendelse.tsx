@@ -1,11 +1,7 @@
 import * as React from 'react';
 import Sak from '../../types/Sak';
 import { History } from 'history';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import BEMHelper from '../../../common/util/bem';
-import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
-import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
 import ResponsiveWrapper from '../ResponsiveWrapper';
@@ -14,6 +10,12 @@ import { AxiosError } from '../../../../node_modules/axios';
 import Api from '../../api/api';
 
 import './ettersendelse.less';
+import Kvittering from 'app/api/types/Kvittering';
+import { EttersendingKvittering as KvitteringComponent } from '../../components/ettersending-kvittering/EttersendingKvittering';
+import { Innholdstittel } from 'nav-frontend-typografi';
+import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
+import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
+import { Hovedknapp } from 'nav-frontend-knapper';
 
 interface Props {
     history: History;
@@ -24,6 +26,7 @@ interface State {
     attachments: Attachment[];
     sendingEttersendelse: boolean;
     error?: AxiosError;
+    kvittering: Kvittering;
 }
 
 class Ettersendelse extends React.Component<Props, State> {
@@ -71,7 +74,7 @@ class Ettersendelse extends React.Component<Props, State> {
             saksnummer: this.state.sak.saksnummer,
             vedlegg: this.state.attachments
         })
-            .then((response) => alert(response))
+            .then((response) => this.setState({ kvittering: response.data }))
             .catch((error: AxiosError) => {
                 if (error.response) {
                     this.setState({ error });
@@ -92,30 +95,34 @@ class Ettersendelse extends React.Component<Props, State> {
             <div className={cls.className}>
                 <Søknadstittel>Ettersending av vedlegg</Søknadstittel>
                 <ResponsiveWrapper>
-                    <div className={cls.modifier('content')}>
-                        <Innholdstittel className={cls.element('title')}>
-                            Last opp dokumentasjon til sak {this.state.sak.saksnummer}
-                        </Innholdstittel>
-                        <div className={cls.element('uploader')}>
-                            <AttachmentsUploader
-                                attachments={this.state.attachments.slice()}
-                                attachmentType={AttachmentType.ETTERSENDELSE}
-                                skjemanummer={Skjemanummer.ANNET}
-                                onFilesUploadStart={this.addAttachment}
-                                onFileUploadFinish={this.editAttachment}
-                                onFileDeleteStart={this.editAttachment}
-                                onFileDeleteFinish={this.deleteAttachemnt}
-                            />
+                    {this.state.kvittering ? (
+                        <KvitteringComponent attachments={this.state.attachments} kvittering={this.state.kvittering} />
+                    ) : (
+                        <div className={cls.modifier(`content`)}>
+                            <Innholdstittel className={cls.element('title')}>
+                                Last opp dokumentasjon til sak {this.state.sak.saksnummer}
+                            </Innholdstittel>
+                            <div className={cls.element('uploader')}>
+                                <AttachmentsUploader
+                                    attachments={this.state.attachments.slice()}
+                                    attachmentType={AttachmentType.ETTERSENDELSE}
+                                    skjemanummer={Skjemanummer.ANNET}
+                                    onFilesUploadStart={this.addAttachment}
+                                    onFileUploadFinish={this.editAttachment}
+                                    onFileDeleteStart={this.editAttachment}
+                                    onFileDeleteFinish={this.deleteAttachemnt}
+                                />
+                            </div>
+                            <div className={cls.element('sendButton')}>
+                                <Hovedknapp
+                                    onClick={this.handleSendOnClick}
+                                    disabled={this.state.sendingEttersendelse}
+                                    spinner={this.state.sendingEttersendelse}>
+                                    Ettersend vedlegg
+                                </Hovedknapp>
+                            </div>
                         </div>
-                        <div className={cls.element('sendButton')}>
-                            <Hovedknapp
-                                onClick={this.handleSendOnClick}
-                                disabled={this.state.sendingEttersendelse}
-                                spinner={this.state.sendingEttersendelse}>
-                                Ettersend vedlegg
-                            </Hovedknapp>
-                        </div>
-                    </div>
+                    )}
                 </ResponsiveWrapper>
             </div>
         );
