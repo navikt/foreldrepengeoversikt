@@ -1,20 +1,107 @@
 @import '../../styles/variables.less';
 @import '../../styles/colors.less';
+@import '~nav-frontend-core/less/_variabler.less';
 
 .annenInformasjon {
-    display: flex;
-    flex-direction: column;
-    background: @annen-informasjon-background-color;
-    padding: 2rem;
-    h2 {
-        margin-bottom: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 1.5rem;
+
+    &__linkContainer {
+        margin-bottom: 1rem;
     }
+
+    &__links {
+        margin-top: 1rem;
+    }
+
+    &__link {
+        color: #0067c5;
+
+        &__icon {
+            margin-left: 0.5rem;
+            position: relative;
+        }
+
+        &--disabled {
+            color: gray;
+            text-shadow: 1px 1px 0px #fff;
+
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .lenke {
+        border: none;
+    }
+
+    .typo-undertittel {
+        font-size: 1.125rem;
+    }
+
+    p {
+        display: inline-block;
+        border-bottom: 1px solid transparent;
+    }
+
     a {
-        margin-bottom: 0.5rem;
-        border-bottom: 0;
-        text-decoration: underline;
+        display: inline-block;
+
+        &:hover {
+            p {
+                border-bottom: 1px solid @navBla;
+            }
+        }
+
+        &:focus {
+            outline: none;
+            background-color: @orangeFocus;
+        }
     }
-    a:last-child {
-        margin-bottom: 0;
+
+    @media (min-width: @mobile-breakpoint) {
+        display: block;
+
+        &__links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+                display: -ms-grid;
+                -ms-grid-columns: 1fr 1fr 1fr;
+
+                .andreLenker__linkContainer:nth-child(2) {
+                    -ms-grid-column: 2;
+                }
+                .andreLenker__linkContainer:nth-child(3) {
+                    -ms-grid-column: 3;
+                }
+                .andreLenker__linkContainer:nth-child(4) {
+                    -ms-grid-column: 1;
+                    -ms-grid-row: 3;
+                }
+                .andreLenker__linkContainer:nth-child(5) {
+                    -ms-grid-column: 2;
+                    -ms-grid-row: 3;
+                }
+                .andreLenker__linkContainer:nth-child(6) {
+                    -ms-grid-column: 3;
+                    -ms-grid-row: 3;
+                }
+                .andreLenker__linkContainer:nth-child(7) {
+                    -ms-grid-column: 1;
+                    -ms-grid-row: 4;
+                }
+                .andreLenker__linkContainer:nth-child(8) {
+                    -ms-grid-column: 2;
+                    -ms-grid-row: 4;
+                }
+                .andreLenker__linkContainer:nth-child(9) {
+                    -ms-grid-column: 3;
+                    -ms-grid-row: 4;
+                }
+            }
+        }
     }
 }

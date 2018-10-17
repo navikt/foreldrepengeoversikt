@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Sidetittel } from 'nav-frontend-typografi';
-import FamilyIcon from '../../ikoner/FamilyIcon';
+import FamilyIcon from '../ikoner/FamilyIcon';
 import BEMHelper from '../../../common/util/bem';
 
 import './header.less';

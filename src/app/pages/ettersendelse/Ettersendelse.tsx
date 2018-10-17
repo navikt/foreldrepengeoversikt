@@ -118,7 +118,7 @@ class Ettersendelse extends React.Component<Props, State> {
                                 />
                             </div>
                             {this.state.attachments.length === 0 && (
-                                <div className={cls.element('sendButton')}>
+                                <div className={cls.element('send-button')}>
                                     <Hovedknapp
                                         onClick={this.handleSendEttersendelseOnClick}
                                         disabled={this.state.sendingEttersendelse}
