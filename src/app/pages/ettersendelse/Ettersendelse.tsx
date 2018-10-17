@@ -5,17 +5,17 @@ import BEMHelper from '../../../common/util/bem';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
 import ResponsiveWrapper from '../ResponsiveWrapper';
-
 import { AxiosError } from '../../../../node_modules/axios';
 import Api from '../../api/api';
-
-import './ettersendelse.less';
 import Kvittering from 'app/api/types/Kvittering';
 import { EttersendingKvittering as KvitteringComponent } from '../../components/ettersending-kvittering/EttersendingKvittering';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import Ettersending from '../../api/types/Ettersending';
+
+import './ettersendelse.less';
 
 interface Props {
     history: History;
@@ -45,7 +45,7 @@ class Ettersendelse extends React.Component<Props, State> {
         this.addAttachment = this.addAttachment.bind(this);
         this.editAttachment = this.editAttachment.bind(this);
         this.deleteAttachemnt = this.deleteAttachemnt.bind(this);
-        this.handleSendOnClick = this.handleSendOnClick.bind(this);
+        this.handleSendEttersendelseOnClick = this.handleSendEttersendelseOnClick.bind(this);
     }
 
     addAttachment(attachments: Attachment[]): void {
@@ -65,15 +65,19 @@ class Ettersendelse extends React.Component<Props, State> {
         this.setState({ attachments: newAttachmentList });
     }
 
-    handleSendOnClick() {
-        this.setState({ sendingEttersendelse: true }, this.sendEttersendelse);
+    handleSendEttersendelseOnClick(): void {
+        if (this.state.attachments.length > 0) {
+            this.setState({ sendingEttersendelse: true }, this.sendEttersendelse);
+        }
     }
 
     sendEttersendelse() {
-        Api.sendEttersending({
+        const ettersending: Ettersending = {
             saksnummer: this.state.sak.saksnummer,
             vedlegg: this.state.attachments
-        })
+        };
+
+        Api.sendEttersending(ettersending)
             .then((response) => this.setState({ kvittering: response.data }))
             .catch((error: AxiosError) => {
                 if (error.response) {
@@ -113,14 +117,16 @@ class Ettersendelse extends React.Component<Props, State> {
                                     onFileDeleteFinish={this.deleteAttachemnt}
                                 />
                             </div>
-                            <div className={cls.element('sendButton')}>
-                                <Hovedknapp
-                                    onClick={this.handleSendOnClick}
-                                    disabled={this.state.sendingEttersendelse}
-                                    spinner={this.state.sendingEttersendelse}>
-                                    Ettersend vedlegg
-                                </Hovedknapp>
-                            </div>
+                            {this.state.attachments.length === 0 && (
+                                <div className={cls.element('sendButton')}>
+                                    <Hovedknapp
+                                        onClick={this.handleSendEttersendelseOnClick}
+                                        disabled={this.state.sendingEttersendelse}
+                                        spinner={this.state.sendingEttersendelse}>
+                                        Ettersend vedlegg
+                                    </Hovedknapp>
+                                </div>
+                            )}
                         </div>
                     )}
                 </ResponsiveWrapper>

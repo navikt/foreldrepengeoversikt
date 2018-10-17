@@ -10,11 +10,13 @@ import './innsyn.less';
 import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjon';
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import ApplicationSpinner from '../../components/application-spinner/ApplicationSpinner';
+import { AxiosError } from 'axios';
 
 interface Props {
     saker: Sak[];
     history: History;
     loading: boolean;
+    error?: AxiosError | any;
 }
 
 class Innsyn extends React.Component<Props> {
@@ -33,34 +35,50 @@ class Innsyn extends React.Component<Props> {
         alert('ikke implementert enda');
     }
 
+    renderSaksoversikt() {
+        const { saker } = this.props;
+        if (!saker) {
+            return null;
+        }
+
+        const cls = BEMHelper('saksoversikt-list');
+        return (
+            <ul className={cls.className}>
+                {saker.map((sak: Sak) => (
+                    <li className={cls.element('element')} key={sak.saksnummer}>
+                        <Saksoversikt
+                            sak={sak}
+                            onEttersendVedlegg={this.onEttersendVedlegg}
+                            onEndreSøknad={this.onEndreSøknad}
+                        />
+                    </li>
+                ))}
+            </ul>
+        );
+    }
+
     render() {
-        const cls = BEMHelper('saksoversiktList');
-        const { saker, loading } = this.props;
+        const { saker, loading, error } = this.props;
+        const cls = BEMHelper('innsyn');
         return (
             <>
                 <Header />
-                <div className={'innsyn'}>
+                <div className={cls.className}>
                     <ResponsiveWrapper>
                         {loading && <ApplicationSpinner />}
                         {!loading &&
-                            (saker === undefined || saker.length === 0) && (
-                                <div className={'innsyn__ingenSaker'}>
-                                    <Systemtittel>Vi fant ingen saker</Systemtittel>
-                                </div>
+                            error && (
+                                <Systemtittel className={cls.element('feilmelding')}>
+                                    Ops, En feil har oppstått. Prøv igjen senere.
+                                </Systemtittel>
                             )}
-                        {saker !== undefined && (
-                            <ul className={cls.className}>
-                                {saker.map((sak: Sak) => (
-                                    <li className={cls.element('element')} key={sak.saksnummer}>
-                                        <Saksoversikt
-                                            sak={sak}
-                                            onEttersendVedlegg={this.onEttersendVedlegg}
-                                            onEndreSøknad={this.onEndreSøknad}
-                                        />
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
+
+                        {!loading &&
+                            ((saker === undefined || saker.length === 0) && (
+                                <Systemtittel className={cls.element('ingen-saker')}>Vi fant ingen saker</Systemtittel>
+                            ))}
+
+                        {saker !== undefined && error === undefined && this.renderSaksoversikt()}
                         <AnnenInformasjon />
                     </ResponsiveWrapper>
                 </div>

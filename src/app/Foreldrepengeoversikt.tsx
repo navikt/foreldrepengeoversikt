@@ -48,7 +48,14 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
                     <Route path="/ettersendelse" render={(props) => <Ettersendelse {...props} />} />
                     <Route
                         path="/"
-                        render={(props) => <Innsyn saker={this.state.saker} loading={this.state.loading} {...props} />}
+                        render={(props) => (
+                            <Innsyn
+                                saker={this.state.saker}
+                                loading={this.state.loading}
+                                error={this.state.error}
+                                {...props}
+                            />
+                        )}
                     />
                 </Switch>
             </Router>
