@@ -5,7 +5,6 @@ import { redirectToLogin } from './utils/login';
 import { AxiosError } from 'axios';
 import Sak from './types/Sak';
 import Innsyn from './pages/innsyn/Innsyn';
-import InnsynDev from './pages/innsyn-dev/InnsynDev';
 import Ettersendelse from './pages/ettersendelse/Ettersendelse';
 
 interface State {
@@ -44,7 +43,6 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
         return (
             <Router>
                 <Switch>
-                    <Route path="/dev" render={() => <InnsynDev saker={this.state.saker} />} />
                     <Route path="/ettersendelse" render={(props) => <Ettersendelse {...props} />} />
                     <Route
                         path="/"
