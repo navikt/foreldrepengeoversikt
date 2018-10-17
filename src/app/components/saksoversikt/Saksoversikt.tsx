@@ -5,8 +5,11 @@ import { Knapp } from 'nav-frontend-knapper';
 import Sak from '../../types/Sak';
 import { formatDate, isSakTooOldForEndringssøknad, isSakTooOldForEttersendelse } from './util';
 import BEMHelper from 'common/util/bem';
+import Lenke from 'nav-frontend-lenker';
+import { andreLenker } from '../../utils/lenker';
 
 import './saksoversikt.less';
+import FileIcon from '../ikoner/FileIcon';
 
 interface Props {
     sak: Sak;
@@ -28,6 +31,12 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                 }
                 ariaTittel={'søknad om foreldrepenger'}>
                 <Normaltekst className={cls.element('saksnummer')}>Saksnummer: {sak.saksnummer}</Normaltekst>
+                <div className={cls.element('din-søknad')}>
+                    <FileIcon />
+                    <Lenke href={andreLenker.dittNav.href}>
+                        <Normaltekst>Din innsendte søknad</Normaltekst>
+                    </Lenke>
+                </div>
                 <Normaltekst className={cls.element('ettersendelse-intro')}>
                     Her kan du ettersende dokumentasjon til søknaden din
                 </Normaltekst>

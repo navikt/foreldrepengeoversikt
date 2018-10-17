@@ -1,11 +1,4 @@
-interface Lenker {
-    [key: string]: {
-        text: string;
-        href: string;
-    };
-}
-
-export const annenInformasjonLenker: Lenker = {
+export const annenInformasjonLenker = {
     viktigeFrister: {
         text: 'Viktige frister',
         href: 'https://www.nav.no/no/Person/Familie/Venter+du+barn/Foreldrepenger/husk-%C3%A5-s%C3%B8ke-til-rett-tid'
@@ -28,6 +21,6 @@ export const annenInformasjonLenker: Lenker = {
     },
 };
 
-export const andreLenker: Lenker = {
+export const andreLenker = {
     dittNav: { text: 'Ditt Nav', href: 'https://tjenester.nav.no/saksoversikt/' }
 };
