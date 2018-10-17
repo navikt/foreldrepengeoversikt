@@ -1,5 +1,13 @@
 import moment from 'moment';
 
+export const isSakTooOldForEndringssøknad = (date: string): boolean => {
+    return moment(date).isBefore(
+        moment()
+            .subtract(3, 'years')
+            .subtract(1, 'days')
+    );
+};
+
 export const isSakTooOldForEttersendelse = (date: string): boolean => {
     return moment(date).isBefore(moment().subtract(71, 'days'));
 };

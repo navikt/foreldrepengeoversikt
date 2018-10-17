@@ -3,7 +3,7 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
 import Sak from '../../types/Sak';
-import { formatDate, isSakTooOldForEttersendelse } from './util';
+import { formatDate, isSakTooOldForEndringssøknad, isSakTooOldForEttersendelse } from './util';
 import BEMHelper from 'common/util/bem';
 
 import './saksoversikt.less';
@@ -40,7 +40,10 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                 <Normaltekst className={cls.element('endringssoknad-intro')}>
                     Endre din periode med foreldrepenger (legge til ferie, hvis du skal jobbe eller har vært syk)
                 </Normaltekst>
-                <Knapp className={cls.element('endringssoknad-btn')} onClick={() => onEndreSøknad(sak)}>
+                <Knapp
+                    className={cls.element('endringssoknad-btn')}
+                    onClick={() => onEndreSøknad(sak)}
+                    disabled={isSakTooOldForEndringssøknad(sak.opprettet)}>
                     Endre perioden din
                 </Knapp>
             </EkspanderbartpanelBase>

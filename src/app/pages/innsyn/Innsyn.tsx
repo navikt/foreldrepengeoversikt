@@ -35,7 +35,7 @@ class Innsyn extends React.Component<Props> {
         alert('ikke implementert enda');
     }
 
-    renderSaksoversikt() {
+    renderSaksoversiktList() {
         const { saker } = this.props;
         if (!saker) {
             return null;
@@ -78,7 +78,7 @@ class Innsyn extends React.Component<Props> {
                                 <Systemtittel className={cls.element('ingen-saker')}>Vi fant ingen saker</Systemtittel>
                             ))}
 
-                        {saker !== undefined && error === undefined && this.renderSaksoversikt()}
+                        {saker !== undefined && error === undefined && this.renderSaksoversiktList()}
                         <AnnenInformasjon />
                     </ResponsiveWrapper>
                 </div>
