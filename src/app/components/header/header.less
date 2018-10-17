@@ -8,45 +8,63 @@
     background: @header-background-color;
     .headerBottomBorder();
 
-
     &__content {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        align-self: flex-end;
-        max-width: 900px;
+        justify-content: space-between;
+        min-height: 164px;
+    }
+
+    &__text-wrapper {
+        align-self: center;
     }
 
     &__title {
         font-size: 2.25rem;
         align-self: center;
+        margin-bottom: 24px;
     }
 
     &__icon {
-        width: 366px;
-        height: 167px;
         flex-shrink: 0;
         justify-content: flex-end;
         margin: 0 1rem;
-        padding-top: 1rem;
+        align-self: flex-end;
+        height: auto;
+        width: 45%;
+    }
+
+    @media (max-width: @tablet-breakpoint) {
+        &__icon {
+            flex-shrink: 1;
+            width: 40%;
+        }
+
+        &__text-wrapper {
+            padding-left: 0.75rem;
+        }
     }
 
     @media (max-width: @mobile-breakpoint) {
         &__content {
             flex-direction: column;
             padding-top: 1rem;
+            max-width: none;
         }
 
-        &__title {
+        &__text-wrapper {
             text-align: left;
-            margin: 0 1rem 1.4rem;
+            margin: 0 1rem 1rem;
         }
 
         &__icon {
-            margin-top: 1rem;
             align-self: center;
             width: 250px;
             height: 110px;
+        }
+
+        &__title {
+            margin-top: 1rem;
         }
     }
 }

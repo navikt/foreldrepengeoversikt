@@ -2,7 +2,7 @@ import React, { SVGProps } from 'react';
 
 type Props = SVGProps<any>;
 const FileIcon: React.StatelessComponent<Props> = (props: Props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24" {...props}>
         <path
             fill="none"
             fillRule="evenodd"

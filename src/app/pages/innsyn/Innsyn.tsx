@@ -62,7 +62,7 @@ class Innsyn extends React.Component<Props> {
         const cls = BEMHelper('innsyn');
         return (
             <>
-                <Header />
+                <Header history={this.props.history} />
                 <div className={cls.className}>
                     <ResponsiveWrapper>
                         {loading && <ApplicationSpinner />}

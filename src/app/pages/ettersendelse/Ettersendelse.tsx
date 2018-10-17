@@ -15,6 +15,7 @@ import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Ettersending from '../../api/types/Ettersending';
 
+import NavigationColumLinks from '../../components/navigation-colum-links/NavigationColumLinks';
 import './ettersendelse.less';
 
 interface Props {
@@ -99,36 +100,42 @@ class Ettersendelse extends React.Component<Props, State> {
             <div className={cls.className}>
                 <Søknadstittel>Ettersending av vedlegg</Søknadstittel>
                 <ResponsiveWrapper>
-                    {this.state.kvittering ? (
-                        <KvitteringComponent attachments={this.state.attachments} kvittering={this.state.kvittering} />
-                    ) : (
-                        <div className={cls.modifier(`content`)}>
-                            <Innholdstittel className={cls.element('title')}>
-                                Last opp dokumentasjon til sak {this.state.sak.saksnummer}
-                            </Innholdstittel>
-                            <div className={cls.element('uploader')}>
-                                <AttachmentsUploader
-                                    attachments={this.state.attachments.slice()}
-                                    attachmentType={AttachmentType.ETTERSENDELSE}
-                                    skjemanummer={Skjemanummer.ANNET}
-                                    onFilesUploadStart={this.addAttachment}
-                                    onFileUploadFinish={this.editAttachment}
-                                    onFileDeleteStart={this.editAttachment}
-                                    onFileDeleteFinish={this.deleteAttachemnt}
-                                />
-                            </div>
-                            {this.state.attachments.length === 0 && (
-                                <div className={cls.element('send-button')}>
-                                    <Hovedknapp
-                                        onClick={this.handleSendEttersendelseOnClick}
-                                        disabled={this.state.sendingEttersendelse}
-                                        spinner={this.state.sendingEttersendelse}>
-                                        Ettersend vedlegg
-                                    </Hovedknapp>
+                    <div className={cls.modifier(`content`)}>
+                        <NavigationColumLinks history={this.props.history} />
+                        {this.state.kvittering ? (
+                            <KvitteringComponent
+                                attachments={this.state.attachments}
+                                kvittering={this.state.kvittering}
+                            />
+                        ) : (
+                            <>
+                                <Innholdstittel className={cls.element('title')}>
+                                    Last opp dokumentasjon til sak {this.state.sak.saksnummer}
+                                </Innholdstittel>
+                                <div className={cls.element('uploader')}>
+                                    <AttachmentsUploader
+                                        attachments={this.state.attachments.slice()}
+                                        attachmentType={AttachmentType.ETTERSENDELSE}
+                                        skjemanummer={Skjemanummer.ANNET}
+                                        onFilesUploadStart={this.addAttachment}
+                                        onFileUploadFinish={this.editAttachment}
+                                        onFileDeleteStart={this.editAttachment}
+                                        onFileDeleteFinish={this.deleteAttachemnt}
+                                    />
                                 </div>
-                            )}
-                        </div>
-                    )}
+                                {this.state.attachments.length === 0 && (
+                                    <div className={cls.element('sendButton')}>
+                                        <Hovedknapp
+                                            onClick={this.handleSendEttersendelseOnClick}
+                                            disabled={this.state.sendingEttersendelse}
+                                            spinner={this.state.sendingEttersendelse}>
+                                            Ettersend vedlegg
+                                        </Hovedknapp>
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </div>
                 </ResponsiveWrapper>
             </div>
         );

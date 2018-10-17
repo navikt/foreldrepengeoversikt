@@ -1,3 +1,19 @@
+export const headerLinks = {
+    dittNav: {
+        text: 'Ditt Nav',
+        href: 'https://www.nav.no/no/Ditt+NAV',
+        external: true
+    },
+    innsyn: {
+        text: 'Dine Foreldrepenger',
+        href: '/'
+    },
+    ettersendelse: {
+        text: 'Ettersendelse av vedlegg',
+        href: '/ettersendelse'
+    }
+};
+
 export const annenInformasjonLenker = {
     viktigeFrister: {
         text: 'Viktige frister',
@@ -18,7 +34,7 @@ export const annenInformasjonLenker = {
     saksbehandlingstider: {
         text: 'Utbetaling og saksbehandlingstider',
         href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Saksbehandlingstider+i+NAV'
-    },
+    }
 };
 
 export const andreLenker = {

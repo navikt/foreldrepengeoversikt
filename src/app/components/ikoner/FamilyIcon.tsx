@@ -5,8 +5,6 @@ const FamilyIcon: React.StatelessComponent<Props> = (props: Props) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
-        width="370"
-        height="164"
         viewBox="0 0 370 164"
         {...props}>
         <defs>
