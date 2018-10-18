@@ -10,6 +10,7 @@ module.exports = {
         'nav-frontend-ekspanderbartpanel-style': '<rootDir>/jest/mockFile.js',
         'nav-frontend-typografi-style': '<rootDir>/jest/mockFile.js',
         'nav-frontend-knapper-style': '<rootDir>/jest/mockFile.js',
+        'nav-frontend-lenker-style': '<rootDir>/jest/mockFile.js',
         '^uttaksplan/(.*)': '<rootDir>/src/uttaksplan/$1',
         '^common/(.*)': '<rootDir>/src/common/$1'
     },
