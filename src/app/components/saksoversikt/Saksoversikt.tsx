@@ -6,7 +6,7 @@ import Sak from '../../types/Sak';
 import { formatDate, isSakTooOldForEndringssøknad, isSakTooOldForEttersendelse } from './util';
 import BEMHelper from 'common/util/bem';
 import Lenke from 'nav-frontend-lenker';
-import { andreLenker } from '../../utils/lenker';
+import { lenker } from '../../utils/lenker';
 
 import './saksoversikt.less';
 import FileIcon from '../ikoner/FileIcon';
@@ -33,7 +33,7 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                 <Normaltekst className={cls.element('saksnummer')}>Saksnummer: {sak.saksnummer}</Normaltekst>
                 <div className={cls.element('din-søknad')}>
                     <FileIcon />
-                    <Lenke href={andreLenker.dittNav.href}>
+                    <Lenke href={lenker.dittNav.href}>
                         <Normaltekst>Din innsendte søknad</Normaltekst>
                     </Lenke>
                 </div>

@@ -11,6 +11,7 @@ import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjo
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import ApplicationSpinner from '../../components/application-spinner/ApplicationSpinner';
 import { AxiosError } from 'axios';
+import { lenker } from '../../utils/lenker';
 
 interface Props {
     saker: Sak[];
@@ -30,9 +31,8 @@ class Innsyn extends React.Component<Props> {
         this.props.history.push('/ettersendelse', { sak });
     }
 
-    // TODO
     onEndreSøknad(sak: Sak): void {
-        alert('ikke implementert enda');
+        window.location.href = lenker.endringssøknad.href;
     }
 
     renderSaksoversiktList() {
@@ -69,11 +69,12 @@ class Innsyn extends React.Component<Props> {
                         {!loading &&
                             error && (
                                 <Systemtittel className={cls.element('feilmelding')}>
-                                    Ops, En feil har oppstått. Prøv igjen senere.
+                                    En feil har oppstått. Prøv igjen senere.
                                 </Systemtittel>
                             )}
 
                         {!loading &&
+                            !error &&
                             ((saker === undefined || saker.length === 0) && (
                                 <Systemtittel className={cls.element('ingen-saker')}>Vi fant ingen saker</Systemtittel>
                             ))}

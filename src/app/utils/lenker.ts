@@ -37,6 +37,10 @@ export const annenInformasjonLenker = {
     }
 };
 
-export const andreLenker = {
+export const lenker = {
+    endringssøknad: {
+        text: 'Endringssøknad',
+        href: 'https://tjenester.nav.no/soknadforeldrepenger/app/start#/soknadsvalg'
+    },
     dittNav: { text: 'Ditt Nav', href: 'https://tjenester.nav.no/saksoversikt/' }
 };

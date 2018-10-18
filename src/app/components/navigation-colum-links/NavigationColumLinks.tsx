@@ -5,9 +5,10 @@ import { History } from 'history';
 import Lenke from 'nav-frontend-lenker';
 import { Link } from 'react-router-dom';
 import { headerLinks } from '../../utils/lenker';
+import UserIcon from '../ikoner/UserIcon';
 
 import './navigationColumLinks.less';
-import UserIcon from '../ikoner/UserIcon';
+import { guid } from 'nav-frontend-js-utils';
 
 interface NavigationLinks {
     text: string;
@@ -34,22 +35,22 @@ const NavigationColumLinks: React.StatelessComponent<Props> = (props: Props) => 
                 }
 
                 if (props.history.location.pathname === link.href) {
-                    return <Normaltekst>{link.text}</Normaltekst>;
+                    return <Normaltekst key={guid()}>{link.text}</Normaltekst>;
                 } else {
                     return link.external ? (
-                        <>
+                        <React.Fragment key={guid()}>
                             <Lenke href={link.href}>
                                 <Normaltekst>{link.text}</Normaltekst>
                             </Lenke>
                             <span>/</span>
-                        </>
+                        </React.Fragment>
                     ) : (
-                        <>
+                        <React.Fragment key={guid()}>
                             <Link to={link.href}>
                                 <Normaltekst>{link.text}</Normaltekst>
                             </Link>
                             <span>/</span>
-                        </>
+                        </React.Fragment>
                     );
                 }
             })}

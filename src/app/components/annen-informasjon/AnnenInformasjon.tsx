@@ -14,7 +14,7 @@ const AnnenInformasjon: React.StatelessComponent = () => {
             <Undertittel>Annen informasjon</Undertittel>
             <nav className={cls.element('links')}>
                 {Object.values(annenInformasjonLenker).map((link) => (
-                    <div className={cls.element('linkContainer')}>
+                    <div key={link.href} className={cls.element('linkContainer')}>
                         <Lenke className={cls.element('link')} href={link.href}>
                             <Normaltekst>{link.text}</Normaltekst>
                         </Lenke>

@@ -4,7 +4,7 @@ import Ettersending from './types/Ettersending';
 
 const apiBaseUrl: string = Environment.REST_API_URL;
 
-const getSøkerInfo = () => {
+const getSaker = () => {
     return axios.get(`${apiBaseUrl}/saker`, {
         timeout: 15 * 1000,
         withCredentials: true
@@ -17,6 +17,6 @@ const sendEttersending = (ettersending: Ettersending) => {
     });
 };
 
-const Api = { getSøkerInfo, sendEttersending };
+const Api = { getSaker, sendEttersending };
 
 export default Api;
