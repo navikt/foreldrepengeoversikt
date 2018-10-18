@@ -18,7 +18,7 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
         super(props);
         this.state = {
             saker: [],
-            loading: false
+            loading: true
         };
     }
 
