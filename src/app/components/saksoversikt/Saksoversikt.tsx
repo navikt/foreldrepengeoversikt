@@ -26,7 +26,7 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                 heading={
                     <div>
                         <Undertittel>Søknad om foreldrepenger</Undertittel>
-                        <Normaltekst>Dato: {formatDate(sak.opprettet)}</Normaltekst>
+                        <Normaltekst>Sist endret: {formatDate(sak.opprettet)}</Normaltekst>
                     </div>
                 }
                 ariaTittel={'søknad om foreldrepenger'}>
@@ -34,7 +34,7 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                 <div className={cls.element('din-søknad')}>
                     <FileIcon />
                     <Lenke href={lenker.dittNav.href}>
-                        <Normaltekst>Din innsendte søknad</Normaltekst>
+                        <Normaltekst>Dine innsendte søknader</Normaltekst>
                     </Lenke>
                 </div>
                 <Normaltekst className={cls.element('ettersendelse-intro')}>

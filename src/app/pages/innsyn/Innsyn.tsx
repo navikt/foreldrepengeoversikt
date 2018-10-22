@@ -12,6 +12,7 @@ import ResponsiveWrapper from '../ResponsiveWrapper';
 import ApplicationSpinner from '../../components/application-spinner/ApplicationSpinner';
 import { AxiosError } from 'axios';
 import { lenker } from '../../utils/lenker';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 interface Props {
     saker: Sak[];
@@ -80,6 +81,9 @@ class Innsyn extends React.Component<Props> {
                             ))}
 
                         {saker !== undefined && error === undefined && this.renderSaksoversiktList()}
+                        <AlertStripe className={cls.element('info')} type={'info'}>
+                            Kun din nyeste søknad som ikke er eldre enn 3 år gammel vil vises her.
+                        </AlertStripe>
                         <AnnenInformasjon />
                     </ResponsiveWrapper>
                 </div>
