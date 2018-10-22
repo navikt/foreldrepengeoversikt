@@ -29,15 +29,14 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
     fetchSaker(): void {
         this.setState({ loading: true }, () => {
             Api.getSaker()
-                .then((response) => this.setState({ saker: response.data }))
+                .then((response) => this.setState({ saker: response.data, loading: false }))
                 .catch((error: AxiosError) => {
                     if (error.response) {
                         error.response.status === 401 ? redirectToLogin() : this.setState({ error });
                     } else {
-                        this.setState({ error });
+                        this.setState({ error, loading: false });
                     }
-                })
-                .finally(() => this.setState({ loading: false }));
+                });
         });
     }
 
