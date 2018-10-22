@@ -61,34 +61,28 @@ class Innsyn extends React.Component<Props> {
     render() {
         const { saker, loading, error } = this.props;
         const cls = BEMHelper('innsyn');
-        return (
-            <>
+        return <>
                 <Header history={this.props.history} />
                 <div className={cls.className}>
                     <ResponsiveWrapper>
-                        {loading && <ApplicationSpinner />}
-                        {!loading &&
-                            error && (
-                                <Systemtittel className={cls.element('feilmelding')}>
-                                    En feil har oppstått. Prøv igjen senere.
-                                </Systemtittel>
-                            )}
-
-                        {!loading &&
-                            !error &&
-                            ((saker === undefined || saker.length === 0) && (
-                                <Systemtittel className={cls.element('ingen-saker')}>Vi fant ingen saker</Systemtittel>
-                            ))}
-
-                        {saker !== undefined && error === undefined && this.renderSaksoversiktList()}
                         <AlertStripe className={cls.element('info')} type={'info'}>
                             Kun din nyeste søknad som ikke er eldre enn 3 år gammel vil vises her.
                         </AlertStripe>
+                        {loading && <ApplicationSpinner />}
+                        {!loading && error && <Systemtittel className={cls.element('feilmelding')}>
+                                    En feil har oppstått. Prøv igjen senere.
+                                </Systemtittel>}
+
+                        {!loading && !error && ((saker === undefined || saker.length === 0) && <Systemtittel
+                                    className={cls.element('ingen-saker')}>
+                                    Vi fant ingen saker
+                                </Systemtittel>)}
+
+                        {saker !== undefined && error === undefined && this.renderSaksoversiktList()}
                         <AnnenInformasjon />
                     </ResponsiveWrapper>
                 </div>
-            </>
-        );
+            </>;
     }
 }
 export default Innsyn;
