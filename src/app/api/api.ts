@@ -13,6 +13,7 @@ const getSaker = () => {
 
 const sendEttersending = (ettersending: Ettersending) => {
     return axios.post(`${apiBaseUrl}/soknad/ettersend`, ettersending, {
+        timeout: 60 * 1000,
         withCredentials: true
     });
 };

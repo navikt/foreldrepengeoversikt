@@ -1,12 +1,14 @@
 import * as React from 'react';
-import Api from './api/api';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { redirectToLogin } from './utils/login';
 import { AxiosError } from 'axios';
+
+import Api from './api/api';
+import { redirectToLogin } from './utils/login';
 import Sak from './types/Sak';
 import DineForeldrepenger from './pages/dine-foreldrepenger/DineForeldrepenger';
 import Ettersendelse from './pages/ettersendelse/Ettersendelse';
 import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
+import ErrorPage from './pages/error/ErrorPage';
 
 interface State {
     saker: Sak[];
@@ -49,16 +51,12 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
         return (
             <Router>
                 <Switch>
+                    <Route path="/feil" render={(props) => <ErrorPage {...props} />} />
                     <Route path="/ettersendelse" render={(props) => <Ettersendelse {...props} />} />
                     <Route
                         path="/"
                         render={(props) => (
-                            <DineForeldrepenger
-                                saker={this.state.saker}
-                                loading={this.state.loading}
-                                error={this.state.error}
-                                {...props}
-                            />
+                            <DineForeldrepenger saker={this.state.saker} error={this.state.error} {...props} />
                         )}
                     />
                 </Switch>

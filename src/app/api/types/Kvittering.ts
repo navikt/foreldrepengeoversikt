@@ -1,4 +1,4 @@
-export default interface Kvittering {
+export interface Kvittering {
     referanseId: string;
     mottattDato: string;
     leveranseStatus: string;

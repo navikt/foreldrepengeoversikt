@@ -42,6 +42,7 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                 <Normaltekst className={cls.element('saksnummer')}>
                     <FormattedMessage id={'saksoversikt.content.saksnummer'} values={{ saksnummer: sak.saksnummer }} />
                 </Normaltekst>
+
                 <div className={cls.element('din-søknad')}>
                     <FileIcon />
                     <Lenke href={lenker.dittNav.href}>
@@ -50,18 +51,22 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                         </Normaltekst>
                     </Lenke>
                 </div>
+
                 <Normaltekst className={cls.element('ettersendelse-intro')}>
                     <FormattedMessage id={'saksoversikt.content.ettersendelse.intro'} />
                 </Normaltekst>
+
                 <Knapp
                     className={cls.element('ettersendelse-btn')}
                     onClick={() => onEttersendVedlegg(sak)}
                     disabled={isSakTooOldForEttersendelse(sak.opprettet)}>
                     <FormattedMessage id={'saksoversikt.content.ettersendelse.button'} />
                 </Knapp>
+
                 <Normaltekst className={cls.element('endringssoknad-intro')}>
                     <FormattedMessage id={'saksoversikt.content.endringssøknad.intro'} />
                 </Normaltekst>
+
                 <Knapp
                     className={cls.element('endringssoknad-btn')}
                     onClick={() => onEndreSøknad(sak)}

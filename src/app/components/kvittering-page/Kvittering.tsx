@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import * as moment from 'moment';
 
-import Kvittering from '../../api/types/Kvittering';
+import { Kvittering } from '../../api/types/Kvittering';
 import BEMHelper from 'common/util/bem';
 import SpotlightLetter from 'common/components/ikoner/SpotlightLetter';
 import LabelText from 'common/components/labeltekst/Labeltekst';
@@ -11,14 +11,14 @@ import { bytesString, getTotalFileSize } from 'common/util/filesize';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 
-import './ettersendingKvittering.less';
+import './kvittering.less';
 
 interface Props {
     kvittering: Kvittering;
     attachments: Attachment[];
 }
 
-const EttersendingKvittering: React.StatelessComponent<Props> = (props: Props) => {
+const Kvittering: React.StatelessComponent<Props> = (props: Props) => {
     const cls = BEMHelper('kvittering');
     const { kvittering, attachments } = props;
     return (
@@ -53,4 +53,4 @@ const EttersendingKvittering: React.StatelessComponent<Props> = (props: Props) =
         </div>
     );
 };
-export default EttersendingKvittering;
+export default Kvittering;

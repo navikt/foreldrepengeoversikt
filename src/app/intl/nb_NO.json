@@ -19,7 +19,9 @@
     "ettersendelse.sendButton": "Ettersend vedlegg",
 
     "vedlegg.lastoppknapp": "Legg ved dokumentasjon",
+    "vedlegg.feilmelding": "Det har skjedd en feil. Prøv igjen.",
     "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
+    "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
     "vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
     "kvittering.headline": "Ettersendelsen er mottat!",
     "kvittering.message": "Vi mottok ettersendelsen den {date} kl. { timeOfDay }.",

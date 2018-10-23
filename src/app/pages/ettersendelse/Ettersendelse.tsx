@@ -1,22 +1,24 @@
 import * as React from 'react';
-import Sak from '../../types/Sak';
+import { FormattedMessage } from 'react-intl';
 import { History } from 'history';
+import { Innholdstittel } from 'nav-frontend-typografi';
+import { Hovedknapp } from 'nav-frontend-knapper';
+
+import Sak from '../../types/Sak';
 import BEMHelper from '../../../common/util/bem';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import { AxiosError } from '../../../../node_modules/axios';
 import Api from '../../api/api';
-import Kvittering from 'app/api/types/Kvittering';
-import EttersendingKvittering from '../../components/ettersending-kvittering/EttersendingKvittering';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Kvittering as EttersendelseKvittering } from 'app/api/types/Kvittering';
+import Kvittering from '../../components/kvittering-page/Kvittering';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import Ettersending from '../../api/types/Ettersending';
+import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 
 import './ettersendelse.less';
-import { FormattedMessage } from 'react-intl';
 
 interface Props {
     history: History;
@@ -26,8 +28,7 @@ interface State {
     sak: Sak;
     attachments: Attachment[];
     sendingEttersendelse: boolean;
-    error?: AxiosError;
-    kvittering: Kvittering;
+    kvittering: EttersendelseKvittering;
 }
 
 class Ettersendelse extends React.Component<Props, State> {
@@ -45,7 +46,7 @@ class Ettersendelse extends React.Component<Props, State> {
 
         this.addAttachment = this.addAttachment.bind(this);
         this.editAttachment = this.editAttachment.bind(this);
-        this.deleteAttachemnt = this.deleteAttachemnt.bind(this);
+        this.deleteAttachment = this.deleteAttachment.bind(this);
         this.handleSendEttersendelseOnClick = this.handleSendEttersendelseOnClick.bind(this);
     }
 
@@ -60,7 +61,7 @@ class Ettersendelse extends React.Component<Props, State> {
         this.setState({ attachments: attachmentsCopy });
     }
 
-    deleteAttachemnt(attachment: Attachment): void {
+    deleteAttachment(attachment: Attachment): void {
         const newAttachmentList = [...this.state.attachments];
         newAttachmentList.splice(newAttachmentList.indexOf(attachment), 1);
         this.setState({ attachments: newAttachmentList });
@@ -75,19 +76,24 @@ class Ettersendelse extends React.Component<Props, State> {
     sendEttersendelse() {
         const ettersending: Ettersending = {
             saksnummer: this.state.sak.saksnummer,
-            vedlegg: this.state.attachments
+            vedlegg: this.state.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
         };
 
         Api.sendEttersending(ettersending)
-            .then((response) => this.setState({ kvittering: response.data }))
-            .catch((error: AxiosError) => {
-                if (error.response) {
-                    this.setState({ error });
-                }
+            .then((response) => {
+                this.setState({ kvittering: response.data, sendingEttersendelse: false });
             })
-            .finally(() => {
-                this.setState({ sendingEttersendelse: false });
+            .catch((error: AxiosError) => {
+                this.setState({ sendingEttersendelse: false }, () => {
+                    error.response
+                        ? this.props.history.push('/feil', { errorStatusCode: error.response.status })
+                        : this.props.history.push('/feil', { timeout: true });
+                });
             });
+    }
+
+    isReadyToSendAttachments(): boolean {
+        return [...this.state.attachments.filter((a: Attachment) => !isAttachmentWithError(a))].length > 0;
     }
 
     render() {
@@ -102,14 +108,14 @@ class Ettersendelse extends React.Component<Props, State> {
                 <ResponsiveWrapper>
                     <div className={cls.modifier(`content`)}>
                         {this.state.kvittering ? (
-                            <EttersendingKvittering
-                                attachments={this.state.attachments}
-                                kvittering={this.state.kvittering}
-                            />
+                            <Kvittering attachments={this.state.attachments} kvittering={this.state.kvittering} />
                         ) : (
                             <>
                                 <Innholdstittel className={cls.element('title')}>
-                                    <FormattedMessage id={'ettersendelse.title'} values={{ saksnummer: this.state.sak.saksnummer}}/>
+                                    <FormattedMessage
+                                        id={'ettersendelse.title'}
+                                        values={{ saksnummer: this.state.sak.saksnummer }}
+                                    />
                                 </Innholdstittel>
                                 <div className={cls.element('uploader')}>
                                     <AttachmentsUploader
@@ -119,10 +125,10 @@ class Ettersendelse extends React.Component<Props, State> {
                                         onFilesUploadStart={this.addAttachment}
                                         onFileUploadFinish={this.editAttachment}
                                         onFileDeleteStart={this.editAttachment}
-                                        onFileDeleteFinish={this.deleteAttachemnt}
+                                        onFileDeleteFinish={this.deleteAttachment}
                                     />
                                 </div>
-                                {this.state.attachments.length > 0 && (
+                                {this.isReadyToSendAttachments() && (
                                     <div className={cls.element('send-button')}>
                                         <Hovedknapp
                                             onClick={this.handleSendEttersendelseOnClick}
