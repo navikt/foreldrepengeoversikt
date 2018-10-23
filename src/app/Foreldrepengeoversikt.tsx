@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { redirectToLogin } from './utils/login';
 import { AxiosError } from 'axios';
 import Sak from './types/Sak';
-import Innsyn from './pages/innsyn/Innsyn';
+import DineForeldrepenger from './pages/dine-foreldrepenger/DineForeldrepenger';
 import Ettersendelse from './pages/ettersendelse/Ettersendelse';
+import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
 
 interface State {
     saker: Sak[];
@@ -41,6 +42,10 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
     }
 
     render(): JSX.Element {
+        if (this.state.loading) {
+            return <ApplicationSpinner />;
+        }
+
         return (
             <Router>
                 <Switch>
@@ -48,7 +53,7 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
                     <Route
                         path="/"
                         render={(props) => (
-                            <Innsyn
+                            <DineForeldrepenger
                                 saker={this.state.saker}
                                 loading={this.state.loading}
                                 error={this.state.error}

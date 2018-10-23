@@ -8,7 +8,7 @@ import ResponsiveWrapper from '../ResponsiveWrapper';
 import { AxiosError } from '../../../../node_modules/axios';
 import Api from '../../api/api';
 import Kvittering from 'app/api/types/Kvittering';
-import { EttersendingKvittering as KvitteringComponent } from '../../components/ettersending-kvittering/EttersendingKvittering';
+import EttersendingKvittering from '../../components/ettersending-kvittering/EttersendingKvittering';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
@@ -101,7 +101,7 @@ class Ettersendelse extends React.Component<Props, State> {
                 <ResponsiveWrapper>
                     <div className={cls.modifier(`content`)}>
                         {this.state.kvittering ? (
-                            <KvitteringComponent
+                            <EttersendingKvittering
                                 attachments={this.state.attachments}
                                 kvittering={this.state.kvittering}
                             />

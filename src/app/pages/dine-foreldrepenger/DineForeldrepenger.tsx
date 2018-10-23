@@ -1,28 +1,28 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { History } from 'history';
+import { AxiosError } from 'axios';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { Systemtittel } from 'nav-frontend-typografi';
+
 import Sak from '../../types/Sak';
 import Saksoversikt from '../../components/saksoversikt/Saksoversikt';
 
 import Header from '../../components/header/Header';
-import { History } from 'history';
 import BEMHelper from '../../../common/util/bem';
-import { Systemtittel } from 'nav-frontend-typografi';
-import './innsyn.less';
 import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjon';
 import ResponsiveWrapper from '../ResponsiveWrapper';
-import ApplicationSpinner from '../../components/application-spinner/ApplicationSpinner';
-import { AxiosError } from 'axios';
 import { lenker } from '../../utils/lenker';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { FormattedMessage } from 'react-intl';
+
+import './dineForeldrepenger.less';
 
 interface Props {
     saker: Sak[];
     history: History;
-    loading: boolean;
     error?: AxiosError | any;
 }
 
-class Innsyn extends React.Component<Props> {
+class DineForeldrepenger extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         this.onEttersendVedlegg = this.onEttersendVedlegg.bind(this);
@@ -33,7 +33,7 @@ class Innsyn extends React.Component<Props> {
         this.props.history.push('/ettersendelse', { sak });
     }
 
-    onEndreSøknad(sak: Sak): void {
+    onEndreSøknad(): void {
         window.location.href = lenker.endringssøknad.href;
     }
 
@@ -60,7 +60,7 @@ class Innsyn extends React.Component<Props> {
     }
 
     render() {
-        const { saker, loading, error } = this.props;
+        const { saker, error } = this.props;
         const cls = BEMHelper('innsyn');
         return (
             <>
@@ -70,16 +70,14 @@ class Innsyn extends React.Component<Props> {
                         <AlertStripe className={cls.element('info')} type={'info'}>
                             <FormattedMessage id={'innsyn.alertstripe'} />
                         </AlertStripe>
-                        {loading && <ApplicationSpinner />}
-                        {!loading &&
-                            error && (
-                                <Systemtittel className={cls.element('feilmelding')}>
-                                    <FormattedMessage id={'innsyn.feilmelding'} />
-                                </Systemtittel>
-                            )}
 
-                        {!loading &&
-                            !error &&
+                        {error && (
+                            <Systemtittel className={cls.element('feilmelding')}>
+                                <FormattedMessage id={'innsyn.feilmelding'} />
+                            </Systemtittel>
+                        )}
+
+                        {!error &&
                             ((saker === undefined || saker.length === 0) && (
                                 <Systemtittel className={cls.element('ingen-saker')}>
                                     <FormattedMessage id={'innsyn.ingenSaker'} />
@@ -87,6 +85,7 @@ class Innsyn extends React.Component<Props> {
                             ))}
 
                         {saker !== undefined && error === undefined && this.renderSaksoversiktList()}
+
                         <AnnenInformasjon />
                     </ResponsiveWrapper>
                 </div>
@@ -94,4 +93,4 @@ class Innsyn extends React.Component<Props> {
         );
     }
 }
-export default Innsyn;
+export default DineForeldrepenger;

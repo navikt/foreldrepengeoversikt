@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Spinner from 'nav-frontend-spinner';
 import BEMHelper from '../../../common/util/bem';
+
 import './applicationSpinner.less';
 
 export interface Props {}
