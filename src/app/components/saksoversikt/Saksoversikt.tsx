@@ -10,6 +10,7 @@ import { lenker } from '../../utils/lenker';
 
 import './saksoversikt.less';
 import FileIcon from '../ikoner/FileIcon';
+import { FormattedMessage } from 'react-intl';
 
 interface Props {
     sak: Sak;
@@ -47,7 +48,7 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                     Last opp vedlegg
                 </Knapp>
                 <Normaltekst className={cls.element('endringssoknad-intro')}>
-                    Endre din periode med foreldrepenger (legge til ferie, hvis du skal jobbe eller har vært syk)
+                    <FormattedMessage id={'saksoversikt.endringssøknad.intro'} />
                 </Normaltekst>
                 <Knapp
                     className={cls.element('endringssoknad-btn')}

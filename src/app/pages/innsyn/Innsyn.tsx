@@ -13,6 +13,7 @@ import ApplicationSpinner from '../../components/application-spinner/Application
 import { AxiosError } from 'axios';
 import { lenker } from '../../utils/lenker';
 import AlertStripe from 'nav-frontend-alertstriper';
+import { FormattedMessage } from 'react-intl';
 
 interface Props {
     saker: Sak[];
@@ -61,28 +62,36 @@ class Innsyn extends React.Component<Props> {
     render() {
         const { saker, loading, error } = this.props;
         const cls = BEMHelper('innsyn');
-        return <>
+        return (
+            <>
                 <Header history={this.props.history} />
                 <div className={cls.className}>
                     <ResponsiveWrapper>
                         <AlertStripe className={cls.element('info')} type={'info'}>
-                            Kun din nyeste søknad som ikke er eldre enn 3 år gammel vil vises her.
+                            <FormattedMessage id={'innsyn.alertstripe'} />
                         </AlertStripe>
                         {loading && <ApplicationSpinner />}
-                        {!loading && error && <Systemtittel className={cls.element('feilmelding')}>
-                                    En feil har oppstått. Prøv igjen senere.
-                                </Systemtittel>}
+                        {!loading &&
+                            error && (
+                                <Systemtittel className={cls.element('feilmelding')}>
+                                    <FormattedMessage id={'innsyn.feilmelding'} />
+                                </Systemtittel>
+                            )}
 
-                        {!loading && !error && ((saker === undefined || saker.length === 0) && <Systemtittel
-                                    className={cls.element('ingen-saker')}>
-                                    Vi fant ingen saker
-                                </Systemtittel>)}
+                        {!loading &&
+                            !error &&
+                            ((saker === undefined || saker.length === 0) && (
+                                <Systemtittel className={cls.element('ingen-saker')}>
+                                    <FormattedMessage id={'innsyn.ingenSaker'} />
+                                </Systemtittel>
+                            ))}
 
                         {saker !== undefined && error === undefined && this.renderSaksoversiktList()}
                         <AnnenInformasjon />
                     </ResponsiveWrapper>
                 </div>
-            </>;
+            </>
+        );
     }
 }
 export default Innsyn;
