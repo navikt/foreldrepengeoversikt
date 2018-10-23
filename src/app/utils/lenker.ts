@@ -27,10 +27,6 @@ export const annenInformasjonLenker = {
         text: 'Kontakt oss',
         href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger'
     },
-    personvernOgMasseErklæringer: {
-        text: 'Personvern og masse erklæringer',
-        href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten'
-    },
     saksbehandlingstider: {
         text: 'Utbetaling og saksbehandlingstider',
         href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Saksbehandlingstider+i+NAV'
