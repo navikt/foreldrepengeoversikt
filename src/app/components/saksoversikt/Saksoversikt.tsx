@@ -1,16 +1,17 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { Knapp } from 'nav-frontend-knapper';
-import Sak from '../../types/Sak';
-import { formatDate, isSakTooOldForEndringssøknad, isSakTooOldForEttersendelse } from './util';
-import BEMHelper from 'common/util/bem';
 import Lenke from 'nav-frontend-lenker';
-import { lenker } from '../../utils/lenker';
+import { Knapp } from 'nav-frontend-knapper';
 
-import './saksoversikt.less';
+import BEMHelper from 'common/util/bem';
+import Sak from '../../types/Sak';
+import { lenker } from '../../utils/lenker';
 import FileIcon from '../ikoner/FileIcon';
-import { FormattedMessage } from 'react-intl';
+
+import { formatDate, isSakTooOldForEndringssøknad, isSakTooOldForEttersendelse } from './util';
+import './saksoversikt.less';
 
 interface Props {
     sak: Sak;
@@ -26,35 +27,46 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
             <EkspanderbartpanelBase
                 heading={
                     <div>
-                        <Undertittel>Søknad om foreldrepenger</Undertittel>
-                        <Normaltekst>Sist endret: {formatDate(sak.opprettet)}</Normaltekst>
+                        <Undertittel>
+                            <FormattedMessage id={'saksoversikt.heading.top'} />
+                        </Undertittel>
+                        <Normaltekst>
+                            <FormattedMessage
+                                id={'saksoversikt.heading.bottom'}
+                                values={{ date: formatDate(sak.opprettet) }}
+                            />
+                        </Normaltekst>
                     </div>
                 }
                 ariaTittel={'søknad om foreldrepenger'}>
-                <Normaltekst className={cls.element('saksnummer')}>Saksnummer: {sak.saksnummer}</Normaltekst>
+                <Normaltekst className={cls.element('saksnummer')}>
+                    <FormattedMessage id={'saksoversikt.content.saksnummer'} values={{ saksnummer: sak.saksnummer }} />
+                </Normaltekst>
                 <div className={cls.element('din-søknad')}>
                     <FileIcon />
                     <Lenke href={lenker.dittNav.href}>
-                        <Normaltekst>Dine innsendte søknader</Normaltekst>
+                        <Normaltekst>
+                            <FormattedMessage id={'saksoversikt.content.dinSøknad'} />
+                        </Normaltekst>
                     </Lenke>
                 </div>
                 <Normaltekst className={cls.element('ettersendelse-intro')}>
-                    Her kan du ettersende dokumentasjon til søknaden din
+                    <FormattedMessage id={'saksoversikt.content.ettersendelse.intro'} />
                 </Normaltekst>
                 <Knapp
                     className={cls.element('ettersendelse-btn')}
                     onClick={() => onEttersendVedlegg(sak)}
                     disabled={isSakTooOldForEttersendelse(sak.opprettet)}>
-                    Last opp vedlegg
+                    <FormattedMessage id={'saksoversikt.content.ettersendelse.button'} />
                 </Knapp>
                 <Normaltekst className={cls.element('endringssoknad-intro')}>
-                    <FormattedMessage id={'saksoversikt.endringssøknad.intro'} />
+                    <FormattedMessage id={'saksoversikt.content.endringssøknad.intro'} />
                 </Normaltekst>
                 <Knapp
                     className={cls.element('endringssoknad-btn')}
                     onClick={() => onEndreSøknad(sak)}
                     disabled={isSakTooOldForEndringssøknad(sak.opprettet)}>
-                    Endre perioden din
+                    <FormattedMessage id={'saksoversikt.content.endringssøknad.button'} />
                 </Knapp>
             </EkspanderbartpanelBase>
         </div>

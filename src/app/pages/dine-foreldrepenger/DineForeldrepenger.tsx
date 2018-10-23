@@ -61,26 +61,26 @@ class DineForeldrepenger extends React.Component<Props> {
 
     render() {
         const { saker, error } = this.props;
-        const cls = BEMHelper('innsyn');
+        const cls = BEMHelper('dine-foreldrepenger');
         return (
             <>
                 <Header history={this.props.history} />
                 <div className={cls.className}>
                     <ResponsiveWrapper>
                         <AlertStripe className={cls.element('info')} type={'info'}>
-                            <FormattedMessage id={'innsyn.alertstripe'} />
+                            <FormattedMessage id={'dineForeldrepenger.alertstripe'} />
                         </AlertStripe>
 
                         {error && (
                             <Systemtittel className={cls.element('feilmelding')}>
-                                <FormattedMessage id={'innsyn.feilmelding'} />
+                                <FormattedMessage id={'dineForeldrepenger.feilmelding'} />
                             </Systemtittel>
                         )}
 
                         {!error &&
                             ((saker === undefined || saker.length === 0) && (
                                 <Systemtittel className={cls.element('ingen-saker')}>
-                                    <FormattedMessage id={'innsyn.ingenSaker'} />
+                                    <FormattedMessage id={'dineForeldrepenger.ingenSaker'} />
                                 </Systemtittel>
                             ))}
 

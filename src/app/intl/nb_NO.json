@@ -1,0 +1,27 @@
+{
+    "header.title": "Dine foreldrepenger",
+
+    "dineForeldrepenger.alertstripe": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
+    "dineForeldrepenger.feilmelding": "Det har skjedd en feil. Prøv igjen senere.",
+    "dineForeldrepenger.ingenSaker": "Du har ingen søknader hos NAV. Søknader eldre enn tre år vises ikke her.",
+
+    "saksoversikt.heading.top": "Søknad om foreldrepenger",
+    "saksoversikt.heading.bottom": "Sist endret: { date }",
+    "saksoversikt.content.saksnummer": "Saksnummer: { saksnummer }",
+    "saksoversikt.content.dinSøknad": "Dine innsendte søknader",
+    "saksoversikt.content.ettersendelse.intro": "Her kan du ettersende dokumentasjon til søknaden din.",
+    "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg.",
+    "saksoversikt.content.endringssøknad.intro":
+        "Her kan du endre perioden din hvis du skal ha ferie, jobbe eller har vært syk.",
+    "saksoversikt.content.endringssøknad.button": "Endre perioden din.",
+
+    "ettersendelse.title" : "Last opp dokumentasjon til sak { saksnummer }",
+    "ettersendelse.sendButton": "Ettersend vedlegg",
+
+    "vedlegg.lastoppknapp": "Legg ved dokumentasjon",
+    "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
+    "vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
+    "kvittering.headline": "Ettersendelsen er mottat!",
+    "kvittering.message": "Vi mottok ettersendelsen den {date} kl. { timeOfDay }.",
+    "kvittering.attachment-list-label": "Innsendte vedlegg { size }"
+}

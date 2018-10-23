@@ -5,6 +5,7 @@ import BEMHelper from '../../../common/util/bem';
 import NavigationColumLinks from '../navigation-colum-links/NavigationColumLinks';
 import './header.less';
 import { History } from 'history';
+import { FormattedMessage } from 'react-intl';
 
 interface Props {
     history: History;
@@ -17,7 +18,9 @@ const Header: React.StatelessComponent<Props> = ({ history }) => {
             <div className={cls.element('content')}>
                 <div className={cls.element('text-wrapper')}>
                     <NavigationColumLinks history={history} />
-                    <Sidetittel className={cls.element('title')}>Dine foreldrepenger</Sidetittel>
+                    <Sidetittel className={cls.element('title')}>
+                        <FormattedMessage id={'header.title'} />
+                    </Sidetittel>
                 </div>
                 <FamilyIcon className={cls.element('icon')} />
             </div>

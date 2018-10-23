@@ -1,14 +1,14 @@
 import * as React from 'react';
-import BEMHelper from '../../../common/util/bem';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Link } from 'react-router-dom';
 import { History } from 'history';
 import Lenke from 'nav-frontend-lenker';
-import { Link } from 'react-router-dom';
+import { guid } from 'nav-frontend-js-utils';
+import BEMHelper from '../../../common/util/bem';
+import { Normaltekst } from 'nav-frontend-typografi';
 import { headerLinks } from '../../utils/lenker';
 import UserIcon from '../ikoner/UserIcon';
 
 import './navigationColumLinks.less';
-import { guid } from 'nav-frontend-js-utils';
 
 interface NavigationLinks {
     text: string;
@@ -37,15 +37,16 @@ const NavigationColumLinks: React.StatelessComponent<Props> = (props: Props) => 
                 if (props.history.location.pathname === link.href) {
                     return <Normaltekst key={guid()}>{link.text}</Normaltekst>;
                 } else {
+                    const key = guid();
                     return link.external ? (
-                        <React.Fragment key={guid()}>
+                        <React.Fragment key={key}>
                             <Lenke href={link.href}>
                                 <Normaltekst>{link.text}</Normaltekst>
                             </Lenke>
                             <span>/</span>
                         </React.Fragment>
                     ) : (
-                        <React.Fragment key={guid()}>
+                        <React.Fragment key={key}>
                             <Link to={link.href}>
                                 <Normaltekst>{link.text}</Normaltekst>
                             </Link>

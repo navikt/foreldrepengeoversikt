@@ -16,6 +16,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import Ettersending from '../../api/types/Ettersending';
 
 import './ettersendelse.less';
+import { FormattedMessage } from 'react-intl';
 
 interface Props {
     history: History;
@@ -108,7 +109,7 @@ class Ettersendelse extends React.Component<Props, State> {
                         ) : (
                             <>
                                 <Innholdstittel className={cls.element('title')}>
-                                    Last opp dokumentasjon til sak {this.state.sak.saksnummer}
+                                    <FormattedMessage id={'ettersendelse.title'} values={{ saksnummer: this.state.sak.saksnummer}}/>
                                 </Innholdstittel>
                                 <div className={cls.element('uploader')}>
                                     <AttachmentsUploader
@@ -127,7 +128,7 @@ class Ettersendelse extends React.Component<Props, State> {
                                             onClick={this.handleSendEttersendelseOnClick}
                                             disabled={this.state.sendingEttersendelse}
                                             spinner={this.state.sendingEttersendelse}>
-                                            Ettersend vedlegg
+                                            <FormattedMessage id={'ettersendelse.sendButton'} />
                                         </Hovedknapp>
                                     </div>
                                 )}

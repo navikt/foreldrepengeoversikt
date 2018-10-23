@@ -24,7 +24,9 @@ const EttersendingKvittering: React.StatelessComponent<Props> = (props: Props) =
     return (
         <div className={cls.className}>
             <SpotlightLetter className={cls.element('logo')} />
-            <Innholdstittel className={cls.element('headline')}>Ettersendelsen er mottat!</Innholdstittel>
+            <Innholdstittel className={cls.element('headline')}>
+                <FormattedMessage id={'kvittering.headline'} />
+            </Innholdstittel>
             <Ingress className={cls.element('message')}>
                 <FormattedMessage
                     id={'kvittering.message'}
@@ -36,7 +38,10 @@ const EttersendingKvittering: React.StatelessComponent<Props> = (props: Props) =
             </Ingress>
             <div className={cls.element('attachment-list-label')}>
                 <LabelText>
-                    Innsendte vedlegg ( {bytesString(getTotalFileSize(attachments.map((a: Attachment) => a.file)))} )
+                    <FormattedMessage
+                        id={'kvittering.attachment-list-label'}
+                        values={{ size: bytesString(getTotalFileSize(attachments.map((a: Attachment) => a.file))) }}
+                    />
                 </LabelText>
             </div>
             <div className={cls.element('attachment-list')}>

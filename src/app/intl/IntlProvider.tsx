@@ -4,7 +4,7 @@ import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import * as nb from 'react-intl/locale-data/nb';
 import * as nn from 'react-intl/locale-data/nn';
 
-import nbMessages from './nb_NO';
+import nbMessages from './nb_NO.json';
 
 moment.locale('nb');
 
