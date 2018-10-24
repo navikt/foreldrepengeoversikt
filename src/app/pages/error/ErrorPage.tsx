@@ -4,7 +4,6 @@ import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import { History } from 'history';
 import BEMHelper from 'common/util/bem';
 import ResponsiveWrapper from '../ResponsiveWrapper';
-import Lenke from 'nav-frontend-lenker';
 import SimpleIllustration from 'common/components/simple-illustration/SimpleIllustration';
 
 export interface Props {
@@ -39,17 +38,17 @@ class ErrorPage extends React.Component<Props, State> {
         const cls = BEMHelper('error-page');
         return (
             <div id={cls.className}>
+                <SimpleIllustration
+                    dialog={{
+                        title: 'tittel',
+                        text: (
+                            <div>
+                                <div>text</div>
+                            </div>
+                        )
+                    }}
+                />
                 <ResponsiveWrapper>
-                    <SimpleIllustration
-                        dialog={{
-                            title: 'tittel',
-                            text: (
-                                <div>
-                                    <div>adf</div>
-                                </div>
-                            )
-                        }}
-                    />
                     <Innholdstittel className={cls.element('title')}>
                         <FormattedMessage id={'errorPage.title'} />
                     </Innholdstittel>

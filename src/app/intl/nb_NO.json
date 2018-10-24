@@ -10,10 +10,10 @@
     "saksoversikt.content.saksnummer": "Saksnummer: { saksnummer }",
     "saksoversikt.content.dinSøknad": "Dine innsendte søknader",
     "saksoversikt.content.ettersendelse.intro": "Her kan du ettersende dokumentasjon til søknaden din.",
-    "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg.",
+    "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg",
     "saksoversikt.content.endringssøknad.intro":
         "Her kan du endre perioden din hvis du skal ha ferie, jobbe eller har vært syk.",
-    "saksoversikt.content.endringssøknad.button": "Endre perioden din.",
+    "saksoversikt.content.endringssøknad.button": "Endre perioden din",
 
     "ettersendelse.title" : "Last opp dokumentasjon til sak { saksnummer }",
     "ettersendelse.sendButton": "Ettersend vedlegg",

@@ -4,13 +4,14 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import { Knapp } from 'nav-frontend-knapper';
+import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
 
 import BEMHelper from 'common/util/bem';
 import Sak from '../../types/Sak';
 import { lenker } from '../../utils/lenker';
 import FileIcon from '../ikoner/FileIcon';
-
 import { formatDate, isSakTooOldForEndringssøknad, isSakTooOldForEttersendelse } from './util';
+
 import './saksoversikt.less';
 
 interface Props {
@@ -56,23 +57,37 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                     <FormattedMessage id={'saksoversikt.content.ettersendelse.intro'} />
                 </Normaltekst>
 
-                <Knapp
-                    className={cls.element('ettersendelse-btn')}
-                    onClick={() => onEttersendVedlegg(sak)}
-                    disabled={isSakTooOldForEttersendelse(sak.opprettet)}>
-                    <FormattedMessage id={'saksoversikt.content.ettersendelse.button'} />
-                </Knapp>
+                <div className={cls.element('valg')}>
+                    <Knapp
+                        className={cls.element('ettersendelse-btn')}
+                        onClick={() => onEttersendVedlegg(sak)}
+                        disabled={isSakTooOldForEttersendelse(sak.opprettet)}>
+                        <FormattedMessage id={'saksoversikt.content.ettersendelse.button'} />
+                    </Knapp>
+                    {isSakTooOldForEttersendelse(sak.opprettet) && (
+                        <HjelpetekstAuto id={'ettersendelse-disabled-info'} tittel={''}>
+                            <FormattedMessage id={'saksoversikt.ettersendelse.hjelpetekst'} />
+                        </HjelpetekstAuto>
+                    )}
+                </div>
 
                 <Normaltekst className={cls.element('endringssoknad-intro')}>
                     <FormattedMessage id={'saksoversikt.content.endringssøknad.intro'} />
                 </Normaltekst>
 
-                <Knapp
-                    className={cls.element('endringssoknad-btn')}
-                    onClick={() => onEndreSøknad(sak)}
-                    disabled={isSakTooOldForEndringssøknad(sak.opprettet)}>
-                    <FormattedMessage id={'saksoversikt.content.endringssøknad.button'} />
-                </Knapp>
+                <div className={cls.element('valg')}>
+                    <Knapp
+                        className={cls.element('endringssoknad-btn')}
+                        onClick={() => onEndreSøknad(sak)}
+                        disabled={isSakTooOldForEndringssøknad(sak.opprettet)}>
+                        <FormattedMessage id={'saksoversikt.content.endringssøknad.button'} />
+                    </Knapp>
+                    {isSakTooOldForEttersendelse(sak.opprettet) && (
+                        <HjelpetekstAuto id={'endringssøknad-disabled-info'} tittel={''}>
+                            <FormattedMessage id={'saksoversikt.endringssøknad.hjelpetekst'} />
+                        </HjelpetekstAuto>
+                    )}
+                </div>
             </EkspanderbartpanelBase>
         </div>
     );
