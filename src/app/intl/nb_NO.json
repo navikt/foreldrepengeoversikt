@@ -25,5 +25,8 @@
     "vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
     "kvittering.headline": "Ettersendelsen er mottat!",
     "kvittering.message": "Vi mottok ettersendelsen den {date} kl. { timeOfDay }.",
-    "kvittering.attachment-list-label": "Innsendte vedlegg { size }"
+    "kvittering.attachment-list-label": "Innsendte vedlegg { size }",
+
+    "errorPage.title": "Det oppstod en feil",
+    "errorPage.message": "Prøv igjen senere."
 }
