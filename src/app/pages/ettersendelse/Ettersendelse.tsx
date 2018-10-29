@@ -19,6 +19,7 @@ import Ettersending from '../../api/types/Ettersending';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 
 import './ettersendelse.less';
+import BackButton from 'common/components/back-button/BackButton';
 
 interface Props {
     history: History;
@@ -67,6 +68,10 @@ class Ettersendelse extends React.Component<Props, State> {
         this.setState({ attachments: newAttachmentList });
     }
 
+    handleBackClick(): void {
+        this.props.history.push('/');
+    }
+
     handleSendEttersendelseOnClick(): void {
         if (this.state.attachments.length > 0) {
             this.setState({ sendingEttersendelse: true }, this.sendEttersendelse);
@@ -107,6 +112,7 @@ class Ettersendelse extends React.Component<Props, State> {
                 <Søknadstittel>Ettersending av vedlegg</Søknadstittel>
                 <ResponsiveWrapper>
                     <div className={cls.modifier(`content`)}>
+                        <BackButton hidden={false} onClick={() => this.handleBackClick()} />
                         {this.state.kvittering ? (
                             <Kvittering attachments={this.state.attachments} kvittering={this.state.kvittering} />
                         ) : (
