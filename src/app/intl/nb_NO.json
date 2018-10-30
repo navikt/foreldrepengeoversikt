@@ -28,5 +28,8 @@
     "kvittering.attachment-list-label": "Innsendte vedlegg { size }",
 
     "errorPage.title": "Det oppstod en feil",
-    "errorPage.message": "Prøv igjen senere."
+    "errorPage.message": "Prøv igjen senere.",
+
+    "saksoversikt.ettersendelse.hjelpetekst": "Fristen for å ettersende vedlegg har utløpt",
+    "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad har utløpt"
 }

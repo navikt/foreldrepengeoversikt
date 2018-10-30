@@ -82,7 +82,7 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                         disabled={isSakTooOldForEndringssøknad(sak.opprettet)}>
                         <FormattedMessage id={'saksoversikt.content.endringssøknad.button'} />
                     </Knapp>
-                    {isSakTooOldForEttersendelse(sak.opprettet) && (
+                    {isSakTooOldForEndringssøknad(sak.opprettet) && (
                         <HjelpetekstAuto id={'endringssøknad-disabled-info'} tittel={''}>
                             <FormattedMessage id={'saksoversikt.endringssøknad.hjelpetekst'} />
                         </HjelpetekstAuto>
