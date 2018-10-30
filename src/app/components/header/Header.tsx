@@ -15,14 +15,18 @@ const Header: React.StatelessComponent<Props> = ({ history }) => {
     const cls = BEMHelper('header');
     return (
         <div className={cls.className}>
-            <div className={cls.element('content')}>
-                <div className={cls.element('text-wrapper')}>
-                    <NavigationColumLinks history={history} />
-                    <Sidetittel className={cls.element('title')}>
-                        <FormattedMessage id={'header.title'} />
-                    </Sidetittel>
+            <div className={cls.element('wrapper')}>
+                <div className={cls.element('content')}>
+                    <div className={cls.element('text')}>
+                        <NavigationColumLinks history={history} />
+                        <Sidetittel className={cls.element('title')}>
+                            <FormattedMessage id={'header.title'} />
+                        </Sidetittel>
+                    </div>
+                    <div className={cls.element('svgContainer')}>
+                        <FamilyIcon className={cls.element('icon')} height={133} width={300} />
+                    </div>
                 </div>
-                <FamilyIcon className={cls.element('icon')} />
             </div>
         </div>
     );

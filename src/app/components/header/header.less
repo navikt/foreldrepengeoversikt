@@ -3,72 +3,153 @@
 @import '../../styles/mixins.less';
 
 .header {
+    align-self: stretch;
+    background-color: @lavender;
+    .purpleBottomBorder();
+
     display: flex;
+    flex-direction: row;
+    align-items: stretch;
     justify-content: center;
-    background: @header-background-color;
-    .headerBottomBorder();
+    overflow: hidden;
+
+    &__wrapper {
+        width: 100%;
+    }
+
+    &__wrapper {
+        display: -ms-flex;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
 
     &__content {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        min-height: 164px;
+        flex: 1;
         max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        overflow: hidden;
     }
 
-    &__text-wrapper {
-        align-self: center;
-    }
-
-    &__title {
-        font-size: 2.25rem;
-        align-self: center;
-        margin-bottom: 40px;
-        padding-top: 1rem;
-    }
-
-    &__icon {
-        flex-shrink: 0;
-        justify-content: flex-end;
-        margin: 0 1rem;
-        align-self: flex-end;
-        height: auto;
-        width: 45%;
-    }
-
-    @media (max-width: @tablet-breakpoint) {
-        &__icon {
-            flex-shrink: 1;
-            width: 40%;
-        }
-
-        &__text-wrapper {
-            padding-left: 0.75rem;
-        }
-    }
-
-    @media (max-width: @mobile-breakpoint) {
-        &__content {
-            flex-direction: column;
-            padding-top: 1rem;
-            max-width: none;
-        }
-
-        &__text-wrapper {
-            text-align: left;
-            margin: 0 1rem 1rem;
-        }
-
-        &__icon {
-            align-self: center;
-            width: 250px;
-            height: 110px;
-        }
+    &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin: 1rem 1rem 1.4rem;
+        padding-left: 1rem;
 
         &__title {
-            margin-top: 1rem;
-            padding-top: 0;
             margin-bottom: 1rem;
+            font-size: 2.25rem;
+        }
+    }
+
+    &__svgContainer {
+        align-self: flex-start;
+        margin: 0 1rem 0 3rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        &__icon {
+            height: 111px;
+            width: 250px;
+        }
+    }
+
+
+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        align-items: center;
+        width: 100%;
+        -ms-flex-direction: row;
+        -ms-flex-align: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+
+        .typo-sidetittel {
+            font-size: 1.1rem;
+            line-height: 1.5rem;
+            margin-top: -1rem;
+        }
+
+        &__wrapper {
+            height: 150px;
+        }
+
+        &__content {
+            align-self: center;
+            width: 100%;
+            flex-direction: row;
+        }
+
+        .typo-normal {
+            font-size: 0.9rem;
+            line-height: 1.1rem;
+            margin-top: -0.5rem;
+        }
+
+        &__text {
+            max-width: 150px;
+            height: 100%;
+        }
+
+        &__svgContainer {
+            margin-top: 50px;
+        }
+    }
+
+    @media (min-width: @mobile-breakpoint) {
+        &__content {
+            flex-direction: row;
+            margin-top: 1rem;
+        }
+
+        &__text {
+            flex: 3;
+        }
+
+        &__svgContainer {
+            align-self: flex-end;
+            margin: 0 1rem;
+            flex: 1;
+        }
+
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            display: -webkit-flex;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            -ms-flex-direction: row;
+            -webkit-align-items: center;
+
+            .typo-sidetittel {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+
+            .typo-normal {
+                font-size: 1rem;
+                line-height: 1.375rem;
+            }
+
+            &__text {
+                max-width: 550px;
+                height: 100%;
+            }
+
+            &__content {
+                -webkit-justify-content: space-between;
+                justify-content: space-between;
+                -ms-flex-pack: center;
+                -ms-flex: 1 100%;
+                -webkit-flex: 1;
+                flex-grow: 1;
+            }
         }
     }
 }
