@@ -1,11 +1,11 @@
 export const headerLinks = {
     dittNav: {
         text: 'Ditt Nav',
-        href: 'https://www.nav.no/no/Ditt+NAV',
+        href: 'https://tjenester.nav.no/brukerflyt/',
         external: true
     },
     innsyn: {
-        text: 'Dine Foreldrepenger',
+        text: 'Dine foreldrepenger',
         href: '/'
     },
     ettersendelse: {
