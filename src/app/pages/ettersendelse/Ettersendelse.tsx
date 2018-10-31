@@ -111,9 +111,7 @@ class Ettersendelse extends React.Component<Props, State> {
         if (!this.state.sak) {
             return null;
         }
-
-        console.log(this.state.attachments);
-
+        
         const cls = BEMHelper('ettersendelse');
         return (
             <div className={cls.className}>
