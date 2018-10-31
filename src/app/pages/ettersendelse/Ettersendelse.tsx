@@ -98,7 +98,13 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     isReadyToSendAttachments(): boolean {
-        return [...this.state.attachments.filter((a: Attachment) => !isAttachmentWithError(a))].length > 0;
+        const attachmentsWithoutUploadError: Attachment[] = this.state.attachments.filter(
+            (a: Attachment) => !isAttachmentWithError(a)
+        );
+        return (
+            attachmentsWithoutUploadError.length > 0 &&
+            attachmentsWithoutUploadError.every((a: Attachment) => a.uploaded)
+        );
     }
 
     render() {
