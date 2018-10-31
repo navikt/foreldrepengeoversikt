@@ -112,6 +112,8 @@ class Ettersendelse extends React.Component<Props, State> {
             return null;
         }
 
+        console.log(this.state.attachments);
+
         const cls = BEMHelper('ettersendelse');
         return (
             <div className={cls.className}>
@@ -120,7 +122,12 @@ class Ettersendelse extends React.Component<Props, State> {
                     <div className={cls.modifier(`content`)}>
                         <BackButton hidden={false} onClick={() => this.handleBackClick()} />
                         {this.state.kvittering ? (
-                            <Kvittering attachments={this.state.attachments} kvittering={this.state.kvittering} />
+                            <Kvittering
+                                attachments={this.state.attachments.filter(
+                                    (a: Attachment) => !isAttachmentWithError(a)
+                                )}
+                                kvittering={this.state.kvittering}
+                            />
                         ) : (
                             <>
                                 <Innholdstittel className={cls.element('title')}>
