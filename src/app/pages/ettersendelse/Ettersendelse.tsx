@@ -136,8 +136,7 @@ class Ettersendelse extends React.Component<Props, State> {
                                         skjemanummer={Skjemanummer.ANNET}
                                         onFilesUploadStart={this.addAttachment}
                                         onFileUploadFinish={this.editAttachment}
-                                        onFileDeleteStart={this.editAttachment}
-                                        onFileDeleteFinish={this.deleteAttachment}
+                                        onFileDeleteStart={this.deleteAttachment}
                                     />
                                 </div>
                                 {this.isReadyToSendAttachments() && (

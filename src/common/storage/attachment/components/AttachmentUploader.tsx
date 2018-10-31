@@ -11,7 +11,6 @@ export interface AttachmentsUploaderProps {
     onFilesUploadStart: (attachments: Attachment[]) => void;
     onFileUploadFinish: (attachment: Attachment) => void;
     onFileDeleteStart: (attachment: Attachment) => void;
-    onFileDeleteFinish: (attachment: Attachment) => void;
 }
 
 export default class AttachmentsUploader extends React.Component<AttachmentsUploaderProps> {
@@ -42,12 +41,10 @@ export default class AttachmentsUploader extends React.Component<AttachmentsUplo
     }
 
     onFileDelete(file: Attachment) {
-        const { onFileDeleteStart, onFileDeleteFinish } = this.props;
+        const { onFileDeleteStart } = this.props;
         file.pending = true;
         onFileDeleteStart(file);
-        AttachmentApi.deleteAttachment(file).then(() => {
-            onFileDeleteFinish(file);
-        });
+        AttachmentApi.deleteAttachment(file);
     }
 
     render() {
