@@ -3,7 +3,7 @@
 
     "dineForeldrepenger.alertstripe": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
     "dineForeldrepenger.feilmelding": "Det har skjedd en feil. Prøv igjen senere.",
-    "dineForeldrepenger.ingenSaker": "Du har ingen søknader hos NAV. Søknader eldre enn tre år vises ikke her.",
+    "dineForeldrepenger.ingenSaker": "Du har ingen søknader hos NAV akkurat nå. Hvis du nettopp sendte inn søknaden din, tar det noen dager før du ser den her.",
 
     "saksoversikt.heading.top": "Søknad om foreldrepenger",
     "saksoversikt.heading.bottom": "Sist endret: { date }",
@@ -19,7 +19,7 @@
     "ettersendelse.sendButton": "Ettersend vedlegg",
 
     "vedlegg.lastoppknapp": "Legg ved dokumentasjon",
-    "vedlegg.feilmelding": "Det har skjedd en feil. Prøv igjen.",
+    "vedlegg.feilmelding": "Det har skjedd en feil. Prøv igjen litt senere.",
     "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
     "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
     "vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
