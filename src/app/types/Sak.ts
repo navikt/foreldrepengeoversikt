@@ -6,5 +6,5 @@ export default interface Sak {
     behandlinger?: Behandling[];
     status: Status;
     saksnummer: string;
-    opprettet: string;
+    opprettet?: string;
 }

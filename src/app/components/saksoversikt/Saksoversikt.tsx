@@ -31,12 +31,14 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                         <Undertittel>
                             <FormattedMessage id={'saksoversikt.heading.top'} />
                         </Undertittel>
-                        <Normaltekst>
-                            <FormattedMessage
-                                id={'saksoversikt.heading.bottom'}
-                                values={{ date: formatDate(sak.opprettet) }}
-                            />
-                        </Normaltekst>
+                        {sak.opprettet &&
+                            <Normaltekst>
+                                <FormattedMessage
+                                    id={'saksoversikt.heading.bottom'}
+                                    values={{ date: formatDate(sak.opprettet) }}
+                                />
+                            </Normaltekst>
+                        }
                     </div>
                 }
                 ariaTittel={'søknad om foreldrepenger'}>
