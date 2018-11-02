@@ -23,7 +23,7 @@
     "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
     "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
     "vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
-    "kvittering.headline": "Ettersendelsen er mottat!",
+    "kvittering.headline": "Ettersendelsen er mottatt!",
     "kvittering.message": "Vi mottok ettersendelsen den {date} kl. { timeOfDay }.",
     "kvittering.attachment-list-label": "Innsendte vedlegg { size }",
 
