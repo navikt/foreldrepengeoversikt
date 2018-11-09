@@ -9,6 +9,7 @@ export interface Attachment {
     pending: boolean;
     uploaded: boolean;
     type: AttachmentType;
+    error?: any;
     skjemanummer: Skjemanummer;
 }
 

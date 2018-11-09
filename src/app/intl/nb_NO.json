@@ -20,6 +20,7 @@
 
     "vedlegg.lastoppknapp": "Legg ved dokumentasjon",
     "vedlegg.feilmelding": "Det har skjedd en feil. Prøv igjen litt senere.",
+    "vedlegg.forStort": "Vedlegget må være mindre enn 9MB",
     "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
     "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
     "vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",

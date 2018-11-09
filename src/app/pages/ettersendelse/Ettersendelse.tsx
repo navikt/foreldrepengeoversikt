@@ -91,7 +91,7 @@ class Ettersendelse extends React.Component<Props, State> {
             .catch((error: AxiosError) => {
                 this.setState({ sendingEttersendelse: false }, () => {
                     error.response
-                        ? this.props.history.push('/feil', { errorStatusCode: error.response.status })
+                        ? this.props.history.push('/feil', { errorStatusCode: error.response.status, errorMessage: error.response.data.messages })
                         : this.props.history.push('/feil', { timeout: true });
                 });
             });

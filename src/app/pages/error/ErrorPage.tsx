@@ -12,6 +12,7 @@ export interface Props {
 
 export interface State {
     errorStatusCode?: number;
+    errorMessage: string;
     timeout?: boolean;
 }
 
@@ -38,7 +39,11 @@ class ErrorPage extends React.Component<Props, State> {
                         <FormattedMessage id={'errorPage.title'} />
                     </Innholdstittel>
                     <Ingress className={cls.element('message')}>
-                        <FormattedMessage id={'errorPage.message'} />
+                        {this.state.errorStatusCode === 413 && this.state.errorMessage ? (
+                            this.state.errorMessage
+                        ) : (
+                            <FormattedMessage id={'errorPage.message'} />
+                        )}
                     </Ingress>
                 </ResponsiveWrapper>
             </div>
