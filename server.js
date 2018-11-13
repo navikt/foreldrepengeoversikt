@@ -6,8 +6,10 @@ const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const getDecorator = require('./src/build/scripts/decorator');
 const createEnvSettingsFile = require('./src/build/scripts/envSettings');
+const compression = require('compression');
 
 const server = express();
+server.use(compression());
 
 server.set('views', `${__dirname}/dist`);
 server.set('view engine', 'mustache');
