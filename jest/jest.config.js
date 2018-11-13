@@ -1,6 +1,6 @@
 module.exports = {
     transform: {
-        '^.+\\.jsx?$': 'babel-jest',
+        '^.+\\.(jsx|js)?$': 'babel-jest',
         '^.+\\.tsx?$': 'ts-jest'
     },
     setupTestFrameworkScriptFile: './jest/setup.ts',
@@ -12,6 +12,10 @@ module.exports = {
         'nav-frontend-knapper-style': '<rootDir>/jest/mockFile.js',
         'nav-frontend-lenker-style': '<rootDir>/jest/mockFile.js',
         'nav-frontend-hjelpetekst-style': '<rootDir>/jest/mockFile.js',
+        'nav-frontend-spinner-style': '<rootDir>/jest/mockFile.js',
+        'nav-frontend-lukknapp-style': '<rootDir>/jest/mockFile.js',
+        'nav-frontend-alertstriper-style': '<rootDir>/jest/mockFile.js',
+        'nav-frontend-chevron-style': '<rootDir>/jest/mockFile.js',
         '^uttaksplan/(.*)': '<rootDir>/src/uttaksplan/$1',
         '^common/(.*)': '<rootDir>/src/common/$1'
     },

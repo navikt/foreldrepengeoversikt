@@ -17,9 +17,9 @@ import AttachmentsUploader from 'common/storage/attachment/components/Attachment
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import Ettersending from '../../api/types/Ettersending';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
+import BackButton from 'common/components/back-button/BackButton';
 
 import './ettersendelse.less';
-import BackButton from 'common/components/back-button/BackButton';
 
 interface Props {
     history: History;
@@ -78,7 +78,7 @@ class Ettersendelse extends React.Component<Props, State> {
         }
     }
 
-    sendEttersendelse() {
+    sendEttersendelse(): void {
         const ettersending: Ettersending = {
             saksnummer: this.state.sak.saksnummer,
             vedlegg: this.state.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
