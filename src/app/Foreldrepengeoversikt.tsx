@@ -35,7 +35,7 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
                 .then((response) => this.setState({ saker: response.data, loading: false }))
                 .catch((error: AxiosError) => {
                     if (error.response) {
-                        error.response.status === 401 ? redirectToLogin() : this.setState({ error });
+                        error.response.status === 401 ? redirectToLogin() : this.setState({ error, loading: false });
                     } else {
                         this.setState({ error, loading: false });
                     }
