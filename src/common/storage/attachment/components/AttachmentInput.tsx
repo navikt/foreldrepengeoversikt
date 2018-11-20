@@ -5,7 +5,6 @@ import CustomSVG from 'common/components/custom-svg/CustomSVG';
 import BEMHelper from 'common/util/bem';
 
 const uploadIcon = require('./upload.svg').default;
-import { AttachmentType } from '../types/AttachmentType';
 
 import './attachment.less';
 
@@ -13,7 +12,6 @@ interface AttachmentInputProps {
     id: string;
     onFilesSelect: (files: File[]) => void;
     onClick: () => void;
-    attachmentType: AttachmentType;
 }
 
 type Props = AttachmentInputProps & InjectedIntlProps;

@@ -4,7 +4,6 @@ import { shallowWithIntl, loadTranslationObject } from 'enzyme-react-intl';
 import Ettersendelse from '../Ettersendelse';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import { Status } from '../../../types/Status';
-import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Api from '../../../api/api';
 import BackButton from 'common/components/back-button/BackButton';
@@ -31,7 +30,6 @@ describe('Ettersendelse page', () => {
 
         mockAttachment = {
             id: 'id',
-            type: AttachmentType.ETTERSENDELSE,
             file: new File([''], 'mockFile.pdf'),
             filesize: 1024,
             filename: 'mockFile.pdf',

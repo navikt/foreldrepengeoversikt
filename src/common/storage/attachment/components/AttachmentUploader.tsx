@@ -2,11 +2,9 @@ import * as React from 'react';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import AttachmentOverview from 'common/storage/attachment/components/AttachmentOverview';
 import AttachmentApi from 'common/storage/api/attachmentApi';
-import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 
 export interface AttachmentsUploaderProps {
     attachments: Attachment[];
-    attachmentType: AttachmentType;
     skjemanummer: Skjemanummer;
     renderAttachmentList?: boolean;
     onFilesUploadStart: (attachments: Attachment[]) => void;
@@ -50,15 +48,13 @@ export default class AttachmentsUploader extends React.Component<AttachmentsUplo
     }
 
     render() {
-        const { attachments, attachmentType, skjemanummer } = this.props;
+        const { attachments, skjemanummer } = this.props;
         return (
             <AttachmentOverview
                 attachments={attachments}
-                attachmentType={attachmentType}
                 skjemanummer={skjemanummer}
                 onFilesSelect={this.onFilesSelect}
                 onFileDelete={this.onFileDelete}
-                renderAttachmentList={this.props.renderAttachmentList}
             />
         );
     }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
-import { Skjemanummer } from 'common/storage/attachment/types/Attachment';
+import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 
 export const getAttachmentTypeSelectOptions = (intl: InjectedIntl) => (
     <>
@@ -15,6 +15,8 @@ export const getAttachmentTypeSelectOptions = (intl: InjectedIntl) => (
     </>
 );
 
-export const getUniqueSkjemanummereInAnAttachmentList = () => {
-
+export const getListOfUniqueSkjemanummerForAttachments = (attachments: Attachment[]) => {
+    return attachments
+        .map((a: Attachment) => a.skjemanummer)
+        .filter((s: Skjemanummer, index, self) => self.indexOf(s) === index)
 };

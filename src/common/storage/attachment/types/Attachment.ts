@@ -1,5 +1,3 @@
-import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
-
 export interface Attachment {
     id: string;
     filename: string;
@@ -8,7 +6,6 @@ export interface Attachment {
     url?: string;
     pending: boolean;
     uploaded: boolean;
-    type: AttachmentType;
     error?: any;
     skjemanummer: Skjemanummer;
 }

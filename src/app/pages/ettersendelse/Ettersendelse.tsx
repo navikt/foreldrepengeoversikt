@@ -15,12 +15,11 @@ import Api from '../../api/api';
 import { Kvittering as EttersendelseKvittering } from 'app/api/types/Kvittering';
 import Kvittering from '../../components/kvittering-page/Kvittering';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
-import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import Ettersending from '../../api/types/Ettersending';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import BackButton from 'common/components/back-button/BackButton';
 import LetterIcon from '../../components/ikoner/LetterIcon';
-import { getAttachmentTypeSelectOptions } from './util';
+import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummerForAttachments } from './util';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 import Block from 'common/components/block/Block';
 
@@ -171,7 +170,6 @@ class Ettersendelse extends React.Component<Props, State> {
                                     <div className={cls.element('uploader')}>
                                         <AttachmentsUploader
                                             attachments={attachments}
-                                            attachmentType={AttachmentType.ETTERSENDELSE}
                                             skjemanummer={
                                                 attachmentSkjemanummer ? attachmentSkjemanummer : Skjemanummer.ANNET
                                             }
@@ -183,22 +181,19 @@ class Ettersendelse extends React.Component<Props, State> {
                                     </div>
                                 )}
 
-                                {attachments
-                                    .map((a: Attachment) => a.skjemanummer)
-                                    .filter((s: Skjemanummer, index, self) => self.indexOf(s) === index)
-                                    .map((s: Skjemanummer) => {
-                                        return (
-                                            <Block margin={'m'} key={s}>
-                                                <AttachmentList
-                                                    attachments={attachments.filter(
-                                                        (a: Attachment) => a.skjemanummer === s
-                                                    )}
-                                                    onDelete={this.deleteAttachment}
-                                                    intlKey={`ettersendelse.attachmentList.${s}`}
-                                                />
-                                            </Block>
-                                        );
-                                    })}
+                                {getListOfUniqueSkjemanummerForAttachments(attachments).map((s: Skjemanummer) => {
+                                    return (
+                                        <Block margin={'m'} key={s}>
+                                            <AttachmentList
+                                                attachments={attachments.filter(
+                                                    (a: Attachment) => a.skjemanummer === s
+                                                )}
+                                                onDelete={this.deleteAttachment}
+                                                intlKey={`ettersendelse.attachmentList.${s}`}
+                                            />
+                                        </Block>
+                                    );
+                                })}
 
                                 {this.isReadyToSendAttachments() && (
                                     <div className={cls.element('send-button')}>
