@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { History } from 'history';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { Select } from 'nav-frontend-skjema';
 
 import Sak from '../../types/Sak';
 import BEMHelper from '../../../common/util/bem';
@@ -18,19 +19,26 @@ import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import Ettersending from '../../api/types/Ettersending';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import BackButton from 'common/components/back-button/BackButton';
+import LetterIcon from '../../components/ikoner/LetterIcon';
+import { getAttachmentTypeSelectOptions } from './util';
+import AttachmentList from 'common/storage/attachment/components/AttachmentList';
+import Block from 'common/components/block/Block';
 
 import './ettersendelse.less';
 
-interface Props {
+interface EttersendelseProps {
     history: History;
 }
 
 interface State {
     sak: Sak;
     attachments: Attachment[];
+    attachmentSkjemanummer?: Skjemanummer;
     sendingEttersendelse: boolean;
     kvittering: EttersendelseKvittering;
 }
+
+type Props = EttersendelseProps & InjectedIntlProps;
 
 class Ettersendelse extends React.Component<Props, State> {
     constructor(props: Props) {
@@ -48,6 +56,7 @@ class Ettersendelse extends React.Component<Props, State> {
         this.addAttachment = this.addAttachment.bind(this);
         this.editAttachment = this.editAttachment.bind(this);
         this.deleteAttachment = this.deleteAttachment.bind(this);
+        this.handleAttachmentTypeSelectChange = this.handleAttachmentTypeSelectChange.bind(this);
         this.handleSendEttersendelseOnClick = this.handleSendEttersendelseOnClick.bind(this);
     }
 
@@ -72,6 +81,11 @@ class Ettersendelse extends React.Component<Props, State> {
         this.props.history.push('/');
     }
 
+    handleAttachmentTypeSelectChange(e: any): void {
+        const selectedValue = e.target.value;
+        this.setState({ attachmentSkjemanummer: selectedValue !== '' ? selectedValue : undefined });
+    }
+
     handleSendEttersendelseOnClick(): void {
         if (this.state.attachments.length > 0) {
             this.setState({ sendingEttersendelse: true }, this.sendEttersendelse);
@@ -91,10 +105,18 @@ class Ettersendelse extends React.Component<Props, State> {
             .catch((error: AxiosError) => {
                 this.setState({ sendingEttersendelse: false }, () => {
                     error.response
-                        ? this.props.history.push('/feil', { errorStatusCode: error.response.status, errorMessage: error.response.data.messages })
+                        ? this.props.history.push('/feil', {
+                              errorStatusCode: error.response.status,
+                              errorMessage: error.response.data.messages
+                          })
                         : this.props.history.push('/feil', { timeout: true });
                 });
             });
+    }
+
+    isReadyToUploadAttachments(): boolean {
+        const { attachmentSkjemanummer } = this.state;
+        return attachmentSkjemanummer !== undefined;
     }
 
     isReadyToSendAttachments(): boolean {
@@ -111,45 +133,79 @@ class Ettersendelse extends React.Component<Props, State> {
         if (!this.state.sak) {
             return null;
         }
-        
+
+        const { intl } = this.props;
+        const { sak, attachments, attachmentSkjemanummer, sendingEttersendelse, kvittering } = this.state;
         const cls = BEMHelper('ettersendelse');
+
         return (
             <div className={cls.className}>
                 <Søknadstittel>Ettersending av vedlegg</Søknadstittel>
                 <ResponsiveWrapper>
                     <div className={cls.modifier(`content`)}>
                         <BackButton hidden={false} onClick={() => this.handleBackClick()} />
-                        {this.state.kvittering ? (
+                        {kvittering ? (
                             <Kvittering
-                                attachments={this.state.attachments.filter(
-                                    (a: Attachment) => !isAttachmentWithError(a)
-                                )}
-                                kvittering={this.state.kvittering}
+                                attachments={attachments.filter((a: Attachment) => !isAttachmentWithError(a))}
+                                kvittering={kvittering}
                             />
                         ) : (
                             <>
+                                <LetterIcon className={cls.element('letter-icon')} />
+
                                 <Innholdstittel className={cls.element('title')}>
                                     <FormattedMessage
                                         id={'ettersendelse.title'}
-                                        values={{ saksnummer: this.state.sak.saksnummer }}
+                                        values={{ saksnummer: sak.saksnummer }}
                                     />
                                 </Innholdstittel>
-                                <div className={cls.element('uploader')}>
-                                    <AttachmentsUploader
-                                        attachments={this.state.attachments.slice()}
-                                        attachmentType={AttachmentType.ETTERSENDELSE}
-                                        skjemanummer={Skjemanummer.ANNET}
-                                        onFilesUploadStart={this.addAttachment}
-                                        onFileUploadFinish={this.editAttachment}
-                                        onFileDeleteStart={this.deleteAttachment}
-                                    />
-                                </div>
+
+                                <Select
+                                    className={cls.element('attachment-type-select')}
+                                    label=""
+                                    onChange={this.handleAttachmentTypeSelectChange}>
+                                    {getAttachmentTypeSelectOptions(intl)}
+                                </Select>
+
+                                {this.isReadyToUploadAttachments() && (
+                                    <div className={cls.element('uploader')}>
+                                        <AttachmentsUploader
+                                            attachments={attachments}
+                                            attachmentType={AttachmentType.ETTERSENDELSE}
+                                            skjemanummer={
+                                                attachmentSkjemanummer ? attachmentSkjemanummer : Skjemanummer.ANNET
+                                            }
+                                            onFilesUploadStart={this.addAttachment}
+                                            onFileUploadFinish={this.editAttachment}
+                                            onFileDeleteStart={this.deleteAttachment}
+                                            renderAttachmentList={false}
+                                        />
+                                    </div>
+                                )}
+
+                                {attachments
+                                    .map((a: Attachment) => a.skjemanummer)
+                                    .filter((s: Skjemanummer, index, self) => self.indexOf(s) === index)
+                                    .map((s: Skjemanummer) => {
+                                        return (
+                                            <Block margin={'m'} key={s}>
+                                                <AttachmentList
+                                                    attachments={attachments.filter(
+                                                        (a: Attachment) => a.skjemanummer === s
+                                                    )}
+                                                    onDelete={this.deleteAttachment}
+                                                    intlKey={`ettersendelse.attachmentList.${s}`}
+                                                />
+                                            </Block>
+                                        );
+                                    })}
+
                                 {this.isReadyToSendAttachments() && (
                                     <div className={cls.element('send-button')}>
                                         <Hovedknapp
                                             onClick={this.handleSendEttersendelseOnClick}
-                                            disabled={this.state.sendingEttersendelse}
-                                            spinner={this.state.sendingEttersendelse}>
+                                            disabled={sendingEttersendelse}
+                                            spinner={sendingEttersendelse}>
                                             <FormattedMessage id={'ettersendelse.sendButton'} />
                                         </Hovedknapp>
                                     </div>
@@ -162,4 +218,4 @@ class Ettersendelse extends React.Component<Props, State> {
         );
     }
 }
-export default Ettersendelse;
+export default injectIntl(Ettersendelse);

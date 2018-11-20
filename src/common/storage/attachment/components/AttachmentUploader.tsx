@@ -8,6 +8,7 @@ export interface AttachmentsUploaderProps {
     attachments: Attachment[];
     attachmentType: AttachmentType;
     skjemanummer: Skjemanummer;
+    renderAttachmentList?: boolean;
     onFilesUploadStart: (attachments: Attachment[]) => void;
     onFileUploadFinish: (attachment: Attachment) => void;
     onFileDeleteStart: (attachment: Attachment) => void;
@@ -57,6 +58,7 @@ export default class AttachmentsUploader extends React.Component<AttachmentsUplo
                 skjemanummer={skjemanummer}
                 onFilesSelect={this.onFilesSelect}
                 onFileDelete={this.onFileDelete}
+                renderAttachmentList={this.props.renderAttachmentList}
             />
         );
     }

@@ -3,8 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import VedleggInput from './AttachmentInput';
 import AttachmentList from './AttachmentList';
-import LabelText from '../../../components/labeltekst/Labeltekst';
-import { bytesString, getTotalFileSize } from 'common/util/filesize';
 import { isAttachmentWithError, mapFileToAttachment } from './util';
 import { CSSTransition } from 'react-transition-group';
 import { guid } from 'nav-frontend-js-utils';
@@ -21,6 +19,7 @@ export interface AttachmentOverviewProps {
     showFileSize?: boolean;
     onFilesSelect: (files: Attachment[]) => void;
     onFileDelete: (file: Attachment) => void;
+    renderAttachmentList?: boolean;
 }
 
 interface State {
@@ -92,7 +91,8 @@ class AttachmentOverview extends React.Component<Props, State> {
             skjemanummer,
             showFileSize,
             onFileDelete,
-            onFilesSelect
+            onFilesSelect,
+            renderAttachmentList = true
         } = this.props;
 
         const { showErrorMessage, errorMessage } = this.state;
@@ -116,7 +116,7 @@ class AttachmentOverview extends React.Component<Props, State> {
                     classNames="transitionFade"
                     timeout={150}
                     in={showAttachments || showErrorMessage}
-                    unmountOnExit={true}>
+                    unmountOnExit={renderAttachmentList}>
                     <React.Fragment>
                         {(showAttachments || showErrorMessage) && (
                             <React.Fragment>
@@ -138,23 +138,13 @@ class AttachmentOverview extends React.Component<Props, State> {
                                         onClose={this.hideErrorMessage}
                                     />
                                 </Block>
-                                <Block margin="xs">
-                                    <LabelText>
-                                        <FormattedMessage
-                                            id="vedlegg.liste.tittel"
-                                            values={{
-                                                størrelse: bytesString(
-                                                    getTotalFileSize(attachmentsToRender.map((a: Attachment) => a.file))
-                                                )
-                                            }}
-                                        />
-                                    </LabelText>
-                                </Block>
-                                <AttachmentList
-                                    attachments={attachmentsToRender}
-                                    showFileSize={showFileSize}
-                                    onDelete={(file: Attachment) => onFileDelete(file)}
-                                />
+                                {renderAttachmentList && (
+                                    <AttachmentList
+                                        attachments={attachmentsToRender}
+                                        showFileSize={showFileSize}
+                                        onDelete={(file: Attachment) => onFileDelete(file)}
+                                    />
+                                )}
                             </React.Fragment>
                         )}
                     </React.Fragment>
