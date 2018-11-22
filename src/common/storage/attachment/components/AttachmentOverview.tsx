@@ -2,20 +2,15 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import VedleggInput from './AttachmentInput';
-import AttachmentList from './AttachmentList';
-import LabelText from '../../../components/labeltekst/Labeltekst';
-import { bytesString, getTotalFileSize } from 'common/util/filesize';
 import { isAttachmentWithError, mapFileToAttachment } from './util';
 import { CSSTransition } from 'react-transition-group';
 import { guid } from 'nav-frontend-js-utils';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Block from 'common/components/block/Block';
 import AlertstripeWithCloseButton from 'common/components/alertstripe-content/AlertstripeWithCloseButton';
-import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 
 export interface AttachmentOverviewProps {
     attachments: Attachment[];
-    attachmentType: AttachmentType;
     skjemanummer: Skjemanummer;
     inputId?: string;
     showFileSize?: boolean;
@@ -60,7 +55,7 @@ class AttachmentOverview extends React.Component<Props, State> {
     }
 
     createErrorMessage(error: any): string {
-        if (error.response && error.response.status === 400) {
+        if (error & error.response && error.response.status === 413) {
             return 'vedlegg.forStort';
         }
         return 'vedlegg.feilmelding';
@@ -85,15 +80,7 @@ class AttachmentOverview extends React.Component<Props, State> {
     }
 
     render() {
-        const {
-            inputId = guid(),
-            attachments,
-            attachmentType,
-            skjemanummer,
-            showFileSize,
-            onFileDelete,
-            onFilesSelect
-        } = this.props;
+        const { inputId = guid(), attachments, skjemanummer, onFilesSelect } = this.props;
 
         const { showErrorMessage, errorMessage } = this.state;
 
@@ -106,10 +93,9 @@ class AttachmentOverview extends React.Component<Props, State> {
                     <VedleggInput
                         id={inputId}
                         onFilesSelect={(files: File[]) => {
-                            onFilesSelect(files.map((f) => mapFileToAttachment(f, attachmentType, skjemanummer)));
+                            onFilesSelect(files.map((f) => mapFileToAttachment(f, skjemanummer)));
                         }}
                         onClick={this.hideErrorMessage}
-                        attachmentType={attachmentType}
                     />
                 </Block>
                 <CSSTransition
@@ -138,23 +124,6 @@ class AttachmentOverview extends React.Component<Props, State> {
                                         onClose={this.hideErrorMessage}
                                     />
                                 </Block>
-                                <Block margin="xs">
-                                    <LabelText>
-                                        <FormattedMessage
-                                            id="vedlegg.liste.tittel"
-                                            values={{
-                                                størrelse: bytesString(
-                                                    getTotalFileSize(attachmentsToRender.map((a: Attachment) => a.file))
-                                                )
-                                            }}
-                                        />
-                                    </LabelText>
-                                </Block>
-                                <AttachmentList
-                                    attachments={attachmentsToRender}
-                                    showFileSize={showFileSize}
-                                    onDelete={(file: Attachment) => onFileDelete(file)}
-                                />
                             </React.Fragment>
                         )}
                     </React.Fragment>

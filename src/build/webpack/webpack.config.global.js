@@ -25,7 +25,10 @@ const webpackConfig = {
             {
                 test: /\.(ts|tsx)$/,
                 loader: require.resolve('tslint-loader'),
-                enforce: 'pre'
+                enforce: 'pre',
+                resolve: {
+                    extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
+                }
             },
             {
                 test: /\.(ts|tsx)$/,

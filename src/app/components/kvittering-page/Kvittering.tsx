@@ -6,8 +6,6 @@ import * as moment from 'moment';
 import { Kvittering } from '../../api/types/Kvittering';
 import BEMHelper from 'common/util/bem';
 import SpotlightLetter from 'common/components/ikoner/SpotlightLetter';
-import LabelText from 'common/components/labeltekst/Labeltekst';
-import { bytesString, getTotalFileSize } from 'common/util/filesize';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 
@@ -36,16 +34,9 @@ const Kvittering: React.StatelessComponent<Props> = (props: Props) => {
                     }}
                 />
             </Ingress>
-            <div className={cls.element('attachment-list-label')}>
-                <LabelText>
-                    <FormattedMessage
-                        id={'kvittering.attachment-list-label'}
-                        values={{ size: bytesString(getTotalFileSize(attachments.map((a: Attachment) => a.file))) }}
-                    />
-                </LabelText>
-            </div>
             <div className={cls.element('attachment-list')}>
                 <AttachmentList
+                    intlKey={'kvittering.attachment-list-label'}
                     attachments={attachments.map(({ url, ...otherProperties }: Attachment) => otherProperties)}
                     showFileSize={false}
                 />
