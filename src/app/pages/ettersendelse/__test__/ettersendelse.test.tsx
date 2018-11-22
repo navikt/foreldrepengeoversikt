@@ -9,7 +9,7 @@ import Api from '../../../api/api';
 import BackButton from 'common/components/back-button/BackButton';
 
 import translations from '../../../intl/nb_NO.json';
-loadTranslationObject(translations)
+loadTranslationObject(translations);
 
 describe('Ettersendelse page', () => {
     let historyMock: any;
@@ -21,7 +21,7 @@ describe('Ettersendelse page', () => {
                 state: {
                     sak: {
                         saksnummer: '123',
-                        opprettet: new Date(),
+                        opprettet: new Date('2018-10-1'),
                         status: Status.OPPRETTET
                     }
                 }
@@ -29,8 +29,8 @@ describe('Ettersendelse page', () => {
         };
 
         mockAttachment = {
-            id: 'id',
-            file: new File([''], 'mockFile.pdf'),
+            id: 'v123',
+            file: new File([''], 'mock.pdf'),
             filesize: 1024,
             filename: 'mockFile.pdf',
             uploaded: true,
@@ -40,12 +40,11 @@ describe('Ettersendelse page', () => {
         };
     });
 
-    it('Should redirect back to frontpage if sak is not on state', () => {
+    it('Should redirect back to front page if a sak object is not on state', () => {
         historyMock.location.state.sak = undefined;
         const historySpy = jest.spyOn(historyMock, 'push');
         shallowWithIntl(<Ettersendelse history={historyMock} />)
             .setState({
-                attachments: [mockAttachment],
                 sak: undefined
             })
             .shallow();
@@ -59,17 +58,43 @@ describe('Ettersendelse page', () => {
         expect(historySpy).toHaveBeenCalledWith('/');
     });
 
-    it('Send ettersendelse button should be hidden if no attachments are uploaded to storage', () => {
+    it('Letter icon should render', () => {
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
-        const ettersendVedleggButton = wrapper.find({ className: 'ettersendelse__send-button' });
-        expect(ettersendVedleggButton.length).toEqual(0);
+        const letterIcon = wrapper.find({ className: 'ettersendelse__letter-icon' });
+        expect(letterIcon.length).toEqual(1);
     });
 
-    it('Send ettersendelse button should be rendered if some attachments are uploaded to storage and no attachments are pending', () => {
-        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />)
-            .setState({ attachments: [mockAttachment] })
-            .shallow();
-        const ettersendVedleggButton = wrapper.find({ className: 'ettersendelse__send-button' });
+    it('Attachment type dropdown should render', () => {
+        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        const attachmentTypeSelector = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
+        expect(attachmentTypeSelector.length).toEqual(1);
+    });
+
+    it('Attachment type dropdown default value should be disabled and not selectable', () => {
+        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        const attachmentTypeSelector = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
+        expect(attachmentTypeSelector.children()).toMatchSnapshot();
+    });
+
+    it('AttachmentUploader should only render when attachment type is selected in dropdown', () => {
+        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        let attachmentUploader = wrapper.find(AttachmentsUploader);
+        expect(attachmentUploader.length).toEqual(0);
+
+        wrapper
+            .find({ className: 'ettersendelse__attachment-type-select' })
+            .simulate('change', { target: { value: Skjemanummer.TERMINBEKREFTELSE } });
+
+        attachmentUploader = wrapper.find(AttachmentsUploader);
+        expect(attachmentUploader.length).toEqual(1);
+    });
+
+    it('Send ettersendelse button should render when at least one uploaded attachment is on component state', () => {
+        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        let ettersendVedleggButton = wrapper.find({ className: 'ettersendelse__send-button' });
+        expect(ettersendVedleggButton.length).toEqual(0);
+        wrapper.setState({ attachments: [mockAttachment] });
+        ettersendVedleggButton = wrapper.find({ className: 'ettersendelse__send-button' });
         expect(ettersendVedleggButton.length).toEqual(1);
     });
 
@@ -99,12 +124,11 @@ describe('Ettersendelse page', () => {
             }
         ];
 
-        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />)
-            .setState({
-                saksnummer: '123',
-                attachments: mockAttachments
-            })
-            .shallow();
+        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        wrapper.setState({ attachments: mockAttachments });
+        wrapper
+            .find({ className: 'ettersendelse__attachment-type-select' })
+            .simulate('change', { target: { value: Skjemanummer.TERMINBEKREFTELSE } });
 
         const ettersendVedleggButton = wrapper.find({ className: 'ettersendelse__send-button' }).childAt(0);
         ettersendVedleggButton.simulate('click');
@@ -126,32 +150,4 @@ describe('Ettersendelse page', () => {
         const ettersendVedleggButton = wrapper.find({ className: 'ettersendelse__send-button' });
         expect(ettersendVedleggButton.length).toEqual(0);
     });
-
-    describe('View', () => {
-        it('Letter icon should render', () => {
-            const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
-            const letterIcon = wrapper.find({ className: 'ettersendelse__letter-icon' });
-            expect(letterIcon.length).toEqual(1);
-        });
-
-        it('Attachment type dropdown should render', () => {
-            const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
-            const attachmentTypeSelector = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
-            expect(attachmentTypeSelector.length).toEqual(1);
-        });
-
-        it('AttachmentUploader should only render when attachment type is selected', () => {
-            const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
-            let attachmentUploader = wrapper.find(AttachmentsUploader);
-            expect(attachmentUploader.length).toEqual(0);
-
-            wrapper
-                .find({ className: 'ettersendelse__attachment-type-select' })
-                .simulate('change', { target: { value: Skjemanummer.TERMINBEKREFTELSE } });
-
-            attachmentUploader = wrapper.find(AttachmentsUploader);
-            expect(attachmentUploader.length).toEqual(1);
-        });
-    });
-
 });

@@ -19,9 +19,8 @@ import Ettersending from '../../api/types/Ettersending';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import BackButton from 'common/components/back-button/BackButton';
 import LetterIcon from '../../components/ikoner/LetterIcon';
-import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummerForAttachments } from './util';
+import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummer } from './util';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
-import Block from 'common/components/block/Block';
 
 import './ettersendelse.less';
 
@@ -122,6 +121,7 @@ class Ettersendelse extends React.Component<Props, State> {
         const attachmentsWithoutUploadError: Attachment[] = this.state.attachments.filter(
             (a: Attachment) => !isAttachmentWithError(a)
         );
+
         return (
             attachmentsWithoutUploadError.length > 0 &&
             attachmentsWithoutUploadError.every((a: Attachment) => a.uploaded)
@@ -151,7 +151,6 @@ class Ettersendelse extends React.Component<Props, State> {
                         ) : (
                             <>
                                 <LetterIcon className={cls.element('letter-icon')} />
-
                                 <Innholdstittel className={cls.element('title')}>
                                     <FormattedMessage
                                         id={'ettersendelse.title'}
@@ -162,7 +161,8 @@ class Ettersendelse extends React.Component<Props, State> {
                                 <Select
                                     className={cls.element('attachment-type-select')}
                                     label=""
-                                    onChange={this.handleAttachmentTypeSelectChange}>
+                                    onChange={this.handleAttachmentTypeSelectChange}
+                                    defaultValue={'default'}>
                                     {getAttachmentTypeSelectOptions(intl)}
                                 </Select>
 
@@ -176,24 +176,20 @@ class Ettersendelse extends React.Component<Props, State> {
                                             onFilesUploadStart={this.addAttachment}
                                             onFileUploadFinish={this.editAttachment}
                                             onFileDeleteStart={this.deleteAttachment}
-                                            renderAttachmentList={false}
                                         />
                                     </div>
                                 )}
 
-                                {getListOfUniqueSkjemanummerForAttachments(attachments).map((s: Skjemanummer) => {
-                                    return (
-                                        <Block margin={'m'} key={s}>
-                                            <AttachmentList
-                                                attachments={attachments.filter(
-                                                    (a: Attachment) => a.skjemanummer === s
-                                                )}
-                                                onDelete={this.deleteAttachment}
-                                                intlKey={`ettersendelse.attachmentList.${s}`}
-                                            />
-                                        </Block>
-                                    );
-                                })}
+                                {getListOfUniqueSkjemanummer(attachments).map((skjemanummer: Skjemanummer) => (
+                                    <AttachmentList
+                                        key={skjemanummer}
+                                        intlKey={`ettersendelse.attachmentList.${skjemanummer}`}
+                                        onDelete={this.deleteAttachment}
+                                        attachments={attachments.filter(
+                                            (a: Attachment) => a.skjemanummer === skjemanummer
+                                        )}
+                                    />
+                                ))}
 
                                 {this.isReadyToSendAttachments() && (
                                     <div className={cls.element('send-button')}>

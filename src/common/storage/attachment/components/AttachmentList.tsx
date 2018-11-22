@@ -18,13 +18,13 @@ interface Props {
 const AttachmentList: React.StatelessComponent<Props> = (props) => {
     const { attachments, showFileSize, onDelete, intlKey } = props;
     return (
-        <>
+        <Block margin={'m'}>
             <Block margin="xs">
                 <LabelText>
                     <FormattedMessage
                         id={intlKey ? intlKey : "vedlegg.liste.tittel"}
                         values={{
-                            størrelse: bytesString(getTotalFileSize(attachments.map((a: Attachment) => a.file)))
+                            size: bytesString(getTotalFileSize(attachments.map((a: Attachment) => a.file)))
                         }}
                     />
                 </LabelText>
@@ -45,7 +45,7 @@ const AttachmentList: React.StatelessComponent<Props> = (props) => {
                     ))}
                 </TransitionGroup>
             </ul>
-        </>
+        </Block>
     );
 };
 export default AttachmentList;

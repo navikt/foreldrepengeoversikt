@@ -1,0 +1,3169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ettersendelse page Attachment type dropdown default value should be disabled and not selectable 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): ShallowWrapper {
+    Symbol(enzyme.__root__): [Circular],
+    Symbol(enzyme.__unrendered__): <Ettersendelse
+      history={
+        Object {
+          "location": Object {
+            "state": Object {
+              "sak": Object {
+                "opprettet": 2018-09-30T22:00:00.000Z,
+                "saksnummer": "123",
+                "status": "OPPR",
+              },
+            },
+          },
+          "push": [MockFunction],
+        }
+      }
+      intl={
+        Object {
+          "defaultFormats": Object {},
+          "defaultLocale": "en",
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "formatters": Object {
+            "getDateTimeFormat": [Function],
+            "getMessageFormat": [Function],
+            "getNumberFormat": [Function],
+            "getPluralFormat": [Function],
+            "getRelativeFormat": [Function],
+          },
+          "locale": "en",
+          "messages": Object {
+            "dineForeldrepenger.alertstripe": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
+            "dineForeldrepenger.feilmelding": "Det har skjedd en feil. Prøv igjen senere.",
+            "dineForeldrepenger.ingenSaker": "Du har ingen søknader hos NAV akkurat nå. Hvis du nettopp sendte inn søknaden din, tar det noen dager før du ser den her.",
+            "errorPage.message": "Prøv igjen senere.",
+            "errorPage.title": "Det oppstod en feil",
+            "ettersendelse.attachmentList.I000007": "Inntektsopplysninger for selvstendig næringsdrivende",
+            "ettersendelse.attachmentList.I000026": "Inntektsopplysninger fra arbeidsgiver",
+            "ettersendelse.attachmentList.I000037": "Dokumentasjon av innleggelse i helseinstitusjon",
+            "ettersendelse.attachmentList.I000038": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+            "ettersendelse.attachmentList.I000039": "Tjenestebevis fra militær- eller siviltjeneste",
+            "ettersendelse.attachmentList.I000042": " Dokumentasjon av dato for overtakelse av omsorg",
+            "ettersendelse.attachmentList.I000044": "Etterlønn",
+            "ettersendelse.attachmentList.I000045": "Dokumentasjon av sykdom",
+            "ettersendelse.attachmentList.I000049": "Annen dokumentasjon",
+            "ettersendelse.attachmentList.I000051": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+            "ettersendelse.attachmentList.I000060": "Annet",
+            "ettersendelse.attachmentList.I000061": "Dokumentasjon av mors utdanning på heltid",
+            "ettersendelse.attachmentList.I000062": "Terminbekreftelse",
+            "ettersendelse.attachmentList.I000063": "Fødselsattest",
+            "ettersendelse.attachmentList.I000065": "Bekreftelse fra arbeidsgiver",
+            "ettersendelse.select.I000007": "Inntektsopplysninger for selvstendig næringsdrivende",
+            "ettersendelse.select.I000026": "Inntektsopplysninger fra arbeidsgiver",
+            "ettersendelse.select.I000037": "Dokumentasjon av innleggelse i helseinstitusjon",
+            "ettersendelse.select.I000038": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+            "ettersendelse.select.I000039": "Tjenestebevis fra militær- eller siviltjeneste",
+            "ettersendelse.select.I000042": " Dokumentasjon av dato for overtakelse av omsorg",
+            "ettersendelse.select.I000044": "Etterlønn",
+            "ettersendelse.select.I000045": "Dokumentasjon av sykdom",
+            "ettersendelse.select.I000049": "Annen dokumentasjon",
+            "ettersendelse.select.I000051": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+            "ettersendelse.select.I000060": "Annet",
+            "ettersendelse.select.I000061": "Dokumentasjon av mors utdanning på heltid",
+            "ettersendelse.select.I000062": "Terminbekreftelse",
+            "ettersendelse.select.I000063": "Fødselsattest",
+            "ettersendelse.select.I000065": "Bekreftelse fra arbeidsgiver",
+            "ettersendelse.select.defaultValue": "Velg type vedlegg",
+            "ettersendelse.sendButton": "Ettersend vedlegg",
+            "ettersendelse.title": "Last opp dokumentasjon til sak { saksnummer }",
+            "header.title": "Dine foreldrepenger",
+            "kvittering.attachment-list-label": "Innsendte vedlegg { size }",
+            "kvittering.headline": "Ettersendelsen er mottatt!",
+            "kvittering.message": "Vi mottok ettersendelsen den {date} kl. { timeOfDay }.",
+            "saksoversikt.content.dinSøknad": "Dokumenter i saken",
+            "saksoversikt.content.endringssøknad.button": "Endre perioden din",
+            "saksoversikt.content.endringssøknad.intro": "Her kan du endre perioden din hvis du skal ha ferie, jobbe eller har vært syk.",
+            "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg",
+            "saksoversikt.content.ettersendelse.intro": "Her kan du ettersende dokumentasjon til søknaden din.",
+            "saksoversikt.content.saksnummer": "Saksnummer: { saksnummer }",
+            "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad har utløpt",
+            "saksoversikt.ettersendelse.hjelpetekst": "Fristen for å ettersende vedlegg har utløpt",
+            "saksoversikt.heading.bottom": "Sist endret: { date }",
+            "saksoversikt.heading.top": "Søknad om foreldrepenger",
+            "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
+            "vedlegg.feilmelding": "Det har skjedd en feil. Prøv igjen litt senere.",
+            "vedlegg.forStort": "Vedlegget må være mindre enn 9MB",
+            "vedlegg.lastoppknapp": "Legg ved dokumentasjon",
+            "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
+            "vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
+          },
+          "now": [Function],
+          "onError": [Function],
+          "textComponent": "span",
+          "timeZone": null,
+        }
+      }
+    />,
+    Symbol(enzyme.__renderer__): Object {
+      "batchedUpdates": [Function],
+      "getNode": [Function],
+      "render": [Function],
+      "simulateError": [Function],
+      "simulateEvent": [Function],
+      "unmount": [Function],
+    },
+    Symbol(enzyme.__node__): Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <Søknadstittel>
+            Ettersending av vedlegg
+          </Søknadstittel>,
+          <ResponsiveWrapper>
+            <div
+              className="ettersendelse--content"
+            >
+              <BackButton
+                hidden={false}
+                onClick={[Function]}
+              />
+              <React.Fragment>
+                <LetterIcon
+                  className="ettersendelse__letter-icon"
+                />
+                <Innholdstittel
+                  className="ettersendelse__title"
+                >
+                  <FormattedMessage
+                    id="ettersendelse.title"
+                    values={
+                      Object {
+                        "saksnummer": "123",
+                      }
+                    }
+                  />
+                </Innholdstittel>
+                <Select
+                  bredde="fullbredde"
+                  className="ettersendelse__attachment-type-select"
+                  defaultValue="default"
+                  disabled={false}
+                  label=""
+                  onChange={[Function]}
+                >
+                  <React.Fragment>
+                    <option
+                      disabled={true}
+                      hidden={true}
+                      value="default"
+                    >
+                      Velg type vedlegg
+                    </option>
+                    <option
+                      value="I000065"
+                    >
+                      Bekreftelse fra arbeidsgiver
+                    </option>
+                    <option
+                      value="I000026"
+                    >
+                      Inntektsopplysninger fra arbeidsgiver
+                    </option>
+                    <option
+                      value="I000044"
+                    >
+                      Etterlønn
+                    </option>
+                    <option
+                      value="I000042"
+                    >
+                       Dokumentasjon av dato for overtakelse av omsorg
+                    </option>
+                    <option
+                      value="I000063"
+                    >
+                      Fødselsattest
+                    </option>
+                    <option
+                      value="I000062"
+                    >
+                      Terminbekreftelse
+                    </option>
+                    <option
+                      value="I000039"
+                    >
+                      Tjenestebevis fra militær- eller siviltjeneste
+                    </option>
+                    <option
+                      value="I000007"
+                    >
+                      Inntektsopplysninger for selvstendig næringsdrivende
+                    </option>
+                    <option
+                      value="I000038"
+                    >
+                      Dokumentasjon av mors utdanning, arbeid eller sykdom
+                    </option>
+                    <option
+                      value="I000037"
+                    >
+                      Dokumentasjon av innleggelse i helseinstitusjon
+                    </option>
+                    <option
+                      value="I000045"
+                    >
+                      Dokumentasjon av sykdom
+                    </option>
+                    <option
+                      value="I000061"
+                    >
+                      Dokumentasjon av mors utdanning på heltid
+                    </option>
+                    <option
+                      value="I000051"
+                    >
+                      Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                    </option>
+                    <option
+                      value="I000060"
+                    >
+                      Annet
+                    </option>
+                  </React.Fragment>
+                </Select>
+              </React.Fragment>
+            </div>
+          </ResponsiveWrapper>,
+        ],
+        "className": "ettersendelse",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "Ettersending av vedlegg",
+          },
+          "ref": null,
+          "rendered": "Ettersending av vedlegg",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <div
+              className="ettersendelse--content"
+            >
+              <BackButton
+                hidden={false}
+                onClick={[Function]}
+              />
+              <React.Fragment>
+                <LetterIcon
+                  className="ettersendelse__letter-icon"
+                />
+                <Innholdstittel
+                  className="ettersendelse__title"
+                >
+                  <FormattedMessage
+                    id="ettersendelse.title"
+                    values={
+                      Object {
+                        "saksnummer": "123",
+                      }
+                    }
+                  />
+                </Innholdstittel>
+                <Select
+                  bredde="fullbredde"
+                  className="ettersendelse__attachment-type-select"
+                  defaultValue="default"
+                  disabled={false}
+                  label=""
+                  onChange={[Function]}
+                >
+                  <React.Fragment>
+                    <option
+                      disabled={true}
+                      hidden={true}
+                      value="default"
+                    >
+                      Velg type vedlegg
+                    </option>
+                    <option
+                      value="I000065"
+                    >
+                      Bekreftelse fra arbeidsgiver
+                    </option>
+                    <option
+                      value="I000026"
+                    >
+                      Inntektsopplysninger fra arbeidsgiver
+                    </option>
+                    <option
+                      value="I000044"
+                    >
+                      Etterlønn
+                    </option>
+                    <option
+                      value="I000042"
+                    >
+                       Dokumentasjon av dato for overtakelse av omsorg
+                    </option>
+                    <option
+                      value="I000063"
+                    >
+                      Fødselsattest
+                    </option>
+                    <option
+                      value="I000062"
+                    >
+                      Terminbekreftelse
+                    </option>
+                    <option
+                      value="I000039"
+                    >
+                      Tjenestebevis fra militær- eller siviltjeneste
+                    </option>
+                    <option
+                      value="I000007"
+                    >
+                      Inntektsopplysninger for selvstendig næringsdrivende
+                    </option>
+                    <option
+                      value="I000038"
+                    >
+                      Dokumentasjon av mors utdanning, arbeid eller sykdom
+                    </option>
+                    <option
+                      value="I000037"
+                    >
+                      Dokumentasjon av innleggelse i helseinstitusjon
+                    </option>
+                    <option
+                      value="I000045"
+                    >
+                      Dokumentasjon av sykdom
+                    </option>
+                    <option
+                      value="I000061"
+                    >
+                      Dokumentasjon av mors utdanning på heltid
+                    </option>
+                    <option
+                      value="I000051"
+                    >
+                      Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                    </option>
+                    <option
+                      value="I000060"
+                    >
+                      Annet
+                    </option>
+                  </React.Fragment>
+                </Select>
+              </React.Fragment>
+            </div>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <BackButton
+                  hidden={false}
+                  onClick={[Function]}
+                />,
+                <React.Fragment>
+                  <LetterIcon
+                    className="ettersendelse__letter-icon"
+                  />
+                  <Innholdstittel
+                    className="ettersendelse__title"
+                  >
+                    <FormattedMessage
+                      id="ettersendelse.title"
+                      values={
+                        Object {
+                          "saksnummer": "123",
+                        }
+                      }
+                    />
+                  </Innholdstittel>
+                  <Select
+                    bredde="fullbredde"
+                    className="ettersendelse__attachment-type-select"
+                    defaultValue="default"
+                    disabled={false}
+                    label=""
+                    onChange={[Function]}
+                  >
+                    <React.Fragment>
+                      <option
+                        disabled={true}
+                        hidden={true}
+                        value="default"
+                      >
+                        Velg type vedlegg
+                      </option>
+                      <option
+                        value="I000065"
+                      >
+                        Bekreftelse fra arbeidsgiver
+                      </option>
+                      <option
+                        value="I000026"
+                      >
+                        Inntektsopplysninger fra arbeidsgiver
+                      </option>
+                      <option
+                        value="I000044"
+                      >
+                        Etterlønn
+                      </option>
+                      <option
+                        value="I000042"
+                      >
+                         Dokumentasjon av dato for overtakelse av omsorg
+                      </option>
+                      <option
+                        value="I000063"
+                      >
+                        Fødselsattest
+                      </option>
+                      <option
+                        value="I000062"
+                      >
+                        Terminbekreftelse
+                      </option>
+                      <option
+                        value="I000039"
+                      >
+                        Tjenestebevis fra militær- eller siviltjeneste
+                      </option>
+                      <option
+                        value="I000007"
+                      >
+                        Inntektsopplysninger for selvstendig næringsdrivende
+                      </option>
+                      <option
+                        value="I000038"
+                      >
+                        Dokumentasjon av mors utdanning, arbeid eller sykdom
+                      </option>
+                      <option
+                        value="I000037"
+                      >
+                        Dokumentasjon av innleggelse i helseinstitusjon
+                      </option>
+                      <option
+                        value="I000045"
+                      >
+                        Dokumentasjon av sykdom
+                      </option>
+                      <option
+                        value="I000061"
+                      >
+                        Dokumentasjon av mors utdanning på heltid
+                      </option>
+                      <option
+                        value="I000051"
+                      >
+                        Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                      </option>
+                      <option
+                        value="I000060"
+                      >
+                        Annet
+                      </option>
+                    </React.Fragment>
+                  </Select>
+                </React.Fragment>,
+              ],
+              "className": "ettersendelse--content",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "hidden": false,
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": Array [
+                    <LetterIcon
+                      className="ettersendelse__letter-icon"
+                    />,
+                    <Innholdstittel
+                      className="ettersendelse__title"
+                    >
+                      <FormattedMessage
+                        id="ettersendelse.title"
+                        values={
+                          Object {
+                            "saksnummer": "123",
+                          }
+                        }
+                      />
+                    </Innholdstittel>,
+                    <Select
+                      bredde="fullbredde"
+                      className="ettersendelse__attachment-type-select"
+                      defaultValue="default"
+                      disabled={false}
+                      label=""
+                      onChange={[Function]}
+                    >
+                      <React.Fragment>
+                        <option
+                          disabled={true}
+                          hidden={true}
+                          value="default"
+                        >
+                          Velg type vedlegg
+                        </option>
+                        <option
+                          value="I000065"
+                        >
+                          Bekreftelse fra arbeidsgiver
+                        </option>
+                        <option
+                          value="I000026"
+                        >
+                          Inntektsopplysninger fra arbeidsgiver
+                        </option>
+                        <option
+                          value="I000044"
+                        >
+                          Etterlønn
+                        </option>
+                        <option
+                          value="I000042"
+                        >
+                           Dokumentasjon av dato for overtakelse av omsorg
+                        </option>
+                        <option
+                          value="I000063"
+                        >
+                          Fødselsattest
+                        </option>
+                        <option
+                          value="I000062"
+                        >
+                          Terminbekreftelse
+                        </option>
+                        <option
+                          value="I000039"
+                        >
+                          Tjenestebevis fra militær- eller siviltjeneste
+                        </option>
+                        <option
+                          value="I000007"
+                        >
+                          Inntektsopplysninger for selvstendig næringsdrivende
+                        </option>
+                        <option
+                          value="I000038"
+                        >
+                          Dokumentasjon av mors utdanning, arbeid eller sykdom
+                        </option>
+                        <option
+                          value="I000037"
+                        >
+                          Dokumentasjon av innleggelse i helseinstitusjon
+                        </option>
+                        <option
+                          value="I000045"
+                        >
+                          Dokumentasjon av sykdom
+                        </option>
+                        <option
+                          value="I000061"
+                        >
+                          Dokumentasjon av mors utdanning på heltid
+                        </option>
+                        <option
+                          value="I000051"
+                        >
+                          Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                        </option>
+                        <option
+                          value="I000060"
+                        >
+                          Annet
+                        </option>
+                      </React.Fragment>
+                    </Select>,
+                    false,
+                    Array [],
+                    false,
+                  ],
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "className": "ettersendelse__letter-icon",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": <FormattedMessage
+                        id="ettersendelse.title"
+                        values={
+                          Object {
+                            "saksnummer": "123",
+                          }
+                        }
+                      />,
+                      "className": "ettersendelse__title",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "id": "ettersendelse.title",
+                        "values": Object {
+                          "saksnummer": "123",
+                        },
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "bredde": "fullbredde",
+                      "children": <React.Fragment>
+                        <option
+                          disabled={true}
+                          hidden={true}
+                          value="default"
+                        >
+                          Velg type vedlegg
+                        </option>
+                        <option
+                          value="I000065"
+                        >
+                          Bekreftelse fra arbeidsgiver
+                        </option>
+                        <option
+                          value="I000026"
+                        >
+                          Inntektsopplysninger fra arbeidsgiver
+                        </option>
+                        <option
+                          value="I000044"
+                        >
+                          Etterlønn
+                        </option>
+                        <option
+                          value="I000042"
+                        >
+                           Dokumentasjon av dato for overtakelse av omsorg
+                        </option>
+                        <option
+                          value="I000063"
+                        >
+                          Fødselsattest
+                        </option>
+                        <option
+                          value="I000062"
+                        >
+                          Terminbekreftelse
+                        </option>
+                        <option
+                          value="I000039"
+                        >
+                          Tjenestebevis fra militær- eller siviltjeneste
+                        </option>
+                        <option
+                          value="I000007"
+                        >
+                          Inntektsopplysninger for selvstendig næringsdrivende
+                        </option>
+                        <option
+                          value="I000038"
+                        >
+                          Dokumentasjon av mors utdanning, arbeid eller sykdom
+                        </option>
+                        <option
+                          value="I000037"
+                        >
+                          Dokumentasjon av innleggelse i helseinstitusjon
+                        </option>
+                        <option
+                          value="I000045"
+                        >
+                          Dokumentasjon av sykdom
+                        </option>
+                        <option
+                          value="I000061"
+                        >
+                          Dokumentasjon av mors utdanning på heltid
+                        </option>
+                        <option
+                          value="I000051"
+                        >
+                          Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                        </option>
+                        <option
+                          value="I000060"
+                        >
+                          Annet
+                        </option>
+                      </React.Fragment>,
+                      "className": "ettersendelse__attachment-type-select",
+                      "defaultValue": "default",
+                      "disabled": false,
+                      "feil": undefined,
+                      "id": undefined,
+                      "label": "",
+                      "onChange": [Function],
+                      "selectRef": undefined,
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": Array [
+                          <option
+                            disabled={true}
+                            hidden={true}
+                            value="default"
+                          >
+                            Velg type vedlegg
+                          </option>,
+                          Array [
+                            <option
+                              value="I000065"
+                            >
+                              Bekreftelse fra arbeidsgiver
+                            </option>,
+                            <option
+                              value="I000026"
+                            >
+                              Inntektsopplysninger fra arbeidsgiver
+                            </option>,
+                            <option
+                              value="I000044"
+                            >
+                              Etterlønn
+                            </option>,
+                            <option
+                              value="I000042"
+                            >
+                               Dokumentasjon av dato for overtakelse av omsorg
+                            </option>,
+                            <option
+                              value="I000063"
+                            >
+                              Fødselsattest
+                            </option>,
+                            <option
+                              value="I000062"
+                            >
+                              Terminbekreftelse
+                            </option>,
+                            <option
+                              value="I000039"
+                            >
+                              Tjenestebevis fra militær- eller siviltjeneste
+                            </option>,
+                            <option
+                              value="I000007"
+                            >
+                              Inntektsopplysninger for selvstendig næringsdrivende
+                            </option>,
+                            <option
+                              value="I000038"
+                            >
+                              Dokumentasjon av mors utdanning, arbeid eller sykdom
+                            </option>,
+                            <option
+                              value="I000037"
+                            >
+                              Dokumentasjon av innleggelse i helseinstitusjon
+                            </option>,
+                            <option
+                              value="I000045"
+                            >
+                              Dokumentasjon av sykdom
+                            </option>,
+                            <option
+                              value="I000061"
+                            >
+                              Dokumentasjon av mors utdanning på heltid
+                            </option>,
+                            <option
+                              value="I000051"
+                            >
+                              Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                            </option>,
+                            <option
+                              value="I000060"
+                            >
+                              Annet
+                            </option>,
+                          ],
+                        ],
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Velg type vedlegg",
+                            "disabled": true,
+                            "hidden": true,
+                            "value": "default",
+                          },
+                          "ref": null,
+                          "rendered": "Velg type vedlegg",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000065",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Bekreftelse fra arbeidsgiver",
+                            "value": "I000065",
+                          },
+                          "ref": null,
+                          "rendered": "Bekreftelse fra arbeidsgiver",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000026",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Inntektsopplysninger fra arbeidsgiver",
+                            "value": "I000026",
+                          },
+                          "ref": null,
+                          "rendered": "Inntektsopplysninger fra arbeidsgiver",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000044",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Etterlønn",
+                            "value": "I000044",
+                          },
+                          "ref": null,
+                          "rendered": "Etterlønn",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000042",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": " Dokumentasjon av dato for overtakelse av omsorg",
+                            "value": "I000042",
+                          },
+                          "ref": null,
+                          "rendered": " Dokumentasjon av dato for overtakelse av omsorg",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000063",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Fødselsattest",
+                            "value": "I000063",
+                          },
+                          "ref": null,
+                          "rendered": "Fødselsattest",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000062",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Terminbekreftelse",
+                            "value": "I000062",
+                          },
+                          "ref": null,
+                          "rendered": "Terminbekreftelse",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000039",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Tjenestebevis fra militær- eller siviltjeneste",
+                            "value": "I000039",
+                          },
+                          "ref": null,
+                          "rendered": "Tjenestebevis fra militær- eller siviltjeneste",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000007",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Inntektsopplysninger for selvstendig næringsdrivende",
+                            "value": "I000007",
+                          },
+                          "ref": null,
+                          "rendered": "Inntektsopplysninger for selvstendig næringsdrivende",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000038",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+                            "value": "I000038",
+                          },
+                          "ref": null,
+                          "rendered": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000037",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Dokumentasjon av innleggelse i helseinstitusjon",
+                            "value": "I000037",
+                          },
+                          "ref": null,
+                          "rendered": "Dokumentasjon av innleggelse i helseinstitusjon",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000045",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Dokumentasjon av sykdom",
+                            "value": "I000045",
+                          },
+                          "ref": null,
+                          "rendered": "Dokumentasjon av sykdom",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000061",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Dokumentasjon av mors utdanning på heltid",
+                            "value": "I000061",
+                          },
+                          "ref": null,
+                          "rendered": "Dokumentasjon av mors utdanning på heltid",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000051",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+                            "value": "I000051",
+                          },
+                          "ref": null,
+                          "rendered": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000060",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Annet",
+                            "value": "I000060",
+                          },
+                          "ref": null,
+                          "rendered": "Annet",
+                          "type": "option",
+                        },
+                      ],
+                      "type": Symbol(react.fragment),
+                    },
+                    "type": [Function],
+                  },
+                  false,
+                  false,
+                ],
+                "type": Symbol(react.fragment),
+              },
+            ],
+            "type": "div",
+          },
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+    Symbol(enzyme.__nodes__): Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <Søknadstittel>
+              Ettersending av vedlegg
+            </Søknadstittel>,
+            <ResponsiveWrapper>
+              <div
+                className="ettersendelse--content"
+              >
+                <BackButton
+                  hidden={false}
+                  onClick={[Function]}
+                />
+                <React.Fragment>
+                  <LetterIcon
+                    className="ettersendelse__letter-icon"
+                  />
+                  <Innholdstittel
+                    className="ettersendelse__title"
+                  >
+                    <FormattedMessage
+                      id="ettersendelse.title"
+                      values={
+                        Object {
+                          "saksnummer": "123",
+                        }
+                      }
+                    />
+                  </Innholdstittel>
+                  <Select
+                    bredde="fullbredde"
+                    className="ettersendelse__attachment-type-select"
+                    defaultValue="default"
+                    disabled={false}
+                    label=""
+                    onChange={[Function]}
+                  >
+                    <React.Fragment>
+                      <option
+                        disabled={true}
+                        hidden={true}
+                        value="default"
+                      >
+                        Velg type vedlegg
+                      </option>
+                      <option
+                        value="I000065"
+                      >
+                        Bekreftelse fra arbeidsgiver
+                      </option>
+                      <option
+                        value="I000026"
+                      >
+                        Inntektsopplysninger fra arbeidsgiver
+                      </option>
+                      <option
+                        value="I000044"
+                      >
+                        Etterlønn
+                      </option>
+                      <option
+                        value="I000042"
+                      >
+                         Dokumentasjon av dato for overtakelse av omsorg
+                      </option>
+                      <option
+                        value="I000063"
+                      >
+                        Fødselsattest
+                      </option>
+                      <option
+                        value="I000062"
+                      >
+                        Terminbekreftelse
+                      </option>
+                      <option
+                        value="I000039"
+                      >
+                        Tjenestebevis fra militær- eller siviltjeneste
+                      </option>
+                      <option
+                        value="I000007"
+                      >
+                        Inntektsopplysninger for selvstendig næringsdrivende
+                      </option>
+                      <option
+                        value="I000038"
+                      >
+                        Dokumentasjon av mors utdanning, arbeid eller sykdom
+                      </option>
+                      <option
+                        value="I000037"
+                      >
+                        Dokumentasjon av innleggelse i helseinstitusjon
+                      </option>
+                      <option
+                        value="I000045"
+                      >
+                        Dokumentasjon av sykdom
+                      </option>
+                      <option
+                        value="I000061"
+                      >
+                        Dokumentasjon av mors utdanning på heltid
+                      </option>
+                      <option
+                        value="I000051"
+                      >
+                        Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                      </option>
+                      <option
+                        value="I000060"
+                      >
+                        Annet
+                      </option>
+                    </React.Fragment>
+                  </Select>
+                </React.Fragment>
+              </div>
+            </ResponsiveWrapper>,
+          ],
+          "className": "ettersendelse",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Ettersending av vedlegg",
+            },
+            "ref": null,
+            "rendered": "Ettersending av vedlegg",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <div
+                className="ettersendelse--content"
+              >
+                <BackButton
+                  hidden={false}
+                  onClick={[Function]}
+                />
+                <React.Fragment>
+                  <LetterIcon
+                    className="ettersendelse__letter-icon"
+                  />
+                  <Innholdstittel
+                    className="ettersendelse__title"
+                  >
+                    <FormattedMessage
+                      id="ettersendelse.title"
+                      values={
+                        Object {
+                          "saksnummer": "123",
+                        }
+                      }
+                    />
+                  </Innholdstittel>
+                  <Select
+                    bredde="fullbredde"
+                    className="ettersendelse__attachment-type-select"
+                    defaultValue="default"
+                    disabled={false}
+                    label=""
+                    onChange={[Function]}
+                  >
+                    <React.Fragment>
+                      <option
+                        disabled={true}
+                        hidden={true}
+                        value="default"
+                      >
+                        Velg type vedlegg
+                      </option>
+                      <option
+                        value="I000065"
+                      >
+                        Bekreftelse fra arbeidsgiver
+                      </option>
+                      <option
+                        value="I000026"
+                      >
+                        Inntektsopplysninger fra arbeidsgiver
+                      </option>
+                      <option
+                        value="I000044"
+                      >
+                        Etterlønn
+                      </option>
+                      <option
+                        value="I000042"
+                      >
+                         Dokumentasjon av dato for overtakelse av omsorg
+                      </option>
+                      <option
+                        value="I000063"
+                      >
+                        Fødselsattest
+                      </option>
+                      <option
+                        value="I000062"
+                      >
+                        Terminbekreftelse
+                      </option>
+                      <option
+                        value="I000039"
+                      >
+                        Tjenestebevis fra militær- eller siviltjeneste
+                      </option>
+                      <option
+                        value="I000007"
+                      >
+                        Inntektsopplysninger for selvstendig næringsdrivende
+                      </option>
+                      <option
+                        value="I000038"
+                      >
+                        Dokumentasjon av mors utdanning, arbeid eller sykdom
+                      </option>
+                      <option
+                        value="I000037"
+                      >
+                        Dokumentasjon av innleggelse i helseinstitusjon
+                      </option>
+                      <option
+                        value="I000045"
+                      >
+                        Dokumentasjon av sykdom
+                      </option>
+                      <option
+                        value="I000061"
+                      >
+                        Dokumentasjon av mors utdanning på heltid
+                      </option>
+                      <option
+                        value="I000051"
+                      >
+                        Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                      </option>
+                      <option
+                        value="I000060"
+                      >
+                        Annet
+                      </option>
+                    </React.Fragment>
+                  </Select>
+                </React.Fragment>
+              </div>,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <BackButton
+                    hidden={false}
+                    onClick={[Function]}
+                  />,
+                  <React.Fragment>
+                    <LetterIcon
+                      className="ettersendelse__letter-icon"
+                    />
+                    <Innholdstittel
+                      className="ettersendelse__title"
+                    >
+                      <FormattedMessage
+                        id="ettersendelse.title"
+                        values={
+                          Object {
+                            "saksnummer": "123",
+                          }
+                        }
+                      />
+                    </Innholdstittel>
+                    <Select
+                      bredde="fullbredde"
+                      className="ettersendelse__attachment-type-select"
+                      defaultValue="default"
+                      disabled={false}
+                      label=""
+                      onChange={[Function]}
+                    >
+                      <React.Fragment>
+                        <option
+                          disabled={true}
+                          hidden={true}
+                          value="default"
+                        >
+                          Velg type vedlegg
+                        </option>
+                        <option
+                          value="I000065"
+                        >
+                          Bekreftelse fra arbeidsgiver
+                        </option>
+                        <option
+                          value="I000026"
+                        >
+                          Inntektsopplysninger fra arbeidsgiver
+                        </option>
+                        <option
+                          value="I000044"
+                        >
+                          Etterlønn
+                        </option>
+                        <option
+                          value="I000042"
+                        >
+                           Dokumentasjon av dato for overtakelse av omsorg
+                        </option>
+                        <option
+                          value="I000063"
+                        >
+                          Fødselsattest
+                        </option>
+                        <option
+                          value="I000062"
+                        >
+                          Terminbekreftelse
+                        </option>
+                        <option
+                          value="I000039"
+                        >
+                          Tjenestebevis fra militær- eller siviltjeneste
+                        </option>
+                        <option
+                          value="I000007"
+                        >
+                          Inntektsopplysninger for selvstendig næringsdrivende
+                        </option>
+                        <option
+                          value="I000038"
+                        >
+                          Dokumentasjon av mors utdanning, arbeid eller sykdom
+                        </option>
+                        <option
+                          value="I000037"
+                        >
+                          Dokumentasjon av innleggelse i helseinstitusjon
+                        </option>
+                        <option
+                          value="I000045"
+                        >
+                          Dokumentasjon av sykdom
+                        </option>
+                        <option
+                          value="I000061"
+                        >
+                          Dokumentasjon av mors utdanning på heltid
+                        </option>
+                        <option
+                          value="I000051"
+                        >
+                          Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                        </option>
+                        <option
+                          value="I000060"
+                        >
+                          Annet
+                        </option>
+                      </React.Fragment>
+                    </Select>
+                  </React.Fragment>,
+                ],
+                "className": "ettersendelse--content",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "hidden": false,
+                    "onClick": [Function],
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "children": Array [
+                      <LetterIcon
+                        className="ettersendelse__letter-icon"
+                      />,
+                      <Innholdstittel
+                        className="ettersendelse__title"
+                      >
+                        <FormattedMessage
+                          id="ettersendelse.title"
+                          values={
+                            Object {
+                              "saksnummer": "123",
+                            }
+                          }
+                        />
+                      </Innholdstittel>,
+                      <Select
+                        bredde="fullbredde"
+                        className="ettersendelse__attachment-type-select"
+                        defaultValue="default"
+                        disabled={false}
+                        label=""
+                        onChange={[Function]}
+                      >
+                        <React.Fragment>
+                          <option
+                            disabled={true}
+                            hidden={true}
+                            value="default"
+                          >
+                            Velg type vedlegg
+                          </option>
+                          <option
+                            value="I000065"
+                          >
+                            Bekreftelse fra arbeidsgiver
+                          </option>
+                          <option
+                            value="I000026"
+                          >
+                            Inntektsopplysninger fra arbeidsgiver
+                          </option>
+                          <option
+                            value="I000044"
+                          >
+                            Etterlønn
+                          </option>
+                          <option
+                            value="I000042"
+                          >
+                             Dokumentasjon av dato for overtakelse av omsorg
+                          </option>
+                          <option
+                            value="I000063"
+                          >
+                            Fødselsattest
+                          </option>
+                          <option
+                            value="I000062"
+                          >
+                            Terminbekreftelse
+                          </option>
+                          <option
+                            value="I000039"
+                          >
+                            Tjenestebevis fra militær- eller siviltjeneste
+                          </option>
+                          <option
+                            value="I000007"
+                          >
+                            Inntektsopplysninger for selvstendig næringsdrivende
+                          </option>
+                          <option
+                            value="I000038"
+                          >
+                            Dokumentasjon av mors utdanning, arbeid eller sykdom
+                          </option>
+                          <option
+                            value="I000037"
+                          >
+                            Dokumentasjon av innleggelse i helseinstitusjon
+                          </option>
+                          <option
+                            value="I000045"
+                          >
+                            Dokumentasjon av sykdom
+                          </option>
+                          <option
+                            value="I000061"
+                          >
+                            Dokumentasjon av mors utdanning på heltid
+                          </option>
+                          <option
+                            value="I000051"
+                          >
+                            Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                          </option>
+                          <option
+                            value="I000060"
+                          >
+                            Annet
+                          </option>
+                        </React.Fragment>
+                      </Select>,
+                      false,
+                      Array [],
+                      false,
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "className": "ettersendelse__letter-icon",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "children": <FormattedMessage
+                          id="ettersendelse.title"
+                          values={
+                            Object {
+                              "saksnummer": "123",
+                            }
+                          }
+                        />,
+                        "className": "ettersendelse__title",
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "id": "ettersendelse.title",
+                          "values": Object {
+                            "saksnummer": "123",
+                          },
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "bredde": "fullbredde",
+                        "children": <React.Fragment>
+                          <option
+                            disabled={true}
+                            hidden={true}
+                            value="default"
+                          >
+                            Velg type vedlegg
+                          </option>
+                          <option
+                            value="I000065"
+                          >
+                            Bekreftelse fra arbeidsgiver
+                          </option>
+                          <option
+                            value="I000026"
+                          >
+                            Inntektsopplysninger fra arbeidsgiver
+                          </option>
+                          <option
+                            value="I000044"
+                          >
+                            Etterlønn
+                          </option>
+                          <option
+                            value="I000042"
+                          >
+                             Dokumentasjon av dato for overtakelse av omsorg
+                          </option>
+                          <option
+                            value="I000063"
+                          >
+                            Fødselsattest
+                          </option>
+                          <option
+                            value="I000062"
+                          >
+                            Terminbekreftelse
+                          </option>
+                          <option
+                            value="I000039"
+                          >
+                            Tjenestebevis fra militær- eller siviltjeneste
+                          </option>
+                          <option
+                            value="I000007"
+                          >
+                            Inntektsopplysninger for selvstendig næringsdrivende
+                          </option>
+                          <option
+                            value="I000038"
+                          >
+                            Dokumentasjon av mors utdanning, arbeid eller sykdom
+                          </option>
+                          <option
+                            value="I000037"
+                          >
+                            Dokumentasjon av innleggelse i helseinstitusjon
+                          </option>
+                          <option
+                            value="I000045"
+                          >
+                            Dokumentasjon av sykdom
+                          </option>
+                          <option
+                            value="I000061"
+                          >
+                            Dokumentasjon av mors utdanning på heltid
+                          </option>
+                          <option
+                            value="I000051"
+                          >
+                            Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                          </option>
+                          <option
+                            value="I000060"
+                          >
+                            Annet
+                          </option>
+                        </React.Fragment>,
+                        "className": "ettersendelse__attachment-type-select",
+                        "defaultValue": "default",
+                        "disabled": false,
+                        "feil": undefined,
+                        "id": undefined,
+                        "label": "",
+                        "onChange": [Function],
+                        "selectRef": undefined,
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "function",
+                        "props": Object {
+                          "children": Array [
+                            <option
+                              disabled={true}
+                              hidden={true}
+                              value="default"
+                            >
+                              Velg type vedlegg
+                            </option>,
+                            Array [
+                              <option
+                                value="I000065"
+                              >
+                                Bekreftelse fra arbeidsgiver
+                              </option>,
+                              <option
+                                value="I000026"
+                              >
+                                Inntektsopplysninger fra arbeidsgiver
+                              </option>,
+                              <option
+                                value="I000044"
+                              >
+                                Etterlønn
+                              </option>,
+                              <option
+                                value="I000042"
+                              >
+                                 Dokumentasjon av dato for overtakelse av omsorg
+                              </option>,
+                              <option
+                                value="I000063"
+                              >
+                                Fødselsattest
+                              </option>,
+                              <option
+                                value="I000062"
+                              >
+                                Terminbekreftelse
+                              </option>,
+                              <option
+                                value="I000039"
+                              >
+                                Tjenestebevis fra militær- eller siviltjeneste
+                              </option>,
+                              <option
+                                value="I000007"
+                              >
+                                Inntektsopplysninger for selvstendig næringsdrivende
+                              </option>,
+                              <option
+                                value="I000038"
+                              >
+                                Dokumentasjon av mors utdanning, arbeid eller sykdom
+                              </option>,
+                              <option
+                                value="I000037"
+                              >
+                                Dokumentasjon av innleggelse i helseinstitusjon
+                              </option>,
+                              <option
+                                value="I000045"
+                              >
+                                Dokumentasjon av sykdom
+                              </option>,
+                              <option
+                                value="I000061"
+                              >
+                                Dokumentasjon av mors utdanning på heltid
+                              </option>,
+                              <option
+                                value="I000051"
+                              >
+                                Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                              </option>,
+                              <option
+                                value="I000060"
+                              >
+                                Annet
+                              </option>,
+                            ],
+                          ],
+                        },
+                        "ref": null,
+                        "rendered": Array [
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Velg type vedlegg",
+                              "disabled": true,
+                              "hidden": true,
+                              "value": "default",
+                            },
+                            "ref": null,
+                            "rendered": "Velg type vedlegg",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000065",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Bekreftelse fra arbeidsgiver",
+                              "value": "I000065",
+                            },
+                            "ref": null,
+                            "rendered": "Bekreftelse fra arbeidsgiver",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000026",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Inntektsopplysninger fra arbeidsgiver",
+                              "value": "I000026",
+                            },
+                            "ref": null,
+                            "rendered": "Inntektsopplysninger fra arbeidsgiver",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000044",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Etterlønn",
+                              "value": "I000044",
+                            },
+                            "ref": null,
+                            "rendered": "Etterlønn",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000042",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": " Dokumentasjon av dato for overtakelse av omsorg",
+                              "value": "I000042",
+                            },
+                            "ref": null,
+                            "rendered": " Dokumentasjon av dato for overtakelse av omsorg",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000063",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Fødselsattest",
+                              "value": "I000063",
+                            },
+                            "ref": null,
+                            "rendered": "Fødselsattest",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000062",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Terminbekreftelse",
+                              "value": "I000062",
+                            },
+                            "ref": null,
+                            "rendered": "Terminbekreftelse",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000039",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Tjenestebevis fra militær- eller siviltjeneste",
+                              "value": "I000039",
+                            },
+                            "ref": null,
+                            "rendered": "Tjenestebevis fra militær- eller siviltjeneste",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000007",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Inntektsopplysninger for selvstendig næringsdrivende",
+                              "value": "I000007",
+                            },
+                            "ref": null,
+                            "rendered": "Inntektsopplysninger for selvstendig næringsdrivende",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000038",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+                              "value": "I000038",
+                            },
+                            "ref": null,
+                            "rendered": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000037",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Dokumentasjon av innleggelse i helseinstitusjon",
+                              "value": "I000037",
+                            },
+                            "ref": null,
+                            "rendered": "Dokumentasjon av innleggelse i helseinstitusjon",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000045",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Dokumentasjon av sykdom",
+                              "value": "I000045",
+                            },
+                            "ref": null,
+                            "rendered": "Dokumentasjon av sykdom",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000061",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Dokumentasjon av mors utdanning på heltid",
+                              "value": "I000061",
+                            },
+                            "ref": null,
+                            "rendered": "Dokumentasjon av mors utdanning på heltid",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000051",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+                              "value": "I000051",
+                            },
+                            "ref": null,
+                            "rendered": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+                            "type": "option",
+                          },
+                          Object {
+                            "instance": null,
+                            "key": "I000060",
+                            "nodeType": "host",
+                            "props": Object {
+                              "children": "Annet",
+                              "value": "I000060",
+                            },
+                            "ref": null,
+                            "rendered": "Annet",
+                            "type": "option",
+                          },
+                        ],
+                        "type": Symbol(react.fragment),
+                      },
+                      "type": [Function],
+                    },
+                    false,
+                    false,
+                  ],
+                  "type": Symbol(react.fragment),
+                },
+              ],
+              "type": "div",
+            },
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    Symbol(enzyme.__options__): Object {
+      "adapter": ReactSixteenAdapter {
+        "options": Object {
+          "enableComponentDidUpdateOnSetState": true,
+          "lifecycles": Object {
+            "componentDidUpdate": Object {
+              "onSetState": true,
+            },
+            "getDerivedStateFromProps": true,
+            "getSnapshotBeforeUpdate": true,
+            "setState": Object {
+              "skipsComponentDidUpdateOnNullish": true,
+            },
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__unrendered__): null,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": "Velg type vedlegg",
+      "disabled": true,
+      "hidden": true,
+      "value": "default",
+    },
+    "ref": null,
+    "rendered": "Velg type vedlegg",
+    "type": "option",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": "Velg type vedlegg",
+        "disabled": true,
+        "hidden": true,
+        "value": "default",
+      },
+      "ref": null,
+      "rendered": "Velg type vedlegg",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000065",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Bekreftelse fra arbeidsgiver",
+        "value": "I000065",
+      },
+      "ref": null,
+      "rendered": "Bekreftelse fra arbeidsgiver",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000026",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Inntektsopplysninger fra arbeidsgiver",
+        "value": "I000026",
+      },
+      "ref": null,
+      "rendered": "Inntektsopplysninger fra arbeidsgiver",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000044",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Etterlønn",
+        "value": "I000044",
+      },
+      "ref": null,
+      "rendered": "Etterlønn",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000042",
+      "nodeType": "host",
+      "props": Object {
+        "children": " Dokumentasjon av dato for overtakelse av omsorg",
+        "value": "I000042",
+      },
+      "ref": null,
+      "rendered": " Dokumentasjon av dato for overtakelse av omsorg",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000063",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Fødselsattest",
+        "value": "I000063",
+      },
+      "ref": null,
+      "rendered": "Fødselsattest",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000062",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Terminbekreftelse",
+        "value": "I000062",
+      },
+      "ref": null,
+      "rendered": "Terminbekreftelse",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000039",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Tjenestebevis fra militær- eller siviltjeneste",
+        "value": "I000039",
+      },
+      "ref": null,
+      "rendered": "Tjenestebevis fra militær- eller siviltjeneste",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000007",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Inntektsopplysninger for selvstendig næringsdrivende",
+        "value": "I000007",
+      },
+      "ref": null,
+      "rendered": "Inntektsopplysninger for selvstendig næringsdrivende",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000038",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+        "value": "I000038",
+      },
+      "ref": null,
+      "rendered": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000037",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Dokumentasjon av innleggelse i helseinstitusjon",
+        "value": "I000037",
+      },
+      "ref": null,
+      "rendered": "Dokumentasjon av innleggelse i helseinstitusjon",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000045",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Dokumentasjon av sykdom",
+        "value": "I000045",
+      },
+      "ref": null,
+      "rendered": "Dokumentasjon av sykdom",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000061",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Dokumentasjon av mors utdanning på heltid",
+        "value": "I000061",
+      },
+      "ref": null,
+      "rendered": "Dokumentasjon av mors utdanning på heltid",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000051",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+        "value": "I000051",
+      },
+      "ref": null,
+      "rendered": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+      "type": "option",
+    },
+    Object {
+      "instance": null,
+      "key": "I000060",
+      "nodeType": "host",
+      "props": Object {
+        "children": "Annet",
+        "value": "I000060",
+      },
+      "ref": null,
+      "rendered": "Annet",
+      "type": "option",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__rootNodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <Søknadstittel>
+            Ettersending av vedlegg
+          </Søknadstittel>,
+          <ResponsiveWrapper>
+            <div
+              className="ettersendelse--content"
+            >
+              <BackButton
+                hidden={false}
+                onClick={[Function]}
+              />
+              <React.Fragment>
+                <LetterIcon
+                  className="ettersendelse__letter-icon"
+                />
+                <Innholdstittel
+                  className="ettersendelse__title"
+                >
+                  <FormattedMessage
+                    id="ettersendelse.title"
+                    values={
+                      Object {
+                        "saksnummer": "123",
+                      }
+                    }
+                  />
+                </Innholdstittel>
+                <Select
+                  bredde="fullbredde"
+                  className="ettersendelse__attachment-type-select"
+                  defaultValue="default"
+                  disabled={false}
+                  label=""
+                  onChange={[Function]}
+                >
+                  <React.Fragment>
+                    <option
+                      disabled={true}
+                      hidden={true}
+                      value="default"
+                    >
+                      Velg type vedlegg
+                    </option>
+                    <option
+                      value="I000065"
+                    >
+                      Bekreftelse fra arbeidsgiver
+                    </option>
+                    <option
+                      value="I000026"
+                    >
+                      Inntektsopplysninger fra arbeidsgiver
+                    </option>
+                    <option
+                      value="I000044"
+                    >
+                      Etterlønn
+                    </option>
+                    <option
+                      value="I000042"
+                    >
+                       Dokumentasjon av dato for overtakelse av omsorg
+                    </option>
+                    <option
+                      value="I000063"
+                    >
+                      Fødselsattest
+                    </option>
+                    <option
+                      value="I000062"
+                    >
+                      Terminbekreftelse
+                    </option>
+                    <option
+                      value="I000039"
+                    >
+                      Tjenestebevis fra militær- eller siviltjeneste
+                    </option>
+                    <option
+                      value="I000007"
+                    >
+                      Inntektsopplysninger for selvstendig næringsdrivende
+                    </option>
+                    <option
+                      value="I000038"
+                    >
+                      Dokumentasjon av mors utdanning, arbeid eller sykdom
+                    </option>
+                    <option
+                      value="I000037"
+                    >
+                      Dokumentasjon av innleggelse i helseinstitusjon
+                    </option>
+                    <option
+                      value="I000045"
+                    >
+                      Dokumentasjon av sykdom
+                    </option>
+                    <option
+                      value="I000061"
+                    >
+                      Dokumentasjon av mors utdanning på heltid
+                    </option>
+                    <option
+                      value="I000051"
+                    >
+                      Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                    </option>
+                    <option
+                      value="I000060"
+                    >
+                      Annet
+                    </option>
+                  </React.Fragment>
+                </Select>
+              </React.Fragment>
+            </div>
+          </ResponsiveWrapper>,
+        ],
+        "className": "ettersendelse",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "Ettersending av vedlegg",
+          },
+          "ref": null,
+          "rendered": "Ettersending av vedlegg",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <div
+              className="ettersendelse--content"
+            >
+              <BackButton
+                hidden={false}
+                onClick={[Function]}
+              />
+              <React.Fragment>
+                <LetterIcon
+                  className="ettersendelse__letter-icon"
+                />
+                <Innholdstittel
+                  className="ettersendelse__title"
+                >
+                  <FormattedMessage
+                    id="ettersendelse.title"
+                    values={
+                      Object {
+                        "saksnummer": "123",
+                      }
+                    }
+                  />
+                </Innholdstittel>
+                <Select
+                  bredde="fullbredde"
+                  className="ettersendelse__attachment-type-select"
+                  defaultValue="default"
+                  disabled={false}
+                  label=""
+                  onChange={[Function]}
+                >
+                  <React.Fragment>
+                    <option
+                      disabled={true}
+                      hidden={true}
+                      value="default"
+                    >
+                      Velg type vedlegg
+                    </option>
+                    <option
+                      value="I000065"
+                    >
+                      Bekreftelse fra arbeidsgiver
+                    </option>
+                    <option
+                      value="I000026"
+                    >
+                      Inntektsopplysninger fra arbeidsgiver
+                    </option>
+                    <option
+                      value="I000044"
+                    >
+                      Etterlønn
+                    </option>
+                    <option
+                      value="I000042"
+                    >
+                       Dokumentasjon av dato for overtakelse av omsorg
+                    </option>
+                    <option
+                      value="I000063"
+                    >
+                      Fødselsattest
+                    </option>
+                    <option
+                      value="I000062"
+                    >
+                      Terminbekreftelse
+                    </option>
+                    <option
+                      value="I000039"
+                    >
+                      Tjenestebevis fra militær- eller siviltjeneste
+                    </option>
+                    <option
+                      value="I000007"
+                    >
+                      Inntektsopplysninger for selvstendig næringsdrivende
+                    </option>
+                    <option
+                      value="I000038"
+                    >
+                      Dokumentasjon av mors utdanning, arbeid eller sykdom
+                    </option>
+                    <option
+                      value="I000037"
+                    >
+                      Dokumentasjon av innleggelse i helseinstitusjon
+                    </option>
+                    <option
+                      value="I000045"
+                    >
+                      Dokumentasjon av sykdom
+                    </option>
+                    <option
+                      value="I000061"
+                    >
+                      Dokumentasjon av mors utdanning på heltid
+                    </option>
+                    <option
+                      value="I000051"
+                    >
+                      Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                    </option>
+                    <option
+                      value="I000060"
+                    >
+                      Annet
+                    </option>
+                  </React.Fragment>
+                </Select>
+              </React.Fragment>
+            </div>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <BackButton
+                  hidden={false}
+                  onClick={[Function]}
+                />,
+                <React.Fragment>
+                  <LetterIcon
+                    className="ettersendelse__letter-icon"
+                  />
+                  <Innholdstittel
+                    className="ettersendelse__title"
+                  >
+                    <FormattedMessage
+                      id="ettersendelse.title"
+                      values={
+                        Object {
+                          "saksnummer": "123",
+                        }
+                      }
+                    />
+                  </Innholdstittel>
+                  <Select
+                    bredde="fullbredde"
+                    className="ettersendelse__attachment-type-select"
+                    defaultValue="default"
+                    disabled={false}
+                    label=""
+                    onChange={[Function]}
+                  >
+                    <React.Fragment>
+                      <option
+                        disabled={true}
+                        hidden={true}
+                        value="default"
+                      >
+                        Velg type vedlegg
+                      </option>
+                      <option
+                        value="I000065"
+                      >
+                        Bekreftelse fra arbeidsgiver
+                      </option>
+                      <option
+                        value="I000026"
+                      >
+                        Inntektsopplysninger fra arbeidsgiver
+                      </option>
+                      <option
+                        value="I000044"
+                      >
+                        Etterlønn
+                      </option>
+                      <option
+                        value="I000042"
+                      >
+                         Dokumentasjon av dato for overtakelse av omsorg
+                      </option>
+                      <option
+                        value="I000063"
+                      >
+                        Fødselsattest
+                      </option>
+                      <option
+                        value="I000062"
+                      >
+                        Terminbekreftelse
+                      </option>
+                      <option
+                        value="I000039"
+                      >
+                        Tjenestebevis fra militær- eller siviltjeneste
+                      </option>
+                      <option
+                        value="I000007"
+                      >
+                        Inntektsopplysninger for selvstendig næringsdrivende
+                      </option>
+                      <option
+                        value="I000038"
+                      >
+                        Dokumentasjon av mors utdanning, arbeid eller sykdom
+                      </option>
+                      <option
+                        value="I000037"
+                      >
+                        Dokumentasjon av innleggelse i helseinstitusjon
+                      </option>
+                      <option
+                        value="I000045"
+                      >
+                        Dokumentasjon av sykdom
+                      </option>
+                      <option
+                        value="I000061"
+                      >
+                        Dokumentasjon av mors utdanning på heltid
+                      </option>
+                      <option
+                        value="I000051"
+                      >
+                        Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                      </option>
+                      <option
+                        value="I000060"
+                      >
+                        Annet
+                      </option>
+                    </React.Fragment>
+                  </Select>
+                </React.Fragment>,
+              ],
+              "className": "ettersendelse--content",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "hidden": false,
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": Array [
+                    <LetterIcon
+                      className="ettersendelse__letter-icon"
+                    />,
+                    <Innholdstittel
+                      className="ettersendelse__title"
+                    >
+                      <FormattedMessage
+                        id="ettersendelse.title"
+                        values={
+                          Object {
+                            "saksnummer": "123",
+                          }
+                        }
+                      />
+                    </Innholdstittel>,
+                    <Select
+                      bredde="fullbredde"
+                      className="ettersendelse__attachment-type-select"
+                      defaultValue="default"
+                      disabled={false}
+                      label=""
+                      onChange={[Function]}
+                    >
+                      <React.Fragment>
+                        <option
+                          disabled={true}
+                          hidden={true}
+                          value="default"
+                        >
+                          Velg type vedlegg
+                        </option>
+                        <option
+                          value="I000065"
+                        >
+                          Bekreftelse fra arbeidsgiver
+                        </option>
+                        <option
+                          value="I000026"
+                        >
+                          Inntektsopplysninger fra arbeidsgiver
+                        </option>
+                        <option
+                          value="I000044"
+                        >
+                          Etterlønn
+                        </option>
+                        <option
+                          value="I000042"
+                        >
+                           Dokumentasjon av dato for overtakelse av omsorg
+                        </option>
+                        <option
+                          value="I000063"
+                        >
+                          Fødselsattest
+                        </option>
+                        <option
+                          value="I000062"
+                        >
+                          Terminbekreftelse
+                        </option>
+                        <option
+                          value="I000039"
+                        >
+                          Tjenestebevis fra militær- eller siviltjeneste
+                        </option>
+                        <option
+                          value="I000007"
+                        >
+                          Inntektsopplysninger for selvstendig næringsdrivende
+                        </option>
+                        <option
+                          value="I000038"
+                        >
+                          Dokumentasjon av mors utdanning, arbeid eller sykdom
+                        </option>
+                        <option
+                          value="I000037"
+                        >
+                          Dokumentasjon av innleggelse i helseinstitusjon
+                        </option>
+                        <option
+                          value="I000045"
+                        >
+                          Dokumentasjon av sykdom
+                        </option>
+                        <option
+                          value="I000061"
+                        >
+                          Dokumentasjon av mors utdanning på heltid
+                        </option>
+                        <option
+                          value="I000051"
+                        >
+                          Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                        </option>
+                        <option
+                          value="I000060"
+                        >
+                          Annet
+                        </option>
+                      </React.Fragment>
+                    </Select>,
+                    false,
+                    Array [],
+                    false,
+                  ],
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "className": "ettersendelse__letter-icon",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": <FormattedMessage
+                        id="ettersendelse.title"
+                        values={
+                          Object {
+                            "saksnummer": "123",
+                          }
+                        }
+                      />,
+                      "className": "ettersendelse__title",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "id": "ettersendelse.title",
+                        "values": Object {
+                          "saksnummer": "123",
+                        },
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "bredde": "fullbredde",
+                      "children": <React.Fragment>
+                        <option
+                          disabled={true}
+                          hidden={true}
+                          value="default"
+                        >
+                          Velg type vedlegg
+                        </option>
+                        <option
+                          value="I000065"
+                        >
+                          Bekreftelse fra arbeidsgiver
+                        </option>
+                        <option
+                          value="I000026"
+                        >
+                          Inntektsopplysninger fra arbeidsgiver
+                        </option>
+                        <option
+                          value="I000044"
+                        >
+                          Etterlønn
+                        </option>
+                        <option
+                          value="I000042"
+                        >
+                           Dokumentasjon av dato for overtakelse av omsorg
+                        </option>
+                        <option
+                          value="I000063"
+                        >
+                          Fødselsattest
+                        </option>
+                        <option
+                          value="I000062"
+                        >
+                          Terminbekreftelse
+                        </option>
+                        <option
+                          value="I000039"
+                        >
+                          Tjenestebevis fra militær- eller siviltjeneste
+                        </option>
+                        <option
+                          value="I000007"
+                        >
+                          Inntektsopplysninger for selvstendig næringsdrivende
+                        </option>
+                        <option
+                          value="I000038"
+                        >
+                          Dokumentasjon av mors utdanning, arbeid eller sykdom
+                        </option>
+                        <option
+                          value="I000037"
+                        >
+                          Dokumentasjon av innleggelse i helseinstitusjon
+                        </option>
+                        <option
+                          value="I000045"
+                        >
+                          Dokumentasjon av sykdom
+                        </option>
+                        <option
+                          value="I000061"
+                        >
+                          Dokumentasjon av mors utdanning på heltid
+                        </option>
+                        <option
+                          value="I000051"
+                        >
+                          Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                        </option>
+                        <option
+                          value="I000060"
+                        >
+                          Annet
+                        </option>
+                      </React.Fragment>,
+                      "className": "ettersendelse__attachment-type-select",
+                      "defaultValue": "default",
+                      "disabled": false,
+                      "feil": undefined,
+                      "id": undefined,
+                      "label": "",
+                      "onChange": [Function],
+                      "selectRef": undefined,
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "function",
+                      "props": Object {
+                        "children": Array [
+                          <option
+                            disabled={true}
+                            hidden={true}
+                            value="default"
+                          >
+                            Velg type vedlegg
+                          </option>,
+                          Array [
+                            <option
+                              value="I000065"
+                            >
+                              Bekreftelse fra arbeidsgiver
+                            </option>,
+                            <option
+                              value="I000026"
+                            >
+                              Inntektsopplysninger fra arbeidsgiver
+                            </option>,
+                            <option
+                              value="I000044"
+                            >
+                              Etterlønn
+                            </option>,
+                            <option
+                              value="I000042"
+                            >
+                               Dokumentasjon av dato for overtakelse av omsorg
+                            </option>,
+                            <option
+                              value="I000063"
+                            >
+                              Fødselsattest
+                            </option>,
+                            <option
+                              value="I000062"
+                            >
+                              Terminbekreftelse
+                            </option>,
+                            <option
+                              value="I000039"
+                            >
+                              Tjenestebevis fra militær- eller siviltjeneste
+                            </option>,
+                            <option
+                              value="I000007"
+                            >
+                              Inntektsopplysninger for selvstendig næringsdrivende
+                            </option>,
+                            <option
+                              value="I000038"
+                            >
+                              Dokumentasjon av mors utdanning, arbeid eller sykdom
+                            </option>,
+                            <option
+                              value="I000037"
+                            >
+                              Dokumentasjon av innleggelse i helseinstitusjon
+                            </option>,
+                            <option
+                              value="I000045"
+                            >
+                              Dokumentasjon av sykdom
+                            </option>,
+                            <option
+                              value="I000061"
+                            >
+                              Dokumentasjon av mors utdanning på heltid
+                            </option>,
+                            <option
+                              value="I000051"
+                            >
+                              Dokumentasjon av at mor deltar i kvalifiseringsprogrammet
+                            </option>,
+                            <option
+                              value="I000060"
+                            >
+                              Annet
+                            </option>,
+                          ],
+                        ],
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Velg type vedlegg",
+                            "disabled": true,
+                            "hidden": true,
+                            "value": "default",
+                          },
+                          "ref": null,
+                          "rendered": "Velg type vedlegg",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000065",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Bekreftelse fra arbeidsgiver",
+                            "value": "I000065",
+                          },
+                          "ref": null,
+                          "rendered": "Bekreftelse fra arbeidsgiver",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000026",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Inntektsopplysninger fra arbeidsgiver",
+                            "value": "I000026",
+                          },
+                          "ref": null,
+                          "rendered": "Inntektsopplysninger fra arbeidsgiver",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000044",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Etterlønn",
+                            "value": "I000044",
+                          },
+                          "ref": null,
+                          "rendered": "Etterlønn",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000042",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": " Dokumentasjon av dato for overtakelse av omsorg",
+                            "value": "I000042",
+                          },
+                          "ref": null,
+                          "rendered": " Dokumentasjon av dato for overtakelse av omsorg",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000063",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Fødselsattest",
+                            "value": "I000063",
+                          },
+                          "ref": null,
+                          "rendered": "Fødselsattest",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000062",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Terminbekreftelse",
+                            "value": "I000062",
+                          },
+                          "ref": null,
+                          "rendered": "Terminbekreftelse",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000039",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Tjenestebevis fra militær- eller siviltjeneste",
+                            "value": "I000039",
+                          },
+                          "ref": null,
+                          "rendered": "Tjenestebevis fra militær- eller siviltjeneste",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000007",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Inntektsopplysninger for selvstendig næringsdrivende",
+                            "value": "I000007",
+                          },
+                          "ref": null,
+                          "rendered": "Inntektsopplysninger for selvstendig næringsdrivende",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000038",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+                            "value": "I000038",
+                          },
+                          "ref": null,
+                          "rendered": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000037",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Dokumentasjon av innleggelse i helseinstitusjon",
+                            "value": "I000037",
+                          },
+                          "ref": null,
+                          "rendered": "Dokumentasjon av innleggelse i helseinstitusjon",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000045",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Dokumentasjon av sykdom",
+                            "value": "I000045",
+                          },
+                          "ref": null,
+                          "rendered": "Dokumentasjon av sykdom",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000061",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Dokumentasjon av mors utdanning på heltid",
+                            "value": "I000061",
+                          },
+                          "ref": null,
+                          "rendered": "Dokumentasjon av mors utdanning på heltid",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000051",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+                            "value": "I000051",
+                          },
+                          "ref": null,
+                          "rendered": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+                          "type": "option",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": "I000060",
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Annet",
+                            "value": "I000060",
+                          },
+                          "ref": null,
+                          "rendered": "Annet",
+                          "type": "option",
+                        },
+                      ],
+                      "type": Symbol(react.fragment),
+                    },
+                    "type": [Function],
+                  },
+                  false,
+                  false,
+                ],
+                "type": Symbol(react.fragment),
+              },
+            ],
+            "type": "div",
+          },
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+}
+`;

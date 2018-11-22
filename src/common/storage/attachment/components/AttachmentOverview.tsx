@@ -55,7 +55,7 @@ class AttachmentOverview extends React.Component<Props, State> {
     }
 
     createErrorMessage(error: any): string {
-        if (error.response && error.response.status === 413) {
+        if (error & error.response && error.response.status === 413) {
             return 'vedlegg.forStort';
         }
         return 'vedlegg.feilmelding';
@@ -80,12 +80,7 @@ class AttachmentOverview extends React.Component<Props, State> {
     }
 
     render() {
-        const {
-            inputId = guid(),
-            attachments,
-            skjemanummer,
-            onFilesSelect,
-        } = this.props;
+        const { inputId = guid(), attachments, skjemanummer, onFilesSelect } = this.props;
 
         const { showErrorMessage, errorMessage } = this.state;
 

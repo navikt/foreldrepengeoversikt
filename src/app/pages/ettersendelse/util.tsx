@@ -4,7 +4,7 @@ import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attach
 
 export const getAttachmentTypeSelectOptions = (intl: InjectedIntl) => (
     <>
-        <option value={undefined} selected={true} disabled={true} hidden={true}>
+        <option value={'default'} disabled={true} hidden={true}>
             {intl.formatMessage({ id: `ettersendelse.select.defaultValue` })}
         </option>
         {Object.values(Skjemanummer).map((skjemanummer: Skjemanummer) => (
@@ -15,8 +15,8 @@ export const getAttachmentTypeSelectOptions = (intl: InjectedIntl) => (
     </>
 );
 
-export const getListOfUniqueSkjemanummerForAttachments = (attachments: Attachment[]) => {
+export const getListOfUniqueSkjemanummer = (attachments: Attachment[]) => {
     return attachments
         .map((a: Attachment) => a.skjemanummer)
-        .filter((s: Skjemanummer, index, self) => self.indexOf(s) === index)
+        .filter((s: Skjemanummer, index, self) => self.indexOf(s) === index);
 };

@@ -6,7 +6,6 @@ import AttachmentApi from 'common/storage/api/attachmentApi';
 export interface AttachmentsUploaderProps {
     attachments: Attachment[];
     skjemanummer: Skjemanummer;
-    renderAttachmentList?: boolean;
     onFilesUploadStart: (attachments: Attachment[]) => void;
     onFileUploadFinish: (attachment: Attachment) => void;
     onFileDeleteStart: (attachment: Attachment) => void;
