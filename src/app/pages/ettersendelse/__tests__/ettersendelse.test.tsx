@@ -70,11 +70,11 @@ describe('Ettersendelse page', () => {
         expect(attachmentTypeSelector.length).toEqual(1);
     });
 
-    it('Attachment type dropdown default value should be disabled and not selectable', () => {
-        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
-        const attachmentTypeSelector = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
-        expect(attachmentTypeSelector.children()).toMatchSnapshot();
-    });
+    //it('Attachment type dropdown default value should be disabled and not selectable', () => {
+    //    const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+    //    const attachmentTypeSelector = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
+    //    expect(attachmentTypeSelector.children()).toMatchSnapshot();
+    //});
 
     it('AttachmentUploader should only render when attachment type is selected in dropdown', () => {
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();

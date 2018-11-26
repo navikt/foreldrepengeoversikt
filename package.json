@@ -17,7 +17,7 @@
         "start": "node ./src/build/scripts/start-dev.js",
         "start-no-decorator": "node ./src/build/scripts/start-dev-nodecorator.js",
         "precommit": "pretty-quick --staged",
-        "jest": "jest --verbose --config ./jest/jest.config.js",
+        "jest": "jest --config ./jest/jest.config.js",
         "jest-update-snapshot": "jest --config --updateSnapshot ./jest/jest.config.js",
         "jest-watch": "jest --watch --verbose --config ./jest/jest.config.js"
     },
@@ -78,6 +78,7 @@
     "dependencies": {
         "@types/jsdom": "^12.2.0",
         "axios": "^0.18.0",
+        "babel-runtime": "^6.26.0",
         "bytes": "^3.0.0",
         "classnames": "^2.2.6",
         "compression": "^1.7.3",
@@ -93,6 +94,8 @@
         "nav-frontend-core": "^4.0.5",
         "nav-frontend-ekspanderbartpanel": "^1.0.15",
         "nav-frontend-ekspanderbartpanel-style": "^0.3.14",
+        "nav-frontend-etiketter": "^1.0.16",
+        "nav-frontend-etiketter-style": "^0.3.14",
         "nav-frontend-hjelpetekst": "^1.0.27",
         "nav-frontend-hjelpetekst-style": "^0.3.25",
         "nav-frontend-ikoner-assets": "^0.2.29",

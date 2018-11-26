@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import { Knapp } from 'nav-frontend-knapper';
 import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
@@ -10,9 +10,10 @@ import BEMHelper from 'common/util/bem';
 import Sak from '../../types/Sak';
 import { lenker } from '../../utils/lenker';
 import FileIcon from '../ikoner/FileIcon';
-import { formatDate, isSakTooOldForEndringssøknad, isSakTooOldForEttersendelse } from './util';
+import { isSakTooOldForEndringssøknad, isSakTooOldForEttersendelse } from './util';
 
 import './saksoversikt.less';
+import SaksoversiktHeader from './SaksoversiktHeader';
 
 interface Props {
     sak: Sak;
@@ -20,28 +21,12 @@ interface Props {
     onEndreSøknad: (sak: Sak) => void;
 }
 
-const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
+const Saksoversikt = (props: Props) => {
     const { sak, onEttersendVedlegg, onEndreSøknad } = props;
     const cls = BEMHelper('saksoversikt');
     return (
         <div className={cls.className}>
-            <EkspanderbartpanelBase
-                heading={
-                    <div>
-                        <Undertittel>
-                            <FormattedMessage id={'saksoversikt.heading.top'} />
-                        </Undertittel>
-                        {sak.opprettet &&
-                            <Normaltekst>
-                                <FormattedMessage
-                                    id={'saksoversikt.heading.bottom'}
-                                    values={{ date: formatDate(sak.opprettet) }}
-                                />
-                            </Normaltekst>
-                        }
-                    </div>
-                }
-                ariaTittel={'søknad om foreldrepenger'}>
+            <EkspanderbartpanelBase heading={<SaksoversiktHeader sak={sak} />} ariaTittel={'søknad om foreldrepenger'}>
                 <Normaltekst className={cls.element('saksnummer')}>
                     <FormattedMessage id={'saksoversikt.content.saksnummer'} values={{ saksnummer: sak.saksnummer }} />
                 </Normaltekst>
@@ -58,7 +43,6 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                 <Normaltekst className={cls.element('ettersendelse-intro')}>
                     <FormattedMessage id={'saksoversikt.content.ettersendelse.intro'} />
                 </Normaltekst>
-
                 <div className={cls.element('valg')}>
                     <Knapp
                         className={cls.element('ettersendelse-btn')}
@@ -76,7 +60,6 @@ const Saksoversikt: React.StatelessComponent<Props> = (props: Props) => {
                 <Normaltekst className={cls.element('endringssoknad-intro')}>
                     <FormattedMessage id={'saksoversikt.content.endringssøknad.intro'} />
                 </Normaltekst>
-
                 <div className={cls.element('valg')}>
                     <Knapp
                         className={cls.element('endringssoknad-btn')}

@@ -21,6 +21,7 @@ describe('Saksoversikt component', () => {
                 onEndreSøknad={jest.fn()}
             />
         );
+
         const uploadButton = wrapper.find({ className: 'saksoversikt__ettersendelse-btn' });
         expect(uploadButton.prop('disabled')).toBeTruthy();
     });

@@ -18,7 +18,8 @@
         margin-bottom: 1.5rem;
     }
 
-    &__ettersendelse-intro, &__endringssoknad-intro {
+    &__ettersendelse-intro,
+    &__endringssoknad-intro {
         margin-bottom: 1rem;
     }
 
@@ -30,17 +31,23 @@
             align-self: center;
         }
     }
+}
 
-    @media (max-width: 345px) {
-        &__valg {
-            display: flex;
-            flex-flow: column-reverse wrap;
-            justify-content: flex-start;
-            margin-bottom: 1.5rem;
-            .hjelpetekst {
-                align-self: flex-end;
-                padding: 0.5rem;
-            }
+.saksoversikt-header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 100%;
+
+    &__status-etikett {
+        margin: 0 1rem;
+        align-self: flex-start;
+    }
+
+    @media (max-width: @mobile-breakpoint) {
+        flex-flow: column wrap;
+        &__status-etikett {
+            margin: 0.5rem 0rem;
         }
     }
 }

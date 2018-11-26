@@ -1,6 +1,7 @@
 export enum Status {
-    OPPRETTET = 'OPPR',
-    UNDER_BEHANDLING = 'UBEH',
-    LØPENDE = 'LOP',
+    OPPRETTET = 'OPPRE',
+    UTREDES = 'UTRED',
+    FATTER_VEDTAK = 'FVED',
+    IVERKSETTER_VEDTAK = 'IVED',
     AVSLUTTET = 'AVSLU'
 }
