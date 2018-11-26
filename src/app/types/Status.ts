@@ -1,4 +1,5 @@
 export enum Status {
+    UNDER_BEHANDLING = 'UBEH',
     OPPRETTET = 'OPPRE',
     UTREDES = 'UTRED',
     FATTER_VEDTAK = 'FVED',
