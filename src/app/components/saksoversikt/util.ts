@@ -27,6 +27,7 @@ export function formatDate(dato: string, datoformat?: string): string {
 
 export const getIntlKeyForStatus = (status: Status): string => {
     switch (status) {
+        case Status.UNDER_BEHANDLING:
         case Status.OPPRETTET:
         case Status.UTREDES:
         case Status.FATTER_VEDTAK:
