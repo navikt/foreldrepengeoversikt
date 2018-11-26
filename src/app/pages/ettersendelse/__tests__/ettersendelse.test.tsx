@@ -3,7 +3,7 @@ import * as React from 'react';
 import { shallowWithIntl, loadTranslationObject } from 'enzyme-react-intl';
 import Ettersendelse from '../Ettersendelse';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
-import { Status } from '../../../types/Status';
+import { FagsakStatus } from '../../../types/FagsakStatus';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Api from '../../../api/api';
 import BackButton from 'common/components/back-button/BackButton';
@@ -22,7 +22,7 @@ describe('Ettersendelse page', () => {
                     sak: {
                         saksnummer: '123',
                         opprettet: new Date('2018-10-1'),
-                        status: Status.OPPRETTET
+                        status: FagsakStatus.OPPRETTET
                     }
                 }
             }

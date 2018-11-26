@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { Status } from '../../types/Status';
+import { FagsakStatus } from '../../types/FagsakStatus';
 
 export const isSakTooOldForEndringssøknad = (date?: string): boolean => {
     if (date === undefined) {
@@ -25,15 +25,13 @@ export function formatDate(dato: string, datoformat?: string): string {
     return moment(dato).format(datoformat || 'D. MMMM YYYY');
 }
 
-export const getIntlKeyForStatus = (status: Status): string => {
+export const getIntlKeyForStatus = (status: FagsakStatus): string => {
     switch (status) {
-        case Status.UNDER_BEHANDLING:
-        case Status.OPPRETTET:
-        case Status.UTREDES:
-        case Status.FATTER_VEDTAK:
-        case Status.IVERKSETTER_VEDTAK:
+        case FagsakStatus.OPPRETTET:
+        case FagsakStatus.UNDER_BEHANDLING:
+        case FagsakStatus.LOPENDE:
             return 'saksoversikt.heading.underBehandling';
-        case Status.AVSLUTTET:
+        case FagsakStatus.AVSLUTTET:
             return 'saksoversikt.heading.avsluttet';
     }
 };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import Saksoversikt from '../Saksoversikt';
 const moment = require('moment');
-import { Status } from '../../../types/Status';
+import { FagsakStatus } from '../../../types/FagsakStatus';
 
 describe('Saksoversikt component', () => {
     it('Ettersendelse should be disabled if the 70 day deadline on ettersendelse has expired', () => {
@@ -15,7 +15,7 @@ describe('Saksoversikt component', () => {
                 sak={{
                     saksnummer: '123',
                     opprettet: opprettetDate,
-                    status: Status.OPPRETTET
+                    status: FagsakStatus.OPPRETTET
                 }}
                 onEttersendVedlegg={jest.fn()}
                 onEndreSøknad={jest.fn()}
@@ -36,7 +36,7 @@ describe('Saksoversikt component', () => {
                 sak={{
                     saksnummer: '123',
                     opprettet: opprettetDate,
-                    status: Status.OPPRETTET
+                    status: FagsakStatus.OPPRETTET
                 }}
                 onEttersendVedlegg={jest.fn()}
                 onEndreSøknad={jest.fn()}
@@ -57,7 +57,7 @@ describe('Saksoversikt component', () => {
                 sak={{
                     saksnummer: '123',
                     opprettet: opprettetDate,
-                    status: Status.OPPRETTET
+                    status: FagsakStatus.OPPRETTET
                 }}
                 onEttersendVedlegg={jest.fn()}
                 onEndreSøknad={jest.fn()}
@@ -77,7 +77,7 @@ describe('Saksoversikt component', () => {
                 sak={{
                     saksnummer: '123',
                     opprettet: opprettetDate,
-                    status: Status.OPPRETTET
+                    status: FagsakStatus.OPPRETTET
                 }}
                 onEttersendVedlegg={jest.fn()}
                 onEndreSøknad={jest.fn()}

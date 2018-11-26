@@ -1,9 +1,9 @@
 import Behandling from './Behandling';
-import { Status } from './Status';
+import { FagsakStatus } from './FagsakStatus';
 
 export default interface Sak {
     behandlinger?: Behandling[];
-    status?: Status;
+    status?: FagsakStatus;
     saksnummer: string;
     opprettet?: string;
 }

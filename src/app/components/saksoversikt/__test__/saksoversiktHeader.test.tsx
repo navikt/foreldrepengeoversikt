@@ -5,7 +5,7 @@ import EtikettBase from 'nav-frontend-etiketter';
 import SaksoversiktHeader from '../SaksoversiktHeader';
 import Saker from '../../../../../jest/__mocks__/Sak';
 import { getIntlKeyForStatus } from '../util';
-import { Status } from '../../../types/Status';
+import { FagsakStatus } from '../../../types/FagsakStatus';
 
 describe('SaksoversiktHeader', () => {
     it('Should render status etikett for fpsak saker where status is present', () => {
@@ -16,10 +16,9 @@ describe('SaksoversiktHeader', () => {
     it('getIntlKeyForStatus should return correct string', () => {
         const underBehandlingIntlKey = 'saksoversikt.heading.underBehandling';
         const avsluttetIntlKey = 'saksoversikt.heading.avsluttet';
-        expect(getIntlKeyForStatus(Status.OPPRETTET)).toEqual(underBehandlingIntlKey);
-        expect(getIntlKeyForStatus(Status.IVERKSETTER_VEDTAK)).toEqual(underBehandlingIntlKey);
-        expect(getIntlKeyForStatus(Status.FATTER_VEDTAK)).toEqual(underBehandlingIntlKey);
-        expect(getIntlKeyForStatus(Status.UTREDES)).toEqual(underBehandlingIntlKey);
-        expect(getIntlKeyForStatus(Status.AVSLUTTET)).toEqual(avsluttetIntlKey);
+        expect(getIntlKeyForStatus(FagsakStatus.OPPRETTET)).toEqual(underBehandlingIntlKey);
+        expect(getIntlKeyForStatus(FagsakStatus.LOPENDE)).toEqual(underBehandlingIntlKey);
+        expect(getIntlKeyForStatus(FagsakStatus.UNDER_BEHANDLING)).toEqual(underBehandlingIntlKey);
+        expect(getIntlKeyForStatus(FagsakStatus.AVSLUTTET)).toEqual(avsluttetIntlKey);
     });
 });

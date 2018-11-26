@@ -1,12 +1,12 @@
-import { Status } from '../../src/app/types/Status';
+import { FagsakStatus } from '../../src/app/types/FagsakStatus';
 import Sak from '../../src/app/types/Sak';
-import Behandling from '../../src/app/types/Behandling';
+import Behandling, { BehanldingStatus } from '../../src/app/types/Behandling';
 
 const behandling: Behandling = {
     behandlendeEnhet: "4833",
     behandlendeEnhetNavn: "NAV Familie- og pensjonsytelser Oslo 1",
     id: null,
-    status: "UTRED",
+    status: BehanldingStatus.OPPRETTET,
     tema: "FORP_FODS",
     type: "FP",
     årsak: null,
@@ -20,7 +20,7 @@ const infotrygdSak: Sak = {
 const fpsakSak: Sak = {
     saksnummer: '123',
     opprettet: '2018-10-01',
-    status: Status.OPPRETTET,
+    status: FagsakStatus.OPPRETTET,
     behandlinger: [behandling]
 };
 
