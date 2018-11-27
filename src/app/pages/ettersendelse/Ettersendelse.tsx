@@ -135,6 +135,7 @@ class Ettersendelse extends React.Component<Props, State> {
 
         const { intl } = this.props;
         const { sak, attachments, attachmentSkjemanummer, sendingEttersendelse, kvittering } = this.state;
+        const uploadedAttachments = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
         const cls = BEMHelper('ettersendelse');
 
         return (
@@ -180,13 +181,14 @@ class Ettersendelse extends React.Component<Props, State> {
                                     </div>
                                 )}
 
-                                {getListOfUniqueSkjemanummer(attachments).map((skjemanummer: Skjemanummer) => (
+                                {getListOfUniqueSkjemanummer(uploadedAttachments).map((skjemanummer: Skjemanummer) => (
                                     <AttachmentList
                                         key={skjemanummer}
                                         intlKey={`ettersendelse.attachmentList.${skjemanummer}`}
                                         onDelete={this.deleteAttachment}
-                                        attachments={attachments.filter(
-                                            (a: Attachment) => a.skjemanummer === skjemanummer
+                                        attachments={uploadedAttachments.filter(
+                                            (a: Attachment) =>
+                                                a.skjemanummer === skjemanummer
                                         )}
                                     />
                                 ))}
