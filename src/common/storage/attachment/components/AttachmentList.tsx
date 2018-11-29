@@ -1,5 +1,5 @@
 import * as React from 'react';
-import AttachmentComponent from './Attachment';
+import AttachmentComponent from './AttachmentListElement';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import './attachment.less';
