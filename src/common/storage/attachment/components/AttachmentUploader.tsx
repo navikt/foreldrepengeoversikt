@@ -27,13 +27,11 @@ export default class AttachmentsUploader extends React.Component<AttachmentsUplo
         files.forEach((file: Attachment) =>
             AttachmentApi.saveAttachment(file).then((response: any) => {
                 file.pending = false;
-                file.uploaded = true;
                 file.url = response.headers.location;
                 onFileUploadFinish(file);
             }).catch((error) => {
                 file.pending = false;
                 file.error = error;
-                file.uploaded = false;
                 onFileUploadFinish(file);
             })
         );

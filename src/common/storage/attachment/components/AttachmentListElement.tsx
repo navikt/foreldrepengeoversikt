@@ -45,7 +45,7 @@ const AttachmentListElement: React.StatelessComponent<Props> = ({ attachment, sh
                 {showFileSize && <div>{bytesString(attachment.filesize)}</div>}
             </div>
             {onDelete &&
-                attachment.uploaded &&
+                attachment.url &&
                 !attachment.pending && (
                     <span className={BEM.element('deleteButton')}>
                         <SlettKnapp

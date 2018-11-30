@@ -124,7 +124,7 @@ class Ettersendelse extends React.Component<Props, State> {
 
         return (
             attachmentsWithoutUploadError.length > 0 &&
-            attachmentsWithoutUploadError.every((a: Attachment) => a.uploaded)
+            attachmentsWithoutUploadError.every((a: Attachment) => a.url !== undefined)
         );
     }
 

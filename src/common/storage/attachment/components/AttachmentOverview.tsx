@@ -19,77 +19,75 @@ export interface AttachmentOverviewProps {
 }
 
 interface State {
-    showErrorMessage: boolean;
+    errorMessages: string[];
     failedAttachments: Attachment[];
-    errorMessage?: string;
 }
 
 type Props = AttachmentOverviewProps;
 class AttachmentOverview extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.state = {
-            showErrorMessage: false,
-            failedAttachments: props.attachments.filter(isAttachmentWithError)
-        };
+        this.state = { errorMessages: [], failedAttachments: props.attachments.filter(isAttachmentWithError) };
+
         this.hideErrorMessage = this.hideErrorMessage.bind(this);
     }
 
     componentDidUpdate() {
-        const attachmentsWithoutOldFailedAttachments = this.props.attachments.filter(
+        const attachmentsWithPossibleNewErrors = this.props.attachments.filter(
             (a: Attachment) => !this.state.failedAttachments.includes(a)
         );
 
-        if (this.hasFailedAttachments(attachmentsWithoutOldFailedAttachments)) {
-            this.setState(
-                {
-                    failedAttachments: this.state.failedAttachments.concat(
-                        attachmentsWithoutOldFailedAttachments.filter(isAttachmentWithError)
-                    )
-                },
-                () => {
-                    this.showErrorMessage(this.createErrorMessage(attachmentsWithoutOldFailedAttachments[0].error));
-                }
-            );
+        if (attachmentsWithPossibleNewErrors.some(isAttachmentWithError)) {
+            this.showErrorMessages();
+            this.updateListOfKnownFailedAttachments(attachmentsWithPossibleNewErrors);
         }
     }
 
-    createErrorMessage(error: any): string {
-        if (error & error.response && error.response.status === 413) {
+    updateListOfKnownFailedAttachments(attachmentsWithPossibleNewErrors: Attachment[]) {
+        this.setState({
+            failedAttachments: this.state.failedAttachments.concat(
+                attachmentsWithPossibleNewErrors.filter(isAttachmentWithError)
+            )
+        });
+    }
+
+    createErrorMessageForFailedAttachment(attachment: Attachment): string {
+        const error = attachment.error;
+        if (error && error.response !== undefined && error.response.status === 413) {
             return 'vedlegg.forStort';
         }
         return 'vedlegg.feilmelding';
     }
 
-    hasFailedAttachments(attachments: Attachment[]) {
-        return attachments.some(isAttachmentWithError);
-    }
-
-    showErrorMessage(errorMessage: string) {
+    showErrorMessages() {
+        const { attachments } = this.props;
         this.setState({
-            showErrorMessage: true,
-            errorMessage
+            errorMessages: attachments
+                .filter(isAttachmentWithError)
+                .map((a: Attachment) => this.createErrorMessageForFailedAttachment(a))
         });
     }
 
     hideErrorMessage() {
-        this.setState({
-            showErrorMessage: false,
-            errorMessage: undefined
-        });
+        this.setState(
+            {
+                errorMessages: []
+            },
+        );
+    }
+
+    createErrorMessage() {
+        return this.state.errorMessages.map((message: string) => <FormattedMessage key={guid()} id={message} />);
     }
 
     render() {
-        const { inputId = guid(), attachments, skjemanummer, onFilesSelect } = this.props;
-
-        const { showErrorMessage, errorMessage } = this.state;
-
-        const attachmentsToRender = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
-        const showAttachments = attachmentsToRender.length > 0;
+        const { inputId = guid(), skjemanummer, onFilesSelect } = this.props;
+        const { errorMessages } = this.state;
+        const showErrorMessage = errorMessages.length > 0;
 
         return (
             <React.Fragment>
-                <Block margin={showAttachments || showErrorMessage ? 'xs' : 'none'}>
+                <Block margin={'xs'}>
                     <VedleggInput
                         id={inputId}
                         onFilesSelect={(files: File[]) => {
@@ -98,24 +96,16 @@ class AttachmentOverview extends React.Component<Props, State> {
                         onClick={this.hideErrorMessage}
                     />
                 </Block>
-                <CSSTransition
-                    classNames="transitionFade"
-                    timeout={150}
-                    in={showAttachments || showErrorMessage}
-                    unmountOnExit={true}>
-                    <React.Fragment>
-                        {(showAttachments || showErrorMessage) && (
-                            <React.Fragment>
+                <CSSTransition classNames="transitionFade" timeout={150} in={showErrorMessage} unmountOnExit={true}>
+                    <>
+                        {showErrorMessage && (
+                            <>
                                 <Block margin="xs" visible={showErrorMessage} animated={false}>
                                     <AlertstripeWithCloseButton
                                         alertStripeProps={{
                                             type: 'advarsel',
                                             solid: true,
-                                            children: (
-                                                <FormattedMessage
-                                                    id={errorMessage ? errorMessage : 'vedlegg.feilmelding'}
-                                                />
-                                            )
+                                            children: <>{this.createErrorMessage()}</>
                                         }}
                                         lukknappProps={{
                                             hvit: true,
@@ -124,9 +114,9 @@ class AttachmentOverview extends React.Component<Props, State> {
                                         onClose={this.hideErrorMessage}
                                     />
                                 </Block>
-                            </React.Fragment>
+                            </>
                         )}
-                    </React.Fragment>
+                    </>
                 </CSSTransition>
             </React.Fragment>
         );

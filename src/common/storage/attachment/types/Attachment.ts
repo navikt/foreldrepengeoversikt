@@ -5,7 +5,6 @@ export interface Attachment {
     file: File;
     url?: string;
     pending: boolean;
-    uploaded: boolean;
     error?: any;
     skjemanummer: Skjemanummer;
 }

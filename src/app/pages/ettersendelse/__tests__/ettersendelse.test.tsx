@@ -33,9 +33,8 @@ describe('Ettersendelse page', () => {
             file: new File([''], 'mock.pdf'),
             filesize: 1024,
             filename: 'mockFile.pdf',
-            uploaded: true,
             pending: false,
-            url: 'mockUrl',
+            url: undefined,
             skjemanummer: Skjemanummer.ANNET
         };
     });
@@ -93,13 +92,14 @@ describe('Ettersendelse page', () => {
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
         let ettersendVedleggButton = wrapper.find({ className: 'ettersendelse__send-button' });
         expect(ettersendVedleggButton.length).toEqual(0);
+        mockAttachment.url = 'mockUrl';
         wrapper.setState({ attachments: [mockAttachment] });
         ettersendVedleggButton = wrapper.find({ className: 'ettersendelse__send-button' });
         expect(ettersendVedleggButton.length).toEqual(1);
     });
 
     it('Send ettersendelse button should be hidden if an attachment upload is pending', () => {
-        mockAttachment.uploaded = false;
+        mockAttachment.url = undefined;
         mockAttachment.pending = true;
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />)
             .setState({ attachments: [mockAttachment] })
@@ -114,12 +114,12 @@ describe('Ettersendelse page', () => {
         const mockAttachments = [
             {
                 ...mockAttachment,
-                uploaded: true,
+                url: 'mockUrl',
                 pending: false
             },
             {
                 ...mockAttachment,
-                uploaded: false,
+                url: undefined,
                 pending: false
             }
         ];
@@ -139,7 +139,7 @@ describe('Ettersendelse page', () => {
     });
 
     it('Send ettersendelse button should be hidden if an attachment upload is pending', () => {
-        mockAttachment.uploaded = false;
+        mockAttachment.url = undefined;
         mockAttachment.pending = true;
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />)
             .setState({
