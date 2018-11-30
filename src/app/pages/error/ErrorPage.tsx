@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+
+import Lenke from 'nav-frontend-lenker';
 import { History } from 'history';
+
 import BEMHelper from 'common/util/bem';
-import ResponsiveWrapper from '../ResponsiveWrapper';
+import Feilsidemelding from 'common/components/feilsidemelding/Feilsidemelding';
+import getMessage from 'common/util/i18nUtils';
+import { lenker } from '../../utils/lenker';
 import './errorPage.less';
 
-export interface Props {
+export interface ErrorPageProps {
     history: History;
 }
 
@@ -16,6 +20,7 @@ export interface State {
     timeout?: boolean;
 }
 
+type Props = ErrorPageProps & InjectedIntlProps;
 class ErrorPage extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
@@ -31,24 +36,35 @@ class ErrorPage extends React.Component<Props, State> {
     }
 
     render() {
+        const { intl } = this.props;
+        const errorMessage =
+            this.state.errorStatusCode === 413 && this.state.errorMessage ? (
+                this.state.errorMessage
+            ) : (
+                <FormattedMessage
+                    id={'feilside.ingress'}
+                    values={{
+                        lenke: (
+                            <Lenke href={lenker.brukerstøtte.href}>{getMessage(intl, 'feilside.ingress.lenke')}</Lenke>
+                        )
+                    }}
+                />
+            );
+
         const cls = BEMHelper('error-page');
         return (
             <div id={cls.className}>
-                <ResponsiveWrapper>
-                    <Innholdstittel className={cls.element('title')}>
-                        <FormattedMessage id={'errorPage.title'} />
-                    </Innholdstittel>
-                    <Ingress className={cls.element('message')}>
-                        {this.state.errorStatusCode === 413 && this.state.errorMessage ? (
-                            this.state.errorMessage
-                        ) : (
-                            <FormattedMessage id={'errorPage.message'} />
-                        )}
-                    </Ingress>
-                </ResponsiveWrapper>
+                <Feilsidemelding
+                    illustrasjon={{
+                        tittel: getMessage(intl, 'feilside.bobletittel'),
+                        tekst: getMessage(intl, 'feilside.bobletekst')
+                    }}
+                    tittel={getMessage(intl, 'feilside.tittel')}
+                    ingress={errorMessage}
+                />
             </div>
         );
     }
 }
 
-export default ErrorPage;
+export default injectIntl(ErrorPage);

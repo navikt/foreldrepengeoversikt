@@ -3,7 +3,8 @@
 
     "dineForeldrepenger.alertstripe": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
     "dineForeldrepenger.feilmelding": "Det har skjedd en feil. Prøv igjen senere.",
-    "dineForeldrepenger.ingenSaker": "Du har ingen søknader hos NAV akkurat nå. Hvis du nettopp sendte inn søknaden din, tar det noen dager før du ser den her.",
+    "dineForeldrepenger.ingenSaker":
+        "Du har ingen søknader hos NAV akkurat nå. Hvis du nettopp sendte inn søknaden din, tar det noen dager før du ser den her.",
 
     "saksoversikt.heading.top": "Søknad om foreldrepenger",
     "saksoversikt.heading.bottom": "Sist endret: { date }",
@@ -17,7 +18,7 @@
         "Her kan du endre perioden din hvis du skal ha ferie, jobbe eller har vært syk.",
     "saksoversikt.content.endringssøknad.button": "Endre perioden din",
 
-    "ettersendelse.title" : "Last opp dokumentasjon til sak { saksnummer }",
+    "ettersendelse.title": "Last opp dokumentasjon til sak { saksnummer }",
     "ettersendelse.sendButton": "Ettersend vedlegg",
 
     "ettersendelse.select.defaultValue": "Velg type vedlegg",
@@ -63,8 +64,14 @@
     "kvittering.message": "Vi mottok ettersendelsen den {date} kl. { timeOfDay }.",
     "kvittering.attachment-list-label": "Innsendte vedlegg { size }",
 
-    "errorPage.title": "Det oppstod en feil",
-    "errorPage.message": "Prøv igjen senere.",
+    "feilside.bobletittel": "Oops,",
+    "feilside.bobletekst": "noe gikk galt.",
+
+    "feilside.tittel": "Det oppstod en feil",
+    "feilside.ingress": "Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, {lenke}.",
+    "feilside.ingress.lenke": "kontakt brukerstøtte",
+    "feilside.vedlegg.forStortTotalt":
+        "Du har et vedlegg som inneholder for mange sider. En pdf kan maksimalt ha 5 sider.",
 
     "saksoversikt.ettersendelse.hjelpetekst": "Fristen for å ettersende vedlegg har utløpt",
     "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad har utløpt"

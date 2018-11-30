@@ -105,7 +105,7 @@ class Ettersendelse extends React.Component<Props, State> {
                     error.response
                         ? this.props.history.push('/feil', {
                               errorStatusCode: error.response.status,
-                              errorMessage: error.response.data.messages
+                              errorMessage: error.response.data.message
                           })
                         : this.props.history.push('/feil', { timeout: true });
                 });
