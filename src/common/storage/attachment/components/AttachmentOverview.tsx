@@ -38,7 +38,7 @@ class AttachmentOverview extends React.Component<Props, State> {
         );
 
         if (attachmentsWithPossibleNewErrors.some(isAttachmentWithError)) {
-            this.showErrorMessages();
+            this.showErrorMessages(attachmentsWithPossibleNewErrors);
             this.updateListOfKnownFailedAttachments(attachmentsWithPossibleNewErrors);
         }
     }
@@ -59,10 +59,9 @@ class AttachmentOverview extends React.Component<Props, State> {
         return 'vedlegg.feilmelding';
     }
 
-    showErrorMessages() {
-        const { attachments } = this.props;
+    showErrorMessages(attachmentsWithPossibleNewErrors: Attachment[]) {
         this.setState({
-            errorMessages: attachments
+            errorMessages: attachmentsWithPossibleNewErrors
                 .filter(isAttachmentWithError)
                 .map((a: Attachment) => this.createErrorMessageForFailedAttachment(a))
         });
