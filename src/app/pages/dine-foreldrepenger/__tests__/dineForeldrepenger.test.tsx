@@ -22,4 +22,21 @@ describe('Dine Foreldrepenger page', () => {
         const wrapper = shallow(<DineForeldrepenger saker={mockSaker} history={historyMock} />);
         expect(wrapper.find(Saksoversikt).length).toEqual(mockSaker.length);
     });
+
+    it('Saker should be sorted by descendig order', () => {
+        const mockSaker = [
+            { ...Saker.infotrygdSak, opprettet: '2017-01-01' },
+            { ...Saker.fpsakSak, opprettet: '2019-01-01' },
+            { ...Saker.fpsakSak, opprettet: '2018-07-22' },
+            { ...Saker.fpsakSak, opprettet: '2018-05-15' }
+        ];
+
+        const wrapper = shallow(<DineForeldrepenger saker={mockSaker.slice()} history={historyMock} />);
+        const saksoversiktList = wrapper.find(Saksoversikt);
+
+        expect(saksoversiktList.at(0).props().sak).toEqual(mockSaker[1]);
+        expect(saksoversiktList.at(1).props().sak).toEqual(mockSaker[2]);
+        expect(saksoversiktList.at(2).props().sak).toEqual(mockSaker[3]);
+        expect(saksoversiktList.at(3).props().sak).toEqual(mockSaker[0]);
+    });
 });

@@ -16,6 +16,7 @@ import { lenker } from '../../utils/lenker';
 
 import './dineForeldrepenger.less';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
+import { datesByDescendingOrder } from '../../utils/sakerUtils';
 
 interface Props {
     saker: Sak[];
@@ -47,7 +48,7 @@ class DineForeldrepenger extends React.Component<Props> {
         const cls = BEMHelper('saksoversikt-list');
         return (
             <ul className={cls.className}>
-                {saker.map((sak: Sak) => (
+                {saker.sort(datesByDescendingOrder).map((sak: Sak) => (
                     <li className={cls.element('element')} key={sak.saksnummer}>
                         <Saksoversikt
                             sak={sak}
