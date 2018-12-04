@@ -38,5 +38,7 @@ export const lenker = {
     dittNav: { text: 'Ditt Nav', href: 'https://tjenester.nav.no/saksoversikt/' },
     brukerstøtte: {
         href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749'
-    }
+    },
+    lesMerOmForeldrepenger: { text: 'Les om foreldrepenger', href: 'https://familie.nav.no' },
+    søkOmForeldrepenger: { text: 'Søk om foreldrepenger', href: 'https://foreldrepengesoknad.nav.no' }
 };

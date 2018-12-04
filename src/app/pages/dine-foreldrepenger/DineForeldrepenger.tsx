@@ -15,6 +15,7 @@ import ResponsiveWrapper from '../ResponsiveWrapper';
 import { lenker } from '../../utils/lenker';
 
 import './dineForeldrepenger.less';
+import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 
 interface Props {
     saker: Sak[];
@@ -77,12 +78,7 @@ class DineForeldrepenger extends React.Component<Props> {
                             </Systemtittel>
                         )}
 
-                        {!error &&
-                            ((saker === undefined || saker.length === 0) && (
-                                <Systemtittel className={cls.element('ingen-saker')}>
-                                    <FormattedMessage id={'dineForeldrepenger.ingenSaker'} />
-                                </Systemtittel>
-                            ))}
+                        {!error && ((saker === undefined || saker.length === 0) && <IngenSaker />)}
 
                         {saker !== undefined && error === undefined && this.renderSaksoversiktList()}
 
