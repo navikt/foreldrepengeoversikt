@@ -20,19 +20,20 @@
     }
 
     &__options {
-      display: flex;
-      flex-flow: row nowrap;
-      width: 100%;
-      a {
-        border: none;
-      }
-
-      .knapp {
-        height: 46px;
+        display: flex;
+        flex-flow: row nowrap;
         width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+        justify-content: space-between;
+        a {
+            border: none;
+        }
+
+        .knapp {
+            height: 46px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 
     &__ingress {
@@ -46,12 +47,18 @@
     }
 
     @media (max-width: @tablet-breakpoint) {
-      padding: 2rem 0.5rem;
+        padding: 2rem 0.5rem;
         &__options {
             display: flex;
+            align-content: center;
             align-self: stretch;
             flex-direction: column;
             align-items: stretch;
+            padding: 0 1rem;
+            .knapp:first-child {
+              margin-bottom: 1rem;
+              padding: 0;
+            }
         }
     }
 }

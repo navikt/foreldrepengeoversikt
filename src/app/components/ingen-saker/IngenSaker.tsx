@@ -25,12 +25,12 @@ const IngenSaker = () => {
             </Normaltekst>
 
             <div className={cls.element('options')}>
-                <Lenke href={}>
+                <Lenke href={lenker.lesMerOmForeldrepenger.href}>
                     <KnappBase type={'standard'}>
                         <FormattedMessage id={'ingenSaker.lesMer'} />
                     </KnappBase>
                 </Lenke>
-                <Lenke href={}>
+                <Lenke href={lenker.søkOmForeldrepenger.href}>
                     <KnappBase type={'hoved'}>
                         <FormattedMessage id={'ingenSaker.søkNå'} />
                     </KnappBase>
