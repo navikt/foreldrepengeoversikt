@@ -34,7 +34,7 @@ class DineForeldrepenger extends React.Component<Props> {
     }
 
     onEndreSøknad(): void {
-        window.location.href = lenker.endringssøknad.href;
+        window.location.href = lenker.endringssøknad;
     }
 
     renderSaksoversiktList() {

@@ -34,10 +34,7 @@ export const annenInformasjonLenker = {
 };
 
 export const lenker = {
-    endringssøknad: {
-        text: 'Endringssøknad',
-        href: 'https://tjenester.nav.no/soknadforeldrepenger/app/start#/soknadsvalg'
-    },
+    endringssøknad: 'https://foreldrepengesoknad.nav.no',
     dittNav: { text: 'Ditt Nav', href: 'https://tjenester.nav.no/saksoversikt/' },
     brukerstøtte: {
         href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749'
