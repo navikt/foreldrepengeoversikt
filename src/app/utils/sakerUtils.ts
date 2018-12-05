@@ -11,7 +11,7 @@ const getBehandling = (sak: Sak): Behandling | undefined => {
     return undefined;
 };
 
-export const gjelderSakForeldrepengesøknad = (sak: Sak): boolean => {
+export const erForeldrepengesak = (sak: Sak): boolean => {
     const behandling = getBehandling(sak);
     if (behandling === undefined) {
         return true;
@@ -27,7 +27,7 @@ export const gjelderSakForeldrepengesøknad = (sak: Sak): boolean => {
 };
 
 export const skalKunneSøkeOmEndring = (nyesteSak: Sak): boolean => {
-    if (!gjelderSakForeldrepengesøknad(nyesteSak)) {
+    if (!erForeldrepengesak(nyesteSak)) {
         return false;
     }
 

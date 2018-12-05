@@ -8,7 +8,7 @@ import { getIntlKeyForStatus } from '../util';
 import { FagsakStatus } from '../../../types/FagsakStatus';
 
 describe('SaksoversiktHeader', () => {
-    it('Should render status etikett for fpsak saker where status is present', () => {
+    it('Should render status etikett for fpsak saker when status is defined', () => {
         const wrapper = shallow(<SaksoversiktHeader sak={SakerMock.fpsakSak} />);
         expect(wrapper.find(EtikettBase).length).toEqual(1);
     });
@@ -21,4 +21,14 @@ describe('SaksoversiktHeader', () => {
         expect(getIntlKeyForStatus(FagsakStatus.UNDER_BEHANDLING)).toEqual(underBehandlingIntlKey);
         expect(getIntlKeyForStatus(FagsakStatus.AVSLUTTET)).toEqual(avsluttetIntlKey);
     });
+
+    it('Should render status etikett for fpsak saker when status is defined', () => {
+        const wrapper = shallow(<SaksoversiktHeader sak={SakerMock.fpsakSak} />);
+        expect(wrapper.find(EtikettBase).length).toEqual(1);
+    });
+
+
+
+
+
 });

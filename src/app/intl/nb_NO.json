@@ -6,7 +6,8 @@
     "dineForeldrepenger.ingenSaker":
         "Du har ingen søknader hos NAV akkurat nå. Hvis du nettopp sendte inn søknaden din, tar det noen dager før du ser den her.",
 
-    "saksoversikt.heading.top": "Søknad om foreldrepenger",
+    "saksoversikt.heading.top.foreldrepenger": "Søknad om foreldrepenger",
+    "saksoversikt.heading.top.engangsstønad": "Søknad om engangsstønad",
     "saksoversikt.heading.bottom": "Sist endret: { date }",
     "saksoversikt.heading.underBehandling": "Under behandling",
     "saksoversikt.heading.avsluttet": "Avsluttet",

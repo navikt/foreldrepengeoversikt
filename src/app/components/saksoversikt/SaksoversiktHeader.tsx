@@ -6,6 +6,7 @@ import EtikettBase from 'nav-frontend-etiketter';
 import Sak from '../../types/Sak';
 import { formatDate, getIntlKeyForStatus } from './util';
 import BEMHelper from 'common/util/bem';
+import { erForeldrepengesak } from '../../utils/sakerUtils';
 
 import './saksoversikt.less';
 
@@ -19,7 +20,13 @@ const SaksoversiktHeader = ({ sak }: Props) => {
         <div className={cls.className}>
             <div className={cls.element('left')}>
                 <Undertittel>
-                    <FormattedMessage id={'saksoversikt.heading.top'} />
+                    <FormattedMessage
+                        id={
+                            erForeldrepengesak(sak)
+                                ? 'saksoversikt.heading.top.foreldrepenger'
+                                : 'saksoversikt.heading.top.engangsstønad'
+                        }
+                    />
                 </Undertittel>
 
                 {sak.opprettet && (
