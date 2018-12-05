@@ -3,7 +3,7 @@ export default interface Behandling {
     behandlendeEnhetNavn: string;
     id: any;
     status: BehanldingStatus;
-    tema: string;
+    tema: BehandlingTema;
     type: string;
     årsak: any;
 }
@@ -14,4 +14,14 @@ export enum BehanldingStatus {
     FATTER_VEDTAK = 'FVED',
     IVERKSETTER_VEDTAK = 'IVED',
     AVSLUTTET = 'AVSLU'
+}
+
+export enum BehandlingTema {
+    'ENGANGSTØNAD' = 'ENGST',
+    'ENGANGSTØNAD_FØDSEL' = 'ENGST_FODS',
+    'ENGANGSTØNAD_ADOPSJON' = 'ENGST_ADOP',
+    'FORELDREPENGER' = 'FORP',
+    'FORELDREPENGER_ADOPSJON' = 'FORP_ADOP',
+    'FORELDREPENGER_FØDSEL' = 'FORP_FODS',
+    'UDEFINERT' = '-'
 }

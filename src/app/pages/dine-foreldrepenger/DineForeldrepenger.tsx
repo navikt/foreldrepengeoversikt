@@ -14,9 +14,10 @@ import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjo
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import { lenker } from '../../utils/lenker';
 
-import './dineForeldrepenger.less';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
-import { datesByDescendingOrder } from '../../utils/sakerUtils';
+import { datesByDescendingOrder, skalKunneSøkeOmEndring } from '../../utils/sakerUtils';
+
+import './dineForeldrepenger.less';
 
 interface Props {
     saker: Sak[];
@@ -48,12 +49,13 @@ class DineForeldrepenger extends React.Component<Props> {
         const cls = BEMHelper('saksoversikt-list');
         return (
             <ul className={cls.className}>
-                {saker.sort(datesByDescendingOrder).map((sak: Sak) => (
+                {saker.sort(datesByDescendingOrder).map((sak: Sak, index: number) => (
                     <li className={cls.element('element')} key={sak.saksnummer}>
                         <Saksoversikt
                             sak={sak}
                             onEttersendVedlegg={this.onEttersendVedlegg}
                             onEndreSøknad={this.onEndreSøknad}
+                            skalKunneSøkeOmEndring={index === 0 && skalKunneSøkeOmEndring(sak)}
                         />
                     </li>
                 ))}

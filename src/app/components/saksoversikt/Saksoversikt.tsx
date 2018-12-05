@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
@@ -10,19 +11,21 @@ import BEMHelper from 'common/util/bem';
 import Sak from '../../types/Sak';
 import { lenker } from '../../utils/lenker';
 import FileIcon from '../ikoner/FileIcon';
-import { isSakTooOldForEndringssøknad, isSakTooOldForEttersendelse } from './util';
+import { isSakTooOldForEttersendelse } from './util';
+
+import SaksoversiktHeader from './SaksoversiktHeader';
 
 import './saksoversikt.less';
-import SaksoversiktHeader from './SaksoversiktHeader';
 
 interface Props {
     sak: Sak;
     onEttersendVedlegg: (sak: Sak) => void;
     onEndreSøknad: (sak: Sak) => void;
+    skalKunneSøkeOmEndring: boolean;
 }
 
 const Saksoversikt = (props: Props) => {
-    const { sak, onEttersendVedlegg, onEndreSøknad } = props;
+    const { sak, onEttersendVedlegg, skalKunneSøkeOmEndring, onEndreSøknad } = props;
     const cls = BEMHelper('saksoversikt');
     return (
         <div className={cls.className}>
@@ -64,10 +67,10 @@ const Saksoversikt = (props: Props) => {
                     <Knapp
                         className={cls.element('endringssoknad-btn')}
                         onClick={() => onEndreSøknad(sak)}
-                        disabled={isSakTooOldForEndringssøknad(sak.opprettet)}>
+                        disabled={!skalKunneSøkeOmEndring}>
                         <FormattedMessage id={'saksoversikt.content.endringssøknad.button'} />
                     </Knapp>
-                    {isSakTooOldForEndringssøknad(sak.opprettet) && (
+                    {!skalKunneSøkeOmEndring && (
                         <HjelpetekstAuto id={'endringssøknad-disabled-info'} tittel={''}>
                             <FormattedMessage id={'saksoversikt.endringssøknad.hjelpetekst'} />
                         </HjelpetekstAuto>

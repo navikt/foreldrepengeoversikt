@@ -3,13 +3,13 @@ import { shallow } from 'enzyme';
 import EtikettBase from 'nav-frontend-etiketter';
 
 import SaksoversiktHeader from '../SaksoversiktHeader';
-import Saker from '../../../../../jest/__mocks__/Sak';
+import SakerMock from '../../../../../jest/__mocks__/Sak';
 import { getIntlKeyForStatus } from '../util';
 import { FagsakStatus } from '../../../types/FagsakStatus';
 
 describe('SaksoversiktHeader', () => {
     it('Should render status etikett for fpsak saker where status is present', () => {
-        const wrapper = shallow(<SaksoversiktHeader sak={Saker.fpsakSak} />);
+        const wrapper = shallow(<SaksoversiktHeader sak={SakerMock.fpsakSak} />);
         expect(wrapper.find(EtikettBase).length).toEqual(1);
     });
 
