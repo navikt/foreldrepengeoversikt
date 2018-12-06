@@ -16,6 +16,7 @@ import { isSakTooOldForEttersendelse } from './util';
 import SaksoversiktHeader from './SaksoversiktHeader';
 
 import './saksoversikt.less';
+import { erForeldrepengesak } from '../../utils/sakerUtils';
 
 interface Props {
     sak: Sak;
@@ -60,22 +61,26 @@ const Saksoversikt = (props: Props) => {
                     )}
                 </div>
 
-                <Normaltekst className={cls.element('endringssoknad-intro')}>
-                    <FormattedMessage id={'saksoversikt.content.endringssøknad.intro'} />
-                </Normaltekst>
-                <div className={cls.element('valg')}>
-                    <Knapp
-                        className={cls.element('endringssoknad-btn')}
-                        onClick={() => onEndreSøknad(sak)}
-                        disabled={!skalKunneSøkeOmEndring}>
-                        <FormattedMessage id={'saksoversikt.content.endringssøknad.button'} />
-                    </Knapp>
-                    {!skalKunneSøkeOmEndring && (
-                        <HjelpetekstAuto id={'endringssøknad-disabled-info'} tittel={''}>
-                            <FormattedMessage id={'saksoversikt.endringssøknad.hjelpetekst'} />
-                        </HjelpetekstAuto>
-                    )}
-                </div>
+                {erForeldrepengesak(sak) && (
+                    <>
+                        <Normaltekst className={cls.element('endringssoknad-intro')}>
+                            <FormattedMessage id={'saksoversikt.content.endringssøknad.intro'} />
+                        </Normaltekst>
+                        <div className={cls.element('valg')}>
+                            <Knapp
+                                className={cls.element('endringssoknad-btn')}
+                                onClick={() => onEndreSøknad(sak)}
+                                disabled={!skalKunneSøkeOmEndring}>
+                                <FormattedMessage id={'saksoversikt.content.endringssøknad.button'} />
+                            </Knapp>
+                            {!skalKunneSøkeOmEndring && (
+                                <HjelpetekstAuto id={'endringssøknad-disabled-info'} tittel={''}>
+                                    <FormattedMessage id={'saksoversikt.endringssøknad.hjelpetekst'} />
+                                </HjelpetekstAuto>
+                            )}
+                        </div>
+                    </>
+                )}
             </EkspanderbartpanelBase>
         </div>
     );
