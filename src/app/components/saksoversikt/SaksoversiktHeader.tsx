@@ -41,7 +41,9 @@ const SaksoversiktHeader = ({ sak }: Props) => {
             </div>
 
             {statusIntlKey && (
-                <EtikettBase className={cls.element('status-etikett')} type="fokus">
+                <EtikettBase
+                    className={cls.element('status-etikett')}
+                    type={statusIntlKey === 'saksoversikt.heading.avsluttet' ? 'suksess' : 'fokus'}>
                     <FormattedMessage id={statusIntlKey} />
                 </EtikettBase>
             )}

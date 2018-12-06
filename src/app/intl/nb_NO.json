@@ -10,7 +10,7 @@
     "saksoversikt.heading.top.engangsstønad": "Søknad om engangsstønad",
     "saksoversikt.heading.bottom": "Sist endret: { date }",
     "saksoversikt.heading.underBehandling": "Under behandling",
-    "saksoversikt.heading.avsluttet": "Avsluttet",
+    "saksoversikt.heading.avsluttet": "Ferdig behandlet",
     "saksoversikt.content.saksnummer": "Saksnummer: { saksnummer }",
     "saksoversikt.content.dinSøknad": "Dokumenter i saken",
     "saksoversikt.content.ettersendelse.intro": "Her kan du ettersende dokumentasjon til søknaden din.",
