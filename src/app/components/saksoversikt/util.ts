@@ -17,8 +17,8 @@ export const getIntlKeyForStatus = (status: FagsakStatus): string => {
     switch (status) {
         case FagsakStatus.OPPRETTET:
         case FagsakStatus.UNDER_BEHANDLING:
-        case FagsakStatus.LOPENDE:
             return 'saksoversikt.heading.underBehandling';
+        case FagsakStatus.LOPENDE:
         case FagsakStatus.AVSLUTTET:
             return 'saksoversikt.heading.avsluttet';
     }

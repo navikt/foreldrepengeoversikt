@@ -16,6 +16,7 @@ interface Props {
 
 const SaksoversiktHeader = ({ sak }: Props) => {
     const cls = BEMHelper('saksoversikt-header');
+    const statusIntlKey = sak.status && getIntlKeyForStatus(sak.status);
     return (
         <div className={cls.className}>
             <div className={cls.element('left')}>
@@ -39,9 +40,9 @@ const SaksoversiktHeader = ({ sak }: Props) => {
                 )}
             </div>
 
-            {sak.status && (
+            {statusIntlKey && (
                 <EtikettBase className={cls.element('status-etikett')} type="fokus">
-                    <FormattedMessage id={getIntlKeyForStatus(sak.status)} />
+                    <FormattedMessage id={statusIntlKey} />
                 </EtikettBase>
             )}
         </div>

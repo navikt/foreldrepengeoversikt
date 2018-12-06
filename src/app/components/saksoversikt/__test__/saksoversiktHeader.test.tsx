@@ -17,8 +17,8 @@ describe('SaksoversiktHeader', () => {
         const underBehandlingIntlKey = 'saksoversikt.heading.underBehandling';
         const avsluttetIntlKey = 'saksoversikt.heading.avsluttet';
         expect(getIntlKeyForStatus(FagsakStatus.OPPRETTET)).toEqual(underBehandlingIntlKey);
-        expect(getIntlKeyForStatus(FagsakStatus.LOPENDE)).toEqual(underBehandlingIntlKey);
         expect(getIntlKeyForStatus(FagsakStatus.UNDER_BEHANDLING)).toEqual(underBehandlingIntlKey);
+        expect(getIntlKeyForStatus(FagsakStatus.LOPENDE)).toEqual(avsluttetIntlKey);
         expect(getIntlKeyForStatus(FagsakStatus.AVSLUTTET)).toEqual(avsluttetIntlKey);
     });
 
