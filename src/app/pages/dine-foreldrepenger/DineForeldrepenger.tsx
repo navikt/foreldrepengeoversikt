@@ -71,9 +71,12 @@ class DineForeldrepenger extends React.Component<Props> {
                 <Header history={this.props.history} />
                 <div className={cls.className}>
                     <ResponsiveWrapper>
-                        <AlertStripe className={cls.element('info')} type={'info'}>
-                            <FormattedMessage id={'dineForeldrepenger.alertstripe'} />
-                        </AlertStripe>
+                        {saker !== undefined &&
+                            saker.length > 0 && (
+                                <AlertStripe className={cls.element('info')} type={'info'}>
+                                    <FormattedMessage id={'dineForeldrepenger.alertstripe'} />
+                                </AlertStripe>
+                            )}
 
                         {error && (
                             <Systemtittel className={cls.element('feilmelding')}>
@@ -84,7 +87,6 @@ class DineForeldrepenger extends React.Component<Props> {
                         {!error && ((saker === undefined || saker.length === 0) && <IngenSaker />)}
 
                         {saker !== undefined && error === undefined && this.renderSaksoversiktList()}
-
                         <AnnenInformasjon />
                     </ResponsiveWrapper>
                 </div>

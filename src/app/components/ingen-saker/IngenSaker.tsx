@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 import KnappBase from 'nav-frontend-knapper';
 
@@ -21,7 +21,7 @@ const IngenSaker = () => {
             </Undertittel>
 
             <Normaltekst className={cls.element('ingress')}>
-                <FormattedMessage id={'ingenSaker.ingress'} />
+                <FormattedHTMLMessage id={'ingenSaker.ingress'} />
             </Normaltekst>
 
             <div className={cls.element('options')}>
