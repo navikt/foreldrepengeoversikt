@@ -27,10 +27,31 @@ export const annenInformasjonLenker = {
         text: 'Kontakt oss',
         href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger'
     },
+    utbetalinger: {
+        text: 'Utbetalinger',
+        href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger '
+    },
     saksbehandlingstider: {
-        text: 'Utbetaling og saksbehandlingstider',
+        text: 'Saksbehandlingstider',
         href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Saksbehandlingstider+i+NAV'
-    }
+    },
+    hvisDuVilJobbe: {
+        text: 'Hvis du vil jobbe',
+        href: 'https://familie.nav.no/om-foreldrepenger#hvis-du-vil-jobbe '
+    },
+    hvisDuSkalPåFerie: {
+        text: 'Hvis du skal på ferie',
+        href: 'https://familie.nav.no/om-foreldrepenger#hvis-du-skal-pa-ferie'
+    },
+    regelverket: {
+        text: 'Regelverket',
+        href: 'https://www.nav.no/rettskildene/Forside/Folketrygdloven/kapittel-14-ytelser-ved-svangerskap-f%C3%B8dsel-og-adopsjon'
+    },
+    meldFraOmEndringer: {
+        text: 'Meld fra om endringer',
+        href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Relatert+informasjon/du-har-plikt-til-%C3%A5-gi-nav-riktige-opplysninger'
+    },
+
 };
 
 export const lenker = {

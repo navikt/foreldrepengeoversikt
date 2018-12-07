@@ -3,57 +3,68 @@
 @import '~nav-frontend-core/less/_variabler.less';
 
 .annenInformasjon {
-    margin-bottom: 2rem;
-    margin-left: 1.5rem;
+    margin: 1.5rem;
+    column-count: 1;
 
-    &__linkContainer {
-        margin-bottom: 1rem;
+    &__subheader {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.25rem;
+        text-align: center;
+
+        &::before,
+        &::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: lightgray;
+        }
+
+        span {
+            flex-shrink: 0;
+            margin: 0 1rem;
+        }
     }
 
-    &__links {
-        margin-top: 1rem;
+    &__link-container {
+        margin-bottom: 1.5rem;
+        text-align: center;
     }
 
     &__link {
         color: #0067c5;
+        text-decoration: none;
+        border-bottom: 1px solid lightgray;
 
-        &__icon {
-            margin-left: 0.5rem;
-            position: relative;
+        &:hover {
+            border-bottom-color: @navBla;
         }
 
-        &--disabled {
-            color: gray;
-            text-shadow: 1px 1px 0px #fff;
+        .typo-normal:hover {
+            border-bottom: 0;
+        }
 
-            &:hover {
-                cursor: not-allowed;
-            }
+        .typo-normal:hover > p {
+            border-bottom: 0;
         }
     }
 
-    .lenke {
-        border: none;
-    }
-
-    .typo-undertittel {
-        font-size: 1.125rem;
+    &__link-icon {
+        margin-left: 0.5rem;
+        position: relative;
     }
 
     p {
+        text-align: center;
         display: inline-block;
         border-bottom: 1px solid transparent;
     }
 
     a {
         display: inline-block;
-
-        &:hover {
-            p {
-                border-bottom: 1px solid @navBla;
-            }
-        }
-
+        
         &:focus {
             outline: none;
             background-color: @orangeFocus;
@@ -61,47 +72,10 @@
     }
 
     @media (min-width: @mobile-breakpoint) {
-        display: block;
+        column-count: 2;
+    }
 
-        &__links {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-
-            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-                display: -ms-grid;
-                -ms-grid-columns: 1fr 1fr 1fr;
-
-                .annenInformasjon__linkContainer:nth-child(2) {
-                    -ms-grid-column: 2;
-                }
-                .annenInformasjon__linkContainer:nth-child(3) {
-                    -ms-grid-column: 3;
-                }
-                .annenInformasjon__linkContainer:nth-child(4) {
-                    -ms-grid-column: 1;
-                    -ms-grid-row: 3;
-                }
-                .annenInformasjon__linkContainer:nth-child(5) {
-                    -ms-grid-column: 2;
-                    -ms-grid-row: 3;
-                }
-                .annenInformasjon__linkContainer:nth-child(6) {
-                    -ms-grid-column: 3;
-                    -ms-grid-row: 3;
-                }
-                .annenInformasjon__linkContainer:nth-child(7) {
-                    -ms-grid-column: 1;
-                    -ms-grid-row: 4;
-                }
-                .annenInformasjon__linkContainer:nth-child(8) {
-                    -ms-grid-column: 2;
-                    -ms-grid-row: 4;
-                }
-                .annenInformasjon__linkContainer:nth-child(9) {
-                    -ms-grid-column: 3;
-                    -ms-grid-row: 4;
-                }
-            }
-        }
+    @media (min-width: @tablet-breakpoint) {
+        column-count: 3;
     }
 }
