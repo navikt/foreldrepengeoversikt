@@ -25,3 +25,8 @@ export enum Skjemanummer {
     BEKREFTELSE_DELTAR_KVALIFISERINGSPROGRAM = 'I000051',
     ANNET = 'I000060'
 }
+
+export const skjemanummerForEngangssønad = (skjemanummer: Skjemanummer) =>
+    skjemanummer === Skjemanummer.ANNET ||
+    skjemanummer === Skjemanummer.TERMINBEKREFTELSE ||
+    skjemanummer === Skjemanummer.FØDSELSATTEST;

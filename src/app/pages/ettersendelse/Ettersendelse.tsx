@@ -164,7 +164,7 @@ class Ettersendelse extends React.Component<Props, State> {
                                     label=""
                                     onChange={this.handleAttachmentTypeSelectChange}
                                     defaultValue={'default'}>
-                                    {getAttachmentTypeSelectOptions(intl)}
+                                    {getAttachmentTypeSelectOptions(intl, sak)}
                                 </Select>
 
                                 {this.isReadyToUploadAttachments() && (
