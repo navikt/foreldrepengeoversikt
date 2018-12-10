@@ -8,7 +8,7 @@ export interface AttachmentsUploaderProps {
     skjemanummer: Skjemanummer;
     onFilesUploadStart: (attachments: Attachment[]) => void;
     onFileUploadFinish: (attachment: Attachment) => void;
-    onFileDeleteStart: (attachment: Attachment) => void;
+    onFileDeleteStart: (attachments: Attachment[]) => void;
 }
 
 export default class AttachmentsUploader extends React.Component<AttachmentsUploaderProps> {
@@ -25,23 +25,22 @@ export default class AttachmentsUploader extends React.Component<AttachmentsUplo
         });
         onFilesUploadStart(files);
         files.forEach((file: Attachment) =>
-            AttachmentApi.saveAttachment(file).then((response: any) => {
-                file.pending = false;
-                file.url = response.headers.location;
-                onFileUploadFinish(file);
-            }).catch((error) => {
-                file.pending = false;
-                file.error = error;
-                onFileUploadFinish(file);
-            })
+            AttachmentApi.saveAttachment(file)
+                .then((response: any) => {
+                    file.pending = false;
+                    file.url = response.headers.location;
+                    onFileUploadFinish(file);
+                })
+                .catch((error) => {
+                    file.pending = false;
+                    file.error = error;
+                    onFileUploadFinish(file);
+                })
         );
     }
 
-    onFileDelete(file: Attachment) {
-        const { onFileDeleteStart } = this.props;
-        file.pending = true;
-        onFileDeleteStart(file);
-        AttachmentApi.deleteAttachment(file);
+    onFileDelete(files: Attachment[]) {
+        this.props.onFileDeleteStart(files);
     }
 
     render() {

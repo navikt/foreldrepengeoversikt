@@ -56,7 +56,10 @@
     "ettersendelse.attachmentList.I000049": "Annen dokumentasjon",
 
     "vedlegg.lastoppknapp": "Legg ved dokumentasjon",
-    "vedlegg.feilmelding": "Det har skjedd en feil. Prøv igjen litt senere.",
+    "vedlegg.feilmelding.tittel.flereFeil": "Opplasting av vedlegg feilet for:",
+    "vedlegg.feilmelding.flereFeil": "{filename} - Ops noe gikk galt prøv igjen",
+    "vedlegg.forStort.flereFeil": "{filename} - Vedlegget må være mindre enn 9MB",
+    "vedlegg.feilmelding": "Ops noe gikk galt, prøv igjen",
     "vedlegg.forStort": "Vedlegget må være mindre enn 9MB",
     "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
     "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
@@ -78,17 +81,13 @@
     "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad har utløpt",
 
     "ingenSaker.title": "Vi finner ingen søknader hos oss akkurat nå",
-    "ingenSaker.ingress": "Hvis du nettopp sendte inn søknaden, tar det noen dager før du ser den her. <br>Søknader eldre enn tre år vises ikke her.",
+    "ingenSaker.ingress":
+        "Hvis du nettopp sendte inn søknaden, tar det noen dager før du ser den her. <br>Søknader eldre enn tre år vises ikke her.",
     "ingenSaker.taKontaktIntro": "Finner du ikke din innsendte søknad?",
     "ingenSaker.taKontakt": "Ta kontakt med brukerstøtte",
 
     "ingenSaker.lesMer": "Les om foreldrepenger",
     "ingenSaker.søkNå": "Søk om foreldrepenger",
 
-
     "annenInformasjon.header": "Annen informasjon"
-
-
-
-
 }

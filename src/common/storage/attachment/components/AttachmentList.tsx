@@ -11,11 +11,11 @@ import { bytesString, getTotalFileSize } from 'common/util/filesize';
 interface Props {
     attachments: Attachment[];
     showFileSize?: boolean;
-    onDelete?: (file: Attachment) => void;
+    onDelete?: (files: Attachment[]) => void;
     intlKey?: string;
 }
 
-const AttachmentList: React.StatelessComponent<Props> = (props) => {
+const AttachmentList = (props: Props) => {
     const { attachments, showFileSize, onDelete, intlKey } = props;
     return (
         <Block margin={'m'}>

@@ -69,9 +69,9 @@ class Ettersendelse extends React.Component<Props, State> {
         this.setState({ attachments: attachmentsCopy });
     }
 
-    deleteAttachment(attachment: Attachment): void {
+    deleteAttachment(attachments: Attachment[]): void {
         const newAttachmentList = [...this.state.attachments];
-        newAttachmentList.splice(newAttachmentList.indexOf(attachment), 1);
+        attachments.forEach((a) => newAttachmentList.splice(newAttachmentList.indexOf(a), 1));
         this.setState({ attachments: newAttachmentList });
     }
 

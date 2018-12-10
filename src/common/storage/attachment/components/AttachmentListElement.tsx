@@ -15,7 +15,7 @@ import BEMHelper from 'common/util/bem';
 interface OwnProps {
     attachment: Attachment;
     showFileSize?: boolean;
-    onDelete?: (file: Attachment) => void;
+    onDelete?: (files: Attachment[]) => void;
 }
 
 type Props = OwnProps & InjectedIntlProps;
@@ -49,7 +49,7 @@ const AttachmentListElement: React.StatelessComponent<Props> = ({ attachment, sh
                 !attachment.pending && (
                     <span className={BEM.element('deleteButton')}>
                         <SlettKnapp
-                            onClick={() => onDelete(attachment)}
+                            onClick={() => onDelete([attachment])}
                             ariaLabel={intl.formatMessage(
                                 { id: 'vedlegg.arialabel.slett' },
                                 { navn: attachment.filename }

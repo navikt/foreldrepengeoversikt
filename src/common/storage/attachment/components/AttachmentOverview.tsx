@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { CSSTransition } from 'react-transition-group';
+import { guid } from 'nav-frontend-js-utils';
 
 import VedleggInput from './AttachmentInput';
 import { isAttachmentWithError, mapFileToAttachment } from './util';
-import { CSSTransition } from 'react-transition-group';
-import { guid } from 'nav-frontend-js-utils';
+
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Block from 'common/components/block/Block';
 import AlertstripeWithCloseButton from 'common/components/alertstripe-content/AlertstripeWithCloseButton';
@@ -15,74 +16,48 @@ export interface AttachmentOverviewProps {
     inputId?: string;
     showFileSize?: boolean;
     onFilesSelect: (files: Attachment[]) => void;
-    onFileDelete: (file: Attachment) => void;
-}
-
-interface State {
-    errorMessages: string[];
-    failedAttachments: Attachment[];
+    onFileDelete: (files: Attachment[]) => void;
 }
 
 type Props = AttachmentOverviewProps;
-class AttachmentOverview extends React.Component<Props, State> {
+class AttachmentOverview extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
-        this.state = { errorMessages: [], failedAttachments: props.attachments.filter(isAttachmentWithError) };
-
-        this.hideErrorMessage = this.hideErrorMessage.bind(this);
+        this.deleteFailedAttachments = this.deleteFailedAttachments.bind(this);
     }
 
-    componentDidUpdate() {
-        const attachmentsWithPossibleNewErrors = this.props.attachments.filter(
-            (a: Attachment) => !this.state.failedAttachments.includes(a)
-        );
-
-        if (attachmentsWithPossibleNewErrors.some(isAttachmentWithError)) {
-            this.showErrorMessages(attachmentsWithPossibleNewErrors);
-            this.updateListOfKnownFailedAttachments(attachmentsWithPossibleNewErrors);
-        }
-    }
-
-    updateListOfKnownFailedAttachments(attachmentsWithPossibleNewErrors: Attachment[]) {
-        this.setState({
-            failedAttachments: this.state.failedAttachments.concat(
-                attachmentsWithPossibleNewErrors.filter(isAttachmentWithError)
-            )
+    createErrorMessagesForFailedAttachments(attachments: Attachment[]): React.ReactNode[] {
+        const errorMessages: React.ReactNode[] = [];
+        const attachmentsWithError = attachments.filter(isAttachmentWithError);
+        const multipleErrors = attachmentsWithError.length > 1;
+        attachmentsWithError.forEach((a: Attachment) => {
+            const error = a.error;
+            if (error && error.response !== undefined && error.response.status === 413) {
+                errorMessages.push(
+                    <FormattedMessage
+                        id={multipleErrors ? 'vedlegg.forStort.flereFeil' : 'vedlegg.forStort'}
+                        values={{ filename: a.filename }}
+                    />
+                );
+            } else {
+                errorMessages.push(
+                    <FormattedMessage
+                        id={multipleErrors ? 'vedlegg.feilmelding.flereFeil' : 'vedlegg.feilmelding'}
+                        values={{ filename: a.filename }}
+                    />
+                );
+            }
         });
+        return errorMessages;
     }
 
-    createErrorMessageForFailedAttachment(attachment: Attachment): string {
-        const error = attachment.error;
-        if (error && error.response !== undefined && error.response.status === 413) {
-            return 'vedlegg.forStort';
-        }
-        return 'vedlegg.feilmelding';
-    }
-
-    showErrorMessages(attachmentsWithPossibleNewErrors: Attachment[]) {
-        this.setState({
-            errorMessages: attachmentsWithPossibleNewErrors
-                .filter(isAttachmentWithError)
-                .map((a: Attachment) => this.createErrorMessageForFailedAttachment(a))
-        });
-    }
-
-    hideErrorMessage() {
-        this.setState(
-            {
-                errorMessages: []
-            },
-        );
-    }
-
-    createErrorMessage() {
-        return this.state.errorMessages.map((message: string) => <FormattedMessage key={guid()} id={message} />);
+    deleteFailedAttachments(): void {
+        this.props.onFileDelete(this.props.attachments.filter(isAttachmentWithError));
     }
 
     render() {
         const { inputId = guid(), skjemanummer, onFilesSelect } = this.props;
-        const { errorMessages } = this.state;
-        const showErrorMessage = errorMessages.length > 0;
+        const showErrorMessage: boolean = this.props.attachments.filter(isAttachmentWithError).length > 0;
 
         return (
             <React.Fragment>
@@ -92,28 +67,24 @@ class AttachmentOverview extends React.Component<Props, State> {
                         onFilesSelect={(files: File[]) => {
                             onFilesSelect(files.map((f) => mapFileToAttachment(f, skjemanummer)));
                         }}
-                        onClick={this.hideErrorMessage}
+                        onClick={this.deleteFailedAttachments}
                     />
                 </Block>
                 <CSSTransition classNames="transitionFade" timeout={150} in={showErrorMessage} unmountOnExit={true}>
                     <>
                         {showErrorMessage && (
-                            <>
-                                <Block margin="xs" visible={showErrorMessage} animated={false}>
-                                    <AlertstripeWithCloseButton
-                                        alertStripeProps={{
-                                            type: 'advarsel',
-                                            solid: true,
-                                            children: <>{this.createErrorMessage()}</>
-                                        }}
-                                        lukknappProps={{
-                                            hvit: true,
-                                            type: 'button'
-                                        }}
-                                        onClose={this.hideErrorMessage}
-                                    />
-                                </Block>
-                            </>
+                            <Block margin="xs" visible={showErrorMessage} animated={false}>
+                                <AlertstripeWithCloseButton
+                                    lukknappProps={{
+                                        hvit: true,
+                                        type: 'button'
+                                    }}
+                                    errorMessages={this.createErrorMessagesForFailedAttachments(
+                                        this.props.attachments.filter(isAttachmentWithError)
+                                    )}
+                                    onClose={this.deleteFailedAttachments}
+                                />
+                            </Block>
                         )}
                     </>
                 </CSSTransition>

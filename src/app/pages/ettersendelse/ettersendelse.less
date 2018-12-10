@@ -1,4 +1,6 @@
 @import '../../styles/colors.less';
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
 
 .ettersendelse {
   background-color: @ettersendelse-background-color;
@@ -33,5 +35,20 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
     text-align: center;
+  }
+
+  @media (max-width: @mobile-breakpoint) {
+    &__uploader {
+      margin: 2rem 0;
+    }
+
+    &__attachment-type-select {
+      width: 100%;
+    }
+
+    &__title {
+      margin: 2rem 0;
+      text-align: center;
+    }
   }
 }
