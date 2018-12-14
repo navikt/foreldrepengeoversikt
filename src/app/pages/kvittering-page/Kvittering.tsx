@@ -14,6 +14,7 @@ import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
 import BackButton from 'common/components/back-button/BackButton';
 
 import './kvittering.less';
+import { Routes } from '../../utils/routes';
 
 interface Props {
     history: History;
@@ -33,12 +34,12 @@ class KvitteringPage extends React.Component<Props, State> {
         };
 
         if (!this.state.kvittering) {
-            this.props.history.push('/');
+            this.props.history.push(Routes.DINE_FORELDREPENGER);
         }
     }
 
     handleBackClick(): void {
-        this.props.history.push('/');
+        this.props.history.push(Routes.DINE_FORELDREPENGER);
     }
 
     render() {

@@ -10,6 +10,7 @@ import Ettersendelse from './pages/ettersendelse/Ettersendelse';
 import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
 import ErrorPage from './pages/error/ErrorPage';
 import KvitteringPage from './pages/kvittering-page/Kvittering';
+import { Routes } from './utils/routes';
 
 interface State {
     saker: Sak[];
@@ -52,14 +53,17 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
         return (
             <Router>
                 <Switch>
-                    <Route path="/feil" render={(props) => <ErrorPage {...props} />} />
-                    <Route path="/ettersendelse" render={(props) => <Ettersendelse {...props} />} />
+                    <Route path={Routes.FEIL} render={(props) => <ErrorPage {...props} />} />
+                    <Route path={Routes.ETTERSENDELSE} render={(props) => <Ettersendelse {...props} />} />
+                    <Route path={Routes.KVITTERING} render={(props) => <KvitteringPage {...props} />} />
                     <Route
-                        path="/"
+                        path={Routes.DINE_FORELDREPENGER}
+                        exact={true}
                         render={(props) => (
                             <DineForeldrepenger saker={this.state.saker} error={this.state.error} {...props} />
                         )}
                     />
+                    <Redirect to={Routes.DINE_FORELDREPENGER}/>
                 </Switch>
             </Router>
         );

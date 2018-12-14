@@ -21,6 +21,7 @@ import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummer } from './u
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 
 import './ettersendelse.less';
+import { Routes } from '../../utils/routes';
 
 interface EttersendelseProps {
     history: History;
@@ -45,7 +46,7 @@ class Ettersendelse extends React.Component<Props, State> {
         };
 
         if (!this.state.sak) {
-            this.props.history.push('/');
+            this.props.history.push(Routes.DINE_FORELDREPENGER);
         }
 
         this.addAttachment = this.addAttachment.bind(this);
@@ -73,7 +74,7 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     handleBackClick(): void {
-        this.props.history.push('/');
+        this.props.history.push(Routes.DINE_FORELDREPENGER);
     }
 
     handleAttachmentTypeSelectChange(e: any): void {
@@ -96,7 +97,7 @@ class Ettersendelse extends React.Component<Props, State> {
         Api.sendEttersending(ettersending)
             .then((response) => {
                 this.setState({ sendingEttersendelse: false }, () => {
-                    this.props.history.push('/kvittering', {
+                    this.props.history.push(Routes.KVITTERING, {
                         kvittering: response.data,
                         attachments: ettersending.vedlegg
                     });
@@ -105,11 +106,11 @@ class Ettersendelse extends React.Component<Props, State> {
             .catch((error: AxiosError) => {
                 this.setState({ sendingEttersendelse: false }, () => {
                     error.response
-                        ? this.props.history.push('/feil', {
+                        ? this.props.history.push(Routes.FEIL, {
                               errorStatusCode: error.response.status,
                               errorMessage: error.response.data.message
                           })
-                        : this.props.history.push('/feil', { timeout: true });
+                        : this.props.history.push(Routes.FEIL, { timeout: true });
                 });
             });
     }

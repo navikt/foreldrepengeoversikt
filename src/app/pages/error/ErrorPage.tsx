@@ -9,6 +9,7 @@ import Feilsidemelding from 'common/components/feilsidemelding/Feilsidemelding';
 import getMessage from 'common/util/i18nUtils';
 import { lenker } from '../../utils/lenker';
 import './errorPage.less';
+import { Routes } from '../../utils/routes';
 
 export interface ErrorPageProps {
     history: History;
@@ -31,7 +32,7 @@ class ErrorPage extends React.Component<Props, State> {
 
     componentWillMount(): void {
         if (!this.state.errorStatusCode && !this.state.timeout) {
-            this.props.history.push('/');
+            this.props.history.push(Routes.DINE_FORELDREPENGER);
         }
     }
 

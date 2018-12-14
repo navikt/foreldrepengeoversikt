@@ -12,10 +12,11 @@ import BEMHelper from 'common/util/bem';
 import Sak from '../../types/Sak';
 import { lenker } from '../../utils/lenker';
 import FileIcon from '../ikoner/FileIcon';
-
 import SaksoversiktHeader from './SaksoversiktHeader';
+
 import { isSakTooOldForEttersendelse } from './util';
 import { erForeldrepengesak } from '../../utils/sakerUtils';
+import { Routes } from '../../utils/routes';
 
 import './saksoversikt.less';
 
@@ -27,7 +28,7 @@ interface Props {
 
 class Saksoversikt extends React.Component<Props> {
     onEttersendVedlegg(sak: Sak): void {
-        this.props.history.push('/ettersendelse', { sak });
+        this.props.history.push(Routes.ETTERSENDELSE, { sak });
     }
 
     onEndreSøknad(): void {
