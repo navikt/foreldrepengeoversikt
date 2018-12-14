@@ -12,8 +12,6 @@ import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import { AxiosError } from '../../../../node_modules/axios';
 import Api from '../../api/api';
-import { Kvittering as EttersendelseKvittering } from 'app/api/types/Kvittering';
-import Kvittering from '../../components/kvittering-page/Kvittering';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import Ettersending from '../../api/types/Ettersending';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
@@ -33,7 +31,6 @@ interface State {
     attachments: Attachment[];
     attachmentSkjemanummer?: Skjemanummer;
     sendingEttersendelse: boolean;
-    kvittering: EttersendelseKvittering;
 }
 
 type Props = EttersendelseProps & InjectedIntlProps;
@@ -85,7 +82,7 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     handleSendEttersendelseOnClick(): void {
-        if (this.state.attachments.length > 0) {
+        if (this.isReadyToUploadAttachments()) {
             this.setState({ sendingEttersendelse: true }, this.sendEttersendelse);
         }
     }
@@ -98,7 +95,12 @@ class Ettersendelse extends React.Component<Props, State> {
 
         Api.sendEttersending(ettersending)
             .then((response) => {
-                this.setState({ kvittering: response.data, sendingEttersendelse: false });
+                this.setState({ sendingEttersendelse: false }, () => {
+                    this.props.history.push('/kvittering', {
+                        kvittering: response.data,
+                        attachments: ettersending.vedlegg
+                    });
+                });
             })
             .catch((error: AxiosError) => {
                 this.setState({ sendingEttersendelse: false }, () => {
@@ -134,7 +136,7 @@ class Ettersendelse extends React.Component<Props, State> {
         }
 
         const { intl } = this.props;
-        const { sak, attachments, attachmentSkjemanummer, sendingEttersendelse, kvittering } = this.state;
+        const { sak, attachments, attachmentSkjemanummer, sendingEttersendelse } = this.state;
         const uploadedAttachments = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
         const cls = BEMHelper('ettersendelse');
 
@@ -142,70 +144,47 @@ class Ettersendelse extends React.Component<Props, State> {
             <div className={cls.className}>
                 <Søknadstittel>Ettersending av vedlegg</Søknadstittel>
                 <ResponsiveWrapper>
-                    <div className={cls.modifier(`content`)}>
-                        <BackButton hidden={false} onClick={() => this.handleBackClick()} />
-                        {kvittering ? (
-                            <Kvittering
-                                attachments={attachments.filter((a: Attachment) => !isAttachmentWithError(a))}
-                                kvittering={kvittering}
+                    <BackButton hidden={false} onClick={() => this.handleBackClick()} />
+                    <LetterIcon className={cls.element('letter-icon')} />
+                    <Innholdstittel className={cls.element('title')}>
+                        <FormattedMessage id={'ettersendelse.title'} values={{ saksnummer: sak.saksnummer }} />
+                    </Innholdstittel>
+                    <Select
+                        className={cls.element('attachment-type-select')}
+                        label=""
+                        onChange={this.handleAttachmentTypeSelectChange}
+                        defaultValue={'default'}>
+                        {getAttachmentTypeSelectOptions(intl, sak)}
+                    </Select>
+                    {this.isReadyToUploadAttachments() && (
+                        <div className={cls.element('uploader')}>
+                            <AttachmentsUploader
+                                attachments={attachments}
+                                skjemanummer={attachmentSkjemanummer ? attachmentSkjemanummer : Skjemanummer.ANNET}
+                                onFilesUploadStart={this.addAttachment}
+                                onFileUploadFinish={this.editAttachment}
+                                onFileDeleteStart={this.deleteAttachment}
                             />
-                        ) : (
-                            <>
-                                <LetterIcon className={cls.element('letter-icon')} />
-                                <Innholdstittel className={cls.element('title')}>
-                                    <FormattedMessage
-                                        id={'ettersendelse.title'}
-                                        values={{ saksnummer: sak.saksnummer }}
-                                    />
-                                </Innholdstittel>
-
-                                <Select
-                                    className={cls.element('attachment-type-select')}
-                                    label=""
-                                    onChange={this.handleAttachmentTypeSelectChange}
-                                    defaultValue={'default'}>
-                                    {getAttachmentTypeSelectOptions(intl, sak)}
-                                </Select>
-
-                                {this.isReadyToUploadAttachments() && (
-                                    <div className={cls.element('uploader')}>
-                                        <AttachmentsUploader
-                                            attachments={attachments}
-                                            skjemanummer={
-                                                attachmentSkjemanummer ? attachmentSkjemanummer : Skjemanummer.ANNET
-                                            }
-                                            onFilesUploadStart={this.addAttachment}
-                                            onFileUploadFinish={this.editAttachment}
-                                            onFileDeleteStart={this.deleteAttachment}
-                                        />
-                                    </div>
-                                )}
-
-                                {getListOfUniqueSkjemanummer(uploadedAttachments).map((skjemanummer: Skjemanummer) => (
-                                    <AttachmentList
-                                        key={skjemanummer}
-                                        intlKey={`ettersendelse.attachmentList.${skjemanummer}`}
-                                        onDelete={this.deleteAttachment}
-                                        attachments={uploadedAttachments.filter(
-                                            (a: Attachment) =>
-                                                a.skjemanummer === skjemanummer
-                                        )}
-                                    />
-                                ))}
-
-                                {this.isReadyToSendAttachments() && (
-                                    <div className={cls.element('send-button')}>
-                                        <Hovedknapp
-                                            onClick={this.handleSendEttersendelseOnClick}
-                                            disabled={sendingEttersendelse}
-                                            spinner={sendingEttersendelse}>
-                                            <FormattedMessage id={'ettersendelse.sendButton'} />
-                                        </Hovedknapp>
-                                    </div>
-                                )}
-                            </>
-                        )}
-                    </div>
+                        </div>
+                    )}
+                    {getListOfUniqueSkjemanummer(uploadedAttachments).map((skjemanummer: Skjemanummer) => (
+                        <AttachmentList
+                            key={skjemanummer}
+                            intlKey={`ettersendelse.attachmentList.${skjemanummer}`}
+                            onDelete={this.deleteAttachment}
+                            attachments={uploadedAttachments.filter((a: Attachment) => a.skjemanummer === skjemanummer)}
+                        />
+                    ))}
+                    {this.isReadyToSendAttachments() && (
+                        <div className={cls.element('send-button')}>
+                            <Hovedknapp
+                                onClick={this.handleSendEttersendelseOnClick}
+                                disabled={sendingEttersendelse}
+                                spinner={sendingEttersendelse}>
+                                <FormattedMessage id={'ettersendelse.sendButton'} />
+                            </Hovedknapp>
+                        </div>
+                    )}
                 </ResponsiveWrapper>
             </div>
         );

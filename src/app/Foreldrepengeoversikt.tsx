@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { AxiosError } from 'axios';
 
 import Api from './api/api';
@@ -9,6 +9,7 @@ import DineForeldrepenger from './pages/dine-foreldrepenger/DineForeldrepenger';
 import Ettersendelse from './pages/ettersendelse/Ettersendelse';
 import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
 import ErrorPage from './pages/error/ErrorPage';
+import KvitteringPage from './pages/kvittering-page/Kvittering';
 
 interface State {
     saker: Sak[];

@@ -3,52 +3,45 @@
 @import '../../styles/mixins.less';
 
 .ettersendelse {
-  background-color: @ettersendelse-background-color;
-  min-height: 720px;
+    background-color: @ettersendelse-background-color;
+    min-height: 720px;
 
-  &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-  }
-
-  &__letter-icon {
-    width: 100%;
-  }
-
-  &__title {
-    margin: 2rem;
-    text-align: center;
-  }
-
-  &__attachment-type-select {
-    width: 75%;
-    margin: 0 auto;
-  }
-
-  &__uploader {
-    margin: 2rem;
-  }
-
-  &__send-button {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  @media (max-width: @mobile-breakpoint) {
-    &__uploader {
-      margin: 2rem 0;
-    }
-
-    &__attachment-type-select {
-      width: 100%;
+    &__letter-icon {
+        width: 100%;
     }
 
     &__title {
-      margin: 2rem 0;
-      text-align: center;
+        margin: 2rem;
+        text-align: center;
     }
-  }
+
+    &__attachment-type-select {
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    &__uploader {
+        margin: 2rem;
+    }
+
+    &__send-button {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    @media (max-width: @mobile-breakpoint) {
+        &__uploader {
+            margin: 2rem 0;
+        }
+
+        &__attachment-type-select {
+            width: 100%;
+        }
+
+        &__title {
+            margin: 2rem 0;
+            text-align: center;
+        }
+    }
 }

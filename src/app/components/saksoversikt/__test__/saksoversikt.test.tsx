@@ -13,9 +13,8 @@ describe('Saksoversikt component', () => {
         const wrapper = shallow(
             <Saksoversikt
                 sak={{ ...SakerMock.fpsakSak, opprettet: opprettetDate }}
-                onEttersendVedlegg={jest.fn()}
-                onEndreSøknad={jest.fn()}
                 skalKunneSøkeOmEndring={false}
+                history={jest.fn() as any}
             />
         );
 
@@ -31,9 +30,8 @@ describe('Saksoversikt component', () => {
         const wrapper = shallow(
             <Saksoversikt
                 sak={{ ...SakerMock.fpsakSak, opprettet: opprettetDate }}
-                onEttersendVedlegg={jest.fn()}
-                onEndreSøknad={jest.fn()}
                 skalKunneSøkeOmEndring={false}
+                history={jest.fn() as any}
             />
         );
         const uploadButton = wrapper.find({ className: 'saksoversikt__ettersendelse-btn' });
@@ -49,9 +47,8 @@ describe('Saksoversikt component', () => {
         const wrapper = shallow(
             <Saksoversikt
                 sak={{ ...SakerMock.fpsakSak, opprettet: opprettetDate }}
-                onEttersendVedlegg={jest.fn()}
-                onEndreSøknad={jest.fn()}
                 skalKunneSøkeOmEndring={false}
+                history={jest.fn() as any}
             />
         );
         const endringssøknadButton = wrapper.find({ className: 'saksoversikt__endringssoknad-btn' });
@@ -67,9 +64,8 @@ describe('Saksoversikt component', () => {
         const wrapper = shallow(
             <Saksoversikt
                 sak={{ ...SakerMock.fpsakSak, opprettet: opprettetDate }}
-                onEttersendVedlegg={jest.fn()}
-                onEndreSøknad={jest.fn()}
                 skalKunneSøkeOmEndring={true}
+                history={jest.fn() as any}
             />
         );
         const endringssøknadButton = wrapper.find({ className: 'saksoversikt__endringssoknad-btn' });
