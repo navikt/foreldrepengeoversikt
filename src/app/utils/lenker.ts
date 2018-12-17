@@ -17,7 +17,7 @@ export const headerLinks = {
 export const annenInformasjonLenker = {
     viktigeFrister: {
         text: 'Viktige frister',
-        href: 'https://familie.nav.no/viktige-frister'
+        href: 'https://familie.nav.no/om-foreldrepenger#nar-kan-du-soke'
     },
     klagePåSøknad: {
         text: 'Klage på søknad',
