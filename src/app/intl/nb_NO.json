@@ -1,12 +1,12 @@
 {
     "header.title": "Dine foreldrepenger",
 
-    "dineForeldrepenger.alertstripe": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
+    "dineForeldrepenger.alertstripe": "Hvis du nettopp sendte inn søknaden, tar det opptil en uke før du ser den her. Søknader eldre enn tre år vises ikke her.",
     "dineForeldrepenger.feilmelding": "Det har skjedd en feil. Prøv igjen senere.",
     "dineForeldrepenger.ingenSaker":
         "Du har ingen søknader hos NAV akkurat nå. Hvis du nettopp sendte inn søknaden din, tar det noen dager før du ser den her.",
 
-    "saksoversikt.heading.top.foreldrepenger": "Søknad om foreldrepenger",
+    "saksoversikt.heading.top.foreldrepenger": "Din foreldrepengesak",
     "saksoversikt.heading.top.engangsstønad": "Søknad om engangsstønad",
     "saksoversikt.heading.bottom": "Sist endret: { date }",
     "saksoversikt.heading.underBehandling": "Under behandling",
@@ -26,7 +26,7 @@
     "ettersendelse.select.I000065": "Bekreftelse fra arbeidsgiver",
     "ettersendelse.select.I000026": "Inntektsopplysninger fra arbeidsgiver",
     "ettersendelse.select.I000044": "Etterlønn",
-    "ettersendelse.select.I000042": " Dokumentasjon av dato for overtakelse av omsorg",
+    "ettersendelse.select.I000042": "Dokumentasjon av dato for overtakelse av omsorg",
     "ettersendelse.select.I000060": "Annet",
     "ettersendelse.select.I000063": "Fødselsattest",
     "ettersendelse.select.I000062": "Terminbekreftelse",
@@ -42,7 +42,7 @@
     "ettersendelse.attachmentList.I000065": "Bekreftelse fra arbeidsgiver",
     "ettersendelse.attachmentList.I000026": "Inntektsopplysninger fra arbeidsgiver",
     "ettersendelse.attachmentList.I000044": "Etterlønn",
-    "ettersendelse.attachmentList.I000042": " Dokumentasjon av dato for overtakelse av omsorg",
+    "ettersendelse.attachmentList.I000042": "Dokumentasjon av dato for overtakelse av omsorg",
     "ettersendelse.attachmentList.I000060": "Annet",
     "ettersendelse.attachmentList.I000063": "Fødselsattest",
     "ettersendelse.attachmentList.I000062": "Terminbekreftelse",
@@ -82,12 +82,12 @@
 
     "ingenSaker.title": "Vi finner ingen søknader hos oss akkurat nå",
     "ingenSaker.ingress":
-        "Hvis du nettopp sendte inn søknaden, tar det noen dager før du ser den her. <br>Søknader eldre enn tre år vises ikke her.",
+        "Hvis du nettopp sendte inn søknaden, tar det opptil en uke før du ser den her. <br>Søknader eldre enn tre år vises ikke her.",
     "ingenSaker.taKontaktIntro": "Finner du ikke din innsendte søknad?",
     "ingenSaker.taKontakt": "Ta kontakt med brukerstøtte",
 
     "ingenSaker.lesMer": "Les om foreldrepenger",
     "ingenSaker.søkNå": "Søk om foreldrepenger",
 
-    "annenInformasjon.header": "Annen informasjon"
+    "annenInformasjon.header": "Relatert informasjon"
 }
