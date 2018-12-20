@@ -11,6 +11,7 @@ import ApplicationSpinner from './components/application-spinner/ApplicationSpin
 import ErrorPage from './pages/error/ErrorPage';
 import KvitteringPage from './pages/kvittering-page/Kvittering';
 import { Routes } from './utils/routes';
+import { datesByDescendingOrder } from './utils/sakerUtils';
 
 interface State {
     saker: Sak[];
@@ -34,7 +35,9 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
     fetchSaker(): void {
         this.setState({ loading: true }, () => {
             Api.getSaker()
-                .then((response) => this.setState({ saker: response.data, loading: false }))
+                .then((response) =>
+                    this.setState({ saker: response.data.sort(datesByDescendingOrder), loading: false })
+                )
                 .catch((error: AxiosError) => {
                     if (error.response) {
                         error.response.status === 401 ? redirectToLogin() : this.setState({ error, loading: false });
@@ -63,7 +66,7 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
                             <DineForeldrepenger saker={this.state.saker} error={this.state.error} {...props} />
                         )}
                     />
-                    <Redirect to={Routes.DINE_FORELDREPENGER}/>
+                    <Redirect to={Routes.DINE_FORELDREPENGER} />
                 </Switch>
             </Router>
         );

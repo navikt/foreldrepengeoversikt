@@ -8,17 +8,18 @@ import BEMHelper from 'common/util/bem';
 import Feilsidemelding from 'common/components/feilsidemelding/Feilsidemelding';
 import getMessage from 'common/util/i18nUtils';
 import { lenker } from '../../utils/lenker';
-import './errorPage.less';
 import { Routes } from '../../utils/routes';
+
+import './errorPage.less';
 
 export interface ErrorPageProps {
     history: History;
 }
 
 export interface State {
+    error?: boolean;
     errorStatusCode?: number;
-    errorMessage: string;
-    timeout?: boolean;
+    errorMessage?: string;
 }
 
 type Props = ErrorPageProps & InjectedIntlProps;
@@ -31,7 +32,7 @@ class ErrorPage extends React.Component<Props, State> {
     }
 
     componentWillMount(): void {
-        if (!this.state.errorStatusCode && !this.state.timeout) {
+        if (this.state.error !== true) {
             this.props.history.push(Routes.DINE_FORELDREPENGER);
         }
     }

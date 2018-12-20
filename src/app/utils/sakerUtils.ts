@@ -4,6 +4,10 @@ import Behandling, { BehandlingTema } from '../types/Behandling';
 
 export const datesByDescendingOrder = (a: Sak, b: Sak) => b.opprettet.localeCompare(a.opprettet);
 
+export const erUnderBehandling = (sak: Sak): any => {
+    return sak && sak.status && (sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING);
+};
+
 const getBehandling = (sak: Sak): Behandling | undefined => {
     if (sak !== undefined && sak.behandlinger !== undefined && sak.behandlinger.length > 0) {
         return sak.behandlinger[0];

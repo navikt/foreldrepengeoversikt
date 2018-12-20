@@ -1,15 +1,53 @@
 @import '../../styles/colors.less';
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
 
 .dine-foreldrepenger {
+    display: grid;
+    grid-row: 1;
+    grid-row-gap: 1rem;
+    grid-column-gap: 1rem;
+    grid-template-columns: 1fr auto 1fr;
+    grid-auto-rows: auto 1fr;
     background-color: @innsyn-background-color;
     margin-bottom: 1rem;
-    &__ingen-saker, &__feilmelding {
+    justify-items: center;
+
+    &__content {
+        -ms-grid-column: 2;
+        grid-column-start: 2;
+        grid-row: 2;
+        justify-self: center;
+        max-width: @app-max-width;
+        width: 100%;
+    }
+
+    &__ingen-saker,
+    &__feilmelding {
         text-align: center;
         margin: 5rem 0;
     }
 
-    &__info {
+    &__alertstipe {
+        grid-row: 1;
+        grid-column: 2;
+        width: 100%;
         margin-top: 0.5rem;
+    }
+
+    &__side-bar {
+        max-width: 162px;
+        justify-self: flex-start;
+        -ms-grid-column: 3;
+        grid-column-start: 3;
+        grid-row: 2;
+    }
+
+    .dine-utbetalinger-wrapper {
+        margin-bottom: 1rem;
+    }
+
+    .sak-info-panel {
         margin-bottom: 1rem;
     }
 }
@@ -17,7 +55,8 @@
 .saksoversikt-list {
     list-style: none;
     padding-left: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
     &__element {
         margin-bottom: 1rem;
     }

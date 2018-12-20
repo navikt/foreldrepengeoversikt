@@ -24,12 +24,7 @@ export interface Props {
     setLanguage?: (languageCode: string) => void;
 }
 
-const Feilsidemelding: React.StatelessComponent<Props> = ({
-    containerId,
-    illustrasjon,
-    tittel,
-    ingress
-}) => {
+const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress }: Props) => {
     return (
         <div id={containerId}>
             {illustrasjon && (

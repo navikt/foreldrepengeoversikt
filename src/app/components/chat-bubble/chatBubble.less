@@ -1,0 +1,45 @@
+.chat-bubble {
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    background-color: white;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem 1rem 2rem;
+
+    .lenkepanel__indikator {
+        margin-top: 1.5rem;
+    }
+
+    &__icon {
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 1115px) {
+        flex-flow: row;
+        justify-content: flex-start;
+        padding: 1rem;
+
+        .lenkepanel__indikator {
+            margin-top: 0;
+        }
+
+        .lenkepanel__heading {
+            display: flex;
+            flex-flow: row;
+            width: 100%;
+        }
+
+        .typo-normal {
+            margin: auto 0;
+            text-align: left;
+        }
+
+        &__icon {
+            width: auto;
+            margin-bottom: 0;
+            margin-right: 1rem;
+        }
+    }
+}
