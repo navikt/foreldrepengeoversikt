@@ -1,13 +1,9 @@
 {
     "header.title": "Dine foreldrepenger",
 
-<<<<<<< Updated upstream
-    "dineForeldrepenger.alertstripe": "Hvis du nettopp sendte inn søknaden, tar det opptil en uke før du ser den her. Søknader eldre enn tre år vises ikke her.",
-=======
     "dineForeldrepenger.alertstripe.fpsak": "Du får tidligst svar på søknaden din fire uker før foreldrepengeperioden din starter. Dette er fordi NAV trenger oppdaterte opplysninger for å behandle saken din.",
     "dineForeldrepenger.alertstripe.infotrygd": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
 
->>>>>>> Stashed changes
     "dineForeldrepenger.feilmelding": "Det har skjedd en feil. Prøv igjen senere.",
     "dineForeldrepenger.ingenSaker": "Du har ingen søknader hos NAV akkurat nå. Hvis du nettopp sendte inn søknaden din, tar det noen dager før du ser den her.",
 
@@ -84,12 +80,8 @@
     "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad har utløpt",
 
     "ingenSaker.title": "Vi finner ingen søknader hos oss akkurat nå",
-<<<<<<< Updated upstream
-    "ingenSaker.ingress":
-        "Hvis du nettopp sendte inn søknaden, tar det opptil en uke før du ser den her. <br>Søknader eldre enn tre år vises ikke her.",
-=======
+
     "ingenSaker.ingress": "Hvis du nettopp sendte inn søknaden, tar det noen dager før du ser den her. <br>Søknader eldre enn tre år vises ikke her.",
->>>>>>> Stashed changes
     "ingenSaker.taKontaktIntro": "Finner du ikke din innsendte søknad?",
     "ingenSaker.taKontakt": "Ta kontakt med brukerstøtte",
 

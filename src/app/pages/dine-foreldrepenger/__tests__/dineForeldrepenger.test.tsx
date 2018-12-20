@@ -6,6 +6,7 @@ import Saksoversikt from '../../../components/saksoversikt/Saksoversikt';
 import SakerMock from '../../../../../jest/__mocks__/Sak';
 import IngenSaker from '../../../components/ingen-saker/IngenSaker';
 import { FagsakStatus } from '../../../types/FagsakStatus';
+import { Routes } from '../../../utils/routes';
 
 describe('Dine Foreldrepenger page', () => {
     it('Should render ingen saker component if saker is an empty list', () => {
@@ -14,8 +15,8 @@ describe('Dine Foreldrepenger page', () => {
     });
 
     it('Should render error message if error object is sent as props', () => {
-        const wrapper = shallow(<DineForeldrepenger saker={[]} history={historyMock} error={{}} />);
-        expect(wrapper.find({ id: 'dineForeldrepenger.feilmelding' }).length).toEqual(1);
+        shallow(<DineForeldrepenger saker={[]} history={historyMock} error={{}} />);
+        expect(historyMock.push).toHaveBeenCalledWith(Routes.FEIL, {error: true});
     });
 
     it('Should render Saksoversikt for each element in saker', () => {
