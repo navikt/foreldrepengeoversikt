@@ -15,6 +15,7 @@ describe('Saksoversikt component', () => {
                 sak={{ ...SakerMock.fpsakSak, opprettet: opprettetDate }}
                 skalKunneSøkeOmEndring={false}
                 history={jest.fn() as any}
+                expanded={true}
             />
         );
 
@@ -32,6 +33,7 @@ describe('Saksoversikt component', () => {
                 sak={{ ...SakerMock.fpsakSak, opprettet: opprettetDate }}
                 skalKunneSøkeOmEndring={false}
                 history={jest.fn() as any}
+                expanded={true}
             />
         );
         const uploadButton = wrapper.find({ className: 'saksoversikt__ettersendelse-btn' });
@@ -49,6 +51,7 @@ describe('Saksoversikt component', () => {
                 sak={{ ...SakerMock.fpsakSak, opprettet: opprettetDate }}
                 skalKunneSøkeOmEndring={false}
                 history={jest.fn() as any}
+                expanded={true}
             />
         );
         const endringssøknadButton = wrapper.find({ className: 'saksoversikt__endringssoknad-btn' });
@@ -66,6 +69,7 @@ describe('Saksoversikt component', () => {
                 sak={{ ...SakerMock.fpsakSak, opprettet: opprettetDate }}
                 skalKunneSøkeOmEndring={true}
                 history={jest.fn() as any}
+                expanded={true}
             />
         );
         const endringssøknadButton = wrapper.find({ className: 'saksoversikt__endringssoknad-btn' });
