@@ -45,13 +45,14 @@ export const annenInformasjonLenker = {
     },
     regelverket: {
         text: 'Regelverket',
-        href: 'https://www.nav.no/rettskildene/Forside/Folketrygdloven/kapittel-14-ytelser-ved-svangerskap-f%C3%B8dsel-og-adopsjon'
+        href:
+            'https://www.nav.no/rettskildene/Forside/Folketrygdloven/kapittel-14-ytelser-ved-svangerskap-f%C3%B8dsel-og-adopsjon'
     },
     meldFraOmEndringer: {
         text: 'Meld fra om endringer',
-        href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Relatert+informasjon/du-har-plikt-til-%C3%A5-gi-nav-riktige-opplysninger'
-    },
-
+        href:
+            'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Relatert+informasjon/du-har-plikt-til-%C3%A5-gi-nav-riktige-opplysninger'
+    }
 };
 
 export const lenker = {
@@ -61,5 +62,9 @@ export const lenker = {
         href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749'
     },
     lesMerOmForeldrepenger: { text: 'Les om foreldrepenger', href: 'https://familie.nav.no' },
-    søkOmForeldrepenger: { text: 'Søk om foreldrepenger', href: 'https://foreldrepengesoknad.nav.no' }
+    søkOmForeldrepenger: { text: 'Søk om foreldrepenger', href: 'https://foreldrepengesoknad.nav.no' },
+    chatMedOss: {
+        href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger'
+    },
+    dineUtbetalinger: { href: 'https://tjenester.nav.no/utbetalingsoversikt/#' }
 };
