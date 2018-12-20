@@ -61,6 +61,7 @@ class DineForeldrepenger extends React.Component<Props> {
                         <Saksoversikt
                             sak={sak}
                             skalKunneSøkeOmEndring={index === 0 && skalKunneSøkeOmEndring(sak)}
+                            expanded={index === 0}
                             history={history}
                         />
                     </li>

@@ -23,6 +23,7 @@ import './saksoversikt.less';
 interface Props {
     sak: Sak;
     skalKunneSøkeOmEndring: boolean;
+    expanded: boolean;
     history: History;
 }
 
@@ -36,11 +37,12 @@ class Saksoversikt extends React.Component<Props> {
     }
 
     render() {
-        const { sak, skalKunneSøkeOmEndring } = this.props;
+        const { sak, skalKunneSøkeOmEndring, expanded } = this.props;
         const cls = BEMHelper('saksoversikt');
         return (
             <div className={cls.className}>
                 <EkspanderbartpanelBase
+                    apen={expanded}
                     heading={<SaksoversiktHeader sak={sak} />}
                     ariaTittel={'søknad om foreldrepenger'}>
                     <Normaltekst className={cls.element('saksnummer')}>
