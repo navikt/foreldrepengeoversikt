@@ -6,6 +6,7 @@
     justify-content: center;
     text-align: center;
     padding: 1rem 1rem 2rem;
+    width: 100%;
 
     .lenkepanel__indikator {
         margin-top: 1.5rem;
@@ -25,21 +26,24 @@
             margin-top: 0;
         }
 
+        .typo-normal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         .lenkepanel__heading {
             display: flex;
             flex-flow: row;
             width: 100%;
-        }
-
-        .typo-normal {
-            margin: auto 0;
-            text-align: left;
+            justify-content: flex-start;
+            align-content: center;
         }
 
         &__icon {
-            width: auto;
             margin-bottom: 0;
             margin-right: 1rem;
+            width: 4rem;
         }
     }
 }
