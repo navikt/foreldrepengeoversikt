@@ -16,18 +16,19 @@ import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjo
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 import {
     datesByDescendingOrder,
+    erEngangssønadsak,
     erForeldrepengesak,
     erInfotrygdSak,
     erUnderBehandling,
     skalKunneSøkeOmEndring
 } from '../../utils/sakerUtils';
 
-import InfoPanel from '../../components/info-panel/InfoPanel';
 import ChatBubble from '../../components/chat-bubble/ChatBubble';
 import DineUtbetalinger from '../../components/dine-utbetalinger/DineUtbetalinger';
 
 import './dineForeldrepenger.less';
 import { Routes } from '../../utils/routes';
+import InfoPanel from '../../components/info-panel/InfoPanel';
 
 interface Props {
     saker: Sak[];
@@ -74,7 +75,7 @@ class DineForeldrepenger extends React.Component<Props> {
         const cls = BEMHelper('sak-info-panel');
         return (
             <div className={cls.className}>
-                <InfoPanel />
+                <InfoPanel erNyesteSakEngangssønad={erEngangssønadsak(this.props.saker[0])} />
             </div>
         );
     }

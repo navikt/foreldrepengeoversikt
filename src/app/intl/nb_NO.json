@@ -19,6 +19,11 @@
     "saksoversikt.content.endringssøknad.intro": "Her kan du endre perioden din hvis du skal ha ferie, jobbe eller har vært syk.",
     "saksoversikt.content.endringssøknad.button": "Endre perioden din",
 
+    "infopanel.utbetaling.engangsønad": "Utbetales én uke etter at søknaden din er innvilget.",
+    "infopanel.utbetaling.foreldrepenger": "Utbetales den 25. i måneden",
+    "infopanel.svarfrist.engangsønad": "Saksbehandlingstiden er inntil seks uker.",
+    "infopanel.svarfrist.foreldrepenger": "Svar tidligst fire uker før",
+
     "ettersendelse.title": "Last opp dokumentasjon til sak { saksnummer }",
     "ettersendelse.sendButton": "Ettersend vedlegg",
 

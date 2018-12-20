@@ -30,6 +30,20 @@ export const erForeldrepengesak = (sak: Sak): boolean => {
     }
 };
 
+export const erEngangssønadsak = (sak: Sak): boolean => {
+    const behandling = getBehandling(sak);
+    if (behandling === undefined) {
+        return true;
+    } else {
+        const { tema } = behandling;
+        return (
+            tema === BehandlingTema.ENGANGSTØNAD ||
+            tema === BehandlingTema.ENGANGSTØNAD_ADOPSJON ||
+            tema === BehandlingTema.ENGANGSTØNAD_FØDSEL
+        );
+    }
+};
+
 export const skalKunneSøkeOmEndring = (nyesteSak: Sak): boolean => {
     if (!erForeldrepengesak(nyesteSak)) {
         return false;
