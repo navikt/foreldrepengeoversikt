@@ -57,7 +57,7 @@ export const annenInformasjonLenker = {
 
 export const lenker = {
     endringssøknad: 'https://foreldrepengesoknad.nav.no',
-    dittNav: { text: 'Ditt Nav', href: 'https://tjenester.nav.no/saksoversikt/' },
+    dittNav: 'https://tjenester.nav.no/saksoversikt/app/tema/FOR',
     brukerstøtte: {
         href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749'
     },

@@ -54,7 +54,7 @@ class Saksoversikt extends React.Component<Props> {
 
                     <div className={cls.element('din-søknad')}>
                         <FileIcon />
-                        <Lenke href={lenker.dittNav.href}>
+                        <Lenke href={lenker.dittNav}>
                             <Normaltekst>
                                 <FormattedMessage id={'saksoversikt.content.dinSøknad'} />
                             </Normaltekst>
