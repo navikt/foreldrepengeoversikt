@@ -1,6 +1,6 @@
 import Sak, { SakType } from '../types/Sak';
 import { FagsakStatus } from '../types/FagsakStatus';
-import Behandling, { BehandlingTema } from '../types/Behandling';
+import Behandling, { BehandlingStatus, BehandlingTema } from '../types/Behandling';
 
 export const datesByDescendingOrder = (a: Sak, b: Sak) => b.opprettet.localeCompare(a.opprettet);
 
@@ -44,12 +44,21 @@ export const erEngangssønadsak = (sak: Sak): boolean => {
     }
 };
 
+export const harEnAvsluttetBehandling = (sak: Sak): boolean => {
+    return sak.behandlinger
+        ? sak.behandlinger.some((behandling: Behandling) => behandling.status === BehandlingStatus.AVSLUTTET)
+        : false;
+};
+
 export const skalKunneSøkeOmEndring = (nyesteSak: Sak): boolean => {
     if (!erForeldrepengesak(nyesteSak)) {
         return false;
     }
 
-    return nyesteSak.status === FagsakStatus.LOPENDE || erInfotrygdSak(nyesteSak);
+    return (
+        (nyesteSak.status !== FagsakStatus.AVSLUTTET && harEnAvsluttetBehandling(nyesteSak)) ||
+        erInfotrygdSak(nyesteSak)
+    );
 };
 
 export const erInfotrygdSak = (sak: Sak): boolean => {

@@ -2,13 +2,14 @@ export default interface Behandling {
     behandlendeEnhet: string;
     behandlendeEnhetNavn: string;
     id: any;
-    status: BehanldingStatus;
-    tema: BehandlingTema;
+    status: BehandlingStatus;
+    tema: string;
     type: string;
     årsak: any;
 }
 
-export enum BehanldingStatus {
+
+export enum BehandlingStatus {
     OPPRETTET = 'OPPRE',
     UTREDES = 'UTRED',
     FATTER_VEDTAK = 'FVED',
