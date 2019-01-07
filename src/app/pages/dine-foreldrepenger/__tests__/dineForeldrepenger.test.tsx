@@ -3,10 +3,12 @@ import { shallow } from 'enzyme';
 import DineForeldrepenger from '../DineForeldrepenger';
 import { historyMock } from '../../../../../jest/__mocks__/History';
 import Saksoversikt from '../../../components/saksoversikt/Saksoversikt';
-import SakerMock from '../../../../../jest/__mocks__/Sak';
+import SakerMock, { behandlingMock } from '../../../../../jest/__mocks__/Sak';
 import IngenSaker from '../../../components/ingen-saker/IngenSaker';
 import { FagsakStatus } from '../../../types/FagsakStatus';
 import { Routes } from '../../../utils/routes';
+import Sak from '../../../types/Sak';
+import { BehandlingStatus } from '../../../types/Behandling';
 
 describe('Dine Foreldrepenger page', () => {
     it('Should render ingen saker component if saker is an empty list', () => {
@@ -16,7 +18,7 @@ describe('Dine Foreldrepenger page', () => {
 
     it('Should render error message if error object is sent as props', () => {
         shallow(<DineForeldrepenger saker={[]} history={historyMock} error={{}} />);
-        expect(historyMock.push).toHaveBeenCalledWith(Routes.FEIL, {error: true});
+        expect(historyMock.push).toHaveBeenCalledWith(Routes.FEIL, { error: true });
     });
 
     it('Should render Saksoversikt for each element in saker', () => {
@@ -42,20 +44,29 @@ describe('Dine Foreldrepenger page', () => {
         expect(saksoversiktList.at(3).props().sak).toEqual(mockSaker[0]);
     });
 
-    it('Endringssøknad should be enabled on the newest sak if the newest sak is from fpsak and has status LOPENDE and disabled for older saker', () => {
-        const mockSaker = [
-            { ...SakerMock.infotrygdSak, opprettet: '2017-01-01' },
-            { ...SakerMock.fpsakSak, opprettet: '2017-05-15', status: FagsakStatus.LOPENDE },
-            { ...SakerMock.fpsakSak, opprettet: '2019-01-01', status: FagsakStatus.LOPENDE }
-        ];
+    it(
+        'Endringssøknad should only be enabled on the newest sak if the newest sak is from fpsak and ' +
+            'status is not avsluttet with at least one avsluttet behandling',
+        () => {
+            const mockSaker: Sak[] = [
+                { ...SakerMock.infotrygdSak, opprettet: '2017-01-01' },
+                { ...SakerMock.fpsakSak, opprettet: '2017-05-15', status: FagsakStatus.LOPENDE },
+                {
+                    ...SakerMock.fpsakSak,
+                    opprettet: '2019-01-01',
+                    status: FagsakStatus.LOPENDE,
+                    behandlinger: [{ ...behandlingMock, status: BehandlingStatus.AVSLUTTET }]
+                }
+            ];
 
-        const wrapper = shallow(<DineForeldrepenger saker={mockSaker.slice()} history={historyMock} />);
-        const saksoversiktList = wrapper.find(Saksoversikt);
+            const wrapper = shallow(<DineForeldrepenger saker={mockSaker.slice()} history={historyMock} />);
+            const saksoversiktList = wrapper.find(Saksoversikt);
 
-        expect(saksoversiktList.at(0).props().skalKunneSøkeOmEndring).toEqual(true);
-        expect(saksoversiktList.at(1).props().skalKunneSøkeOmEndring).toEqual(false);
-        expect(saksoversiktList.at(2).props().skalKunneSøkeOmEndring).toEqual(false);
-    });
+            expect(saksoversiktList.at(0).props().skalKunneSøkeOmEndring).toEqual(true);
+            expect(saksoversiktList.at(1).props().skalKunneSøkeOmEndring).toEqual(false);
+            expect(saksoversiktList.at(2).props().skalKunneSøkeOmEndring).toEqual(false);
+        }
+    );
 
     it('Endringssøknad should be enabled on the newest sak if the newest sak is from infotrygd and disabled older saker', () => {
         const mockSaker = [

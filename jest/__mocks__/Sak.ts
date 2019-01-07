@@ -2,7 +2,7 @@ import { FagsakStatus } from '../../src/app/types/FagsakStatus';
 import Sak, { SakType } from '../../src/app/types/Sak';
 import Behandling, { BehandlingStatus, BehandlingTema } from '../../src/app/types/Behandling';
 
-const behandling: Behandling = {
+export const behandlingMock: Behandling = {
     behandlendeEnhet: "4833",
     behandlendeEnhetNavn: "NAV Familie- og pensjonsytelser Oslo 1",
     id: null,
@@ -23,7 +23,7 @@ const fpsakSak: Sak = {
     saksnummer: '123',
     opprettet: '2018-10-01',
     status: FagsakStatus.OPPRETTET,
-    behandlinger: [behandling]
+    behandlinger: [behandlingMock]
 };
 
 const SakerMock = { infotrygdSak, fpsakSak };
