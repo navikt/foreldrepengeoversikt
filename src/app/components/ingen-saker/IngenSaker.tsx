@@ -25,12 +25,12 @@ const IngenSaker = () => {
             </Normaltekst>
 
             <div className={cls.element('options')}>
-                <Lenke href={lenker.lesMerOmForeldrepenger.href}>
+                <Lenke href={lenker.lesMerOmForeldrepenger}>
                     <KnappBase type={'standard'}>
                         <FormattedMessage id={'ingenSaker.lesMer'} />
                     </KnappBase>
                 </Lenke>
-                <Lenke href={lenker.søkOmForeldrepenger.href}>
+                <Lenke href={lenker.søkOmForeldrepenger}>
                     <KnappBase type={'hoved'}>
                         <FormattedMessage id={'ingenSaker.søkNå'} />
                     </KnappBase>
@@ -41,7 +41,7 @@ const IngenSaker = () => {
                 <Normaltekst>
                     <FormattedMessage id={'ingenSaker.taKontaktIntro'} />
                 </Normaltekst>
-                <Lenke href={lenker.brukerstøtte.href}>
+                <Lenke href={lenker.brukerstøtte}>
                     <FormattedMessage id={'ingenSaker.taKontakt'} />
                 </Lenke>
             </div>

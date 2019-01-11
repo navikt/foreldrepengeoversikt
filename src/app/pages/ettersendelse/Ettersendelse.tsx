@@ -19,9 +19,9 @@ import BackButton from 'common/components/back-button/BackButton';
 import LetterIcon from '../../components/ikoner/LetterIcon';
 import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummer } from './util';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
+import { Routes } from '../../utils/routes';
 
 import './ettersendelse.less';
-import { Routes } from '../../utils/routes';
 
 interface EttersendelseProps {
     history: History;

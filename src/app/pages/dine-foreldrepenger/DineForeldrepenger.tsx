@@ -1,18 +1,15 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import MediaQuery from 'react-responsive';
-
 import { History } from 'history';
 import { AxiosError } from 'axios';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 import Sak from '../../types/Sak';
 import Saksoversikt from '../../components/saksoversikt/Saksoversikt';
-
 import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
 import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjon';
-
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 import {
     datesByDescendingOrder,
@@ -22,13 +19,12 @@ import {
     erUnderBehandling,
     skalKunneSøkeOmEndring
 } from '../../utils/sakerUtils';
-
 import ChatBubble from '../../components/chat-bubble/ChatBubble';
 import DineUtbetalinger from '../../components/dine-utbetalinger/DineUtbetalinger';
-
-import './dineForeldrepenger.less';
 import { Routes } from '../../utils/routes';
 import InfoPanel from '../../components/info-panel/InfoPanel';
+
+import './dineForeldrepenger.less';
 
 interface Props {
     saker: Sak[];

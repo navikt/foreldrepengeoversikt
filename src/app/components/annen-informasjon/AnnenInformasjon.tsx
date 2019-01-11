@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import BEMHelper from '../../../common/util/bem';
 import Lenke from 'nav-frontend-lenker';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
+import BEMHelper from '../../../common/util/bem';
 import { annenInformasjonLenker } from '../../utils/lenker';
+import ExternalLinkIcon from '../ikoner/ExternalLinkIcon';
 
 import './annenInformasjon.less';
-import ExternalLinkIcon from '../ikoner/ExternalLinkIcon';
 
 const AnnenInformasjon = () => {
     const cls = BEMHelper('annenInformasjon');

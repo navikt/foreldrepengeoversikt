@@ -25,7 +25,7 @@ const InfoPanel = ({ erNyesteSakEngangssønad }: Props) => {
                     <Undertittel>Greit for deg å vite</Undertittel>
                 </MediaQuery>
                 <MediaQuery minWidth={1114}>
-                    <UndertekstBold className={cls.element('title')}>Greit for deg å vite</UndertekstBold>
+                    <UndertekstBold className={cls.element('title')}><FormattedMessage id={"infopanel.title"}/></UndertekstBold>
                 </MediaQuery>
             </div>
 

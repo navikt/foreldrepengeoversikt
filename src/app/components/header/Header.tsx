@@ -1,17 +1,19 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { History } from 'history';
 import { Sidetittel } from 'nav-frontend-typografi';
+
 import FamilyIcon from '../ikoner/FamilyIcon';
 import BEMHelper from '../../../common/util/bem';
 import NavigationColumLinks from '../navigation-colum-links/NavigationColumLinks';
+
 import './header.less';
-import { History } from 'history';
-import { FormattedMessage } from 'react-intl';
 
 interface Props {
     history: History;
 }
 
-const Header: React.StatelessComponent<Props> = ({ history }) => {
+const Header = ({ history }: Props) => {
     const cls = BEMHelper('header');
     return (
         <div className={cls.className}>

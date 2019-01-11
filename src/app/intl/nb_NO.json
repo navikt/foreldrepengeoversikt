@@ -3,9 +3,10 @@
 
     "dineForeldrepenger.alertstripe.fpsak": "Du får tidligst svar på søknaden din fire uker før foreldrepengeperioden din starter. Dette er fordi NAV trenger oppdaterte opplysninger for å behandle saken din.",
     "dineForeldrepenger.alertstripe.infotrygd": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
-
     "dineForeldrepenger.feilmelding": "Det har skjedd en feil. Prøv igjen senere.",
     "dineForeldrepenger.ingenSaker": "Du har ingen søknader hos NAV akkurat nå. Hvis du nettopp sendte inn søknaden din, tar det noen dager før du ser den her.",
+    "dineForeldrepenger.chatMedOss": "Chat med oss om dine foreldrepenger",
+    "dineForeldrepenger.dineUtbetalinger": "Her finner du alle dine utbetalinger fra NAV. Får du utbetalt foreldrepenger fra arbeidsgiver vil disse ikke vises her.",
 
     "saksoversikt.heading.top.foreldrepenger": "Din foreldrepengesak",
     "saksoversikt.heading.top.engangsstønad": "Søknad om engangsstønad",
@@ -19,6 +20,7 @@
     "saksoversikt.content.endringssøknad.intro": "Her kan du endre perioden din hvis du skal ha ferie, jobbe eller har vært syk.",
     "saksoversikt.content.endringssøknad.button": "Endre perioden din",
 
+    "infopanel.title": "Greit for deg å vite",
     "infopanel.utbetaling.engangsønad": "Utbetales én uke etter at søknaden din er innvilget.",
     "infopanel.utbetaling.foreldrepenger": "Utbetales den 25. i måneden",
     "infopanel.svarfrist.engangsønad": "Saksbehandlingstiden er inntil seks uker.",
@@ -26,7 +28,6 @@
 
     "ettersendelse.title": "Last opp dokumentasjon til sak { saksnummer }",
     "ettersendelse.sendButton": "Ettersend vedlegg",
-
     "ettersendelse.select.defaultValue": "Velg type vedlegg",
     "ettersendelse.select.I000065": "Bekreftelse fra arbeidsgiver",
     "ettersendelse.select.I000026": "Inntektsopplysninger fra arbeidsgiver",
@@ -43,7 +44,6 @@
     "ettersendelse.select.I000061": "Dokumentasjon av mors utdanning på heltid",
     "ettersendelse.select.I000051": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
     "ettersendelse.select.I000049": "Annen dokumentasjon",
-
     "ettersendelse.attachmentList.I000065": "Bekreftelse fra arbeidsgiver",
     "ettersendelse.attachmentList.I000026": "Inntektsopplysninger fra arbeidsgiver",
     "ettersendelse.attachmentList.I000044": "Etterlønn",
@@ -69,13 +69,13 @@
     "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
     "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
     "vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
+
     "kvittering.headline": "Ettersendelsen er mottatt!",
     "kvittering.message": "Vi mottok ettersendelsen den {date} kl. { timeOfDay }.",
     "kvittering.attachment-list-label": "Innsendte vedlegg { size }",
 
     "feilside.bobletittel": "Oops,",
     "feilside.bobletekst": "noe gikk galt.",
-
     "feilside.tittel": "Det oppstod en feil",
     "feilside.ingress": "Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, {lenke}.",
     "feilside.ingress.lenke": "kontakt brukerstøtte",
@@ -85,11 +85,9 @@
     "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad har utløpt",
 
     "ingenSaker.title": "Vi finner ingen søknader hos oss akkurat nå",
-
     "ingenSaker.ingress": "Hvis du nettopp sendte inn søknaden, tar det noen dager før du ser den her. <br>Søknader eldre enn tre år vises ikke her.",
     "ingenSaker.taKontaktIntro": "Finner du ikke din innsendte søknad?",
     "ingenSaker.taKontakt": "Ta kontakt med brukerstøtte",
-
     "ingenSaker.lesMer": "Les om foreldrepenger",
     "ingenSaker.søkNå": "Søk om foreldrepenger",
 

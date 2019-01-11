@@ -58,13 +58,9 @@ export const annenInformasjonLenker = {
 export const lenker = {
     endringssøknad: 'https://foreldrepengesoknad.nav.no',
     dittNav: 'https://tjenester.nav.no/saksoversikt/app/tema/FOR',
-    brukerstøtte: {
-        href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749'
-    },
-    lesMerOmForeldrepenger: { text: 'Les om foreldrepenger', href: 'https://familie.nav.no' },
-    søkOmForeldrepenger: { text: 'Søk om foreldrepenger', href: 'https://foreldrepengesoknad.nav.no' },
-    chatMedOss: {
-        href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger'
-    },
-    dineUtbetalinger: { href: 'https://tjenester.nav.no/utbetalingsoversikt/#' }
+    brukerstøtte:  'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749',
+    lesMerOmForeldrepenger: 'https://familie.nav.no',
+    søkOmForeldrepenger:'https://foreldrepengesoknad.nav.no',
+    chatMedOss: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger',
+    dineUtbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/#'
 };

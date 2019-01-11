@@ -47,7 +47,7 @@ class ErrorPage extends React.Component<Props, State> {
                     id={'feilside.ingress'}
                     values={{
                         lenke: (
-                            <Lenke href={lenker.brukerstøtte.href}>{getMessage(intl, 'feilside.ingress.lenke')}</Lenke>
+                            <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'feilside.ingress.lenke')}</Lenke>
                         )
                     }}
                 />

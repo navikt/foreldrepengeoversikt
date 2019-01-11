@@ -20,7 +20,7 @@ interface Props {
     history: History;
 }
 
-const NavigationColumLinks: React.StatelessComponent<Props> = (props: Props) => {
+const NavigationColumLinks = (props: Props) => {
     const cls = BEMHelper('navigation-colum-links');
     const links = Object.values(headerLinks);
     return (

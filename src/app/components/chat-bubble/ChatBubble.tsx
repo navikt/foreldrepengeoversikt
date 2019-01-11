@@ -1,19 +1,22 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Lenkepanel from 'nav-frontend-lenkepanel';
 
 import BEMHelper from 'common/util/bem';
 import SpeechBubble from '../ikoner/SpeechBubble';
-
-import './chatBubble.less';
 import { lenker } from '../../utils/lenker';
 
-const ChatBubble = ({ row = false }) => {
+import './chatBubble.less';
+
+const ChatBubble = () => {
     const cls = BEMHelper('chat-bubble');
     return (
-        <Lenkepanel className={cls.className} href={lenker.chatMedOss.href} tittelProps={'normaltekst'}>
+        <Lenkepanel className={cls.className} href={lenker.chatMedOss} tittelProps={'normaltekst'}>
             <SpeechBubble className={cls.element('icon')} />
-            <Normaltekst tag={'span'}>Chat med oss om dine foreldrepenger</Normaltekst>
+            <Normaltekst tag={'span'}>
+                <FormattedMessage id={'dineForeldrepenger'} />
+            </Normaltekst>
         </Lenkepanel>
     );
 };

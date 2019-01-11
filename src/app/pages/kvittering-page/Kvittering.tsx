@@ -12,9 +12,9 @@ import AttachmentList from 'common/storage/attachment/components/AttachmentList'
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
 import BackButton from 'common/components/back-button/BackButton';
+import { Routes } from '../../utils/routes';
 
 import './kvittering.less';
-import { Routes } from '../../utils/routes';
 
 interface Props {
     history: History;
