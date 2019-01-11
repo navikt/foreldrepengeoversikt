@@ -15,7 +15,7 @@ const ChatBubble = () => {
         <Lenkepanel className={cls.className} href={lenker.chatMedOss} tittelProps={'normaltekst'}>
             <SpeechBubble className={cls.element('icon')} />
             <Normaltekst tag={'span'}>
-                <FormattedMessage id={'dineForeldrepenger'} />
+                <FormattedMessage id={'dineForeldrepenger.chatMedOss'} />
             </Normaltekst>
         </Lenkepanel>
     );
