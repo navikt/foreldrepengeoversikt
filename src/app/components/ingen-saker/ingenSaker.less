@@ -7,7 +7,9 @@
     flex-flow: column nowrap;
     text-align: center;
     background-color: @ingen-saker-background;
-    padding: 2rem;
+    width: 640px;
+    max-width: 100%;
+    padding: 2rem 3rem;
 
     &__icon {
         width: 100%;
@@ -17,6 +19,10 @@
     &__options,
     &__contact {
         margin-top: 2rem;
+    }
+
+    &__title {
+        margin-bottom: 2rem;
     }
 
     &__options {
@@ -31,13 +37,14 @@
         .knapp {
             height: 46px;
             width: 100%;
+            padding: 0 1rem;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
-    }
 
-    &__ingress {
-        margin-top: 0.5rem;
+            &:first-child {
+                margin-right: 1rem;
+            }
+        }
     }
 
     &__contact {
@@ -56,8 +63,9 @@
             align-items: stretch;
             padding: 0 1rem;
             .knapp:first-child {
-              margin-bottom: 1rem;
-              padding: 0;
+                margin-bottom: 1rem;
+                margin-right: 0;
+                padding: 0;
             }
         }
     }
