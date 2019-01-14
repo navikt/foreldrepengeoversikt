@@ -39,15 +39,6 @@ const IngenSaker = () => {
                     </KnappBase>
                 </Lenke>
             </div>
-
-            <div className={cls.element('contact')}>
-                <Normaltekst>
-                    <FormattedMessage id={'ingenSaker.taKontaktIntro'} />
-                </Normaltekst>
-                <Lenke href={lenker.brukerstøtte}>
-                    <FormattedMessage id={'ingenSaker.taKontakt'} />
-                </Lenke>
-            </div>
         </div>
     );
 };
