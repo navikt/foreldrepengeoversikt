@@ -40,7 +40,7 @@ describe('Saksoversikt component', () => {
         expect(uploadButton.prop('disabled')).toBeFalsy();
     });
 
-    it('Endringssøknad should be disabled if skalKunneSøkeOmEndring prop is false', () => {
+    it('Endringssøknad button should be hidden if skalKunneSøkeOmEndring prop is false', () => {
         const opprettetDate = moment()
             .subtract(3, 'years')
             .subtract(1, 'days')
@@ -55,7 +55,7 @@ describe('Saksoversikt component', () => {
             />
         );
         const endringssøknadButton = wrapper.find({ className: 'saksoversikt__endringssoknad-btn' });
-        expect(endringssøknadButton.prop('disabled')).toBeTruthy();
+        expect(endringssøknadButton.length).toBe(0);
     });
 
     it('Endringssøknad should be enabled if skalKunneSøkeOmEndring prop is true', () => {

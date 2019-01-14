@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { lenker } from '../../utils/lenker';
+import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { lenker } from '../../utils/lenker';
 import BEMHelper from 'common/util/bem';
 import classnames from 'classnames';
 import CryBabyIcon from 'app/components/ikoner/CryBabyIkon';
 import KnappBase from 'nav-frontend-knapper';
 import Lenke from 'nav-frontend-lenker';
 import Veileder from 'common/components/veileder/Veileder';
-import Veilederpanel from 'nav-frontend-veilederpanel';
+
 import './ingenSaker.less';
 
 const IngenSaker = () => {

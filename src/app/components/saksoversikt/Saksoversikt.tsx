@@ -15,7 +15,6 @@ import FileIcon from '../ikoner/FileIcon';
 import SaksoversiktHeader from './SaksoversiktHeader';
 
 import { isSakTooOldForEttersendelse } from './util';
-import { erForeldrepengesak } from '../../utils/sakerUtils';
 import { Routes } from '../../utils/routes';
 
 import './saksoversikt.less';
@@ -78,7 +77,7 @@ class Saksoversikt extends React.Component<Props> {
                         )}
                     </div>
 
-                    {erForeldrepengesak(sak) && (
+                    {skalKunneSøkeOmEndring && (
                         <>
                             <Normaltekst className={cls.element('endringssoknad-intro')}>
                                 <FormattedMessage id={'saksoversikt.content.endringssøknad.intro'} />
@@ -86,15 +85,9 @@ class Saksoversikt extends React.Component<Props> {
                             <div className={cls.element('valg')}>
                                 <Knapp
                                     className={cls.element('endringssoknad-btn')}
-                                    onClick={() => this.onEndreSøknad()}
-                                    disabled={!skalKunneSøkeOmEndring}>
+                                    onClick={() => this.onEndreSøknad()}>
                                     <FormattedMessage id={'saksoversikt.content.endringssøknad.button'} />
                                 </Knapp>
-                                {!skalKunneSøkeOmEndring && (
-                                    <HjelpetekstAuto id={'endringssøknad-disabled-info'} tittel={''}>
-                                        <FormattedMessage id={'saksoversikt.endringssøknad.hjelpetekst'} />
-                                    </HjelpetekstAuto>
-                                )}
                             </div>
                         </>
                     )}
