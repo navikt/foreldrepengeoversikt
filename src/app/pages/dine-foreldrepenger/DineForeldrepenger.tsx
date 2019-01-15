@@ -96,7 +96,7 @@ class DineForeldrepenger extends React.Component<Props> {
 
     shouldRenderInfoPanel(): boolean {
         const { saker } = this.props;
-        return saker !== undefined && saker.length > 0;
+        return saker !== undefined && saker.length > 0 && !erInfotrygdSak(saker[0]);
     }
 
     render() {
