@@ -145,10 +145,10 @@ node {
                 }
 
                 // Tag production release
-                withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
-                    sh ("git tag -a ${releaseVersion} -m ${releaseVersion}")
-                    sh ("git push https://${token}:x-oauth-basic@github.com/${project}/${app}.git --tags")
-                }
+                //withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
+                //    sh ("git tag -a ${releaseVersion} -m ${releaseVersion}")
+                //    sh ("git push https://${token}:x-oauth-basic@github.com/${project}/${app}.git --tags")
+                //}
 
                 slackSend([
                     color: 'good',
