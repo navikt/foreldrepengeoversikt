@@ -1,15 +1,17 @@
 import { FagsakStatus } from '../../src/app/types/FagsakStatus';
 import Sak, { SakType } from '../../src/app/types/Sak';
-import Behandling, { BehandlingStatus, BehandlingTema } from '../../src/app/types/Behandling';
+import Behandling, { BehandlingStatus, BehandlingTema, BehandlingÅrsak } from '../../src/app/types/Behandling';
 
 export const behandlingMock: Behandling = {
+    opprettetTidspunkt: '2019-01-01',
+    endretTidspunkt: '2019-01-02',
     behandlendeEnhet: "4833",
     behandlendeEnhetNavn: "NAV Familie- og pensjonsytelser Oslo 1",
     id: null,
     status: BehandlingStatus.OPPRETTET,
     tema: BehandlingTema.FORELDREPENGER,
     type: "FP",
-    årsak: null,
+    årsak: BehandlingÅrsak.YTELSE,
 };
 
 const infotrygdSak: Sak = {

@@ -43,6 +43,7 @@
     "ettersendelse.select.I000045": "Dokumentasjon av sykdom",
     "ettersendelse.select.I000061": "Dokumentasjon av mors utdanning på heltid",
     "ettersendelse.select.I000051": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+    "ettersendelse.select.I000036": "Bekreftelse på avtalt ferie",
     "ettersendelse.select.I000049": "Annen dokumentasjon",
     "ettersendelse.attachmentList.I000065": "Bekreftelse fra arbeidsgiver",
     "ettersendelse.attachmentList.I000026": "Inntektsopplysninger fra arbeidsgiver",
@@ -58,6 +59,7 @@
     "ettersendelse.attachmentList.I000045": "Dokumentasjon av sykdom",
     "ettersendelse.attachmentList.I000061": "Dokumentasjon av mors utdanning på heltid",
     "ettersendelse.attachmentList.I000051": "Dokumentasjon av at mor deltar i kvalifiseringsprogrammet",
+    "ettersendelse.attachmentList.I000036": "Bekreftelse på avtalt ferie",
     "ettersendelse.attachmentList.I000049": "Annen dokumentasjon",
 
     "vedlegg.lastoppknapp": "Legg ved dokumentasjon",

@@ -1,6 +1,6 @@
 import Sak, { SakType } from '../types/Sak';
 import { FagsakStatus } from '../types/FagsakStatus';
-import Behandling, { BehandlingStatus, BehandlingTema } from '../types/Behandling';
+import Behandling, { BehandlingStatus, BehandlingTema, BehandlingÅrsak } from '../types/Behandling';
 
 export const datesByDescendingOrder = (a: Sak, b: Sak) => b.opprettet.localeCompare(a.opprettet);
 
@@ -13,6 +13,13 @@ const getBehandling = (sak: Sak): Behandling | undefined => {
         return sak.behandlinger[0];
     }
     return undefined;
+};
+
+export const erEndringssøknad = (sak: Sak) => {
+    if (!sak.behandlinger) {
+        return false;
+    }
+    return sak.behandlinger.some((b: Behandling) => b.årsak === BehandlingÅrsak.ENDRING_FRA_BRUKER);
 };
 
 export const erForeldrepengesak = (sak: Sak): boolean => {
@@ -30,7 +37,7 @@ export const erForeldrepengesak = (sak: Sak): boolean => {
     }
 };
 
-export const erEngangssønadsak = (sak: Sak): boolean => {
+export const erEngangsstønad = (sak: Sak): boolean => {
     const behandling = getBehandling(sak);
     if (behandling === undefined) {
         return true;

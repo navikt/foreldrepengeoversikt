@@ -13,7 +13,7 @@ import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjo
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 import {
     datesByDescendingOrder,
-    erEngangssønadsak,
+    erEngangsstønad,
     erForeldrepengesak,
     erInfotrygdSak,
     erUnderBehandling,
@@ -71,7 +71,7 @@ class DineForeldrepenger extends React.Component<Props> {
         const cls = BEMHelper('sak-info-panel');
         return (
             <div className={cls.className}>
-                <InfoPanel erNyesteSakEngangssønad={erEngangssønadsak(this.props.saker[0])} />
+                <InfoPanel erNyesteSakEngangssønad={erEngangsstønad(this.props.saker[0])} />
             </div>
         );
     }
@@ -92,6 +92,11 @@ class DineForeldrepenger extends React.Component<Props> {
                 <DineUtbetalinger />
             </div>
         );
+    }
+
+    shouldRenderInfoPanel(): boolean {
+        const { saker } = this.props;
+        return saker !== undefined && saker.length > 0;
     }
 
     render() {
@@ -116,7 +121,9 @@ class DineForeldrepenger extends React.Component<Props> {
                         {!error && ((saker === undefined || saker.length === 0) && <IngenSaker />)}
                         {saker !== undefined && error === undefined && this.renderSaksoversiktList()}
 
-                        <MediaQuery maxWidth={1114}>{this.renderInfoPanel()}</MediaQuery>
+                        {this.shouldRenderInfoPanel() && (
+                            <MediaQuery maxWidth={1114}>{this.renderInfoPanel()}</MediaQuery>
+                        )}
                         {saker !== undefined && saker.length > 0 && this.renderDineUtbetalingerPanel()}
                         <MediaQuery maxWidth={1114}>{this.renderChatBubblePanel()}</MediaQuery>
 
@@ -125,7 +132,7 @@ class DineForeldrepenger extends React.Component<Props> {
 
                     <MediaQuery minWidth={1115}>
                         <div className={cls.element('side-bar')}>
-                            {saker !== undefined && saker.length > 0 && this.renderInfoPanel()}
+                            {this.shouldRenderInfoPanel() && this.renderInfoPanel()}
                             {this.renderChatBubblePanel()}
                         </div>
                     </MediaQuery>

@@ -26,9 +26,4 @@ describe('SaksoversiktHeader', () => {
         const wrapper = shallow(<SaksoversiktHeader sak={SakerMock.fpsakSak} />);
         expect(wrapper.find(EtikettBase).length).toEqual(1);
     });
-
-
-
-
-
 });

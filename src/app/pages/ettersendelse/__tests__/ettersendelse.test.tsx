@@ -9,6 +9,8 @@ import Api from '../../../api/api';
 import BackButton from 'common/components/back-button/BackButton';
 
 import translations from '../../../intl/nb_NO.json';
+import SakerMock, { behandlingMock } from '../../../../../jest/__mocks__/Sak';
+import { BehandlingTema, BehandlingÅrsak } from '../../../types/Behandling';
 loadTranslationObject(translations);
 
 describe('Ettersendelse page', () => {
@@ -68,12 +70,6 @@ describe('Ettersendelse page', () => {
         const attachmentTypeSelector = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
         expect(attachmentTypeSelector.length).toEqual(1);
     });
-
-    //it('Attachment type dropdown default value should be disabled and not selectable', () => {
-    //    const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
-    //    const attachmentTypeSelector = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
-    //    expect(attachmentTypeSelector.children()).toMatchSnapshot();
-    //});
 
     it('AttachmentUploader should only render when attachment type is selected in dropdown', () => {
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
@@ -149,5 +145,47 @@ describe('Ettersendelse page', () => {
 
         const ettersendVedleggButton = wrapper.find({ className: 'ettersendelse__send-button' });
         expect(ettersendVedleggButton.length).toEqual(0);
+    });
+
+    it('attachment type dropdown should render all attachment types for saker from infotrygd', () => {
+        historyMock.location.state.sak = { ...SakerMock.infotrygdSak };
+        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
+        expect(dropdown.children().length).toBe(Object.values(Skjemanummer).length + 1);
+    });
+
+    it('attachment type dropdown should only render relevant attachment types for engangsstønad', () => {
+        historyMock.location.state.sak = {
+            ...SakerMock.fpsakSak,
+            behandlinger: [{ ...behandlingMock, tema: BehandlingTema.ENGANGSTØNAD }]
+        };
+
+        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
+        expect(dropdown.children().length).toBe(4);
+    });
+
+    it('attachment type dropdown should only render relevant attachment types for foreldrepengesøknad', () => {
+        historyMock.location.state.sak = {
+            ...SakerMock.fpsakSak,
+            behandlinger: [{ ...behandlingMock, tema: BehandlingTema.FORELDREPENGER }]
+        };
+
+        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
+        expect(dropdown.children().length).toBe(Object.values(Skjemanummer).length + 1);
+    });
+
+    it('attachment type dropdown should only render relevant attachment types for foreldrepengesoknad with endring', () => {
+        historyMock.location.state.sak = {
+            ...SakerMock.fpsakSak,
+            behandlinger: [
+                { ...behandlingMock, tema: BehandlingTema.FORELDREPENGER, årsak: BehandlingÅrsak.ENDRING_FRA_BRUKER }
+            ]
+        };
+
+        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
+        expect(dropdown.children().length).toBe(10);
     });
 });

@@ -23,10 +23,23 @@ export enum Skjemanummer {
     DOK_OVERFØRING_FOR_SYK = 'I000045',
     BEKREFTELSE_FRA_STUDIESTED = 'I000061',
     BEKREFTELSE_DELTAR_KVALIFISERINGSPROGRAM = 'I000051',
-    ANNET = 'I000060'
+    BEKREFTELSE_PÅ_AVTALT_FERIE = 'I000036',
+    ANNET = 'I000060',
 }
 
-export const skjemanummerForEngangssønad = (skjemanummer: Skjemanummer) =>
+export const skjemanummerForEngangsstønad = (skjemanummer: Skjemanummer) =>
     skjemanummer === Skjemanummer.ANNET ||
     skjemanummer === Skjemanummer.TERMINBEKREFTELSE ||
     skjemanummer === Skjemanummer.FØDSELSATTEST;
+
+
+export const skjemanummerForEndringssøknad = (skjemanummer: Skjemanummer) =>
+    skjemanummer === Skjemanummer.BEKREFTELSE_FRA_ARBEIDSGIVER ||
+    skjemanummer === Skjemanummer.OMSORGSOVERTAKELSESDATO ||
+    skjemanummer === Skjemanummer.ANNET ||
+    skjemanummer === Skjemanummer.DOK_MORS_UTDANNING_ARBEID_SYKDOM ||
+    skjemanummer === Skjemanummer.DOK_INNLEGGELSE ||
+    skjemanummer === Skjemanummer.DOK_OVERFØRING_FOR_SYK ||
+    skjemanummer === Skjemanummer.BEKREFTELSE_FRA_STUDIESTED ||
+    skjemanummer === Skjemanummer.BEKREFTELSE_DELTAR_KVALIFISERINGSPROGRAM ||
+    skjemanummer === Skjemanummer.BEKREFTELSE_PÅ_AVTALT_FERIE;
