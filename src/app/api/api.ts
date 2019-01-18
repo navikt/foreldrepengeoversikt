@@ -18,6 +18,18 @@ const sendEttersending = (ettersending: Ettersending) => {
     });
 };
 
-const Api = { getSaker, sendEttersending };
+
+const log = (error: any) => {
+    return axios.post('/log', error, {
+        timeout: 15 * 1000,
+        withCredentials: true,
+        headers: {
+            'content-type': 'application/json'
+        }
+    });
+};
+
+
+const Api = { getSaker, sendEttersending, log};
 
 export default Api;

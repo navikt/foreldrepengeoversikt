@@ -1,14 +1,15 @@
-require('dotenv').config();
-
 const express = require('express');
+const server = express();
+server.use(express.json());
+
 const path = require('path');
+const winston = require('winston');
 const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const getDecorator = require('./src/build/scripts/decorator');
 const createEnvSettingsFile = require('./src/build/scripts/envSettings');
 const compression = require('compression');
 
-const server = express();
 server.use(compression());
 
 server.set('views', `${__dirname}/dist`);
@@ -23,6 +24,11 @@ server.use((req, res, next) => {
     res.set('X-XSS-Protection', '1; mode=block');
     res.set('X-Content-Type-Options', 'nosniff');
     next();
+});
+
+const logger = winston.createLogger({
+    format: winston.format.json(),
+    transports: [new winston.transports.Console()]
 });
 
 const renderApp = (decoratorFragments) =>
@@ -49,6 +55,11 @@ const startServer = (html) => {
 
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
     server.get('/health/isReady', (req, res) => res.sendStatus(200));
+    server.post('/log', (req, res) => {
+        const { message, ...rest } = req.body;
+        logger.warn(message, { ...rest });
+        res.sendStatus(200);
+    });
 
     server.get(/^\/(?!.*dist).*$/, (req, res) => {
         res.send(html);

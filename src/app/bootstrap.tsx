@@ -5,11 +5,14 @@ import IntlProvider from './intl/IntlProvider';
 import Foreldrepengeoversikt from './Foreldrepengeoversikt';
 
 import './styles/app.less';
+import ErrorBoundary from 'common/components/error-boundary/ErrorBoundary';
 
 const root = document.getElementById('app');
 render(
-    <IntlProvider>
-        <Foreldrepengeoversikt />
-    </IntlProvider>,
+    <ErrorBoundary>
+        <IntlProvider>
+            <Foreldrepengeoversikt />
+        </IntlProvider>
+    </ErrorBoundary>,
     root
 );
