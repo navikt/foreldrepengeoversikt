@@ -6,6 +6,7 @@ import VeilederMedSnakkeboble from '../veileder-med-snakkeboble/VeilederMedSnakk
 import Block from 'common/components/block/Block';
 
 import './feilsidemelding.less';
+import { FormattedMessage } from 'react-intl';
 
 export interface Props {
     containerId?: string;
@@ -54,7 +55,9 @@ const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress, uuid }: P
                 </Block>
                 {uuid && (
                     <Block margin={'l'}>
-                        <Ingress>{uuid}</Ingress>
+                        <Ingress>
+                            <FormattedMessage id="feilside.uuid" values={{ uuid }} />
+                        </Ingress>
                     </Block>
                 )}
             </div>

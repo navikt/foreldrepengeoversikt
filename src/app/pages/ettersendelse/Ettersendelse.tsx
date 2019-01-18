@@ -21,8 +21,8 @@ import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummer } from './u
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 import { Routes } from '../../utils/routes';
 
-import './ettersendelse.less';
 import { extractErrorMessage, extractUUID } from 'common/util/errorUtil';
+import './ettersendelse.less';
 
 interface EttersendelseProps {
     history: History;
