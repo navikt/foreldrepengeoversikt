@@ -20,11 +20,10 @@ export interface Props {
     };
     tittel: React.ReactNode;
     ingress: React.ReactNode;
-    language?: string;
-    setLanguage?: (languageCode: string) => void;
+    uuid?: string;
 }
 
-const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress }: Props) => {
+const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress, uuid }: Props) => {
     return (
         <div id={containerId}>
             {illustrasjon && (
@@ -53,6 +52,11 @@ const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress }: Props) 
                 <Block margin={'l'}>
                     <Ingress>{ingress}</Ingress>
                 </Block>
+                {uuid && (
+                    <Block margin={'l'}>
+                        <Ingress>{uuid}</Ingress>
+                    </Block>
+                )}
             </div>
         </div>
     );

@@ -22,6 +22,7 @@ import AttachmentList from 'common/storage/attachment/components/AttachmentList'
 import { Routes } from '../../utils/routes';
 
 import './ettersendelse.less';
+import { extractErrorMessage, extractUUID } from 'common/util/errorUtil';
 
 interface EttersendelseProps {
     history: History;
@@ -107,10 +108,11 @@ class Ettersendelse extends React.Component<Props, State> {
                 this.setState({ sendingEttersendelse: false }, () => {
                     error.response
                         ? this.props.history.push(Routes.FEIL, {
-                              errorStatusCode: error.response.status,
-                              errorMessage: error.response.data.message
+                              error: true,
+                              errorMessage: error.response.status === 413 ? extractErrorMessage(error) : undefined,
+                              uuid: extractUUID(error)
                           })
-                        : this.props.history.push(Routes.FEIL, { timeout: true });
+                        : this.props.history.push(Routes.FEIL, { error: true });
                 });
             });
     }

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-
 import Lenke from 'nav-frontend-lenker';
 import { History } from 'history';
 
@@ -17,9 +16,9 @@ export interface ErrorPageProps {
 }
 
 export interface State {
-    error?: boolean;
-    errorStatusCode?: number;
+    error: true;
     errorMessage?: string;
+    uuid?: string;
 }
 
 type Props = ErrorPageProps & InjectedIntlProps;
@@ -39,19 +38,18 @@ class ErrorPage extends React.Component<Props, State> {
 
     render() {
         const { intl } = this.props;
-        const errorMessage =
-            this.state.errorStatusCode === 413 && this.state.errorMessage ? (
-                this.state.errorMessage
-            ) : (
-                <FormattedMessage
-                    id={'feilside.ingress'}
-                    values={{
-                        lenke: (
-                            <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'feilside.ingress.lenke')}</Lenke>
-                        )
-                    }}
-                />
-            );
+        const { uuid } = this.state;
+
+        const errorMessage = this.state.errorMessage ? (
+            this.state.errorMessage
+        ) : (
+            <FormattedMessage
+                id={'feilside.ingress'}
+                values={{
+                    lenke: <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'feilside.ingress.lenke')}</Lenke>
+                }}
+            />
+        );
 
         const cls = BEMHelper('error-page');
         return (
@@ -63,6 +61,7 @@ class ErrorPage extends React.Component<Props, State> {
                     }}
                     tittel={getMessage(intl, 'feilside.tittel')}
                     ingress={errorMessage}
+                    uuid={uuid}
                 />
             </div>
         );
