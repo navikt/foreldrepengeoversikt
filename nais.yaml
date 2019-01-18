@@ -31,3 +31,5 @@ fasitResources:
     resourceType: restservice
   - alias: loadbalancer:foreldrepengeoversikt
     resourceType: loadbalancerconfig
+  - alias: foreldrepengeoversikt-toggles
+    resourceType: applicationProperties
