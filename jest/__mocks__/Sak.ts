@@ -12,6 +12,7 @@ export const behandlingMock: Behandling = {
     tema: BehandlingTema.FORELDREPENGER,
     type: "FP",
     årsak: BehandlingÅrsak.YTELSE,
+    behandlingResultatType: "INNVILGET"
 };
 
 const infotrygdSak: Sak = {

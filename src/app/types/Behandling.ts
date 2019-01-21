@@ -8,6 +8,7 @@ export default interface Behandling {
     tema: string;
     type: string;
     årsak: BehandlingÅrsak;
+    behandlingResultatType: string;
 }
 
 

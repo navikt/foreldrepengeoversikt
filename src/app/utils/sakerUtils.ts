@@ -2,7 +2,8 @@ import Sak, { SakType } from '../types/Sak';
 import { FagsakStatus } from '../types/FagsakStatus';
 import Behandling, { BehandlingStatus, BehandlingTema, BehandlingÅrsak } from '../types/Behandling';
 
-export const datesByDescendingOrder = (a: Sak, b: Sak) => b.opprettet.localeCompare(a.opprettet);
+export const sakByDescendingOrder = (a: Sak, b: Sak) => b.opprettet.localeCompare(a.opprettet);
+export const behandlingByDescendingOrder = (a: Behandling, b: Behandling) => b.opprettetTidspunkt.localeCompare(a.opprettetTidspunkt);
 
 export const erUnderBehandling = (sak: Sak): any => {
     return sak && sak.status && (sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING);

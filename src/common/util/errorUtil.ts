@@ -1,6 +1,6 @@
 export const extractErrorMessage = (error: any): string | undefined => {
-    return error && error.response && error.response.data && error.response.data.message
-        ? error.response.data.message
+    return error && error.response && error.response.data && error.response.data.messages
+        ? error.response.data.messages
         : undefined;
 };
 

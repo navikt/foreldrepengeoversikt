@@ -1,7 +1,8 @@
 import Environment from './Environment';
 
 export enum Feature {
-    logging = 'FEATURE_LOGGING'
+    logging = 'FEATURE_LOGGING',
+    behandlingsOversikt = "FEATURE_BEHANDLINGSOVERSIKT"
 }
 
 export const isFeatureEnabled = (feature: Feature): boolean => {

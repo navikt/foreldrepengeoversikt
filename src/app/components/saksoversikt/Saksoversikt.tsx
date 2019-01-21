@@ -13,9 +13,12 @@ import Sak from '../../types/Sak';
 import { lenker } from '../../utils/lenker';
 import FileIcon from '../ikoner/FileIcon';
 import SaksoversiktHeader from './SaksoversiktHeader';
-
 import { isSakTooOldForEttersendelse } from './util';
 import { Routes } from '../../utils/routes';
+import { Feature, isFeatureEnabled } from '../../Feature';
+import Behandling from '../../types/Behandling';
+import { behandlingByDescendingOrder } from '../../utils/sakerUtils';
+import { guid } from 'nav-frontend-js-utils';
 
 import './saksoversikt.less';
 
@@ -38,6 +41,7 @@ class Saksoversikt extends React.Component<Props> {
     render() {
         const { sak, skalKunneSøkeOmEndring, expanded } = this.props;
         const cls = BEMHelper('saksoversikt');
+
         return (
             <div className={cls.className}>
                 <EkspanderbartpanelBase
@@ -90,6 +94,21 @@ class Saksoversikt extends React.Component<Props> {
                                 </Knapp>
                             </div>
                         </>
+                    )}
+
+                    {isFeatureEnabled(Feature.behandlingsOversikt) && sak.behandlinger && (
+                        <ol>
+                            {sak.behandlinger.sort(behandlingByDescendingOrder).map((b: Behandling) => (
+                                <li key={guid()}>
+                                    <Normaltekst>opprettetTidspunkt: {b.opprettetTidspunkt}</Normaltekst>
+                                    <Normaltekst>endretTidspunkt: {b.endretTidspunkt}</Normaltekst>
+                                    <Normaltekst>årsak: {b.årsak}</Normaltekst>
+                                    <Normaltekst>tema: {b.tema}</Normaltekst>
+                                    <Normaltekst>status: {b.status}</Normaltekst>
+                                    <Normaltekst>behandlingResultatType: {b.behandlingResultatType}</Normaltekst>
+                                </li>
+                            ))}
+                        </ol>
                     )}
                 </EkspanderbartpanelBase>
             </div>

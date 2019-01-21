@@ -11,7 +11,7 @@ import ApplicationSpinner from './components/application-spinner/ApplicationSpin
 import ErrorPage from './pages/error/ErrorPage';
 import KvitteringPage from './pages/kvittering-page/Kvittering';
 import { Routes } from './utils/routes';
-import { datesByDescendingOrder } from './utils/sakerUtils';
+import { sakByDescendingOrder } from './utils/sakerUtils';
 
 interface State {
     saker: Sak[];
@@ -36,7 +36,7 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
         this.setState({ loading: true }, () => {
             Api.getSaker()
                 .then((response) =>
-                    this.setState({ saker: response.data.sort(datesByDescendingOrder), loading: false })
+                    this.setState({ saker: response.data.sort(sakByDescendingOrder), loading: false })
                 )
                 .catch((error: AxiosError) => {
                     if (error.response) {

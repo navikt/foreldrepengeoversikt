@@ -12,7 +12,7 @@ import BEMHelper from '../../../common/util/bem';
 import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjon';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 import {
-    datesByDescendingOrder,
+    sakByDescendingOrder,
     erEngangsstønad,
     erForeldrepengesak,
     erInfotrygdSak,
@@ -53,7 +53,7 @@ class DineForeldrepenger extends React.Component<Props> {
         const cls = BEMHelper('saksoversikt-list');
         return (
             <ul className={cls.className}>
-                {saker.sort(datesByDescendingOrder).map((sak: Sak, index: number) => (
+                {saker.sort(sakByDescendingOrder).map((sak: Sak, index: number) => (
                     <li className={cls.element('element')} key={sak.saksnummer}>
                         <Saksoversikt
                             sak={sak}
