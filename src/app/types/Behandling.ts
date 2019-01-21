@@ -9,6 +9,7 @@ export default interface Behandling {
     type: string;
     årsak: BehandlingÅrsak;
     behandlingResultatType: string;
+    inntektsmeldinger: string[];
 }
 
 

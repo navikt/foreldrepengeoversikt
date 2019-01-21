@@ -106,6 +106,7 @@ class Saksoversikt extends React.Component<Props> {
                                     <Normaltekst>tema: {b.tema}</Normaltekst>
                                     <Normaltekst>status: {b.status}</Normaltekst>
                                     <Normaltekst>behandlingResultatType: {b.behandlingResultatType}</Normaltekst>
+                                    <Normaltekst>inntektsmeldinger: {b.inntektsmeldinger}</Normaltekst>
                                 </li>
                             ))}
                         </ol>
