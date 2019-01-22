@@ -10,8 +10,7 @@ moment.locale('nb');
 
 const areIntlLocalesSupported = require('intl-locales-supported');
 const localesMyAppSupports = [
-    'nb_NO',
-    'nn_NO'
+    'nb-NO'
 ];
 
 if (global.Intl) {
