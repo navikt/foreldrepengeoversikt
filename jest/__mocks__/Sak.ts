@@ -1,6 +1,6 @@
 import { FagsakStatus } from '../../src/app/types/FagsakStatus';
 import Sak, { SakType } from '../../src/app/types/Sak';
-import Behandling, { BehandlingStatus, BehandlingTema, BehandlingÅrsak } from '../../src/app/types/Behandling';
+import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingTema, BehandlingÅrsak } from '../../src/app/types/Behandling';
 
 export const behandlingMock: Behandling = {
     opprettetTidspunkt: '2019-01-01',
@@ -12,7 +12,7 @@ export const behandlingMock: Behandling = {
     tema: BehandlingTema.FORELDREPENGER,
     type: "FP",
     årsak: BehandlingÅrsak.YTELSE,
-    behandlingResultatType: "INNVILGET",
+    behandlingResultatType: BehandlingResultatType.INNVILGET,
     inntektsmeldinger: []
 };
 

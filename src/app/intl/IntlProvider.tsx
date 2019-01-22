@@ -8,6 +8,22 @@ import nbMessages from './nb_NO.json';
 
 moment.locale('nb');
 
+const areIntlLocalesSupported = require('intl-locales-supported');
+const localesMyAppSupports = [
+    'nb_NO',
+    'nn_NO'
+];
+
+if (global.Intl) {
+    if (!areIntlLocalesSupported(localesMyAppSupports)) {
+        const IntlPolyfill    = require('intl');
+        Intl.NumberFormat   = IntlPolyfill.NumberFormat;
+        Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
+    }
+} else {
+    global.Intl = require('intl');
+}
+
 class IntlProvider extends React.Component {
     constructor(props: any) {
         super(props);
