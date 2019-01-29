@@ -19,14 +19,14 @@ interface HistorikkElementProps {
 type Props = HistorikkElementProps;
 class HistorikkElement extends React.Component<Props> {
     // TODO sette brukers initialer her
-    //componentDidMount(): void {
-    //    if ((document as any) !== undefined) {
-    //        const list = (document as any).getElementsByClassName('bruker');
-    //        for (const item of list) {
-    //            item.innerHTML = '';
-    //        }
-    //    }
-    //}
+    //  componentDidMount(): void {
+    //      if ((document as any) !== undefined) {
+    //          const list = (document as any).getElementsByClassName('bruker');
+    //          for (const item of list) {
+    //              item.innerHTML = '';
+    //          }
+    //      }
+    //  }
 
     render() {
         const { hendelse } = this.props;

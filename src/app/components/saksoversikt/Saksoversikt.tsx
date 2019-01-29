@@ -16,9 +16,7 @@ import SaksoversiktHeader from './SaksoversiktHeader';
 import { isSakTooOldForEttersendelse } from './util';
 import { Routes } from '../../utils/routes';
 import { Feature, isFeatureEnabled } from '../../Feature';
-import Behandling from '../../types/Behandling';
-import { behandlingByDescendingOrder } from '../../utils/sakerUtils';
-import { guid } from 'nav-frontend-js-utils';
+import Oversikt from '../oversikt/Oversikt';
 
 import './saksoversikt.less';
 
@@ -96,21 +94,7 @@ class Saksoversikt extends React.Component<Props> {
                         </>
                     )}
 
-                    {isFeatureEnabled(Feature.behandlingsOversikt) && sak.behandlinger && (
-                        <ol>
-                            {sak.behandlinger.sort(behandlingByDescendingOrder).map((b: Behandling) => (
-                                <li key={guid()}>
-                                    <Normaltekst>opprettetTidspunkt: {b.opprettetTidspunkt}</Normaltekst>
-                                    <Normaltekst>endretTidspunkt: {b.endretTidspunkt}</Normaltekst>
-                                    <Normaltekst>årsak: {b.årsak}</Normaltekst>
-                                    <Normaltekst>tema: {b.tema}</Normaltekst>
-                                    <Normaltekst>status: {b.status}</Normaltekst>
-                                    <Normaltekst>behandlingResultatType: {b.behandlingResultatType}</Normaltekst>
-                                    <Normaltekst>inntektsmeldinger: {b.inntektsmeldinger}</Normaltekst>
-                                </li>
-                            ))}
-                        </ol>
-                    )}
+                    {isFeatureEnabled(Feature.behandlingsOversikt) && <Oversikt sak={sak} />}
                 </EkspanderbartpanelBase>
             </div>
         );
