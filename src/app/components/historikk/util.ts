@@ -2,7 +2,7 @@ import Sak from '../../types/Sak';
 import { Hendelse } from './HistorikkElement';
 import Behandling, { BehandlingStatus, BehandlingÅrsak } from '../../types/Behandling';
 import { formatDate } from '../saksoversikt/util';
-import { behandlingByAscendingOrder } from '../../utils/sakerUtils';
+import { behandlingByDescendingOrder } from '../../utils/sakerUtils';
 
 const oversettÅrsak = (årsak?: BehandlingÅrsak): string => {
     switch (årsak) {
@@ -60,7 +60,7 @@ export const utledHendelser = (sak: Sak): Hendelse[] => {
     const hendelser: Hendelse[] = [];
 
     if (sak.behandlinger) {
-        sak.behandlinger.sort(behandlingByAscendingOrder).forEach((b: Behandling) => {
+        sak.behandlinger.sort(behandlingByDescendingOrder).forEach((b: Behandling) => {
             erBehandlingAvsluttet(b)
                 ? hendelser.push(...splittBehandlingTilHenderlser(b))
                 : hendelser.push({
