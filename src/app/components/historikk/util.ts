@@ -71,8 +71,10 @@ export const utledHendelser = (sak: Sak): Hendelse[] => {
         });
     }
 
-    hendelser[hendelser.length - 1].beskrivelse = 'Søknad Sendt';
-    hendelser[hendelser.length - 1].brukerInitiertHendelse= true;
+    if (hendelser.length > 0) {
+        hendelser[hendelser.length - 1].beskrivelse = 'Søknad Sendt';
+        hendelser[hendelser.length - 1].brukerInitiertHendelse = true;
+    }
 
     return hendelser;
 };
