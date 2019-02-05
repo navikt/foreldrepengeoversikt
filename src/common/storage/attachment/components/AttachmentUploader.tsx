@@ -29,6 +29,7 @@ export default class AttachmentsUploader extends React.Component<AttachmentsUplo
                 .then((response: any) => {
                     file.pending = false;
                     file.url = response.headers.location;
+                    file.uuid = response.data;
                     onFileUploadFinish(file);
                 })
                 .catch((error) => {

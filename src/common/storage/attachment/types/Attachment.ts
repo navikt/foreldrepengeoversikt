@@ -4,6 +4,7 @@ export interface Attachment {
     filesize: number;
     file: File;
     url?: string;
+    uuid?: string;
     pending: boolean;
     error?: any;
     skjemanummer: Skjemanummer;
