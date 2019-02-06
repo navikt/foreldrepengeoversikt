@@ -1,6 +1,6 @@
 import Sak from '../../types/Sak';
 import { Hendelse } from './HistorikkElement';
-import Behandling, { BehandlingStatus, BehandlingÅrsak } from '../../types/Behandling';
+import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingÅrsak } from '../../types/Behandling';
 import { formatDate } from '../saksoversikt/util';
 import { behandlingByDescendingOrder } from '../../utils/sakerUtils';
 
@@ -13,7 +13,7 @@ const oversettÅrsak = (årsak?: BehandlingÅrsak): string => {
         case BehandlingÅrsak.MANGLENDE_FØDSEL:
             return 'Manglende informasjon om fødsel i folkeregisteret';
         default:
-            return årsak ? årsak : 'årsak null';
+            return årsak ? årsak : 'Søknad Sendt';
     }
 };
 
@@ -33,15 +33,27 @@ const erBehandlingAvsluttet = (b: Behandling): boolean => {
     return b.status === BehandlingStatus.AVSLUTTET;
 };
 
-const oversettStatus = (status: BehandlingStatus): string => {
-    return status === BehandlingStatus.AVSLUTTET ? 'Behandlig avsluttet(ukjent status)' : 'ukjent';
+const oversettResultat = (resultatType: BehandlingResultatType) => {
+    switch (resultatType) {
+        case BehandlingResultatType.INNVILGET:
+            return 'Søknad innvilget';
+        case BehandlingResultatType.FORELDREPENGER_ENDRET:
+            return 'Endring godkjent'
+        default:
+            return resultatType ? resultatType : 'Resultat ikke definert';
+    }
+};
+
+
+const oversettStatus = (b: Behandling): string => {
+    return b.status === BehandlingStatus.AVSLUTTET ? oversettResultat(b.behandlingResultat) : 'ukjent';
 };
 
 const splittBehandlingTilHenderlser = (b: Behandling): Hendelse[] => {
-    return [
+    const hendelser: Hendelse[] = [
         {
             dato: formaterDato(b.endretTidspunkt),
-            beskrivelse: oversettStatus(b.status),
+            beskrivelse: oversettStatus(b),
             brukerInitiertHendelse: false
         },
         {
@@ -50,10 +62,20 @@ const splittBehandlingTilHenderlser = (b: Behandling): Hendelse[] => {
             brukerInitiertHendelse: true
         }
     ];
+
+    if (b.inntektsmeldinger.length > 0) {
+        hendelser.push({
+            dato: formaterDato(b.opprettetTidspunkt),
+            beskrivelse: 'Inntektsmelding mottatt',
+            brukerInitiertHendelse: false
+        });
+    }
+
+    return hendelser;
 };
 
 const formaterDato = (dato: string) => {
-    return formatDate(dato, 'D. MMMM YYYY [kl.] hh:mm:ss');
+    return formatDate(dato, 'D. MMMM YYYY [kl.] HH:mm:ss');
 };
 
 export const utledHendelser = (sak: Sak): Hendelse[] => {
@@ -70,11 +92,5 @@ export const utledHendelser = (sak: Sak): Hendelse[] => {
                   });
         });
     }
-
-    if (hendelser.length > 0) {
-        hendelser[hendelser.length - 1].beskrivelse = 'Søknad Sendt';
-        hendelser[hendelser.length - 1].brukerInitiertHendelse = true;
-    }
-
     return hendelser;
 };
