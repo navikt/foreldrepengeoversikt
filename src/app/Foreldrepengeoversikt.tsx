@@ -11,7 +11,6 @@ import ApplicationSpinner from './components/application-spinner/ApplicationSpin
 import ErrorPage from './pages/error/ErrorPage';
 import KvitteringPage from './pages/kvittering-page/Kvittering';
 import { Routes } from './utils/routes';
-import { sakByDescendingOrder } from './utils/sakerUtils';
 import Person from './types/Person';
 
 interface State {
@@ -39,25 +38,18 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
             axios
                 .all([Api.getSaker(), Api.getPerson()])
                 .then(
-                    axios.spread((getSakerResponse, getPersonResponse) =>
+                    axios.spread((getSakerResponse, getPersonResponse) => {
                         this.setState({
-                            saker: getSakerResponse.data.sort(sakByDescendingOrder),
+                            saker: getSakerResponse.data,
                             person: getPersonResponse.data,
                             loading: false
-                        })
-                    )
+                        });
+                    })
                 )
                 .catch((error: AxiosError) => {
-                    if (error.response) {
-                        error.response.status === 401
-                            ? redirectToLogin()
-                            : this.setState({
-                                  error: this.state.saker === undefined ? error : undefined,
-                                  loading: false
-                              });
-                    } else {
-                        this.setState({ error: this.state.saker === undefined ? error : undefined, loading: false });
-                    }
+                    error.response && error.response.status === 401
+                        ? redirectToLogin()
+                        : this.setState({ error, loading: false });
                 });
         });
     }
