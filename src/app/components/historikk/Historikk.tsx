@@ -19,7 +19,7 @@ const Historikk = (props: HistorikkProps) => {
     return (
         <div className={cls.className}>
             <ol className={cls.element('liste')}>
-                {utledHendelser(sak).map((h: Hendelse) => (
+                {utledHendelser(sak.behandlinger).map((h: Hendelse) => (
                     <HistorikkElement key={guid()} hendelse={h} />
                 ))}
             </ol>

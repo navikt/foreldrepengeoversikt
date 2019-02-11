@@ -3,6 +3,7 @@ import Snakkeboble from 'nav-frontend-snakkeboble';
 import { Element } from 'nav-frontend-typografi';
 
 import BEMHelper from 'common/util/bem';
+import { formaterDatoForHendelse } from './util';
 
 import './historikk.less';
 
@@ -35,7 +36,7 @@ class HistorikkElement extends React.Component<Props> {
         return (
             <li className={cls.className}>
                 <Snakkeboble
-                    dato={hendelse.dato}
+                    dato={formaterDatoForHendelse(hendelse.dato)}
                     pilHoyre={!hendelse.brukerInitiertHendelse}
                     ikonClass={hendelse.brukerInitiertHendelse ? 'bruker' : 'nav'}>
                     <Element>{hendelse.beskrivelse}</Element>
