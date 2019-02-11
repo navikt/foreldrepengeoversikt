@@ -7,6 +7,7 @@ import { formaterDatoForHendelse } from './util';
 import Person from '../../types/Person';
 
 import './historikk.less';
+import MediaQuery from 'react-responsive';
 
 export interface Hendelse {
     dato: string;
@@ -27,12 +28,18 @@ function HistorikkElement(props: Props) {
     const cls = BEMHelper('historikk-element');
     return (
         <li className={cls.className}>
-            <Snakkeboble
-                dato={formaterDatoForHendelse(hendelse.dato)}
-                pilHoyre={!hendelse.brukerInitiertHendelse}
-                ikonClass={hendelse.brukerInitiertHendelse ? 'bruker' : 'nav'}>
-                <Element>{hendelse.beskrivelse}</Element>
-            </Snakkeboble>
+            <MediaQuery maxWidth={745}>
+                {(matches) => {
+                    return (
+                        <Snakkeboble
+                            dato={formaterDatoForHendelse(hendelse.dato)}
+                            pilHoyre={!hendelse.brukerInitiertHendelse && !matches}
+                            ikonClass={hendelse.brukerInitiertHendelse ? 'bruker' : 'nav'}>
+                            <Element>{hendelse.beskrivelse}</Element>
+                        </Snakkeboble>
+                    );
+                }}
+            </MediaQuery>
         </li>
     );
 }
