@@ -17,10 +17,11 @@ import { isSakTooOldForEttersendelse } from './util';
 import { Routes } from '../../utils/routes';
 import { Feature, isFeatureEnabled } from '../../Feature';
 import Oversikt from '../oversikt/Oversikt';
-
+import Person from '../../types/Person';
 import './saksoversikt.less';
 
 interface Props {
+    person?: Person;
     sak: Sak;
     skalKunneSøkeOmEndring: boolean;
     expanded: boolean;
@@ -94,7 +95,7 @@ class Saksoversikt extends React.Component<Props> {
                         </>
                     )}
 
-                    {isFeatureEnabled(Feature.behandlingsOversikt) && <Oversikt sak={sak} />}
+                    {isFeatureEnabled(Feature.behandlingsOversikt) && <Oversikt person={this.props.person} sak={sak} />}
                 </EkspanderbartpanelBase>
             </div>
         );

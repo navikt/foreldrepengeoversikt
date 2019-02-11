@@ -6,10 +6,12 @@ import BEMHelper from 'common/util/bem';
 import Sak from '../../types/Sak';
 import { FormattedMessage } from 'react-intl';
 import Historikk from '../historikk/Historikk';
+import Person from '../../types/Person';
 
 import './oversikt.less';
 
 interface OversiktProps {
+    person?: Person;
     sak: Sak;
 }
 
@@ -46,7 +48,7 @@ class Oversikt extends React.Component<Props, State> {
                     kompakt={true}
                     onChange={this.handleTabOnClick}
                 />
-                {this.state.aktivTab === 0 && <Historikk sak={sak || []} />}
+                {this.state.aktivTab === 0 && <Historikk person={this.props.person} sak={sak || []} />}
                 {this.state.aktivTab === 1 && <p>Ikke implementert</p>}
             </div>
         );

@@ -1,5 +1,5 @@
 import { behandlingMock } from '../../../../../jest/__mocks__/Sak';
-import { fjernBehandlingerMedLikOpprettetOgEndretDato, oversettResultat, utledHendelser } from '../util';
+import { fjernBehandlingerMedLikOpprettetDato, oversettResultat, utledHendelser } from '../util';
 import { BehandlingStatus } from '../../../types/Behandling';
 import { Hendelse } from '../HistorikkElement';
 
@@ -7,7 +7,7 @@ describe('historikk', () => {
     it('Fjerner behandlinger med samme opprettet tidsstempel fra hendelse historikk', () => {
         const behanlding1 = { ...behandlingMock };
         const behanlding2 = { ...behandlingMock };
-        expect([behanlding1, behanlding2].filter(fjernBehandlingerMedLikOpprettetOgEndretDato).length).toEqual(1);
+        expect([behanlding1, behanlding2].filter(fjernBehandlingerMedLikOpprettetDato).length).toEqual(1);
     });
 
     it('Første behandling skal uansett føre til en brukerinitiert søknad sendt hendelse', () => {

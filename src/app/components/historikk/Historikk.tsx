@@ -5,25 +5,40 @@ import BEMHelper from 'common/util/bem';
 import HistorikkElement, { Hendelse } from './HistorikkElement';
 import Sak from '../../types/Sak';
 import { utledHendelser } from './util';
+import Person from '../../types/Person';
 
 import './historikk.less';
 
 interface HistorikkProps {
+    person?: Person;
     sak: Sak;
 }
 
-const Historikk = (props: HistorikkProps) => {
-    const cls = BEMHelper('historikk');
+class Historikk extends React.Component<HistorikkProps> {
+    componentDidMount(): void {
+        const { person } = this.props;
+        if ((document as any) !== undefined && person) {
+            const list = (document as any).getElementsByClassName('bruker');
+            for (const item of list) {
+                item.innerHTML = person.fornavn.substr(0, 1) + person.etternavn.substr(0, 1);
+            }
+        }
+    }
 
-    const { sak } = props;
-    return (
-        <div className={cls.className}>
-            <ol className={cls.element('liste')}>
-                {utledHendelser(sak.behandlinger).map((h: Hendelse) => (
-                    <HistorikkElement key={guid()} hendelse={h} />
-                ))}
-            </ol>
-        </div>
-    );
-};
+    render() {
+        const cls = BEMHelper('historikk');
+
+        const { sak } = this.props;
+        return (
+            <div className={cls.className}>
+                <ol className={cls.element('liste')}>
+                    {utledHendelser(sak.behandlinger).map((h: Hendelse) => (
+                        <HistorikkElement key={guid()} hendelse={h}/>
+                    ))}
+                </ol>
+            </div>
+        );
+    }
+}
+
 export default Historikk;

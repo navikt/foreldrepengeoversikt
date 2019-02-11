@@ -23,10 +23,12 @@ import ChatBubble from '../../components/chat-bubble/ChatBubble';
 import DineUtbetalinger from '../../components/dine-utbetalinger/DineUtbetalinger';
 import { Routes } from '../../utils/routes';
 import InfoPanel from '../../components/info-panel/InfoPanel';
+import Person from '../../types/Person';
 
 import './dineForeldrepenger.less';
 
 interface Props {
+    person?: Person;
     saker: Sak[];
     history: History;
     error?: AxiosError | any;
@@ -56,6 +58,7 @@ class DineForeldrepenger extends React.Component<Props> {
                 {saker.sort(sakByDescendingOrder).map((sak: Sak, index: number) => (
                     <li className={cls.element('element')} key={sak.saksnummer}>
                         <Saksoversikt
+                            person={this.props.person}
                             sak={sak}
                             skalKunneSøkeOmEndring={index === 0 && skalKunneSøkeOmEndring(sak)}
                             expanded={index === 0}

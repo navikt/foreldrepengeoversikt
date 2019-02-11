@@ -70,7 +70,7 @@ export const formaterDatoForHendelse = (dato: string) => {
     return formatDate(dato, 'D. MMMM YYYY [kl.] HH:mm:ss');
 };
 
-export const fjernBehandlingerMedLikOpprettetOgEndretDato = (
+export const fjernBehandlingerMedLikOpprettetDato = (
     behandling: Behandling,
     index: number,
     behandlinger: Behandling[]
@@ -86,7 +86,7 @@ export const utledHendelser = (behandlinger?: Behandling[]): Hendelse[] => {
     }
 
     behandlinger
-        .filter(fjernBehandlingerMedLikOpprettetOgEndretDato)
+        .filter(fjernBehandlingerMedLikOpprettetDato)
         .sort(behandlingByDescendingOrder)
         .forEach((b: Behandling) => {
             erBehandlingAvsluttet(b)

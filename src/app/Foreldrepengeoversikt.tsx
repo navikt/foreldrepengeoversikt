@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import Api from './api/api';
 import { redirectToLogin } from './utils/login';
@@ -12,9 +12,11 @@ import ErrorPage from './pages/error/ErrorPage';
 import KvitteringPage from './pages/kvittering-page/Kvittering';
 import { Routes } from './utils/routes';
 import { sakByDescendingOrder } from './utils/sakerUtils';
+import Person from './types/Person';
 
 interface State {
     saker: Sak[];
+    person?: Person;
     loading: boolean;
     error?: AxiosError;
 }
@@ -29,20 +31,32 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
     }
 
     componentWillMount(): void {
-        this.fetchSaker();
+        this.fetchData();
     }
 
-    fetchSaker(): void {
+    fetchData(): void {
         this.setState({ loading: true }, () => {
-            Api.getSaker()
-                .then((response) =>
-                    this.setState({ saker: response.data.sort(sakByDescendingOrder), loading: false })
+            axios
+                .all([Api.getSaker(), Api.getPerson()])
+                .then(
+                    axios.spread((getSakerResponse, getPersonResponse) =>
+                        this.setState({
+                            saker: getSakerResponse.data.sort(sakByDescendingOrder),
+                            person: getPersonResponse.data,
+                            loading: false
+                        })
+                    )
                 )
                 .catch((error: AxiosError) => {
                     if (error.response) {
-                        error.response.status === 401 ? redirectToLogin() : this.setState({ error, loading: false });
+                        error.response.status === 401
+                            ? redirectToLogin()
+                            : this.setState({
+                                  error: this.state.saker === undefined ? error : undefined,
+                                  loading: false
+                              });
                     } else {
-                        this.setState({ error, loading: false });
+                        this.setState({ error: this.state.saker === undefined ? error : undefined, loading: false });
                     }
                 });
         });
@@ -63,7 +77,12 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
                         path={Routes.DINE_FORELDREPENGER}
                         exact={true}
                         render={(props) => (
-                            <DineForeldrepenger saker={this.state.saker} error={this.state.error} {...props} />
+                            <DineForeldrepenger
+                                person={this.state.person}
+                                saker={this.state.saker}
+                                error={this.state.error}
+                                {...props}
+                            />
                         )}
                     />
                     <Redirect to={Routes.DINE_FORELDREPENGER} />
