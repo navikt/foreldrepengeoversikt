@@ -74,7 +74,7 @@
 
     "kvittering.headline": "Ettersendelsen er mottatt!",
     "kvittering.message": "Vi mottok ettersendelsen den {date} kl. { timeOfDay }.",
-    "kvittering.attachment-list-label": "Innsendte vedlegg { size }",
+    "kvittering.attachment-list-label": "Ettersendte vedlegg { size }",
 
     "feilside.bobletittel": "Oops,",
     "feilside.bobletekst": "noe gikk galt.",
