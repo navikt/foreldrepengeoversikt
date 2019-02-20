@@ -20,9 +20,10 @@ import LetterIcon from '../../components/ikoner/LetterIcon';
 import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummer } from './util';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 import { Routes } from '../../utils/routes';
-
 import { extractErrorMessage, extractUUID } from 'common/util/errorUtil';
+
 import './ettersendelse.less';
+import { erForeldrepengesak } from '../../utils/sakerUtils';
 
 interface EttersendelseProps {
     history: History;
@@ -95,7 +96,7 @@ class Ettersendelse extends React.Component<Props, State> {
             vedlegg: this.state.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
         };
 
-        Api.sendEttersending(ettersending)
+        Api.sendEttersending(ettersending, erForeldrepengesak(this.state.sak))
             .then((response) => {
                 this.setState({ sendingEttersendelse: false }, () => {
                     this.props.history.push(Routes.KVITTERING, {

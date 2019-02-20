@@ -131,7 +131,7 @@ describe('Ettersendelse page', () => {
         expect(apiMock).toHaveBeenCalledWith({
             saksnummer: '123',
             vedlegg: [mockAttachments[0]]
-        });
+        }, true);
     });
 
     it('Send ettersendelse button should be hidden if an attachment upload is pending', () => {

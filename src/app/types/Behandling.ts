@@ -5,7 +5,7 @@ export default interface Behandling {
     behandlendeEnhetNavn: string;
     id: any;
     status: BehandlingStatus;
-    tema: string;
+    tema: BehandlingTema;
     type: string;
     årsak: BehandlingÅrsak | null;
     behandlingResultat: BehandlingResultatType;
@@ -76,11 +76,11 @@ export enum BehandlingÅrsak {
 }
 
 export enum BehandlingTema {
-    'ENGANGSTØNAD' = 'ENGST',
-    'ENGANGSTØNAD_FØDSEL' = 'ENGST_FODS',
-    'ENGANGSTØNAD_ADOPSJON' = 'ENGST_ADOP',
-    'FORELDREPENGER' = 'FORP',
-    'FORELDREPENGER_ADOPSJON' = 'FORP_ADOP',
-    'FORELDREPENGER_FØDSEL' = 'FORP_FODS',
-    'UDEFINERT' = '-'
+    ENGANGSTØNAD = 'ENGST',
+    ENGANGSTØNAD_FØDSEL = 'ENGST_FODS',
+    ENGANGSTØNAD_ADOPSJON = 'ENGST_ADOP',
+    FORELDREPENGER = 'FORP',
+    FORELDREPENGER_ADOPSJON = 'FORP_ADOP',
+    FORELDREPENGER_FØDSEL = 'FORP_FODS',
+    UDEFINERT = '-'
 }
