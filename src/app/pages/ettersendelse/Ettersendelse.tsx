@@ -23,6 +23,7 @@ import { Routes } from '../../utils/routes';
 
 import { extractErrorMessage, extractUUID } from 'common/util/errorUtil';
 import './ettersendelse.less';
+import { erForeldrepengesak } from '../../utils/sakerUtils';
 
 interface EttersendelseProps {
     history: History;
@@ -91,6 +92,7 @@ class Ettersendelse extends React.Component<Props, State> {
 
     sendEttersendelse(): void {
         const ettersending: Ettersending = {
+            type: erForeldrepengesak(this.state.sak) ? 'foreldrepenger': 'engangsstønad',
             saksnummer: this.state.sak.saksnummer,
             vedlegg: this.state.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
         };

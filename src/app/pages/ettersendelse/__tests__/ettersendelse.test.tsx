@@ -129,6 +129,7 @@ describe('Ettersendelse page', () => {
         const ettersendVedleggButton = wrapper.find({ className: 'ettersendelse__send-button' }).childAt(0);
         ettersendVedleggButton.simulate('click');
         expect(apiMock).toHaveBeenCalledWith({
+            type: 'foreldrepenger',
             saksnummer: '123',
             vedlegg: [mockAttachments[0]]
         });
