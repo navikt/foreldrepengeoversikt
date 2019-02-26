@@ -18,6 +18,8 @@ import { Routes } from '../../utils/routes';
 import { Feature, isFeatureEnabled } from '../../Feature';
 import Oversikt from '../oversikt/Oversikt';
 import Person from '../../types/Person';
+import { erInfotrygdSak } from '../../utils/sakerUtils';
+
 import './saksoversikt.less';
 
 interface Props {
@@ -95,7 +97,9 @@ class Saksoversikt extends React.Component<Props> {
                         </>
                     )}
 
-                    {isFeatureEnabled(Feature.behandlingsOversikt) && <Oversikt person={this.props.person} sak={sak} />}
+                    {isFeatureEnabled(Feature.behandlingsOversikt) && !erInfotrygdSak(sak) && (
+                        <Oversikt person={this.props.person} sak={sak} />
+                    )}
                 </EkspanderbartpanelBase>
             </div>
         );

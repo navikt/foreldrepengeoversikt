@@ -93,5 +93,33 @@
     "ingenSaker.søkNå": "Søk om foreldrepenger",
 
     "annenInformasjon.header": "Relatert informasjon",
-    "oversikt": "Oversikt"
+    "oversikt": "Oversikt",
+    "historikk.BERØRT-BEHANDLING": "Berørt Behandling",
+
+    "historikk.søknad-sendt" : "Søknad sendt",
+    "historikk.inntektsmelding-motatt": "Innteksmelding motatt",
+    "historikk.RE-END-INNTEKTSMELD": "Innteksmelding motatt",
+    "historikk.RE-END-FRA-BRUKER": "Endringssøknad motatt",
+
+    "historikk.IKKE_FASTSATT": "IKKE_FASTSATT",
+    "historikk.INNVILGET": "Innvilget",
+    "historikk.AVSLÅTT": "AVSLÅTT",
+    "historikk.OPPHØR": "OPPHØR",
+    "historikk.HENLAGT_SØKNAD_TRUKKET": "HENLAGT_SØKNAD_TRUKKET",
+    "historikk.HENLAGT_FEILOPPRETTET": "HENLAGT_FEILOPPRETTET",
+    "historikk.HENLAGT_BRUKER_DØD": "HENLAGT_BRUKER_DØD",
+    "historikk.MERGET_OG_HENLAGT": "MERGET_OG_HENLAGT",
+    "historikk.HENLAGT_SØKNAD_MANGLER": "HENLAGT_SØKNAD_MANGLER",
+    "historikk.KLAGE_AVVIST": "KLAGE_AVVIST",
+    "historikk.KLAGE_MEDHOLD": "KLAGE_MEDHOLD",
+    "historikk.KLAGE_MEDHOLD": "KLAGE_MEDHOLD",
+    "historikk.KLAGE_YTELSESVEDTAK_OPPHEVET": "KLAGE_YTELSESVEDTAK_OPPHEVET",
+    "historikk.KLAGE_YTELSESVEDTAK_STADFESTET": "LAGE_YTELSESVEDTAK_STADFESTET",
+    "historikk.HENLAGT_KLAGE_TRUKKET": "HENLAGT_KLAGE_TRUKKET",
+    "historikk.INNSYN_INNVILGET": "INNSYN_INNVILGET",
+    "historikk.INNSYN_DELVIS_INNVILGET":  "INNSYN_DELVIS_INNVILGET",
+    "historikk.INNSYN_AVVIST":  "INNSYN_AVVIST",
+    "historikk.FORELDREPENGER_ENDRET": "Vedtak endret"
+
+
 }

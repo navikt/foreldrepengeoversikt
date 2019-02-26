@@ -3,19 +3,25 @@
 @import '../../styles/mixins.less';
 
 .historikk {
-    background: linear-gradient(
-        to right,
-        transparent 0%,
-        transparent calc(50% - 0.81px),
-        #c6c2bf calc(50% - 0.8px),
-        #c6c2bf calc(50% + 0.8px),
-        transparent calc(50% + 0.81px),
-        transparent 100%
-    );
-
     &__liste {
         padding-left: 0;
         list-style: none;
+        padding-bottom: 0.5rem;
+        background: linear-gradient(
+                to right,
+                transparent 0%,
+                transparent calc(50% - 0.81px),
+                #c6c2bf calc(50% - 0.8px),
+                #c6c2bf calc(50% + 0.8px),
+                transparent calc(50% + 0.81px),
+                transparent 100%
+        );
+
+
+    }
+
+    &__alert-stripe {
+        margin-top: 1rem;
     }
 
     @media (max-width: 745px) {

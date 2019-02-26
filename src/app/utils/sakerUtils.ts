@@ -4,6 +4,7 @@ import Behandling, { BehandlingStatus, BehandlingTema, BehandlingÅrsak } from '
 
 export const sakByDescendingOrder = (a: Sak, b: Sak) => b.opprettet.localeCompare(a.opprettet);
 export const behandlingByDescendingOrder = (a: Behandling, b: Behandling) => b.opprettetTidspunkt.localeCompare(a.opprettetTidspunkt);
+export const behandlingByAscendingOrder = (a: Behandling, b: Behandling) => a.opprettetTidspunkt.localeCompare(b.opprettetTidspunkt);
 
 export const erUnderBehandling = (sak: Sak): any => {
     return sak && sak.status && (sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING);

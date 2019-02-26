@@ -1,17 +1,19 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+import MediaQuery from 'react-responsive';
 import Snakkeboble from 'nav-frontend-snakkeboble';
 import { Element } from 'nav-frontend-typografi';
 
 import BEMHelper from 'common/util/bem';
 import { formaterDatoForHendelse } from './util';
 import Person from '../../types/Person';
+import { BehandlingResultatType, BehandlingÅrsak } from '../../types/Behandling';
 
 import './historikk.less';
-import MediaQuery from 'react-responsive';
 
 export interface Hendelse {
     dato: string;
-    beskrivelse: string;
+    beskrivelse: BehandlingÅrsak | BehandlingResultatType | string;
     brukerInitiertHendelse: boolean;
 }
 
@@ -35,7 +37,9 @@ function HistorikkElement(props: Props) {
                             dato={formaterDatoForHendelse(hendelse.dato)}
                             pilHoyre={!hendelse.brukerInitiertHendelse && !matches}
                             ikonClass={hendelse.brukerInitiertHendelse ? 'bruker' : 'nav'}>
-                            <Element>{hendelse.beskrivelse}</Element>
+                            <Element tag={'p'}>
+                                <FormattedMessage id={`historikk.${hendelse.beskrivelse}`} />
+                            </Element>
                         </Snakkeboble>
                     );
                 }}

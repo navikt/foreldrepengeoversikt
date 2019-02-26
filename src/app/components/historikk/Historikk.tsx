@@ -6,6 +6,7 @@ import HistorikkElement, { Hendelse } from './HistorikkElement';
 import Sak from '../../types/Sak';
 import { utledHendelser } from './util';
 import Person from '../../types/Person';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 import './historikk.less';
 
@@ -33,9 +34,13 @@ class Historikk extends React.Component<HistorikkProps> {
             <div className={cls.className}>
                 <ol className={cls.element('liste')}>
                     {utledHendelser(sak.behandlinger).map((h: Hendelse) => (
-                        <HistorikkElement key={guid()} hendelse={h}/>
+                        <HistorikkElement key={guid()} hendelse={h} />
                     ))}
                 </ol>
+
+                <div className={cls.element('alert-stripe')}>
+                    <AlertStripe type={'info'}>Ettersendelse av dokumentasjon vil ikke vises her</AlertStripe>
+                </div>
             </div>
         );
     }
