@@ -81,7 +81,7 @@ export const utledHendelser = (behandlinger?: Behandling[]): Hendelse[] => {
     behandlinger
         .filter(fjernBehandlingerMedLikOpprettetDato)
         .sort(behandlingByDescendingOrder)
-        .forEach((b: Behandling, index: number) => {
+        .forEach((b: Behandling, index: number, filtrerteBehandlinger: Behandling[]) => {
             erBehandlingAvsluttet(b)
                 ? hendelser.push(...splittBehandlingTilHenderlser(b))
                 : hendelser.push({
@@ -90,7 +90,7 @@ export const utledHendelser = (behandlinger?: Behandling[]): Hendelse[] => {
                       brukerInitiertHendelse: erInitiertAvBruker(b.årsak)
                   });
 
-            if (b.inntektsmeldinger.length > 0 && (index !== 0 || behandlinger.length === 1)) {
+            if (b.inntektsmeldinger.length > 0 && (index !== 0 || filtrerteBehandlinger.length === 1)) {
                 hendelser.push({
                     dato: b.årsak === BehandlingÅrsak.ENDRET_INNTEKTSMELDING ? b.opprettetTidspunkt : b.endretTidspunkt,
                     beskrivelse: 'inntektsmelding-motatt',
