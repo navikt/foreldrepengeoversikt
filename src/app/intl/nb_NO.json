@@ -5,7 +5,7 @@
     "dineForeldrepenger.alertstripe.infotrygd": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
     "dineForeldrepenger.feilmelding": "Det har skjedd en feil. Prøv igjen senere.",
     "dineForeldrepenger.ingenSaker": "Du har ingen søknader hos NAV akkurat nå. Hvis du nettopp sendte inn søknaden din, tar det noen dager før du ser den her.",
-    "dineForeldrepenger.chatMedOss": "Chat med oss om dine foreldrepenger",
+    "dineForeldrepenger.chatMedOss": "Chat med oss om foreldrepenger",
     "dineForeldrepenger.dineUtbetalinger": "Her finner du alle dine utbetalinger fra NAV. Får du utbetalt foreldrepenger fra arbeidsgiver vil disse ikke vises her.",
 
     "saksoversikt.heading.top.foreldrepenger": "Din foreldrepengesak",
@@ -96,15 +96,15 @@
     "oversikt": "Oversikt",
     "historikk.BERØRT-BEHANDLING": "Berørt Behandling",
 
-    "historikk.søknad-sendt" : "Søknad sendt",
-    "historikk.inntektsmelding-motatt": "Innteksmelding motatt",
-    "historikk.RE-END-INNTEKTSMELD": "Innteksmelding motatt",
-    "historikk.RE-END-FRA-BRUKER": "Endringssøknad motatt",
+    "historikk.søknad-sendt" : "Søknaden er mottatt",
+    "historikk.inntektsmelding-motatt": "Innteksmelding fra arbeidsgiver er motatt",
+    "historikk.RE-END-INNTEKTSMELD": "Innteksmelding fra arbeidsgiver er motatt",
+    "historikk.RE-END-FRA-BRUKER": "Endringssøknad er motatt",
 
     "historikk.IKKE_FASTSATT": "IKKE_FASTSATT",
-    "historikk.INNVILGET": "Innvilget",
-    "historikk.AVSLÅTT": "AVSLÅTT",
-    "historikk.OPPHØR": "OPPHØR",
+    "historikk.INNVILGET": "Vedtak er innvilget",
+    "historikk.AVSLÅTT": "Vedtaket er avslått",
+    "historikk.OPPHØR": "Vedtaket er opphørt",
     "historikk.HENLAGT_SØKNAD_TRUKKET": "HENLAGT_SØKNAD_TRUKKET",
     "historikk.HENLAGT_FEILOPPRETTET": "HENLAGT_FEILOPPRETTET",
     "historikk.HENLAGT_BRUKER_DØD": "HENLAGT_BRUKER_DØD",
@@ -112,14 +112,13 @@
     "historikk.HENLAGT_SØKNAD_MANGLER": "HENLAGT_SØKNAD_MANGLER",
     "historikk.KLAGE_AVVIST": "KLAGE_AVVIST",
     "historikk.KLAGE_MEDHOLD": "KLAGE_MEDHOLD",
-    "historikk.KLAGE_MEDHOLD": "KLAGE_MEDHOLD",
     "historikk.KLAGE_YTELSESVEDTAK_OPPHEVET": "KLAGE_YTELSESVEDTAK_OPPHEVET",
     "historikk.KLAGE_YTELSESVEDTAK_STADFESTET": "LAGE_YTELSESVEDTAK_STADFESTET",
     "historikk.HENLAGT_KLAGE_TRUKKET": "HENLAGT_KLAGE_TRUKKET",
     "historikk.INNSYN_INNVILGET": "INNSYN_INNVILGET",
     "historikk.INNSYN_DELVIS_INNVILGET":  "INNSYN_DELVIS_INNVILGET",
     "historikk.INNSYN_AVVIST":  "INNSYN_AVVIST",
-    "historikk.FORELDREPENGER_ENDRET": "Vedtak endret"
+    "historikk.FORELDREPENGER_ENDRET": "Vedtaket er endret"
 
 
 }
