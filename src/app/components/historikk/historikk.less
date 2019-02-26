@@ -8,16 +8,14 @@
         list-style: none;
         padding-bottom: 0.5rem;
         background: linear-gradient(
-                to right,
-                transparent 0%,
-                transparent calc(50% - 0.81px),
-                #c6c2bf calc(50% - 0.8px),
-                #c6c2bf calc(50% + 0.8px),
-                transparent calc(50% + 0.81px),
-                transparent 100%
+            to right,
+            transparent 0%,
+            transparent calc(50% - 0.81px),
+            #c6c2bf calc(50% - 0.8px),
+            #c6c2bf calc(50% + 0.8px),
+            transparent calc(50% + 0.81px),
+            transparent 100%
         );
-
-
     }
 
     &__alert-stripe {
@@ -25,15 +23,17 @@
     }
 
     @media (max-width: 745px) {
-        background: linear-gradient(
-            to right,
-            transparent 0%,
-            transparent calc(20px - 0.81px),
-            #c6c2bf calc(20px - 0.8px),
-            #c6c2bf calc(20px + 0.8px),
-            transparent calc(20px + 0.81px),
-            transparent 100%
-        );
+        &__liste {
+            background: linear-gradient(
+                to right,
+                transparent 0%,
+                transparent calc(20px - 0.81px),
+                #c6c2bf calc(20px - 0.8px),
+                #c6c2bf calc(20px + 0.8px),
+                transparent calc(20px + 0.81px),
+                transparent 100%
+            );
+        }
     }
 }
 
