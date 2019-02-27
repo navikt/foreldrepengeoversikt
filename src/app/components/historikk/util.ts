@@ -90,6 +90,7 @@ export const utledHendelser = (behandlinger?: Behandling[]): Hendelse[] => {
                       brukerInitiertHendelse: erInitiertAvBruker(b.årsak)
                   });
 
+
             if (b.inntektsmeldinger.length > 0 && (index !== 0 || filtrerteBehandlinger.length === 1)) {
                 hendelser.push({
                     dato: b.årsak === BehandlingÅrsak.ENDRET_INNTEKTSMELDING ? b.opprettetTidspunkt : b.endretTidspunkt,

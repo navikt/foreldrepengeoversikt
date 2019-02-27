@@ -14,7 +14,6 @@
     "saksoversikt.heading.underBehandling": "Under behandling",
     "saksoversikt.heading.avsluttet": "Ferdig behandlet",
     "saksoversikt.content.saksnummer": "Saksnummer: { saksnummer }",
-    "saksoversikt.content.dinSøknad": "Dokumenter i saken",
     "saksoversikt.content.ettersendelse.intro": "Her kan du ettersende dokumentasjon til søknaden din.",
     "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg",
     "saksoversikt.content.endringssøknad.intro": "Her kan du endre perioden din hvis du skal ha ferie, jobbe eller har vært syk.",
@@ -118,7 +117,10 @@
     "historikk.INNSYN_INNVILGET": "INNSYN_INNVILGET",
     "historikk.INNSYN_DELVIS_INNVILGET":  "INNSYN_DELVIS_INNVILGET",
     "historikk.INNSYN_AVVIST":  "INNSYN_AVVIST",
-    "historikk.FORELDREPENGER_ENDRET": "Vedtaket er endret"
+    "historikk.FORELDREPENGER_ENDRET": "Vedtaket er endret",
+
+    "dokumentoversikt.info": "Vi jobber med å kunne vise alle dine dokumenter koblet til foreldrepenger her. Inntil videre finner du disse under { lenke }.",
+    "dokumentoversikt.info.lenke": "dine dokumenter"
 
 
 }

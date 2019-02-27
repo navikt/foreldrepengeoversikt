@@ -4,14 +4,12 @@ import { History } from 'history';
 
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
 import { Knapp } from 'nav-frontend-knapper';
 import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
 
 import BEMHelper from 'common/util/bem';
 import Sak from '../../types/Sak';
 import { lenker } from '../../utils/lenker';
-import FileIcon from '../ikoner/FileIcon';
 import SaksoversiktHeader from './SaksoversiktHeader';
 import { isSakTooOldForEttersendelse } from './util';
 import { Routes } from '../../utils/routes';
@@ -55,15 +53,6 @@ class Saksoversikt extends React.Component<Props> {
                             values={{ saksnummer: sak.saksnummer }}
                         />
                     </Normaltekst>
-
-                    <div className={cls.element('din-søknad')}>
-                        <FileIcon />
-                        <Lenke href={lenker.dittNav}>
-                            <Normaltekst>
-                                <FormattedMessage id={'saksoversikt.content.dinSøknad'} />
-                            </Normaltekst>
-                        </Lenke>
-                    </div>
 
                     <Normaltekst className={cls.element('ettersendelse-intro')}>
                         <FormattedMessage id={'saksoversikt.content.ettersendelse.intro'} />

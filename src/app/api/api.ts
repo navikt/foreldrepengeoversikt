@@ -5,8 +5,8 @@ import Ettersending from './types/Ettersending';
 export const apiBaseUrl: string = Environment.REST_API_URL;
 
 const getPerson = () => {
-    return axios.get(`${apiBaseUrl}/personinfo`, {withCredentials: true});
-}
+    return axios.get(`${apiBaseUrl}/personinfo`, { withCredentials: true });
+};
 
 const getSaker = () => {
     return axios.get(`${apiBaseUrl}/innsyn/saker`, {
@@ -22,7 +22,6 @@ const sendEttersending = (ettersending: Ettersending) => {
     });
 };
 
-
 const log = (error: any) => {
     return axios.post('/log', error, {
         timeout: 15 * 1000,
@@ -33,7 +32,6 @@ const log = (error: any) => {
     });
 };
 
-
-const Api = { getSaker, getPerson, sendEttersending, log};
+const Api = { getSaker, getPerson, sendEttersending, log };
 
 export default Api;
