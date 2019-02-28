@@ -7,9 +7,10 @@ import Sak from '../../types/Sak';
 import { FormattedMessage } from 'react-intl';
 import Historikk from '../historikk/Historikk';
 import Person from '../../types/Person';
+import Dokumentoversikt from '../dokumentoversikt/Dokumentoversikt';
+import { utledHendelser } from '../historikk/util';
 
 import './oversikt.less';
-import Dokumentoversikt from '../dokumentoversikt/Dokumentoversikt';
 
 interface OversiktProps {
     person?: Person;
@@ -36,9 +37,10 @@ class Oversikt extends React.Component<Props, State> {
     }
 
     render() {
-        const cls = BEMHelper('oversikt');
-
         const { sak } = this.props;
+        const hendelser = utledHendelser(sak.behandlinger);
+
+        const cls = BEMHelper('oversikt');
         return (
             <div className={cls.className}>
                 <Systemtittel className={cls.element('title')}>
@@ -49,7 +51,7 @@ class Oversikt extends React.Component<Props, State> {
                     kompakt={true}
                     onChange={this.handleTabOnClick}
                 />
-                {this.state.aktivTab === 0 && <Historikk person={this.props.person} sak={sak || []} />}
+                {this.state.aktivTab === 0 && <Historikk person={this.props.person} hendelser={hendelser} />}
                 {this.state.aktivTab === 1 && <Dokumentoversikt />}
             </div>
         );

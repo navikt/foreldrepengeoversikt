@@ -95,7 +95,7 @@
     "oversikt": "Oversikt",
     "historikk.BERØRT-BEHANDLING": "Berørt Behandling",
 
-    "historikk.søknad-sendt" : "Søknaden er mottatt",
+    "historikk.søknad-sendt": "Søknaden er mottatt",
     "historikk.inntektsmelding-motatt": "Innteksmelding fra arbeidsgiver er motatt",
     "historikk.RE-END-INNTEKTSMELD": "Innteksmelding fra arbeidsgiver er motatt",
     "historikk.RE-END-FRA-BRUKER": "Endringssøknad er motatt",
@@ -115,12 +115,12 @@
     "historikk.KLAGE_YTELSESVEDTAK_STADFESTET": "LAGE_YTELSESVEDTAK_STADFESTET",
     "historikk.HENLAGT_KLAGE_TRUKKET": "HENLAGT_KLAGE_TRUKKET",
     "historikk.INNSYN_INNVILGET": "INNSYN_INNVILGET",
-    "historikk.INNSYN_DELVIS_INNVILGET":  "INNSYN_DELVIS_INNVILGET",
-    "historikk.INNSYN_AVVIST":  "INNSYN_AVVIST",
+    "historikk.INNSYN_DELVIS_INNVILGET": "INNSYN_DELVIS_INNVILGET",
+    "historikk.INNSYN_AVVIST": "INNSYN_AVVIST",
     "historikk.FORELDREPENGER_ENDRET": "Vedtaket er endret",
+    "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vil ikke vises her.",
+    "historikk.ingenHendelser": "Vi kan desverre ikke vise historikk for denne saken.",
 
     "dokumentoversikt.info": "Vi jobber med å kunne vise alle dine dokumenter koblet til foreldrepenger her. Inntil videre finner du disse under { lenke }.",
     "dokumentoversikt.info.lenke": "dine dokumenter"
-
-
 }

@@ -1,7 +1,7 @@
 [
     {
         "type": "FPSAK",
-        "saksnummer": "137649698",
+        "saksnummer": "137649691",
         "status": "LOP",
         "opprettet": "2019-01-23",
         "behandlinger": [
@@ -90,5 +90,17 @@
                 "inntektsmeldinger": []
             }
         ]
+    },
+    {
+        "type": "FPSAK",
+        "saksnummer": "137649693",
+        "status": "LOP",
+        "opprettet": "2018-01-01",
+        "behandlinger": []
+    },
+    {
+        "type": "SAK",
+        "saksnummer": "137649696",
+        "opprettet": "2016-06-01"
     }
 ]

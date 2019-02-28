@@ -1,18 +1,17 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { guid } from 'nav-frontend-js-utils';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 import BEMHelper from 'common/util/bem';
 import HistorikkElement, { Hendelse } from './HistorikkElement';
-import Sak from '../../types/Sak';
-import { utledHendelser } from './util';
 import Person from '../../types/Person';
-import AlertStripe from 'nav-frontend-alertstriper';
 
 import './historikk.less';
 
 interface HistorikkProps {
     person?: Person;
-    sak: Sak;
+    hendelser: Hendelse[];
 }
 
 class Historikk extends React.Component<HistorikkProps> {
@@ -28,19 +27,32 @@ class Historikk extends React.Component<HistorikkProps> {
 
     render() {
         const cls = BEMHelper('historikk');
+        const { hendelser } = this.props;
 
-        const { sak } = this.props;
         return (
             <div className={cls.className}>
-                <ol className={cls.element('liste')}>
-                    {utledHendelser(sak.behandlinger).map((h: Hendelse) => (
-                        <HistorikkElement key={guid()} hendelse={h} />
-                    ))}
-                </ol>
+                {hendelser.length === 0 && (
+                    <div className={cls.element('ingen-hendelser')}>
+                        <AlertStripe type={'info'}>
+                            <FormattedMessage id={'historikk.ingenHendelser'} />
+                        </AlertStripe>
+                    </div>
+                )}
 
-                <div className={cls.element('alert-stripe')}>
-                    <AlertStripe type={'info'}>Ettersendelse av dokumentasjon vil ikke vises her</AlertStripe>
-                </div>
+                {hendelser.length > 0 && (
+                    <>
+                        <ol className={cls.element('liste')}>
+                            {hendelser.map((h: Hendelse) => (
+                                <HistorikkElement key={guid()} hendelse={h} />
+                            ))}
+                        </ol>
+                        <div className={cls.element('ettersendelse-info')}>
+                            <AlertStripe type={'info'}>
+                                <FormattedMessage id={'historikk.ettersendelse.info'} />
+                            </AlertStripe>
+                        </div>
+                    </>
+                )}
             </div>
         );
     }
