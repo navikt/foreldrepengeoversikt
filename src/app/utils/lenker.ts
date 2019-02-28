@@ -1,7 +1,7 @@
 export const headerLinks = {
     dittNav: {
         text: 'Ditt Nav',
-        href: 'https://tjenester.nav.no/brukerflyt/',
+        href: 'https://tjenester.nav.no/dittnav',
         external: true
     },
     innsyn: {
