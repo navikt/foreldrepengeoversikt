@@ -16,15 +16,15 @@ interface HistorikkProps {
 }
 
 class Historikk extends React.Component<HistorikkProps> {
-    //componentDidMount(): void {
-    //    const { person } = this.props;
-    //    if ((document as any) !== undefined && person) {
-    //        const list = (document as any).getElementsByClassName('bruker');
-    //        for (const item of list) {
-    //            item.innerHTML = person.fornavn.substr(0, 1) + person.etternavn.substr(0, 1);
-    //        }
-    //    }
-    //}
+    componentDidMount(): void {
+        const { person } = this.props;
+        if ((document as any) !== undefined && person) {
+            const list = (document as any).getElementsByClassName('bruker');
+            for (const item of list) {
+                item.innerHTML = person.fornavn.substr(0, 1) + person.etternavn.substr(0, 1);
+            }
+        }
+    }
 
     render() {
         const cls = BEMHelper('historikk');
