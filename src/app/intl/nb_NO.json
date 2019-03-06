@@ -16,7 +16,7 @@
     "saksoversikt.content.saksnummer": "Saksnummer: { saksnummer }",
     "saksoversikt.content.ettersendelse.intro": "Her kan du ettersende dokumentasjon til søknaden din.",
     "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg",
-    "saksoversikt.content.endringssøknad.intro": "Her kan du endre perioden din hvis du skal ha ferie, jobbe eller har vært syk.",
+    "saksoversikt.content.endringssøknad.intro": "Her kan du endre perioden din med foreldrepenger eller søke om utsettelse hvis du skal ha ferie, jobbe eller er syk.",
     "saksoversikt.content.endringssøknad.button": "Endre perioden din",
 
     "infopanel.title": "Greit for deg å vite",
@@ -95,13 +95,13 @@
     "oversikt": "Oversikt",
     "historikk.BERØRT-BEHANDLING": "Berørt Behandling",
 
-    "historikk.søknad-sendt": "Søknaden er mottatt",
+    "historikk.søknad-sendt": "Søknad er mottatt",
     "historikk.inntektsmelding-motatt": "Innteksmelding fra arbeidsgiver er motatt",
     "historikk.RE-END-INNTEKTSMELD": "Innteksmelding fra arbeidsgiver er motatt",
-    "historikk.RE-END-FRA-BRUKER": "Endringssøknad er motatt",
+    "historikk.RE-END-FRA-BRUKER": "Søknad om endring er motatt",
 
     "historikk.IKKE_FASTSATT": "IKKE_FASTSATT",
-    "historikk.INNVILGET": "Vedtak er innvilget",
+    "historikk.INNVILGET": "Vedtaket er innvilget",
     "historikk.AVSLÅTT": "Vedtaket er avslått",
     "historikk.OPPHØR": "Vedtaket er opphørt",
     "historikk.HENLAGT_SØKNAD_TRUKKET": "HENLAGT_SØKNAD_TRUKKET",
@@ -118,9 +118,9 @@
     "historikk.INNSYN_DELVIS_INNVILGET": "INNSYN_DELVIS_INNVILGET",
     "historikk.INNSYN_AVVIST": "INNSYN_AVVIST",
     "historikk.FORELDREPENGER_ENDRET": "Vedtaket er endret",
-    "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vil ikke vises her.",
+    "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vises ikke her.",
     "historikk.ingenHendelser": "Vi kan desverre ikke vise historikk for denne saken.",
 
-    "dokumentoversikt.info": "Vi jobber med å kunne vise alle dine dokumenter koblet til foreldrepenger her. Inntil videre finner du disse under { lenke }.",
+    "dokumentoversikt.info": "Vi jobber med å kunne vise alle dokumenter du har i foreldrepengesaken din. Inntil videre finner du disse under { lenke }.",
     "dokumentoversikt.info.lenke": "dine dokumenter"
 }
