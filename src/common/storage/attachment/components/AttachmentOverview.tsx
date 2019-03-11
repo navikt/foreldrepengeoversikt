@@ -61,7 +61,7 @@ class AttachmentOverview extends React.Component<Props> {
 
         return (
             <React.Fragment>
-                <Block margin={'xs'}>
+                <Block margin="xs">
                     <VedleggInput
                         id={inputId}
                         onFilesSelect={(files: File[]) => {

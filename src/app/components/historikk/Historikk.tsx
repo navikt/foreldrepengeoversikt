@@ -33,8 +33,8 @@ class Historikk extends React.Component<HistorikkProps> {
             <div className={cls.className}>
                 {hendelser.length === 0 && (
                     <div className={cls.element('ingen-hendelser')}>
-                        <AlertStripe type={'info'}>
-                            <FormattedMessage id={'historikk.ingenHendelser'} />
+                        <AlertStripe type="info">
+                            <FormattedMessage id="historikk.ingenHendelser" />
                         </AlertStripe>
                     </div>
                 )}
@@ -47,8 +47,8 @@ class Historikk extends React.Component<HistorikkProps> {
                             ))}
                         </ol>
                         <div className={cls.element('ettersendelse-info')}>
-                            <AlertStripe type={'info'}>
-                                <FormattedMessage id={'historikk.ettersendelse.info'} />
+                            <AlertStripe type="info">
+                                <FormattedMessage id="historikk.ettersendelse.info" />
                             </AlertStripe>
                         </div>
                     </>

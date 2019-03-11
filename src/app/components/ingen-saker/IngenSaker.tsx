@@ -19,24 +19,24 @@ const IngenSaker = () => {
             <CryBabyIcon className={cls.element('icon')} />
 
             <Undertittel className={cls.element('title')}>
-                <FormattedMessage id={'ingenSaker.title'} />
+                <FormattedMessage id="ingenSaker.title" />
             </Undertittel>
 
             <Veilederpanel kompakt={true} svg={<Veileder />}>
                 <Normaltekst className={cls.element('ingress')}>
-                    <FormattedHTMLMessage id={'ingenSaker.ingress'} />
+                    <FormattedHTMLMessage id="ingenSaker.ingress" />
                 </Normaltekst>
             </Veilederpanel>
 
             <div className={cls.element('options')}>
                 <Lenke href={lenker.lesMerOmForeldrepenger}>
-                    <KnappBase type={'standard'}>
-                        <FormattedMessage id={'ingenSaker.lesMer'} />
+                    <KnappBase type="standard">
+                        <FormattedMessage id="ingenSaker.lesMer" />
                     </KnappBase>
                 </Lenke>
                 <Lenke href={lenker.søkOmForeldrepenger}>
-                    <KnappBase type={'hoved'}>
-                        <FormattedMessage id={'ingenSaker.søkNå'} />
+                    <KnappBase type="hoved">
+                        <FormattedMessage id="ingenSaker.søkNå" />
                     </KnappBase>
                 </Lenke>
             </div>

@@ -1,33 +1,34 @@
-import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { Component } from 'react';
 import { History } from 'history';
-
-import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
-import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
+import { FormattedMessage } from 'react-intl';
 
-import BEMHelper from 'common/util/bem';
-import Sak from '../../types/Sak';
-import { lenker } from '../../utils/lenker';
-import SaksoversiktHeader from './SaksoversiktHeader';
-import { isSakTooOldForEttersendelse } from './util';
-import { Routes } from '../../utils/routes';
+import { formatDate, isSakTooOldForEttersendelse } from '../ekspanderbar-saksoversikt/util';
 import { Feature, isFeatureEnabled } from '../../Feature';
+import { erInfotrygdSak, behandlingByDescendingOrder } from '../../utils/sakerUtils';
+import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
+import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 import Oversikt from '../oversikt/Oversikt';
+import Sak from '../../types/Sak';
+import { Routes } from '../../utils/routes';
+import { lenker } from '../../utils/lenker';
+import BEMHelper from 'common/util/bem';
 import Person from '../../types/Person';
+import SaksoversiktHeader from './SaksoversiktHeader';
 
 import './saksoversikt.less';
+import { Normaltekst } from 'nav-frontend-typografi';
+import Behandling from 'app/types/Behandling';
 
-interface Props {
-    person?: Person;
+interface SaksoversiktProps {
     sak: Sak;
-    skalKunneSøkeOmEndring: boolean;
-    expanded: boolean;
+    person?: Person;
     history: History;
+    skalKunneSøkeOmEndring?: boolean;
+    withHeader?: boolean;
 }
 
-class Saksoversikt extends React.Component<Props> {
+class Saksoversikt extends Component<SaksoversiktProps> {
     onEttersendVedlegg(sak: Sak): void {
         this.props.history.push(Routes.ETTERSENDELSE, { sak });
     }
@@ -37,58 +38,45 @@ class Saksoversikt extends React.Component<Props> {
     }
 
     render() {
-        const { sak, skalKunneSøkeOmEndring, expanded } = this.props;
-        const cls = BEMHelper('saksoversikt');
+        const { sak, skalKunneSøkeOmEndring = false, withHeader = false } = this.props;
+        const nyesteBehandling: Behandling | undefined = sak.behandlinger && sak.behandlinger.sort(behandlingByDescendingOrder)[0]
 
+        const cls = BEMHelper('saksoversikt');
         return (
-            <div className={cls.className}>
-                <EkspanderbartpanelBase
-                    apen={expanded}
-                    heading={<SaksoversiktHeader sak={sak} />}
-                    ariaTittel={'søknad om foreldrepenger'}>
-                    <Normaltekst className={cls.element('saksnummer')}>
+            <div className={'saksoversikt'}>
+                {withHeader && <SaksoversiktHeader sak={sak} />}
+
+                {nyesteBehandling && nyesteBehandling.endretTidspunkt && (
+                    <Normaltekst className="blokk-xs">
                         <FormattedMessage
-                            id={'saksoversikt.content.saksnummer'}
-                            values={{ saksnummer: sak.saksnummer }}
+                            id="saksoversikt.heading.bottom.sistEndret"
+                            values={{ date: formatDate(nyesteBehandling.endretTidspunkt) }}
                         />
                     </Normaltekst>
+                )}
 
-                    <Normaltekst className={cls.element('ettersendelse-intro')}>
-                        <FormattedMessage id={'saksoversikt.content.ettersendelse.intro'} />
-                    </Normaltekst>
-                    <div className={cls.element('valg')}>
-                        <Knapp
-                            className={cls.element('ettersendelse-btn')}
-                            onClick={() => this.onEttersendVedlegg(sak)}
-                            disabled={isSakTooOldForEttersendelse(sak.opprettet)}>
-                            <FormattedMessage id={'saksoversikt.content.ettersendelse.button'} />
+                <MeldingOmVedtakLenkepanel />
+
+                <div className="blokk-xs">
+                    <UtsettelsePanel />
+                </div>
+
+                <div className={cls.element('valg')}>
+                    {!isSakTooOldForEttersendelse(sak.opprettet) && sak.saksnummer !== undefined && (
+                        <Knapp onClick={() => this.onEttersendVedlegg(sak)}>
+                            <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
                         </Knapp>
-                        {isSakTooOldForEttersendelse(sak.opprettet) && (
-                            <HjelpetekstAuto id={'ettersendelse-disabled-info'} tittel={''}>
-                                <FormattedMessage id={'saksoversikt.ettersendelse.hjelpetekst'} />
-                            </HjelpetekstAuto>
-                        )}
-                    </div>
-
-                    {skalKunneSøkeOmEndring && (
-                        <>
-                            <Normaltekst className={cls.element('endringssoknad-intro')}>
-                                <FormattedMessage id={'saksoversikt.content.endringssøknad.intro'} />
-                            </Normaltekst>
-                            <div className={cls.element('valg')}>
-                                <Knapp
-                                    className={cls.element('endringssoknad-btn')}
-                                    onClick={() => this.onEndreSøknad()}>
-                                    <FormattedMessage id={'saksoversikt.content.endringssøknad.button'} />
-                                </Knapp>
-                            </div>
-                        </>
                     )}
-
-                    {isFeatureEnabled(Feature.behandlingsOversikt) && (
-                        <Oversikt person={this.props.person} sak={sak} />
+                    {skalKunneSøkeOmEndring && sak.saksnummer !== undefined && (
+                        <Knapp onClick={() => this.onEndreSøknad()}>
+                            <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
+                        </Knapp>
                     )}
-                </EkspanderbartpanelBase>
+                </div>
+
+                {isFeatureEnabled(Feature.behandlingsOversikt) && !erInfotrygdSak(sak) && (
+                    <Oversikt person={this.props.person} sak={sak} />
+                )}
             </div>
         );
     }

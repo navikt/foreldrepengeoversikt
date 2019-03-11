@@ -34,9 +34,12 @@ router.get('/rest/innsyn/saker', (req, res) => {
     res.send(MockStorage.getSaker());
 });
 
-
 router.delete('/rest/storage', (req, res) => {
     res.sendStatus(204);
+});
+
+router.get('/rest/storage/kvittering/foreldrepenger', (req, res) => {
+    res.send(MockStorage.getKvitteringStorage());
 });
 
 const vedleggUpload = multer({ dest: './dist/vedlegg/' });

@@ -57,11 +57,11 @@ class KvitteringPage extends React.Component<Props, State> {
                         <BackButton hidden={false} onClick={() => this.handleBackClick()} />
                         <SpotlightLetter className={cls.element('logo')} width={136} height={136} />
                         <Innholdstittel className={cls.element('headline')}>
-                            <FormattedMessage id={'kvittering.headline'} />
+                            <FormattedMessage id="kvittering.headline" />
                         </Innholdstittel>
                         <Ingress className={cls.element('message')}>
                             <FormattedMessage
-                                id={'kvittering.message'}
+                                id="kvittering.message"
                                 values={{
                                     timeOfDay: moment(kvittering.mottattDato).format('HH:mm'),
                                     date: moment(kvittering.mottattDato).format('LL')
@@ -70,7 +70,7 @@ class KvitteringPage extends React.Component<Props, State> {
                         </Ingress>
                         <div className={cls.element('attachment-list')}>
                             <AttachmentList
-                                intlKey={'kvittering.attachment-list-label'}
+                                intlKey="kvittering.attachment-list-label"
                                 attachments={attachments.map(
                                     ({ url, ...otherProperties }: Attachment) => otherProperties
                                 )}

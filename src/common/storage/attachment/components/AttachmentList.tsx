@@ -18,7 +18,7 @@ interface Props {
 const AttachmentList = (props: Props) => {
     const { attachments, showFileSize, onDelete, intlKey } = props;
     return (
-        <Block margin={'m'}>
+        <Block margin="m">
             <Block margin="xs">
                 <LabelText>
                     <FormattedMessage

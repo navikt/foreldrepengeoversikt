@@ -47,14 +47,14 @@ const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress, uuid }: P
                 />
             )}
             <div className="responsiveContainer">
-                <Block margin={'s'}>
+                <Block margin="s">
                     <Innholdstittel>{tittel}</Innholdstittel>
                 </Block>
-                <Block margin={'l'}>
+                <Block margin="l">
                     <Ingress>{ingress}</Ingress>
                 </Block>
                 {uuid && (
-                    <Block margin={'l'}>
+                    <Block margin="l">
                         <Ingress>
                             <FormattedMessage id="feilside.uuid" values={{ uuid }} />
                         </Ingress>

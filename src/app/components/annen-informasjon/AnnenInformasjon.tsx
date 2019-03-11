@@ -14,7 +14,7 @@ const AnnenInformasjon = () => {
     return (
         <>
             <Undertittel className={cls.element('subheader')}>
-                <FormattedMessage id={'annenInformasjon.header'} />
+                <FormattedMessage id="annenInformasjon.header" />
             </Undertittel>
             <div className={cls.className}>
                 <nav className={cls.element('links')}>

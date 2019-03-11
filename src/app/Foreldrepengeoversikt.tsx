@@ -2,19 +2,25 @@ import * as React from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 
-import Api from './api/api';
-import { redirectToLogin } from './utils/login';
-import Sak from './types/Sak';
 import DineForeldrepenger from './pages/dine-foreldrepenger/DineForeldrepenger';
 import Ettersendelse from './pages/ettersendelse/Ettersendelse';
-import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
 import ErrorPage from './pages/error/ErrorPage';
 import KvitteringPage from './pages/kvittering-page/Kvittering';
+
+import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
+
+import Api from './api/api';
+import { redirectToLogin } from './utils/login';
 import { Routes } from './utils/routes';
+
+import Sak from './types/Sak';
 import Person from './types/Person';
+import { StorageKvittering } from './types/StorageKvittering';
+import { sakByDescendingOrder } from './utils/sakerUtils';
 
 interface State {
     saker: Sak[];
+    storageKvittering?: StorageKvittering;
     person?: Person;
     loading: boolean;
     error?: AxiosError;
@@ -36,12 +42,13 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
     fetchData(): void {
         this.setState({ loading: true }, () => {
             axios
-                .all([Api.getSaker(), Api.getPerson()])
+                .all([Api.getSaker(), Api.getPerson(), Api.getStorageKvittering()])
                 .then(
-                    axios.spread((getSakerResponse, getPersonResponse) => {
+                    axios.spread((getSakerResponse, getPersonResponse, getStorageKvitteringResponse) => {
                         this.setState({
-                            saker: getSakerResponse.data,
+                            saker: getSakerResponse.data.sort(sakByDescendingOrder),
                             person: getPersonResponse.data,
+                            storageKvittering: getStorageKvitteringResponse.data,
                             loading: false
                         });
                     })
@@ -73,6 +80,7 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
                                 person={this.state.person}
                                 saker={this.state.saker}
                                 error={this.state.error}
+                                storageKvittering={this.state.storageKvittering}
                                 {...props}
                             />
                         )}

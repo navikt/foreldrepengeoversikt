@@ -22,6 +22,14 @@ const sendEttersending = (ettersending: Ettersending) => {
     });
 };
 
+const getStorageKvittering = () => {
+    const url = `${apiBaseUrl}/storage/kvittering/foreldrepenger`;
+    return axios.get(url, {
+        withCredentials: true,
+        timeout: 15 * 1000
+    });
+};
+
 const log = (error: any) => {
     return axios.post('/log', error, {
         timeout: 15 * 1000,
@@ -32,6 +40,6 @@ const log = (error: any) => {
     });
 };
 
-const Api = { getSaker, getPerson, sendEttersending, log };
+const Api = { getSaker, getPerson, sendEttersending, getStorageKvittering, log };
 
 export default Api;

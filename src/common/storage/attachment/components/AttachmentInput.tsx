@@ -98,7 +98,7 @@ class AttachmentInput extends React.Component<Props> {
                     <CustomSVG iconRef={uploadIcon} size={22} />
                 </div>
                 <Element className={BEM.element('label')}>
-                    <FormattedMessage id={'vedlegg.lastoppknapp'} />
+                    <FormattedMessage id="vedlegg.lastoppknapp" />
                 </Element>
                 <input
                     id={inputId}

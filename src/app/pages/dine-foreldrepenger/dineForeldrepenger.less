@@ -14,14 +14,14 @@
     justify-items: center;
     margin: 0 0.5rem 1rem;
 
-    &__content {
+    &__main-content {
         -ms-grid-column: 2;
         grid-column-start: 2;
         -ms-grid-row: 2;
         grid-row: 2;
         -ms-grid-column-align: center;
         justify-self: center;
-        max-width: @app-max-width;
+        max-width: @main-content-max-width;
         width: 100%;
         margin-top: 1rem;
     }
@@ -32,16 +32,17 @@
         margin: 5rem 0;
     }
 
-    &__alertstipe {
+    .alertstripe {
         -ms-grid-row: 1;
         grid-row: 1;
         -ms-grid-column: 2;
         grid-column: 2;
         width: 100%;
         margin-top: 0.5rem;
+        margin-bottom: 1rem;
     }
 
-    &__side-bar {
+    &__sidepanel-desktop {
         max-width: 162px;
         justify-self: flex-start;
         -ms-grid-column: 3;

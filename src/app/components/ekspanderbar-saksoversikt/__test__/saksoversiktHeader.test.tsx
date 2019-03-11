@@ -2,14 +2,14 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import EtikettBase from 'nav-frontend-etiketter';
 
-import SaksoversiktHeader from '../SaksoversiktHeader';
+import EkspanderbarSaksoversiktHeader from '../EkspanderbarSaksoversiktHeader';
 import SakerMock from '../../../../../jest/__mocks__/Sak';
 import { getIntlKeyForStatus } from '../util';
 import { FagsakStatus } from '../../../types/FagsakStatus';
 
-describe('SaksoversiktHeader', () => {
+describe('EkspanderbarSaksoversiktHeader', () => {
     it('Should render status etikett for fpsak saker when status is defined', () => {
-        const wrapper = shallow(<SaksoversiktHeader sak={SakerMock.fpsakSak} />);
+        const wrapper = shallow(<EkspanderbarSaksoversiktHeader sak={SakerMock.fpsakSak} />);
         expect(wrapper.find(EtikettBase).length).toEqual(1);
     });
 
@@ -23,7 +23,7 @@ describe('SaksoversiktHeader', () => {
     });
 
     it('Should render status etikett for fpsak saker when status is defined', () => {
-        const wrapper = shallow(<SaksoversiktHeader sak={SakerMock.fpsakSak} />);
+        const wrapper = shallow(<EkspanderbarSaksoversiktHeader sak={SakerMock.fpsakSak} />);
         expect(wrapper.find(EtikettBase).length).toEqual(1);
     });
 });

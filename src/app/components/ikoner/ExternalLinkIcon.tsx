@@ -1,7 +1,6 @@
-import React, { SVGProps } from 'react';
+import React from 'react';
 
-type Props = SVGProps<any>;
-const ExternalLinkIcon = (props: Props) => (
+const ExternalLinkIcon = (props: any) => (
     <svg
         width="24px"
         height="24px"

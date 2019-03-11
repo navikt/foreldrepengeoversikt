@@ -1,8 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const webpackConfig = {
     entry: {
@@ -17,7 +16,8 @@ const webpackConfig = {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
             app: path.resolve(__dirname, './../../app'),
-            common: path.resolve(__dirname, './../../common')
+            common: path.resolve(__dirname, './../../common'),
+            assets: path.resolve(__dirname, './../../assets')
         }
     },
     module: {
@@ -47,39 +47,20 @@ const webpackConfig = {
             },
             {
                 test: /\.less$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader'
-                        },
-                        {
-                            loader: 'less-loader',
-                            options: {
-                                globalVars: {
-                                    coreModulePath: '"~"',
-                                    nodeModulesPath: '"~"'
-                                }
-                            }
-                        }
-                    ]
-                })
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
             },
             {
                 test: /\.svg$/,
-                use: 'svg-sprite-loader'
+                use: ['file-loader']
             }
         ]
     },
     plugins: [
         new CaseSensitivePathsPlugin(),
-        new ExtractTextPlugin({
+        new MiniCssExtractPlugin({
             filename: 'css/[name].css?[hash]-[chunkhash]-[name]',
             disable: false,
             allChunks: true
-        }),
-        new SpriteLoaderPlugin({
-            plainSprite: true
         })
     ]
 };

@@ -1,10 +1,11 @@
 import Sak, { SakType } from '../types/Sak';
 import { FagsakStatus } from '../types/FagsakStatus';
 import Behandling, { BehandlingStatus, BehandlingTema, BehandlingÅrsak } from '../types/Behandling';
+import { StorageKvittering } from '../types/StorageKvittering';
 
 export const sakByDescendingOrder = (a: Sak, b: Sak) => b.opprettet.localeCompare(a.opprettet);
-export const behandlingByDescendingOrder = (a: Behandling, b: Behandling) => b.opprettetTidspunkt.localeCompare(a.opprettetTidspunkt);
-export const behandlingByAscendingOrder = (a: Behandling, b: Behandling) => a.opprettetTidspunkt.localeCompare(b.opprettetTidspunkt);
+export const behandlingByDescendingOrder = (a: Behandling, b: Behandling) =>
+    b.opprettetTidspunkt.localeCompare(a.opprettetTidspunkt);
 
 export const erUnderBehandling = (sak: Sak): any => {
     return sak && sak.status && (sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING);
@@ -72,4 +73,13 @@ export const skalKunneSøkeOmEndring = (nyesteSak: Sak): boolean => {
 
 export const erInfotrygdSak = (sak: Sak): boolean => {
     return sak.type === SakType.SAK;
+};
+
+export const opprettSak = (storageKvittering: StorageKvittering) => {
+    const sak: Sak = {
+        type: SakType.SAK,
+        opprettet: storageKvittering.innsendingstidspunkt
+    }
+
+    return sak;
 };

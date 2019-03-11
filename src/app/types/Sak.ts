@@ -2,10 +2,10 @@ import Behandling from './Behandling';
 import { FagsakStatus } from './FagsakStatus';
 
 export default interface Sak {
-    type: SakType;
+    type?: SakType;
     behandlinger?: Behandling[];
     status?: FagsakStatus;
-    saksnummer: string;
+    saksnummer?: string;
     opprettet: string;
 }
 

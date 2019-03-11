@@ -1,0 +1,33 @@
+@import '../../styles/variables.less';
+@import '../../styles/colors.less';
+@import '../../styles/mixins.less';
+
+.ekspanderbar-saksoversikt {
+    width: 100%;
+    .ekspanderbartPanel__innhold {
+        padding: 0;
+    }
+
+}
+
+.ekspenderbar-saksoversikt-header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 1rem;
+
+    &__status-etikett {
+        margin: 0 1rem;
+        justify-self: center;
+        align-self: center;
+    }
+
+    @media (max-width: @mobile-breakpoint) {
+        flex-flow: column wrap;
+        &__status-etikett {
+            align-self: flex-start;
+            margin: 0.5rem 0rem;
+        }
+    }
+}

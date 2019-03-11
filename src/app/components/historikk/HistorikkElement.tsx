@@ -37,7 +37,7 @@ function HistorikkElement(props: Props) {
                             dato={formaterDatoForHendelse(hendelse.dato)}
                             pilHoyre={!hendelse.brukerInitiertHendelse && !matches}
                             ikonClass={hendelse.brukerInitiertHendelse ? 'bruker' : 'nav'}>
-                            <Element tag={'p'}>
+                            <Element tag="p">
                                 <FormattedMessage id={`historikk.${hendelse.beskrivelse}`} />
                             </Element>
                         </Snakkeboble>

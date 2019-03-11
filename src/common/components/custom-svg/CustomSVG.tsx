@@ -11,7 +11,7 @@ interface Props {
     className?: string;
 }
 
-const CustomSVGFromSprite: React.StatelessComponent<Props> = ({ iconRef, size, className, ...other }) => {
+const CustomSVGFromSprite = ({ iconRef, size, className, ...other }: Props) => {
     const viewBox = { 'view-box': iconRef.viewBox };
     return (
         <svg className={className} height={size} width={size} {...viewBox} {...other}>

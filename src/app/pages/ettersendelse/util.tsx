@@ -11,7 +11,7 @@ import Sak from '../../types/Sak';
 
 export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: Sak) => (
     <>
-        <option value={'default'} disabled={true} hidden={true}>
+        <option value="default" disabled={true} hidden={true}>
             {intl.formatMessage({ id: `ettersendelse.select.defaultValue` })}
         </option>
         {relevanteSkjemanummer(sak).map((skjemanummer: Skjemanummer) => (

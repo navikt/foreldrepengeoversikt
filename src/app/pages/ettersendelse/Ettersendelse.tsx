@@ -152,13 +152,13 @@ class Ettersendelse extends React.Component<Props, State> {
                     <BackButton hidden={false} onClick={() => this.handleBackClick()} />
                     <LetterIcon className={cls.element('letter-icon')} />
                     <Innholdstittel className={cls.element('title')}>
-                        <FormattedMessage id={'ettersendelse.title'} values={{ saksnummer: sak.saksnummer }} />
+                        <FormattedMessage id="ettersendelse.title" values={{ saksnummer: sak.saksnummer }} />
                     </Innholdstittel>
                     <Select
                         className={cls.element('attachment-type-select')}
                         label=""
                         onChange={this.handleAttachmentTypeSelectChange}
-                        defaultValue={'default'}>
+                        defaultValue="default">
                         {getAttachmentTypeSelectOptions(intl, sak)}
                     </Select>
                     {this.isReadyToUploadAttachments() && (
@@ -186,7 +186,7 @@ class Ettersendelse extends React.Component<Props, State> {
                                 onClick={this.handleSendEttersendelseOnClick}
                                 disabled={sendingEttersendelse}
                                 spinner={sendingEttersendelse}>
-                                <FormattedMessage id={'ettersendelse.sendButton'} />
+                                <FormattedMessage id="ettersendelse.sendButton" />
                             </Hovedknapp>
                         </div>
                     )}

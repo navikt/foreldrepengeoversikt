@@ -31,7 +31,7 @@ class IntlProvider extends React.Component {
 
     render() {
         return (
-            <Provider key={'nb'} locale={'nb'} messages={nbMessages}>
+            <Provider key="nb" locale="nb" messages={nbMessages}>
                 {this.props.children}
             </Provider>
         );

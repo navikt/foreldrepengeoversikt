@@ -1,5 +1,6 @@
 {
     "header.title": "Dine foreldrepenger",
+    "header.undertitle": "Her finner du alt om dine foreldrepenger. Du kan också endre på ditt uttak eller ettersende dokumentasjon.",
 
     "dineForeldrepenger.alertstripe.fpsak": "Du får tidligst svar på søknaden din fire uker før foreldrepengeperioden din starter. Dette er fordi NAV trenger oppdaterte opplysninger for å behandle saken din.",
     "dineForeldrepenger.alertstripe.infotrygd": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
@@ -10,20 +11,20 @@
 
     "saksoversikt.heading.top.foreldrepenger": "Din foreldrepengesak",
     "saksoversikt.heading.top.engangsstønad": "Søknad om engangsstønad",
-    "saksoversikt.heading.bottom": "Sist endret: { date }",
+    "saksoversikt.heading.bottom.mottatt": "Mottatt: { date }",
+    "saksoversikt.heading.bottom.sistEndret": "Sist endret: { date }",
     "saksoversikt.heading.underBehandling": "Under behandling",
     "saksoversikt.heading.avsluttet": "Ferdig behandlet",
     "saksoversikt.content.saksnummer": "Saksnummer: { saksnummer }",
     "saksoversikt.content.ettersendelse.intro": "Her kan du ettersende dokumentasjon til søknaden din.",
     "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg",
-    "saksoversikt.content.endringssøknad.intro": "Her kan du endre perioden din med foreldrepenger eller søke om utsettelse hvis du skal ha ferie, jobbe eller er syk.",
+    "saksoversikt.content.endringssøknad.intro": "Her kan du endre perioden din hvis du skal ha ferie, jobbe eller har vært syk.",
     "saksoversikt.content.endringssøknad.button": "Endre perioden din",
 
-    "infopanel.title": "Greit for deg å vite",
-    "infopanel.utbetaling.engangsønad": "Utbetales én uke etter at søknaden din er innvilget.",
-    "infopanel.utbetaling.foreldrepenger": "Utbetales den 25. i måneden",
-    "infopanel.svarfrist.engangsønad": "Saksbehandlingstiden er inntil seks uker.",
-    "infopanel.svarfrist.foreldrepenger": "Svar tidligst fire uker før",
+    "sidepanel.utbetalingsdato": "Neste utbetalingsdato",
+    "sidepanel.utbetalinger": "Dine utbetalinger",
+    "sidepanel.søk": "Søk for ett nytt barn",
+    "sidepanel.chat": "Chat med oss om foreldrepenger",
 
     "ettersendelse.title": "Last opp dokumentasjon til sak { saksnummer }",
     "ettersendelse.sendButton": "Ettersend vedlegg",
@@ -95,13 +96,13 @@
     "oversikt": "Oversikt",
     "historikk.BERØRT-BEHANDLING": "Berørt Behandling",
 
-    "historikk.søknad-sendt": "Søknad er mottatt",
+    "historikk.søknad-sendt": "Søknaden er mottatt",
     "historikk.inntektsmelding-motatt": "Innteksmelding fra arbeidsgiver er motatt",
     "historikk.RE-END-INNTEKTSMELD": "Innteksmelding fra arbeidsgiver er motatt",
-    "historikk.RE-END-FRA-BRUKER": "Søknad om endring er motatt",
+    "historikk.RE-END-FRA-BRUKER": "Endringssøknad er motatt",
 
     "historikk.IKKE_FASTSATT": "IKKE_FASTSATT",
-    "historikk.INNVILGET": "Vedtaket er innvilget",
+    "historikk.INNVILGET": "Vedtak er innvilget",
     "historikk.AVSLÅTT": "Vedtaket er avslått",
     "historikk.OPPHØR": "Vedtaket er opphørt",
     "historikk.HENLAGT_SØKNAD_TRUKKET": "HENLAGT_SØKNAD_TRUKKET",
@@ -118,9 +119,19 @@
     "historikk.INNSYN_DELVIS_INNVILGET": "INNSYN_DELVIS_INNVILGET",
     "historikk.INNSYN_AVVIST": "INNSYN_AVVIST",
     "historikk.FORELDREPENGER_ENDRET": "Vedtaket er endret",
-    "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vises ikke her.",
+    "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vil ikke vises her.",
     "historikk.ingenHendelser": "Vi kan desverre ikke vise historikk for denne saken.",
 
-    "dokumentoversikt.info": "Vi jobber med å kunne vise alle dokumenter du har i foreldrepengesaken din. Inntil videre finner du disse under { lenke }.",
-    "dokumentoversikt.info.lenke": "dine dokumenter"
+    "dokumentoversikt.info": "Vi jobber med å kunne vise alle dine dokumenter koblet til foreldrepenger her. Inntil videre finner du disse under { lenke }.",
+    "dokumentoversikt.info.lenke": "dine dokumenter",
+
+    "utsettelsepanel.title": "Ferie eller arbeid?",
+    "utsettelsepanel.tekst": "Du kan utsette dine foreldrepenger om du skal på ferie eller om du ønsker å jobbe, eller om du har blitt syk og ikke kan ta hand om barnet. Søk om endring i foreldrepengesøknaden for å legge til en utsettelse.",
+    "utsettelsepanel.lenke": "Les mer om utsettelse her",
+
+    "meldingOmVedtak.tittel": "Melding om vedtak?",
+    "meldingOmVedtak.tekst": "Klikk her for å gå til dine dokumenter der du finner alle vedtak og dokumenter som vi har sendt deg.",
+
+    "sakInfo.tittel": "Søknad om foreldrepenger",
+    "sakInfo.sistEndret": "Mottatt { date }"
 }

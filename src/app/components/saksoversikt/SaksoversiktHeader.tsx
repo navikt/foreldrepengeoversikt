@@ -1,25 +1,22 @@
-import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import EtikettBase from 'nav-frontend-etiketter';
-
+import React from 'react';
 import Sak from '../../types/Sak';
-import { formatDate, getIntlKeyForStatus } from './util';
-import BEMHelper from 'common/util/bem';
+import { Normaltekst, Undertittel, Undertekst } from 'nav-frontend-typografi';
+import { FormattedMessage } from 'react-intl';
 import { erForeldrepengesak } from '../../utils/sakerUtils';
+import { formatDate } from '../ekspanderbar-saksoversikt/util';
+import BEMHelper from 'common/util/bem';
 
 import './saksoversikt.less';
 
-interface Props {
+interface SaksoversiktHeaderProps {
     sak: Sak;
 }
 
-const SaksoversiktHeader = ({ sak }: Props) => {
+const SaksoversiktHeader = ({ sak }: SaksoversiktHeaderProps) => {
     const cls = BEMHelper('saksoversikt-header');
-    const statusIntlKey = sak.status && getIntlKeyForStatus(sak.status);
     return (
         <div className={cls.className}>
-            <div className={cls.element('left')}>
+            <div className={cls.element('top')}>
                 <Undertittel>
                     <FormattedMessage
                         id={
@@ -29,25 +26,16 @@ const SaksoversiktHeader = ({ sak }: Props) => {
                         }
                     />
                 </Undertittel>
-
-                {sak.opprettet && (
-                    <Normaltekst>
-                        <FormattedMessage
-                            id={'saksoversikt.heading.bottom'}
-                            values={{ date: formatDate(sak.opprettet) }}
-                        />
-                    </Normaltekst>
-                )}
+                {sak.saksnummer && <Undertekst>{sak.saksnummer}</Undertekst>}
             </div>
 
-            {statusIntlKey && (
-                <EtikettBase
-                    className={cls.element('status-etikett')}
-                    type={statusIntlKey === 'saksoversikt.heading.avsluttet' ? 'suksess' : 'fokus'}>
-                    <FormattedMessage id={statusIntlKey} />
-                </EtikettBase>
+            {sak.opprettet && (
+                <Normaltekst>
+                    <FormattedMessage id="saksoversikt.heading.bottom.mottatt" values={{ date: formatDate(sak.opprettet) }} />
+                </Normaltekst>
             )}
         </div>
     );
 };
+
 export default SaksoversiktHeader;

@@ -1,0 +1,18 @@
+@import '../../styles/colors.less';
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.utsettelse-panel {
+    background-image: url(./../../../assets/utsettelse-background.svg);
+    background-size: contain;
+    background-color: #ccdee6;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    padding: 1.5rem 10rem 5rem 1.5rem;
+    border-radius: 4px;
+
+    @media (max-width: @mobile-breakpoint) {
+        padding: 1.5rem 2.5rem 5rem 1.5rem;
+    }
+
+}

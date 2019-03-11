@@ -1,0 +1,33 @@
+@import '../../styles/variables.less';
+
+.melding-om-vedtak-lenkepanel {
+    border: 1.5px solid #7f756c;
+    border-radius: 4px;
+    .lenkepanel__heading {
+        display: flex;
+        flex-flow: row;
+        width: 100%;
+        justify-content: flex-start;
+        align-content: center;
+    }
+
+    &__tekst {
+        margin-left: 1.25rem;
+        padding-right: 1rem;
+    }
+
+    .typo-undertekst {
+        margin-top: 0.25rem;
+    }
+    
+    @media (max-width: @mobile-breakpoint) {
+        &__tekst {
+            margin-left: 0;
+        }
+    }
+}
+
+.melding-om-vedtak-lenkepanel:hover {
+    box-shadow: none;
+    border: 1.5px solid #0067c5;
+}

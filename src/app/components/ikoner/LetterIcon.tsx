@@ -1,7 +1,6 @@
-import React, { SVGProps } from 'react';
+import React from 'react';
 
-type Props = SVGProps<any>;
-const LetterIcon: React.StatelessComponent<Props> = (props: Props) => (
+const LetterIcon = (props: any) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"

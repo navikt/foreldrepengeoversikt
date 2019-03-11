@@ -44,7 +44,7 @@ class ErrorPage extends React.Component<Props, State> {
             this.state.errorMessage
         ) : (
             <FormattedMessage
-                id={'feilside.ingress'}
+                id="feilside.ingress"
                 values={{
                     lenke: <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'feilside.ingress.lenke')}</Lenke>
                 }}
@@ -53,7 +53,7 @@ class ErrorPage extends React.Component<Props, State> {
 
         const cls = BEMHelper('error-page');
         return (
-            <div id={cls.className}>
+            <div className={cls.className}>
                 <Feilsidemelding
                     illustrasjon={{
                         tittel: getMessage(intl, 'feilside.bobletittel'),

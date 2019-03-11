@@ -1,53 +1,40 @@
-@import '../../styles/variables.less';
 @import '../../styles/colors.less';
+@import '../../styles/variables.less';
 @import '../../styles/mixins.less';
 
 .saksoversikt {
-    width: 100%;
+    background-color: white;
+    padding: 0.5rem 2rem 2rem;
+    margin-bottom: 1rem;
 
-    &__din-søknad {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 2rem;
-        svg {
-            margin-right: 0.75rem;
+    &__valg {
+        .knapp:first-child {
+            margin-right: 1rem;
         }
     }
 
-    &__saksnummer {
-        margin-bottom: 1.5rem;
-    }
-
-    &__ettersendelse-intro,
-    &__endringssoknad-intro {
-        margin-bottom: 1rem;
-    }
-
-    &__valg {
-        display: flex;
-        flex-flow: row nowrap;
-        margin-bottom: 1.5rem;
-        .hjelpetekst {
-            align-self: center;
+    @media (max-width: @mobile-breakpoint) {
+        padding: 1rem;
+        &__valg {
+            display: flex;
+            flex-flow: column;
+            .knapp:first-child {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
         }
     }
 }
 
 .saksoversikt-header {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    width: 100%;
-
-    &__status-etikett {
-        margin: 0 1rem;
-        align-self: flex-start;
-    }
-
-    @media (max-width: @mobile-breakpoint) {
-        flex-flow: column wrap;
-        &__status-etikett {
-            margin: 0.5rem 0rem;
-        }
+    flex-flow: column;
+    margin-bottom: 1rem;
+    padding-top: 2rem;
+    &__top {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
     }
 }
