@@ -93,7 +93,7 @@ class Ettersendelse extends React.Component<Props, State> {
     sendEttersendelse(): void {
         const ettersending: Ettersending = {
             type: erForeldrepengesak(this.state.sak) ? 'foreldrepenger': 'engangsstønad',
-            saksnummer: this.state.sak.saksnummer,
+            saksnummer: this.state.sak.saksnummer!,
             vedlegg: this.state.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
         };
 

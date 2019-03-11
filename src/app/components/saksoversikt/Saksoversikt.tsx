@@ -63,7 +63,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
 
                 <div className={cls.element('valg')}>
                     {!isSakTooOldForEttersendelse(sak.opprettet) && sak.saksnummer !== undefined && (
-                        <Knapp onClick={() => this.onEttersendVedlegg(sak)}>
+                        <Knapp className={cls.element('ettersendelse-btn')} onClick={() => this.onEttersendVedlegg(sak)}>
                             <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
                         </Knapp>
                     )}

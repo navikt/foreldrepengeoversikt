@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import EkspanderbarSaksoversikt from '../EkspanderbarSaksoversikt';
 const moment = require('moment');
 import SakerMock from '../../../../../jest/__mocks__/Sak';
+import Saksoversikt from '../Saksoversikt';
 
 describe('EkspanderbarSaksoversikt component', () => {
     it('Ettersendelse should be disabled if the 70 day deadline on ettersendelse has expired', () => {
@@ -11,7 +11,7 @@ describe('EkspanderbarSaksoversikt component', () => {
             .format('YYYY-MM-DD');
 
         const wrapper = shallow(
-            <EkspanderbarSaksoversikt
+            <Saksoversikt
                 sak={{ ...SakerMock.fpsakSak, opprettet: opprettetDate }}
                 history={jest.fn() as any}
             />
@@ -27,7 +27,7 @@ describe('EkspanderbarSaksoversikt component', () => {
             .format('YYYY-MM-DD');
 
         const wrapper = shallow(
-            <EkspanderbarSaksoversikt
+            <Saksoversikt
                 sak={{ ...SakerMock.fpsakSak, opprettet: opprettetDate }}
                 history={jest.fn() as any}
             />

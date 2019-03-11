@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import Lenke from 'nav-frontend-lenker';
 import { FormattedMessage } from 'react-intl';
 import BEMHelper from 'common/util/bem';
-import { Undertittel, Systemtittel } from 'nav-frontend-typografi';
+import { Systemtittel } from 'nav-frontend-typografi';
 
 import './sidepanel.less';
 
