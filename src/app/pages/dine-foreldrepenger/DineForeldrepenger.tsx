@@ -95,7 +95,7 @@ class DineForeldrepenger extends React.Component<Props> {
 
         const nyesteSak: Sak | undefined =
             storageKvittering && storageKvittering.innsendingstidspunkt &&
-            !saker.some((sak: Sak) => moment(sak.opprettet).isAfter(storageKvittering.innsendingstidspunkt))
+            saker.every((sak: Sak) => moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt))
                 ? opprettSak(storageKvittering)
                 : saker.shift();
 

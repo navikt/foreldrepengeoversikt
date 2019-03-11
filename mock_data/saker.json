@@ -1,3 +1,24 @@
 [
-
+    {
+        "type": "FPSAK",
+        "saksnummer": "137662557",
+        "status": "LOP",
+        "opprettet": "2019-03-11",
+        "behandlinger": [
+            {
+                "opprettetTidspunkt": "2019-03-11T08:12:41.227",
+                "endretTidspunkt": "2019-03-11T08:15:53.969",
+                "status": "AVSLU",
+                "type": "FP",
+                "tema": "FORP_FODS",
+                "årsak": null,
+                "behandlingResultat": "INNVILGET",
+                "behandlendeEnhet": "4833",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Oslo 1",
+                "inntektsmeldinger": [
+                    "439779793"
+                ]
+            }
+        ]
+    }
 ]
