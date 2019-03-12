@@ -2,6 +2,7 @@ const express = require('express');
 const server = express();
 server.use(express.json());
 
+
 const path = require('path');
 const winston = require('winston');
 const mustacheExpress = require('mustache-express');
@@ -49,6 +50,11 @@ const startServer = (html) => {
         express.static(path.resolve(__dirname, 'dist/css'))
     );
 
+    server.use(
+        '/dist/assets',
+        express.static(path.resolve(__dirname, 'dist/assets'))
+    );
+    
     server.get(['/dist/js/settings.js'], (req, res) => {
         res.sendFile(path.resolve(`../../dist/js/settings.js`));
     });
