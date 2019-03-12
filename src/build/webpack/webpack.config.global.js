@@ -51,7 +51,10 @@ const webpackConfig = {
             },
             {
                 test: /\.svg$/,
-                use: ['file-loader']
+                use: [{ loader: 'file-loader', options: {
+                    name: '[path][name].[ext]',
+                    publicPath: 'assets',
+                  } }]
             }
         ]
     },
