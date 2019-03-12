@@ -1,6 +1,6 @@
 {
     "header.title": "Dine foreldrepenger",
-    "header.undertitle": "Her finner du alt om dine foreldrepenger. Du kan också endre på ditt uttak eller ettersende dokumentasjon.",
+    "header.undertitle": "Her finner du alt om dine foreldrepenger. Du kan også endre på ditt uttak eller ettersende dokumentasjon.",
 
     "dineForeldrepenger.alertstripe.fpsak": "Du får tidligst svar på søknaden din fire uker før foreldrepengeperioden din starter. Dette er fordi NAV trenger oppdaterte opplysninger for å behandle saken din.",
     "dineForeldrepenger.alertstripe.infotrygd": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
@@ -125,9 +125,9 @@
     "dokumentoversikt.info": "Vi jobber med å kunne vise alle dine dokumenter koblet til foreldrepenger her. Inntil videre finner du disse under { lenke }.",
     "dokumentoversikt.info.lenke": "dine dokumenter",
 
-    "utsettelsepanel.title": "Ferie eller arbeid?",
-    "utsettelsepanel.tekst": "Du kan utsette dine foreldrepenger om du skal på ferie eller om du ønsker å jobbe, eller om du har blitt syk og ikke kan ta hand om barnet. Søk om endring i foreldrepengesøknaden for å legge til en utsettelse.",
-    "utsettelsepanel.lenke": "Les mer om utsettelse her",
+    "utsettelsepanel.title": "Vil du endre perioden din eller utsette med ferie, arbeid eller sykdom?",
+    "utsettelsepanel.tekst": "Du kan endre perioden din med foreldrepenger, mødrekvote, medmorkvote, fedrekvote eller fellesperiode. Søk om endring ved å legge til en ny periode. Du kan utsette om du skal på ferie eller om du ønsker å jobbe, eller på grunn av sykdom. Søk om endring ved å legge til en utsettelse.",
+    "utsettelsepanel.lenke": "Les mer om utsettelse",
 
     "meldingOmVedtak.tittel": "Melding om vedtak?",
     "meldingOmVedtak.tekst": "Klikk her for å gå til dine dokumenter der du finner alle vedtak og dokumenter som vi har sendt deg.",
