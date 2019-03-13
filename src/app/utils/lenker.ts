@@ -27,21 +27,9 @@ export const annenInformasjonLenker = {
         text: 'Kontakt oss',
         href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger'
     },
-    utbetalinger: {
-        text: 'Utbetalinger',
-        href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger '
-    },
     saksbehandlingstider: {
         text: 'Saksbehandlingstider',
         href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Saksbehandlingstider+i+NAV'
-    },
-    hvisDuVilJobbe: {
-        text: 'Hvis du vil jobbe',
-        href: 'https://familie.nav.no/om-foreldrepenger#hvis-du-vil-jobbe '
-    },
-    hvisDuSkalPåFerie: {
-        text: 'Hvis du skal på ferie',
-        href: 'https://familie.nav.no/om-foreldrepenger#hvis-du-skal-pa-ferie'
     },
     regelverket: {
         text: 'Regelverket',
