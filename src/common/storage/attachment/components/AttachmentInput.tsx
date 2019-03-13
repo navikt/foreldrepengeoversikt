@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
-import CustomSVG from 'common/components/custom-svg/CustomSVG';
 import BEMHelper from 'common/util/bem';
-
-const uploadIcon = require('./upload.svg').default;
+import UploadIkon from 'app/components/ikoner/UploadIkon';
 
 import './attachment.less';
 
@@ -95,7 +93,7 @@ class AttachmentInput extends React.Component<Props> {
                 onDrop={(e) => this.onFileDropHandler(e)}
                 onKeyPress={(e) => this.onKeyPress(e)}>
                 <div className={BEM.element('icon')}>
-                    <CustomSVG iconRef={uploadIcon} size={22} />
+                    <UploadIkon />
                 </div>
                 <Element className={BEM.element('label')}>
                     <FormattedMessage id="vedlegg.lastoppknapp" />
