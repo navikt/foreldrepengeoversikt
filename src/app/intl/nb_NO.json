@@ -15,6 +15,7 @@
     "saksoversikt.heading.ekspanderbar.mottatt": "Mottatt: {date}",
     "saksoversikt.heading.sisteEndring": "Siste endring",
     "saksoversikt.heading.underBehandling": "Under behandling",
+    "saksoversikt.heading.løpende": "Løpende",
     "saksoversikt.heading.avsluttet": "Ferdig behandlet",
     "saksoversikt.heading.saksnummer.label": "Saksnummer",
     "saksoversikt.content.ettersendelse.intro": "Her kan du ettersende dokumentasjon til søknaden din.",

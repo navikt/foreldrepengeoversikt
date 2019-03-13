@@ -4,13 +4,14 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 
 import Sak from '../../types/Sak';
 import { erForeldrepengesak, finnNyesteBehandling } from '../../utils/sakerUtils';
-import { formatDate, getIntlKeyForStatus } from '../ekspanderbar-saksoversikt/util';
+import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus } from '../ekspanderbar-saksoversikt/util';
 import BEMHelper from 'common/util/bem';
 import Etikett from '../etikett/etikett';
 
-import './saksoversikt.less';
 import EtikettBase from 'nav-frontend-etiketter';
 import BamseIkon from '../ikoner/BamseIkon';
+
+import './saksoversikt.less';
 
 interface SaksoversiktHeaderProps {
     sak: Sak;
@@ -62,7 +63,7 @@ const SaksoversiktHeader: FunctionComponent<SaksoversiktHeaderProps> = ({ sak })
                 {statusIntlKey ? (
                     <EtikettBase
                         className={cls.element('status-etikett')}
-                        type={statusIntlKey === 'saksoversikt.heading.avsluttet' ? 'suksess' : 'fokus'}>
+                        type={getEtikettTypeForSaksstatus(sak)}>
                         <FormattedMessage id={statusIntlKey} />
                     </EtikettBase>
                 ) : (

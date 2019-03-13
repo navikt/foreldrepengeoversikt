@@ -20,7 +20,12 @@ export const getIntlKeyForStatus = (status: FagsakStatus): string => {
         case FagsakStatus.UNDER_BEHANDLING:
             return 'saksoversikt.heading.underBehandling';
         case FagsakStatus.LOPENDE:
+            return 'saksoversikt.heading.løpende';
         case FagsakStatus.AVSLUTTET:
             return 'saksoversikt.heading.avsluttet';
     }
 };
+
+
+export const getEtikettTypeForSaksstatus = (sak: Sak): 'suksess' | 'fokus' => 
+    sak.status === FagsakStatus.LOPENDE || sak.status === FagsakStatus.AVSLUTTET ? 'suksess' : 'fokus';

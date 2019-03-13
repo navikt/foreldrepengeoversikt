@@ -4,7 +4,7 @@ import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
 
 import Sak from '../../types/Sak';
-import { formatDate, getIntlKeyForStatus } from './util';
+import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus } from './util';
 import BEMHelper from 'common/util/bem';
 import { erForeldrepengesak } from '../../utils/sakerUtils';
 
@@ -43,7 +43,7 @@ const EkspanderbarSaksoversiktHeader = ({ sak }: Props) => {
             {statusIntlKey && (
                 <EtikettBase
                     className={cls.element('status-etikett')}
-                    type={statusIntlKey === 'saksoversikt.heading.avsluttet' ? 'suksess' : 'fokus'}>
+                    type={getEtikettTypeForSaksstatus(sak)}>
                     <FormattedMessage id={statusIntlKey} />
                 </EtikettBase>
             )}

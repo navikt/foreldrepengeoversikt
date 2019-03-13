@@ -13,7 +13,6 @@ import BEMHelper from '../../../common/util/bem';
 import RelatertInformasjon from 'app/components/relatert-informasjon/RelatertInformasjon';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 import {
-    erEngangsstønad,
     erForeldrepengesak,
     erInfotrygdSak,
     erUnderBehandling,
