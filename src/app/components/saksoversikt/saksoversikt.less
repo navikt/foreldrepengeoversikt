@@ -27,8 +27,6 @@
 }
 
 .saksoversikt-header {
-    display: flex;
-    flex-flow: column;
     margin-bottom: 1rem;
     padding-top: 2rem;
     &__top {
@@ -36,5 +34,16 @@
         flex-flow: row;
         justify-content: space-between;
         margin-bottom: 0.5rem;
+    }
+
+    &__bottom-row {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    &__mottatt {
+        text-align: left;
     }
 }

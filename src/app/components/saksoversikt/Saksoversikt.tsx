@@ -3,7 +3,7 @@ import { History } from 'history';
 import { Knapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
 
-import { formatDate, isSakTooOldForEttersendelse } from '../ekspanderbar-saksoversikt/util';
+import { isSakTooOldForEttersendelse } from '../ekspanderbar-saksoversikt/util';
 import { Feature, isFeatureEnabled } from '../../Feature';
 import { erInfotrygdSak, behandlingByDescendingOrder } from '../../utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
@@ -15,10 +15,9 @@ import { lenker } from '../../utils/lenker';
 import BEMHelper from 'common/util/bem';
 import Person from '../../types/Person';
 import SaksoversiktHeader from './SaksoversiktHeader';
+import Behandling from 'app/types/Behandling';
 
 import './saksoversikt.less';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Behandling from 'app/types/Behandling';
 
 interface SaksoversiktProps {
     sak: Sak;
@@ -45,15 +44,6 @@ class Saksoversikt extends Component<SaksoversiktProps> {
         return (
             <div className={'saksoversikt'}>
                 {withHeader && <SaksoversiktHeader sak={sak} />}
-
-                {nyesteBehandling && nyesteBehandling.endretTidspunkt && (
-                    <Normaltekst className="blokk-xs">
-                        <FormattedMessage
-                            id="saksoversikt.heading.bottom.sistEndret"
-                            values={{ date: formatDate(nyesteBehandling.endretTidspunkt) }}
-                        />
-                    </Normaltekst>
-                )}
 
                 <MeldingOmVedtakLenkepanel />
 
