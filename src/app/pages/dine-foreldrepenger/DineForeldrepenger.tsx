@@ -4,12 +4,13 @@ import MediaQuery from 'react-responsive';
 import { History } from 'history';
 import { AxiosError } from 'axios';
 import AlertStripe from 'nav-frontend-alertstriper';
+import moment from 'moment';
 
 import Sak from '../../types/Sak';
 import EkspanderbarSaksoversikt from '../../components/ekspanderbar-saksoversikt/EkspanderbarSaksoversikt';
 import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
-import AnnenInformasjon from '../../components/annen-informasjon/AnnenInformasjon';
+import RelatertInformasjon from 'app/components/relatert-informasjon/RelatertInformasjon';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 import {
     erEngangsstønad,
@@ -25,7 +26,6 @@ import Saksoversikt from '../../components/saksoversikt/Saksoversikt';
 
 import Person from '../../types/Person';
 import { StorageKvittering } from '../../types/StorageKvittering';
-import moment from 'moment';
 
 import './dineForeldrepenger.less';
 
@@ -122,7 +122,7 @@ class DineForeldrepenger extends React.Component<Props> {
                         )}
 
                         <MediaQuery maxWidth={1114}>{this.renderSidepanel()}</MediaQuery>
-                        <AnnenInformasjon />
+                        <RelatertInformasjon />
                     </div>
 
                     <MediaQuery minWidth={1115}>

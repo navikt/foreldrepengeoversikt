@@ -7,14 +7,14 @@ import BEMHelper from '../../../common/util/bem';
 import { annenInformasjonLenker } from '../../utils/lenker';
 import ExternalLinkIcon from '../ikoner/ExternalLinkIcon';
 
-import './annenInformasjon.less';
+import './relatertInformasjon.less';
 
-const AnnenInformasjon = () => {
-    const cls = BEMHelper('annenInformasjon');
+const RelatertInformasjon = () => {
+    const cls = BEMHelper('relatert-informasjon');
     return (
         <>
             <Undertittel className={cls.element('subheader')}>
-                <FormattedMessage id="annenInformasjon.header" />
+                <FormattedMessage id="relatertInformasjon.header" />
             </Undertittel>
             <div className={cls.className}>
                 <nav className={cls.element('links')}>
@@ -31,4 +31,4 @@ const AnnenInformasjon = () => {
         </>
     );
 };
-export default AnnenInformasjon;
+export default RelatertInformasjon;
