@@ -101,10 +101,10 @@
     "historikk.søknad-sendt": "Søknaden er mottatt",
     "historikk.inntektsmelding-motatt": "Innteksmelding fra arbeidsgiver er motatt",
     "historikk.RE-END-INNTEKTSMELD": "Innteksmelding fra arbeidsgiver er motatt",
-    "historikk.RE-END-FRA-BRUKER": "Endringssøknad er motatt",
+    "historikk.RE-END-FRA-BRUKER": "Endringssøknaden er motatt",
 
     "historikk.IKKE_FASTSATT": "IKKE_FASTSATT",
-    "historikk.INNVILGET": "Vedtak er innvilget",
+    "historikk.INNVILGET": "Vedtaket er innvilget",
     "historikk.AVSLÅTT": "Vedtaket er avslått",
     "historikk.OPPHØR": "Vedtaket er opphørt",
     "historikk.HENLAGT_SØKNAD_TRUKKET": "HENLAGT_SØKNAD_TRUKKET",
