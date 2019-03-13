@@ -85,7 +85,7 @@
     "feilside.vedlegg.forStortTotalt": "Du har et vedlegg som inneholder for mange sider. En pdf kan maksimalt ha 5 sider.",
     "feilside.uuid": "Tar du kontakt med brukerstøtte, vennligst oppgi denne koden {uuid}",
 
-    "saksoversikt.ettersendelse.hjelpetekst": "Fristen for å ettersende vedlegg har utløpt",
+    "saksoversikt.ettersendelse.hjelpetekst": "Det tar inntil tre uker fra du har sendt inn søknaden din til du kan ettersende vedlegg.",
     "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad har utløpt",
 
     "ingenSaker.title": "Vi finner ingen søknader hos oss akkurat nå",

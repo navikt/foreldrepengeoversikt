@@ -1,12 +1,13 @@
 import moment from 'moment';
 import { FagsakStatus } from '../../types/FagsakStatus';
+import Sak from 'app/types/Sak';
 
-export const isSakTooOldForEttersendelse = (date?: string): boolean => {
-    if (date === undefined) {
+export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
+    const { opprettet, saksnummer } = sak;
+    if (opprettet === undefined) {
         return false;
     }
-
-    return moment(date).isBefore(moment().subtract(71, 'days'));
+    return moment(opprettet).isSameOrAfter(moment().subtract(71, 'days')) && saksnummer !== undefined;
 };
 
 export function formatDate(dato: string, datoformat?: string): string {

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { History } from 'history';
 import { Knapp } from 'nav-frontend-knapper';
-import { FormattedMessage } from 'react-intl';
+import AlertStripe from 'nav-frontend-alertstriper';
 
-import { isSakTooOldForEttersendelse } from '../ekspanderbar-saksoversikt/util';
+import { isSakEligableForEttersendelse } from '../ekspanderbar-saksoversikt/util';
 import { Feature, isFeatureEnabled } from '../../Feature';
 import { erInfotrygdSak } from '../../utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
@@ -15,9 +16,9 @@ import { lenker } from '../../utils/lenker';
 import BEMHelper from 'common/util/bem';
 import Person from '../../types/Person';
 import SaksoversiktHeader from './SaksoversiktHeader';
+import Etikett from '../etikett/etikett';
 
 import './saksoversikt.less';
-import Etikett from '../etikett/etikett';
 
 interface SaksoversiktProps {
     sak: Sak;
@@ -53,20 +54,27 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                 )}
 
                 <MeldingOmVedtakLenkepanel />
-                
                 <div className="blokk-xs">
                     <UtsettelsePanel />
                 </div>
 
+                {
+                   sak.erJornalført === false && (
+                       <AlertStripe type="info">
+                            <FormattedMessage id={"saksoversikt.ettersendelse.hjelpetekst"} />
+                        </AlertStripe>
+                   ) 
+                }
+
                 <div className={cls.element('valg')}>
-                    {!isSakTooOldForEttersendelse(sak.opprettet) && sak.saksnummer !== undefined && (
+                    {isSakEligableForEttersendelse(sak) && (
                         <Knapp
                             className={cls.element('ettersendelse-btn')}
                             onClick={() => this.onEttersendVedlegg(sak)}>
                             <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
                         </Knapp>
                     )}
-                    {skalKunneSøkeOmEndring && sak.saksnummer !== undefined && (
+                    {skalKunneSøkeOmEndring && (
                         <Knapp onClick={() => this.onEndreSøknad()}>
                             <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
                         </Knapp>

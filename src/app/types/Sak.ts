@@ -3,6 +3,7 @@ import { FagsakStatus } from './FagsakStatus';
 
 export default interface Sak {
     type?: SakType;
+    erJornalført?: boolean;
     behandlinger?: Behandling[];
     status?: FagsakStatus;
     saksnummer?: string;

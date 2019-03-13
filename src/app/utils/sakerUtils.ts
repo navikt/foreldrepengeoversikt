@@ -65,13 +65,13 @@ export const harEnAvsluttetBehandling = (sak: Sak): boolean => {
 };
 
 export const skalKunneSøkeOmEndring = (nyesteSak: Sak): boolean => {
-    if (!erForeldrepengesak(nyesteSak)) {
+    if (!erForeldrepengesak(nyesteSak) || nyesteSak.saksnummer === undefined) {
         return false;
     }
 
     return (
         (nyesteSak.status !== FagsakStatus.AVSLUTTET && harEnAvsluttetBehandling(nyesteSak)) ||
-        erInfotrygdSak(nyesteSak)
+        erInfotrygdSak(nyesteSak) 
     );
 };
 
@@ -82,6 +82,7 @@ export const erInfotrygdSak = (sak: Sak): boolean => {
 export const opprettSak = (storageKvittering: StorageKvittering) => {
     const sak: Sak = {
         type: SakType.SAK,
+        erJornalført: false,
         opprettet: storageKvittering.innsendingstidspunkt
     }
 
