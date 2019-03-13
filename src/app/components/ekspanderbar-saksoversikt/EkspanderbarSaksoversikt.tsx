@@ -19,7 +19,7 @@ interface Props {
 
 class EkspanderbarSaksoversikt extends React.Component<Props> {
     render() {
-        const { sak, history } = this.props;
+        const { sak, person, history } = this.props;
         const cls = BEMHelper('ekspanderbar-saksoversikt');
 
         return (
@@ -27,7 +27,7 @@ class EkspanderbarSaksoversikt extends React.Component<Props> {
                 <EkspanderbartpanelBase
                     heading={<EkspanderbarSaksoversiktHeader sak={sak} />}
                     ariaTittel="søknad om foreldrepenger">
-                    <Saksoversikt sak={sak} history={history} />
+                    <Saksoversikt sak={sak} history={history} person={person} />
                 </EkspanderbartpanelBase>
             </div>
         );

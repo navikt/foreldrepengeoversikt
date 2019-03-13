@@ -91,7 +91,7 @@ class DineForeldrepenger extends React.Component<Props> {
     }
 
     render() {
-        const { saker, history, storageKvittering, error } = this.props;
+        const { saker, history, storageKvittering, person, error } = this.props;
 
         const nyesteSak: Sak | undefined =
             storageKvittering && storageKvittering.innsendingstidspunkt &&
@@ -112,6 +112,7 @@ class DineForeldrepenger extends React.Component<Props> {
                             <>
                                 <Saksoversikt
                                     sak={nyesteSak}
+                                    person={person}
                                     history={history}
                                     skalKunneSøkeOmEndring={skalKunneSøkeOmEndring(nyesteSak)}
                                     withHeader={true}
