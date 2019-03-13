@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import BEMHelper from 'common/util/bem';
 import SidepanelElement from './SidepanelElement';
 import { lenker } from '../../utils/lenker';
@@ -6,16 +6,16 @@ import ChatIkon from '../ikoner/sidepanel/ChatIkon';
 import SøkIkon from '../ikoner/sidepanel/SøkIkon';
 import UtbetalingerIkon from '../ikoner/sidepanel/UtbetalingerIkon';
 import { finnNesteUtbetalingsdato } from 'app/utils/dateUtils';
+import Sak from 'app/types/Sak';
 
 import './sidepanel.less';
 
 interface Props {
-    erNyesteSakEngangssønad: boolean;
+    sak: Sak;
 }
 
-const Sidepanel = ({ erNyesteSakEngangssønad }: Props) => {
+const Sidepanel: FunctionComponent<Props> = ({ sak }) => {
     const cls = BEMHelper('sidepanel');
-
     return (
         <aside className={cls.className}>
             <SidepanelElement

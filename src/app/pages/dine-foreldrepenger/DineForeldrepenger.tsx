@@ -71,7 +71,7 @@ class DineForeldrepenger extends React.Component<Props> {
         const cls = BEMHelper('sak-info-panel');
         return (
             <div className={cls.className}>
-                <Sidepanel erNyesteSakEngangssønad={erEngangsstønad(this.props.saker[0])} />
+                <Sidepanel sak={this.props.saker[0]} />
             </div>
         );
     }
