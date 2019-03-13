@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { isSakTooOldForEttersendelse } from '../ekspanderbar-saksoversikt/util';
 import { Feature, isFeatureEnabled } from '../../Feature';
-import { erInfotrygdSak, behandlingByDescendingOrder } from '../../utils/sakerUtils';
+import { erInfotrygdSak } from '../../utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 import Oversikt from '../oversikt/Oversikt';
@@ -15,9 +15,9 @@ import { lenker } from '../../utils/lenker';
 import BEMHelper from 'common/util/bem';
 import Person from '../../types/Person';
 import SaksoversiktHeader from './SaksoversiktHeader';
-import Behandling from 'app/types/Behandling';
 
 import './saksoversikt.less';
+import Etikett from '../etikett/etikett';
 
 interface SaksoversiktProps {
     sak: Sak;
@@ -38,22 +38,31 @@ class Saksoversikt extends Component<SaksoversiktProps> {
 
     render() {
         const { sak, skalKunneSøkeOmEndring = false, withHeader = false } = this.props;
-        const nyesteBehandling: Behandling | undefined = sak.behandlinger && sak.behandlinger.sort(behandlingByDescendingOrder)[0]
 
         const cls = BEMHelper('saksoversikt');
         return (
             <div className={'saksoversikt'}>
                 {withHeader && <SaksoversiktHeader sak={sak} />}
 
-                <MeldingOmVedtakLenkepanel />
+                {withHeader === false && (
+                    <Etikett
+                        className="blokk-xs"
+                        etikett={<FormattedMessage id="saksoversikt.heading.saksnummer.label" />}
+                        value={sak.saksnummer}
+                    />
+                )}
 
+                <MeldingOmVedtakLenkepanel />
+                
                 <div className="blokk-xs">
                     <UtsettelsePanel />
                 </div>
 
                 <div className={cls.element('valg')}>
                     {!isSakTooOldForEttersendelse(sak.opprettet) && sak.saksnummer !== undefined && (
-                        <Knapp className={cls.element('ettersendelse-btn')} onClick={() => this.onEttersendVedlegg(sak)}>
+                        <Knapp
+                            className={cls.element('ettersendelse-btn')}
+                            onClick={() => this.onEttersendVedlegg(sak)}>
                             <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
                         </Knapp>
                     )}

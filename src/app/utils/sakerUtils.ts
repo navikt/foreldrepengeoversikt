@@ -18,6 +18,10 @@ const getBehandling = (sak: Sak): Behandling | undefined => {
     return undefined;
 };
 
+export const finnNyesteBehandling = (sak: Sak): Behandling | undefined => {
+    return sak.behandlinger && sak.behandlinger.sort(behandlingByDescendingOrder)[0];
+}
+
 export const erEndringssøknad = (sak: Sak) => {
     if (!sak.behandlinger) {
         return false;

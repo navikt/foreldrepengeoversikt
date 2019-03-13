@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Innholdstittel } from 'nav-frontend-typografi';
 
 import Sak from '../../types/Sak';
-import { erForeldrepengesak, erInfotrygdSak } from '../../utils/sakerUtils';
+import { erForeldrepengesak, finnNyesteBehandling } from '../../utils/sakerUtils';
 import { formatDate, getIntlKeyForStatus } from '../ekspanderbar-saksoversikt/util';
 import BEMHelper from 'common/util/bem';
 import Etikett from '../etikett/etikett';
 
 import './saksoversikt.less';
 import EtikettBase from 'nav-frontend-etiketter';
+import BamseIkon from '../ikoner/BamseIkon';
 
 interface SaksoversiktHeaderProps {
     sak: Sak;
 }
 
-const SaksoversiktHeader = ({ sak }: SaksoversiktHeaderProps) => {
+const SaksoversiktHeader: FunctionComponent<SaksoversiktHeaderProps> = ({ sak }) => {
     const statusIntlKey = sak.status && getIntlKeyForStatus(sak.status);
+    const nyesteBehandling = finnNyesteBehandling(sak);
+
     const cls = BEMHelper('saksoversikt-header');
     return (
         <div className={cls.className}>
@@ -38,24 +41,34 @@ const SaksoversiktHeader = ({ sak }: SaksoversiktHeaderProps) => {
                 )}
             </div>
 
-            {!erInfotrygdSak(sak) && (
-                <div className={cls.element('bottom-row')}>
-                    <Etikett
-                        className={cls.element('mottatt')}
-                        etikett={<FormattedMessage id="saksoversikt.heading.mottatt" />}
-                        value={formatDate(sak.opprettet)}
-                    />
-                    {statusIntlKey && (
-                        <div>
-                            <EtikettBase
-                                className={cls.element('status-etikett')}
-                                type={statusIntlKey === 'saksoversikt.heading.avsluttet' ? 'suksess' : 'fokus'}>
-                                <FormattedMessage id={statusIntlKey} />
-                            </EtikettBase>
-                        </div>
-                    )}
-                </div>
-            )}
+            <div className={cls.element('bottom-row')}>
+                <Etikett
+                    className={cls.element('timestamp')}
+                    etikett={
+                        <FormattedMessage
+                            id={
+                                nyesteBehandling === undefined
+                                    ? 'saksoversikt.heading.mottatt'
+                                    : 'saksoversikt.heading.sisteEndring'
+                            }
+                        />
+                    }
+                    value={
+                        nyesteBehandling === undefined
+                            ? formatDate(sak.opprettet)
+                            : formatDate(nyesteBehandling.endretTidspunkt)
+                    }
+                />
+                {statusIntlKey ? (
+                    <EtikettBase
+                        className={cls.element('status-etikett')}
+                        type={statusIntlKey === 'saksoversikt.heading.avsluttet' ? 'suksess' : 'fokus'}>
+                        <FormattedMessage id={statusIntlKey} />
+                    </EtikettBase>
+                ) : (
+                    <BamseIkon />
+                )}
+            </div>
         </div>
     );
 };

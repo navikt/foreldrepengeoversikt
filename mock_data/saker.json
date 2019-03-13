@@ -1,13 +1,26 @@
 [
     {
+        "type": "SAK",
+        "saksnummer": "137662557",
+        "opprettet": "2019-05-11"
+    },
+    {
         "type": "FPSAK",
         "saksnummer": "137662557",
         "status": "LOP",
         "opprettet": "2019-03-11",
         "behandlinger": [
+        ]
+    },
+    {
+        "type": "FPSAK",
+        "saksnummer": "123456789",
+        "status": "LOP",
+        "opprettet": "2019-04-01",
+        "behandlinger": [
             {
                 "opprettetTidspunkt": "2019-03-11T08:12:41.227",
-                "endretTidspunkt": "2019-03-11T08:15:53.969",
+                "endretTidspunkt": "2019-03-28T08:15:53.969",
                 "status": "AVSLU",
                 "type": "FP",
                 "tema": "FORP_FODS",

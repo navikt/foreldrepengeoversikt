@@ -33,7 +33,7 @@ const EkspanderbarSaksoversiktHeader = ({ sak }: Props) => {
                 {sak.opprettet && (
                     <Normaltekst>
                         <FormattedMessage
-                            id="saksoversikt.heading.bottom.mottatt"
+                            id="saksoversikt.heading.ekspanderbar.mottatt"
                             values={{ date: formatDate(sak.opprettet) }}
                         />
                     </Normaltekst>
