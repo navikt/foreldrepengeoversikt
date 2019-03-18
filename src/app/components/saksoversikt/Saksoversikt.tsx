@@ -7,7 +7,7 @@ import { guid } from 'nav-frontend-js-utils';
 
 import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../ekspanderbar-saksoversikt/util';
 import { Feature, isFeatureEnabled } from '../../Feature';
-import { erInfotrygdSak } from '../../utils/sakerUtils';
+import { erInfotrygdSak, erEngangsstønad } from '../../utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 import Oversikt from '../oversikt/Oversikt';
@@ -40,6 +40,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
 
     render() {
         const { sak, withHeader = false } = this.props;
+        const  erSakEngangsstønad = erEngangsstønad(sak);
 
         const cls = BEMHelper('saksoversikt');
         return (
@@ -55,9 +56,12 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                 )}
 
                 <MeldingOmVedtakLenkepanel />
-                <div className="blokk-xs">
-                    <UtsettelsePanel />
-                </div>
+
+                {!erSakEngangsstønad && (
+                    <div className="blokk-xs">
+                        <UtsettelsePanel />
+                    </div>
+                )}
 
                 <div className={cls.element('valg')}>
                     <div className={cls.element('btn')}>
@@ -79,11 +83,13 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                             </Hjelpetekst>
                         )}
                     </div>
-                    <div className={cls.element('btn')}>
-                        <Knapp onClick={() => this.onEndreSøknad()}>
-                            <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
-                        </Knapp>
-                    </div>
+                    {!erInfotrygdSak && (
+                        <div className={cls.element('btn')}>
+                            <Knapp onClick={() => this.onEndreSøknad()}>
+                                <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
+                            </Knapp>
+                        </div>
+                    )}
                 </div>
 
                 {isFeatureEnabled(Feature.behandlingsOversikt) && !erInfotrygdSak(sak) && (

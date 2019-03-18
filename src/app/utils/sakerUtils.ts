@@ -47,7 +47,7 @@ export const erForeldrepengesak = (sak: Sak): boolean => {
 export const erEngangsstønad = (sak: Sak): boolean => {
     const behandling = getBehandling(sak);
     if (behandling === undefined) {
-        return true;
+        return false;
     } else {
         const { tema } = behandling;
         return (
