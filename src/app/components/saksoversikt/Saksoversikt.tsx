@@ -83,7 +83,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                             </Hjelpetekst>
                         )}
                     </div>
-                    {!erInfotrygdSak && (
+                    {!erSakEngangsstønad && (
                         <div className={cls.element('btn')}>
                             <Knapp onClick={() => this.onEndreSøknad()}>
                                 <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
