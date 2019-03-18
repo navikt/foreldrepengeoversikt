@@ -18,7 +18,7 @@ describe('EkspanderbarSaksoversikt component', () => {
         );
 
         const uploadButton = wrapper.find({ className: 'saksoversikt__ettersendelse-btn' });
-        expect(uploadButton.length).toEqual(0);
+        expect(uploadButton.props().disabled).toEqual(true);
     });
 
     it('Ettersendelse should be able enabled 70 days after the application is sent', () => {
