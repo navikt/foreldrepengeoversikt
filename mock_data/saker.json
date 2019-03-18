@@ -15,7 +15,7 @@
         "type": "FPSAK",
         "saksnummer": "123456789",
         "status": "LOP",
-        "opprettet": "2019-04-01",
+        "opprettet": "2018-04-01",
         "behandlinger": [
             {
                 "opprettetTidspunkt": "2019-03-11T08:12:41.227",

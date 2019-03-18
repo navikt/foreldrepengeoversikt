@@ -1,27 +1,42 @@
 @import '../../styles/colors.less';
 @import '../../styles/variables.less';
 @import '../../styles/mixins.less';
-
 .saksoversikt {
     background-color: white;
     padding: 0.5rem 2rem 2rem;
     margin-bottom: 1rem;
-
     &__valg {
-        .knapp:first-child {
-            margin-right: 1rem;
+        display: flex;
+        flex-flow: row;
+    }
+
+    &__btn {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        align-content: center;
+        .hjelpetekst {
+            padding: 0;
+            margin-left: 0.5rem;
         }
+    }
+
+    &__btn:first-child {
+        margin-right: 1rem;
     }
 
     @media (max-width: @mobile-breakpoint) {
         padding: 1rem;
         &__valg {
-            display: flex;
             flex-flow: column;
             .knapp:first-child {
                 margin-right: 0;
                 margin-bottom: 0.5rem;
             }
+        }
+
+        &__btn {
+            justify-content: flex-start;
         }
     }
 }
@@ -35,17 +50,14 @@
         justify-content: space-between;
         margin-bottom: 0.5rem;
     }
-
     &__bottom-row {
         display: flex;
         flex-flow: row;
         justify-content: space-between;
     }
-
     &__status-etikett {
         align-self: flex-end;
     }
-
     &__timestamp {
         text-align: left;
     }

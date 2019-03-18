@@ -2,6 +2,14 @@ import moment from 'moment';
 import { FagsakStatus } from '../../types/FagsakStatus';
 import Sak from 'app/types/Sak';
 
+export const isSakTooOldForEttersendelse = (date?: string): boolean => {
+    if (date === undefined) {
+        return false;
+    }
+
+    return moment(date).isBefore(moment().subtract(71, 'days'));
+};
+
 export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
     const { opprettet, saksnummer } = sak;
     if (opprettet === undefined) {

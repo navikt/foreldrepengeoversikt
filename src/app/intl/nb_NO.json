@@ -18,10 +18,10 @@
     "saksoversikt.heading.løpende": "Løpende",
     "saksoversikt.heading.avsluttet": "Ferdig behandlet",
     "saksoversikt.heading.saksnummer.label": "Saksnummer",
-    "saksoversikt.content.ettersendelse.intro": "Her kan du ettersende dokumentasjon til søknaden din.",
     "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg",
-    "saksoversikt.content.endringssøknad.intro": "Her kan du endre perioden din hvis du skal ha ferie, jobbe eller har vært syk.",
     "saksoversikt.content.endringssøknad.button": "Endre perioden din",
+    "saksoversikt.ettersendelse.hjelpetekst.ikkeJournalført": "Det tar inntil tre uker fra du har sendt inn søknaden din til du kan ettersende vedlegg.",
+    "saksoversikt.ettersendelse.hjelpetekst.utløptFrist": "Fristen for å ettersende vedlegg til saken er løpt ut.",
 
     "sidepanel.utbetalingsdato": "Neste utbetalingsdato",
     "sidepanel.utbetalinger": "Dine utbetalinger",

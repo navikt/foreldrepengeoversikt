@@ -3,8 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { History } from 'history';
 import { Knapp } from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import { guid } from 'nav-frontend-js-utils';
 
-import { isSakEligableForEttersendelse } from '../ekspanderbar-saksoversikt/util';
+import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../ekspanderbar-saksoversikt/util';
 import { Feature, isFeatureEnabled } from '../../Feature';
 import { erInfotrygdSak } from '../../utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
@@ -38,7 +40,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
     }
 
     render() {
-        const { sak, skalKunneSøkeOmEndring = false, withHeader = false } = this.props;
+        const { sak, withHeader = false } = this.props;
 
         const cls = BEMHelper('saksoversikt');
         return (
@@ -58,27 +60,37 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                     <UtsettelsePanel />
                 </div>
 
-                {
-                   sak.erJornalført === false && (
-                       <AlertStripe type="info">
-                            <FormattedMessage id={"saksoversikt.ettersendelse.hjelpetekst"} />
-                        </AlertStripe>
-                   ) 
-                }
+                {sak.erJornalført === false && (
+                    <AlertStripe type="info">
+                        <FormattedMessage id={'saksoversikt.ettersendelse.hjelpetekst'} />
+                    </AlertStripe>
+                )}
 
                 <div className={cls.element('valg')}>
-                    {isSakEligableForEttersendelse(sak) && (
+                    <div className={cls.element('btn')}>
                         <Knapp
                             className={cls.element('ettersendelse-btn')}
-                            onClick={() => this.onEttersendVedlegg(sak)}>
+                            onClick={() => this.onEttersendVedlegg(sak)}
+                            disabled={!isSakEligableForEttersendelse(sak)}>
                             <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
                         </Knapp>
-                    )}
-                    {skalKunneSøkeOmEndring && (
+                        {!isSakEligableForEttersendelse(sak) && (
+                            <Hjelpetekst id={guid()}>
+                                <FormattedMessage
+                                    id={
+                                        isSakTooOldForEttersendelse(sak.opprettet)
+                                            ? 'saksoversikt.ettersendelse.hjelpetekst.utløptFrist'
+                                            : 'saksoversikt.ettersendelse.hjelpetekst.ikkeJournalført'
+                                    }
+                                />
+                            </Hjelpetekst>
+                        )}
+                    </div>
+                    <div className={cls.element('btn')}>
                         <Knapp onClick={() => this.onEndreSøknad()}>
                             <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
                         </Knapp>
-                    )}
+                    </div>
                 </div>
 
                 {isFeatureEnabled(Feature.behandlingsOversikt) && !erInfotrygdSak(sak) && (
