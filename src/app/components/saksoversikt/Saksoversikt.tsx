@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { History } from 'history';
 import { Knapp } from 'nav-frontend-knapper';
-import AlertStripe from 'nav-frontend-alertstriper';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { guid } from 'nav-frontend-js-utils';
 
@@ -59,12 +58,6 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                 <div className="blokk-xs">
                     <UtsettelsePanel />
                 </div>
-
-                {sak.erJornalført === false && (
-                    <AlertStripe type="info">
-                        <FormattedMessage id={'saksoversikt.ettersendelse.hjelpetekst'} />
-                    </AlertStripe>
-                )}
 
                 <div className={cls.element('valg')}>
                     <div className={cls.element('btn')}>
