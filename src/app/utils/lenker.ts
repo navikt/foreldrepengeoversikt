@@ -44,7 +44,7 @@ export const annenInformasjonLenker = {
 };
 
 export const lenker = {
-    utsettelse: '',
+    utsettelse: 'https://familie.nav.no/om-foreldrepenger#hvis-du-skal-pa-ferie',
     endringssøknad: 'https://foreldrepengesoknad.nav.no',
     saksoversikt: 'https://tjenester.nav.no/saksoversikt/app/tema/FOR',
     brukerstøtte:  'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749',
