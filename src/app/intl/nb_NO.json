@@ -121,7 +121,7 @@
     "historikk.INNSYN_DELVIS_INNVILGET": "INNSYN_DELVIS_INNVILGET",
     "historikk.INNSYN_AVVIST": "INNSYN_AVVIST",
     "historikk.FORELDREPENGER_ENDRET": "Vedtaket er endret",
-    "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vil ikke vises her.",
+    "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vises ikke her.",
     "historikk.ingenHendelser": "Vi kan desverre ikke vise historikk for denne saken.",
 
     "dokumentoversikt.info": "Vi jobber med å kunne vise alle dine dokumenter koblet til foreldrepenger her. Inntil videre finner du disse under { lenke }.",
