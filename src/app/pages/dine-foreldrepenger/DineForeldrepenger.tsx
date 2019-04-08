@@ -27,6 +27,7 @@ import Person from '../../types/Person';
 import { StorageKvittering } from '../../types/StorageKvittering';
 
 import './dineForeldrepenger.less';
+import Behandling from 'app/types/Behandling';
 
 interface Props {
     person?: Person;
@@ -42,6 +43,22 @@ class DineForeldrepenger extends React.Component<Props> {
         if (props.error) {
             this.props.history.push(Routes.FEIL, { error: true });
         }
+    }
+
+    shouldRenderStorageKvitteringAsSak(): boolean {
+        const { saker, storageKvittering } = this.props;
+        if (storageKvittering === undefined) {
+            return false;
+        }
+
+        return (
+            storageKvittering.innsendingstidspunkt !== undefined &&
+            saker.every((sak: Sak) => moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt)) &&
+            saker[0].behandlinger !== undefined &&
+            saker[0].behandlinger.every((b: Behandling) =>
+                moment(b.endretTidspunkt).isBefore(storageKvittering.innsendingstidspunkt, 'days')
+            )
+        );
     }
 
     shouldRenderAlertStripe(nyesteSak: Sak): boolean {
@@ -91,12 +108,9 @@ class DineForeldrepenger extends React.Component<Props> {
 
     render() {
         const { saker, history, storageKvittering, person, error } = this.props;
-
-        const nyesteSak: Sak | undefined =
-            storageKvittering && storageKvittering.innsendingstidspunkt &&
-            saker.every((sak: Sak) => moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt))
-                ? opprettSak(storageKvittering)
-                : saker.shift();
+        const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
+            ? opprettSak(storageKvittering!)
+            : saker.shift();
 
         const cls = BEMHelper('dine-foreldrepenger');
         return (
