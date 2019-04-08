@@ -47,12 +47,19 @@ class DineForeldrepenger extends React.Component<Props> {
 
     shouldRenderStorageKvitteringAsSak(): boolean {
         const { saker, storageKvittering } = this.props;
-        if (storageKvittering === undefined) {
+        if (storageKvittering === undefined || storageKvittering.innsendingstidspunkt === undefined) {
             return false;
         }
 
+        if (saker.length === 0) {
+            return true;
+        }
+
+        if (erInfotrygdSak(saker[0])) {
+            return saker.every((sak: Sak) => moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt));
+        }
+
         return (
-            storageKvittering.innsendingstidspunkt !== undefined &&
             saker.every((sak: Sak) => moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt)) &&
             saker[0].behandlinger !== undefined &&
             saker[0].behandlinger.every((b: Behandling) =>
