@@ -98,10 +98,10 @@
     "oversikt": "Oversikt",
     "historikk.BERØRT-BEHANDLING": "Berørt Behandling",
 
-    "historikk.søknad-sendt": "Søknad er mottatt",
-    "historikk.inntektsmelding-motatt": "Innteksmelding fra arbeidsgiver er motatt",
-    "historikk.RE-END-INNTEKTSMELD": "Innteksmelding fra arbeidsgiver er motatt",
-    "historikk.RE-END-FRA-BRUKER": "Søknad om endring er motatt",
+    "historikk.søknad-sendt": "Søknad din er mottatt",
+    "historikk.inntektsmelding-motatt": "Innteksmelding fra arbeidsgiveren din er motatt",
+    "historikk.RE-END-INNTEKTSMELD": "Innteksmelding fra arbeidsgiveren din er motatt",
+    "historikk.RE-END-FRA-BRUKER": "Søknaden din om endring er motatt",
 
     "historikk.IKKE_FASTSATT": "IKKE_FASTSATT",
     "historikk.INNVILGET": "Vedtaket er innvilget",
