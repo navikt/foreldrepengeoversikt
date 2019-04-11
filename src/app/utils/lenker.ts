@@ -52,5 +52,5 @@ export const lenker = {
     søkOmForeldrepenger:'https://foreldrepengesoknad.nav.no',
     chat: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger',
     utbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/#',
-    søk: 'https://foreldrepenger.nav.no'
+    søk: 'https://foreldrepengesoknad.nav.no'
 };
