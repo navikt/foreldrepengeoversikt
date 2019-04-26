@@ -6,7 +6,6 @@ import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { guid } from 'nav-frontend-js-utils';
 
 import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../ekspanderbar-saksoversikt/util';
-import { Feature, isFeatureEnabled } from '../../Feature';
 import { erInfotrygdSak, erEngangsstønad } from '../../utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
@@ -82,6 +81,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                             </Hjelpetekst>
                         )}
                     </div>
+
                     {!erSakEngangsstønad && (
                         <div className={cls.element('btn')}>
                             <Knapp onClick={() => this.onEndreSøknad()}>
@@ -91,7 +91,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                     )}
                 </div>
 
-                {isFeatureEnabled(Feature.behandlingsOversikt) && !erInfotrygdSak(sak) && (
+                {!erInfotrygdSak(sak) && (
                     <Oversikt person={this.props.person} sak={sak} />
                 )}
             </div>
