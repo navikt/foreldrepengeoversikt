@@ -54,7 +54,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                         value={sak.saksnummer}
                     />
                 )}
-                {!erInfotrygdSak(sak) && <MeldingOmVedtakLenkepanel />}
+                {erInfotrygdSak(sak) && <MeldingOmVedtakLenkepanel />}
 
                 {!erSakEngangsstønad && (
                     <div className="blokk-xs">
