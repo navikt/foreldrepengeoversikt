@@ -40,7 +40,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
 
     render() {
         const { sak, withHeader = false } = this.props;
-        const  erSakEngangsstønad = erEngangsstønad(sak);
+        const erSakEngangsstønad = erEngangsstønad(sak);
 
         const cls = BEMHelper('saksoversikt');
         return (
@@ -54,8 +54,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                         value={sak.saksnummer}
                     />
                 )}
-
-                <MeldingOmVedtakLenkepanel />
+                {!erInfotrygdSak(sak) && <MeldingOmVedtakLenkepanel />}
 
                 {!erSakEngangsstønad && (
                     <div className="blokk-xs">
