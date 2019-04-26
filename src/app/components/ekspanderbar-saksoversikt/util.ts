@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { FagsakStatus } from '../../types/FagsakStatus';
 import Sak from 'app/types/Sak';
+import { erInfotrygdSak } from 'app/utils/sakerUtils';
 
 export const isSakTooOldForEttersendelse = (date?: string): boolean => {
     if (date === undefined) {
@@ -12,10 +13,18 @@ export const isSakTooOldForEttersendelse = (date?: string): boolean => {
 
 export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
     const { opprettet, saksnummer } = sak;
-    if (opprettet === undefined) {
+    if(saksnummer === undefined) {
         return false;
     }
-    return moment(opprettet).isSameOrAfter(moment().subtract(71, 'days')) && saksnummer !== undefined;
+
+    if (erInfotrygdSak(sak)) {
+        return moment(opprettet).isSameOrAfter(moment().subtract(150, 'days'));
+    }
+
+    if(sak && sak.status) {
+        return sak.status === FagsakStatus.LOPENDE || sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING;
+    }
+    return false;
 };
 
 export function formatDate(dato: string, datoformat?: string): string {

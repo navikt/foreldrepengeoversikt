@@ -1,23 +1,8 @@
 [
     {
-        "type": "FPSAK",
+        "type": "SAK",
         "saksnummer": "137666017",
-        "status": "LOP",
-        "opprettet": "2019-03-15",
-        "behandlinger": [
-            {
-                "opprettetTidspunkt": "2019-03-15T09:04:14.082",
-                "endretTidspunkt": "2019-03-15T09:10:22.899",
-                "status": "AVSLU",
-                "type": "FP",
-                "tema": "FORP_FODS",
-                "årsak": null,
-                "behandlingResultat": "INNVILGET",
-                "behandlendeEnhet": "4833",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Oslo 1",
-                "inntektsmeldinger": ["439788127"]
-            }
-        ]
+        "opprettet": "2019-03-15"
     },
     {
         "type": "FPSAK",

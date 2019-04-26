@@ -1,6 +1,7 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
+import { Undertekst } from 'nav-frontend-typografi';
 
 import KonfoluttIkon from '../ikoner/KonfoluttIkon';
 import { lenker } from '../../utils/lenker';
@@ -8,7 +9,6 @@ import { FormattedMessage } from 'react-intl';
 import BEMHelper from 'common/util/bem';
 
 import './meldingOmVedtakLenkepanel.less';
-import { Undertekst } from 'nav-frontend-typografi';
 
 const MeldingOmVedtakLenkepanel = () => {
     const cls = BEMHelper('melding-om-vedtak-lenkepanel');
