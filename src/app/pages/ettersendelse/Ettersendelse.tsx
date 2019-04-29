@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { History } from 'history';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Select } from 'nav-frontend-skjema';
+import { Select, Input } from 'nav-frontend-skjema';
 
 import Sak from '../../types/Sak';
 import BEMHelper from '../../../common/util/bem';
@@ -22,8 +22,10 @@ import AttachmentList from 'common/storage/attachment/components/AttachmentList'
 import { Routes } from '../../utils/routes';
 
 import { extractErrorMessage, extractUUID } from 'common/util/errorUtil';
-import './ettersendelse.less';
 import { erForeldrepengesak } from '../../utils/sakerUtils';
+import getMessage from 'common/util/i18nUtils';
+
+import './ettersendelse.less';
 
 interface EttersendelseProps {
     history: History;
@@ -33,6 +35,7 @@ interface State {
     sak: Sak;
     attachments: Attachment[];
     attachmentSkjemanummer?: Skjemanummer;
+    attachmentBeskrivelse?: string;
     sendingEttersendelse: boolean;
 }
 
@@ -56,9 +59,15 @@ class Ettersendelse extends React.Component<Props, State> {
         this.deleteAttachment = this.deleteAttachment.bind(this);
         this.handleAttachmentTypeSelectChange = this.handleAttachmentTypeSelectChange.bind(this);
         this.handleSendEttersendelseOnClick = this.handleSendEttersendelseOnClick.bind(this);
+        this.handleAttachmentBeskrivelseOnChange = this.handleAttachmentBeskrivelseOnChange.bind(this);
     }
 
     addAttachment(attachments: Attachment[]): void {
+        attachments.forEach((a) => {
+            if (this.state.attachmentSkjemanummer === Skjemanummer.ANNET) {
+                a.beskrivelse = this.state.attachmentBeskrivelse;
+            }
+        });
         this.setState({ attachments: this.state.attachments.concat(attachments) });
     }
 
@@ -92,14 +101,14 @@ class Ettersendelse extends React.Component<Props, State> {
 
     sendEttersendelse(): void {
         const ettersending: Ettersending = {
-            type: erForeldrepengesak(this.state.sak) ? 'foreldrepenger': 'engangsstønad',
+            type: erForeldrepengesak(this.state.sak) ? 'foreldrepenger' : 'engangsstønad',
             saksnummer: this.state.sak.saksnummer!,
             vedlegg: this.state.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
         };
 
         Api.sendEttersending(ettersending)
             .then((response) => {
-                this.setState({ sendingEttersendelse: false }, () => {
+                this.setState({ sendingEttersendelse: false, attachmentBeskrivelse: undefined }, () => {
                     this.props.history.push(Routes.KVITTERING, {
                         kvittering: response.data,
                         attachments: ettersending.vedlegg
@@ -121,6 +130,9 @@ class Ettersendelse extends React.Component<Props, State> {
 
     isReadyToUploadAttachments(): boolean {
         const { attachmentSkjemanummer } = this.state;
+        if (attachmentSkjemanummer === Skjemanummer.ANNET) {
+            return this.state.attachmentBeskrivelse !== undefined && this.state.attachmentBeskrivelse !== '';
+        }
         return attachmentSkjemanummer !== undefined;
     }
 
@@ -133,6 +145,14 @@ class Ettersendelse extends React.Component<Props, State> {
             attachmentsWithoutUploadError.length > 0 &&
             attachmentsWithoutUploadError.every((a: Attachment) => a.url !== undefined)
         );
+    }
+
+    isAttachmentOfTypeAnnet(): boolean {
+        return this.state.attachmentSkjemanummer === Skjemanummer.ANNET;
+    }
+
+    handleAttachmentBeskrivelseOnChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ attachmentBeskrivelse: e.target.value });
     }
 
     render() {
@@ -156,11 +176,20 @@ class Ettersendelse extends React.Component<Props, State> {
                     </Innholdstittel>
                     <Select
                         className={cls.element('attachment-type-select')}
-                        label=""
+                        label={<Element>{getMessage(intl, 'ettersendelse.vedlegg.select.label')}</Element>}
                         onChange={this.handleAttachmentTypeSelectChange}
                         defaultValue="default">
                         {getAttachmentTypeSelectOptions(intl, sak)}
                     </Select>
+
+                    {this.isAttachmentOfTypeAnnet() && (
+                        <Input
+                            className={cls.element('attachment-description')}
+                            label={<Element>{getMessage(intl, 'ettersendelse.vedlegg.beskrivelse')}</Element>}
+                            onChange={this.handleAttachmentBeskrivelseOnChange}
+                        />
+                    )}
+
                     {this.isReadyToUploadAttachments() && (
                         <div className={cls.element('uploader')}>
                             <AttachmentsUploader
@@ -172,6 +201,7 @@ class Ettersendelse extends React.Component<Props, State> {
                             />
                         </div>
                     )}
+
                     {getListOfUniqueSkjemanummer(uploadedAttachments).map((skjemanummer: Skjemanummer) => (
                         <AttachmentList
                             key={skjemanummer}
@@ -180,6 +210,7 @@ class Ettersendelse extends React.Component<Props, State> {
                             attachments={uploadedAttachments.filter((a: Attachment) => a.skjemanummer === skjemanummer)}
                         />
                     ))}
+
                     {this.isReadyToSendAttachments() && (
                         <div className={cls.element('send-button')}>
                             <Hovedknapp

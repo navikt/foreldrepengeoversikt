@@ -8,6 +8,7 @@ export interface Attachment {
     pending: boolean;
     error?: any;
     skjemanummer: Skjemanummer;
+    beskrivelse?: string;
 }
 
 export enum Skjemanummer {

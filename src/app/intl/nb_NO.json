@@ -31,6 +31,8 @@
     "ettersendelse.title": "Last opp dokumentasjon til sak { saksnummer }",
     "ettersendelse.sendButton": "Ettersend vedlegg",
     "ettersendelse.select.defaultValue": "Velg type vedlegg",
+    "ettersendelse.vedlegg.select.label": "Velg type vedlegg",
+    "ettersendelse.vedlegg.beskrivelse": "Hva slags informasjon innholder vedlegget?",
     "ettersendelse.select.I000065": "Bekreftelse fra arbeidsgiver",
     "ettersendelse.select.I000026": "Inntektsopplysninger fra arbeidsgiver",
     "ettersendelse.select.I000044": "Etterlønn",
