@@ -1,9 +1,14 @@
 import * as React from 'react';
+import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { BotInfo, BrowserInfo, detect, NodeInfo } from 'detect-browser';
 import Api from '../../../app/api/api';
 import { Feature, isFeatureEnabled } from '../../../app/Feature';
+import Feilsidemelding from '../feilsidemelding/Feilsidemelding';
+import getMessage from 'common/util/i18nUtils';
+import Lenke from 'nav-frontend-lenker';
+import { lenker } from 'app/utils/lenker';
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component<InjectedIntlProps> {
     constructor(props: any) {
         super(props);
         this.logError = this.logError.bind(this);
@@ -30,7 +35,26 @@ class ErrorBoundary extends React.Component {
     }
 
     render() {
-        return this.props.children;
+        const { intl } = this.props;
+        return (
+            <Feilsidemelding
+                illustrasjon={{
+                    tittel: getMessage(intl, 'feilside.bobletittel'),
+                    tekst: getMessage(intl, 'feilside.bobletekst')
+                }}
+                tittel={getMessage(intl, 'feilside.tittel')}
+                ingress={
+                    <FormattedMessage
+                        id="feilside.ingress"
+                        values={{
+                            lenke: (
+                                <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'feilside.ingress.lenke')}</Lenke>
+                            )
+                        }}
+                    />
+                }
+            />
+        );
     }
 }
-export default ErrorBoundary;
+export default injectIntl(ErrorBoundary);

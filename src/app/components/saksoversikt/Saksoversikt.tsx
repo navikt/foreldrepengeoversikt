@@ -14,7 +14,7 @@ import Sak from '../../types/Sak';
 import { Routes } from '../../utils/routes';
 import { lenker } from '../../utils/lenker';
 import BEMHelper from 'common/util/bem';
-import Person from '../../types/Person';
+import Person from '../../types/Personinfo';
 import SaksoversiktHeader from './SaksoversiktHeader';
 import Etikett from '../etikett/etikett';
 

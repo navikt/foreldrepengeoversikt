@@ -24,6 +24,7 @@ import { Routes } from '../../utils/routes';
 import { extractErrorMessage, extractUUID } from 'common/util/errorUtil';
 import { erForeldrepengesak } from '../../utils/sakerUtils';
 import getMessage from 'common/util/i18nUtils';
+import ErrorPage from '../error/ErrorPage';
 
 import './ettersendelse.less';
 
@@ -37,6 +38,11 @@ interface State {
     attachmentSkjemanummer?: Skjemanummer;
     attachmentBeskrivelse?: string;
     sendingEttersendelse: boolean;
+    error: {
+        hasOccured: boolean;
+        uuid?: string;
+        message?: string;
+    };
 }
 
 type Props = EttersendelseProps & InjectedIntlProps;
@@ -47,7 +53,8 @@ class Ettersendelse extends React.Component<Props, State> {
         this.state = {
             ...this.props.history.location.state,
             sendingEttersendelse: false,
-            attachments: []
+            attachments: [],
+            error: { hasOccured: false }
         };
 
         if (!this.state.sak) {
@@ -116,14 +123,14 @@ class Ettersendelse extends React.Component<Props, State> {
                 });
             })
             .catch((error: AxiosError) => {
-                this.setState({ sendingEttersendelse: false }, () => {
-                    error.response
-                        ? this.props.history.push(Routes.FEIL, {
-                              error: true,
-                              errorMessage: error.response.status === 413 ? extractErrorMessage(error) : undefined,
-                              uuid: extractUUID(error)
-                          })
-                        : this.props.history.push(Routes.FEIL, { error: true });
+                this.setState({
+                    sendingEttersendelse: false,
+                    error: {
+                        hasOccured: true,
+                        uuid: extractUUID(error),
+                        message:
+                            error.response && error.response.status === 413 ? extractErrorMessage(error) : undefined
+                    }
                 });
             });
     }
@@ -156,14 +163,14 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     render() {
-        if (!this.state.sak) {
-            return null;
-        }
-
         const { intl } = this.props;
         const { sak, attachments, attachmentSkjemanummer, sendingEttersendelse } = this.state;
         const uploadedAttachments = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
         const cls = BEMHelper('ettersendelse');
+
+        if (this.state.error.hasOccured) {
+            return <ErrorPage uuid={this.state.error.uuid} errorMessage={this.state.error.message} />;
+        }
 
         return (
             <div className={cls.className}>

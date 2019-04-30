@@ -72,7 +72,7 @@ export enum BehandlingÅrsak {
     TILSTØTENDE_YTELSE_INNVILGET = 'RE-TILST-YT-INNVIL',
     ENDRING_BEREGNINGSGRUNNLAG = 'RE-ENDR-BER-GRUN',
     TILSTØTENDE_YTELSE_OPPHØRT = 'RE-TILST-YT-OPPH',
-    ANNET = 'RE-ANNET',
+    ANNET = 'RE-ANNET'
 }
 
 export enum BehandlingTema {

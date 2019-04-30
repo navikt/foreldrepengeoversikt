@@ -6,7 +6,7 @@ import BEMHelper from 'common/util/bem';
 import Sak from '../../types/Sak';
 import { FormattedMessage } from 'react-intl';
 import Historikk from '../historikk/Historikk';
-import Person from '../../types/Person';
+import Person from '../../types/Personinfo';
 import Dokumentoversikt from '../dokumentoversikt/Dokumentoversikt';
 import { utledHendelser } from '../historikk/util';
 

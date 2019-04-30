@@ -4,7 +4,7 @@ import Ettersending from './types/Ettersending';
 
 export const apiBaseUrl: string = Environment.REST_API_URL;
 
-const getPerson = () => {
+const getPersoninfo = () => {
     return axios.get(`${apiBaseUrl}/personinfo`, { withCredentials: true });
 };
 
@@ -40,6 +40,6 @@ const log = (error: any) => {
     });
 };
 
-const Api = { getSaker, getPerson, sendEttersending, getStorageKvittering, log };
+const Api = { getSaker, getPersoninfo, sendEttersending, getStorageKvittering, log };
 
 export default Api;

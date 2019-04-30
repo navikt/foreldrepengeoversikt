@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
 
 import DineForeldrepenger from './pages/dine-foreldrepenger/DineForeldrepenger';
 import Ettersendelse from './pages/ettersendelse/Ettersendelse';
@@ -8,31 +8,29 @@ import ErrorPage from './pages/error/ErrorPage';
 import KvitteringPage from './pages/kvittering-page/Kvittering';
 
 import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
-
-import Api from './api/api';
-import { redirectToLogin } from './utils/login';
 import { Routes } from './utils/routes';
 
 import Sak from './types/Sak';
-import Person from './types/Person';
+import Person from './types/Personinfo';
 import { StorageKvittering } from './types/StorageKvittering';
-import { sakByDescendingOrder } from './utils/sakerUtils';
+import ApiAction, { ApiActionTypes } from './redux/types/ApiAction';
+import { State } from './redux/store';
+import FetchState, { FetchStatus } from './redux/types/FetchState';
+import { extractUUID } from 'common/util/errorUtil';
+import { getErrorCode } from './redux/util/fetchFromState';
 
-interface State {
-    saker: Sak[];
-    storageKvittering?: StorageKvittering;
-    person?: Person;
-    loading: boolean;
-    error?: AxiosError;
+interface Props {
+    saker: FetchState<Sak[]>;
+    storageKvittering: FetchState<StorageKvittering>;
+    personinfo: FetchState<Person>;
+    requestPersoninfo: () => void;
+    requestSaker: () => void;
+    requestStorageKvittering: () => void;
 }
 
-class Foreldrepengeoversikt extends React.Component<{}, State> {
-    constructor(props: {}) {
+class Foreldrepengeoversikt extends React.Component<Props> {
+    constructor(props: Props) {
         super(props);
-        this.state = {
-            saker: [],
-            loading: true
-        };
     }
 
     componentWillMount(): void {
@@ -40,50 +38,57 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
     }
 
     fetchData(): void {
-        this.setState({ loading: true }, () => {
-            axios
-                .all([Api.getSaker(), Api.getPerson(), Api.getStorageKvittering()])
-                .then(
-                    axios.spread((getSakerResponse, getPersonResponse, getStorageKvitteringResponse) => {
-                        this.setState({
-                            saker: getSakerResponse.data.sort(sakByDescendingOrder),
-                            person: getPersonResponse.data,
-                            storageKvittering: getStorageKvitteringResponse.data,
-                            loading: false
-                        });
-                    })
-                )
-                .catch((error: AxiosError) => {
-                    error.response && error.response.status === 401
-                        ? redirectToLogin()
-                        : this.setState({ error, loading: false });
-                });
-        });
+        if (this.props.personinfo.status === FetchStatus.UNFETCHED) {
+            this.props.requestPersoninfo();
+            this.props.requestSaker();
+            this.props.requestStorageKvittering();
+        }
+    }
+
+    shouldRenderApplicationSpinner(): boolean {
+        const { personinfo, storageKvittering, saker } = this.props;
+        return (
+            personinfo.status === FetchStatus.UNFETCHED ||
+            personinfo.status === FetchStatus.IN_PROGRESS ||
+            saker.status === FetchStatus.UNFETCHED ||
+            saker.status === FetchStatus.IN_PROGRESS ||
+            storageKvittering.status === FetchStatus.UNFETCHED ||
+            storageKvittering.status === FetchStatus.IN_PROGRESS
+        );
+    }
+
+    shouldRenderErrorPage(): boolean {
+        const { personinfo, storageKvittering, saker } = this.props;
+        return (
+            personinfo.status === FetchStatus.FAILURE ||
+            storageKvittering.status === FetchStatus.FAILURE ||
+            saker.status === FetchStatus.FAILURE
+        );
     }
 
     render(): JSX.Element {
-        if (this.state.loading) {
+        if (this.shouldRenderApplicationSpinner()) {
             return <ApplicationSpinner />;
+        }
+
+        const { personinfo, storageKvittering, saker } = this.props;
+        if (personinfo.status === FetchStatus.FAILURE && getErrorCode(personinfo) !== 401) {
+            return <ErrorPage uuid={extractUUID(personinfo.error)} />;
+        } else if (storageKvittering.status === FetchStatus.FAILURE && getErrorCode(personinfo) !== 401) {
+            return <ErrorPage uuid={extractUUID(storageKvittering.error)} />;
+        } else if (saker.status === FetchStatus.FAILURE && getErrorCode(personinfo) !== 401) {
+            return <ErrorPage uuid={extractUUID(saker.error)} />;
         }
 
         return (
             <Router>
                 <Switch>
-                    <Route path={Routes.FEIL} render={(props) => <ErrorPage {...props} />} />
                     <Route path={Routes.ETTERSENDELSE} render={(props) => <Ettersendelse {...props} />} />
                     <Route path={Routes.KVITTERING} render={(props) => <KvitteringPage {...props} />} />
                     <Route
                         path={Routes.DINE_FORELDREPENGER}
                         exact={true}
-                        render={(props) => (
-                            <DineForeldrepenger
-                                person={this.state.person}
-                                saker={this.state.saker}
-                                error={this.state.error}
-                                storageKvittering={this.state.storageKvittering}
-                                {...props}
-                            />
-                        )}
+                        render={(props) => <DineForeldrepenger {...props} />}
                     />
                     <Redirect to={Routes.DINE_FORELDREPENGER} />
                 </Switch>
@@ -92,4 +97,25 @@ class Foreldrepengeoversikt extends React.Component<{}, State> {
     }
 }
 
-export default Foreldrepengeoversikt;
+const mapStateToProps = (state: State) => ({
+    personinfo: state.api.personinfo,
+    saker: state.api.saker,
+    storageKvittering: state.api.storageKvittering
+});
+
+const mapDispatchToProps = (dispatch: (action: ApiAction) => void) => ({
+    requestPersoninfo: () => {
+        dispatch({ type: ApiActionTypes.GET_PERSONINFO_REQUEST });
+    },
+    requestSaker: () => {
+        dispatch({ type: ApiActionTypes.GET_SAKER_REQUEST });
+    },
+    requestStorageKvittering: () => {
+        dispatch({ type: ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST });
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Foreldrepengeoversikt);

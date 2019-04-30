@@ -4,7 +4,7 @@ export type Kjønn =
     | 'M'
     | 'K';
 
-interface Person {
+interface Personinfo {
     fnr: string;
     fornavn: string;
     mellomnavn: string;
@@ -16,4 +16,4 @@ interface Person {
     bankkonto?: Bankkonto;
 };
 
-export default Person;
+export default Personinfo;

@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import MediaQuery from 'react-responsive';
 import { History } from 'history';
-import { AxiosError } from 'axios';
 import AlertStripe from 'nav-frontend-alertstriper';
 import moment from 'moment';
 
@@ -19,30 +19,27 @@ import {
     opprettSak,
     skalKunneSøkeOmEndring
 } from '../../utils/sakerUtils';
-import { Routes } from '../../utils/routes';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/Saksoversikt';
 
-import Person from '../../types/Person';
+import Person from '../../types/Personinfo';
 import { StorageKvittering } from '../../types/StorageKvittering';
+import Behandling from 'app/types/Behandling';
+import { State } from 'app/redux/store';
+import { getData } from 'app/redux/util/fetchFromState';
 
 import './dineForeldrepenger.less';
-import Behandling from 'app/types/Behandling';
 
 interface Props {
-    person?: Person;
     saker: Sak[];
     storageKvittering?: StorageKvittering;
+    personinfo?: Person;
     history: History;
-    error?: AxiosError | any;
 }
 
 class DineForeldrepenger extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
-        if (props.error) {
-            this.props.history.push(Routes.FEIL, { error: true });
-        }
     }
 
     shouldRenderStorageKvitteringAsSak(): boolean {
@@ -72,7 +69,7 @@ class DineForeldrepenger extends React.Component<Props> {
         return erUnderBehandling(nyesteSak) || erInfotrygdSak(nyesteSak);
     }
 
-    renderSaksoversiktList() {
+    renderSaksoversiktList(nyesteSak: Sak) {
         const { saker, history } = this.props;
         if (!saker) {
             return null;
@@ -81,11 +78,15 @@ class DineForeldrepenger extends React.Component<Props> {
         const cls = BEMHelper('saksoversikt-list');
         return (
             <ul className={cls.className}>
-                {saker.map((sak: Sak) => (
-                    <li className={cls.element('element')} key={sak.saksnummer}>
-                        <EkspanderbarSaksoversikt person={this.props.person} sak={sak} history={history} />
-                    </li>
-                ))}
+                {saker
+                    .filter((s: Sak) => s.saksnummer !== nyesteSak.saksnummer)
+                    .map((sak: Sak) => {
+                        return (
+                            <li className={cls.element('element')} key={sak.saksnummer}>
+                                <EkspanderbarSaksoversikt person={this.props.personinfo} sak={sak} history={history} />
+                            </li>
+                        );
+                    })}
             </ul>
         );
     }
@@ -114,10 +115,10 @@ class DineForeldrepenger extends React.Component<Props> {
     }
 
     render() {
-        const { saker, history, storageKvittering, person, error } = this.props;
+        const { saker, history, storageKvittering, personinfo } = this.props;
         const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettSak(storageKvittering!)
-            : saker.shift();
+            : saker.slice().shift();
 
         const cls = BEMHelper('dine-foreldrepenger');
         return (
@@ -125,19 +126,18 @@ class DineForeldrepenger extends React.Component<Props> {
                 <Header history={this.props.history} />
                 <div className={cls.className}>
                     <div className={cls.element('main-content')}>
-                        {!error && nyesteSak === undefined && <IngenSaker />}
-
+                        {nyesteSak === undefined && <IngenSaker />}
                         {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe(nyesteSak)}
-                        {nyesteSak && error === undefined && (
+                        {nyesteSak && (
                             <>
                                 <Saksoversikt
                                     sak={nyesteSak}
-                                    person={person}
+                                    person={personinfo}
                                     history={history}
                                     skalKunneSøkeOmEndring={skalKunneSøkeOmEndring(nyesteSak)}
                                     withHeader={true}
                                 />
-                                {this.renderSaksoversiktList()}
+                                {this.renderSaksoversiktList(nyesteSak)}
                             </>
                         )}
 
@@ -153,4 +153,11 @@ class DineForeldrepenger extends React.Component<Props> {
         );
     }
 }
-export default DineForeldrepenger;
+
+const mapStateToProps = (state: State) => ({
+    personinfo: getData(state.api.personinfo, undefined),
+    saker: getData(state.api.saker, []),
+    storageKvittering: getData(state.api.storageKvittering, undefined)
+});
+
+export default connect(mapStateToProps)(DineForeldrepenger);

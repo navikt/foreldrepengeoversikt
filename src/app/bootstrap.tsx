@@ -1,18 +1,20 @@
 import * as React from 'react';
+import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 
 import IntlProvider from './intl/IntlProvider';
 import Foreldrepengeoversikt from './Foreldrepengeoversikt';
+import store from './redux/store';
+
 
 import './styles/app.less';
-import ErrorBoundary from 'common/components/error-boundary/ErrorBoundary';
 
 const root = document.getElementById('app');
 render(
-    <ErrorBoundary>
-        <IntlProvider>
+    <IntlProvider>
+        <Provider store={store}>
             <Foreldrepengeoversikt />
-        </IntlProvider>
-    </ErrorBoundary>,
+        </Provider>
+    </IntlProvider>,
     root
 );

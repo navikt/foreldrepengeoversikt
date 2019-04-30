@@ -26,7 +26,7 @@ export enum Skjemanummer {
     BEKREFTELSE_FRA_STUDIESTED = 'I000061',
     BEKREFTELSE_DELTAR_KVALIFISERINGSPROGRAM = 'I000051',
     BEKREFTELSE_PÅ_AVTALT_FERIE = 'I000036',
-    ANNET = 'I000060',
+    ANNET = 'I000060'
 }
 
 export const skjemanummerForEngangsstønad = (skjemanummer: Skjemanummer) =>

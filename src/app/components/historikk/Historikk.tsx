@@ -5,7 +5,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 
 import BEMHelper from 'common/util/bem';
 import HistorikkElement, { Hendelse } from './HistorikkElement';
-import Person from '../../types/Person';
+import Person from '../../types/Personinfo';
 
 import './historikk.less';
 
