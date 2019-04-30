@@ -165,6 +165,10 @@ class Ettersendelse extends React.Component<Props, State> {
     render() {
         const { intl } = this.props;
         const { sak, attachments, attachmentSkjemanummer, sendingEttersendelse } = this.state;
+        if (!sak) {	
+            return null;	
+        }
+
         const uploadedAttachments = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
         const cls = BEMHelper('ettersendelse');
 

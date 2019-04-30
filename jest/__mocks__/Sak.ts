@@ -19,12 +19,12 @@ export const behandlingMock: Behandling = {
 const infotrygdSak: Sak = {
     type: SakType.SAK,
     saksnummer: '123',
-    opprettet: '2018-10-1',
+    opprettet: '2018-09-01'
 };
 
 const fpsakSak: Sak = {
     type: SakType.FPSAK,
-    saksnummer: '123',
+    saksnummer: '234',
     opprettet: '2018-10-01',
     status: FagsakStatus.OPPRETTET,
     behandlinger: [behandlingMock]

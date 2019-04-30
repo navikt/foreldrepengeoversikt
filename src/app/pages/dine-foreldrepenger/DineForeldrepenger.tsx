@@ -37,7 +37,7 @@ interface Props {
     history: History;
 }
 
-class DineForeldrepenger extends React.Component<Props> {
+export class DineForeldrepenger extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
     }
