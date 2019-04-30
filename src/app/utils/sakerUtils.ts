@@ -7,9 +7,17 @@ export const sakByDescendingOrder = (a: Sak, b: Sak) => b.opprettet.localeCompar
 export const behandlingByDescendingOrder = (a: Behandling, b: Behandling) =>
     b.opprettetTidspunkt.localeCompare(a.opprettetTidspunkt);
 
-export const erUnderBehandling = (sak: Sak): any => {
-    return sak && sak.status && (sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING);
+export const erUnderBehandling = (sak: Sak): boolean => {
+    return sak !== undefined && sak.status !== undefined && (sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING);
 };
+
+export const erLøpende = (sak: Sak): boolean => {
+    return sak !== undefined && sak.status !== undefined && (sak.status === FagsakStatus.LOPENDE);
+}
+
+export const erAvsluttet = (sak: Sak): boolean => {
+    return sak !== undefined && sak.status !== undefined && (sak.status === FagsakStatus.AVSLUTTET);
+}
 
 const getBehandling = (sak: Sak): Behandling | undefined => {
     if (sak !== undefined && sak.behandlinger !== undefined && sak.behandlinger.length > 0) {

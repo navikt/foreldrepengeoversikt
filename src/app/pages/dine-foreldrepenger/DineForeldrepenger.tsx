@@ -91,11 +91,11 @@ class DineForeldrepenger extends React.Component<Props> {
         );
     }
 
-    renderSidepanel() {
+    renderSidepanel(sak?: Sak) {
         const cls = BEMHelper('sak-info-panel');
         return (
             <div className={cls.className}>
-                <Sidepanel sak={this.props.saker[0]} />
+                <Sidepanel sak={sak} />
             </div>
         );
     }
@@ -141,12 +141,12 @@ class DineForeldrepenger extends React.Component<Props> {
                             </>
                         )}
 
-                        <MediaQuery maxWidth={1114}>{this.renderSidepanel()}</MediaQuery>
+                        <MediaQuery maxWidth={1114}>{this.renderSidepanel(nyesteSak)}</MediaQuery>
                         <RelatertInformasjon />
                     </div>
 
                     <MediaQuery minWidth={1115}>
-                        <div className={cls.element('sidepanel-desktop')}>{this.renderSidepanel()}</div>
+                        <div className={cls.element('sidepanel-desktop')}>{this.renderSidepanel(nyesteSak)}</div>
                     </MediaQuery>
                 </div>
             </>
