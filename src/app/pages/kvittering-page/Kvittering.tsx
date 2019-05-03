@@ -15,6 +15,7 @@ import BackButton from 'common/components/back-button/BackButton';
 import { Routes } from '../../utils/routes';
 
 import './kvittering.less';
+import { Knapp } from 'nav-frontend-knapper';
 
 interface Props {
     history: History;
@@ -36,6 +37,8 @@ class KvitteringPage extends React.Component<Props, State> {
         if (!this.state.kvittering) {
             this.props.history.push(Routes.DINE_FORELDREPENGER);
         }
+
+        this.handleBackClick = this.handleBackClick.bind(this);
     }
 
     handleBackClick(): void {
@@ -76,6 +79,12 @@ class KvitteringPage extends React.Component<Props, State> {
                                 )}
                                 showFileSize={false}
                             />
+                        </div>
+
+                        <div className={cls.element('tilbake-knapp')}>
+                            <Knapp onClick={this.handleBackClick}>
+                                <FormattedMessage id="kvittering.tilbake.knapp" />
+                            </Knapp>
                         </div>
                     </ResponsiveWrapper>
                 </div>
