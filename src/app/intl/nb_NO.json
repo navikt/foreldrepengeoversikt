@@ -124,10 +124,10 @@
     "historikk.INNSYN_DELVIS_INNVILGET": "INNSYN_DELVIS_INNVILGET",
     "historikk.INNSYN_AVVIST": "INNSYN_AVVIST",
     "historikk.FORELDREPENGER_ENDRET": "Vedtaket er endret",
-    "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vises ikke her.",
+    "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vises ikke i historikken.",
     "historikk.ingenHendelser": "Vi kan desverre ikke vise historikk for denne saken.",
 
-    "dokumentoversikt.info": "Vi jobber med å kunne vise alle dine dokumenter koblet til foreldrepenger her. Inntil videre finner du disse under { lenke }.",
+    "dokumentoversikt.info": "Vi jobber med å kunne vise alle dokumenter du har i saken her. Inntil videre finner du disse under { lenke }. ",
     "dokumentoversikt.info.lenke": "dine dokumenter",
 
     "utsettelsepanel.title": "Vil du endre perioden din eller utsette?",
