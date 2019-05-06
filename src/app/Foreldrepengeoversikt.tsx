@@ -53,7 +53,8 @@ class Foreldrepengeoversikt extends React.Component<Props> {
             saker.status === FetchStatus.UNFETCHED ||
             saker.status === FetchStatus.IN_PROGRESS ||
             storageKvittering.status === FetchStatus.UNFETCHED ||
-            storageKvittering.status === FetchStatus.IN_PROGRESS
+            storageKvittering.status === FetchStatus.IN_PROGRESS || 
+            getErrorCode(personinfo) === 401
         );
     }
 
