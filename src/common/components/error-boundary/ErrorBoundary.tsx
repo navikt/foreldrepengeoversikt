@@ -8,13 +8,18 @@ import getMessage from 'common/util/i18nUtils';
 import Lenke from 'nav-frontend-lenker';
 import { lenker } from 'app/utils/lenker';
 
-class ErrorBoundary extends React.Component<InjectedIntlProps> {
+class ErrorBoundary extends React.Component<InjectedIntlProps, { hasError: boolean }> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            hasError: false
+        };
+
         this.logError = this.logError.bind(this);
     }
 
     componentDidCatch(error: Error | null, reactStackTrace: object) {
+        this.setState({ hasError: true });
         if (isFeatureEnabled(Feature.logging)) {
             this.logError(error, detect(), reactStackTrace);
         }
@@ -36,6 +41,10 @@ class ErrorBoundary extends React.Component<InjectedIntlProps> {
 
     render() {
         const { intl } = this.props;
+        if (!this.state.hasError) {
+            return this.props.children;
+        }
+
         return (
             <Feilsidemelding
                 illustrasjon={{

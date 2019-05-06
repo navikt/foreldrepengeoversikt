@@ -115,6 +115,10 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     render() {
+
+
+
+
         const { saker, history, storageKvittering, personinfo } = this.props;
         const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettSak(storageKvittering!)
