@@ -19,10 +19,11 @@ class ErrorBoundary extends React.Component<InjectedIntlProps, { hasError: boole
     }
 
     componentDidCatch(error: Error | null, reactStackTrace: object) {
-        this.setState({ hasError: true });
-        if (isFeatureEnabled(Feature.logging)) {
-            this.logError(error, detect(), reactStackTrace);
-        }
+        this.setState({ hasError: true }, () => {
+            if (isFeatureEnabled(Feature.logging)) {
+                this.logError(error, detect(), reactStackTrace);
+            }
+        });
     }
 
     logError(
