@@ -66,7 +66,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     shouldRenderAlertStripe(nyesteSak: Sak): boolean {
-        return erUnderBehandling(nyesteSak) || erInfotrygdSak(nyesteSak);
+        return !skalKunneSøkeOmEndring(nyesteSak) || erInfotrygdSak(nyesteSak);
     }
 
     renderSaksoversiktList(nyesteSak: Sak) {
@@ -115,10 +115,6 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     render() {
-
-
-
-
         const { saker, history, storageKvittering, personinfo } = this.props;
         const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettSak(storageKvittering!)

@@ -6,7 +6,7 @@ import {
     skjemanummerForEndringssøknad,
     skjemanummerForEngangsstønad
 } from 'common/storage/attachment/types/Attachment';
-import { erEndringssøknad, erForeldrepengesak } from '../../utils/sakerUtils';
+import { erForeldrepengesak, harSendtInnEndringssøknad } from '../../utils/sakerUtils';
 import Sak from '../../types/Sak';
 
 export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: Sak) => (
@@ -25,7 +25,9 @@ export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: Sak) => 
 const relevanteSkjemanummer = (sak: Sak) => {
     const alleSkjemanummere = Object.values(Skjemanummer);
     if (erForeldrepengesak(sak)) {
-        return erEndringssøknad(sak) ? alleSkjemanummere.filter(skjemanummerForEndringssøknad) : alleSkjemanummere;
+        return harSendtInnEndringssøknad(sak)
+            ? alleSkjemanummere.filter(skjemanummerForEndringssøknad)
+            : alleSkjemanummere;
     }
     return alleSkjemanummere.filter(skjemanummerForEngangsstønad);
 };

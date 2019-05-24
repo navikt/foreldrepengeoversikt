@@ -8,29 +8,33 @@ export const behandlingByDescendingOrder = (a: Behandling, b: Behandling) =>
     b.opprettetTidspunkt.localeCompare(a.opprettetTidspunkt);
 
 export const erUnderBehandling = (sak: Sak): boolean => {
-    return sak !== undefined && sak.status !== undefined && (sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING);
+    return (
+        sak !== undefined &&
+        sak.status !== undefined &&
+        (sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING)
+    );
 };
 
 export const erLøpende = (sak: Sak): boolean => {
-    return sak !== undefined && sak.status !== undefined && (sak.status === FagsakStatus.LOPENDE);
-}
+    return sak !== undefined && sak.status !== undefined && sak.status === FagsakStatus.LOPENDE;
+};
 
 export const erAvsluttet = (sak: Sak): boolean => {
-    return sak !== undefined && sak.status !== undefined && (sak.status === FagsakStatus.AVSLUTTET);
-}
+    return sak !== undefined && sak.status !== undefined && sak.status === FagsakStatus.AVSLUTTET;
+};
 
-const getBehandling = (sak: Sak): Behandling | undefined => {
+const getNyesteBehandling = (sak: Sak): Behandling | undefined => {
     if (sak !== undefined && sak.behandlinger !== undefined && sak.behandlinger.length > 0) {
-        return sak.behandlinger[0];
+        return sak.behandlinger.sort(behandlingByDescendingOrder)[0];
     }
     return undefined;
 };
 
 export const finnNyesteBehandling = (sak: Sak): Behandling | undefined => {
     return sak.behandlinger && sak.behandlinger.sort(behandlingByDescendingOrder)[0];
-}
+};
 
-export const erEndringssøknad = (sak: Sak) => {
+export const harSendtInnEndringssøknad = (sak: Sak) => {
     if (!sak.behandlinger) {
         return false;
     }
@@ -38,7 +42,7 @@ export const erEndringssøknad = (sak: Sak) => {
 };
 
 export const erForeldrepengesak = (sak: Sak): boolean => {
-    const behandling = getBehandling(sak);
+    const behandling = getNyesteBehandling(sak);
     if (behandling === undefined) {
         return true;
     } else {
@@ -53,7 +57,7 @@ export const erForeldrepengesak = (sak: Sak): boolean => {
 };
 
 export const erEngangsstønad = (sak: Sak): boolean => {
-    const behandling = getBehandling(sak);
+    const behandling = getNyesteBehandling(sak);
     if (behandling === undefined) {
         return false;
     } else {
@@ -73,15 +77,16 @@ export const harEnAvsluttetBehandling = (sak: Sak): boolean => {
 };
 
 export const skalKunneSøkeOmEndring = (nyesteSak: Sak): boolean => {
-    if (!erForeldrepengesak(nyesteSak) || nyesteSak.saksnummer === undefined) {
+    if (!erForeldrepengesak(nyesteSak) || nyesteSak.saksnummer === undefined) {
         return false;
     }
 
     return (
         (nyesteSak.status !== FagsakStatus.AVSLUTTET && harEnAvsluttetBehandling(nyesteSak)) ||
-        erInfotrygdSak(nyesteSak) 
+        erInfotrygdSak(nyesteSak)
     );
 };
+
 
 export const erInfotrygdSak = (sak: Sak): boolean => {
     return sak.type === SakType.SAK;
@@ -92,7 +97,7 @@ export const opprettSak = (storageKvittering: StorageKvittering) => {
         type: SakType.SAK,
         erJornalført: false,
         opprettet: storageKvittering.innsendingstidspunkt
-    }
+    };
 
     return sak;
 };
