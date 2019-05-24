@@ -15,7 +15,6 @@ import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 import {
     erForeldrepengesak,
     erInfotrygdSak,
-    erUnderBehandling,
     opprettSak,
     skalKunneSøkeOmEndring
 } from '../../utils/sakerUtils';
