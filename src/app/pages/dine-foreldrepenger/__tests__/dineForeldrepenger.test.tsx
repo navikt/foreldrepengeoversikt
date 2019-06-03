@@ -13,7 +13,7 @@ describe('Dine Foreldrepenger page', () => {
     });
 
     it('Should render EkspanderbarSaksoversikt for each element in saker except the newest', () => {
-        const mockSaker = [SakerMock.infotrygdSak, SakerMock.fpsakSak];
+        const mockSaker = [SakerMock.infotrygd, SakerMock.fpsakFP];
         const wrapper = shallow(<DineForeldrepenger saker={mockSaker} history={historyMock} />);
         expect(wrapper.find(EkspanderbarSaksoversikt).length).toEqual(1);
     });

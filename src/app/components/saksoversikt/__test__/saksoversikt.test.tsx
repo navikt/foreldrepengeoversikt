@@ -12,7 +12,7 @@ describe('EkspanderbarSaksoversikt component', () => {
 
         const wrapper = shallow(
             <Saksoversikt
-                sak={{ ...SakerMock.infotrygdSak, opprettet: opprettetDate }}
+                sak={{ ...SakerMock.infotrygd, opprettet: opprettetDate }}
                 history={jest.fn() as any}
             />
         );
@@ -28,7 +28,7 @@ describe('EkspanderbarSaksoversikt component', () => {
        
         const wrapper = shallow(
             <Saksoversikt
-                sak={{ ...SakerMock.infotrygdSak, opprettet: opprettetDate }}
+                sak={{ ...SakerMock.infotrygd, opprettet: opprettetDate }}
                 history={jest.fn() as any}
             />
         );
