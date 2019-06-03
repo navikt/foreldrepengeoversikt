@@ -5,7 +5,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { guid } from 'nav-frontend-js-utils';
 
-import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../utils';
+import { isSakEligableForEttersendelse } from '../utils';
 import { erInfotrygdSak, erForeldrepengesak, erSvangerskapepengesak } from '../../../utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
 import UtsettelsePanel from '../../utsettelse-panel/UtsettelsePanel';
@@ -75,7 +75,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                             <Hjelpetekst id={guid()}>
                                 <FormattedMessage
                                     id={
-                                        isSakTooOldForEttersendelse(sak)
+                                        !isSakEligableForEttersendelse(sak)
                                             ? 'saksoversikt.ettersendelse.hjelpetekst.utløptFrist'
                                             : 'saksoversikt.ettersendelse.hjelpetekst.ikkeJournalført'
                                     }

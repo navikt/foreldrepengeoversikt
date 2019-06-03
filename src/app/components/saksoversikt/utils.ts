@@ -4,19 +4,18 @@ import Sak from 'app/types/Sak';
 import { erInfotrygdSak, getNyesteBehandling } from 'app/utils/sakerUtils';
 import { BehandligType } from 'app/types/Behandling';
 
-export const isSakTooOldForEttersendelse = (sak: Sak): boolean => {
+const isSakTooOldForEttersendelse = (sak: Sak): boolean => {
     return !moment(sak.opprettet).isSameOrAfter(moment().subtract(150, 'days'));
 };
 
 export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
-    const { opprettet, saksnummer } = sak;
-    if (saksnummer === undefined) {
+    if (sak.saksnummer === undefined) {
         return false;
-    }
-    
+    };
+
     if (erInfotrygdSak(sak)) {
-        return moment(opprettet).isSameOrAfter(moment().subtract(150, 'days'));
-    }
+        return isSakTooOldForEttersendelse(sak);
+    };
 
     return sak.status ? sak.status !== FagsakStatus.AVSLUTTET : false; 
 };
@@ -54,6 +53,6 @@ export const getSaksoversiktTitle = (sak: Sak): string => {
         case BehandligType.SVANGERSKAPSPENGESØKNAD:     
             return 'saksoversikt.heading.top.svangerskapspengesoknad';
         default:
-            return 'saksoversikt.heading.top.default';
+            return 'saksoversikt.heading.top.ukjent';
     }
 };

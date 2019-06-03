@@ -9,14 +9,12 @@ describe('Saksoversikt component', () => {
         const opprettetDate = moment()
             .subtract(151, 'days')
             .format('YYYY-MM-DD');
-
         const wrapper = shallow(
             <Saksoversikt
                 sak={{ ...SakerMock.infotrygd, opprettet: opprettetDate }}
                 history={jest.fn() as any}
             />
         );
-
         const uploadButton = wrapper.find({ className: 'saksoversikt__ettersendelse-btn' });
         expect(uploadButton.props().disabled).toBeTruthy();
     });
