@@ -5,12 +5,13 @@ export default interface Behandling {
     behandlendeEnhetNavn: string;
     id: any;
     status: BehandlingStatus;
-    tema: string;
+    tema: BehandlingTema;
     type: string;
     årsak: BehandlingÅrsak | null;
     behandlingResultat: BehandlingResultatType;
     inntektsmeldinger: string[];
 }
+
 
 export enum BehandlingResultatType {
     IKKE_FASTSATT = 'IKKE_FASTSATT',
@@ -75,6 +76,14 @@ export enum BehandlingÅrsak {
     ANNET = 'RE-ANNET'
 }
 
+
+export enum BehandligType {
+    'FORELDREPENGESØKNAD' = 'FP',
+    'ENGANGSSØNAD' = 'ES',
+    'ENDRINGSSØKNAD' = 'ENDRING',
+    'SVANGERSKAPSPENGESØKNAD' = 'SVP'
+}
+
 export enum BehandlingTema {
     'ENGANGSTØNAD' = 'ENGST',
     'ENGANGSTØNAD_FØDSEL' = 'ENGST_FODS',
@@ -82,5 +91,6 @@ export enum BehandlingTema {
     'FORELDREPENGER' = 'FORP',
     'FORELDREPENGER_ADOPSJON' = 'FORP_ADOP',
     'FORELDREPENGER_FØDSEL' = 'FORP_FODS',
+    'SVANGERSKAPSPENGER' = 'SVP',
     'UDEFINERT' = '-'
 }
