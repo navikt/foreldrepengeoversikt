@@ -7,7 +7,7 @@ import SøkIkon from '../ikoner/sidepanel/SøkIkon';
 import UtbetalingerIkon from '../ikoner/sidepanel/UtbetalingerIkon';
 import { finnNesteUtbetalingsdato } from 'app/utils/dateUtils';
 import Sak from 'app/types/Sak';
-import { erLøpende, erForeldrepengesak, erAvsluttet, erInfotrygdSak } from 'app/utils/sakerUtils';
+import { erLøpende, erForeldrepengesak, erAvsluttet, erInfotrygdSak, erEngangsstønad } from 'app/utils/sakerUtils';
 
 import './sidepanel.less';
 
@@ -25,15 +25,17 @@ const Sidepanel: FunctionComponent<Props> = ({ sak }) => {
                     tekst="sidepanel.utbetalingsdato"
                 />
             )}
-            {sak !== undefined && erForeldrepengesak(sak) && (erAvsluttet(sak) || erLøpende(sak)) && (
-                <SidepanelElement
-                    icon={<UtbetalingerIkon />}
-                    lenke={{
-                        lenketekst: 'sidepanel.utbetalinger',
-                        href: lenker.utbetalinger
-                    }}
-                />
-            )}
+            {sak !== undefined &&
+                (erForeldrepengesak(sak) || erEngangsstønad(sak)) &&
+                (erAvsluttet(sak) || erLøpende(sak)) && (
+                    <SidepanelElement
+                        icon={<UtbetalingerIkon />}
+                        lenke={{
+                            lenketekst: 'sidepanel.utbetalinger',
+                            href: lenker.utbetalinger
+                        }}
+                    />
+                )}
             {sak !== undefined && erForeldrepengesak(sak) && (
                 <SidepanelElement
                     icon={<SøkIkon />}

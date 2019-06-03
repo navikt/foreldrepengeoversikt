@@ -2,7 +2,7 @@ import moment from 'moment';
 import { FagsakStatus } from '../../types/FagsakStatus';
 import Sak from 'app/types/Sak';
 import { erInfotrygdSak, getNyesteBehandling } from 'app/utils/sakerUtils';
-import { BehandligType, BehandlingTema } from 'app/types/Behandling';
+import { BehandligType } from 'app/types/Behandling';
 
 export const isSakTooOldForEttersendelse = (sak: Sak): boolean => {
     return !moment(sak.opprettet).isSameOrAfter(moment().subtract(150, 'days'));
@@ -13,15 +13,12 @@ export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
     if (saksnummer === undefined) {
         return false;
     }
-
+    
     if (erInfotrygdSak(sak)) {
         return moment(opprettet).isSameOrAfter(moment().subtract(150, 'days'));
     }
 
-    if (sak.status) {
-        return sak.status !== FagsakStatus.AVSLUTTET;
-    }
-    return false;
+    return sak.status ? sak.status !== FagsakStatus.AVSLUTTET : false; 
 };
 
 export function formatDate(dato: string, datoformat?: string): string {
