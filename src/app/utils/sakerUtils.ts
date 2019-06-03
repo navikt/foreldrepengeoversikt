@@ -9,26 +9,25 @@ export const behandlingByDescendingOrder = (a: Behandling, b: Behandling) =>
 
 export const erUnderBehandling = (sak: Sak): boolean => {
     return (
-        sak !== undefined &&
         sak.status !== undefined &&
         (sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING)
     );
 };
 
 export const erLøpende = (sak: Sak): boolean => {
-    return sak !== undefined && sak.status !== undefined && sak.status === FagsakStatus.LOPENDE;
+    return sak.status !== undefined && sak.status === FagsakStatus.LOPENDE;
 };
 
 export const erAvsluttet = (sak: Sak): boolean => {
-    return sak !== undefined && sak.status !== undefined && sak.status === FagsakStatus.AVSLUTTET;
+    return sak.status !== undefined && sak.status === FagsakStatus.AVSLUTTET;
 };
 
 export const getNyesteSak = (saker: Sak[]): Sak | undefined => {
     return saker.sort(sakByDescendingOrder)[0];
 };
 
-export const getNyesteBehandling = (sak?: Sak): Behandling | undefined => {
-    if (sak !== undefined && sak.behandlinger !== undefined && sak.behandlinger.length > 0) {
+export const getNyesteBehandling = (sak: Sak): Behandling | undefined => {
+    if (sak.behandlinger !== undefined && sak.behandlinger.length > 0) {
         return sak.behandlinger.sort(behandlingByDescendingOrder)[0];
     }
     return undefined;
@@ -49,17 +48,19 @@ export const finnNyesteBehandling = (sak: Sak): Behandling | undefined => {
 };
 
 export const harSendtInnEndringssøknad = (sak: Sak) => {
-    return sak.behandlinger === undefined ? false : sak.behandlinger.some((b: Behandling) => b.årsak === BehandlingÅrsak.ENDRING_FRA_BRUKER);
+    return sak.behandlinger === undefined
+        ? false
+        : sak.behandlinger.some((b: Behandling) => b.årsak === BehandlingÅrsak.ENDRING_FRA_BRUKER);
 };
 
 export const erForeldrepengesak = (sak: Sak): boolean => {
     const behandling = getNyesteBehandling(sak);
-    return behandling === undefined ? true : behandling.type === BehandligType.FORELDREPENGESØKNAD; 
+    return behandling === undefined ? true : behandling.type === BehandligType.FORELDREPENGESØKNAD;
 };
 
 export const erEngangsstønad = (sak: Sak): boolean => {
     const behandling = getNyesteBehandling(sak);
-    return behandling === undefined ? false : behandling.type === BehandligType.ENGANGSSØNAD; 
+    return behandling === undefined ? false : behandling.type === BehandligType.ENGANGSSØNAD;
 };
 
 export const erSvangerskapepengesak = (sak: Sak): boolean => {

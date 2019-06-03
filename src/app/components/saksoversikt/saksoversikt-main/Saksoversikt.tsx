@@ -6,7 +6,7 @@ import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { guid } from 'nav-frontend-js-utils';
 
 import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../utils';
-import { erInfotrygdSak, erEngangsstønad } from '../../../utils/sakerUtils';
+import { erInfotrygdSak, erForeldrepengesak, erSvangerskapepengesak } from '../../../utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
 import UtsettelsePanel from '../../utsettelse-panel/UtsettelsePanel';
 import Oversikt from '../../oversikt/Oversikt';
@@ -34,18 +34,19 @@ class Saksoversikt extends Component<SaksoversiktProps> {
     }
 
     onEndreSøknad(): void {
-        window.location.href = lenker.endringssøknad;
+        window.location.href = erForeldrepengesak(this.props.sak)
+            ? lenker.endringssøknad
+            : lenker.svangerskapspengesøknad;
     }
 
     render() {
         const { sak, withHeader = false } = this.props;
-        const erSakEngangsstønad = erEngangsstønad(sak);
+        const erSakForeldrepengesak = erForeldrepengesak(sak);
 
         const cls = BEMHelper('saksoversikt');
         return (
             <div className={'saksoversikt'}>
                 {withHeader && <SaksoversiktHeader sak={sak} />}
-
                 {withHeader === false && (
                     <Etikett
                         className="blokk-xs"
@@ -53,9 +54,10 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                         value={sak.saksnummer}
                     />
                 )}
+
                 {erInfotrygdSak(sak) && <MeldingOmVedtakLenkepanel />}
 
-                {!erSakEngangsstønad && (
+                {erSakForeldrepengesak && (
                     <div className="blokk-xs">
                         <UtsettelsePanel />
                     </div>
@@ -82,18 +84,17 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                         )}
                     </div>
 
-                    {!erSakEngangsstønad && (
-                        <div className={cls.element('btn')}>
-                            <Knapp onClick={() => this.onEndreSøknad()}>
-                                <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
-                            </Knapp>
-                        </div>
-                    )}
+                    {erSakForeldrepengesak ||
+                        (erSvangerskapepengesak(sak) && (
+                            <div className={cls.element('btn')}>
+                                <Knapp onClick={() => this.onEndreSøknad()}>
+                                    <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
+                                </Knapp>
+                            </div>
+                        ))}
                 </div>
 
-                {!erInfotrygdSak(sak) && (
-                    <Oversikt person={this.props.person} sak={sak} />
-                )}
+                {!erInfotrygdSak(sak) && <Oversikt person={this.props.person} sak={sak} />}
             </div>
         );
     }
