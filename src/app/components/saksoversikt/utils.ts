@@ -1,7 +1,8 @@
 import moment from 'moment';
 import { FagsakStatus } from '../../types/FagsakStatus';
 import Sak from 'app/types/Sak';
-import { erInfotrygdSak } from 'app/utils/sakerUtils';
+import { erInfotrygdSak, getNyesteBehandling } from 'app/utils/sakerUtils';
+import { BehandligType, BehandlingTema } from 'app/types/Behandling';
 
 export const isSakTooOldForEttersendelse = (sak: Sak): boolean => {
     return !moment(sak.opprettet).isSameOrAfter(moment().subtract(150, 'days'));
@@ -9,7 +10,7 @@ export const isSakTooOldForEttersendelse = (sak: Sak): boolean => {
 
 export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
     const { opprettet, saksnummer } = sak;
-    if(saksnummer === undefined) {
+    if (saksnummer === undefined) {
         return false;
     }
 
@@ -17,7 +18,7 @@ export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
         return moment(opprettet).isSameOrAfter(moment().subtract(150, 'days'));
     }
 
-    if(sak.status) {
+    if (sak.status) {
         return sak.status !== FagsakStatus.AVSLUTTET;
     }
     return false;
@@ -39,5 +40,23 @@ export const getIntlKeyForStatus = (status: FagsakStatus): string => {
     }
 };
 
-export const getEtikettTypeForSaksstatus = (sak: Sak): 'suksess' | 'fokus' => 
+export const getEtikettTypeForSaksstatus = (sak: Sak): 'suksess' | 'fokus' =>
     sak.status === FagsakStatus.LOPENDE || sak.status === FagsakStatus.AVSLUTTET ? 'suksess' : 'fokus';
+
+export const getSaksoversiktTitle = (sak: Sak): string => {
+    const nyesteBehandlig = getNyesteBehandling(sak);
+    if (erInfotrygdSak(sak) || nyesteBehandlig === undefined) {
+        return 'saksoversikt.heading.top.default';
+    }
+    switch (nyesteBehandlig.type) {
+        case BehandligType.ENDRINGSSØKNAD:
+        case BehandligType.FORELDREPENGESØKNAD:
+            return 'saksoversikt.heading.top.foreldrepenger';
+        case BehandligType.ENGANGSSØNAD:
+            return 'saksoversikt.heading.top.engangsstønad"';
+        case BehandligType.SVANGERSKAPSPENGESØKNAD:     
+            return 'saksoversikt.heading.top.svangerskapspengesoknad';
+        default:
+            return 'saksoversikt.heading.top.default';
+    }
+};

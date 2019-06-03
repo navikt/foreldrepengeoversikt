@@ -4,9 +4,8 @@ import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
 
 import Sak from '../../../types/Sak';
-import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus } from '../utils';
+import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus, getSaksoversiktTitle } from '../utils';
 import BEMHelper from 'common/util/bem';
-import { erForeldrepengesak } from '../../../utils/sakerUtils';
 
 import './ekspanderbarSaksoversikt.less';
 
@@ -22,11 +21,7 @@ const EkspanderbarSaksoversiktHeader: React.FunctionComponent<Props> = ({ sak })
             <div className={cls.element('left')}>
                 <Undertittel>
                     <FormattedMessage
-                        id={
-                            erForeldrepengesak(sak)
-                                ? 'saksoversikt.heading.top.foreldrepenger'
-                                : 'saksoversikt.heading.top.engangsstønad'
-                        }
+                        id={getSaksoversiktTitle(sak)}
                     />
                 </Undertittel>
 

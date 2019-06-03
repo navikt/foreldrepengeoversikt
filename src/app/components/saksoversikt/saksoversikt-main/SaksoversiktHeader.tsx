@@ -4,7 +4,7 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 
 import Sak from '../../../types/Sak';
 import { erForeldrepengesak, finnNyesteBehandling } from '../../../utils/sakerUtils';
-import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus } from '../utils';
+import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus, getSaksoversiktTitle } from '../utils';
 import BEMHelper from 'common/util/bem';
 import Etikett from '../../etikett/etikett';
 
@@ -27,11 +27,7 @@ const SaksoversiktHeader: FunctionComponent<SaksoversiktHeaderProps> = ({ sak })
             <div className={cls.element('top')}>
                 <Innholdstittel>
                     <FormattedMessage
-                        id={
-                            erForeldrepengesak(sak)
-                                ? 'saksoversikt.heading.top.foreldrepenger'
-                                : 'saksoversikt.heading.top.engangsstønad'
-                        }
+                        id={getSaksoversiktTitle(sak)}
                     />
                 </Innholdstittel>
                 {sak.saksnummer && (

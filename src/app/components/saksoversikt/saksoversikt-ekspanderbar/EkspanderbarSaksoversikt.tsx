@@ -8,6 +8,7 @@ import Sak from '../../../types/Sak';
 import EkspanderbarSaksoversiktHeader from './EkspanderbarSaksoversiktHeader';
 import Person from '../../../types/Personinfo';
 import Saksoversikt from '../saksoversikt-main/Saksoversikt';
+import { getSaksoversiktTitle } from '../utils';
 
 import './ekspanderbarSaksoversikt.less';
 
@@ -24,7 +25,7 @@ const EkspanderbarSaksoversikt: React.FunctionComponent<Props> = (props) => {
         <div className={cls.className}>
             <EkspanderbartpanelBase
                 heading={<EkspanderbarSaksoversiktHeader sak={sak} />}
-                ariaTittel="">
+                ariaTittel={getSaksoversiktTitle(sak)}>
                 <Saksoversikt sak={sak} history={history} person={person} />
             </EkspanderbartpanelBase>
         </div>
