@@ -1,6 +1,6 @@
 import Sak, { SakType } from '../types/Sak';
 import { FagsakStatus } from '../types/FagsakStatus';
-import Behandling, { BehandlingStatus, BehandlingTema, BehandlingÅrsak } from '../types/Behandling';
+import Behandling, { BehandlingStatus, BehandlingÅrsak, BehandligType } from '../types/Behandling';
 import { StorageKvittering } from '../types/StorageKvittering';
 
 export const sakByDescendingOrder = (a: Sak, b: Sak) => b.opprettet.localeCompare(a.opprettet);
@@ -23,11 +23,25 @@ export const erAvsluttet = (sak: Sak): boolean => {
     return sak !== undefined && sak.status !== undefined && sak.status === FagsakStatus.AVSLUTTET;
 };
 
-const getNyesteBehandling = (sak: Sak): Behandling | undefined => {
+export const getNyesteSak = (saker: Sak[]): Sak | undefined => {
+    return saker.sort(sakByDescendingOrder)[0];
+};
+
+export const getNyesteBehandling = (sak?: Sak): Behandling | undefined => {
     if (sak !== undefined && sak.behandlinger !== undefined && sak.behandlinger.length > 0) {
         return sak.behandlinger.sort(behandlingByDescendingOrder)[0];
     }
     return undefined;
+};
+
+export const getAlleBehandlinger = (saker: Sak[]): Behandling[] => {
+    const behandlinger: Behandling[] = [];
+    saker.forEach((sak: Sak) => {
+        if (sak.behandlinger) {
+            behandlinger.push(...sak.behandlinger);
+        }
+    });
+    return behandlinger;
 };
 
 export const finnNyesteBehandling = (sak: Sak): Behandling | undefined => {
@@ -35,39 +49,22 @@ export const finnNyesteBehandling = (sak: Sak): Behandling | undefined => {
 };
 
 export const harSendtInnEndringssøknad = (sak: Sak) => {
-    if (!sak.behandlinger) {
-        return false;
-    }
-    return sak.behandlinger.some((b: Behandling) => b.årsak === BehandlingÅrsak.ENDRING_FRA_BRUKER);
+    return sak.behandlinger === undefined ? false : sak.behandlinger.some((b: Behandling) => b.årsak === BehandlingÅrsak.ENDRING_FRA_BRUKER);
 };
 
 export const erForeldrepengesak = (sak: Sak): boolean => {
     const behandling = getNyesteBehandling(sak);
-    if (behandling === undefined) {
-        return true;
-    } else {
-        const { tema } = behandling;
-        return (
-            tema === BehandlingTema.FORELDREPENGER ||
-            tema === BehandlingTema.FORELDREPENGER_ADOPSJON ||
-            tema === BehandlingTema.FORELDREPENGER_FØDSEL ||
-            tema === BehandlingTema.UDEFINERT
-        );
-    }
+    return behandling === undefined ? true : behandling.type === BehandligType.FORELDREPENGESØKNAD; 
 };
 
 export const erEngangsstønad = (sak: Sak): boolean => {
     const behandling = getNyesteBehandling(sak);
-    if (behandling === undefined) {
-        return false;
-    } else {
-        const { tema } = behandling;
-        return (
-            tema === BehandlingTema.ENGANGSTØNAD ||
-            tema === BehandlingTema.ENGANGSTØNAD_ADOPSJON ||
-            tema === BehandlingTema.ENGANGSTØNAD_FØDSEL
-        );
-    }
+    return behandling === undefined ? false : behandling.type === BehandligType.ENGANGSSØNAD; 
+};
+
+export const erSvangerskapepengesak = (sak: Sak): boolean => {
+    const behandlig = getNyesteBehandling(sak);
+    return behandlig === undefined ? false : behandlig.type === BehandligType.SVANGERSKAPSPENGESØKNAD;
 };
 
 export const harEnAvsluttetBehandling = (sak: Sak): boolean => {
@@ -87,7 +84,6 @@ export const skalKunneSøkeOmEndring = (nyesteSak: Sak): boolean => {
     );
 };
 
-
 export const erInfotrygdSak = (sak: Sak): boolean => {
     return sak.type === SakType.SAK;
 };
@@ -98,6 +94,5 @@ export const opprettSak = (storageKvittering: StorageKvittering) => {
         erJornalført: false,
         opprettet: storageKvittering.innsendingstidspunkt
     };
-
     return sak;
 };

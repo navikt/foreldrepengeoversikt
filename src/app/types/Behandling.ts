@@ -91,6 +91,5 @@ export enum BehandlingTema {
     'FORELDREPENGER' = 'FORP',
     'FORELDREPENGER_ADOPSJON' = 'FORP_ADOP',
     'FORELDREPENGER_FØDSEL' = 'FORP_FODS',
-    'SVANGERSKAPSPENGER' = 'SVP',
     'UDEFINERT' = '-'
 }

@@ -1,5 +1,13 @@
 {
-    "header.title": "Dine foreldrepenger",
+    "header.title.default": "Dine foreldrepenger",
+    "header.title.FP": "Dine foreldrepenger",
+    "header.title.ES": "Engangssønad",
+    "header.title.SVP": "Dine Svangerskapspenger",
+    "header.title.ES.FP": "Dine Foreldrepenger",
+    "header.title.ES.SVP": "Dine foreldrepenger og svangerskapspenger",
+    "header.title.FP.SVP": "Dine foreldrepenger og svangerskapspenger",
+    "header.title.ES.FP.SVP": "Dine foreldrepenger og svangerskapspenger",
+
     "header.undertitle": "Her finner du alt om dine foreldrepenger. Du kan også endre på perioden din med foreldrepenger eller ettersende dokumentasjon.",
 
     "dineForeldrepenger.alertstripe.fpsak": "Du får tidligst svar på søknaden din fire uker før foreldrepengeperioden din starter. Dette er fordi NAV trenger oppdaterte opplysninger for å behandle saken din.",

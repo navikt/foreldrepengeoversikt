@@ -122,7 +122,7 @@ export class DineForeldrepenger extends React.Component<Props> {
         const cls = BEMHelper('dine-foreldrepenger');
         return (
             <>
-                <Header history={this.props.history} />
+                <Header saker={saker} history={this.props.history} />
                 <div className={cls.className}>
                     <div className={cls.element('main-content')}>
                         {nyesteSak === undefined && <IngenSaker />}
