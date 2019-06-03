@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 const moment = require('moment');
-import SakerMock from '../../../../../jest/__mocks__/Sak';
+import SakerMock from '../../../../../../jest/__mocks__/Sak';
 import Saksoversikt from '../Saksoversikt';
 
-describe('EkspanderbarSaksoversikt component', () => {
+describe('Saksoversikt component', () => {
     it('Ettersendelse should be disabled if sak is from infotrygd and the 150 day deadline on ettersendelse has expired', () => {
         const opprettetDate = moment()
             .subtract(151, 'days')

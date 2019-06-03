@@ -1,11 +1,11 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
+import { FormattedMessage } from 'react-intl';
 import Lenkepanel from 'nav-frontend-lenkepanel/lib';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import KonfoluttIkon from '../ikoner/KonfoluttIkon';
 import { lenker } from '../../utils/lenker';
-import { FormattedMessage } from 'react-intl';
 import BEMHelper from 'common/util/bem';
 
 import './meldingOmVedtakLenkepanel.less';

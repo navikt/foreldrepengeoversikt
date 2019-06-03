@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import EtikettBase from 'nav-frontend-etiketter';
 
 import EkspanderbarSaksoversiktHeader from '../EkspanderbarSaksoversiktHeader';
-import SakerMock from '../../../../../jest/__mocks__/Sak';
+import SakerMock from '../../../../../../jest/__mocks__/Sak';
 
 describe('EkspanderbarSaksoversiktHeader', () => {
     it('Should render status etikett for fpsak saker when fagsak status is defined', () => {

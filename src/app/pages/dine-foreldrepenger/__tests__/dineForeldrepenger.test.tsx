@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { DineForeldrepenger } from '../DineForeldrepenger';
 import { historyMock } from '../../../../../jest/__mocks__/History';
-import EkspanderbarSaksoversikt from '../../../components/ekspanderbar-saksoversikt/EkspanderbarSaksoversikt';
+import EkspanderbarSaksoversikt from '../../../components/saksoversikt/saksoversikt-ekspanderbar/EkspanderbarSaksoversikt';
 import SakerMock from '../../../../../jest/__mocks__/Sak';
 import IngenSaker from '../../../components/ingen-saker/IngenSaker';
 

@@ -3,9 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { guid } from 'nav-frontend-js-utils';
 import AlertStripe from 'nav-frontend-alertstriper';
 
-import BEMHelper from 'common/util/bem';
 import HistorikkElement, { Hendelse } from './HistorikkElement';
 import Person from '../../types/Personinfo';
+import BEMHelper from 'common/util/bem';
 
 import './historikk.less';
 

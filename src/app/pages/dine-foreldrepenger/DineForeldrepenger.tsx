@@ -7,7 +7,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import moment from 'moment';
 
 import Sak from '../../types/Sak';
-import EkspanderbarSaksoversikt from '../../components/ekspanderbar-saksoversikt/EkspanderbarSaksoversikt';
+import EkspanderbarSaksoversikt from '../../components/saksoversikt/saksoversikt-ekspanderbar/EkspanderbarSaksoversikt';
 import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
 import RelatertInformasjon from 'app/components/relatert-informasjon/RelatertInformasjon';
@@ -19,7 +19,7 @@ import {
     skalKunneSøkeOmEndring
 } from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
-import Saksoversikt from '../../components/saksoversikt/Saksoversikt';
+import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
 
 import Person from '../../types/Personinfo';
 import { StorageKvittering } from '../../types/StorageKvittering';

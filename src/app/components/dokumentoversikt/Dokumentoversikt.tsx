@@ -1,9 +1,10 @@
-import BEMHelper from 'common/util/bem';
 import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedMessage } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
+
 import { lenker } from '../../utils/lenker';
+import BEMHelper from 'common/util/bem';
 
 import './dokuentoversikt.less';
 

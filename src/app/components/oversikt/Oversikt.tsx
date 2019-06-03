@@ -2,7 +2,6 @@ import * as React from 'react';
 import Tabs from 'nav-frontend-tabs';
 import { Systemtittel } from 'nav-frontend-typografi';
 
-import BEMHelper from 'common/util/bem';
 import Sak from '../../types/Sak';
 import { FormattedMessage } from 'react-intl';
 import Historikk from '../historikk/Historikk';
@@ -11,6 +10,7 @@ import Dokumentoversikt from '../dokumentoversikt/Dokumentoversikt';
 import { utledHendelser } from '../historikk/util';
 
 import './oversikt.less';
+import BEMHelper from 'common/util/bem';
 
 interface OversiktProps {
     person?: Person;

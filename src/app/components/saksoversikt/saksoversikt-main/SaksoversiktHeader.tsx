@@ -2,14 +2,14 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Innholdstittel } from 'nav-frontend-typografi';
 
-import Sak from '../../types/Sak';
-import { erForeldrepengesak, finnNyesteBehandling } from '../../utils/sakerUtils';
-import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus } from '../ekspanderbar-saksoversikt/util';
+import Sak from '../../../types/Sak';
+import { erForeldrepengesak, finnNyesteBehandling } from '../../../utils/sakerUtils';
+import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus } from '../utils';
 import BEMHelper from 'common/util/bem';
-import Etikett from '../etikett/etikett';
+import Etikett from '../../etikett/etikett';
 
 import EtikettBase from 'nav-frontend-etiketter';
-import BamseIkon from '../ikoner/BamseIkon';
+import BamseIkon from '../../ikoner/BamseIkon';
 
 import './saksoversikt.less';
 

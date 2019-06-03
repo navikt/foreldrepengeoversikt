@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
 
-import Sak from '../../types/Sak';
-import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus } from './util';
+import Sak from '../../../types/Sak';
+import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus } from '../utils';
 import BEMHelper from 'common/util/bem';
-import { erForeldrepengesak } from '../../utils/sakerUtils';
+import { erForeldrepengesak } from '../../../utils/sakerUtils';
 
 import './ekspanderbarSaksoversikt.less';
 
@@ -14,9 +14,9 @@ interface Props {
     sak: Sak;
 }
 
-const EkspanderbarSaksoversiktHeader = ({ sak }: Props) => {
-    const cls = BEMHelper('ekspenderbar-saksoversikt-header');
+const EkspanderbarSaksoversiktHeader: React.FunctionComponent<Props> = ({ sak }) => {
     const statusIntlKey = sak.status && getIntlKeyForStatus(sak.status);
+    const cls = BEMHelper('ekspenderbar-saksoversikt-header');
     return (
         <div className={cls.className}>
             <div className={cls.element('left')}>

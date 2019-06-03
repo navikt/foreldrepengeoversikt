@@ -1,6 +1,6 @@
 import { Hendelse } from './HistorikkElement';
 import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingÅrsak } from '../../types/Behandling';
-import { formatDate } from '../ekspanderbar-saksoversikt/util';
+import { formatDate } from '../saksoversikt/utils';
 import { behandlingByDescendingOrder } from '../../utils/sakerUtils';
 
 export const formaterDatoForHendelse = (dato: string) => {

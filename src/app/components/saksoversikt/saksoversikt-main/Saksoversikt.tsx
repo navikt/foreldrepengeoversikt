@@ -5,18 +5,18 @@ import { Knapp } from 'nav-frontend-knapper';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { guid } from 'nav-frontend-js-utils';
 
-import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../ekspanderbar-saksoversikt/util';
-import { erInfotrygdSak, erEngangsstønad } from '../../utils/sakerUtils';
-import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
-import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
-import Oversikt from '../oversikt/Oversikt';
-import Sak from '../../types/Sak';
-import { Routes } from '../../utils/routes';
-import { lenker } from '../../utils/lenker';
+import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../utils';
+import { erInfotrygdSak, erEngangsstønad } from '../../../utils/sakerUtils';
+import MeldingOmVedtakLenkepanel from '../../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
+import UtsettelsePanel from '../../utsettelse-panel/UtsettelsePanel';
+import Oversikt from '../../oversikt/Oversikt';
+import Sak from '../../../types/Sak';
+import { Routes } from '../../../utils/routes';
+import { lenker } from '../../../utils/lenker';
 import BEMHelper from 'common/util/bem';
-import Person from '../../types/Personinfo';
+import Person from '../../../types/Personinfo';
 import SaksoversiktHeader from './SaksoversiktHeader';
-import Etikett from '../etikett/etikett';
+import Etikett from '../../etikett/etikett';
 
 import './saksoversikt.less';
 
@@ -73,7 +73,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                             <Hjelpetekst id={guid()}>
                                 <FormattedMessage
                                     id={
-                                        isSakTooOldForEttersendelse(sak.opprettet)
+                                        isSakTooOldForEttersendelse(sak)
                                             ? 'saksoversikt.ettersendelse.hjelpetekst.utløptFrist'
                                             : 'saksoversikt.ettersendelse.hjelpetekst.ikkeJournalført'
                                     }

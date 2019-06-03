@@ -3,12 +3,8 @@ import { FagsakStatus } from '../../types/FagsakStatus';
 import Sak from 'app/types/Sak';
 import { erInfotrygdSak } from 'app/utils/sakerUtils';
 
-export const isSakTooOldForEttersendelse = (date?: string): boolean => {
-    if (date === undefined) {
-        return false;
-    }
-
-    return moment(date).isBefore(moment().subtract(71, 'days'));
+export const isSakTooOldForEttersendelse = (sak: Sak): boolean => {
+    return !moment(sak.opprettet).isSameOrAfter(moment().subtract(150, 'days'));
 };
 
 export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
@@ -21,8 +17,8 @@ export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
         return moment(opprettet).isSameOrAfter(moment().subtract(150, 'days'));
     }
 
-    if(sak && sak.status) {
-        return sak.status === FagsakStatus.LOPENDE || sak.status === FagsakStatus.OPPRETTET || sak.status === FagsakStatus.UNDER_BEHANDLING;
+    if(sak.status) {
+        return sak.status !== FagsakStatus.AVSLUTTET;
     }
     return false;
 };
@@ -42,7 +38,6 @@ export const getIntlKeyForStatus = (status: FagsakStatus): string => {
             return 'saksoversikt.heading.avsluttet';
     }
 };
-
 
 export const getEtikettTypeForSaksstatus = (sak: Sak): 'suksess' | 'fokus' => 
     sak.status === FagsakStatus.LOPENDE || sak.status === FagsakStatus.AVSLUTTET ? 'suksess' : 'fokus';
