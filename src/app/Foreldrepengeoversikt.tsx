@@ -14,10 +14,10 @@ import Sak from './types/Sak';
 import Person from './types/Personinfo';
 import { StorageKvittering } from './types/StorageKvittering';
 import ApiAction, { ApiActionTypes } from './redux/types/ApiAction';
-import { State } from './redux/store';
 import FetchState, { FetchStatus } from './redux/types/FetchState';
 import { extractUUID } from 'common/util/errorUtil';
 import { getErrorCode } from './redux/util/fetchFromState';
+import { State } from './redux/store';
 
 interface Props {
     saker: FetchState<Sak[]>;
@@ -28,9 +28,16 @@ interface Props {
     requestStorageKvittering: () => void;
 }
 
-class Foreldrepengeoversikt extends React.Component<Props> {
+interface OwnState {
+    isChangeBrowserModalRead: boolean;
+}
+
+class Foreldrepengeoversikt extends React.Component<Props, OwnState> {
     constructor(props: Props) {
         super(props);
+        this.state = {
+            isChangeBrowserModalRead: false
+        };
     }
 
     componentWillMount(): void {
@@ -53,7 +60,7 @@ class Foreldrepengeoversikt extends React.Component<Props> {
             saker.status === FetchStatus.UNFETCHED ||
             saker.status === FetchStatus.IN_PROGRESS ||
             storageKvittering.status === FetchStatus.UNFETCHED ||
-            storageKvittering.status === FetchStatus.IN_PROGRESS || 
+            storageKvittering.status === FetchStatus.IN_PROGRESS ||
             getErrorCode(personinfo) === 401
         );
     }

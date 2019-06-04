@@ -2,6 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const postCSS = require('../../../postcss.config');
+
+const autoprefixer = require('autoprefixer');
 
 const webpackConfig = {
     entry: {

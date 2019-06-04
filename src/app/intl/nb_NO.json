@@ -140,14 +140,15 @@
 
     "dokumentoversikt.info": "Vi jobber med å kunne vise alle dokumenter du har i saken her. Inntil videre finner du disse under { lenke }. ",
     "dokumentoversikt.info.lenke": "dine dokumenter",
-
     "utsettelsepanel.title": "Vil du endre perioden din eller utsette?",
     "utsettelsepanel.tekst": "Du kan endre perioden du skal være hjemme eller utsette hvis du skal på ferie eller om du ønsker å jobbe, eller på grunn av sykdom.",
     "utsettelsepanel.lenke": "Les mer om utsettelse",
-
     "meldingOmVedtak.tittel": "Dokumenter i saken?",
     "meldingOmVedtak.tekst": "Klikk her for å gå til dine dokumenter der du finner alle vedtak og dokumenter som vi har sendt deg. Du finner også alle søknader og ettersendelser som du har sendt inn.",
-
     "sakInfo.tittel": "Søknad om foreldrepenger",
-    "sakInfo.sistEndret": "Mottatt { date }"
+    "sakInfo.sistEndret": "Mottatt { date }",
+
+    "byttBrowser.tittel": "Vi ser du en utdatert nettleser",
+    "byttBrowser.ingress": "For å få den beste brukeropplevelsen anbefaler vi en moderne nettleser som støtter moderne webstandarder, men også er betydelig sikrere.",
+    "ok": "Ok"
 }
