@@ -5,7 +5,6 @@ import Personinfo from 'app/types/Personinfo';
 import Sak from 'app/types/Sak';
 import normalizeName from 'app/utils/normalizeName';
 import { StorageKvittering } from 'app/types/StorageKvittering';
-import { redirectToLogin } from 'app/utils/login';
 import { sakByDescendingOrder } from 'app/utils/sakerUtils';
 
 function* getPersoninfoSaga(_: GetPersoninfoRequest) {
@@ -21,9 +20,6 @@ function* getPersoninfoSaga(_: GetPersoninfoRequest) {
 
         yield put({ type: ApiActionTypes.GET_PERSONINFO_SUCCESS, payload: { personinfo } });
     } catch (error) {
-        if (error.response && error.response.status === 401) {
-            redirectToLogin(); 
-        }
         yield put({ type: ApiActionTypes.GET_PERSONINFO_FAILURE, payload: { error } });
     }
 }
