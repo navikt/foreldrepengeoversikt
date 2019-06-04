@@ -5,9 +5,7 @@
 .dine-foreldrepenger {
     display: -ms-grid;
     display: grid;
-    -ms-grid-row: 1;
     grid-row: 1;
-    -ms-grid-columns: 1fr auto 1fr;
     grid-template-columns: 1fr auto 1fr;
     grid-auto-rows: auto 1fr;
     background-color: @innsyn-background-color;
@@ -15,11 +13,8 @@
     margin: 0 0.5rem 1rem;
 
     &__main-content {
-        -ms-grid-column: 2;
         grid-column-start: 2;
-        -ms-grid-row: 2;
         grid-row: 2;
-        -ms-grid-column-align: center;
         justify-self: center;
         max-width: @main-content-max-width;
         width: 100%;
@@ -33,9 +28,7 @@
     }
 
     .alertstripe {
-        -ms-grid-row: 1;
         grid-row: 1;
-        -ms-grid-column: 2;
         grid-column: 2;
         width: 100%;
         margin-top: 0.5rem;
@@ -45,9 +38,7 @@
     &__sidepanel-desktop {
         max-width: 162px;
         justify-self: flex-start;
-        -ms-grid-column: 3;
         grid-column-start: 3;
-        -ms-grid-row: 2;
         grid-row: 2;
         margin-left: 1rem;
         margin-top: 1rem;

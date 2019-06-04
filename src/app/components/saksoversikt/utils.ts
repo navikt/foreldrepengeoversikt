@@ -41,10 +41,8 @@ export const getEtikettTypeForSaksstatus = (sak: Sak): 'suksess' | 'fokus' =>
 
 export const getSaksoversiktTitle = (sak: Sak): string => {
     const nyesteBehandlig = getNyesteBehandling(sak);
-    if (erInfotrygdSak(sak) || nyesteBehandlig === undefined) {
-        return 'saksoversikt.heading.top.default';
-    }
-    switch (nyesteBehandlig.type) {
+    const type = nyesteBehandlig && nyesteBehandlig.type;
+    switch (type) {
         case BehandligType.ENDRINGSSØKNAD:
         case BehandligType.FORELDREPENGESØKNAD:
             return 'saksoversikt.heading.top.foreldrepenger';
