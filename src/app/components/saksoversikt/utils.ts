@@ -4,7 +4,7 @@ import Sak from 'app/types/Sak';
 import { erInfotrygdSak, getNyesteBehandling } from 'app/utils/sakerUtils';
 import { BehandligType } from 'app/types/Behandling';
 
-const isSakTooOldForEttersendelse = (sak: Sak): boolean => {
+export const isSakTooOldForEttersendelse = (sak: Sak): boolean => {
     return !moment(sak.opprettet).isSameOrAfter(moment().subtract(150, 'days'));
 };
 
@@ -14,7 +14,7 @@ export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
     };
 
     if (erInfotrygdSak(sak)) {
-        return isSakTooOldForEttersendelse(sak);
+        return !isSakTooOldForEttersendelse(sak);
     };
 
     return sak.status ? sak.status !== FagsakStatus.AVSLUTTET : false; 
