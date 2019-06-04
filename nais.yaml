@@ -1,4 +1,5 @@
 name: foreldrepengeoversikt
+team: teamforeldrepenger
 image: repo.adeo.no:5443/foreldrepengeoversikt
 replicas:
   min: 2
