@@ -46,8 +46,9 @@ class Saksoversikt extends Component<SaksoversiktProps> {
         const cls = BEMHelper('saksoversikt');
         return (
             <div className={'saksoversikt'}>
-                {withHeader && <SaksoversiktHeader sak={sak} />}
-                {withHeader === false && (
+                {withHeader ? (
+                    <SaksoversiktHeader sak={sak} />
+                ) : (
                     <Etikett
                         className="blokk-xs"
                         etikett={<FormattedMessage id="saksoversikt.heading.saksnummer.label" />}
@@ -84,14 +85,13 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                         )}
                     </div>
 
-                    {erSakForeldrepengesak ||
-                        (erSvangerskapepengesak(sak) && (
-                            <div className={cls.element('btn')}>
-                                <Knapp onClick={() => this.onEndreSøknad()}>
-                                    <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
-                                </Knapp>
-                            </div>
-                        ))}
+                    {(erSakForeldrepengesak || erSvangerskapepengesak(sak)) && (
+                        <div className={cls.element('btn')}>
+                            <Knapp onClick={() => this.onEndreSøknad()}>
+                                <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
+                            </Knapp>
+                        </div>
+                    )}
                 </div>
 
                 {!erInfotrygdSak(sak) && <Oversikt person={this.props.person} sak={sak} />}
