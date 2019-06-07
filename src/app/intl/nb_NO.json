@@ -31,6 +31,7 @@
     "saksoversikt.heading.saksnummer.label": "Saksnummer",
     "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg",
     "saksoversikt.content.endringssøknad.button": "Endre perioden din",
+    "saksoversikt.content.endringssøknad.button.svp": "Ny søknad",
     "saksoversikt.ettersendelse.hjelpetekst.ikkeJournalført": "Det tar inntil tre uker fra du har sendt inn søknaden din til du kan ettersende vedlegg.",
     "saksoversikt.ettersendelse.hjelpetekst.utløptFrist": "Fristen for å ettersende vedlegg til saken er løpt ut.",
 

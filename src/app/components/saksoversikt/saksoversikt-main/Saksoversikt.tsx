@@ -88,7 +88,13 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                     {(erSakForeldrepengesak || erSvangerskapepengesak(sak)) && (
                         <div className={cls.element('btn')}>
                             <Knapp onClick={() => this.onEndreSøknad()}>
-                                <FormattedMessage id="saksoversikt.content.endringssøknad.button" />
+                                <FormattedMessage
+                                    id={
+                                        erSakForeldrepengesak
+                                            ? 'saksoversikt.content.endringssøknad.button'
+                                            : 'saksoversikt.content.endringssøknad.button.svp'
+                                    }
+                                />
                             </Knapp>
                         </div>
                     )}
