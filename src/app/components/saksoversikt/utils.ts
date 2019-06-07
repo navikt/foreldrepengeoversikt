@@ -47,7 +47,7 @@ export const getSaksoversiktTitle = (sak: Sak): string => {
         case BehandligType.FORELDREPENGESØKNAD:
             return 'saksoversikt.heading.top.foreldrepenger';
         case BehandligType.ENGANGSSØNAD:
-            return 'saksoversikt.heading.top.engangsstønad"';
+            return 'saksoversikt.heading.top.engangsstønad';
         case BehandligType.SVANGERSKAPSPENGESØKNAD:     
             return 'saksoversikt.heading.top.svangerskapspengesoknad';
         default:
