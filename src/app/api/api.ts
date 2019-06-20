@@ -29,6 +29,18 @@ const getStorageKvittering = () => {
     });
 };
 
+const getHistorikk = () => {
+    return AxiosApiInterceptor.get('/historikk/historikk', {
+        timeout: 60 * 1000
+    });
+};
+
+const getMiniDialog = () => {
+    return AxiosApiInterceptor.get('/minidialog/minidialog', {
+        timeout: 60 * 1000
+    });
+};
+
 const log = (error: any) => {
     return axios.post('/log', error, {
         timeout: 15 * 1000,
@@ -38,6 +50,6 @@ const log = (error: any) => {
     });
 };
 
-const Api = { getSaker, getPersoninfo, sendEttersending, getStorageKvittering, log };
+const Api = { getSaker, getPersoninfo, sendEttersending, getStorageKvittering, getHistorikk, getMiniDialog, log };
 
 export default Api;
