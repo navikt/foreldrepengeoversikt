@@ -3,14 +3,14 @@ import Environment from 'app/Environment';
 import { redirectToLogin } from 'app/utils/login';
 
 const REST_API_URL: string = Environment.REST_API_URL;
-const AxiosWithInterceptor = axios.create({ baseURL: REST_API_URL });
+const AxiosApiInterceptor = axios.create({ baseURL: REST_API_URL });
 
-AxiosWithInterceptor.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
+AxiosApiInterceptor.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
     config.withCredentials = true;
     return config;
 });
 
-AxiosWithInterceptor.interceptors.response.use(
+AxiosApiInterceptor.interceptors.response.use(
     (response: AxiosResponse) => {
         return response;
     },
@@ -22,4 +22,4 @@ AxiosWithInterceptor.interceptors.response.use(
     }
 );
 
-export default AxiosWithInterceptor;
+export default AxiosApiInterceptor;

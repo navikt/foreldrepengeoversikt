@@ -1,30 +1,30 @@
 import axios from 'axios';
 import Environment from '../Environment';
 import Ettersending from './types/Ettersending';
-import AxiosWithInterceptor from './interceptor';
+import AxiosApiInterceptor from './interceptor';
 
 export const apiBaseUrl: string = Environment.REST_API_URL;
 
 const getPersoninfo = () => {
-    return AxiosWithInterceptor.get('/personinfo', {
+    return AxiosApiInterceptor.get('/personinfo', {
         timeout: 60 * 1000
     });
 };
 
 const getSaker = () => {
-    return AxiosWithInterceptor.get('innsyn/saker', {
+    return AxiosApiInterceptor.get('innsyn/saker', {
         timeout: 60 * 1000
     });
 };
 
 const sendEttersending = (ettersending: Ettersending) => {
-    return AxiosWithInterceptor.post('/soknad/ettersend', ettersending, {
+    return AxiosApiInterceptor.post('/soknad/ettersend', ettersending, {
         timeout: 60 * 1000
     });
 };
 
 const getStorageKvittering = () => {
-    return AxiosWithInterceptor.get('/storage/kvittering/foreldrepenger', {
+    return AxiosApiInterceptor.get('/storage/kvittering/foreldrepenger', {
         timeout: 15 * 1000
     });
 };
