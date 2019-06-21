@@ -3,11 +3,15 @@ import Personinfo from 'app/types/Personinfo';
 import FetchState, { FetchStatus } from '../types/FetchState';
 import Sak from 'app/types/Sak';
 import { StorageKvittering } from 'app/types/StorageKvittering';
+import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
+import { MinidialogInnslag } from 'app/types/MinidialogInnslag';
 
 export interface ApiState {
     personinfo: FetchState<Personinfo>;
     saker: FetchState<Sak[]>;
     storageKvittering: FetchState<StorageKvittering>;
+    historikk: FetchState<HistorikkInnslag[]>;
+    miniDialog: FetchState<MinidialogInnslag[]>;
 }
 
 const getDefaultState = (): ApiState => ({
@@ -18,6 +22,12 @@ const getDefaultState = (): ApiState => ({
         status: FetchStatus.UNFETCHED
     },
     storageKvittering: {
+        status: FetchStatus.UNFETCHED
+    },
+    historikk: {
+        status: FetchStatus.UNFETCHED
+    },
+    miniDialog: {
         status: FetchStatus.UNFETCHED
     }
 });
@@ -99,6 +109,60 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
             return {
                 ...state,
                 storageKvittering: {
+                    status: FetchStatus.FAILURE,
+                    error: action.payload.error
+                }
+            };
+        case ApiActionTypes.GET_HISTORIKK_REQUEST:
+            return {
+                ...state,
+                historikk: {
+                    status: FetchStatus.IN_PROGRESS
+                }
+            };
+
+        case ApiActionTypes.GET_HISTORIKK_SUCCESS:
+            return {
+                ...state,
+                historikk: {
+                    status: FetchStatus.SUCCESS,
+                    data: {
+                        ...action.payload.historikk
+                    }
+                }
+            };
+
+        case ApiActionTypes.GET_HISTORIKK_FAILURE:
+            return {
+                ...state,
+                historikk: {
+                    status: FetchStatus.FAILURE,
+                    error: action.payload.error
+                }
+            };
+        case ApiActionTypes.GET_MINIDIALOG_REQUEST:
+            return {
+                ...state,
+                miniDialog: {
+                    status: FetchStatus.IN_PROGRESS
+                }
+            };
+
+        case ApiActionTypes.GET_MINIDIALOG_SUCCESS:
+            return {
+                ...state,
+                miniDialog: {
+                    status: FetchStatus.SUCCESS,
+                    data: {
+                        ...action.payload.miniDialog
+                    }
+                }
+            };
+
+        case ApiActionTypes.GET_MINIDIALOG_FAILURE:
+            return {
+                ...state,
+                miniDialog: {
                     status: FetchStatus.FAILURE,
                     error: action.payload.error
                 }

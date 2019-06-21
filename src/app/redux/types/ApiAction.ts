@@ -2,6 +2,8 @@ import Personinfo from "app/types/Personinfo";
 import Sak from "app/types/Sak";
 import { FetchError } from "./FetchState";
 import { StorageKvittering } from "app/types/StorageKvittering";
+import { HistorikkInnslag } from "app/types/HistorikkInnslag";
+import { MinidialogInnslag } from "app/types/MinidialogInnslag";
 
 export enum ApiActionTypes {
     'GET_PERSONINFO_REQUEST' = 'getPersoninfoRequest',
@@ -12,7 +14,13 @@ export enum ApiActionTypes {
     'GET_SAKER_FAILURE' = 'getSøkerInfoFailure',
     'GET_STORAGE_KVITTERING_REQUEST' = 'ggetStorageKvitteringRequest',
     'GET_STORAGE_KVITTERING_SUCCESS' = 'getStorageKvitteringSuccess',
-    'GET_STORAGE_KVITTERING_FAILURE' = 'getStorageKvitteringFailure'
+    'GET_STORAGE_KVITTERING_FAILURE' = 'getStorageKvitteringFailure',
+    'GET_HISTORIKK_REQUEST' = 'getHistorikkRequest',
+    'GET_HISTORIKK_SUCCESS' = 'getHistorikkSuccess',
+    'GET_HISTORIKK_FAILURE' = 'getHistorikkFailure',
+    'GET_MINIDIALOG_REQUEST' = 'getMinidialogRequest',
+    'GET_MINIDIALOG_SUCCESS' = 'getMinidialogSuccess',
+    'GET_MINIDIALOG_FAILURE' = 'getMinidialogFailure'
 }
 
 export interface GetPersoninfoRequest {
@@ -69,6 +77,39 @@ export interface GetStorageKvitteringFailure {
     };
 }
 
+export interface GetHistorikkRequest {
+    type: ApiActionTypes.GET_HISTORIKK_REQUEST
+}
+
+export interface GetHistorikkSuccess {
+    type: ApiActionTypes.GET_HISTORIKK_SUCCESS;
+    payload: {
+        historikk: HistorikkInnslag[];
+    };
+}
+export interface GetHistorikkFailure {
+    type: ApiActionTypes.GET_HISTORIKK_FAILURE;
+    payload: {
+        error: FetchError;
+    };
+}
+
+export interface GetMiniDialogRequest {
+    type: ApiActionTypes.GET_MINIDIALOG_REQUEST
+}
+
+export interface GetMinidialogSuccess {
+    type: ApiActionTypes.GET_MINIDIALOG_SUCCESS;
+    payload: {
+        miniDialog: MinidialogInnslag[];
+    };
+}
+export interface GetMinidialogFailure {
+    type: ApiActionTypes.GET_MINIDIALOG_FAILURE;
+    payload: {
+        error: FetchError;
+    };
+}
 
 type ApiAction =
     | GetPersoninfoRequest
@@ -80,5 +121,12 @@ type ApiAction =
     | GetStorageKvitteringRequest
     | GetStorageKvitteringSuccess 
     | GetStorageKvitteringFailure
+    | GetHistorikkRequest
+    | GetHistorikkSuccess 
+    | GetHistorikkFailure
+    | GetMiniDialogRequest
+    | GetMinidialogSuccess 
+    | GetMinidialogFailure
+
 
 export default ApiAction;

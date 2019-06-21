@@ -18,6 +18,7 @@ import FetchState, { FetchStatus } from './redux/types/FetchState';
 import { extractUUID } from 'common/util/errorUtil';
 import { getErrorCode } from './redux/util/fetchFromState';
 import { State } from './redux/store';
+import { Feature, isFeatureEnabled } from './Feature';
 
 interface Props {
     saker: FetchState<Sak[]>;
@@ -26,6 +27,8 @@ interface Props {
     requestPersoninfo: () => void;
     requestSaker: () => void;
     requestStorageKvittering: () => void;
+    requestHistorikk: () => void;
+    requestMinidialog: () => void;
 }
 
 interface OwnState {
@@ -49,7 +52,15 @@ class Foreldrepengeoversikt extends React.Component<Props, OwnState> {
             this.props.requestPersoninfo();
             this.props.requestSaker();
             this.props.requestStorageKvittering();
-        }
+
+            if(isFeatureEnabled(Feature.historikk)) {
+                this.props.requestHistorikk();
+            };
+
+            if(isFeatureEnabled(Feature.miniDialog)) {
+                this.props.requestMinidialog();
+            };
+        };
     }
 
     shouldRenderApplicationSpinner(): boolean {
@@ -120,6 +131,12 @@ const mapDispatchToProps = (dispatch: (action: ApiAction) => void) => ({
     },
     requestStorageKvittering: () => {
         dispatch({ type: ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST });
+    },
+    requestHistorikk: () => {
+        dispatch({ type: ApiActionTypes.GET_HISTORIKK_REQUEST });
+    },
+    requestMinidialog: () => {
+        dispatch({ type: ApiActionTypes.GET_MINIDIALOG_REQUEST });
     }
 });
 
