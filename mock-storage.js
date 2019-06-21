@@ -6,8 +6,8 @@ const getFilePath = function(filnavn) {
     return directories.join(path.sep);
 };
 
-const getPersoninfo = function() {
-    const fileName = getFilePath('personinfo.json');
+const getFileContent = function(filnavn) {
+    const fileName = getFilePath(filnavn);
     if (!fs.existsSync(fileName)) {
         return {};
     } else {
@@ -17,37 +17,33 @@ const getPersoninfo = function() {
             return {};
         }
     }
+};
+
+const getPersoninfo = function() {
+    return getFileContent('personinfo.json');
 };
 
 const getSaker = function() {
-    const fileName = getFilePath('saker.json');
-    if (!fs.existsSync(fileName)) {
-        return {};
-    } else {
-        try {
-            return JSON.parse(fs.readFileSync(fileName, 'utf8'));
-        } catch (err) {
-            return {};
-        }
-    }
+    return getFileContent('saker.json');
 };
 
 const getKvitteringStorage = function() {
-    const fileName = getFilePath('storage_kvittering.json');
-    if(!fs.existsSync(fileName)) {
-        return {};
-    } else {
-        try {
-            return JSON.parse(fs.readFileSync(fileName, 'utf8'))
-        } catch (err) {
-            return {};
-        }
-    }
-}
+    return getFileContent('storage_kvittering.json');
+};
 
+const getHistorikk = function() {
+    return getFileContent('historikk.json');
+};
+
+const getMiniDialog = function() {
+    return getFileContent('miniDialog.json');
+};
 
 module.exports = {
     getPersoninfo,
     getSaker,
-    getKvitteringStorage
+    getKvitteringStorage,
+    getSaker,
+    getHistorikk,
+    getMiniDialog
 };

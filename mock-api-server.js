@@ -34,6 +34,14 @@ router.get('/rest/innsyn/saker', (req, res) => {
     res.send(MockStorage.getSaker());
 });
 
+router.get('/rest/historikk/historikk', (req, res) => {
+    res.send(MockStorage.getHistorikk());
+});
+
+router.get('/rest/minidialog/minidialog', (req, res) => {
+    res.send(MockStorage.getMinidialog());
+});
+
 router.delete('/rest/storage', (req, res) => {
     res.sendStatus(204);
 });
@@ -59,4 +67,3 @@ app.listen(port, () => {
     console.log(`Mock-api listening on port: ${port}`);
 });
 
-const logError = (errorMessage, details) => console.log(errorMessage, details);
