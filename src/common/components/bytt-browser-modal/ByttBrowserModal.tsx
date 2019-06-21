@@ -20,7 +20,7 @@ const ByttBrowserModal: React.FunctionComponent<Props> = ({ intl }) => {
     return (
         <Modal
             className={cls.className}
-            contentLabel={getMessage(intl, 'sesjonUtløpt.tittel')}
+            contentLabel={getMessage(intl, 'byttBrowser.tittel')}
             closeButton={false}
             isOpen={isOpen}
             onRequestClose={() => undefined}>
