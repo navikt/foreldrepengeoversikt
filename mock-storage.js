@@ -35,7 +35,7 @@ const getHistorikk = function() {
     return getFileContent('historikk.json');
 };
 
-const getMiniDialog = function() {
+const getMinidialog = function() {
     return getFileContent('miniDialog.json');
 };
 
@@ -45,5 +45,5 @@ module.exports = {
     getKvitteringStorage,
     getSaker,
     getHistorikk,
-    getMiniDialog
+    getMinidialog
 };

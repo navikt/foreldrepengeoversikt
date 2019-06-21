@@ -2,7 +2,7 @@ import Environment from './Environment';
 
 export enum Feature {
     logging = 'FEATURE_LOGGING',
-    historikk = 'FEATURE_HISTOIKK',
+    historikk = 'FEATURE_HISTORIKK',
     miniDialog = 'FEATURE_MINI_DIALOG'
 }
 

@@ -51,7 +51,7 @@ function* getStorageKvittering(_: GetSakerRequest) {
 
 function* getHistorikk(_: GetHistorikkRequest) {
     try {
-        const response = yield call(Api.getStorageKvittering);
+        const response = yield call(Api.getHistorikk);
         const historikk: HistorikkInnslag[] = response.data;
         yield put({ type: ApiActionTypes.GET_HISTORIKK_SUCCESS, payload: { historikk } });
     } catch (error) {
@@ -61,7 +61,7 @@ function* getHistorikk(_: GetHistorikkRequest) {
 
 function* getMiniDialog(_: GetMiniDialogRequest) {
     try {
-        const response = yield call(Api.getStorageKvittering);
+        const response = yield call(Api.getMiniDialog);
         const miniDialog: MinidialogInnslag[] = response.data;
         yield put({ type: ApiActionTypes.GET_MINIDIALOG_SUCCESS, payload: { miniDialog } });
     } catch (error) {
@@ -73,8 +73,8 @@ function* apiSaga() {
     yield all([takeLatest(ApiActionTypes.GET_PERSONINFO_REQUEST, getPersoninfoSaga)]);
     yield all([takeLatest(ApiActionTypes.GET_SAKER_REQUEST, getSakerSaga)]);
     yield all([takeLatest(ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST, getStorageKvittering)]);
-    yield all([takeLatest(ApiActionTypes.GET_MINIDIALOG_REQUEST, getHistorikk)]);
-    yield all([takeLatest(ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST, getMiniDialog)]);
+    yield all([takeLatest(ApiActionTypes.GET_HISTORIKK_REQUEST, getHistorikk)]);
+    yield all([takeLatest(ApiActionTypes.GET_MINIDIALOG_REQUEST, getMiniDialog)]);
 }
 
 export default apiSaga;
