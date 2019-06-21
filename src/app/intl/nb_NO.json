@@ -1,7 +1,7 @@
 {
     "header.title.default": "Dine foreldrepenger",
     "header.title.FP": "Dine foreldrepenger",
-    "header.title.ES": "Engangssønad",
+    "header.title.ES": "Engangsstønad",
     "header.title.SVP": "Dine Svangerskapspenger",
     "header.title.ES.FP": "Dine Foreldrepenger",
     "header.title.ES.SVP": "Dine foreldrepenger og svangerskapspenger",
@@ -113,7 +113,7 @@
     "oversikt": "Oversikt",
     "historikk.BERØRT-BEHANDLING": "Berørt Behandling",
 
-    "historikk.søknad-sendt": "Søknad din er mottatt",
+    "historikk.søknad-sendt": "Søknaden din er mottatt",
     "historikk.inntektsmelding-motatt": "Innteksmelding fra arbeidsgiveren din er motatt",
     "historikk.RE-END-INNTEKTSMELD": "Innteksmelding fra arbeidsgiveren din er motatt",
     "historikk.RE-END-FRA-BRUKER": "Søknaden din om endring er motatt",
