@@ -20,7 +20,7 @@
     "saksoversikt.heading.top.ukjent": "Din foreldrepengesak",
     "saksoversikt.heading.top.foreldrepenger": "Din foreldrepengesak",
     "saksoversikt.heading.top.engangsstønad": "Søknad om engangsstønad",
-    "saksoversikt.heading.top.svangerskapspengesoknad": "Din sak om svangerskapspenger",
+    "saksoversikt.heading.top.svangerskapspengesoknad": "Din svangerskapspengesak",
     
     "saksoversikt.heading.mottatt": "Mottatt",
     "saksoversikt.heading.ekspanderbar.mottatt": "Mottatt: {date}",
@@ -32,7 +32,7 @@
     "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg",
     "saksoversikt.content.endringssøknad.button": "Endre perioden din",
     "saksoversikt.content.endringssøknad.button.svp": "Ny søknad",
-    "saksoversikt.ettersendelse.hjelpetekst.ikkeJournalført": "Det tar inntil tre uker fra du har sendt inn søknaden din til du kan ettersende vedlegg.",
+    "saksoversikt.ettersendelse.hjelpetekst.ikkeJournalført": "Det tar inntil tre uker fra du har sendt inn søknaden din til du kan ettersende vedlegg. Prøv igjen litt senere.",
     "saksoversikt.ettersendelse.hjelpetekst.utløptFrist": "Fristen for å ettersende vedlegg til saken er løpt ut.",
 
     "sidepanel.utbetalingsdato": "Neste utbetalingsdato",
@@ -102,31 +102,31 @@
     "feilside.uuid": "Tar du kontakt med brukerstøtte, vennligst oppgi denne koden {uuid}",
 
     "saksoversikt.ettersendelse.hjelpetekst": "Det tar inntil tre uker fra du har sendt inn søknaden din til du kan ettersende vedlegg.",
-    "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad har utløpt",
+    "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad er utløpt",
 
     "ingenSaker.title": "Vi finner ingen søknader hos oss akkurat nå",
-    "ingenSaker.ingress": "Hvis du nettopp sendte inn søknaden, tar det <b>inntil tre uker</b> før du ser den her. Søknader <b>eldre enn tre år</b> vises ikke her.",
+    "ingenSaker.ingress": "Søknader <b>eldre enn tre år</b> vises ikke her.",
     "ingenSaker.lesMer": "Les om foreldrepenger",
     "ingenSaker.søkNå": "Søk om foreldrepenger",
 
     "relatertInformasjon.header": "Relatert informasjon",
     "oversikt": "Oversikt",
-    "historikk.BERØRT-BEHANDLING": "Berørt Behandling",
+    "historikk.BERØRT-BEHANDLING": "Berørt behandling",
 
-    "historikk.søknad-sendt": "Søknaden din er mottatt",
-    "historikk.inntektsmelding-motatt": "Innteksmelding fra arbeidsgiveren din er motatt",
-    "historikk.RE-END-INNTEKTSMELD": "Innteksmelding fra arbeidsgiveren din er motatt",
-    "historikk.RE-END-FRA-BRUKER": "Søknaden din om endring er motatt",
+    "historikk.søknad-sendt": "Vi har mottatt søknaden din",
+    "historikk.inntektsmelding-motatt": "Vi har mottatt innteksmelding fra arbeidsgiveren din.",
+    "historikk.RE-END-INNTEKTSMELD": "Vi har mottatt ny innteksmelding fra arbeidsgiveren din.",
+    "historikk.RE-END-FRA-BRUKER": "Vi har mottatt søknaden din om endring.",
 
     "historikk.IKKE_FASTSATT": "IKKE_FASTSATT",
-    "historikk.INNVILGET": "Vedtaket er innvilget",
-    "historikk.AVSLÅTT": "Vedtaket er avslått",
-    "historikk.OPPHØR": "Vedtaket er opphørt",
+    "historikk.INNVILGET": "Vi har innvilget søknaden din.",
+    "historikk.AVSLÅTT": "Vi har avslått søknaden din.",
+    "historikk.OPPHØR": "Vi har behandlet søknaden din.",
     "historikk.HENLAGT_SØKNAD_TRUKKET": "HENLAGT_SØKNAD_TRUKKET",
     "historikk.HENLAGT_FEILOPPRETTET": "HENLAGT_FEILOPPRETTET",
     "historikk.HENLAGT_BRUKER_DØD": "HENLAGT_BRUKER_DØD",
     "historikk.MERGET_OG_HENLAGT": "MERGET_OG_HENLAGT",
-    "historikk.HENLAGT_SØKNAD_MANGLER": "HENLAGT_SØKNAD_MANGLER",
+    "historikk.HENLAGT_SØKNAD_MANGLER": "Søknaden er henlagt",
     "historikk.KLAGE_AVVIST": "KLAGE_AVVIST",
     "historikk.KLAGE_MEDHOLD": "KLAGE_MEDHOLD",
     "historikk.KLAGE_YTELSESVEDTAK_OPPHEVET": "KLAGE_YTELSESVEDTAK_OPPHEVET",
@@ -135,7 +135,7 @@
     "historikk.INNSYN_INNVILGET": "INNSYN_INNVILGET",
     "historikk.INNSYN_DELVIS_INNVILGET": "INNSYN_DELVIS_INNVILGET",
     "historikk.INNSYN_AVVIST": "INNSYN_AVVIST",
-    "historikk.FORELDREPENGER_ENDRET": "Vedtaket er endret",
+    "historikk.FORELDREPENGER_ENDRET": "Vi har endret vedtaket ditt.",
     "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vises ikke i historikken.",
     "historikk.ingenHendelser": "Vi kan desverre ikke vise historikk for denne saken.",
 
@@ -150,6 +150,6 @@
     "sakInfo.sistEndret": "Mottatt { date }",
 
     "byttBrowser.tittel": "Vi ser du en utdatert nettleser",
-    "byttBrowser.ingress": "For å få den beste brukeropplevelsen anbefaler vi en moderne nettleser som støtter moderne webstandarder, men også er betydelig sikrere.",
+    "byttBrowser.ingress": "For å få den beste brukeropplevelsen anbefaler vi en moderne nettleser som støtter moderne webstandarder, og som er betydelig sikrere.",
     "ok": "Ok"
 }
