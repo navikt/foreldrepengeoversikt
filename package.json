@@ -32,7 +32,7 @@
         "@types/react-intl": "2.3.14",
         "@types/react-redux": "^7.0.8",
         "@types/react-responsive": "3.0.2",
-        "@types/react-router-dom": "4.3.1",
+        "@types/react-router-dom": "4.3.4",
         "@types/react-transition-group": "2.0.14",
         "autoprefixer": "^9.6.0",
         "awesome-typescript-loader": "^5.2.1",
