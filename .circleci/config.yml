@@ -9,6 +9,8 @@ workflows:
         docker:
             - image: circleci/node:latest
         steps:
+            - checkout
+
             - run:
                   name: Run yarn install
                   command: npm install
