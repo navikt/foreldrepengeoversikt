@@ -10,9 +10,8 @@ jobs:
             - image: circleci/node:latest
         steps:
             - checkout
-
             - run:
-                  name: Run yarn install
+                  name: Run npm install
                   command: npm install
 
             - run:
@@ -23,28 +22,30 @@ jobs:
                   name: Build
                   command: npm run build
 
+            - nais/docker-deploy:
+                  image: navikt/$CIRCLE_PROJECT_REPONAME
 
 workflows:
-   version: 2
-   deploy-nais:
-     jobs:
-      - build:
-          context: NAIS deployment 
-                            
-    #   - nais/deploy:
-    #       name: dev_deploy
-    #       enable-vars: true
-    #       template-vars: dev.json
-    #       build-and-push-docker-image: false
-    #       context: NAIS deployment
-    #       repo: navikt/$CIRCLE_PROJECT_REPONAME
-    #       image: navikt/$CIRCLE_PROJECT_REPONAME
-    #       github-app-id: 20250
-    #       nais-template: naiserator.yaml
-    #       environment: dev-sbs
-    #       team: teamforeldrepenger
-    #       filters:
-    #         branches:
-    #           only: master
-    #       requires:
-    #         - build
+    version: 2
+    deploy-nais:
+        jobs:
+            - build:
+                  context: NAIS deployment
+
+            # - nais/deploy:
+            #       name: dev_deploy
+            #       enable-vars: true
+            #       template-vars: dev.json
+            #       build-and-push-docker-image: false
+            #       context: NAIS deployment
+            #       repo: navikt/$CIRCLE_PROJECT_REPONAME
+            #       image: navikt/$CIRCLE_PROJECT_REPONAME
+            #       github-app-id: 20250
+            #       nais-template: naiserator.yaml
+            #       environment: dev-sbs
+            #       team: teamforeldrepenger
+            #       filters:
+            #           branches:
+            #           only: master
+            #       requires:
+            #           - build
