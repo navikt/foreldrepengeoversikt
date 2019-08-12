@@ -46,6 +46,6 @@ workflows:
                   team: teamforeldrepenger
                   filters:
                       branches:
-                      only: master
+                        only: master
                   requires:
                       - build
