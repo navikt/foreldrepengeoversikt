@@ -1,5 +1,5 @@
 {
-    "ingress": "https://foreldrepengeoversikt-q.nav.no",
+    "ingress": "https://foreldrepenger-q.nav.no",
     "ingress-internal" : "https://foreldrepengeoversikt.nais.oera-q.local",
     "application_name": "foreldrepengeoversikt",
     "env": {
