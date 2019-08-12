@@ -3,7 +3,6 @@ export default interface Behandling {
     endretTidspunkt: string;
     behandlendeEnhet: string;
     behandlendeEnhetNavn: string;
-    id: any;
     status: BehandlingStatus;
     tema: BehandlingTema;
     type: string;
