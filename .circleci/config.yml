@@ -8,6 +8,8 @@ jobs:
         working_directory: ~/foreldrepengeoversikt
         docker:
             - image: circleci/node:latest
+        environment:
+            APPRES_CMS_URL: http://appres-q.nav.no
         steps:
             - checkout
             - run:
