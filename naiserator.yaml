@@ -38,6 +38,8 @@ spec:
   vault:
       enabled: true      
   env: 
-      - name: APPRES_CMS_URL
-        value: https://appres-q1.nav.no
+  {{#each env}}
+   - name: {{@key}}
+     value: "{{this}}"
+  {{/each}}
   webproxy: true
