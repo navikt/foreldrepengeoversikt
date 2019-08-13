@@ -8,8 +8,8 @@ jobs:
         working_directory: ~/foreldrepengeoversikt
         docker:
             - image: circleci/node:latest
-        environment:
-            APPRES_CMS_URL: http://appres-q.nav.no
+              environment:
+                  APPRES_CMS_URL: http://appres-q.nav.no
         steps:
             - checkout
             - run:
@@ -33,7 +33,7 @@ workflows:
         jobs:
             - build:
                   context: NAIS deployment
-                  
+
             - nais/deploy:
                   name: dev_deploy
                   enable-vars: true
@@ -48,6 +48,6 @@ workflows:
                   team: teamforeldrepenger
                   filters:
                       branches:
-                        only: master
+                          only: master
                   requires:
                       - build
