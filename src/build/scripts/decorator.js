@@ -5,7 +5,7 @@ const { JSDOM } = jsdom;
 
 const requestDecorator = (callback) =>
     request(
-        `$http://appres.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer=true`,
+        `https://appres.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer=true`,
         callback
     );
 
