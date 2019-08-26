@@ -44,7 +44,7 @@ const getMiniDialog = () => {
 const getUttaksplan = (saksnummer: string) => {
     return AxiosApiInterceptor.get('innsyn/uttaksplan', {
         timeout: 60 * 1000,
-        params: saksnummer
+        params: { saksnummer }
     });
 };
 

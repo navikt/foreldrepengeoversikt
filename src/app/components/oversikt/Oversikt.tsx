@@ -7,9 +7,9 @@ import Historikk from '../historikk/Historikk';
 import Person from '../../types/Personinfo';
 import Dokumentoversikt from '../dokumentoversikt/Dokumentoversikt';
 import { utledHendelser } from '../historikk/util';
+import SectionSeparator from '../section-separator/SectionSeparator';
 
 import './oversikt.less';
-import SectionSeparator from '../section-separator/SectionSeparator';
 
 interface OversiktProps {
     person?: Person;
