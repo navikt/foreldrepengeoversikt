@@ -54,4 +54,15 @@ describe('historikk', () => {
             )
         ).toBeFalsy();
     });
+
+    it('skal utlede initiell innsending hvis historikkinnslag ikke ekisterer', () => {
+        const behanlding = {
+            ...foreldrepengesoknadBehandlingMock,
+            opprettetTidspunkt: '2018-01-21T12:10:00.33',
+            endretTidspunkt: '2018-01-21T12:10:00.33'
+        };
+        expect(
+            utledHendelser([behanlding], undefined).find((hendelse) => hendelse.beskrivelse === 'søknad-sendt')
+        ).toBeTruthy();
+    });
 });

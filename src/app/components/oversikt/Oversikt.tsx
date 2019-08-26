@@ -1,19 +1,17 @@
 import * as React from 'react';
 import Tabs from 'nav-frontend-tabs';
-
-import Sak from '../../types/Sak';
 import { FormattedMessage } from 'react-intl';
 import Historikk from '../historikk/Historikk';
 import Person from '../../types/Personinfo';
 import Dokumentoversikt from '../dokumentoversikt/Dokumentoversikt';
-import { utledHendelser } from '../historikk/util';
 import SectionSeparator from '../section-separator/SectionSeparator';
+import { Hendelse } from '../historikk/HistorikkElement';
 
 import './oversikt.less';
 
 interface OversiktProps {
     person?: Person;
-    sak: Sak;
+    hendelser: Hendelse[];
 }
 
 interface State {
@@ -36,8 +34,6 @@ class Oversikt extends React.Component<Props, State> {
     }
 
     render() {
-        const { sak } = this.props;
-        const hendelser = utledHendelser(sak.behandlinger);
         return (
             <SectionSeparator title={<FormattedMessage id="oversikt" />}>
                 <Tabs
@@ -45,7 +41,7 @@ class Oversikt extends React.Component<Props, State> {
                     kompakt={true}
                     onChange={this.handleTabOnClick}
                 />
-                {this.state.aktivTab === 0 && <Historikk person={this.props.person} hendelser={hendelser} />}
+                {this.state.aktivTab === 0 && <Historikk person={this.props.person} hendelser={this.props.hendelser} />}
                 {this.state.aktivTab === 1 && <Dokumentoversikt />}
             </SectionSeparator>
         );

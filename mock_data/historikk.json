@@ -1,0 +1,18 @@
+[
+    {
+        "aktørId": "1349969186575",
+        "tekst": "INITIELL_FORELDREPENGER",
+        "fnr": "23113936223",
+        "journalpostId": "453467549",
+        "opprettet": "2019-08-12T15:52:37.424457",
+        "saksnr": "140257669"
+    },
+    {
+        "aktørId": "1349969186575",
+        "tekst": "ETTERSENDING_FORELDREPENGER",
+        "fnr": "23113936223",
+        "journalpostId": "453469080",
+        "opprettet": "2019-08-26T11:17:34.266426",
+        "saksnr": "140257669"
+    }
+]

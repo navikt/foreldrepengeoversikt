@@ -16,6 +16,10 @@ interface HistorikkProps {
 
 class Historikk extends React.Component<HistorikkProps> {
     componentDidMount(): void {
+        this.fillInnInitials();
+    }
+
+    fillInnInitials() {
         const { person } = this.props;
         if ((document as any) !== undefined && person) {
             const list = (document as any).getElementsByClassName('bruker');

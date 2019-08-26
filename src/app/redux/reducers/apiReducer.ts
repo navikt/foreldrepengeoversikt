@@ -126,9 +126,7 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 historikk: {
                     status: FetchStatus.SUCCESS,
-                    data: {
-                        ...action.payload.historikk
-                    }
+                    data: action.payload.historikk
                 }
             };
 

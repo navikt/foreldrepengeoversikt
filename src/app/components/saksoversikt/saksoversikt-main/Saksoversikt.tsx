@@ -19,13 +19,18 @@ import SaksoversiktHeader from './SaksoversiktHeader';
 import Etikett from '../../etikett/etikett';
 import DinPlan from 'app/components/din-plan/DinPlan';
 
-import './saksoversikt.less';
 import { slåSammenLikeOgSammenhengendeUttaksperioder } from 'app/components/periode-oversikt/periodeUtils';
 import { isFeatureEnabled, Feature } from 'app/Feature';
+import { utledHendelser } from 'app/components/historikk/util';
+import { hentHistorikkForSak } from 'app/utils/historikkUtils';
+import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
+
+import './saksoversikt.less';
 
 interface SaksoversiktProps {
     sak: Sak;
     person?: Person;
+    historikkInnslagListe?: HistorikkInnslag[];
     history: History;
     skalKunneSøkeOmEndring?: boolean;
     withHeader?: boolean;
@@ -43,7 +48,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
     }
 
     render() {
-        const { sak, withHeader = false } = this.props;
+        const { sak, historikkInnslagListe, withHeader = false } = this.props;
         const erSakForeldrepengesak = erForeldrepengesak(sak);
 
         const cls = BEMHelper('saksoversikt');
@@ -104,10 +109,15 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                     )}
                 </div>
 
-                {isFeatureEnabled(Feature.dinPlan) && erForeldrepengesak(sak) && sak.saksgrunnlag && (
+                {isFeatureEnabled(Feature.dinPlan) && erSakForeldrepengesak && sak.saksgrunnlag && (
                     <DinPlan perioder={slåSammenLikeOgSammenhengendeUttaksperioder(sak.saksgrunnlag.perioder)} />
                 )}
-                {!erInfotrygdSak(sak) && <Oversikt person={this.props.person} sak={sak} />}
+                {!erInfotrygdSak(sak) && (
+                    <Oversikt
+                        person={this.props.person}
+                        hendelser={utledHendelser(sak.behandlinger, hentHistorikkForSak(sak, historikkInnslagListe))}
+                    />
+                )}
             </div>
         );
     }

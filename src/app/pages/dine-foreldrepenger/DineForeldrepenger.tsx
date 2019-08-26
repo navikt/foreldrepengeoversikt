@@ -26,6 +26,7 @@ import { StorageKvittering } from '../../types/StorageKvittering';
 import Behandling from 'app/types/Behandling';
 import { State } from 'app/redux/store';
 import { getData } from 'app/redux/util/fetchFromState';
+import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
 
 import './dineForeldrepenger.less';
 
@@ -34,6 +35,7 @@ interface Props {
     storageKvittering?: StorageKvittering;
     personinfo?: Person;
     history: History;
+    historikkInnslagListe?: HistorikkInnslag[]
 }
 
 export class DineForeldrepenger extends React.Component<Props> {
@@ -114,7 +116,8 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     render() {
-        const { saker, history, storageKvittering, personinfo } = this.props;
+        const { saker, history, storageKvittering, personinfo, historikkInnslagListe } = this.props;
+
         const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettSak(storageKvittering!)
             : saker.slice().shift();
@@ -133,6 +136,7 @@ export class DineForeldrepenger extends React.Component<Props> {
                                     sak={nyesteSak}
                                     person={personinfo}
                                     history={history}
+                                    historikkInnslagListe={historikkInnslagListe}
                                     skalKunneSøkeOmEndring={skalKunneSøkeOmEndring(nyesteSak)}
                                     withHeader={true}
                                 />
@@ -156,7 +160,8 @@ export class DineForeldrepenger extends React.Component<Props> {
 const mapStateToProps = (state: State) => ({
     personinfo: getData(state.api.personinfo, undefined),
     saker: getData(state.api.saker, []),
-    storageKvittering: getData(state.api.storageKvittering, undefined)
+    storageKvittering: getData(state.api.storageKvittering, undefined),
+    historikkInnslagListe: getData(state.api.historikk, undefined)
 });
 
 export default connect(mapStateToProps)(DineForeldrepenger);

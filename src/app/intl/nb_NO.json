@@ -114,6 +114,8 @@
     "historikk.BERØRT-BEHANDLING": "Berørt behandling",
 
     "historikk.søknad-sendt": "Vi mottok søknaden din",
+    "historikk.INITIELL_FORELDREPENGER": "Vi mottok søknaden din",
+    "historikk.ETTERSENDING_FORELDREPENGER": "Vi har mottat en ettersendelse fra deg",
     "historikk.inntektsmelding-motatt": "Vi mottok innteksmelding fra arbeidsgiveren din",
     "historikk.RE-END-INNTEKTSMELD": "Vi mottok ny innteksmelding fra arbeidsgiveren din",
     "historikk.RE-END-FRA-BRUKER": "Vi mottok søknaden din om endring",
