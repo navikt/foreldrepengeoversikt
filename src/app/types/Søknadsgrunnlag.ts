@@ -1,5 +1,6 @@
 import { Tidsperiode } from "./Tidsperiode";
 
+
 export interface Uttaksperiode {
     periodeResultatType: string;
     utsettelsePeriodeType: string;
