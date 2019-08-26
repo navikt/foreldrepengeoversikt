@@ -41,6 +41,13 @@ const getMiniDialog = () => {
     });
 };
 
+const getUttaksplan = (saksnummer: string) => {
+    return AxiosApiInterceptor.get('innsyn/uttaksplan', {
+        timeout: 60 * 1000,
+        params: saksnummer
+    });
+};
+
 const log = (error: any) => {
     return axios.post('/log', error, {
         timeout: 15 * 1000,
@@ -50,6 +57,15 @@ const log = (error: any) => {
     });
 };
 
-const Api = { getSaker, getPersoninfo, sendEttersending, getStorageKvittering, getHistorikk, getMiniDialog, log };
+const Api = {
+    getSaker,
+    getPersoninfo,
+    sendEttersending,
+    getStorageKvittering,
+    getHistorikk,
+    getMiniDialog,
+    getUttaksplan,
+    log
+};
 
 export default Api;

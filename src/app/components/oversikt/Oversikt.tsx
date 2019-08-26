@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Tabs from 'nav-frontend-tabs';
-import { Systemtittel } from 'nav-frontend-typografi';
 
 import Sak from '../../types/Sak';
 import { FormattedMessage } from 'react-intl';
@@ -10,7 +9,7 @@ import Dokumentoversikt from '../dokumentoversikt/Dokumentoversikt';
 import { utledHendelser } from '../historikk/util';
 
 import './oversikt.less';
-import BEMHelper from 'common/util/bem';
+import SectionSeparator from '../section-separator/SectionSeparator';
 
 interface OversiktProps {
     person?: Person;
@@ -39,13 +38,8 @@ class Oversikt extends React.Component<Props, State> {
     render() {
         const { sak } = this.props;
         const hendelser = utledHendelser(sak.behandlinger);
-
-        const cls = BEMHelper('oversikt');
         return (
-            <div className={cls.className}>
-                <Systemtittel className={cls.element('title')}>
-                    <FormattedMessage id="oversikt" />
-                </Systemtittel>
+            <SectionSeparator title={<FormattedMessage id="oversikt" />}>
                 <Tabs
                     tabs={[{ label: 'Historikk' }, { label: 'Dokumenter' }]}
                     kompakt={true}
@@ -53,7 +47,7 @@ class Oversikt extends React.Component<Props, State> {
                 />
                 {this.state.aktivTab === 0 && <Historikk person={this.props.person} hendelser={hendelser} />}
                 {this.state.aktivTab === 1 && <Dokumentoversikt />}
-            </div>
+            </SectionSeparator>
         );
     }
 }

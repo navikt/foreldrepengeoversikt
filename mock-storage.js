@@ -39,11 +39,25 @@ const getMinidialog = function() {
     return getFileContent('miniDialog.json');
 };
 
+const getUttaksplan = function() {
+    const fileName = getFilePath('uttaksplan.json');
+    if (!fs.existsSync(fileName)) {
+        return {};
+    } else {
+        try {
+            return JSON.parse(fs.readFileSync(fileName, 'utf8'));
+        } catch (err) {
+            return {};
+        }
+    }
+};
+
 module.exports = {
     getPersoninfo,
     getSaker,
     getKvitteringStorage,
     getSaker,
     getHistorikk,
-    getMinidialog
+    getMinidialog,
+    getUttaksplan
 };

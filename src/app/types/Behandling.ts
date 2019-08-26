@@ -5,7 +5,7 @@ export default interface Behandling {
     behandlendeEnhetNavn: string;
     status: BehandlingStatus;
     tema: BehandlingTema;
-    type: string;
+    type: BehandligType;
     årsak: BehandlingÅrsak | null;
     behandlingResultat: BehandlingResultatType;
     inntektsmeldinger: string[];

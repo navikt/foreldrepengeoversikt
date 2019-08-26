@@ -1,11 +1,17 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
 import Api from '../../api/api';
-import { ApiActionTypes, GetPersoninfoRequest, GetSakerRequest, GetHistorikkRequest, GetMiniDialogRequest } from '../types/ApiAction';
+import {
+    ApiActionTypes,
+    GetPersoninfoRequest,
+    GetSakerRequest,
+    GetHistorikkRequest,
+    GetMiniDialogRequest
+} from '../types/ApiAction';
 import Personinfo from 'app/types/Personinfo';
-import Sak from 'app/types/Sak';
+import Sak, { SakType } from 'app/types/Sak';
 import normalizeName from 'app/utils/normalizeName';
 import { StorageKvittering } from 'app/types/StorageKvittering';
-import { sakByDescendingOrder } from 'app/utils/sakerUtils';
+import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
 import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
 import { MinidialogInnslag } from 'app/types/MinidialogInnslag';
 
@@ -29,13 +35,26 @@ function* getPersoninfoSaga(_: GetPersoninfoRequest) {
 function* getSakerSaga(_: GetSakerRequest) {
     try {
         const response = yield call(Api.getSaker);
-        const saker: Sak[] = response.data;
-        if(saker){
-            saker.sort(sakByDescendingOrder)
+        let saker: Sak[] = response.data;
+        if (saker) {
+            saker = saker.sort(sakByDescendingOrder);
+            saker = yield all(saker.map(uttaksplanTilSakMapper));
         }
         yield put({ type: ApiActionTypes.GET_SAKER_SUCCESS, payload: { saker } });
     } catch (error) {
         yield put({ type: ApiActionTypes.GET_SAKER_FAILURE, payload: { error } });
+    }
+}
+
+function* uttaksplanTilSakMapper(sak: Sak): IterableIterator<any> {
+    try {
+        if (sak.saksnummer && sak.type === SakType.FPSAK && erForeldrepengesak(sak))     {
+            const response = yield call(Api.getUttaksplan, sak.saksnummer);
+            sak.saksgrunnlag = response.data;
+        }
+        return sak;
+    } catch (error) {
+        return sak;
     }
 }
 
@@ -57,7 +76,7 @@ function* getHistorikk(_: GetHistorikkRequest) {
     } catch (error) {
         yield put({ type: ApiActionTypes.GET_HISTORIKK_FAILURE, payload: { error } });
     }
-};
+}
 
 function* getMiniDialog(_: GetMiniDialogRequest) {
     try {
@@ -67,7 +86,7 @@ function* getMiniDialog(_: GetMiniDialogRequest) {
     } catch (error) {
         yield put({ type: ApiActionTypes.GET_MINIDIALOG_FAILURE, payload: { error } });
     }
-}; 
+}
 
 function* apiSaga() {
     yield all([takeLatest(ApiActionTypes.GET_PERSONINFO_REQUEST, getPersoninfoSaga)]);

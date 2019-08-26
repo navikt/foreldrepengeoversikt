@@ -17,8 +17,11 @@ import BEMHelper from 'common/util/bem';
 import Person from '../../../types/Personinfo';
 import SaksoversiktHeader from './SaksoversiktHeader';
 import Etikett from '../../etikett/etikett';
+import DinPlan from 'app/components/din-plan/DinPlan';
 
 import './saksoversikt.less';
+import { slåSammenLikeOgSammenhengendeUttaksperioder } from 'app/components/periode-oversikt/periodeUtils';
+import { isFeatureEnabled, Feature } from 'app/Feature';
 
 interface SaksoversiktProps {
     sak: Sak;
@@ -72,6 +75,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                             disabled={!isSakEligableForEttersendelse(sak)}>
                             <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
                         </Knapp>
+
                         {!isSakEligableForEttersendelse(sak) && (
                             <Hjelpetekst id={guid()}>
                                 <FormattedMessage
@@ -100,6 +104,9 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                     )}
                 </div>
 
+                {isFeatureEnabled(Feature.dinPlan) && erForeldrepengesak(sak) && sak.saksgrunnlag && (
+                    <DinPlan perioder={slåSammenLikeOgSammenhengendeUttaksperioder(sak.saksgrunnlag.perioder)} />
+                )}
                 {!erInfotrygdSak(sak) && <Oversikt person={this.props.person} sak={sak} />}
             </div>
         );

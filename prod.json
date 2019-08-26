@@ -7,6 +7,7 @@
         "LOGINSERVICE_URL": "https://loginservice.nav.no/login",
         "FEATURE_LOGGING": "on",
         "FEATURE_MINI_DIALOG": "off",
-        "FEATURE_HISTORIKK":"off"
+        "FEATURE_HISTORIKK":"off",
+        "FEATURE_DIN_PLAN": "off"
     }
 }
