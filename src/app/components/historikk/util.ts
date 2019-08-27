@@ -71,25 +71,20 @@ const erHendelseRelevant = (h: Hendelse): boolean => {
         h.beskrivelse === BehandlingÅrsak.ENDRET_INNTEKTSMELDING ||
         h.beskrivelse === BehandlingÅrsak.ENDRING_FRA_BRUKER ||
         h.beskrivelse === 'INITIELL_FORELDREPENGER' ||
-        h.beskrivelse === 'ETTERSENDING_FORELDREPENGER' 
+        h.beskrivelse === 'ETTERSENDING_FORELDREPENGER'
     );
 };
 
 export const opprettHendelserFraHistorikkinnslagListe = (historikkInnslagListe: HistorikkInnslag[]): Hendelse[] => {
-    return historikkInnslagListe
-        .map((historikkInnslagEttersendelser) => ({
-            dato: historikkInnslagEttersendelser.opprettet,
-            beskrivelse: historikkInnslagEttersendelser.tekst,
-            brukerInitiertHendelse: true
-        }));
+    return historikkInnslagListe.map((historikkInnslagEttersendelser) => ({
+        dato: historikkInnslagEttersendelser.opprettet,
+        beskrivelse: historikkInnslagEttersendelser.hendelse,
+        brukerInitiertHendelse: true
+    }));
 };
 
-export const utledHendelser = (behandlinger?: Behandling[], historikkInnslagListe?: HistorikkInnslag[]): Hendelse[] => {
+const utledHendelserUtenHistorikkInnslag = (behandlinger: Behandling[]) => {
     let hendelser: Hendelse[] = [];
-    if (behandlinger === undefined || behandlinger.length === 0) {
-        return hendelser;
-    }
-
     behandlinger
         .filter(fjernBehandlingerMedLikOpprettetDato)
         .sort(behandlingByDescendingOrder)
@@ -111,10 +106,60 @@ export const utledHendelser = (behandlinger?: Behandling[], historikkInnslagList
             }
         });
 
-    if (historikkInnslagListe && historikkInnslagListe.length > 0) {
+    return utledSøknadMotattHendelse(hendelser);
+};
+
+const utledHendelserMedHistorikkInnslag = (behandlinger: Behandling[], historikkInnslagListe: HistorikkInnslag[]) => {
+    let hendelser: Hendelse[] = [];
+    behandlinger
+        .filter(fjernBehandlingerMedLikOpprettetDato)
+        .sort(behandlingByDescendingOrder)
+        .forEach((b: Behandling, index: number, filtrerteBehandlinger: Behandling[]) => {
+            erBehandlingAvsluttet(b)
+                ? hendelser.push(...splittBehandlingTilHenderlser(b))
+                : hendelser.push({
+                      dato: b.opprettetTidspunkt,
+                      beskrivelse: b.årsak === null ? 'null' : b.årsak,
+                      brukerInitiertHendelse: erInitiertAvBruker(b.årsak)
+                  });
+        });
+
+    if (historikkInnslagListe.length > 0) {
         hendelser.push(...opprettHendelserFraHistorikkinnslagListe(historikkInnslagListe));
+    }
+
+    const behanldingMedInntektsmelding = behandlinger.find(
+        (b) => b.inntektsmeldinger && b.inntektsmeldinger.length > 0
+    );
+    if (
+        behanldingMedInntektsmelding &&
+        !hendelser.some(
+            (h) =>
+                h.beskrivelse === 'inntektsmelding-motatt' || h.beskrivelse === BehandlingÅrsak.ENDRET_INNTEKTSMELDING
+        )
+    ) {
+        hendelser.push({
+            dato:
+                behanldingMedInntektsmelding.årsak === BehandlingÅrsak.ENDRET_INNTEKTSMELDING
+                    ? behanldingMedInntektsmelding.opprettetTidspunkt
+                    : behanldingMedInntektsmelding.endretTidspunkt,
+            beskrivelse: 'inntektsmelding-motatt',
+            brukerInitiertHendelse: false
+        });
+    }
+    return hendelser;
+};
+
+export const utledHendelser = (behandlinger?: Behandling[], historikkInnslagListe?: HistorikkInnslag[]): Hendelse[] => {
+    let hendelser: Hendelse[] = [];
+    if (behandlinger === undefined || behandlinger.length === 0) {
+        return hendelser;
+    }
+
+    if (historikkInnslagListe === undefined || (historikkInnslagListe && historikkInnslagListe.length === 0)) {
+        hendelser = utledHendelserUtenHistorikkInnslag(behandlinger);
     } else {
-        hendelser = utledSøknadMotattHendelse(hendelser);
+        hendelser = utledHendelserMedHistorikkInnslag(behandlinger, historikkInnslagListe);
     }
 
     return hendelser.filter(erHendelseRelevant).sort((h1: Hendelse, h2: Hendelse) => h2.dato.localeCompare(h1.dato));

@@ -1,7 +1,8 @@
 export interface HistorikkInnslag {
-    saksnr: string;
     aktørId: string;
-    journalpostId: string;
-    tekst: string;
+    saksnr: string;
+    fnr: string;
     opprettet: string;
+    hendelse: string;
+    journalpostId: string;
 }

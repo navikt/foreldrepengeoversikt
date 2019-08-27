@@ -1,46 +1,26 @@
 [
     {
         "type": "FPSAK",
-        "saksnummer": "140257669",
-        "status": "UBEH",
-        "opprettet": "2019-08-21",
+        "saksnummer": "140258038",
+        "status": "LOP",
+        "opprettet": "2019-08-27",
         "annenPart": {
-            "fnr": "08093936087",
-            "aktørId": "1917282603741",
-            "navn": { "fornavn": "TALENTFULL", "etternavn": "FLOSKEL", "kjønn": "K" }
+            "fnr": "02036129800",
+            "aktørId": "1944804312863",
+            "navn": { "fornavn": "GODSLIG", "mellomnavn": "SKJELENDE", "etternavn": "TAREMEL", "kjønn": "K" }
         },
         "behandlinger": [
             {
-                "opprettetTidspunkt": "2019-08-21T15:37:28.419",
-                "status": "OPPRE",
-                "type": "FP",
-                "tema": "FORP_FODS",
-                "behandlendeEnhet": "4849",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Tromsø",
-                "inntektsmeldinger": []
-            },
-            {
-                "opprettetTidspunkt": "2019-08-12T15:57:09.513",
-                "endretTidspunkt": "2019-08-12T15:57:15.475",
-                "status": "UTRED",
-                "type": "FP",
-                "tema": "FORP_FODS",
-                "årsak": "BERØRT-BEHANDLING",
-                "behandlingResultat": "IKKE_FASTSATT",
-                "behandlendeEnhet": "4849",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Tromsø",
-                "inntektsmeldinger": []
-            },
-            {
-                "opprettetTidspunkt": "2019-08-12T15:52:34.337",
-                "endretTidspunkt": "2019-08-12T15:52:51.594",
+                "opprettetTidspunkt": "2019-08-27T15:01:08.765",
+                "endretTidspunkt": "2019-08-27T15:03:35.261",
                 "status": "AVSLU",
                 "type": "FP",
                 "tema": "FORP_FODS",
+                "årsak": "null",
                 "behandlingResultat": "INNVILGET",
-                "behandlendeEnhet": "4849",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Tromsø",
-                "inntektsmeldinger": ["453467548"]
+                "behandlendeEnhet": "4842",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Stord",
+                "inntektsmeldinger": ["453469322", "453469323"]
             }
         ]
     }
