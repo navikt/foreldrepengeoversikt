@@ -3,7 +3,7 @@ import {
     finnFremtidigePerioder,
     slåSammenLikeOgSammenhengendeUttaksperioder
 } from '../periodeUtils';
-import { Uttaksperiode, MorsAktivitetDto, OppholdsÅrsak } from 'app/types/uttaksplan/Søknadsgrunnlag';
+import { Uttaksperiode, MorsAktivitetDto, OppholdsÅrsak, StønadskontoType } from 'app/types/uttaksplan/Søknadsgrunnlag';
 import moment from 'moment';
 
 describe('periodeUtils', () => {
@@ -96,7 +96,7 @@ describe('periodeUtils', () => {
             graderingInnvilget: false,
             samtidigUttak: false,
             samtidigUttaksprosent: 0,
-            stønadskontotype: 'string',
+            stønadskontotype: StønadskontoType.Fellesperiode,
             trekkDager: 20,
             arbeidstidprosent: 100,
             utbetalingprosent: 100,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Uttaksperiode } from 'app/types/uttaksplan/Søknadsgrunnlag';
+import { Uttaksperiode, StønadskontoType } from 'app/types/uttaksplan/Søknadsgrunnlag';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { guid } from 'nav-frontend-js-utils';
 
@@ -7,6 +7,8 @@ import IconBox from 'app/components/ikoner/uttaksplanIkon/iconBox/IconBox';
 import UttakIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/UttakIkon';
 
 import PeriodeListElement from './PeriodeListElement';
+import { UttaksplanColor } from 'app/types/uttaksplan/colors';
+import { Forelder } from 'app/types';
 
 import './periodeList.less';
 
@@ -15,6 +17,36 @@ interface Props {
     perioder: Uttaksperiode[];
 }
 
+export const getStønadskontoFarge = (
+    konto: StønadskontoType,
+    forelder: Forelder | undefined,
+    forIkon?: boolean
+): UttaksplanColor => {
+    if (forIkon && (konto === StønadskontoType.Fellesperiode || konto === StønadskontoType.Flerbarnsdager)) {
+        return 'purpleBlue';
+    }
+
+    if (forelder === undefined) {
+        switch (konto) {
+            case StønadskontoType.Fedrekvote:
+            case StønadskontoType.AktivitetsfriKvote:
+                return 'blue';
+            case StønadskontoType.Mødrekvote:
+            case StønadskontoType.Foreldrepenger:
+            case StønadskontoType.ForeldrepengerFørFødsel:
+                return 'purple';
+            case StønadskontoType.Fellesperiode:
+            case StønadskontoType.Flerbarnsdager:
+                return 'purpleBlue';
+            default:
+                return 'transparent';
+        }
+    }
+    return forelder === Forelder.mor ? 'purple' : 'blue';
+};
+
+
+// TODO utlede forelder
 const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder }) => {
     return (
         <>
@@ -28,7 +60,7 @@ const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder }) => {
                             type="periode"
                             tittel={stønadskontotype}
                             ikon={
-                                <IconBox color="green">
+                                <IconBox color={getStønadskontoFarge(stønadskontotype, undefined, true)}> 
                                     <UttakIkon title="uttak ikon" />
                                 </IconBox>
                             }

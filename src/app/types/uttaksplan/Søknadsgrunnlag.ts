@@ -7,7 +7,7 @@ export interface Uttaksperiode {
     graderingInnvilget: boolean;
     samtidigUttak: boolean;
     samtidigUttaksprosent: number;
-    stønadskontotype: string;
+    stønadskontotype: StønadskontoType;
     trekkDager: number;
     arbeidstidprosent: number;
     utbetalingprosent: number;
@@ -60,4 +60,14 @@ export enum MorsAktivitetDto {
     'ArbeidOgUtdanning' = 'ARBEID_OG_UTDANNING',
     'Uføre' = 'UFØRE',
     'samtidigUttak' = 'SAMTIDIGUTTAK'
+}
+
+export enum StønadskontoType {
+    'Mødrekvote' = 'MØDREKVOTE',
+    'Fedrekvote' = 'FEDREKVOTE',
+    'Fellesperiode' = 'FELLESPERIODE',
+    'Foreldrepenger' = 'FORELDREPENGER',
+    'ForeldrepengerFørFødsel' = 'FORELDREPENGER_FØR_FØDSEL',
+    'Flerbarnsdager' = 'FLERBARNSDAGER', // Ikke brukt som egen type i periodene
+    'AktivitetsfriKvote' = 'AKTIVITETSFRI_KVOTE' // Foreldrepenger
 }
