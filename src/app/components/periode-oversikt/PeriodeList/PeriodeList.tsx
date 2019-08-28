@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Uttaksperiode, OppholdsÅrsak } from 'app/types/uttaksplan/Søknadsgrunnlag';
+import { Uttaksperiode } from 'app/types/uttaksplan/Søknadsgrunnlag';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { guid } from 'nav-frontend-js-utils';
 
