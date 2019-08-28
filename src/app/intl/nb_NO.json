@@ -21,7 +21,7 @@
     "saksoversikt.heading.top.foreldrepenger": "Din foreldrepengesak",
     "saksoversikt.heading.top.engangsstønad": "Søknad om engangsstønad",
     "saksoversikt.heading.top.svangerskapspengesoknad": "Din svangerskapspengesak",
-    
+
     "saksoversikt.heading.mottatt": "Mottatt",
     "saksoversikt.heading.ekspanderbar.mottatt": "Mottatt: {date}",
     "saksoversikt.heading.sisteEndring": "Siste endring",
@@ -154,5 +154,24 @@
 
     "byttBrowser.tittel": "Vi ser du en utdatert nettleser",
     "byttBrowser.ingress": "For å få den beste brukeropplevelsen anbefaler vi en moderne nettleser som støtter moderne webstandarder, og som er betydelig sikrere.",
-    "ok": "Ok"
+    "ok": "Ok",
+
+    "common.dag": "dag",
+    "common.dager": "dager",
+    "common.varighet.dager": "{dager, plural, one {# dag} other {# dager}}",
+    "common.varighet.uker": "{uker, plural, one {# uke} other {# uker}}",
+    "common.varighet.ukerogdager": "{uker, plural, zero {} one {# uke} other {# uker}} {dager, plural, =0 {} one {og # dag} other {og # dager}}",
+    "common.varighet.og": "og",
+    "common.varighet.separator--full": " og ",
+    "common.varighet.separator--normal": ", ",
+    "common.tall-1": "én",
+    "common.tall-2": "to",
+    "common.tall-3": "tre",
+    "common.tall-4": "fire",
+    "common.tall-5": "fem",
+    "common.tall-6": "seks",
+    "common.tall-7": "syv",
+    "common.tall-8": "åtte",
+    "common.tall-9": "ni",
+    "common.tall-10": "ti"
 }

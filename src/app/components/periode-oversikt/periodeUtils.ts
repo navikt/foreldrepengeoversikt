@@ -1,7 +1,10 @@
 import moment from 'moment';
-import { Uttaksperiode } from 'app/types/uttaksplan/Søknadsgrunnlag';
+import { Uttaksperiode, StønadskontoType } from 'app/types/uttaksplan/Søknadsgrunnlag';
 import { Tidsperiode } from 'app/types/Tidsperiode';
 import _ from 'lodash';
+import { Forelder } from 'app/types';
+import { UttaksplanColor } from 'app/types/uttaksplan/colors';
+import { InjectedIntl } from 'react-intl';
 
 const ANTALL_UTTAKSDAGER_PR_UKE: number = 5;
 
@@ -78,4 +81,53 @@ const finnNesteMuligeUttaksdag = (dato: string): string => {
         : moment(dato)
               .add(1, 'days')
               .format('YYYY-MM-DD');
+};
+
+
+export const getStønadskontoFarge = (
+    konto: StønadskontoType,
+    forelder: Forelder | undefined,
+    forIkon?: boolean
+): UttaksplanColor => {
+    if (forIkon && (konto === StønadskontoType.Fellesperiode || konto === StønadskontoType.Flerbarnsdager)) {
+        return UttaksplanColor.purpleBlue;
+    }
+
+    if (forelder === undefined) {
+        switch (konto) {
+            case StønadskontoType.Fedrekvote:
+            case StønadskontoType.AktivitetsfriKvote:
+                return UttaksplanColor.blue;
+            case StønadskontoType.Mødrekvote:
+            case StønadskontoType.Foreldrepenger:
+            case StønadskontoType.ForeldrepengerFørFødsel:
+                return UttaksplanColor.purple;
+            case StønadskontoType.Fellesperiode:
+            case StønadskontoType.Flerbarnsdager:
+                return UttaksplanColor.purpleBlue;
+            default:
+                return UttaksplanColor.transparent;
+        }
+    }
+    return forelder === Forelder.mor ? UttaksplanColor.purple : UttaksplanColor.blue;
+};
+
+export const getVarighetString = (antallDager: number, intl: InjectedIntl): string => {
+    const { uker, dager } = getUkerOgDagerFromDager(Math.abs(antallDager));
+    const dagerStr = intl.formatMessage(
+        { id: 'common.varighet.dager' },
+        {
+            dager
+        }
+    );
+    if (uker === 0) {
+        return dagerStr;
+    }
+    const ukerStr = intl.formatMessage({ id: 'common.varighet.uker' }, { uker });
+    if (dager > 0) {
+        return `${ukerStr}${intl.formatMessage({
+            id: `common.varighet.separator--full`
+        })}${dagerStr}`;
+    }
+    return ukerStr;
 };
