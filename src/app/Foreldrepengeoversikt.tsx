@@ -19,6 +19,7 @@ import { extractUUID } from 'common/util/errorUtil';
 import { getErrorCode } from './redux/util/fetchFromState';
 import { State } from './redux/store';
 import { Feature, isFeatureEnabled } from './Feature';
+import DinPlan from './pages/din-plan/DinPlan';
 
 interface Props {
     saker: FetchState<Sak[]>;
@@ -104,6 +105,7 @@ class Foreldrepengeoversikt extends React.Component<Props, OwnState> {
                 <Switch>
                     <Route path={Routes.ETTERSENDELSE} render={(props) => <Ettersendelse {...props} />} />
                     <Route path={Routes.KVITTERING} render={(props) => <KvitteringPage {...props} />} />
+                    <Route path={Routes.DIN_PLAN} render={(props) => <DinPlan />} />
                     <Route
                         path={Routes.DINE_FORELDREPENGER}
                         exact={true}
