@@ -8,7 +8,7 @@ import {
     GetMiniDialogRequest
 } from '../types/ApiAction';
 import Personinfo from 'app/types/Personinfo';
-import Sak, { SakType } from 'app/types/Sak';
+import Sak, { SakType } from 'app/types/sak/Sak';
 import normalizeName from 'app/utils/normalizeName';
 import { StorageKvittering } from 'app/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';

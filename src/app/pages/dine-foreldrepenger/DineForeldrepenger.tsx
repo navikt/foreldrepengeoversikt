@@ -6,7 +6,7 @@ import { History } from 'history';
 import AlertStripe from 'nav-frontend-alertstriper';
 import moment from 'moment';
 
-import Sak from '../../types/Sak';
+import Sak from '../../types/sak/Sak';
 import EkspanderbarSaksoversikt from '../../components/saksoversikt/saksoversikt-ekspanderbar/EkspanderbarSaksoversikt';
 import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
@@ -23,7 +23,7 @@ import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksov
 
 import Person from '../../types/Personinfo';
 import { StorageKvittering } from '../../types/StorageKvittering';
-import Behandling from 'app/types/Behandling';
+import Behandling from 'app/types/sak/Behandling';
 import { State } from 'app/redux/store';
 import { getData } from 'app/redux/util/fetchFromState';
 import { HistorikkInnslag } from 'app/types/HistorikkInnslag';

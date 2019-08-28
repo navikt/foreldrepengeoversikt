@@ -1,6 +1,6 @@
 import React from 'react';
 import PeriodeListe from './PeriodeList/PeriodeList';
-import { Uttaksperiode } from 'app/types/Søknadsgrunnlag';
+import { Uttaksperiode } from 'app/types/uttaksplan/Søknadsgrunnlag';
 import { finnNåværendePerioder, finnFremtidigePerioder, finnTidligerePerioder } from './periodeUtils';
 
 interface Props {

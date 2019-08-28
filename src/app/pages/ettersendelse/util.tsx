@@ -7,7 +7,7 @@ import {
     skjemanummerForEngangsstønad
 } from 'common/storage/attachment/types/Attachment';
 import { erForeldrepengesak, harSendtInnEndringssøknad } from '../../utils/sakerUtils';
-import Sak from '../../types/Sak';
+import Sak from '../../types/sak/Sak';
 
 export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: Sak) => (
     <>

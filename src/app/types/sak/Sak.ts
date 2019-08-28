@@ -1,6 +1,7 @@
-import { FagsakStatus } from './FagsakStatus';
-import { Saksgrunnlag } from './Søknadsgrunnlag';
+import { FagsakStatus } from '../FagsakStatus';
+import { Saksgrunnlag } from '../uttaksplan/Søknadsgrunnlag';
 import Behandling from './Behandling';
+import AnnenPart from './AnnenPart';
 
 export default interface Sak {
     type?: SakType;
@@ -10,6 +11,7 @@ export default interface Sak {
     saksnummer?: string;
     opprettet: string;
     saksgrunnlag?: Saksgrunnlag;
+    annenPart?: AnnenPart;
 }
 
 export enum SakType {

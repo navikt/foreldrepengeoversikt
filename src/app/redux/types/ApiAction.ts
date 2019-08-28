@@ -1,5 +1,5 @@
 import Personinfo from "app/types/Personinfo";
-import Sak from "app/types/Sak";
+import Sak from "app/types/sak/Sak";
 import { FetchError } from "./FetchState";
 import { StorageKvittering } from "app/types/StorageKvittering";
 import { HistorikkInnslag } from "app/types/HistorikkInnslag";

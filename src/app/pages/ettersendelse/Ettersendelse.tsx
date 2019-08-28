@@ -5,7 +5,7 @@ import { Innholdstittel, Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Select, Input } from 'nav-frontend-skjema';
 
-import Sak from '../../types/Sak';
+import Sak from '../../types/sak/Sak';
 import BEMHelper from '../../../common/util/bem';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';

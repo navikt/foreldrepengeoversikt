@@ -1,8 +1,5 @@
 import Bankkonto from './Bankkonto';
-
-export type Kjønn =
-    | 'M'
-    | 'K';
+import { Kjønn } from './Kjønn';
 
 interface Personinfo {
     fnr: string;

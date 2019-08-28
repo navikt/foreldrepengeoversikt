@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SectionSeparator from '../section-separator/SectionSeparator';
 import PeriodeOversikt from '../periode-oversikt/PeriodeOversikt';
-import { Uttaksperiode } from 'app/types/Søknadsgrunnlag';
+import { Uttaksperiode } from 'app/types/uttaksplan/Søknadsgrunnlag';
 
 import './dinPlan.less';
 

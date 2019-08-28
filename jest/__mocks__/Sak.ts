@@ -1,6 +1,6 @@
 import { FagsakStatus } from '../../src/app/types/FagsakStatus';
-import Sak, { SakType } from '../../src/app/types/Sak';
-import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingTema, BehandlingÅrsak, BehandligType } from '../../src/app/types/Behandling';
+import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingTema, BehandlingÅrsak, BehandligType } from '../../src/app/types/sak/Behandling';
+import Sak, { SakType } from 'app/types/sak/Sak';
 
 
 export const engangssønadBehandligMock: Behandling = {

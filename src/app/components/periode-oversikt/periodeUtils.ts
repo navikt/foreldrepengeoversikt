@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { Uttaksperiode } from 'app/types/Søknadsgrunnlag';
+import { Uttaksperiode } from 'app/types/uttaksplan/Søknadsgrunnlag';
 import { Tidsperiode } from 'app/types/Tidsperiode';
 import _ from 'lodash';
 

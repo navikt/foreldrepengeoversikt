@@ -10,7 +10,7 @@ import KvitteringPage from './pages/kvittering-page/Kvittering';
 import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
 import { Routes } from './utils/routes';
 
-import Sak from './types/Sak';
+import Sak from './types/sak/Sak';
 import Person from './types/Personinfo';
 import { StorageKvittering } from './types/StorageKvittering';
 import ApiAction, { ApiActionTypes } from './redux/types/ApiAction';

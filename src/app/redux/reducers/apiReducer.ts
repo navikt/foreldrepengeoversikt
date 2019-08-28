@@ -1,7 +1,7 @@
 import ApiAction, { ApiActionTypes } from '../types/ApiAction';
 import Personinfo from 'app/types/Personinfo';
 import FetchState, { FetchStatus } from '../types/FetchState';
-import Sak from 'app/types/Sak';
+import Sak from 'app/types/sak/Sak';
 import { StorageKvittering } from 'app/types/StorageKvittering';
 import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
 import { MinidialogInnslag } from 'app/types/MinidialogInnslag';

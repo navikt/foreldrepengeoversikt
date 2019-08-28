@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Uttaksperiode } from 'app/types/Søknadsgrunnlag';
+import { Uttaksperiode } from 'app/types/uttaksplan/Søknadsgrunnlag';
 import PeriodeListElement from './PeriodeListElement';
 import { Normaltekst } from 'nav-frontend-typografi';
 

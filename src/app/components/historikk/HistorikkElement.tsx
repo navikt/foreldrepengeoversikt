@@ -7,7 +7,7 @@ import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 import { formaterDatoForHendelse } from './util';
 import Person from '../../types/Personinfo';
-import { BehandlingResultatType, BehandlingÅrsak } from '../../types/Behandling';
+import { BehandlingResultatType, BehandlingÅrsak } from '../../types/sak/Behandling';
 
 import './historikk.less';
 

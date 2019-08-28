@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
 
-import Sak from '../../../types/Sak';
+import Sak from '../../../types/sak/Sak';
 import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus, getSaksoversiktTitle } from '../utils';
 import BEMHelper from 'common/util/bem';
 

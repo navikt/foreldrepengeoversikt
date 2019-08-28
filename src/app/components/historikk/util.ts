@@ -1,5 +1,5 @@
 import { Hendelse } from './HistorikkElement';
-import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingÅrsak } from '../../types/Behandling';
+import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingÅrsak } from '../../types/sak/Behandling';
 import { formatDate } from '../saksoversikt/utils';
 import { behandlingByDescendingOrder } from '../../utils/sakerUtils';
 import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
@@ -84,7 +84,7 @@ export const opprettHendelserFraHistorikkinnslagListe = (historikkInnslagListe: 
 };
 
 const utledHendelserUtenHistorikkInnslag = (behandlinger: Behandling[]) => {
-    let hendelser: Hendelse[] = [];
+    const hendelser: Hendelse[] = [];
     behandlinger
         .filter(fjernBehandlingerMedLikOpprettetDato)
         .sort(behandlingByDescendingOrder)
@@ -110,7 +110,7 @@ const utledHendelserUtenHistorikkInnslag = (behandlinger: Behandling[]) => {
 };
 
 const utledHendelserMedHistorikkInnslag = (behandlinger: Behandling[], historikkInnslagListe: HistorikkInnslag[]) => {
-    let hendelser: Hendelse[] = [];
+    const hendelser: Hendelse[] = [];
     behandlinger
         .filter(fjernBehandlingerMedLikOpprettetDato)
         .sort(behandlingByDescendingOrder)
@@ -156,11 +156,10 @@ export const utledHendelser = (behandlinger?: Behandling[], historikkInnslagList
         return hendelser;
     }
 
-    if (historikkInnslagListe === undefined || (historikkInnslagListe && historikkInnslagListe.length === 0)) {
-        hendelser = utledHendelserUtenHistorikkInnslag(behandlinger);
-    } else {
-        hendelser = utledHendelserMedHistorikkInnslag(behandlinger, historikkInnslagListe);
-    }
+    hendelser =
+        historikkInnslagListe === undefined || (historikkInnslagListe && historikkInnslagListe.length === 0)
+            ? utledHendelserUtenHistorikkInnslag(behandlinger)
+            : utledHendelserMedHistorikkInnslag(behandlinger, historikkInnslagListe);
 
     return hendelser.filter(erHendelseRelevant).sort((h1: Hendelse, h2: Hendelse) => h2.dato.localeCompare(h1.dato));
 };

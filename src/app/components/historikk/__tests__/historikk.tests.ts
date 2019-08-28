@@ -1,6 +1,6 @@
 import { foreldrepengesoknadBehandlingMock } from '../../../../../jest/__mocks__/Sak';
 import { fjernBehandlingerMedLikOpprettetDato, utledHendelser } from '../util';
-import { BehandlingResultatType, BehandlingStatus } from '../../../types/Behandling';
+import { BehandlingResultatType, BehandlingStatus } from '../../../types/sak/Behandling';
 import { Hendelse } from '../HistorikkElement';
 
 describe('historikk', () => {

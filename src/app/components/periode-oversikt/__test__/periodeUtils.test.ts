@@ -3,7 +3,7 @@ import {
     finnFremtidigePerioder,
     slåSammenLikeOgSammenhengendeUttaksperioder
 } from '../periodeUtils';
-import { Uttaksperiode, MorsAktivitetDto, OppholdsÅrsak } from 'app/types/Søknadsgrunnlag';
+import { Uttaksperiode, MorsAktivitetDto, OppholdsÅrsak } from 'app/types/uttaksplan/Søknadsgrunnlag';
 import moment from 'moment';
 
 describe('periodeUtils', () => {

@@ -4,7 +4,7 @@ import { History } from 'history';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 
 import BEMHelper from 'common/util/bem';
-import Sak from '../../../types/Sak';
+import Sak from '../../../types/sak/Sak';
 import EkspanderbarSaksoversiktHeader from './EkspanderbarSaksoversiktHeader';
 import Person from '../../../types/Personinfo';
 import Saksoversikt from '../saksoversikt-main/Saksoversikt';
