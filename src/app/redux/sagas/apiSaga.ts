@@ -37,7 +37,7 @@ function* getSakerSaga(_: GetSakerRequest) {
         const response = yield call(Api.getSaker);
         let saker: Sak[] = response.data;
         if (saker) {
-            saker = saker.sort(sakByDescendingOrder);
+            saker.sort(sakByDescendingOrder);
             saker = yield all(saker.map(uttaksplanTilSakMapper));
         }
         yield put({ type: ApiActionTypes.GET_SAKER_SUCCESS, payload: { saker } });

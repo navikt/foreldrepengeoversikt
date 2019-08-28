@@ -56,7 +56,6 @@ module.exports = {
     getPersoninfo,
     getSaker,
     getKvitteringStorage,
-    getSaker,
     getHistorikk,
     getMinidialog,
     getUttaksplan
