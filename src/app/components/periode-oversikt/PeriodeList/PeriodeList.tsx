@@ -23,28 +23,27 @@ export const getStønadskontoFarge = (
     forIkon?: boolean
 ): UttaksplanColor => {
     if (forIkon && (konto === StønadskontoType.Fellesperiode || konto === StønadskontoType.Flerbarnsdager)) {
-        return 'purpleBlue';
+        return UttaksplanColor.purpleBlue;
     }
 
     if (forelder === undefined) {
         switch (konto) {
             case StønadskontoType.Fedrekvote:
             case StønadskontoType.AktivitetsfriKvote:
-                return 'blue';
+                return UttaksplanColor.blue;
             case StønadskontoType.Mødrekvote:
             case StønadskontoType.Foreldrepenger:
             case StønadskontoType.ForeldrepengerFørFødsel:
-                return 'purple';
+                return UttaksplanColor.purple;
             case StønadskontoType.Fellesperiode:
             case StønadskontoType.Flerbarnsdager:
-                return 'purpleBlue';
+                return UttaksplanColor.purpleBlue;
             default:
-                return 'transparent';
+                return UttaksplanColor.transparent;
         }
     }
-    return forelder === Forelder.mor ? 'purple' : 'blue';
+    return forelder === Forelder.mor ? UttaksplanColor.purple : UttaksplanColor.blue;
 };
-
 
 // TODO utlede forelder
 const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder }) => {
@@ -60,7 +59,7 @@ const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder }) => {
                             type="periode"
                             tittel={stønadskontotype}
                             ikon={
-                                <IconBox color={getStønadskontoFarge(stønadskontotype, undefined, true)}> 
+                                <IconBox color={getStønadskontoFarge(stønadskontotype, undefined, true)}>
                                     <UttakIkon title="uttak ikon" />
                                 </IconBox>
                             }
