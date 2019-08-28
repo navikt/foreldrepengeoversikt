@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { Uttaksperiode } from 'app/types/uttaksplan/Søknadsgrunnlag';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { Uttaksperiode, OppholdsÅrsak } from 'app/types/uttaksplan/Søknadsgrunnlag';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { guid } from 'nav-frontend-js-utils';
 
 import IconBox from 'app/components/ikoner/uttaksplanIkon/iconBox/IconBox';
 import UttakIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/UttakIkon';
 
-import PeriodeListElement from './PeriodeListElement';
 import { getStønadskontoFarge, getVarighetString } from '../periodeUtils';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import PeriodeListElement from './PeriodeListElement';
+import BEMHelper from 'common/util/bem';
 
 import './periodeList.less';
 
@@ -17,25 +18,31 @@ interface Props {
     perioder: Uttaksperiode[];
 }
 
-// TODO utlede forelder
+// TODO utlede forelder og foreldernavn
 const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({ tittel, perioder, intl }) => {
+    const cls = BEMHelper('periodeliste');
     return (
         <>
             <Normaltekst>{tittel}</Normaltekst>
-            <ol className="periodeliste">
+            <ol className={cls.className}>
                 {perioder.map((p) => {
-                    const { stønadskontotype, trekkDager, periode } = p;
+                    const { stønadskontotype, trekkDager, periode, oppholdAarsak } = p;
                     return (
                         <PeriodeListElement
                             key={guid()}
                             type="periode"
-                            tittel={stønadskontotype}
+                            tittel={stønadskontotype || oppholdAarsak}
                             ikon={
                                 <IconBox color={getStønadskontoFarge(stønadskontotype, undefined, true)}>
                                     <UttakIkon title="uttak ikon" />
                                 </IconBox>
                             }
-                            beskrivelse={getVarighetString(trekkDager, intl)}
+                            beskrivelse={
+                                <>
+                                    {getVarighetString(trekkDager, intl)}
+                                    <em className={cls.element('hvem')}> - {'foreldernavn'}</em>
+                                </>
+                            }
                             tidsperiode={periode}
                         />
                     );
