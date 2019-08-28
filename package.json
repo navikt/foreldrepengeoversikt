@@ -76,7 +76,7 @@
         "tslint-react": "3.6.0",
         "typescript": "^3.4.5",
         "wait-on": "3.2.0",
-        "webpack": "4.27.1",
+        "webpack": "4.39.1",
         "webpack-dev-server": "3.1.14"
     },
     "dependencies": {
