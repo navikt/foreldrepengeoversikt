@@ -10,7 +10,7 @@
 
     "header.undertitle": "Her finner du alt om dine foreldrepenger. Du kan også endre på perioden din med foreldrepenger eller ettersende dokumentasjon.",
 
-    "dineForeldrepenger.alertstripe.fpsak": "Du får tidligst svar på søknaden din <b>fire uker før foreldrepengeperioden din starter</b>. Det er fordi vi bruker de nyeste opplysningene om inntekten din når vi skal beregne hva du skal få i foreldrepenger.",
+    "dineForeldrepenger.alertstripe.fpsak": "Du får tidligst svar på søknaden din <b>4 uker før foreldrepengeperioden din starter</b>. Det er fordi vi bruker de nyeste opplysningene om inntekten din når vi skal beregne hva du skal få i foreldrepenger.",
     "dineForeldrepenger.alertstripe.infotrygd": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
     "dineForeldrepenger.feilmelding": "Det har skjedd en feil. Prøv igjen senere.",
     "dineForeldrepenger.ingenSaker": "Du har ingen søknader hos NAV akkurat nå.",
@@ -32,7 +32,7 @@
     "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg",
     "saksoversikt.content.endringssøknad.button": "Endre perioden din",
     "saksoversikt.content.endringssøknad.button.svp": "Ny søknad",
-    "saksoversikt.ettersendelse.hjelpetekst.ikkeJournalført": "Det tar inntil tre uker fra du har sendt inn søknaden din til du kan ettersende vedlegg. Prøv igjen litt senere.",
+    "saksoversikt.ettersendelse.hjelpetekst.ikkeJournalført": "Det tar inntil 3 uker fra du har sendt inn søknaden din til du kan ettersende vedlegg. Prøv igjen litt senere.",
     "saksoversikt.ettersendelse.hjelpetekst.utløptFrist": "Fristen for å ettersende vedlegg til saken er utløpt.",
     "saksoversikt.section.dinPlan.sectionLink": "Vis hele planen",
 
@@ -102,11 +102,11 @@
     "feilside.vedlegg.forStortTotalt": "Du har et vedlegg som inneholder for mange sider. En pdf kan maksimalt ha 5 sider.",
     "feilside.uuid": "Tar du kontakt med brukerstøtte, vennligst oppgi denne koden {uuid}",
 
-    "saksoversikt.ettersendelse.hjelpetekst": "Det tar inntil tre uker fra du har sendt inn søknaden din til du kan ettersende vedlegg.",
+    "saksoversikt.ettersendelse.hjelpetekst": "Det tar inntil 3 uker fra du har sendt inn søknaden din til du kan ettersende vedlegg.",
     "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad er utløpt",
 
     "ingenSaker.title": "Vi finner ingen søknader hos oss akkurat nå",
-    "ingenSaker.ingress": "Søknader <b>eldre enn tre år</b> vises ikke her.",
+    "ingenSaker.ingress": "Søknader <b>eldre enn 3 år</b> vises ikke her.",
     "ingenSaker.lesMer": "Les om foreldrepenger",
     "ingenSaker.søkNå": "Søk om foreldrepenger",
 
@@ -114,12 +114,12 @@
     "oversikt": "Oversikt",
     "historikk.BERØRT-BEHANDLING": "Berørt behandling",
 
-    "historikk.søknad-sendt": "Vi mottok søknaden din",
-    "historikk.INITIELL_FORELDREPENGER": "Vi mottok søknaden din",
+    "historikk.søknad-sendt": "Du sendte inn søknad",
+    "historikk.INITIELL_FORELDREPENGER": "Du sendte inn søknad",
     "historikk.ETTERSENDING_FORELDREPENGER": "Vi har mottok ettersendelse fra deg",
-    "historikk.inntektsmelding-motatt": "Vi mottok innteksmelding fra arbeidsgiveren din",
-    "historikk.RE-END-INNTEKTSMELD": "Vi mottok ny innteksmelding fra arbeidsgiveren din",
-    "historikk.RE-END-FRA-BRUKER": "Vi mottok søknaden din om endring",
+    "historikk.inntektsmelding-motatt": "Arbeidsgiveren din sendte inn inntektsmelding",
+    "historikk.RE-END-INNTEKTSMELD": "Arbeidsgiveren din sendte inn en ny inntektsmelding",
+    "historikk.RE-END-FRA-BRUKER": "Du sendte inn søknad om endring",
 
     "historikk.IKKE_FASTSATT": "IKKE_FASTSATT",
     "historikk.INNVILGET": "Vi innvilget søknaden din",
