@@ -27,7 +27,11 @@ describe('historikk', () => {
         const hendelser: Hendelse[] = utledHendelser([behanlding1]);
         expect(hendelser.length).toEqual(2);
         expect(
-            hendelser.some((h: Hendelse) => Object.values(BehandlingResultatType).includes(h.beskrivelse))
+            hendelser.some((h: Hendelse) =>
+                Object.values(BehandlingResultatType)
+                    .map((brt) => brt.toString())
+                    .includes(h.beskrivelse)
+            )
         ).toBeTruthy();
     });
 

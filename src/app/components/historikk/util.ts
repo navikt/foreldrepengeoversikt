@@ -65,7 +65,9 @@ const utledSøknadMotattHendelse = (hendelser: Hendelse[]) => {
 
 const erHendelseRelevant = (h: Hendelse): boolean => {
     return (
-        Object.values(BehandlingResultatType).includes(h.beskrivelse) ||
+        Object.values(BehandlingResultatType)
+            .map((brt) => brt.toString())
+            .includes(h.beskrivelse) ||
         h.beskrivelse === 'søknad-sendt' ||
         h.beskrivelse === 'inntektsmelding-motatt' ||
         h.beskrivelse === BehandlingÅrsak.ENDRET_INNTEKTSMELDING ||
