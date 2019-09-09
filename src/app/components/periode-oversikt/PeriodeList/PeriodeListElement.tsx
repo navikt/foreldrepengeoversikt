@@ -14,7 +14,6 @@ interface Props {
     beskrivelse?: string | React.ReactNode;
     melding?: string;
     tidsperiode?: any;
-    type: 'periode' | 'info';
 }
 
 const BEM = BEMHelper('periodelisteItemHeader');
@@ -36,7 +35,6 @@ const renderDagMnd = (dato: string): JSX.Element => {
 };
 
 const PeriodeListElement: React.FunctionComponent<Props> = ({
-    type,
     ikon,
     tittel,
     beskrivelse,
@@ -44,7 +42,7 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
     tidsperiode
 }) => {
     return (
-        <li className={BEM.modifier(type)}>
+        <li className={BEM.modifier('periode')}>
             <div className={classnames(BEM.className, 'typo-normal')}>
                 <div className={BEM.element('ikon')} role="presentation" aria-hidden={true}>
                     {ikon}

@@ -87,7 +87,6 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                             return (
                                 <PeriodeListElement
                                     key={guid()}
-                                    type="periode"
                                     tittel={getTittel(p)}
                                     ikon={getIkon(p)}
                                     beskrivelse={getBeskrivelse(p, { søker, annenPart }, intl)}
@@ -98,7 +97,6 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                             return (
                                 <PeriodeListElement
                                     key={guid()}
-                                    type="periode"
                                     tittel={
                                         <FormattedMessage
                                             id="dinPlan.utsettelsesårsak"
@@ -114,7 +112,6 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                             return (
                                 <PeriodeListElement
                                     key={guid()}
-                                    type="periode"
                                     tittel={<FormattedMessage id="dinPlan.hull" />}
                                     ikon={<UttaksplanAdvarselIkon />}
                                     beskrivelse={
