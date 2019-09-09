@@ -1,9 +1,8 @@
-import { Tidsperiode } from "../Tidsperiode";
+import { Tidsperiode } from '../../types/Tidsperiode';
 
-
-export interface Uttaksperiode {
-    periodeResultatType: string;
-    utsettelsePeriodeType: string;
+export interface UttaksPeriodeDto {
+    periodeResultatType: PeriodeResultatType;
+    utsettelsePeriodeType: UtsettelsePeriodeType;
     graderingInnvilget: boolean;
     samtidigUttak: boolean;
     samtidigUttaksprosent: number;
@@ -13,7 +12,8 @@ export interface Uttaksperiode {
     utbetalingprosent: number;
     gjelderAnnenPart: boolean;
     flerbarnsdager: boolean;
-    uttakArbeidType: string;
+    uttakArbeidType: UttakArbeidType;
+    manueltBehandlet: boolean;
     arbeidsgiverInfo: {
         id: string;
         type: string;
@@ -24,7 +24,7 @@ export interface Uttaksperiode {
     oppholdAarsak: OppholdsÅrsak;
 }
 
-export interface Saksgrunnlag {
+export interface UttaksplanDto {
     grunnlag: {
         dekningsgrad: number;
         antallBarn: number;
@@ -39,7 +39,7 @@ export interface Saksgrunnlag {
         fødselsdato?: string;
         omsorgsovertakelsesdato: string;
     };
-    perioder: Uttaksperiode[];
+    perioder: UttaksPeriodeDto[];
 }
 
 export enum OppholdsÅrsak {
@@ -59,7 +59,7 @@ export enum MorsAktivitetDto {
     'Innlagt' = 'INNLAGT',
     'ArbeidOgUtdanning' = 'ARBEID_OG_UTDANNING',
     'Uføre' = 'UFØRE',
-    'samtidigUttak' = 'SAMTIDIGUTTAK'
+    'SamtidigUttak' = 'SAMTIDIGUTTAK'
 }
 
 export enum StønadskontoType {
@@ -70,4 +70,26 @@ export enum StønadskontoType {
     'ForeldrepengerFørFødsel' = 'FORELDREPENGER_FØR_FØDSEL',
     'Flerbarnsdager' = 'FLERBARNSDAGER', // Ikke brukt som egen type i periodene
     'AktivitetsfriKvote' = 'AKTIVITETSFRI_KVOTE' // Foreldrepenger
+}
+
+export enum PeriodeResultatType {
+    'Innvilget' = 'INNVILGET',
+    'Avslått' = 'AVSLÅTT',
+    'IkkeFastssatt' = 'IKKE_FASTSATT',
+    'ManuellBehanldig' = 'MANUELL_BEHANDLING'
+}
+
+export enum UtsettelsePeriodeType {
+    'Arbeid' = 'ARBEID',
+    'Ferie' = 'FERIE',
+    'SykdomSkade' = 'SYKDOM_SKADE',
+    'SøkerInnlagt' = 'SØKER_INNLAGT',
+    'BarnInnlagt' = 'BARN_INNLAGT'
+}
+
+export enum UttakArbeidType {
+    "OrdinærtArbeid" = 'ORDINÆRT_ARBEID',
+    "SelvstendigNæringsdrivende" = 'SELVSTENDIG_NÆRINGSDRIVENDE',
+    "Frilans" = 'FRILANS',
+    "Annet" = 'ANNET'
 }

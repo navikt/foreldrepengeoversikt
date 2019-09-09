@@ -1,20 +1,29 @@
 import * as React from 'react';
 import SectionSeparator from '../section-separator/SectionSeparator';
 import PeriodeOversikt from '../periode-oversikt/PeriodeOversikt';
-import { Uttaksperiode } from 'app/types/uttaksplan/Søknadsgrunnlag';
 import { Routes } from 'app/utils/routes';
 import { FormattedMessage } from 'react-intl';
+import Periode from 'app/types/uttaksplan/Periode';
+import Personinfo from 'app/types/Personinfo';
+import AnnenPart from 'app/types/sak/AnnenPart';
 
 import './dinPlan.less';
 
 interface Props {
-    perioder: Uttaksperiode[];
-};
+    perioder: Periode[];
+    søker: Personinfo;
+    annenPart?: AnnenPart;
+}
 
-const DinPlan: React.FunctionComponent<Props> = ({ perioder }) => {
+const DinPlan: React.FunctionComponent<Props> = ({ perioder, søker, annenPart }) => {
     return (
-        <SectionSeparator title="Din Plan" sectionLink={{ to: Routes.DIN_PLAN, text: <FormattedMessage id="saksoversikt.section.dinPlan.sectionLink" />}}>
-            <PeriodeOversikt perioder={perioder} />
+        <SectionSeparator
+            title="Din Plan"
+            sectionLink={{
+                to: Routes.DIN_PLAN,
+                text: <FormattedMessage id="saksoversikt.section.dinPlan.sectionLink" />
+            }}>
+            <PeriodeOversikt perioder={perioder} søker={søker} annenPart={annenPart} />
         </SectionSeparator>
     );
 };

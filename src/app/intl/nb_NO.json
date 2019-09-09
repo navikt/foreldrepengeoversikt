@@ -173,5 +173,16 @@
     "common.tall-7": "syv",
     "common.tall-8": "åtte",
     "common.tall-9": "ni",
-    "common.tall-10": "ti"
+    "common.tall-10": "ti",
+
+    "dinPlan.uttak.FORELDREPENGER_FØR_FØDSEL": "Foreldrepenger før fødsel",
+    "dinPlan.uttak.FELLESPERIODE": "Fellesperiode",
+    "dinPlan.uttak.FORELDREPENGER": "Foreldrepenger",
+    "dinPlan.uttak.MØDREKVOTE": "Mødrekvote",
+    "dinPlan.uttak.FEDREKVOTE": "Fedrekvote",
+
+    "dinPlan.hull": "Tapte foreldrepenger",
+    "dinPlan.hull.beskrivelse": "{antallDager} dager uten registrert periode eller utsettelse",
+
+    "dinPlan.utsettelsesårsak": "Utsettelse - {årsak}"
 }

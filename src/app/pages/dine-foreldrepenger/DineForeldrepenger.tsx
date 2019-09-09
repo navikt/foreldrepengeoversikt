@@ -12,12 +12,7 @@ import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
 import RelatertInformasjon from 'app/components/relatert-informasjon/RelatertInformasjon';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
-import {
-    erForeldrepengesak,
-    erInfotrygdSak,
-    opprettSak,
-    skalKunneSøkeOmEndring
-} from '../../utils/sakerUtils';
+import { erForeldrepengesak, erInfotrygdSak, opprettSak, skalKunneSøkeOmEndring } from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
 
@@ -33,9 +28,9 @@ import './dineForeldrepenger.less';
 interface Props {
     saker: Sak[];
     storageKvittering?: StorageKvittering;
-    personinfo?: Person;
+    søker?: Person;
     history: History;
-    historikkInnslagListe?: HistorikkInnslag[]
+    historikkInnslagListe?: HistorikkInnslag[];
 }
 
 export class DineForeldrepenger extends React.Component<Props> {
@@ -84,7 +79,7 @@ export class DineForeldrepenger extends React.Component<Props> {
                     .map((sak: Sak) => {
                         return (
                             <li className={cls.element('element')} key={sak.saksnummer}>
-                                <EkspanderbarSaksoversikt person={this.props.personinfo} sak={sak} history={history} />
+                                <EkspanderbarSaksoversikt søker={this.props.søker} sak={sak} history={history} />
                             </li>
                         );
                     })}
@@ -116,8 +111,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     render() {
-        const { saker, history, storageKvittering, personinfo, historikkInnslagListe } = this.props;
-
+        const { saker, history, storageKvittering, søker, historikkInnslagListe } = this.props;
         const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettSak(storageKvittering!)
             : saker.slice().shift();
@@ -134,7 +128,7 @@ export class DineForeldrepenger extends React.Component<Props> {
                             <>
                                 <Saksoversikt
                                     sak={nyesteSak}
-                                    person={personinfo}
+                                    søker={søker}
                                     history={history}
                                     historikkInnslagListe={historikkInnslagListe}
                                     skalKunneSøkeOmEndring={skalKunneSøkeOmEndring(nyesteSak)}
@@ -158,7 +152,7 @@ export class DineForeldrepenger extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State) => ({
-    personinfo: getData(state.api.personinfo, undefined),
+    søker: getData(state.api.personinfo, undefined),
     saker: getData(state.api.saker, []),
     storageKvittering: getData(state.api.storageKvittering, undefined),
     historikkInnslagListe: getData(state.api.historikk, undefined)

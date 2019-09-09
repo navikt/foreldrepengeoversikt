@@ -14,6 +14,8 @@ import { StorageKvittering } from 'app/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
 import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
 import { MinidialogInnslag } from 'app/types/MinidialogInnslag';
+import { uttaksperiodeDtoToPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
+import { slåSammenLikeOgSammenhengendeUttaksperioder, fyllInnHull } from 'app/components/periode-oversikt/periodeUtils';
 
 function* getPersoninfoSaga(_: GetPersoninfoRequest) {
     try {
@@ -48,9 +50,12 @@ function* getSakerSaga(_: GetSakerRequest) {
 
 function* uttaksplanTilSakMapper(sak: Sak): IterableIterator<any> {
     try {
-        if (sak.saksnummer && sak.type === SakType.FPSAK && erForeldrepengesak(sak))     {
+        if (sak.saksnummer && sak.type === SakType.FPSAK && erForeldrepengesak(sak)) {
             const response = yield call(Api.getUttaksplan, sak.saksnummer);
             sak.saksgrunnlag = response.data;
+            sak.perioder = slåSammenLikeOgSammenhengendeUttaksperioder(sak.saksgrunnlag!.perioder).map((p) =>
+                uttaksperiodeDtoToPeriode(p, sak.saksgrunnlag!.grunnlag.søkerErFarEllerMedmor)
+            ).reduce(fyllInnHull, []);
         }
         return sak;
     } catch (error) {

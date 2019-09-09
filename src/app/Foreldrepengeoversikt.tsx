@@ -54,14 +54,14 @@ class Foreldrepengeoversikt extends React.Component<Props, OwnState> {
             this.props.requestSaker();
             this.props.requestStorageKvittering();
 
-            if(isFeatureEnabled(Feature.historikk)) {
+            if (isFeatureEnabled(Feature.historikk)) {
                 this.props.requestHistorikk();
-            };
+            }
 
-            if(isFeatureEnabled(Feature.miniDialog)) {
+            if (isFeatureEnabled(Feature.miniDialog)) {
                 this.props.requestMinidialog();
-            };
-        };
+            }
+        }
     }
 
     shouldRenderApplicationSpinner(): boolean {

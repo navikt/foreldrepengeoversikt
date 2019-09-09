@@ -4,7 +4,6 @@ import { History } from 'history';
 import { Knapp } from 'nav-frontend-knapper';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { guid } from 'nav-frontend-js-utils';
-
 import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../utils';
 import { erInfotrygdSak, erForeldrepengesak, erSvangerskapepengesak } from '../../../utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
@@ -18,8 +17,6 @@ import Person from '../../../types/Personinfo';
 import SaksoversiktHeader from './SaksoversiktHeader';
 import Etikett from '../../etikett/etikett';
 import DinPlan from 'app/components/din-plan/DinPlan';
-
-import { slåSammenLikeOgSammenhengendeUttaksperioder } from 'app/components/periode-oversikt/periodeUtils';
 import { isFeatureEnabled, Feature } from 'app/Feature';
 import { utledHendelser } from 'app/components/historikk/util';
 import { hentHistorikkForSak } from 'app/utils/historikkUtils';
@@ -29,7 +26,7 @@ import './saksoversikt.less';
 
 interface SaksoversiktProps {
     sak: Sak;
-    person?: Person;
+    søker?: Person;
     historikkInnslagListe?: HistorikkInnslag[];
     history: History;
     skalKunneSøkeOmEndring?: boolean;
@@ -48,7 +45,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
     }
 
     render() {
-        const { sak, historikkInnslagListe, withHeader = false } = this.props;
+        const { sak, historikkInnslagListe, withHeader = false, søker } = this.props;
         const erSakForeldrepengesak = erForeldrepengesak(sak);
 
         const cls = BEMHelper('saksoversikt');
@@ -109,12 +106,12 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                     )}
                 </div>
 
-                {isFeatureEnabled(Feature.dinPlan) && erSakForeldrepengesak && sak.saksgrunnlag && (
-                    <DinPlan perioder={slåSammenLikeOgSammenhengendeUttaksperioder(sak.saksgrunnlag.perioder)} />
+                {isFeatureEnabled(Feature.dinPlan) && erSakForeldrepengesak && sak.perioder && søker !== undefined && (
+                    <DinPlan perioder={sak.perioder} søker={søker} annenPart={sak.annenPart} />
                 )}
                 {!erInfotrygdSak(sak) && (
                     <Oversikt
-                        person={this.props.person}
+                        person={this.props.søker}
                         hendelser={utledHendelser(sak.behandlinger, hentHistorikkForSak(sak, historikkInnslagListe))}
                     />
                 )}

@@ -1,7 +1,8 @@
 import { FagsakStatus } from '../FagsakStatus';
-import { Saksgrunnlag } from '../uttaksplan/Søknadsgrunnlag';
 import Behandling from './Behandling';
 import AnnenPart from './AnnenPart';
+import Periode from '../uttaksplan/Periode';
+import { UttaksplanDto } from 'app/api/types/UttaksplanDto';
 
 export default interface Sak {
     type?: SakType;
@@ -10,7 +11,8 @@ export default interface Sak {
     status?: FagsakStatus;
     saksnummer?: string;
     opprettet: string;
-    saksgrunnlag?: Saksgrunnlag;
+    saksgrunnlag?: UttaksplanDto;
+    perioder?: Periode[];
     annenPart?: AnnenPart;
 }
 

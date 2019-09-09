@@ -1,23 +1,26 @@
 import moment from 'moment';
-import { Uttaksperiode, StønadskontoType } from 'app/types/uttaksplan/Søknadsgrunnlag';
+import { UttaksPeriodeDto, StønadskontoType } from 'app/api/types/UttaksplanDto';
 import { Tidsperiode } from 'app/types/Tidsperiode';
 import _ from 'lodash';
 import { Forelder } from 'app/types';
-import { UttaksplanColor } from 'app/types/uttaksplan/colors';
+import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import { InjectedIntl } from 'react-intl';
+import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Periode';
 
 const ANTALL_UTTAKSDAGER_PR_UKE: number = 5;
 
-export const finnTidligerePerioder = (perioder: Uttaksperiode[]): Uttaksperiode[] => {
-    return perioder.filter((periode) => moment(periode.periode.tom).isBefore(moment()));
+export const finnTidligerePerioder = (perioder: Periode[]): Periode[] => {
+    return perioder.filter((periode) => moment(periode.tidsperiode.tom).isBefore(moment()));
 };
 
-export const finnNåværendePerioder = (perioder: Uttaksperiode[]): Uttaksperiode[] => {
-    return perioder.filter((periode) => moment().isBetween(periode.periode.fom, periode.periode.tom));
+export const finnNåværendePerioder = (perioder: Periode[]): Periode[] => {
+    return perioder.filter((periode) =>
+        moment().isBetween(periode.tidsperiode.fom, periode.tidsperiode.tom, 'day', '[]')
+    );
 };
 
-export const finnFremtidigePerioder = (perioder: Uttaksperiode[]): Uttaksperiode[] => {
-    return perioder.filter((periode) => moment(periode.periode.fom).isAfter(moment()));
+export const finnFremtidigePerioder = (perioder: Periode[]): Periode[] => {
+    return perioder.filter((periode) => moment(periode.tidsperiode.fom).isAfter(moment()));
 };
 
 export const getUkerOgDagerFromDager = (dager: number): { uker: number; dager: number } => {
@@ -28,8 +31,8 @@ export const getUkerOgDagerFromDager = (dager: number): { uker: number; dager: n
     };
 };
 
-export const slåSammenLikeOgSammenhengendeUttaksperioder = (uttaksperioder: Uttaksperiode[]): Uttaksperiode[] => {
-    return uttaksperioder.reduce((uttaksperiodeAccumulator: Uttaksperiode[], uttaksperiode, index) => {
+export const slåSammenLikeOgSammenhengendeUttaksperioder = (uttaksperioder: UttaksPeriodeDto[]): UttaksPeriodeDto[] => {
+    return uttaksperioder.reduce((uttaksperiodeAccumulator: UttaksPeriodeDto[], uttaksperiode, index) => {
         const previousUttaksperiode = uttaksperiodeAccumulator[index - 1];
         if (skalKunneSlåSammenUttaksperioer(previousUttaksperiode, uttaksperiode)) {
             uttaksperiodeAccumulator.pop();
@@ -48,8 +51,8 @@ export const slåSammenLikeOgSammenhengendeUttaksperioder = (uttaksperioder: Utt
 };
 
 export const skalKunneSlåSammenUttaksperioer = (
-    uttaksperiode1?: Uttaksperiode,
-    uttaksperiode2?: Uttaksperiode
+    uttaksperiode1?: UttaksPeriodeDto,
+    uttaksperiode2?: UttaksPeriodeDto
 ): boolean => {
     return uttaksperiode1 === undefined || uttaksperiode2 === undefined
         ? false
@@ -57,32 +60,47 @@ export const skalKunneSlåSammenUttaksperioer = (
 };
 
 export const erSammenhengende = (tidsperiode1: Tidsperiode, tidsperiode2: Tidsperiode): boolean => {
-    return finnNesteMuligeUttaksdag(tidsperiode1.tom) === tidsperiode2.fom;
+    return (
+        finnNesteMuligeUttaksdag(tidsperiode1.tom) === tidsperiode2.fom ||
+        moment(tidsperiode1.tom)
+            .add(1, 'days')
+            .format('YYYY-MM-DD') === tidsperiode2.fom
+    );
 };
 
-const erLike = (uttaksperiode1: Uttaksperiode, uttaksperiode2: Uttaksperiode): boolean => {
+const erLike = (uttaksperiode1: UttaksPeriodeDto, uttaksperiode2: UttaksPeriodeDto): boolean => {
     return _.isEqual(
         getRelevanteFelterForSammenligning(uttaksperiode1),
         getRelevanteFelterForSammenligning(uttaksperiode2)
     );
 };
 
-const getRelevanteFelterForSammenligning = (uttaksperiode: Uttaksperiode) => {
-    const { periode, trekkDager, ...relevanteFelter } = uttaksperiode;
+const getRelevanteFelterForSammenligning = (uttaksperiode: UttaksPeriodeDto) => {
+    const { periode, trekkDager, manueltBehandlet, ...relevanteFelter } = uttaksperiode;
     return relevanteFelter;
 };
 
 const finnNesteMuligeUttaksdag = (dato: string): string => {
-    return moment(dato).isoWeekday() >= 6
-        ? moment(dato)
+    const nesteDag = moment.utc(dato).add(1, 'day');
+    return nesteDag.isoWeekday() >= 6
+        ? nesteDag
               .add(1, 'weeks')
               .startOf('isoWeek')
               .format('YYYY-MM-DD')
-        : moment(dato)
-              .add(1, 'days')
-              .format('YYYY-MM-DD');
+        : nesteDag.format('YYYY-MM-DD');
 };
 
+const finnForrigeMuligeUttaksdag = (dato: string): string => {
+    const dagenFør = moment.utc(dato).subtract(1, 'day');
+    switch (dagenFør.isoWeekday()) {
+        case 6:
+            return dagenFør.subtract(1, 'day').format('YYYY-MM-DD');
+        case 7:
+            return dagenFør.subtract(2, 'day').format('YYYY-MM-DD');
+        default:
+            return dagenFør.format('YYYY-MM-DD');
+    }
+};
 
 export const getStønadskontoFarge = (
     konto: StønadskontoType,
@@ -131,3 +149,54 @@ export const getVarighetString = (antallDager: number, intl: InjectedIntl): stri
     }
     return ukerStr;
 };
+
+export const getAntallUttaksdagerITidsperiode = (tidsperiode: Tidsperiode): number => {
+    const fom = moment(tidsperiode.fom);
+    const tom = moment(tidsperiode.tom);
+    let antall = 0;
+    while (fom.isSameOrBefore(tom, 'day')) {
+        if (fom.isoWeekday() < 6) {
+            antall++;
+        }
+        fom.add(24, 'hours');
+    }
+    return antall;
+};
+
+export const fyllInnHull = (periodeAcc: Periode[], periode: Periode, index: number, periodene: Periode[]) => {
+    periodeAcc.push(periode);
+    const nestePeriode = periodene[index + 1];
+    if (
+        erHullMellomPerioder(periode, nestePeriode) &&
+        !harAnnenForelderSamtidigUttakISammePeriode(periode, periodene)
+    ) {
+        const tidsperiode = {
+            fom: finnNesteMuligeUttaksdag(periode.tidsperiode.tom),
+            tom: finnForrigeMuligeUttaksdag(nestePeriode.tidsperiode.fom)
+        };
+
+        periodeAcc.push({
+            type: PeriodeType.Hull,
+            tidsperiode,
+            antallUttaksdager: getAntallUttaksdagerITidsperiode(tidsperiode)
+        });
+    }
+    return periodeAcc;
+};
+
+const erHullMellomPerioder = (periode: Periode, nestePeriode?: Periode) => {
+    return (
+        nestePeriode &&
+        finnNesteMuligeUttaksdag(periode.tidsperiode.tom) !== nestePeriode.tidsperiode.fom &&
+        (nestePeriode as Uttaksperiode).samtidigUttak === false
+    );
+};
+
+const harAnnenForelderSamtidigUttakISammePeriode = (periode: Periode, perioder: Periode[]): boolean =>
+    periode.type === PeriodeType.Uttak
+        ? perioder
+              .filter((p) => (p as Uttaksperiode).samtidigUttak)
+              .some(
+                  (p) => (p as Uttaksperiode).gjelderAnnenPart === true && _.isEqual(periode.tidsperiode, p.tidsperiode)
+              )
+        : false;

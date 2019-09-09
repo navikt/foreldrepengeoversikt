@@ -1,10 +1,20 @@
 import {
     getUkerOgDagerFromDager,
     finnFremtidigePerioder,
-    slåSammenLikeOgSammenhengendeUttaksperioder
+    slåSammenLikeOgSammenhengendeUttaksperioder,
+    erSammenhengende
 } from '../periodeUtils';
-import { Uttaksperiode, MorsAktivitetDto, OppholdsÅrsak, StønadskontoType } from 'app/types/uttaksplan/Søknadsgrunnlag';
+import {
+    UttaksPeriodeDto,
+    MorsAktivitetDto,
+    OppholdsÅrsak,
+    StønadskontoType,
+    PeriodeResultatType,
+    UttakArbeidType,
+    UtsettelsePeriodeType
+} from 'app/api/types/UttaksplanDto';
 import moment from 'moment';
+import Periode from 'app/types/uttaksplan/Periode';
 
 describe('periodeUtils', () => {
     describe('getUkerOgDagerFromDager', () => {
@@ -29,13 +39,13 @@ describe('periodeUtils', () => {
     });
 
     describe('finnFremtidigePerioder', () => {
-        const periodeMock: Uttaksperiode = { periode: {} } as Uttaksperiode;
+        const periodeMock: Periode = { tidsperiode: {} } as Periode;
         it('returns empty list if future period does not exist', () => {
             expect(
                 finnFremtidigePerioder([
                     {
                         ...periodeMock,
-                        periode: {
+                        tidsperiode: {
                             fom: moment()
                                 .subtract(2, 'months')
                                 .format('YYYY-MM-DD'),
@@ -46,7 +56,7 @@ describe('periodeUtils', () => {
                     },
                     {
                         ...periodeMock,
-                        periode: {
+                        tidsperiode: {
                             fom: moment()
                                 .subtract(1, 'days')
                                 .format('YYYY-MM-DD'),
@@ -64,7 +74,7 @@ describe('periodeUtils', () => {
                 finnFremtidigePerioder([
                     {
                         ...periodeMock,
-                        periode: {
+                        tidsperiode: {
                             fom: moment()
                                 .subtract(2, 'months')
                                 .format('YYYY-MM-DD'),
@@ -75,7 +85,7 @@ describe('periodeUtils', () => {
                     },
                     {
                         ...periodeMock,
-                        periode: {
+                        tidsperiode: {
                             fom: moment()
                                 .add(1, 'days')
                                 .format('YYYY-MM-DD'),
@@ -90,9 +100,9 @@ describe('periodeUtils', () => {
     });
 
     it('like og sammenhengende perioder skal slås sammen', () => {
-        const mockPeriode: Uttaksperiode = {
-            periodeResultatType: 'string',
-            utsettelsePeriodeType: 'string',
+        const mockPeriode: UttaksPeriodeDto = {
+            periodeResultatType: PeriodeResultatType.Innvilget,
+            utsettelsePeriodeType: UtsettelsePeriodeType.Arbeid,
             graderingInnvilget: false,
             samtidigUttak: false,
             samtidigUttaksprosent: 0,
@@ -102,7 +112,8 @@ describe('periodeUtils', () => {
             utbetalingprosent: 100,
             gjelderAnnenPart: false,
             flerbarnsdager: false,
-            uttakArbeidType: 'string',
+            manueltBehandlet: false,
+            uttakArbeidType: UttakArbeidType.OrdinærtArbeid,
             arbeidsgiverInfo: {
                 id: 'string',
                 type: 'string',
@@ -121,5 +132,11 @@ describe('periodeUtils', () => {
                 { ...mockPeriode, periode: { fom: '2019-01-03', tom: '2019-01-04' } }
             ]).length
         ).toEqual(1);
+    });
+
+    it('en periode skal regnes som sammenhengende selv om forrige periode slutter på en sønadg', () => {
+        expect(
+            erSammenhengende({ fom: '2019-09-02', tom: '2019-09-27' }, { fom: '2019-09-28', tom: '2019-10-08' })
+        ).toBeTruthy();
     });
 });

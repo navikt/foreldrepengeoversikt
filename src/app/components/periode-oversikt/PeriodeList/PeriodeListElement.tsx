@@ -9,7 +9,7 @@ import './periodeListElement.less';
 
 interface Props {
     isOpen?: boolean;
-    tittel: string;
+    tittel: string | React.ReactNode;
     ikon: React.ReactNode | undefined;
     beskrivelse?: string | React.ReactNode;
     melding?: string;
@@ -27,7 +27,7 @@ const renderDagMnd = (dato: string): JSX.Element => {
                 {d.get('date')}. {d.format('MMM')}
             </span>
             <EtikettLiten tag="span" className={BEM.element('dagmnd__mnd')}>
-                <abbr title={`${(d.format('MMM'))} ${d.format('YYYY')}`}>{d.format('YYYY')}</abbr>
+                <abbr title={`${d.format('MMM')} ${d.format('YYYY')}`}>{d.format('YYYY')}</abbr>
             </EtikettLiten>
         </div>
     ) : (
@@ -45,10 +45,9 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
 }) => {
     return (
         <li className={BEM.modifier(type)}>
-            <div
-                className={classnames(BEM.className, 'typo-normal')}>
+            <div className={classnames(BEM.className, 'typo-normal')}>
                 <div className={BEM.element('ikon')} role="presentation" aria-hidden={true}>
-                    {ikon}  
+                    {ikon}
                 </div>
                 <div className={BEM.element('beskrivelse')}>
                     <Element tag="h1">{tittel}</Element>
