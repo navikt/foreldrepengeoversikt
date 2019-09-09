@@ -12,7 +12,7 @@ import Sak, { SakType } from 'app/types/sak/Sak';
 import normalizeName from 'app/utils/normalizeName';
 import { StorageKvittering } from 'app/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
-import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
+import { HistorikkInnslag } from 'app/types/historikk/HistorikkInnslag';
 import { MinidialogInnslag } from 'app/types/MinidialogInnslag';
 import { uttaksperiodeDtoToPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
 import { slåSammenLikeOgSammenhengendeUttaksperioder, fyllInnHull } from 'app/components/periode-oversikt/periodeUtils';

@@ -20,7 +20,7 @@ import DinPlan from 'app/components/din-plan/DinPlan';
 import { isFeatureEnabled, Feature } from 'app/Feature';
 import { utledHendelser } from 'app/components/historikk/util';
 import { hentHistorikkForSak } from 'app/utils/historikkUtils';
-import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
+import { HistorikkInnslag } from 'app/types/historikk/HistorikkInnslag';
 
 import './saksoversikt.less';
 

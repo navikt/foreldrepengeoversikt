@@ -2,7 +2,7 @@ import { Hendelse } from './HistorikkElement';
 import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingÅrsak } from '../../types/sak/Behandling';
 import { formatDate } from '../saksoversikt/utils';
 import { behandlingByDescendingOrder } from '../../utils/sakerUtils';
-import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
+import { HistorikkInnslag } from 'app/types/historikk/HistorikkInnslag';
 
 export const formaterDatoForHendelse = (dato: string) => {
     return formatDate(dato, 'D. MMMM YYYY [kl.] HH:mm:ss');

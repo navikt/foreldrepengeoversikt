@@ -21,7 +21,7 @@ import { StorageKvittering } from '../../types/StorageKvittering';
 import Behandling from 'app/types/sak/Behandling';
 import { State } from 'app/redux/store';
 import { getData } from 'app/redux/util/fetchFromState';
-import { HistorikkInnslag } from 'app/types/HistorikkInnslag';
+import { HistorikkInnslag } from 'app/types/historikk/HistorikkInnslag';
 
 import './dineForeldrepenger.less';
 
