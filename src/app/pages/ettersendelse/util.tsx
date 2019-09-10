@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
-import {
-    Attachment,
-    Skjemanummer,
-    skjemanummerForEndringssøknad,
-    skjemanummerForEngangsstønad
-} from 'common/storage/attachment/types/Attachment';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { erForeldrepengesak, harSendtInnEndringssøknad } from '../../utils/sakerUtils';
 import Sak from '../../api/types/sak/Sak';
+import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
+import {
+    skjemanummerForEndringssøknad,
+    skjemanummerForEngangsstønad
+} from 'common/storage/attachment/skjemanummerUtils';
 
 export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: Sak) => (
     <>

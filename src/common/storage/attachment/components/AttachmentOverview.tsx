@@ -6,9 +6,10 @@ import { guid } from 'nav-frontend-js-utils';
 import VedleggInput from './AttachmentInput';
 import { isAttachmentWithError, mapFileToAttachment } from './util';
 
-import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 import Block from 'common/components/block/Block';
 import AlertstripeWithCloseButton from 'common/components/alertstripe-content/AlertstripeWithCloseButton';
+import { Skjemanummer } from '../types/Skjemanummer';
 
 export interface AttachmentOverviewProps {
     attachments: Attachment[];

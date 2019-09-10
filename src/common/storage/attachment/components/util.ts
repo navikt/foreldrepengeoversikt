@@ -1,5 +1,6 @@
 import { guid } from 'nav-frontend-js-utils';
-import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
+import { Skjemanummer } from '../types/Skjemanummer';
 
 const generateAttachmentId = () => 'V'.concat(guid().replace(/-/g, ''));
 

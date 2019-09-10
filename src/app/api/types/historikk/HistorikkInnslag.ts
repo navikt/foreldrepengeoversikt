@@ -1,6 +1,5 @@
 import { Hendelse } from "./Hendelse";
-import { Skjemanummer } from "common/storage/attachment/types/Attachment";
-
+import { Skjemanummer } from "common/storage/attachment/types/Skjemanummer";
 
 export enum HistorikkInnslagType {
     "søknad" = "SØKNAD",

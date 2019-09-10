@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 import AttachmentOverview from 'common/storage/attachment/components/AttachmentOverview';
 import AttachmentApi from 'common/storage/api/attachmentApi';
+import { Skjemanummer } from '../types/Skjemanummer';
 
 export interface AttachmentsUploaderProps {
     attachments: Attachment[];

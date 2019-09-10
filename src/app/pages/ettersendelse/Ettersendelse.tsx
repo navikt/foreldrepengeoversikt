@@ -7,7 +7,7 @@ import { Select, Input } from 'nav-frontend-skjema';
 
 import Sak from '../../api/types/sak/Sak';
 import BEMHelper from '../../../common/util/bem';
-import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
 import ResponsiveWrapper from '../ResponsiveWrapper';
 import { AxiosError } from '../../../../node_modules/axios';
@@ -27,6 +27,7 @@ import getMessage from 'common/util/i18nUtils';
 import ErrorPage from '../error/ErrorPage';
 
 import './ettersendelse.less';
+import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 
 interface EttersendelseProps {
     history: History;
