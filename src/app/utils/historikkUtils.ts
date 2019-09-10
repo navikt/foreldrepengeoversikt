@@ -1,5 +1,5 @@
-import { HistorikkInnslag } from 'app/types/historikk/HistorikkInnslag';
-import Sak from 'app/types/sak/Sak';
+import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import Sak from 'app/api/types/sak/Sak';
 
 export const hentHistorikkForSak = (sak: Sak, historikkInnslagListe?: HistorikkInnslag[]) => {
     return historikkInnslagListe

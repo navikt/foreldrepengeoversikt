@@ -1,8 +1,8 @@
 import moment from 'moment';
-import { FagsakStatus } from '../../types/FagsakStatus';
-import Sak from 'app/types/sak/Sak';
+import { FagsakStatus } from '../../api/types/sak/FagsakStatus';
+import Sak from 'app/api/types/sak/Sak';
 import { erInfotrygdSak, getNyesteBehandling } from 'app/utils/sakerUtils';
-import { BehandligType } from 'app/types/sak/Behandling';
+import { BehandligType } from 'app/api/types/sak/Behandling';
 
 export const isSakTooOldForEttersendelse = (sak: Sak): boolean => {
     return !moment(sak.opprettet).isSameOrAfter(moment().subtract(150, 'days'));

@@ -7,13 +7,13 @@ import {
     GetHistorikkRequest,
     GetMiniDialogRequest
 } from '../types/ApiAction';
-import Personinfo from 'app/types/Personinfo';
-import Sak, { SakType } from 'app/types/sak/Sak';
+import Personinfo from 'app/api/types/personinfo/Personinfo';
+import Sak, { SakType } from 'app/api/types/sak/Sak';
 import normalizeName from 'app/utils/normalizeName';
-import { StorageKvittering } from 'app/types/StorageKvittering';
+import { StorageKvittering } from 'app/api/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
-import { HistorikkInnslag } from 'app/types/historikk/HistorikkInnslag';
-import { MinidialogInnslag } from 'app/types/MinidialogInnslag';
+import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 import { uttaksperiodeDtoToPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
 import { slåSammenLikeOgSammenhengendeUttaksperioder, fyllInnHull } from 'app/components/periode-oversikt/periodeUtils';
 

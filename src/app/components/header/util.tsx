@@ -7,8 +7,8 @@ import Familie3 from '../ikoner/familier/Familie3';
 import Familie4 from '../ikoner/familier/Familie4';
 import Familie5 from '../ikoner/familier/Familie5';
 
-import Sak from 'app/types/sak/Sak';
-import { FagsakStatus } from 'app/types/FagsakStatus';
+import Sak from 'app/api/types/sak/Sak';
+import { FagsakStatus } from 'app/api/types/sak/FagsakStatus';
 import { erForeldrepengesak, erEngangsstønad, erSvangerskapepengesak } from 'app/utils/sakerUtils';
 import BEMHelper from 'common/util/bem';
 

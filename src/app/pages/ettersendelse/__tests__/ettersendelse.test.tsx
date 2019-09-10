@@ -3,7 +3,7 @@ import * as React from 'react';
 import { shallowWithIntl, loadTranslationObject } from 'enzyme-react-intl';
 import Ettersendelse from '../Ettersendelse';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
-import { FagsakStatus } from '../../../types/FagsakStatus';
+import { FagsakStatus } from '../../../api/types/sak/FagsakStatus';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Api from '../../../api/api';
 import BackButton from 'common/components/back-button/BackButton';

@@ -2,10 +2,10 @@ import moment from 'moment';
 import { UttaksPeriodeDto, StønadskontoType } from 'app/api/types/UttaksplanDto';
 import { Tidsperiode } from 'app/types/Tidsperiode';
 import _ from 'lodash';
-import { Forelder } from 'app/types';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import { InjectedIntl } from 'react-intl';
 import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Periode';
+import { Rolle } from 'app/types/Rolle';
 
 const ANTALL_UTTAKSDAGER_PR_UKE: number = 5;
 
@@ -104,7 +104,7 @@ const finnForrigeMuligeUttaksdag = (dato: string): string => {
 
 export const getStønadskontoFarge = (
     konto: StønadskontoType,
-    forelder: Forelder | undefined,
+    forelder: Rolle | undefined,
     forIkon?: boolean
 ): UttaksplanColor => {
     if (forIkon && (konto === StønadskontoType.Fellesperiode || konto === StønadskontoType.Flerbarnsdager)) {
@@ -127,7 +127,7 @@ export const getStønadskontoFarge = (
                 return UttaksplanColor.transparent;
         }
     }
-    return forelder === Forelder.mor ? UttaksplanColor.purple : UttaksplanColor.blue;
+    return forelder === Rolle.mor ? UttaksplanColor.purple : UttaksplanColor.blue;
 };
 
 export const getVarighetString = (antallDager: number, intl: InjectedIntl): string => {

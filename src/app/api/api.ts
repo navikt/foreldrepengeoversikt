@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Environment from '../Environment';
-import Ettersending from './types/Ettersending';
+import Ettersending from './types/ettersending/Ettersending';
 import AxiosApiInterceptor from './interceptor';
 
 export const apiBaseUrl: string = Environment.REST_API_URL;

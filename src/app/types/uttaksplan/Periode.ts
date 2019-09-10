@@ -1,13 +1,13 @@
-import { StønadskontoType, UtsettelsePeriodeType, PeriodeResultatType } from "app/api/types/UttaksplanDto";
+import { PeriodeResultatType, StønadskontoType, UtsettelsePeriodeType } from "app/api/types/UttaksplanDto";
 import { Tidsperiode } from "../Tidsperiode";
-import { Forelder } from "..";
+import { Rolle } from "../Rolle";
 
 export default interface Periode {
     type: PeriodeType;
     periodeResultatType?: PeriodeResultatType;
     gjelderAnnenPart?: boolean;
     tidsperiode: Tidsperiode;
-    forelder?: Forelder;
+    forelder?: Rolle;
     antallUttaksdager: number;
 }
 

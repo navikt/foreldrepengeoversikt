@@ -6,7 +6,7 @@ import ChatIkon from '../ikoner/sidepanel/ChatIkon';
 import SøkIkon from '../ikoner/sidepanel/SøkIkon';
 import UtbetalingerIkon from '../ikoner/sidepanel/UtbetalingerIkon';
 import { finnNesteUtbetalingsdato } from 'app/utils/dateUtils';
-import Sak from 'app/types/sak/Sak';
+import Sak from 'app/api/types/sak/Sak';
 import { erLøpende, erForeldrepengesak, erAvsluttet, erInfotrygdSak, erEngangsstønad } from 'app/utils/sakerUtils';
 
 import './sidepanel.less';

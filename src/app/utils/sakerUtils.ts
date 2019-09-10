@@ -1,7 +1,7 @@
-import Sak, { SakType } from '../types/sak/Sak';
-import { FagsakStatus } from '../types/FagsakStatus';
-import Behandling, { BehandlingStatus, BehandlingÅrsak, BehandligType } from '../types/sak/Behandling';
-import { StorageKvittering } from '../types/StorageKvittering';
+import Sak, { SakType } from '../api/types/sak/Sak';
+import { FagsakStatus } from '../api/types/sak/FagsakStatus';
+import Behandling, { BehandlingStatus, BehandlingÅrsak, BehandligType } from '../api/types/sak/Behandling';
+import { StorageKvittering } from '../api/types/StorageKvittering';
 
 export const sakByDescendingOrder = (a: Sak, b: Sak) => b.opprettet.localeCompare(a.opprettet);
 export const behandlingByDescendingOrder = (a: Behandling, b: Behandling) =>

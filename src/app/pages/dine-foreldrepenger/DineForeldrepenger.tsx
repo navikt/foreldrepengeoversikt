@@ -6,7 +6,7 @@ import { History } from 'history';
 import AlertStripe from 'nav-frontend-alertstriper';
 import moment from 'moment';
 
-import Sak from '../../types/sak/Sak';
+import Sak from '../../api/types/sak/Sak';
 import EkspanderbarSaksoversikt from '../../components/saksoversikt/saksoversikt-ekspanderbar/EkspanderbarSaksoversikt';
 import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
@@ -16,12 +16,12 @@ import { erForeldrepengesak, erInfotrygdSak, opprettSak, skalKunneSøkeOmEndring
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
 
-import Person from '../../types/Personinfo';
-import { StorageKvittering } from '../../types/StorageKvittering';
-import Behandling from 'app/types/sak/Behandling';
+import Person from '../../api/types/personinfo/Personinfo';
+import { StorageKvittering } from '../../api/types/StorageKvittering';
+import Behandling from 'app/api/types/sak/Behandling';
 import { State } from 'app/redux/store';
 import { getData } from 'app/redux/util/fetchFromState';
-import { HistorikkInnslag } from 'app/types/historikk/HistorikkInnslag';
+import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
 import './dineForeldrepenger.less';
 

@@ -1,7 +1,7 @@
-import { FagsakStatus } from '../FagsakStatus';
+import { FagsakStatus } from './FagsakStatus';
 import Behandling from './Behandling';
 import AnnenPart from './AnnenPart';
-import Periode from '../uttaksplan/Periode';
+import Periode from '../../../types/uttaksplan/Periode';
 import { UttaksplanDto } from 'app/api/types/UttaksplanDto';
 
 export default interface Sak {

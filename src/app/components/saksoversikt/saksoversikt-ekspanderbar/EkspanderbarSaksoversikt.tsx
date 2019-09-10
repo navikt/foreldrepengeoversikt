@@ -4,9 +4,9 @@ import { History } from 'history';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 
 import BEMHelper from 'common/util/bem';
-import Sak from '../../../types/sak/Sak';
+import Sak from '../../../api/types/sak/Sak';
 import EkspanderbarSaksoversiktHeader from './EkspanderbarSaksoversiktHeader';
-import Person from '../../../types/Personinfo';
+import Person from '../../../api/types/personinfo/Personinfo';
 import Saksoversikt from '../saksoversikt-main/Saksoversikt';
 import { getSaksoversiktTitle } from '../utils';
 

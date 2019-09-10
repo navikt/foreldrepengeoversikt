@@ -4,7 +4,7 @@ import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import * as moment from 'moment';
 import { History } from 'history';
 
-import { Kvittering } from '../../api/types/Kvittering';
+import { Kvittering } from '../../api/types/ettersending/Kvittering';
 import BEMHelper from 'common/util/bem';
 import SpotlightLetter from 'common/components/ikoner/SpotlightLetter';
 import { Attachment } from 'common/storage/attachment/types/Attachment';

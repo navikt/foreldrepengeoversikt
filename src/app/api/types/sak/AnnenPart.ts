@@ -1,4 +1,4 @@
-import { Kjønn } from "../Kjønn";
+import { Kjønn } from "../personinfo/Kjønn";
 
 export default interface AnnenPart {
     aktørid: string;

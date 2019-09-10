@@ -1,7 +1,7 @@
 import { UttaksPeriodeDto } from 'app/api/types/UttaksplanDto';
 import { PeriodeType, Utsettelsesperiode, Uttaksperiode } from 'app/types/uttaksplan/Periode';
-import { Forelder } from 'app/types';
 import { getAntallUttaksdagerITidsperiode } from 'app/components/periode-oversikt/periodeUtils';
+import { Rolle } from 'app/types/Rolle';
 
 const getPeriodetype = (uttaksperiodeDto: UttaksPeriodeDto): PeriodeType => {
     return uttaksperiodeDto.stønadskontotype && uttaksperiodeDto.utsettelsePeriodeType === undefined
@@ -9,11 +9,11 @@ const getPeriodetype = (uttaksperiodeDto: UttaksPeriodeDto): PeriodeType => {
         : PeriodeType.Utsettelse;
 };
 
-const getForelderForPeriode = (uttaksperiodeDto: UttaksPeriodeDto, søkerErFarEllerMedmor: boolean): Forelder => {
+const getForelderForPeriode = (uttaksperiodeDto: UttaksPeriodeDto, søkerErFarEllerMedmor: boolean): Rolle => {
     if (uttaksperiodeDto.gjelderAnnenPart) {
-        return søkerErFarEllerMedmor ? Forelder.mor : Forelder.farMedmor;
+        return søkerErFarEllerMedmor ? Rolle.mor : Rolle.farMedmor;
     }
-    return søkerErFarEllerMedmor ? Forelder.farMedmor : Forelder.mor;
+    return søkerErFarEllerMedmor ? Rolle.farMedmor : Rolle.mor;
 };
 
 export const uttaksperiodeDtoToPeriode = (uttaksperiodeDto: UttaksPeriodeDto, søkerErFarEllerMedmor: boolean) => {

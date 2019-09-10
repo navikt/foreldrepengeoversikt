@@ -2,7 +2,7 @@ import * as React from 'react';
 import Tabs from 'nav-frontend-tabs';
 import { FormattedMessage } from 'react-intl';
 import Historikk from '../historikk/Historikk';
-import Person from '../../types/Personinfo';
+import Person from '../../api/types/personinfo/Personinfo';
 import Dokumentoversikt from '../dokumentoversikt/Dokumentoversikt';
 import SectionSeparator from '../section-separator/SectionSeparator';
 import { Hendelse } from '../historikk/HistorikkElement';

@@ -5,7 +5,7 @@ import { Innholdstittel, Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Select, Input } from 'nav-frontend-skjema';
 
-import Sak from '../../types/sak/Sak';
+import Sak from '../../api/types/sak/Sak';
 import BEMHelper from '../../../common/util/bem';
 import { Attachment, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
@@ -13,7 +13,7 @@ import ResponsiveWrapper from '../ResponsiveWrapper';
 import { AxiosError } from '../../../../node_modules/axios';
 import Api from '../../api/api';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
-import Ettersending from '../../api/types/Ettersending';
+import Ettersending from '../../api/types/ettersending/Ettersending';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import BackButton from 'common/components/back-button/BackButton';
 import LetterIcon from '../../components/ikoner/LetterIcon';

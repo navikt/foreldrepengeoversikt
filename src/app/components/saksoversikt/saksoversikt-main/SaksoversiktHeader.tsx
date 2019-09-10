@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Innholdstittel } from 'nav-frontend-typografi';
 
-import Sak from '../../../types/sak/Sak';
+import Sak from '../../../api/types/sak/Sak';
 import { finnNyesteBehandling } from '../../../utils/sakerUtils';
 import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus, getSaksoversiktTitle } from '../utils';
 import BEMHelper from 'common/util/bem';

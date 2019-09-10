@@ -4,10 +4,8 @@ import PeriodeOversikt from '../periode-oversikt/PeriodeOversikt';
 import { Routes } from 'app/utils/routes';
 import { FormattedMessage } from 'react-intl';
 import Periode from 'app/types/uttaksplan/Periode';
-import Personinfo from 'app/types/Personinfo';
-import AnnenPart from 'app/types/sak/AnnenPart';
-
-import './dinPlan.less';
+import Personinfo from 'app/api/types/personinfo/Personinfo';
+import AnnenPart from 'app/api/types/sak/AnnenPart';
 
 interface Props {
     perioder: Periode[];

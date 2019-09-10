@@ -1,10 +1,10 @@
 import ApiAction, { ApiActionTypes } from '../types/ApiAction';
-import Personinfo from 'app/types/Personinfo';
+import Personinfo from 'app/api/types/personinfo/Personinfo';
 import FetchState, { FetchStatus } from '../types/FetchState';
-import Sak from 'app/types/sak/Sak';
-import { StorageKvittering } from 'app/types/StorageKvittering';
-import { HistorikkInnslag } from 'app/types/historikk/HistorikkInnslag';
-import { MinidialogInnslag } from 'app/types/MinidialogInnslag';
+import Sak from 'app/api/types/sak/Sak';
+import { StorageKvittering } from 'app/api/types/StorageKvittering';
+import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 
 export interface ApiState {
     personinfo: FetchState<Personinfo>;

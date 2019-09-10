@@ -1,9 +1,9 @@
-import Personinfo from "app/types/Personinfo";
-import Sak from "app/types/sak/Sak";
+import Personinfo from "app/api/types/personinfo/Personinfo";
+import Sak from "app/api/types/sak/Sak";
 import { FetchError } from "./FetchState";
-import { StorageKvittering } from "app/types/StorageKvittering";
-import { HistorikkInnslag } from "app/types/historikk/HistorikkInnslag";
-import { MinidialogInnslag } from "app/types/MinidialogInnslag";
+import { StorageKvittering } from "app/api/types/StorageKvittering";
+import { HistorikkInnslag } from "app/api/types/historikk/HistorikkInnslag";
+import { MinidialogInnslag } from "app/api/types/MinidialogInnslag";
 
 export enum ApiActionTypes {
     'GET_PERSONINFO_REQUEST' = 'getPersoninfoRequest',

@@ -9,18 +9,18 @@ import { erInfotrygdSak, erForeldrepengesak, erSvangerskapepengesak } from '../.
 import MeldingOmVedtakLenkepanel from '../../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
 import UtsettelsePanel from '../../utsettelse-panel/UtsettelsePanel';
 import Oversikt from '../../oversikt/Oversikt';
-import Sak from '../../../types/sak/Sak';
+import Sak from '../../../api/types/sak/Sak';
 import { Routes } from '../../../utils/routes';
 import { lenker } from '../../../utils/lenker';
 import BEMHelper from 'common/util/bem';
-import Person from '../../../types/Personinfo';
+import Person from '../../../api/types/personinfo/Personinfo';
 import SaksoversiktHeader from './SaksoversiktHeader';
 import Etikett from '../../etikett/etikett';
 import DinPlan from 'app/components/din-plan/DinPlan';
 import { isFeatureEnabled, Feature } from 'app/Feature';
 import { utledHendelser } from 'app/components/historikk/util';
 import { hentHistorikkForSak } from 'app/utils/historikkUtils';
-import { HistorikkInnslag } from 'app/types/historikk/HistorikkInnslag';
+import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
 import './saksoversikt.less';
 

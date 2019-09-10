@@ -11,8 +11,8 @@ import Periode, { PeriodeType, Utsettelsesperiode } from 'app/types/uttaksplan/P
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import UttaksplanAdvarselIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/UttaksplanAdvarselIkon';
 import PeriodeListElement from './PeriodeListElement';
-import AnnenPart from 'app/types/sak/AnnenPart';
-import Personinfo from 'app/types/Personinfo';
+import AnnenPart from 'app/api/types/sak/AnnenPart';
+import Personinfo from 'app/api/types/personinfo/Personinfo';
 
 import './periodeList.less';
 
