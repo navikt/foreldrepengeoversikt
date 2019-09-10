@@ -30,8 +30,21 @@ export enum Skjemanummer {
     DOK_BEGRUNNELSE_SØKE_TILBAKE_I_TID = 'I000111',
     DOK_DELTAKELSE_I_INTRODUKSJONSPROGRAMMET = 'I000112',
     SKJEMA_FOR_TILRETTELEGGING_OG_OMPLASSERING = 'I000109',
+    TILRETTELEGGING_FOR_ARBEIDSTAKERE = 'I000049',
+    TILRETTELEGGING_FOR_FRILANS_ELLER_SELVSTENDIG = 'I000001',
     ANNET = 'I000060'
 }
+
+export const skjemanummerForSvangerskapspengesoknad = (skjemanummer: Skjemanummer) => {
+    switch (skjemanummer) {
+        case Skjemanummer.SKJEMA_FOR_TILRETTELEGGING_OG_OMPLASSERING:
+        case Skjemanummer.TILRETTELEGGING_FOR_ARBEIDSTAKERE:
+        case Skjemanummer.TILRETTELEGGING_FOR_FRILANS_ELLER_SELVSTENDIG:
+            return true;
+        default:
+            return false;
+    }
+};
 
 export const skjemanummerForEngangsstønad = (skjemanummer: Skjemanummer) =>
     skjemanummer === Skjemanummer.ANNET ||
