@@ -22,10 +22,14 @@ export enum Skjemanummer {
     INNTEKTSOPPLYSNINGER_FRILANS_ELLER_SELVSTENDIG = 'I000007',
     DOK_MORS_UTDANNING_ARBEID_SYKDOM = 'I000038',
     DOK_INNLEGGELSE = 'I000037',
-    DOK_OVERFØRING_FOR_SYK = 'I000045',
+    DOK_OVERFØRING_FOR_SYK = 'I000023',
     BEKREFTELSE_FRA_STUDIESTED = 'I000061',
     BEKREFTELSE_DELTAR_KVALIFISERINGSPROGRAM = 'I000051',
     BEKREFTELSE_PÅ_AVTALT_FERIE = 'I000036',
+    DOK_AV_ALENEOMSORG = 'I000110',
+    DOK_BEGRUNNELSE_SØKE_TILBAKE_I_TID = 'I000111',
+    DOK_DELTAKELSE_I_INTRODUKSJONSPROGRAMMET = 'I000112',
+    SKJEMA_FOR_TILRETTELEGGING_OG_OMPLASSERING = 'I000109',
     ANNET = 'I000060'
 }
 
@@ -33,7 +37,6 @@ export const skjemanummerForEngangsstønad = (skjemanummer: Skjemanummer) =>
     skjemanummer === Skjemanummer.ANNET ||
     skjemanummer === Skjemanummer.TERMINBEKREFTELSE ||
     skjemanummer === Skjemanummer.FØDSELSATTEST;
-
 
 export const skjemanummerForEndringssøknad = (skjemanummer: Skjemanummer) =>
     skjemanummer === Skjemanummer.BEKREFTELSE_FRA_ARBEIDSGIVER ||
@@ -44,4 +47,7 @@ export const skjemanummerForEndringssøknad = (skjemanummer: Skjemanummer) =>
     skjemanummer === Skjemanummer.DOK_OVERFØRING_FOR_SYK ||
     skjemanummer === Skjemanummer.BEKREFTELSE_FRA_STUDIESTED ||
     skjemanummer === Skjemanummer.BEKREFTELSE_DELTAR_KVALIFISERINGSPROGRAM ||
-    skjemanummer === Skjemanummer.BEKREFTELSE_PÅ_AVTALT_FERIE;
+    skjemanummer === Skjemanummer.BEKREFTELSE_PÅ_AVTALT_FERIE ||
+    skjemanummer === Skjemanummer.DOK_AV_ALENEOMSORG ||
+    skjemanummer === Skjemanummer.DOK_BEGRUNNELSE_SØKE_TILBAKE_I_TID ||
+    skjemanummer === Skjemanummer.DOK_DELTAKELSE_I_INTRODUKSJONSPROGRAMMET;
