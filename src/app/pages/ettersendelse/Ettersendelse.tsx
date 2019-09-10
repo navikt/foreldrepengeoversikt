@@ -13,7 +13,7 @@ import ResponsiveWrapper from '../ResponsiveWrapper';
 import { AxiosError } from '../../../../node_modules/axios';
 import Api from '../../api/api';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
-import Ettersending from '../../api/types/ettersending/Ettersending';
+import EttersendingDto from '../../api/types/ettersending/EttersendingDto';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import BackButton from 'common/components/back-button/BackButton';
 import LetterIcon from '../../components/ikoner/LetterIcon';
@@ -108,7 +108,7 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     sendEttersendelse(): void {
-        const ettersending: Ettersending = {
+        const ettersending: EttersendingDto = {
             type: erForeldrepengesak(this.state.sak) ? 'foreldrepenger' : 'engangsstønad',
             saksnummer: this.state.sak.saksnummer!,
             vedlegg: this.state.attachments.filter((a: Attachment) => !isAttachmentWithError(a))

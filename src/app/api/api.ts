@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Environment from '../Environment';
-import Ettersending from './types/ettersending/Ettersending';
+import EttersendingDto from './types/ettersending/EttersendingDto';
 import AxiosApiInterceptor from './interceptor';
 
 export const apiBaseUrl: string = Environment.REST_API_URL;
@@ -13,7 +13,7 @@ const getSaker = () => {
     return AxiosApiInterceptor.get('innsyn/saker');
 };
 
-const sendEttersending = (ettersending: Ettersending) => {
+const sendEttersending = (ettersending: EttersendingDto) => {
     return AxiosApiInterceptor.post('/soknad/ettersend', ettersending);
 };
 
