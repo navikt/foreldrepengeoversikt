@@ -172,6 +172,6 @@ describe('Ettersendelse page', () => {
         historyMock.location.state.sak = SakerMock.fpsakEndring;
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
-        expect(dropdown.children().length).toBe(10);
+        expect(dropdown.children().length).toBe(13);
     });
 });
