@@ -6,7 +6,7 @@
     "scripts": {
         "build": "node src/build/scripts/production-build.js",
         "start-express": "node ./server.js",
-        "mock-api": "node ./mock-api-server.js",
+        "mock-api": "node ./mock-api/mock-api-server.js",
         "start": "node ./src/build/scripts/start-dev.js",
         "start-no-decorator": "node ./src/build/scripts/start-dev-nodecorator.js",
         "precommit": "pretty-quick --staged",
