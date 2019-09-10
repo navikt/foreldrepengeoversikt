@@ -11,12 +11,9 @@ interface Props {
 interface Dialog {
     title: string;
     text: string | React.ReactNode;
-};
+}
 
-const SimpleIllustration: React.StatelessComponent<Props> = ({
-    dialog,
-    veileder
-}) => {
+const SimpleIllustration: React.StatelessComponent<Props> = ({ dialog, veileder }) => {
     return (
         <div className="simpleIllustration">
             {dialog && (

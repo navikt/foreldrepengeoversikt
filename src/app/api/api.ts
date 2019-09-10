@@ -6,21 +6,15 @@ import AxiosApiInterceptor from './interceptor';
 export const apiBaseUrl: string = Environment.REST_API_URL;
 
 const getPersoninfo = () => {
-    return AxiosApiInterceptor.get('/personinfo', {
-        timeout: 60 * 1000
-    });
+    return AxiosApiInterceptor.get('/personinfo');
 };
 
 const getSaker = () => {
-    return AxiosApiInterceptor.get('innsyn/saker', {
-        timeout: 60 * 1000
-    });
+    return AxiosApiInterceptor.get('innsyn/saker');
 };
 
 const sendEttersending = (ettersending: Ettersending) => {
-    return AxiosApiInterceptor.post('/soknad/ettersend', ettersending, {
-        timeout: 60 * 1000
-    });
+    return AxiosApiInterceptor.post('/soknad/ettersend', ettersending);
 };
 
 const getStorageKvittering = () => {
@@ -30,20 +24,15 @@ const getStorageKvittering = () => {
 };
 
 const getHistorikk = () => {
-    return AxiosApiInterceptor.get('/historikk/historikk', {
-        timeout: 60 * 1000
-    });
+    return AxiosApiInterceptor.get('/historikk/historikk');
 };
 
 const getMiniDialog = () => {
-    return AxiosApiInterceptor.get('/minidialog/minidialog', {
-        timeout: 60 * 1000
-    });
+    return AxiosApiInterceptor.get('/minidialog/minidialog');
 };
 
 const getUttaksplan = (saksnummer: string) => {
     return AxiosApiInterceptor.get('innsyn/uttaksplan', {
-        timeout: 60 * 1000,
         params: { saksnummer }
     });
 };

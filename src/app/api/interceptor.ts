@@ -7,6 +7,7 @@ const AxiosApiInterceptor = axios.create({ baseURL: REST_API_URL });
 
 AxiosApiInterceptor.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
     config.withCredentials = true;
+    config.timeout = 60 * 1000;
     return config;
 });
 

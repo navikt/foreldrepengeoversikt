@@ -11,6 +11,6 @@ interface Personinfo {
     fødselsdato: string;
     ikkeNordiskEøsLand: boolean;
     bankkonto?: Bankkonto;
-};
+}
 
 export default Personinfo;

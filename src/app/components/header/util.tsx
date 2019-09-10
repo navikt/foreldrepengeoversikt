@@ -31,15 +31,17 @@ export const getHeaderTitleIntlKey = (saker: Sak[]): string => {
     const keys = [];
     if (aktiveSaker.some((s) => erForeldrepengesak(s))) {
         keys.push('FP');
-    };
+    }
 
     if (aktiveSaker.some((s) => erEngangsstønad(s))) {
         keys.push('ES');
-    };
+    }
 
     if (aktiveSaker.some((s) => erSvangerskapepengesak(s))) {
         keys.push('SVP');
-    };
+    }
 
-    return aktiveSaker.length > 0 && keys.length > 0 ? 'header.title.'.concat(keys.sort().join('.')) : 'header.title.default';
+    return aktiveSaker.length > 0 && keys.length > 0
+        ? 'header.title.'.concat(keys.sort().join('.'))
+        : 'header.title.default';
 };
