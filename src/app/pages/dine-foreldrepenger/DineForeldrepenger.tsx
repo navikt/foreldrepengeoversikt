@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import MediaQuery from 'react-responsive';
 import { History } from 'history';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -99,7 +99,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     renderAlertStripe(sak: Sak) {
         return (
             <AlertStripe type="info">
-                <FormattedMessage
+                <FormattedHTMLMessage
                     id={
                         erForeldrepengesak(sak)
                             ? 'dineForeldrepenger.alertstripe.fpsak'
