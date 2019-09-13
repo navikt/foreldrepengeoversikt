@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage } from 'react-intl';
 import MediaQuery from 'react-responsive';
 import { History } from 'history';
 import AlertStripe from 'nav-frontend-alertstriper';
