@@ -1,6 +1,6 @@
 import * as React from 'react';
 // @ts-ignore
-import { shallowWithIntl, loadTranslationObject } from 'enzyme-react-intl';
+import { shallowWithIntl, loadTranslationObject, mountWithIntl } from 'enzyme-react-intl';
 import Ettersendelse from '../Ettersendelse';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import { FagsakStatus } from '../../../api/types/sak/FagsakStatus';
@@ -54,15 +54,9 @@ describe('Ettersendelse page', () => {
 
     it('Should navigate to frontpage when back button is clicked', () => {
         const historySpy = jest.spyOn(historyMock, 'push');
-        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        const wrapper = mountWithIntl(<Ettersendelse history={historyMock} />).mount();
         wrapper.find(BackButton).simulate('click');
         expect(historySpy).toHaveBeenCalledWith('/');
-    });
-
-    it('Letter icon should render', () => {
-        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
-        const letterIcon = wrapper.find({ className: 'ettersendelse__letter-icon' });
-        expect(letterIcon.length).toEqual(1);
     });
 
     it('Attachment type dropdown should render', () => {

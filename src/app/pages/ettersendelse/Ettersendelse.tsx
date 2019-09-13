@@ -1,21 +1,18 @@
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { History } from 'history';
-import { Innholdstittel, Element } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Select, Input } from 'nav-frontend-skjema';
 
 import Sak from '../../api/types/sak/Sak';
 import BEMHelper from '../../../common/util/bem';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
-import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
-import ResponsiveWrapper from '../ResponsiveWrapper';
 import { AxiosError } from '../../../../node_modules/axios';
 import Api from '../../api/api';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import EttersendingDto from '../../api/types/ettersending/EttersendingDto';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
-import BackButton from 'common/components/back-button/BackButton';
 import LetterIcon from '../../components/ikoner/LetterIcon';
 import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummer } from './util';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
@@ -25,9 +22,10 @@ import { extractErrorMessage, extractUUID } from 'common/util/errorUtil';
 import { erForeldrepengesak } from '../../utils/sakerUtils';
 import getMessage from 'common/util/i18nUtils';
 import ErrorPage from '../error/ErrorPage';
+import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
+import Page from '../page/Page';
 
 import './ettersendelse.less';
-import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 
 interface EttersendelseProps {
     history: History;
@@ -68,6 +66,7 @@ class Ettersendelse extends React.Component<Props, State> {
         this.handleAttachmentTypeSelectChange = this.handleAttachmentTypeSelectChange.bind(this);
         this.handleSendEttersendelseOnClick = this.handleSendEttersendelseOnClick.bind(this);
         this.handleAttachmentBeskrivelseOnChange = this.handleAttachmentBeskrivelseOnChange.bind(this);
+        this.handleBackClick = this.handleBackClick.bind(this);
     }
 
     addAttachment(attachments: Attachment[]): void {
@@ -166,8 +165,8 @@ class Ettersendelse extends React.Component<Props, State> {
     render() {
         const { intl } = this.props;
         const { sak, attachments, attachmentSkjemanummer, sendingEttersendelse } = this.state;
-        if (!sak) {	
-            return null;	
+        if (!sak) {
+            return null;
         }
 
         const uploadedAttachments = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
@@ -178,63 +177,60 @@ class Ettersendelse extends React.Component<Props, State> {
         }
 
         return (
-            <div className={cls.className}>
-                <Søknadstittel>Ettersending av vedlegg</Søknadstittel>
-                <ResponsiveWrapper>
-                    <BackButton hidden={false} onClick={() => this.handleBackClick()} />
-                    <LetterIcon className={cls.element('letter-icon')} />
-                    <Innholdstittel className={cls.element('title')}>
-                        <FormattedMessage id="ettersendelse.title" values={{ saksnummer: sak.saksnummer }} />
-                    </Innholdstittel>
-                    <Select
-                        className={cls.element('attachment-type-select')}
-                        label={<Element>{getMessage(intl, 'ettersendelse.vedlegg.select.label')}</Element>}
-                        onChange={this.handleAttachmentTypeSelectChange}
-                        defaultValue="default">
-                        {getAttachmentTypeSelectOptions(intl, sak)}
-                    </Select>
+            <Page
+                className={cls.className}
+                pageTitle="Ettersending av vedlegg"
+                icon={(className) => <LetterIcon className={className} />}
+                title={<FormattedMessage id="ettersendelse.title" values={{ saksnummer: sak.saksnummer }} />}
+                onBackClick={this.handleBackClick}>
+                <Select
+                    className={cls.element('attachment-type-select')}
+                    label={<Element>{getMessage(intl, 'ettersendelse.vedlegg.select.label')}</Element>}
+                    onChange={this.handleAttachmentTypeSelectChange}
+                    defaultValue="default">
+                    {getAttachmentTypeSelectOptions(intl, sak)}
+                </Select>
 
-                    {this.isAttachmentOfTypeAnnet() && (
-                        <Input
-                            className={cls.element('attachment-description')}
-                            label={<Element>{getMessage(intl, 'ettersendelse.vedlegg.beskrivelse')}</Element>}
-                            onChange={this.handleAttachmentBeskrivelseOnChange}
+                {this.isAttachmentOfTypeAnnet() && (
+                    <Input
+                        className={cls.element('attachment-description')}
+                        label={<Element>{getMessage(intl, 'ettersendelse.vedlegg.beskrivelse')}</Element>}
+                        onChange={this.handleAttachmentBeskrivelseOnChange}
+                    />
+                )}
+
+                {this.isReadyToUploadAttachments() && (
+                    <div className={cls.element('uploader')}>
+                        <AttachmentsUploader
+                            attachments={attachments}
+                            skjemanummer={attachmentSkjemanummer ? attachmentSkjemanummer : Skjemanummer.ANNET}
+                            onFilesUploadStart={this.addAttachment}
+                            onFileUploadFinish={this.editAttachment}
+                            onFileDeleteStart={this.deleteAttachment}
                         />
-                    )}
+                    </div>
+                )}
 
-                    {this.isReadyToUploadAttachments() && (
-                        <div className={cls.element('uploader')}>
-                            <AttachmentsUploader
-                                attachments={attachments}
-                                skjemanummer={attachmentSkjemanummer ? attachmentSkjemanummer : Skjemanummer.ANNET}
-                                onFilesUploadStart={this.addAttachment}
-                                onFileUploadFinish={this.editAttachment}
-                                onFileDeleteStart={this.deleteAttachment}
-                            />
-                        </div>
-                    )}
+                {getListOfUniqueSkjemanummer(uploadedAttachments).map((skjemanummer: Skjemanummer) => (
+                    <AttachmentList
+                        key={skjemanummer}
+                        intlKey={`ettersendelse.attachmentList.${skjemanummer}`}
+                        onDelete={this.deleteAttachment}
+                        attachments={uploadedAttachments.filter((a: Attachment) => a.skjemanummer === skjemanummer)}
+                    />
+                ))}
 
-                    {getListOfUniqueSkjemanummer(uploadedAttachments).map((skjemanummer: Skjemanummer) => (
-                        <AttachmentList
-                            key={skjemanummer}
-                            intlKey={`ettersendelse.attachmentList.${skjemanummer}`}
-                            onDelete={this.deleteAttachment}
-                            attachments={uploadedAttachments.filter((a: Attachment) => a.skjemanummer === skjemanummer)}
-                        />
-                    ))}
-
-                    {this.isReadyToSendAttachments() && (
-                        <div className={cls.element('send-button')}>
-                            <Hovedknapp
-                                onClick={this.handleSendEttersendelseOnClick}
-                                disabled={sendingEttersendelse}
-                                spinner={sendingEttersendelse}>
-                                <FormattedMessage id="ettersendelse.sendButton" />
-                            </Hovedknapp>
-                        </div>
-                    )}
-                </ResponsiveWrapper>
-            </div>
+                {this.isReadyToSendAttachments() && (
+                    <div className={cls.element('send-button')}>
+                        <Hovedknapp
+                            onClick={this.handleSendEttersendelseOnClick}
+                            disabled={sendingEttersendelse}
+                            spinner={sendingEttersendelse}>
+                            <FormattedMessage id="ettersendelse.sendButton" />
+                        </Hovedknapp>
+                    </div>
+                )}
+            </Page>
         );
     }
 }

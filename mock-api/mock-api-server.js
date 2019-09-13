@@ -64,6 +64,10 @@ router.delete('/rest/storage/vedlegg/:id', (req, res) => {
     res.sendStatus(204);
 });
 
+router.post('/rest/soknad/ettersend', (req,res) => {
+    res.sendStatus(200);
+});
+
 app.use('', router);
 
 const port = process.env.PORT || 8888;

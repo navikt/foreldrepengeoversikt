@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import './søknadstittel.less';
 
 interface Props {

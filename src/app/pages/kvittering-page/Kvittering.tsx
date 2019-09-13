@@ -1,21 +1,20 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
-import * as moment from 'moment';
+import { Ingress } from 'nav-frontend-typografi';
+import { Knapp } from 'nav-frontend-knapper';
+const moment = require('moment');
 import { History } from 'history';
 
 import { Kvittering } from '../../api/types/ettersending/Kvittering';
 import BEMHelper from 'common/util/bem';
-import SpotlightLetter from 'common/components/ikoner/SpotlightLetter';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
-import ResponsiveWrapper from '../ResponsiveWrapper';
-import Søknadstittel from 'common/components/søknadstittel/Søknadstittel';
-import BackButton from 'common/components/back-button/BackButton';
 import { Routes } from '../../utils/routes';
 
+import Page from '../page/Page';
+import LetterIcon from 'app/components/ikoner/LetterIcon';
+
 import './kvittering.less';
-import { Knapp } from 'nav-frontend-knapper';
 
 interface Props {
     history: History;
@@ -53,42 +52,36 @@ class KvitteringPage extends React.Component<Props, State> {
 
         const cls = BEMHelper('kvittering');
         return (
-            <>
-                <Søknadstittel>Ettersending av vedlegg</Søknadstittel>
-                <div className={cls.className}>
-                    <ResponsiveWrapper>
-                        <BackButton hidden={false} onClick={() => this.handleBackClick()} />
-                        <SpotlightLetter className={cls.element('logo')} width={136} height={136} />
-                        <Innholdstittel className={cls.element('headline')}>
-                            <FormattedMessage id="kvittering.headline" />
-                        </Innholdstittel>
-                        <Ingress className={cls.element('message')}>
-                            <FormattedMessage
-                                id="kvittering.message"
-                                values={{
-                                    timeOfDay: moment(kvittering.mottattDato).format('HH:mm'),
-                                    date: moment(kvittering.mottattDato).format('LL')
-                                }}
-                            />
-                        </Ingress>
-                        <div className={cls.element('attachment-list')}>
-                            <AttachmentList
-                                intlKey="kvittering.attachment-list-label"
-                                attachments={attachments.map(
-                                    ({ url, ...otherProperties }: Attachment) => otherProperties
-                                )}
-                                showFileSize={false}
-                            />
-                        </div>
-
-                        <div className={cls.element('tilbake-knapp')}>
-                            <Knapp onClick={this.handleBackClick}>
-                                <FormattedMessage id="kvittering.tilbake.knapp" />
-                            </Knapp>
-                        </div>
-                    </ResponsiveWrapper>
+            <Page
+                className={cls.className}
+                pageTitle="Ettersending av vedlegg"
+                icon={(className) => <LetterIcon className={className} />}
+                title={<FormattedMessage id="kvittering.headline"/>}
+                onBackClick={this.handleBackClick}>
+                    
+                <Ingress className={cls.element('message')}>
+                    <FormattedMessage
+                        id="kvittering.message"
+                        values={{
+                            timeOfDay: moment(kvittering.mottattDato).format('HH:mm'),
+                            date: moment(kvittering.mottattDato).format('LL')
+                        }}
+                    />
+                </Ingress>
+                <div className={cls.element('attachment-list')}>
+                    <AttachmentList
+                        intlKey="kvittering.attachment-list-label"
+                        attachments={attachments.map(({ url, ...otherProperties }: Attachment) => otherProperties)}
+                        showFileSize={false}
+                    />
                 </div>
-            </>
+
+                <div className={cls.element('tilbake-knapp')}>
+                    <Knapp onClick={this.handleBackClick}>
+                        <FormattedMessage id="kvittering.tilbake.knapp" />
+                    </Knapp>
+                </div>
+            </Page>
         );
     }
 }
