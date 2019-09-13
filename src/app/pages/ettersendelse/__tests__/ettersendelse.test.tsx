@@ -166,7 +166,7 @@ describe('Ettersendelse page', () => {
         historyMock.location.state.sak = SakerMock.fpsakFP;
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
-        expect(dropdown.children().length).toBe(Object.values(Skjemanummer).length + 1);
+        expect(dropdown.children().length).toBe(19);
     });
 
     it('attachment type dropdown should only render relevant attachment types for foreldrepengesoknad with endring', () => {
