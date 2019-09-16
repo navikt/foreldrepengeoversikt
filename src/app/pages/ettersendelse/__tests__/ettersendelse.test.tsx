@@ -149,8 +149,23 @@ describe('Ettersendelse page', () => {
         expect(dropdown.children().length).toBe(Object.values(Skjemanummer).length + 1);
     });
 
+    it('attachment type dropdown options should be sorted alphabetically except first element', () => {
+        historyMock.location.state.sak = { ...SakerMock.infotrygd };
+        const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
+        const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
+        const selectOptions = dropdown.children();
+        expect(
+            selectOptions
+                .map((children: any, index: number, selectOptions: any[]) => children.text())
+                .every(
+                    (text: string, index: number, selectOptions: string[]) =>
+                        index === 0 || index === 1 || selectOptions[index - 1].localeCompare(text) <= 0
+                )
+        ).toBeTruthy();
+    });
+
     it('attachment type dropdown should only render relevant attachment types for engangsstønad', () => {
-        historyMock.location.state.sak = SakerMock.fpsakES
+        historyMock.location.state.sak = SakerMock.fpsakES;
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
         expect(dropdown.children().length).toBe(4);

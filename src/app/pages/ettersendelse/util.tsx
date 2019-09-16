@@ -16,11 +16,17 @@ export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: Sak) => 
         <option value="default" disabled={true} hidden={true}>
             {intl.formatMessage({ id: `ettersendelse.select.defaultValue` })}
         </option>
-        {getRelevanteSkjemanummer(sak).sort().map((skjemanummer) => (
-            <option value={skjemanummer} key={skjemanummer}>
-                {intl.formatMessage({ id: `ettersendelse.select.${skjemanummer}` })}
-            </option>
-        ))}
+        {getRelevanteSkjemanummer(sak)
+            .map((skjemanummer) => ({
+                skjemanummer,
+                text: intl.formatMessage({ id: `ettersendelse.select.${skjemanummer}` })
+            }))
+            .sort((selectOption, nextSelectOption) => selectOption.text.localeCompare(nextSelectOption.text))
+            .map(({ skjemanummer, text }) => (
+                <option value={skjemanummer} key={skjemanummer}>
+                    {text}
+                </option>
+            ))}
     </>
 );
 
