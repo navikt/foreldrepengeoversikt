@@ -1,20 +1,18 @@
 import * as React from 'react';
-import KvitteringPage from '../Kvittering';
-// @ts-ignore
-import BackButton from 'common/components/back-button/BackButton';
+import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import { LeveransesStatus } from 'app/api/types/ettersending/Kvittering';
+import BackButton from 'common/components/back-button/BackButton';
 // @ts-ignore
 import { loadTranslationObject, shallowWithIntl } from 'enzyme-react-intl';
 import translations from '../../../intl/nb_NO.json';
-import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
+import DinPlan from '../DinPlan';
 
 loadTranslationObject(translations);
 
-describe('Kvittering', () => {
+describe('DinPlan page', () => {
     let historyMock: any;
     let mockAttachment: Attachment;
-    
     beforeEach(() => {
         mockAttachment = {
             id: 'v123',
@@ -45,10 +43,8 @@ describe('Kvittering', () => {
 
     it('Should navigate to frontpage when back button is clicked', () => {
         const historySpy = jest.spyOn(historyMock, 'push');
-        const wrapper = shallowWithIntl(<KvitteringPage history={historyMock} />).shallow();
-        wrapper
-            .find(BackButton)
-            .simulate('click');
+        const wrapper = shallowWithIntl(<DinPlan history={historyMock} />).shallow();
+        wrapper.find(BackButton).simulate('click');
         expect(historySpy).toHaveBeenCalledWith('/');
     });
 });

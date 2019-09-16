@@ -105,7 +105,7 @@ class Foreldrepengeoversikt extends React.Component<Props, OwnState> {
                 <Switch>
                     <Route path={Routes.ETTERSENDELSE} render={(props) => <Ettersendelse {...props} />} />
                     <Route path={Routes.KVITTERING} render={(props) => <KvitteringPage {...props} />} />
-                    <Route path={Routes.DIN_PLAN} render={(props) => <DinPlan />} />
+                    <Route path={Routes.DIN_PLAN} render={(props) => <DinPlan {...props} />} />
                     <Route
                         path={Routes.DINE_FORELDREPENGER}
                         exact={true}
