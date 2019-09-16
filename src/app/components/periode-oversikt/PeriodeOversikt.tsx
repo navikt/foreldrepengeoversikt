@@ -1,26 +1,39 @@
-import React from 'react';
+import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+
 import PeriodeListe from './PeriodeList/PeriodeList';
-import { finnNåværendePerioder, finnFremtidigePerioder, finnTidligerePerioder } from './periodeUtils';
 import Periode from 'app/types/uttaksplan/Periode';
 import Personinfo from 'app/api/types/personinfo/Personinfo';
 import AnnenPart from 'app/api/types/sak/AnnenPart';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 interface Props {
-    perioder: Periode[];
     søker: Personinfo;
     annenPart?: AnnenPart;
+    tidligerePerioder?: Periode[];
+    nåværendePerioder?: Periode[];
+    fremtidigePerioder?: Periode[];
 }
 
-const PeriodeOversikt: React.StatelessComponent<Props> = ({ perioder, søker, annenPart }) => {
-    const tidligerPerioder = finnTidligerePerioder(perioder);
-    const nåværendePerioder = finnNåværendePerioder(perioder);
-    const fremtidigePerioder = finnFremtidigePerioder(perioder);
+const PeriodeOversikt: React.StatelessComponent<Props> = ({
+    tidligerePerioder = [],
+    nåværendePerioder = [],
+    fremtidigePerioder = [],
+    søker,
+    annenPart
+}) => {
     return (
         <>
-            {tidligerPerioder.length > 0 && (
+            {[...tidligerePerioder, ...nåværendePerioder, ...fremtidigePerioder].length === 0 && (
+                <AlertStripe type="info">
+                    <FormattedMessage id="periodeOversikt.ingenPerioder" />
+                </AlertStripe>
+            )}
+
+            {tidligerePerioder.length > 0 && (
                 <PeriodeListe
                     tittel={'Tidligere perioder'}
-                    perioder={tidligerPerioder}
+                    perioder={tidligerePerioder}
                     søker={søker}
                     annenPart={annenPart}
                 />

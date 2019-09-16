@@ -4,6 +4,7 @@ import { History } from 'history';
 import { Knapp } from 'nav-frontend-knapper';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { guid } from 'nav-frontend-js-utils';
+
 import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../utils';
 import { erInfotrygdSak, erForeldrepengesak, erSvangerskapepengesak } from '../../../utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
@@ -21,9 +22,11 @@ import { utledHendelser } from 'app/components/historikk/util';
 import { hentHistorikkForSak } from 'app/utils/historikkUtils';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
-import './saksoversikt.less';
 import SectionSeparator from 'app/components/section-separator/SectionSeparator';
 import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
+import { finnNåværendePerioder, finnFremtidigePerioder } from 'app/components/periode-oversikt/periodeUtils';
+
+import './saksoversikt.less';
 
 interface SaksoversiktProps {
     sak: Sak;
@@ -47,6 +50,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
 
     render() {
         const { sak, historikkInnslagListe, withHeader = false, søker } = this.props;
+        const { perioder } = sak;
         const erSakForeldrepengesak = erForeldrepengesak(sak);
 
         const cls = BEMHelper('saksoversikt');
@@ -109,7 +113,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
 
                 {isFeatureEnabled(Feature.dinPlan) &&
                     erSakForeldrepengesak &&
-                    sak.perioder &&
+                    perioder &&
                     søker !== undefined &&
                     sak.saksnummer && (
                         <SectionSeparator
@@ -119,7 +123,12 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                                 search: new URLSearchParams({ saksnummer: sak.saksnummer }).toString(),
                                 text: <FormattedMessage id="saksoversikt.section.dinPlan.sectionLink" />
                             }}>
-                            <PeriodeOversikt perioder={sak.perioder} søker={søker} annenPart={sak.annenPart} />
+                            <PeriodeOversikt
+                                nåværendePerioder={finnNåværendePerioder(perioder!).slice(0,1)}
+                                fremtidigePerioder={finnFremtidigePerioder(perioder!).slice(0,1)}
+                                søker={søker}
+                                annenPart={sak.annenPart}
+                            />
                         </SectionSeparator>
                     )}
 

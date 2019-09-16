@@ -190,14 +190,6 @@
     "dinPlan.title": "Deres plan",
 
 
-
-
-
-
-
-
-
-
     "dinPlan.uttak.FORELDREPENGER_FØR_FØDSEL": "Foreldrepenger før fødsel",
     "dinPlan.uttak.FELLESPERIODE": "Fellesperiode",
     "dinPlan.uttak.FORELDREPENGER": "Foreldrepenger",
@@ -206,6 +198,7 @@
 
     "dinPlan.hull": "Tapte foreldrepenger",
     "dinPlan.hull.beskrivelse": "{antallDager} dager uten registrert periode eller utsettelse",
+    "dinPlan.utsettelsesårsak": "Utsettelse - {årsak}",
 
-    "dinPlan.utsettelsesårsak": "Utsettelse - {årsak}"
+    "periodeOversikt.ingenPerioder": "Ingen aktuelle perioder for denne saken."
 }
