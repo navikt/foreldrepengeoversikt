@@ -9,8 +9,9 @@ import './sectionSeparator.less';
 interface Props {
     title: string | React.ReactNode;
     sectionLink?: {
-        to: Routes;
+        path: Routes;
         text: string | React.ReactNode;
+        search?: any;
     };
 }
 
@@ -20,7 +21,9 @@ const SectionSeparator: React.FunctionComponent<Props> = ({ children, title, sec
         <div className={cls.className}>
             <div className={cls.element('header')}>
                 <Systemtittel>{title}</Systemtittel>
-                {sectionLink && <Link to={sectionLink.to}>{sectionLink.text}</Link>}
+                {sectionLink && (
+                    <Link to={{ pathname: sectionLink.path, search: sectionLink.search }}>{sectionLink.text}</Link>
+                )}
             </div>
             {children}
         </div>

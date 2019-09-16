@@ -23,6 +23,8 @@ import { hentHistorikkForSak } from 'app/utils/historikkUtils';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
 import './saksoversikt.less';
+import SectionSeparator from 'app/components/section-separator/SectionSeparator';
+import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
 
 interface SaksoversiktProps {
     sak: Sak;
@@ -106,9 +108,22 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                     )}
                 </div>
 
-                {isFeatureEnabled(Feature.dinPlan) && erSakForeldrepengesak && sak.perioder && søker !== undefined && (
-                    <DinPlan perioder={sak.perioder} søker={søker} annenPart={sak.annenPart} />
-                )}
+                {isFeatureEnabled(Feature.dinPlan) &&
+                    erSakForeldrepengesak &&
+                    sak.perioder &&
+                    søker !== undefined &&
+                    sak.saksnummer && (
+                        <SectionSeparator
+                            title="Din Plan"
+                            sectionLink={{
+                                path: Routes.DIN_PLAN,
+                                search: new URLSearchParams({ saksnummer: sak.saksnummer }).toString(),
+                                text: <FormattedMessage id="saksoversikt.section.dinPlan.sectionLink" />
+                            }}>
+                            <PeriodeOversikt perioder={sak.perioder} søker={søker} annenPart={sak.annenPart} />
+                        </SectionSeparator>
+                    )}
+
                 {!erInfotrygdSak(sak) && (
                     <Oversikt
                         person={this.props.søker}
