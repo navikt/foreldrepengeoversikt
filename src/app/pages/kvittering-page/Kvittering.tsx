@@ -55,7 +55,7 @@ class KvitteringPage extends React.Component<Props, State> {
             <Page
                 className={cls.className}
                 pageTitle={<FormattedMessage id="ettersendelse.pageTitle" />}
-                icon={(className) => <LetterIcon className={className} />}
+                icon={() => <LetterIcon />}
                 title={<FormattedMessage id="kvittering.headline" />}
                 onBackClick={this.handleBackClick}>
                 <Ingress className={cls.element('message')}>

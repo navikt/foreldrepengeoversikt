@@ -179,8 +179,8 @@ class Ettersendelse extends React.Component<Props, State> {
         return (
             <Page
                 className={cls.className}
-                pageTitle={<FormattedMessage id="ettersendelse.pageTitle"/>}
-                icon={(className) => <LetterIcon className={className} />}
+                pageTitle={<FormattedMessage id="ettersendelse.pageTitle" />}
+                icon={() => <LetterIcon />}
                 title={<FormattedMessage id="ettersendelse.title" values={{ saksnummer: sak.saksnummer }} />}
                 onBackClick={this.handleBackClick}>
                 <Select
