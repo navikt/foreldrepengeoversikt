@@ -3,7 +3,7 @@ import * as React from 'react';
 import './søknadstittel.less';
 
 interface Props {
-    children: string;
+    children: string | React.ReactNode;
 }
 
 export default class Søknadstittel extends React.Component<Props> {

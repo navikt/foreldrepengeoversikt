@@ -41,6 +41,7 @@
     "sidepanel.søk": "Søk for ett nytt barn",
     "sidepanel.chat": "Chat med oss om foreldrepenger",
 
+    "ettersendelse.pageTitle": "Ettersending av vedlegg",
     "ettersendelse.title": "Last opp dokumentasjon til sak { saksnummer }",
     "ettersendelse.sendButton": "Ettersend vedlegg",
     "ettersendelse.select.defaultValue": "Velg type vedlegg",

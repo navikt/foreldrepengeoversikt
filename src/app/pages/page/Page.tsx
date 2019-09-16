@@ -10,7 +10,7 @@ import './page.less';
 
 interface Props {
     className?: string;
-    pageTitle: string;
+    pageTitle: string | React.ReactNode;
     icon?: (className: string) => React.ReactNode;
     title: string | React.ReactNode;
     onBackClick?: () => void;
@@ -18,14 +18,14 @@ interface Props {
 
 class Page extends React.Component<Props> {
     render() {
-        const { className, onBackClick, icon: titleIcon, children, title } = this.props;
+        const { className, onBackClick, icon, children, title } = this.props;
         const cls = BEMHelper('page');
         return (
             <div className={classNames(cls.className, { className })}>
                 <Søknadstittel>{this.props.pageTitle}</Søknadstittel>
                 <div className={cls.element('content')}>
                     {onBackClick && <BackButton hidden={false} onClick={onBackClick} />}
-                    {titleIcon && titleIcon(cls.element('icon'))}
+                    {icon && icon(cls.element('icon'))}
                     <Innholdstittel className={cls.element('title')}>{title}</Innholdstittel>
                     {children}
                 </div>
