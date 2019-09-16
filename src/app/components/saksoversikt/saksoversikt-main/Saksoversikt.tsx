@@ -16,7 +16,6 @@ import BEMHelper from 'common/util/bem';
 import Person from '../../../api/types/personinfo/Personinfo';
 import SaksoversiktHeader from './SaksoversiktHeader';
 import Etikett from '../../etikett/etikett';
-import DinPlan from 'app/components/din-plan/DinPlan';
 import { isFeatureEnabled, Feature } from 'app/Feature';
 import { utledHendelser } from 'app/components/historikk/util';
 import { hentHistorikkForSak } from 'app/utils/historikkUtils';
