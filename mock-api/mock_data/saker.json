@@ -1,20 +1,26 @@
 [
     {
         "type": "FPSAK",
-        "saksnummer": "140258504",
-        "status": "AVSLU",
-        "opprettet": "2019-09-20",
+        "saksnummer": "140258038",
+        "status": "LOP",
+        "opprettet": "2019-08-27",
+        "annenPart": {
+            "fnr": "02036129800",
+            "aktørId": "1944804312863",
+            "navn": { "fornavn": "GODSLIG", "mellomnavn": "SKJELENDE", "etternavn": "TAREMEL", "kjønn": "K" }
+        },
         "behandlinger": [
             {
-                "opprettetTidspunkt": "2019-09-20T15:24:04.157",
-                "endretTidspunkt": "2019-09-20T15:24:54.391",
+                "opprettetTidspunkt": "2019-08-27T15:01:08.765",
+                "endretTidspunkt": "2019-08-27T15:03:35.261",
                 "status": "AVSLU",
-                "type": "ES",
-                "tema": "ENGST",
+                "type": "FP",
+                "tema": "FORP_FODS",
+                "årsak": "null",
                 "behandlingResultat": "INNVILGET",
-                "behandlendeEnhet": "4849",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Tromsø",
-                "inntektsmeldinger": []
+                "behandlendeEnhet": "4842",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Stord",
+                "inntektsmeldinger": ["453469322", "453469323"]
             }
         ]
     }

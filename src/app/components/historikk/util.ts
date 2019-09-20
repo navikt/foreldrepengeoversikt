@@ -3,7 +3,6 @@ import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingÅrsak 
 import { formatDate } from '../saksoversikt/utils';
 import { behandlingByDescendingOrder } from '../../utils/sakerUtils';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
-import { Hendelse as HendelseType} from 'app/api/types/historikk/Hendelse';
 
 export const formaterDatoForHendelse = (dato: string) => {
     return formatDate(dato, 'D. MMMM YYYY [kl.] HH:mm:ss');
@@ -65,10 +64,7 @@ const utledSøknadMotattHendelse = (hendelser: Hendelse[]) => {
 };
 
 const erHendelseRelevant = (h: Hendelse): boolean => {
-    return (        
-        Object.values(HendelseType)
-            .map((hendelse) => hendelse.toString())
-            .includes(h.beskrivelse) ||
+    return (
         Object.values(BehandlingResultatType)
             .map((brt) => brt.toString())
             .includes(h.beskrivelse) ||

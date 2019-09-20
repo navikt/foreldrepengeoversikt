@@ -1,12 +1,10 @@
 [
     {
-        "type": "søknad",
-        "fnr": "06088923020",
-        "hendelse": "INITIELL_ENGANGSSTØNAD",
-        "aktørId": "1059412034287",
-        "journalpostId": "453471659",
-        "saksnr": "140258504",
-        "opprettet": "2019-09-20T15:24:10.907481",
-        "vedlegg": ["I000062"]
+        "aktørId": "1053225029551",
+        "hendelse": "INITIELL_FORELDREPENGER",
+        "fnr": "05116129886",
+        "journalpostId": "453469321",
+        "opprettet": "2019-08-27T15:01:12.594785",
+        "saksnr": "140258038"
     }
 ]
