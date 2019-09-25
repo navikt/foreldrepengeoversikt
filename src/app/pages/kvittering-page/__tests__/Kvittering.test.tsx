@@ -8,6 +8,7 @@ import { loadTranslationObject, shallowWithIntl } from 'enzyme-react-intl';
 import translations from '../../../intl/nb_NO.json';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
+import { Routes } from 'app/utils/routes';
 
 loadTranslationObject(translations);
 
@@ -49,6 +50,6 @@ describe('Kvittering', () => {
         wrapper
             .find(BackButton)
             .simulate('click');
-        expect(historySpy).toHaveBeenCalledWith('/');
+        expect(historySpy).toHaveBeenCalledWith(Routes.DINE_FORELDREPENGER);
     });
 });

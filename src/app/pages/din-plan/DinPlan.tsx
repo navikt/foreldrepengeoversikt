@@ -13,19 +13,28 @@ import { Routes } from 'app/utils/routes';
 import Personinfo from 'app/api/types/personinfo/Personinfo';
 import Sak from 'app/api/types/sak/Sak';
 import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
-import { finnNåværendePerioder, finnFremtidigePerioder, finnTidligerePerioder } from 'app/components/periode-oversikt/periodeUtils';
+import {
+    finnNåværendePerioder,
+    finnFremtidigePerioder,
+    finnTidligerePerioder
+} from 'app/components/periode-oversikt/periodeUtils';
 
 import './dinPlan.less';
 
 interface Props {
     history: History;
-    søker: Personinfo;
-    sak: Sak;
+    søker?: Personinfo;
+    sak?: Sak;
 }
 
-const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker }) => {
+export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker }) => {
+    if (sak === undefined || søker === undefined || sak.perioder === undefined) {
+        history.push(Routes.DINE_FORELDREPENGER);
+        return null;
+    }
+
     const { perioder } = sak;
-    const cls = BEMHelper('din-plan');    
+    const cls = BEMHelper('din-plan');
     return (
         <Page
             className={cls.className}

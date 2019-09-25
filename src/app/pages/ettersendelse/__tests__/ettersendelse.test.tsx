@@ -10,6 +10,7 @@ import BackButton from 'common/components/back-button/BackButton';
 import translations from '../../../intl/nb_NO.json';
 import SakerMock from '../../../../../jest/__mocks__/Sak';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
+import { Routes } from 'app/utils/routes';
 
 loadTranslationObject(translations);
 
@@ -49,14 +50,14 @@ describe('Ettersendelse page', () => {
                 sak: undefined
             })
             .shallow();
-        expect(historySpy).toHaveBeenCalledWith('/');
+        expect(historySpy).toHaveBeenCalledWith(Routes.DINE_FORELDREPENGER);
     });
 
     it('Should navigate to frontpage when back button is clicked', () => {
         const historySpy = jest.spyOn(historyMock, 'push');
         const wrapper = mountWithIntl(<Ettersendelse history={historyMock} />).mount();
         wrapper.find(BackButton).simulate('click');
-        expect(historySpy).toHaveBeenCalledWith('/');
+        expect(historySpy).toHaveBeenCalledWith(Routes.DINE_FORELDREPENGER);
     });
 
     it('Attachment type dropdown should render', () => {
