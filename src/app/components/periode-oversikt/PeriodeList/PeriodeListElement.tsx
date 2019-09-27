@@ -4,6 +4,7 @@ import BEMHelper from 'common/util/bem';
 import { Element, Normaltekst, EtikettLiten } from 'nav-frontend-typografi';
 const moment = require('moment');
 import UttakIkon from 'app/components/ikoner/UttakIkon';
+import AnnenPart from 'app/api/types/sak/AnnenPart';
 
 import './periodeListElement.less';
 
@@ -14,6 +15,8 @@ interface Props {
     beskrivelse?: string | React.ReactNode;
     melding?: string;
     tidsperiode?: any;
+    erSamtidigUttak?: boolean;
+    annenPart?: AnnenPart;
 }
 
 const BEM = BEMHelper('periodelisteItemHeader');
@@ -39,7 +42,9 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
     tittel,
     beskrivelse,
     melding,
-    tidsperiode
+    tidsperiode,
+    erSamtidigUttak,
+    annenPart
 }) => {
     return (
         <li className={BEM.modifier('periode')}>
@@ -48,8 +53,15 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
                     {ikon}
                 </div>
                 <div className={BEM.element('beskrivelse')}>
-                    <Element tag="h1">{tittel}</Element>
-                    {beskrivelse && <Normaltekst>{beskrivelse}</Normaltekst>}
+                    <div className={BEM.element('beskrivelse__tekst')}>
+                        <Element tag="h1">{tittel}</Element>
+                        {beskrivelse && <Normaltekst>{beskrivelse}</Normaltekst>}
+                    </div>
+                    {erSamtidigUttak && (
+                        <div className={BEM.element('samtidig-uttak-punkt')}>
+                            {annenPart ? annenPart.navn.fornavn : 'Samtidig uttak'}
+                        </div>
+                    )}
                 </div>
                 {melding && (
                     <div className={BEM.element('advarsel')}>

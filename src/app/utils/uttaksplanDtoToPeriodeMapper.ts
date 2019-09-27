@@ -34,7 +34,8 @@ const uttaksperiodeDtoUTottaksperiode = (
         antallUttaksdager: uttaksperiodeDto.trekkDager,
         stønadskontotype: uttaksperiodeDto.stønadskontotype,
         graderingInnvilget: uttaksperiodeDto.graderingInnvilget,
-        samtidigUttak: uttaksperiodeDto.samtidigUttak
+        samtidigUttak: uttaksperiodeDto.samtidigUttak,
+        samtidigUttaksprosent: uttaksperiodeDto.samtidigUttaksprosent
     };
 };
 

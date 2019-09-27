@@ -1,7 +1,37 @@
 {
-    "fnr": "22086330656",
-    "fornavn": "LEALAUS",
-    "etternavn": "SEKK",
+    "fnr": "12015649893",
+    "fornavn": "SEDAT",
+    "etternavn": "SAKS",
     "kjønn": "K",
-    "fødselsdato": "1963-08-22"
+    "fødselsdato": "1956-01-12",
+    "land": "NO",
+    "ikkeNordiskEøsLand": false,
+    "barn": [
+        {
+            "fornavn": "ABSURD",
+            "etternavn": "VEGGPRYD",
+            "fnr": "28081975401",
+            "kjønn": "K",
+            "fødselsdato": "2019-08-28",
+            "annenForelder": {
+                "fnr": "21115549933",
+                "fornavn": "TUNGSINDIG",
+                "etternavn": "HEST",
+                "fødselsdato": "1955-11-21"
+            }
+        },
+        {
+            "fornavn": "SNILL",
+            "etternavn": "VEGGPRYD",
+            "fnr": "27081974255",
+            "kjønn": "K",
+            "fødselsdato": "2019-08-27",
+            "annenForelder": {
+                "fnr": "21115549933",
+                "fornavn": "TUNGSINDIG",
+                "etternavn": "HEST",
+                "fødselsdato": "1955-11-21"
+            }
+        }
+    ]
 }
