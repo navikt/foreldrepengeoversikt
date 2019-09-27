@@ -193,8 +193,8 @@
     "kvote.foreldrepenger_før_fødsel": "Foreldrepenger før fødsel",
     "kvote.fellesperiode": "Fellesperiode",
     "kvote.foreldrepenger": "Foreldrepenger",
-    "kvote.uttak.mødrekvote": "Mødrekvote",
-    "kvote.uttak.fedrekvote": "Fedrekvote",
+    "kvote.mødrekvote": "Mødrekvote",
+    "kvote.fedrekvote": "Fedrekvote",
 
     "dinPlan.hull": "Tapte foreldrepenger",
     "dinPlan.hull.beskrivelse": "{antallDager} dager uten registrert periode eller utsettelse",
