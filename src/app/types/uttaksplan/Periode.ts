@@ -1,4 +1,4 @@
-import { PeriodeResultatType, StønadskontoType, UtsettelsePeriodeType } from "app/api/types/UttaksplanDto";
+import { PeriodeResultatType, StønadskontoType, UtsettelsePeriodeType, OppholdsÅrsak } from "app/api/types/UttaksplanDto";
 import { Tidsperiode } from "../Tidsperiode";
 import { Rolle } from "../Rolle";
 
@@ -22,8 +22,13 @@ export interface Utsettelsesperiode extends Periode {
     årsak: UtsettelsePeriodeType;
 }
 
+export interface Oppholdsperiode extends Periode {
+    oppholdsårsak: OppholdsÅrsak;
+}
+
 export enum PeriodeType {
     "Uttak" = "UTTAK",
     "Hull" = "HULL",
-    "Utsettelse" = "UTSETTELSE"
+    "Utsettelse" = "UTSETTELSE",
+    "Opphold" = "Opphold"
 }

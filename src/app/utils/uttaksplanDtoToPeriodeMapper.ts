@@ -1,9 +1,15 @@
 import { UttaksPeriodeDto } from 'app/api/types/UttaksplanDto';
-import { PeriodeType, Utsettelsesperiode, Uttaksperiode } from 'app/types/uttaksplan/Periode';
+import { PeriodeType, Utsettelsesperiode, Uttaksperiode, Oppholdsperiode } from 'app/types/uttaksplan/Periode';
 import { getAntallUttaksdagerITidsperiode } from 'app/components/periode-oversikt/periodeUtils';
 import { Rolle } from 'app/types/Rolle';
 
-const getPeriodetype = (uttaksperiodeDto: UttaksPeriodeDto): PeriodeType => {
+const getPeriodetype = (
+    uttaksperiodeDto: UttaksPeriodeDto
+): PeriodeType.Opphold | PeriodeType.Utsettelse | PeriodeType.Uttak => {
+    if (uttaksperiodeDto.oppholdAarsak) {
+        return PeriodeType.Opphold;
+    }
+
     return uttaksperiodeDto.stønadskontotype && uttaksperiodeDto.utsettelsePeriodeType === undefined
         ? PeriodeType.Uttak
         : PeriodeType.Utsettelse;
@@ -17,9 +23,28 @@ const getForelderForPeriode = (uttaksperiodeDto: UttaksPeriodeDto, søkerErFarEl
 };
 
 export const uttaksperiodeDtoToPeriode = (uttaksperiodeDto: UttaksPeriodeDto, søkerErFarEllerMedmor: boolean) => {
-    return getPeriodetype(uttaksperiodeDto) === PeriodeType.Uttak
-        ? uttaksperiodeDtoUTottaksperiode(uttaksperiodeDto, søkerErFarEllerMedmor)
-        : uttaksperiodeDtoToUtsettelsesperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
+    switch (getPeriodetype(uttaksperiodeDto)) {
+        case PeriodeType.Uttak:
+            return uttaksperiodeDtoUTottaksperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
+        case PeriodeType.Utsettelse:
+            return uttaksperiodeDtoToUtsettelsesperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
+        case PeriodeType.Opphold:
+            return uttaksperiodeDtoUToOppholdsperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
+    }
+};
+
+const uttaksperiodeDtoUToOppholdsperiode = (
+    uttaksperiodeDto: UttaksPeriodeDto,
+    søkerErFarEllerMedmor: boolean
+): Oppholdsperiode => {
+    return {
+        type: PeriodeType.Opphold,
+        gjelderAnnenPart: true,
+        tidsperiode: uttaksperiodeDto.periode,
+        forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
+        antallUttaksdager: getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode),
+        oppholdsårsak: uttaksperiodeDto.oppholdAarsak!
+    };
 };
 
 const uttaksperiodeDtoUTottaksperiode = (

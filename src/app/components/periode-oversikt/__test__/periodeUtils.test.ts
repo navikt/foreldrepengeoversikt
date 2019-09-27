@@ -7,7 +7,6 @@ import {
 import {
     UttaksPeriodeDto,
     MorsAktivitetDto,
-    OppholdsÅrsak,
     StønadskontoType,
     PeriodeResultatType,
     UttakArbeidType,
@@ -123,8 +122,7 @@ describe('periodeUtils', () => {
                 fom: '2019-01-01',
                 tom: '2019-01-02'
             },
-            morsAktivitet: MorsAktivitetDto.Arbeid,
-            oppholdAarsak: OppholdsÅrsak.INGEN
+            morsAktivitet: MorsAktivitetDto.Arbeid
         };
         expect(
             slåSammenLikeOgSammenhengendeUttaksperioder([

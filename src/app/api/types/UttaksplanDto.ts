@@ -21,7 +21,7 @@ export interface UttaksPeriodeDto {
     };
     periode: Tidsperiode;
     morsAktivitet: MorsAktivitetDto;
-    oppholdAarsak: OppholdsÅrsak;
+    oppholdAarsak?: OppholdsÅrsak;
 }
 
 export interface UttaksplanDto {
@@ -43,10 +43,8 @@ export interface UttaksplanDto {
 }
 
 export enum OppholdsÅrsak {
-    'INGEN' = 'INGEN',
     'UTTAK_MØDREKVOTE_ANNEN_FORELDER' = 'UTTAK_MØDREKVOTE_ANNEN_FORELDER',
     'UTTAK_FEDREKVOTE_ANNEN_FORELDER' = 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
-    'UTTAK_FORELDREPENGER_ANNEN_FORELDER' = 'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
     'UTTAK_FELLESP_ANNEN_FORELDER' = 'UTTAK_FELLESP_ANNEN_FORELDER'
 }
 

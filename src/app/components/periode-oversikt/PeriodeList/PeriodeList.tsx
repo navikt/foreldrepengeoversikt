@@ -5,9 +5,14 @@ import { guid } from 'nav-frontend-js-utils';
 
 import BEMHelper from 'common/util/bem';
 import IconBox from 'app/components/ikoner/uttaksplanIkon/iconBox/IconBox';
-import { getStønadskontoFarge, getVarighetString, harAnnenForelderSamtidigUttakISammePeriode } from '../periodeUtils';
+import {
+    getStønadskontoFarge,
+    getVarighetString,
+    harAnnenForelderSamtidigUttakISammePeriode,
+    getStønadskontoTypeFromOppholdsÅrsak
+} from '../periodeUtils';
 import UttakIkon from 'app/components/ikoner/UttakIkon';
-import Periode, { PeriodeType, Utsettelsesperiode, Uttaksperiode } from 'app/types/uttaksplan/Periode';
+import Periode, { PeriodeType, Utsettelsesperiode, Uttaksperiode, Oppholdsperiode } from 'app/types/uttaksplan/Periode';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import UttaksplanAdvarselIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/UttaksplanAdvarselIkon';
 import PeriodeListElement from './PeriodeListElement';
@@ -59,16 +64,6 @@ const getBeskrivelse = (
     );
 };
 
-const getTittel = (periode: any) => {
-    return (
-        <FormattedMessage
-            id={`dinPlan.${periode.type.toLowerCase()}.${
-                periode.stønadskontotype ? periode.stønadskontotype : periode.årsak
-            }`}
-        />
-    );
-};
-
 const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
     tittel,
     perioder,
@@ -89,7 +84,11 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                 return (
                                     <PeriodeListElement
                                         key={guid()}
-                                        tittel={getTittel(p)}
+                                        tittel={
+                                            <FormattedMessage
+                                                id={`kvote.${(p as Uttaksperiode).stønadskontotype.toLowerCase()}`}
+                                            />
+                                        }
                                         ikon={getIkon(p)}
                                         beskrivelse={getBeskrivelse(p, { søker, annenPart }, intl)}
                                         tidsperiode={p.tidsperiode}
@@ -107,9 +106,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                                 values={{
                                                     årsak: (
                                                         <FormattedMessage
-                                                            id={`dinPlan.utsettelsesårsak.${
-                                                                (p as Utsettelsesperiode).årsak
-                                                            }`}
+                                                            id={`dinPlan.utsettelsesårsak.${(p as Utsettelsesperiode).årsak.toLowerCase()}`}
                                                         />
                                                     )
                                                 }}
@@ -132,6 +129,32 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                                 values={{ antallDager: p.antallUttaksdager }}
                                             />
                                         }
+                                    />
+                                );
+                            case PeriodeType.Opphold:
+                                const kvote = getStønadskontoTypeFromOppholdsÅrsak(
+                                    (p as Oppholdsperiode).oppholdsårsak
+                                );
+                                
+                                return (
+                                    <PeriodeListElement
+                                        key={guid()}
+                                        tittel={
+                                            <FormattedMessage
+                                                id="dinPlan.opphold"
+                                                values={{
+                                                    kvote: <FormattedMessage id={`kvote.${kvote.toLowerCase()}`} />
+                                                }}
+                                            />
+                                        }
+                                        ikon={<UttaksplanAdvarselIkon />}
+                                        beskrivelse={
+                                            <FormattedMessage
+                                                id="dinPlan.opphold.beskrivelse"
+                                                values={{ navn: annenPart ? annenPart.navn.fornavn : 'test' }}
+                                            />
+                                        }
+                                        tidsperiode={p.tidsperiode}
                                     />
                                 );
                         }

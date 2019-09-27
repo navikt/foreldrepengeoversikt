@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { UttaksPeriodeDto, StønadskontoType } from 'app/api/types/UttaksplanDto';
+import { UttaksPeriodeDto, StønadskontoType, OppholdsÅrsak } from 'app/api/types/UttaksplanDto';
 import { Tidsperiode } from 'app/types/Tidsperiode';
 import _ from 'lodash';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
@@ -10,7 +10,7 @@ import { Rolle } from 'app/types/Rolle';
 const ANTALL_UTTAKSDAGER_PR_UKE: number = 5;
 
 export const finnTidligerePerioder = (perioder: Periode[]): Periode[] => {
-    return perioder.filter((periode) => moment(periode.tidsperiode.tom).isBefore(moment(),'days'));
+    return perioder.filter((periode) => moment(periode.tidsperiode.tom).isBefore(moment(), 'days'));
 };
 
 export const finnNåværendePerioder = (perioder: Periode[]): Periode[] => {
@@ -200,3 +200,15 @@ export const harAnnenForelderSamtidigUttakISammePeriode = (periode: Periode, per
                   (p) => (p as Uttaksperiode).gjelderAnnenPart === true && _.isEqual(periode.tidsperiode, p.tidsperiode)
               )
         : false;
+
+        
+export const getStønadskontoTypeFromOppholdsÅrsak = (årsak: OppholdsÅrsak): StønadskontoType => {
+    switch (årsak) {
+        case OppholdsÅrsak.UTTAK_FEDREKVOTE_ANNEN_FORELDER:
+            return StønadskontoType.Fedrekvote;
+        case OppholdsÅrsak.UTTAK_FELLESP_ANNEN_FORELDER:
+            return StønadskontoType.Fellesperiode;
+        case OppholdsÅrsak.UTTAK_MØDREKVOTE_ANNEN_FORELDER:
+            return StønadskontoType.Mødrekvote;
+    }
+};
