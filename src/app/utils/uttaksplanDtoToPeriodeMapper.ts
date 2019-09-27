@@ -56,7 +56,10 @@ const uttaksperiodeDtoUTottaksperiode = (
         gjelderAnnenPart: uttaksperiodeDto.gjelderAnnenPart,
         tidsperiode: uttaksperiodeDto.periode,
         forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
-        antallUttaksdager: uttaksperiodeDto.trekkDager,
+        antallUttaksdager:
+            uttaksperiodeDto.trekkDager > 0
+                ? uttaksperiodeDto.trekkDager
+                : getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode),
         stønadskontotype: uttaksperiodeDto.stønadskontotype,
         graderingInnvilget: uttaksperiodeDto.graderingInnvilget,
         samtidigUttak: uttaksperiodeDto.samtidigUttak,
