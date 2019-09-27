@@ -38,6 +38,7 @@ export const slåSammenLikeOgSammenhengendeUttaksperioder = (uttaksperioder: Utt
             uttaksperiodeAccumulator.pop();
             uttaksperiodeAccumulator.push({
                 ...previousUttaksperiode,
+                trekkDager: previousUttaksperiode.trekkDager + uttaksperiode.trekkDager,
                 periode: {
                     ...previousUttaksperiode.periode,
                     tom: uttaksperiode.periode.tom
@@ -201,7 +202,6 @@ export const harAnnenForelderSamtidigUttakISammePeriode = (periode: Periode, per
               )
         : false;
 
-        
 export const getStønadskontoTypeFromOppholdsÅrsak = (årsak: OppholdsÅrsak): StønadskontoType => {
     switch (årsak) {
         case OppholdsÅrsak.UTTAK_FEDREKVOTE_ANNEN_FORELDER:

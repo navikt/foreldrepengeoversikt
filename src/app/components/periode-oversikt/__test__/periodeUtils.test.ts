@@ -124,12 +124,17 @@ describe('periodeUtils', () => {
             },
             morsAktivitet: MorsAktivitetDto.Arbeid
         };
+
+        const perioder = [
+            mockPeriode,
+            { ...mockPeriode, periode: { fom: '2019-01-03', tom: '2019-01-04' } }
+        ];
+
         expect(
-            slåSammenLikeOgSammenhengendeUttaksperioder([
-                mockPeriode,
-                { ...mockPeriode, periode: { fom: '2019-01-03', tom: '2019-01-04' } }
-            ]).length
+            slåSammenLikeOgSammenhengendeUttaksperioder(perioder).length
         ).toEqual(1);
+
+        expect(slåSammenLikeOgSammenhengendeUttaksperioder(perioder)[0].trekkDager).toEqual(40);
     });
 
     it('en periode skal regnes som sammenhengende selv om forrige periode slutter på en sønadg', () => {
