@@ -1,11 +1,27 @@
-import { UttaksPeriodeDto } from 'app/api/types/UttaksplanDto';
-import { PeriodeType, Utsettelsesperiode, Uttaksperiode, Oppholdsperiode } from 'app/types/uttaksplan/Periode';
+import { UttaksPeriodeDto, PeriodeResultatType } from 'app/api/types/UttaksplanDto';
+import {
+    PeriodeType,
+    Utsettelsesperiode,
+    Uttaksperiode,
+    Oppholdsperiode,
+    TaptPeriode
+} from 'app/types/uttaksplan/Periode';
 import { getAntallUttaksdagerITidsperiode } from 'app/components/periode-oversikt/periodeUtils';
 import { Rolle } from 'app/types/Rolle';
 
+const erTaptPeriode = (uttaksperiodeDto: UttaksPeriodeDto) => {
+    return (
+        uttaksperiodeDto.periodeResultatType === PeriodeResultatType.Avslått && uttaksperiodeDto.utbetalingsprosent === 0
+    );
+};
+
 const getPeriodetype = (
     uttaksperiodeDto: UttaksPeriodeDto
-): PeriodeType.Opphold | PeriodeType.Utsettelse | PeriodeType.Uttak => {
+): PeriodeType.Opphold | PeriodeType.Utsettelse | PeriodeType.Uttak | PeriodeType.TaptPeriode => {
+    if (erTaptPeriode(uttaksperiodeDto)) {
+        return PeriodeType.TaptPeriode;
+    }
+
     if (uttaksperiodeDto.oppholdAarsak) {
         return PeriodeType.Opphold;
     }
@@ -30,8 +46,21 @@ export const uttaksperiodeDtoToPeriode = (uttaksperiodeDto: UttaksPeriodeDto, s�
             return uttaksperiodeDtoToUtsettelsesperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
         case PeriodeType.Opphold:
             return uttaksperiodeDtoUToOppholdsperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
+        case PeriodeType.TaptPeriode:
+            return uttaksperiodeDtoUToTaptPeriode(uttaksperiodeDto, søkerErFarEllerMedmor);
     }
 };
+
+const uttaksperiodeDtoUToTaptPeriode = (
+    uttaksperiodeDto: UttaksPeriodeDto,
+    søkerErFarEllerMedmor: boolean
+): TaptPeriode => ({
+    type: PeriodeType.TaptPeriode,
+    tidsperiode: uttaksperiodeDto.periode,
+    antallUttaksdager: getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode),
+    forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
+    stønadskontotype: uttaksperiodeDto.stønadskontotype
+});
 
 const uttaksperiodeDtoUToOppholdsperiode = (
     uttaksperiodeDto: UttaksPeriodeDto,
@@ -56,10 +85,7 @@ const uttaksperiodeDtoUTottaksperiode = (
         gjelderAnnenPart: uttaksperiodeDto.gjelderAnnenPart,
         tidsperiode: uttaksperiodeDto.periode,
         forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
-        antallUttaksdager:
-            uttaksperiodeDto.trekkDager > 0
-                ? uttaksperiodeDto.trekkDager
-                : getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode),
+        antallUttaksdager: uttaksperiodeDto.trekkDager,
         stønadskontotype: uttaksperiodeDto.stønadskontotype,
         graderingInnvilget: uttaksperiodeDto.graderingInnvilget,
         samtidigUttak: uttaksperiodeDto.samtidigUttak,

@@ -31,6 +31,8 @@
 	"dinPlan.utsettelsesårsak.ferie": "Ferie",
 	"dinPlan.utsettelsesårsak.sykdom_skade": "Sykdom",
 	"dinPlan.utsettelsesårsak.søker_innlagt": "Innlagt",
+	"dinPlan.taptPeriode": "dinPlan.taptPeriode",
+	"dinPlan.taptPeriode.beskrivelse": "{navn} - dinPlan.taptPeriode.beskrivelse",
 	"dinPlan.utsettelsesårsak.ukjent": "Utsettelse - årsak ikke valgt",
 	"dineForeldrepenger.alertstripe.fpsak": "Du får tidligst svar på søknaden din <b>4 uker før foreldrepengeperioden din starter</b>. Det er fordi vi bruker de nyeste opplysningene om inntekten din når vi skal beregne hva du skal få i foreldrepenger.",
 	"dineForeldrepenger.alertstripe.infotrygd": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",

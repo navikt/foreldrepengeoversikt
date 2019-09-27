@@ -9,7 +9,7 @@ export interface UttaksPeriodeDto {
     stønadskontotype: StønadskontoType;
     trekkDager: number;
     arbeidstidprosent: number;
-    utbetalingprosent: number;
+    utbetalingsprosent: number;
     gjelderAnnenPart: boolean;
     flerbarnsdager: boolean;
     uttakArbeidType: UttakArbeidType;

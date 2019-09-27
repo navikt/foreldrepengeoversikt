@@ -108,7 +108,7 @@ describe('periodeUtils', () => {
             stønadskontotype: StønadskontoType.Fellesperiode,
             trekkDager: 20,
             arbeidstidprosent: 100,
-            utbetalingprosent: 100,
+            utbetalingsprosent: 100,
             gjelderAnnenPart: false,
             flerbarnsdager: false,
             manueltBehandlet: false,

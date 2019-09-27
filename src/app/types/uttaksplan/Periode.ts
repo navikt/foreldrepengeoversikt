@@ -12,6 +12,7 @@ export default interface Periode {
 }
 
 export interface Uttaksperiode extends Periode {
+    type: PeriodeType.Uttak;
     stønadskontotype: StønadskontoType;
     graderingInnvilget: boolean;
     samtidigUttak: boolean;
@@ -19,6 +20,7 @@ export interface Uttaksperiode extends Periode {
 }
 
 export interface Utsettelsesperiode extends Periode {
+    type: PeriodeType.Utsettelse;
     årsak: UtsettelsePeriodeType;
 }
 
@@ -26,9 +28,15 @@ export interface Oppholdsperiode extends Periode {
     oppholdsårsak: OppholdsÅrsak;
 }
 
+export interface TaptPeriode extends Periode {
+    type: PeriodeType.TaptPeriode;
+    stønadskontotype: StønadskontoType;
+};
+
 export enum PeriodeType {
     "Uttak" = "UTTAK",
     "Hull" = "HULL",
     "Utsettelse" = "UTSETTELSE",
-    "Opphold" = "Opphold"
+    "Opphold" = "OPPHOLD",
+    "TaptPeriode" = "TAPT_PERIODE"
 }

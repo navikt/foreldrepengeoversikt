@@ -135,7 +135,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                 const kvote = getStønadskontoTypeFromOppholdsÅrsak(
                                     (p as Oppholdsperiode).oppholdsårsak
                                 );
-                                
+
                                 return (
                                     <PeriodeListElement
                                         key={guid()}
@@ -151,7 +151,26 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                         beskrivelse={
                                             <FormattedMessage
                                                 id="dinPlan.opphold.beskrivelse"
-                                                values={{ navn: annenPart ? annenPart.navn.fornavn : 'test' }}
+                                                values={{ navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen' }}
+                                            />
+                                        }
+                                        tidsperiode={p.tidsperiode}
+                                    />
+                                );
+                            case PeriodeType.TaptPeriode:
+                                return (
+                                    <PeriodeListElement
+                                        key={guid()}
+                                        tittel={
+                                            <FormattedMessage
+                                                id="dinPlan.taptPeriode"
+                                            />
+                                        }
+                                        ikon={<UttaksplanAdvarselIkon />}
+                                        beskrivelse={
+                                            <FormattedMessage
+                                                id="dinPlan.taptPeriode.beskrivelse"
+                                                values={{ navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen' }}
                                             />
                                         }
                                         tidsperiode={p.tidsperiode}
