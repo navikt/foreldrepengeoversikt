@@ -100,7 +100,15 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                     tittel={
                                         <FormattedMessage
                                             id="dinPlan.utsettelsesårsak"
-                                            values={{ årsak: (p as Utsettelsesperiode).årsak }}
+                                            values={{
+                                                årsak: (
+                                                    <FormattedMessage
+                                                        id={`dinPlan.utsettelsesårsak.${
+                                                            (p as Utsettelsesperiode).årsak
+                                                        }`}
+                                                    />
+                                                )
+                                            }}
                                         />
                                     }
                                     ikon={getIkon(p)}

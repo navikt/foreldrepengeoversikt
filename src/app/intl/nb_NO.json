@@ -199,6 +199,12 @@
     "dinPlan.hull": "Tapte foreldrepenger",
     "dinPlan.hull.beskrivelse": "{antallDager} dager uten registrert periode eller utsettelse",
     "dinPlan.utsettelsesårsak": "Utsettelse - {årsak}",
+    "dinPlan.utsettelsesårsak.ARBEID": "Arbeid",
+    "dinPlan.utsettelsesårsak.BARN_INNLAGT": "Barnet er innlagt",
+    "dinPlan.utsettelsesårsak.SØKER_INNLAGT": "Innlagt",
+    "dinPlan.utsettelsesårsak.FERIE": "Ferie",
+    "dinPlan.utsettelsesårsak.SYKDOM_SKADE": "Sykdom",
+    "dinPlan.utsettelsesårsak.ukjent": "Utsettelse - årsak ikke valgt",
 
     "periodeOversikt.ingenPerioder": "Ingen aktuelle perioder for denne saken."
 }
