@@ -10,17 +10,17 @@ import { Rolle } from 'app/types/Rolle';
 const ANTALL_UTTAKSDAGER_PR_UKE: number = 5;
 
 export const finnTidligerePerioder = (perioder: Periode[]): Periode[] => {
-    return perioder.filter((periode) => moment(periode.tidsperiode.tom).isBefore(moment()));
+    return perioder.filter((periode) => moment(periode.tidsperiode.tom).isBefore(moment(),'days'));
 };
 
 export const finnNåværendePerioder = (perioder: Periode[]): Periode[] => {
     return perioder.filter((periode) =>
-        moment().isBetween(periode.tidsperiode.fom, periode.tidsperiode.tom, 'day', '[]')
+        moment().isBetween(periode.tidsperiode.fom, periode.tidsperiode.tom, 'days', '[]')
     );
 };
 
 export const finnFremtidigePerioder = (perioder: Periode[]): Periode[] => {
-    return perioder.filter((periode) => moment(periode.tidsperiode.fom).isAfter(moment()));
+    return perioder.filter((periode) => moment(periode.tidsperiode.fom).isAfter(moment(), 'days'));
 };
 
 export const getUkerOgDagerFromDager = (dager: number): { uker: number; dager: number } => {
@@ -192,7 +192,7 @@ const erHullMellomPerioder = (periode: Periode, nestePeriode?: Periode) => {
     );
 };
 
-const harAnnenForelderSamtidigUttakISammePeriode = (periode: Periode, perioder: Periode[]): boolean =>
+export const harAnnenForelderSamtidigUttakISammePeriode = (periode: Periode, perioder: Periode[]): boolean =>
     periode.type === PeriodeType.Uttak
         ? perioder
               .filter((p) => (p as Uttaksperiode).samtidigUttak)
