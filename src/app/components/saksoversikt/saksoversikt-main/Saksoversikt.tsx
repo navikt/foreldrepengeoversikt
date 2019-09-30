@@ -128,10 +128,10 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                                 text: <FormattedMessage id="saksoversikt.section.dinPlan.sectionLink" />
                             }}>
                             <PeriodeOversikt
-                                nåværendePerioder={finnNåværendePerioder(perioder!)
+                                nåværendePerioder={finnNåværendePerioder(perioder)
                                     .filter((p) => skalVisesIPeriodeListe(p, perioder))
                                     .slice(0, 1)}
-                                fremtidigePerioder={finnFremtidigePerioder(perioder!)
+                                fremtidigePerioder={finnFremtidigePerioder(perioder)
                                     .filter((p) => skalVisesIPeriodeListe(p, perioder))
                                     .slice(0, 1)}
                                 søker={søker}
