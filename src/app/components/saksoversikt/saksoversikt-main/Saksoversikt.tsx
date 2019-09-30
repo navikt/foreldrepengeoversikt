@@ -24,7 +24,11 @@ import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
 import SectionSeparator from 'app/components/section-separator/SectionSeparator';
 import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
-import { finnNåværendePerioder, finnFremtidigePerioder } from 'app/components/periode-oversikt/periodeUtils';
+import {
+    finnNåværendePerioder,
+    finnFremtidigePerioder,
+    skalVisesIPeriodeListe
+} from 'app/components/periode-oversikt/periodeUtils';
 
 import './saksoversikt.less';
 
@@ -50,7 +54,7 @@ class Saksoversikt extends Component<SaksoversiktProps> {
 
     render() {
         const { sak, historikkInnslagListe, withHeader = false, søker } = this.props;
-        const { perioder } = sak;
+        const { perioder } = sak;
         const erSakForeldrepengesak = erForeldrepengesak(sak);
 
         const cls = BEMHelper('saksoversikt');
@@ -124,8 +128,12 @@ class Saksoversikt extends Component<SaksoversiktProps> {
                                 text: <FormattedMessage id="saksoversikt.section.dinPlan.sectionLink" />
                             }}>
                             <PeriodeOversikt
-                                nåværendePerioder={finnNåværendePerioder(perioder!).slice(0,1)}
-                                fremtidigePerioder={finnFremtidigePerioder(perioder!).slice(0,1)}
+                                nåværendePerioder={finnNåværendePerioder(perioder!)
+                                    .filter((p) => skalVisesIPeriodeListe(p, perioder))
+                                    .slice(0, 1)}
+                                fremtidigePerioder={finnFremtidigePerioder(perioder!)
+                                    .filter((p) => skalVisesIPeriodeListe(p, perioder))
+                                    .slice(0, 1)}
                                 søker={søker}
                                 annenPart={sak.annenPart}
                             />

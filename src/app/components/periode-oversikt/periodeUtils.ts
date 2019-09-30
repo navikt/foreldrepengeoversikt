@@ -4,7 +4,7 @@ import { Tidsperiode } from 'app/types/Tidsperiode';
 import _ from 'lodash';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import { InjectedIntl } from 'react-intl';
-import Periode, { PeriodeType } from 'app/types/uttaksplan/Periode';
+import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Periode';
 import { Rolle } from 'app/types/Rolle';
 
 const ANTALL_UTTAKSDAGER_PR_UKE: number = 5;
@@ -210,3 +210,8 @@ export const getStønadskontoTypeFromOppholdsÅrsak = (årsak: OppholdsÅrsak): 
             return StønadskontoType.Mødrekvote;
     }
 };
+
+export const skalVisesIPeriodeListe = (periode: Periode, perioder: Periode[]) =>
+    ((periode as Uttaksperiode).samtidigUttak !== true &&
+        !harAnnenForelderSamtidigUttakISammePeriode(periode, perioder)) ||
+    (harAnnenForelderSamtidigUttakISammePeriode(periode, perioder) && !periode.gjelderAnnenPart);

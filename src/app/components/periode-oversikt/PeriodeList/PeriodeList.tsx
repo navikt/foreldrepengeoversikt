@@ -9,7 +9,8 @@ import {
     getStønadskontoFarge,
     getVarighetString,
     harAnnenForelderSamtidigUttakISammePeriode,
-    getStønadskontoTypeFromOppholdsÅrsak
+    getStønadskontoTypeFromOppholdsÅrsak,
+    skalVisesIPeriodeListe
 } from '../periodeUtils';
 import UttakIkon from 'app/components/ikoner/UttakIkon';
 import Periode, { PeriodeType, Utsettelsesperiode, Uttaksperiode, Oppholdsperiode } from 'app/types/uttaksplan/Periode';
@@ -77,14 +78,8 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
             <Normaltekst className={cls.element('tittel')}>{tittel}</Normaltekst>
             <ol>
                 {perioder
-                    .filter(
-                        (p) =>
-                            ((p as Uttaksperiode).samtidigUttak !== true &&
-                                !harAnnenForelderSamtidigUttakISammePeriode(p, perioder)) ||
-                            (harAnnenForelderSamtidigUttakISammePeriode(p, perioder) && !p.gjelderAnnenPart)
-                    )
+                    .filter((p) => skalVisesIPeriodeListe(p, perioder))
                     .map((p) => {
-                        console.log(p);
                         switch (p.type) {
                             case PeriodeType.Uttak:
                                 return (
