@@ -4,7 +4,7 @@ import { Tidsperiode } from 'app/types/Tidsperiode';
 import _ from 'lodash';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import { InjectedIntl } from 'react-intl';
-import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Periode';
+import Periode, { PeriodeType } from 'app/types/uttaksplan/Periode';
 import { Rolle } from 'app/types/Rolle';
 
 const ANTALL_UTTAKSDAGER_PR_UKE: number = 5;
@@ -65,7 +65,7 @@ export const erSammenhengende = (tidsperiode1: Tidsperiode, tidsperiode2: Tidspe
         finnNesteMuligeUttaksdag(tidsperiode1.tom) === tidsperiode2.fom ||
         moment(tidsperiode1.tom)
             .add(1, 'days')
-            .format('YYYY-MM-DD') === tidsperiode2.fom
+            .isSame(moment(tidsperiode2.fom), 'days')
     );
 };
 
@@ -185,21 +185,19 @@ export const fyllInnHull = (periodeAcc: Periode[], periode: Periode, index: numb
     return periodeAcc;
 };
 
-const erHullMellomPerioder = (periode: Periode, nestePeriode?: Periode) => {
+export const erHullMellomPerioder = (periode: Periode, nestePeriode?: Periode) => {
     return (
-        nestePeriode &&
-        finnNesteMuligeUttaksdag(periode.tidsperiode.tom) !== nestePeriode.tidsperiode.fom &&
-        (nestePeriode as Uttaksperiode).samtidigUttak === false
+        nestePeriode !== undefined &&
+        !erSammenhengende(periode.tidsperiode, nestePeriode.tidsperiode) &&
+        moment(periode.tidsperiode.tom).isBefore(nestePeriode.tidsperiode.fom, 'days')
     );
 };
 
 export const harAnnenForelderSamtidigUttakISammePeriode = (periode: Periode, perioder: Periode[]): boolean =>
     periode.type === PeriodeType.Uttak
         ? perioder
-              .filter((p) => (p as Uttaksperiode).samtidigUttak)
-              .some(
-                  (p) => (p as Uttaksperiode).gjelderAnnenPart === true && _.isEqual(periode.tidsperiode, p.tidsperiode)
-              )
+              .filter((p) => p.type === PeriodeType.Uttak && !_.isEqual(p, periode))
+              .some((p) => _.isEqual(periode.tidsperiode.fom, p.tidsperiode.fom))
         : false;
 
 export const getStønadskontoTypeFromOppholdsÅrsak = (årsak: OppholdsÅrsak): StønadskontoType => {

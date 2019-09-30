@@ -77,8 +77,14 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
             <Normaltekst className={cls.element('tittel')}>{tittel}</Normaltekst>
             <ol>
                 {perioder
-                    .filter((p) => (p as Uttaksperiode).samtidigUttak !== true)
+                    .filter(
+                        (p) =>
+                            ((p as Uttaksperiode).samtidigUttak !== true &&
+                                !harAnnenForelderSamtidigUttakISammePeriode(p, perioder)) ||
+                            (harAnnenForelderSamtidigUttakISammePeriode(p, perioder) && !p.gjelderAnnenPart)
+                    )
                     .map((p) => {
+                        console.log(p);
                         switch (p.type) {
                             case PeriodeType.Uttak:
                                 return (
@@ -151,7 +157,9 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                         beskrivelse={
                                             <FormattedMessage
                                                 id="dinPlan.opphold.beskrivelse"
-                                                values={{ navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen' }}
+                                                values={{
+                                                    navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen'
+                                                }}
                                             />
                                         }
                                         tidsperiode={p.tidsperiode}
@@ -161,16 +169,14 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                 return (
                                     <PeriodeListElement
                                         key={guid()}
-                                        tittel={
-                                            <FormattedMessage
-                                                id="dinPlan.taptPeriode"
-                                            />
-                                        }
+                                        tittel={<FormattedMessage id="dinPlan.taptPeriode" />}
                                         ikon={<UttaksplanAdvarselIkon />}
                                         beskrivelse={
                                             <FormattedMessage
                                                 id="dinPlan.taptPeriode.beskrivelse"
-                                                values={{ navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen' }}
+                                                values={{
+                                                    navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen'
+                                                }}
                                             />
                                         }
                                         tidsperiode={p.tidsperiode}
