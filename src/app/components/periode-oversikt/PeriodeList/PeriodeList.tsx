@@ -170,7 +170,8 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                             <FormattedMessage
                                                 id="dinPlan.taptPeriode.beskrivelse"
                                                 values={{
-                                                    navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen'
+                                                    navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen',
+                                                    antallDager: getVarighetString(p.antallUttaksdager, intl)
                                                 }}
                                             />
                                         }
