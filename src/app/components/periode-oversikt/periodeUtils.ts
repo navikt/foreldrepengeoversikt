@@ -218,3 +218,7 @@ export const skalVisesIPeriodeListe = (periode: Periode, perioder: Periode[]) =>
               !harAnnenForelderSamtidigUttakISammePeriode(periode, perioder)) ||
               (harAnnenForelderSamtidigUttakISammePeriode(periode, perioder) && !periode.gjelderAnnenPart);
 };
+
+export const harUttaksperiodeITaptPeriode = (periode: Periode, perioder: Periode[]) => {
+    
+};

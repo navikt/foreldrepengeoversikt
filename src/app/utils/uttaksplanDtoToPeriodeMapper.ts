@@ -9,9 +9,10 @@ import {
 import { getAntallUttaksdagerITidsperiode } from 'app/components/periode-oversikt/periodeUtils';
 import { Rolle } from 'app/types/Rolle';
 
-const erTaptPeriode = (uttaksperiodeDto: UttaksPeriodeDto) => {
+export const erTaptPeriode = (uttaksperiodeDto: UttaksPeriodeDto) => {
     return (
-        uttaksperiodeDto.periodeResultatType === PeriodeResultatType.Avslått && uttaksperiodeDto.utbetalingsprosent === 0
+        uttaksperiodeDto.periodeResultatType === PeriodeResultatType.Avslått &&
+        uttaksperiodeDto.utbetalingsprosent === 0
     );
 };
 
