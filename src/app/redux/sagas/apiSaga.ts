@@ -1,4 +1,5 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
+import isEqual from 'lodash/isEqual';
 import Api from '../../api/api';
 import {
     ApiActionTypes,
@@ -17,7 +18,6 @@ import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 import { uttaksperiodeDtoToPeriode, erTaptPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
 import { slåSammenLikeOgSammenhengendeUttaksperioder, fyllInnHull } from 'app/components/periode-oversikt/periodeUtils';
 import { StønadskontoType } from 'app/api/types/UttaksplanDto';
-import _ from 'lodash';
 
 function* getPersoninfoSaga(_: GetPersoninfoRequest) {
     try {
@@ -57,9 +57,9 @@ function* uttaksplanTilSakMapper(sak: Sak): IterableIterator<any> {
             sak.saksgrunnlag = response.data;
             sak.perioder = slåSammenLikeOgSammenhengendeUttaksperioder(sak.saksgrunnlag!.perioder)
                 .filter(
-                    (p, index, perioder) =>
+                    (p, _, perioder) =>
                         !(erTaptPeriode(p) && p.stønadskontotype === StønadskontoType.ForeldrepengerFørFødsel) &&
-                        !(erTaptPeriode(p) && perioder.some((val) => _.isEqual(val.periode, p.periode)))
+                        !(erTaptPeriode(p) && perioder.some((val) => isEqual(val.periode, p.periode)))
                 )
                 .map((p) => uttaksperiodeDtoToPeriode(p, sak.saksgrunnlag!.grunnlag.søkerErFarEllerMedmor))
                 .reduce(fyllInnHull, []);
