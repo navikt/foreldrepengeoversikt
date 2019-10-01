@@ -1,5 +1,4 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
-import isEqual from 'lodash/isEqual';
 import Api from '../../api/api';
 import {
     ApiActionTypes,
@@ -15,9 +14,12 @@ import { StorageKvittering } from 'app/api/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
-import { uttaksperiodeDtoToPeriode, erTaptPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
-import { slåSammenLikeOgSammenhengendeUttaksperioder, fyllInnHull } from 'app/components/periode-oversikt/periodeUtils';
-import { StønadskontoType } from 'app/api/types/UttaksplanDto';
+import { uttaksperiodeDtoToPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
+import {
+    slåSammenLikeOgSammenhengendeUttaksperioder,
+    fyllInnHull,
+    fjernIrrelevanteTaptePerioder
+} from 'app/components/periode-oversikt/periodeUtils';
 
 function* getPersoninfoSaga(_: GetPersoninfoRequest) {
     try {
@@ -55,12 +57,9 @@ function* uttaksplanTilSakMapper(sak: Sak): IterableIterator<any> {
         if (sak.saksnummer && sak.type === SakType.FPSAK && erForeldrepengesak(sak)) {
             const response = yield call(Api.getUttaksplan, sak.saksnummer);
             sak.saksgrunnlag = response.data;
-            sak.perioder = slåSammenLikeOgSammenhengendeUttaksperioder(sak.saksgrunnlag!.perioder)
-                .filter(
-                    (p, _, perioder) =>
-                        !(erTaptPeriode(p) && p.stønadskontotype === StønadskontoType.ForeldrepengerFørFødsel) &&
-                        !(erTaptPeriode(p) && perioder.some((val) => isEqual(val.periode, p.periode)))
-                )
+            sak.perioder = slåSammenLikeOgSammenhengendeUttaksperioder(
+                sak.saksgrunnlag!.perioder.filter(fjernIrrelevanteTaptePerioder)
+            )
                 .map((p) => uttaksperiodeDtoToPeriode(p, sak.saksgrunnlag!.grunnlag.søkerErFarEllerMedmor))
                 .reduce(fyllInnHull, []);
         }

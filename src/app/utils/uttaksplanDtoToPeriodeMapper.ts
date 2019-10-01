@@ -1,4 +1,4 @@
-import { UttaksPeriodeDto, PeriodeResultatType } from 'app/api/types/UttaksplanDto';
+import { UttaksPeriodeDto } from 'app/api/types/UttaksplanDto';
 import {
     PeriodeType,
     Utsettelsesperiode,
@@ -6,15 +6,8 @@ import {
     Oppholdsperiode,
     TaptPeriode
 } from 'app/types/uttaksplan/Periode';
-import { getAntallUttaksdagerITidsperiode } from 'app/components/periode-oversikt/periodeUtils';
+import { getAntallUttaksdagerITidsperiode, erTaptPeriode } from 'app/components/periode-oversikt/periodeUtils';
 import { Rolle } from 'app/types/Rolle';
-
-export const erTaptPeriode = (uttaksperiodeDto: UttaksPeriodeDto) => {
-    return (
-        uttaksperiodeDto.periodeResultatType === PeriodeResultatType.Avslått &&
-        uttaksperiodeDto.utbetalingsprosent === 0
-    );
-};
 
 const getPeriodetype = (
     uttaksperiodeDto: UttaksPeriodeDto

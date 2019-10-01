@@ -1,7 +1,7 @@
 import moment from 'moment';
-import { UttaksPeriodeDto, StønadskontoType, OppholdsÅrsak } from 'app/api/types/UttaksplanDto';
+import { UttaksPeriodeDto, StønadskontoType, OppholdsÅrsak, PeriodeResultatType } from 'app/api/types/UttaksplanDto';
 import { Tidsperiode } from 'app/types/Tidsperiode';
-import _ from 'lodash';
+import { isEqual } from 'lodash';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import { InjectedIntl } from 'react-intl';
 import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Periode';
@@ -70,7 +70,7 @@ export const erSammenhengende = (tidsperiode1: Tidsperiode, tidsperiode2: Tidspe
 };
 
 const erLike = (uttaksperiode1: UttaksPeriodeDto, uttaksperiode2: UttaksPeriodeDto): boolean => {
-    return _.isEqual(
+    return isEqual(
         getRelevanteFelterForSammenligning(uttaksperiode1),
         getRelevanteFelterForSammenligning(uttaksperiode2)
     );
@@ -196,8 +196,8 @@ export const erHullMellomPerioder = (periode: Periode, nestePeriode?: Periode) =
 export const harAnnenForelderSamtidigUttakISammePeriode = (periode: Periode, perioder: Periode[]): boolean =>
     periode.type === PeriodeType.Uttak
         ? perioder
-              .filter((p) => p.type === PeriodeType.Uttak && !_.isEqual(p, periode))
-              .some((p) => _.isEqual(periode.tidsperiode.fom, p.tidsperiode.fom))
+              .filter((p) => p.type === PeriodeType.Uttak && !isEqual(p, periode))
+              .some((p) => isEqual(periode.tidsperiode.fom, p.tidsperiode.fom))
         : false;
 
 export const getStønadskontoTypeFromOppholdsÅrsak = (årsak: OppholdsÅrsak): StønadskontoType => {
@@ -218,3 +218,14 @@ export const skalVisesIPeriodeListe = (periode: Periode, perioder: Periode[]) =>
               !harAnnenForelderSamtidigUttakISammePeriode(periode, perioder)) ||
               (harAnnenForelderSamtidigUttakISammePeriode(periode, perioder) && !periode.gjelderAnnenPart);
 };
+
+export const erTaptPeriode = (uttaksperiodeDto: UttaksPeriodeDto) => {
+    return (
+        uttaksperiodeDto.periodeResultatType === PeriodeResultatType.Avslått &&
+        uttaksperiodeDto.utbetalingsprosent === 0
+    );
+};
+
+export const fjernIrrelevanteTaptePerioder = (periode: UttaksPeriodeDto, _: number, perioder: UttaksPeriodeDto[]) =>
+    !(erTaptPeriode(periode) && periode.stønadskontotype === StønadskontoType.ForeldrepengerFørFødsel) &&
+    !(erTaptPeriode(periode) && perioder.some((p) => isEqual(p.periode.fom, periode.periode.fom)));
