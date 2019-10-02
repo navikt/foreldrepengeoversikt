@@ -18,7 +18,8 @@ import { uttaksperiodeDtoToPeriode } from 'app/utils/uttaksplanDtoToPeriodeMappe
 import {
     slåSammenLikeOgSammenhengendeUttaksperioder,
     fyllInnHull,
-    fjernIrrelevanteTaptePerioder
+    fjernIrrelevanteTaptePerioder,
+    fjernAvslåttePerioderEtterSisteInnvilgetPeriode
 } from 'app/components/periode-oversikt/periodeUtils';
 
 function* getPersoninfoSaga(_: GetPersoninfoRequest) {
@@ -57,9 +58,11 @@ function* uttaksplanTilSakMapper(sak: Sak): IterableIterator<any> {
         if (sak.saksnummer && sak.type === SakType.FPSAK && erForeldrepengesak(sak)) {
             const response = yield call(Api.getUttaksplan, sak.saksnummer);
             sak.saksgrunnlag = response.data;
-            sak.perioder = slåSammenLikeOgSammenhengendeUttaksperioder(
-                sak.saksgrunnlag!.perioder.filter(fjernIrrelevanteTaptePerioder)
-            )
+            const perioder = fjernAvslåttePerioderEtterSisteInnvilgetPeriode(sak.saksgrunnlag!.perioder).filter(
+                fjernIrrelevanteTaptePerioder
+            );
+            
+            sak.perioder = slåSammenLikeOgSammenhengendeUttaksperioder(perioder)
                 .map((p) => uttaksperiodeDtoToPeriode(p, sak.saksgrunnlag!.grunnlag.søkerErFarEllerMedmor))
                 .reduce(fyllInnHull, []);
         }

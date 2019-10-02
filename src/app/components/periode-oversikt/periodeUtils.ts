@@ -221,11 +221,19 @@ export const skalVisesIPeriodeListe = (periode: Periode, perioder: Periode[]) =>
 
 export const erTaptPeriode = (uttaksperiodeDto: UttaksPeriodeDto) => {
     return (
-        uttaksperiodeDto.periodeResultatType === PeriodeResultatType.Avslått &&
-        uttaksperiodeDto.utbetalingsprosent === 0
+        (uttaksperiodeDto.periodeResultatType === PeriodeResultatType.Avslått &&
+            uttaksperiodeDto.utbetalingsprosent === 0) ||
+        (uttaksperiodeDto.trekkDager > 0 && uttaksperiodeDto.utbetalingsprosent === 0)
     );
 };
 
 export const fjernIrrelevanteTaptePerioder = (periode: UttaksPeriodeDto, _: number, perioder: UttaksPeriodeDto[]) =>
     !(erTaptPeriode(periode) && periode.stønadskontotype === StønadskontoType.ForeldrepengerFørFødsel) &&
     !(erTaptPeriode(periode) && perioder.some((p) => isEqual(p.periode.fom, periode.periode.fom)));
+
+export const fjernAvslåttePerioderEtterSisteInnvilgetPeriode = (perioder: UttaksPeriodeDto[]) => {
+    while (perioder[perioder.length - 1].periodeResultatType === PeriodeResultatType.Avslått) {
+        perioder.pop();
+    }
+    return perioder;
+};

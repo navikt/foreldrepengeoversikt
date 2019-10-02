@@ -15,7 +15,7 @@ const getPeriodetype = (
     if (erTaptPeriode(uttaksperiodeDto)) {
         return PeriodeType.TaptPeriode;
     }
-
+    
     if (uttaksperiodeDto.oppholdAarsak) {
         return PeriodeType.Opphold;
     }
