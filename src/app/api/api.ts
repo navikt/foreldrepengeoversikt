@@ -24,11 +24,11 @@ const getStorageKvittering = () => {
 };
 
 const getHistorikk = () => {
-    return AxiosApiInterceptor.get('/historikk/historikk');
+    return AxiosApiInterceptor.get('/historikk');
 };
 
 const getMiniDialog = () => {
-    return AxiosApiInterceptor.get('/minidialog/minidialog');
+    return AxiosApiInterceptor.get('/minidialog');
 };
 
 const getUttaksplan = (saksnummer: string) => {
