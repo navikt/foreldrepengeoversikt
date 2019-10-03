@@ -53,5 +53,6 @@ export const lenker = {
     chat: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger',
     utbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/#',
     søk: 'https://foreldrepengesoknad.nav.no',
-    svangerskapspengesøknad: 'https://svangerskapspengesoknad.nav.no'
+    svangerskapspengesøknad: 'https://svangerskapspengesoknad.nav.no',
+    skjemaveileder: "https://www.nav.no/soknader/nb/person"
 };

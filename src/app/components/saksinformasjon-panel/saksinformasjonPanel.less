@@ -1,0 +1,41 @@
+@import '../../styles/variables.less';
+
+.saksinformasjon-panel {
+    background-color: white;
+    padding: 0.5rem 2rem 2rem;
+    margin-bottom: 1rem;
+    &__valg {
+        display: flex;
+        flex-flow: row;
+    }
+
+    &__btn {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        align-content: center;
+        .hjelpetekst {
+            padding: 0;
+            margin-left: 0.5rem;
+        }
+    }
+
+    &__btn:first-child {
+        margin-right: 1rem;
+    }
+
+    @media (max-width: @mobile-breakpoint) {
+        padding: 1rem;
+        &__valg {
+            flex-flow: column;
+            .knapp:first-child {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        &__btn {
+            justify-content: flex-start;
+        }
+    }
+}

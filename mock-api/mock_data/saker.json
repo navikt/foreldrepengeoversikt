@@ -2,26 +2,12 @@
     {
         "type": "FPSAK",
         "saksnummer": "140258038",
-        "status": "LOP",
+        "status": "OPPR",
         "opprettet": "2019-08-27",
         "annenPart": {
             "fnr": "02036129800",
             "aktørId": "1944804312863",
             "navn": { "fornavn": "GODSLIG", "mellomnavn": "SKJELENDE", "etternavn": "TAREMEL", "kjønn": "K" }
-        },
-        "behandlinger": [
-            {
-                "opprettetTidspunkt": "2019-08-27T15:01:08.765",
-                "endretTidspunkt": "2019-08-27T15:03:35.261",
-                "status": "AVSLU",
-                "type": "FP",
-                "tema": "FORP_FODS",
-                "årsak": "null",
-                "behandlingResultat": "INNVILGET",
-                "behandlendeEnhet": "4842",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Stord",
-                "inntektsmeldinger": ["453469322", "453469323"]
-            }
-        ]
+        }
     }
 ]

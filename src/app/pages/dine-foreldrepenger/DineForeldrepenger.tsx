@@ -12,7 +12,7 @@ import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
 import RelatertInformasjon from 'app/components/relatert-informasjon/RelatertInformasjon';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
-import { erForeldrepengesak, erInfotrygdSak, opprettSak, skalKunneSøkeOmEndring } from '../../utils/sakerUtils';
+import { erForeldrepengesak, erInfotrygdSak, opprettSak, skalKunneSøkeOmEndring, harSøkt } from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
 
@@ -62,7 +62,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     shouldRenderAlertStripe(nyesteSak: Sak): boolean {
-        return !skalKunneSøkeOmEndring(nyesteSak) || erInfotrygdSak(nyesteSak);
+        return harSøkt(nyesteSak) && !skalKunneSøkeOmEndring(nyesteSak) || erInfotrygdSak(nyesteSak);
     }
 
     renderSaksoversiktList(nyesteSak: Sak) {
@@ -131,7 +131,6 @@ export class DineForeldrepenger extends React.Component<Props> {
                                     søker={søker}
                                     history={history}
                                     historikkInnslagListe={historikkInnslagListe}
-                                    skalKunneSøkeOmEndring={skalKunneSøkeOmEndring(nyesteSak)}
                                     withHeader={true}
                                 />
                                 {this.renderSaksoversiktList(nyesteSak)}
