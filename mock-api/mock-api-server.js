@@ -34,11 +34,11 @@ router.get('/rest/innsyn/saker', (req, res) => {
     res.send(MockStorage.getSaker());
 });
 
-router.get('/rest/historikk/historikk', (req, res) => {
+router.get('/rest/historikk', (req, res) => {
     res.send(MockStorage.getHistorikk());
 });
 
-router.get('/rest/minidialog/minidialog', (req, res) => {
+router.get('/rest/minidialog', (req, res) => {
     res.send(MockStorage.getMinidialog());
 });
 
