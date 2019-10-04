@@ -54,5 +54,5 @@ export const lenker = {
     utbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/#',
     søk: 'https://foreldrepengesoknad.nav.no',
     svangerskapspengesøknad: 'https://svangerskapspengesoknad.nav.no',
-    skjemaveileder: "https://www.nav.no/soknader/nb/person"
+    hvaSøkerDu: "https://familie.nav.no/hva-soker-du"
 };
