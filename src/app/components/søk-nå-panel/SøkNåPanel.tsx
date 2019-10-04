@@ -1,6 +1,6 @@
 import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
 import { lenker } from 'app/utils/lenker';
@@ -15,17 +15,19 @@ interface Props {
 const SøkNåPanel: React.StatelessComponent<Props> = ({ søker }) => {
     return (
         <AlertStripe type="advarsel">
-            <Undertittel className="blokk-s">
+            <Innholdstittel className="blokk-s">
                 <FormattedMessage id="søkNåPanel.tittel" />
-            </Undertittel>
+            </Innholdstittel>
             <Normaltekst className="blokk-xs">
-                <FormattedMessage id={'søkNåPanel.tekst'} />
+                <FormattedMessage
+                    id={'søkNåPanel.tekst'}
+                />
             </Normaltekst>
             <Hovedknapp
                 onClick={() =>
                     søker && søker.kjønn === Kjønn.K
-                        ? redirect(lenker.søkOmForeldrepenger)
-                        : redirect(lenker.skjemaveileder)
+                        ? redirect(lenker.skjemaveileder)
+                        : redirect(lenker.søkOmForeldrepenger)
                 }>
                 <FormattedMessage id="søkNåPanel.søkNåButton" />
             </Hovedknapp>
