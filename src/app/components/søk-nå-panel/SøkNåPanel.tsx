@@ -19,15 +19,13 @@ const SøkNåPanel: React.StatelessComponent<Props> = ({ søker }) => {
                 <FormattedMessage id="søkNåPanel.tittel" />
             </Undertittel>
             <Normaltekst className="blokk-xs">
-                <FormattedMessage
-                    id={'søkNåPanel.tekst'}
-                />
+                <FormattedMessage id={'søkNåPanel.tekst'} />
             </Normaltekst>
             <Hovedknapp
                 onClick={() =>
-                    søker && søker.kjønn === Kjønn.K
-                        ? redirect(lenker.skjemaveileder)
-                        : redirect(lenker.søkOmForeldrepenger)
+                    søker && søker.kjønn === Kjønn.M
+                        ? redirect(lenker.søkOmForeldrepenger)
+                        : redirect(lenker.skjemaveileder)
                 }>
                 <FormattedMessage id="søkNåPanel.søkNåButton" />
             </Hovedknapp>
