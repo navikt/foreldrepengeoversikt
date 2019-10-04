@@ -46,7 +46,14 @@ const getRelevanteSkjemanummer = (sak: Sak): Skjemanummer[] => {
 };
 
 export const skjemanummerForFørstegangssøknadForeldrepenger = (skjemanummer: Skjemanummer): boolean => {
-    return !isSkjemanummerForSvangerskapspengesoknad(skjemanummer) || skjemanummer === Skjemanummer.ANNET;
+    switch (skjemanummer) {
+        case Skjemanummer.SKJEMA_FOR_TILRETTELEGGING_OG_OMPLASSERING:
+        case Skjemanummer.TILRETTELEGGING_FOR_ARBEIDSTAKERE:
+        case Skjemanummer.TILRETTELEGGING_FOR_FRILANS_ELLER_SELVSTENDIG:
+            return false;
+        default:
+            return true;
+    }
 };
 
 export const isSkjemanummerForEndringssøknadForeldrepenger = (skjemanummer: Skjemanummer): boolean => {
