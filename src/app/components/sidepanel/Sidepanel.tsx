@@ -43,7 +43,7 @@ const Sidepanel: FunctionComponent<Props> = ({ sak }) => {
                         }}
                     />
                 )}
-            {sak !== undefined && erForeldrepengesak(sak) && (
+            {sak !== undefined && erForeldrepengesak(sak) && harSøkt(sak) && (
                 <SidepanelElement
                     icon={<SøkIkon />}
                     lenke={{
