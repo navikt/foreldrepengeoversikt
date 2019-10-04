@@ -34,7 +34,7 @@
 	"dinPlan.taptPeriode": "Ikke innvilget periode",
 	"dinPlan.taptPeriode.beskrivelse": "{navn} - {antallDager} uten innvilget periode eller utsettelse",
 	"dinPlan.utsettelsesårsak.ukjent": "Utsettelse - årsak ikke valgt",
-	"dineForeldrepenger.alertstripe.fpsak": "Du får tidligst svar på søknaden din <b>4 uker</b> før foreldrepengeperioden din starter<. Det er fordi vi bruker de nyeste opplysningene om inntekten din når vi skal beregne hva du skal få i foreldrepenger.",
+	"dineForeldrepenger.alertstripe.fpsak": "Du får tidligst svar på søknaden din <b>4 uker</b> før foreldrepengeperioden din starter. Det er fordi vi bruker de nyeste opplysningene om inntekten din når vi skal beregne hva du skal få i foreldrepenger.",
 	"dineForeldrepenger.alertstripe.infotrygd": "Her finner du den siste søknaden din. Søknader eldre enn tre år vises ikke her.",
 	"dineForeldrepenger.chatMedOss": "Chat med oss om foreldrepenger",
 	"dineForeldrepenger.dineUtbetalinger": "Her finner du alle dine utbetalinger fra NAV. Får du utbetalt foreldrepenger fra arbeidsgiver vil disse ikke vises her.",
