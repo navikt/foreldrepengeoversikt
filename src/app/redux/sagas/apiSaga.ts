@@ -21,6 +21,7 @@ import {
     fjernIrrelevanteTaptePerioder,
     fjernAvslåttePerioderEtterSisteInnvilgetPeriode
 } from 'app/components/periode-oversikt/periodeUtils';
+import { isFeatureEnabled, Feature } from 'app/Feature';
 
 function* getPersoninfoSaga(_: GetPersoninfoRequest) {
     try {
@@ -45,7 +46,9 @@ function* getSakerSaga(_: GetSakerRequest) {
         let saker: Sak[] = response.data;
         if (saker) {
             saker.sort(sakByDescendingOrder);
-            saker = yield all(saker.map(uttaksplanTilSakMapper));
+            if(isFeatureEnabled(Feature.dinPlan)) {
+                saker = yield all(saker.map(uttaksplanTilSakMapper));
+            }
         }
         yield put({ type: ApiActionTypes.GET_SAKER_SUCCESS, payload: { saker } });
     } catch (error) {
