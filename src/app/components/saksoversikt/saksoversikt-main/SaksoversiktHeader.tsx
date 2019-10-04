@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Innholdstittel } from 'nav-frontend-typografi';
 
 import Sak from '../../../api/types/sak/Sak';
-import { finnNyesteBehandling } from '../../../utils/sakerUtils';
+import { finnNyesteBehandling, harSøkt } from '../../../utils/sakerUtils';
 import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus, getSaksoversiktTitle } from '../utils';
 import BEMHelper from 'common/util/bem';
 import Etikett from '../../etikett/etikett';
@@ -26,9 +26,7 @@ const SaksoversiktHeader: FunctionComponent<SaksoversiktHeaderProps> = ({ sak })
         <div className={cls.className}>
             <div className={cls.element('top')}>
                 <Innholdstittel>
-                    <FormattedMessage
-                        id={getSaksoversiktTitle(sak)}
-                    />
+                    <FormattedMessage id={getSaksoversiktTitle(sak)} />
                 </Innholdstittel>
                 {sak.saksnummer && (
                     <Etikett
@@ -38,34 +36,34 @@ const SaksoversiktHeader: FunctionComponent<SaksoversiktHeaderProps> = ({ sak })
                 )}
             </div>
 
-            <div className={cls.element('bottom-row')}>
-                <Etikett
-                    className={cls.element('timestamp')}
-                    etikett={
-                        <FormattedMessage
-                            id={
-                                nyesteBehandling === undefined
-                                    ? 'saksoversikt.heading.mottatt'
-                                    : 'saksoversikt.heading.sisteEndring'
-                            }
-                        />
-                    }
-                    value={
-                        nyesteBehandling === undefined
-                            ? formatDate(sak.opprettet)
-                            : formatDate(nyesteBehandling.endretTidspunkt)
-                    }
-                />
-                {statusIntlKey ? (
-                    <EtikettBase
-                        className={cls.element('status-etikett')}
-                        type={getEtikettTypeForSaksstatus(sak)}>
-                        <FormattedMessage id={statusIntlKey} />
-                    </EtikettBase>
-                ) : (
-                    <BamseIkon />
-                )}
-            </div>
+            {harSøkt(sak) && (
+                <div className={cls.element('bottom-row')}>
+                    <Etikett
+                        className={cls.element('timestamp')}
+                        etikett={
+                            <FormattedMessage
+                                id={
+                                    nyesteBehandling === undefined
+                                        ? 'saksoversikt.heading.mottatt'
+                                        : 'saksoversikt.heading.sisteEndring'
+                                }
+                            />
+                        }
+                        value={
+                            nyesteBehandling === undefined
+                                ? formatDate(sak.opprettet)
+                                : formatDate(nyesteBehandling.endretTidspunkt)
+                        }
+                    />
+                    {statusIntlKey ? (
+                        <EtikettBase className={cls.element('status-etikett')} type={getEtikettTypeForSaksstatus(sak)}>
+                            <FormattedMessage id={statusIntlKey} />
+                        </EtikettBase>
+                    ) : (
+                        <BamseIkon />
+                    )}
+                </div>
+            )}
         </div>
     );
 };

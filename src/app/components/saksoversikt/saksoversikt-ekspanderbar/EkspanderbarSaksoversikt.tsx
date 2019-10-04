@@ -18,7 +18,7 @@ interface Props {
     history: History;
 }
 
-const EkspanderbarSaksoversikt: React.FunctionComponent<Props> = (props) => {
+const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = (props) => {
     const { sak, søker, history } = props;
     const cls = BEMHelper('ekspanderbar-saksoversikt');
     return (

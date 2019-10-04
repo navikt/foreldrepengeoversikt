@@ -8,6 +8,7 @@ import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus, getSaksov
 import BEMHelper from 'common/util/bem';
 
 import './ekspanderbarSaksoversikt.less';
+import { harSøkt } from 'app/utils/sakerUtils';
 
 interface Props {
     sak: Sak;
@@ -20,9 +21,7 @@ const EkspanderbarSaksoversiktHeader: React.FunctionComponent<Props> = ({ sak })
         <div className={cls.className}>
             <div className={cls.element('left')}>
                 <Undertittel>
-                    <FormattedMessage
-                        id={getSaksoversiktTitle(sak)}
-                    />
+                    <FormattedMessage id={getSaksoversiktTitle(sak)} />
                 </Undertittel>
 
                 {sak.opprettet && (
@@ -35,10 +34,8 @@ const EkspanderbarSaksoversiktHeader: React.FunctionComponent<Props> = ({ sak })
                 )}
             </div>
 
-            {statusIntlKey && (
-                <EtikettBase
-                    className={cls.element('status-etikett')}
-                    type={getEtikettTypeForSaksstatus(sak)}>
+            {statusIntlKey && harSøkt(sak) && (
+                <EtikettBase className={cls.element('status-etikett')} type={getEtikettTypeForSaksstatus(sak)}>
                     <FormattedMessage id={statusIntlKey} />
                 </EtikettBase>
             )}

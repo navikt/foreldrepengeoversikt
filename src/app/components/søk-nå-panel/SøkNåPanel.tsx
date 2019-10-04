@@ -13,24 +13,19 @@ interface Props {
 }
 
 const SøkNåPanel: React.StatelessComponent<Props> = ({ søker }) => {
-    const erAktuellForBådeSvangerskapspengerOgForeldrepenger = søker && søker.kjønn === Kjønn.K;
     return (
         <AlertStripe type="advarsel">
-            <Innholdstittel>
+            <Innholdstittel className="blokk-s">
                 <FormattedMessage id="søkNåPanel.tittel" />
             </Innholdstittel>
-            <Normaltekst>
+            <Normaltekst className="blokk-xs">
                 <FormattedMessage
-                    id={
-                        erAktuellForBådeSvangerskapspengerOgForeldrepenger
-                            ? 'søkNåPanel.text.foreldrepengesoknadOgSvangerskapspengesoknad'
-                            : 'søkNåPanel.tekst.foreldrepengesoknad'
-                    }
+                    id={'søkNåPanel.tekst'}
                 />
             </Normaltekst>
             <Hovedknapp
                 onClick={() =>
-                    erAktuellForBådeSvangerskapspengerOgForeldrepenger
+                    søker && søker.kjønn === Kjønn.K
                         ? redirect(lenker.skjemaveileder)
                         : redirect(lenker.søkOmForeldrepenger)
                 }>

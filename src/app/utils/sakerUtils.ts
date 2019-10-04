@@ -99,5 +99,5 @@ export const opprettSak = (storageKvittering: StorageKvittering) => {
 };
 
 export const harSøkt = (sak: Sak): boolean => {
-    return sak.type === SakType.FPSAK ? sak.behandlinger !== undefined && sak.behandlinger.length > 0 : true;
+    return !erInfotrygdSak(sak) ? sak.behandlinger !== undefined && sak.behandlinger.length > 0 : true;
 };
