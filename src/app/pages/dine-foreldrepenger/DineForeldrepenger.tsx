@@ -117,6 +117,7 @@ export class DineForeldrepenger extends React.Component<Props> {
             : saker.slice().shift();
 
         const cls = BEMHelper('dine-foreldrepenger');
+
         return (
             <>
                 <Header saker={saker} history={this.props.history} />

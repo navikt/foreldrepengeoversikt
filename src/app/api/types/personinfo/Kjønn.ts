@@ -1,4 +1,4 @@
 export enum Kjønn {
-    'M',
-    'K'
+    'M' = 'M',
+    'K' = 'K'
 }
