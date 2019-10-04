@@ -1,6 +1,6 @@
 import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Innholdstittel, Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
 import { lenker } from 'app/utils/lenker';
