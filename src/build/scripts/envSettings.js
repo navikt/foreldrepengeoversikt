@@ -7,6 +7,7 @@ function createEnvSettingsFile(settingsFile) {
             `window.appSettings = {
                 REST_API_URL: '${process.env.FORELDREPENGESOKNAD_API_URL}',
                 LOGIN_URL: '${process.env.LOGINSERVICE_URL}',
+                APP_VERSION: '${proces.env.APP_VERSION}',
                 FEATURE_LOGGING:'${process.env.FEATURE_LOGGING}',
                 FEATURE_HISTORIKK:'${process.env.FEATURE_HISTORIKK}',
                 FEATURE_MINI_DIALOG:'${process.env.FEATURE_MINI_DIALOG}',
