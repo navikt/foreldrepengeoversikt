@@ -172,6 +172,9 @@
 	"sidepanel.søk": "Søk for ett nytt barn",
 	"sidepanel.utbetalinger": "Dine utbetalinger",
 	"sidepanel.utbetalingsdato": "Neste utbetalingsdato",
+	"søkNåPanel.tittel": "Send inn søknad",
+	"søkNåPanel.text": "Du kan nå sende inn søknad til oss.",
+	"søkNåPanel.søkNåButton": "Søk nå",
 	"utsettelsepanel.lenke": "Les mer om utsettelse",
 	"utsettelsepanel.tekst": "Du kan endre perioden du skal være hjemme eller utsette hvis du skal på ferie eller om du ønsker å jobbe, eller på grunn av sykdom.",
 	"utsettelsepanel.title": "Vil du endre perioden din eller utsette?",
@@ -183,9 +186,5 @@
 	"vedlegg.forStort.flereFeil": "{filename} - Vedlegget må være mindre enn 9MB",
 	"vedlegg.lastoppknapp": "Legg ved dokumentasjon",
 	"vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
-	"vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
-
-	"søkNåPanel.tittel": "Du må søke",
-	"søkNåPanel.text": "Vi har mottat en noe som indikerer at du bør søke snart søke noe",
-	"søkNåPanel.søkNåButton": "Søk nå"
+	"vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })"
 }
