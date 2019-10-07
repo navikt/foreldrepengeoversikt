@@ -85,6 +85,7 @@
 	"ettersendelse.select.I000110": "Dokumentasjon av aleneomsorg",
 	"ettersendelse.select.I000111": "Begrunnelese for sen søknad",
 	"ettersendelse.select.I000112": "Dokumentasjon av deltakelse i introduksjonsprogrammet",
+	"ettersendelse.select.I000114": "Svar på varsel om tilbakebetaling",
 	"ettersendelse.select.defaultValue": "Velg type vedlegg",
 	"ettersendelse.sendButton": "Ettersend vedlegg",
 	"ettersendelse.title": "Last opp dokumentasjon til sak { saksnummer }",

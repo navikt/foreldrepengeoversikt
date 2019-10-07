@@ -70,6 +70,7 @@ export const isSkjemanummerForEndringssøknadForeldrepenger = (skjemanummer: Skj
         case Skjemanummer.DOK_MORS_UTDANNING_ARBEID_SYKDOM:
         case Skjemanummer.DOK_OVERFØRING_FOR_SYK:
         case Skjemanummer.OMSORGSOVERTAKELSESDATO:
+        case Skjemanummer.TILBAKEBETALING:
             return true;
         default:
             return false;
@@ -84,6 +85,7 @@ export const isSkjemanummerForSvangerskapspengesoknad = (skjemanummer: Skjemanum
         case Skjemanummer.SKJEMA_FOR_TILRETTELEGGING_OG_OMPLASSERING:
         case Skjemanummer.TILRETTELEGGING_FOR_ARBEIDSTAKERE:
         case Skjemanummer.TILRETTELEGGING_FOR_FRILANS_ELLER_SELVSTENDIG:
+        case Skjemanummer.TILBAKEBETALING:
             return true;
         default:
             return false;
@@ -95,6 +97,7 @@ export const isSkjemanummerForEngangsstønad = (skjemanummer: Skjemanummer): boo
         case Skjemanummer.ANNET:
         case Skjemanummer.TERMINBEKREFTELSE:
         case Skjemanummer.FØDSELSATTEST:
+        case Skjemanummer.TILBAKEBETALING:
             return true;
         default:
             return false;
