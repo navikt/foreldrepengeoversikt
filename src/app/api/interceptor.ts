@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios';
 import Environment from 'app/Environment';
-import { redirectToLogin } from 'app/utils/login';
+import { redirectToLogin } from 'app/utils/redirect';
 
 const REST_API_URL: string = Environment.REST_API_URL;
 const AxiosApiInterceptor = axios.create({ baseURL: REST_API_URL });
