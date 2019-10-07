@@ -169,20 +169,20 @@ describe('Ettersendelse page', () => {
         historyMock.location.state.sak = SakerMock.fpsakES;
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
-        expect(dropdown.children().length).toBe(4);
+        expect(dropdown.children().length).toBe(5);
     });
 
     it('attachment type dropdown should only render relevant attachment types for foreldrepengesøknad', () => {
         historyMock.location.state.sak = SakerMock.fpsakFP;
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
-        expect(dropdown.children().length).toBe(19);
+        expect(dropdown.children().length).toBe(20);
     });
 
     it('attachment type dropdown should only render relevant attachment types for foreldrepengesoknad with endring', () => {
         historyMock.location.state.sak = SakerMock.fpsakEndring;
         const wrapper = shallowWithIntl(<Ettersendelse history={historyMock} />).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
-        expect(dropdown.children().length).toBe(13);
+        expect(dropdown.children().length).toBe(14);
     });
 });
