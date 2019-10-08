@@ -20,6 +20,7 @@ import { getErrorCode } from './redux/util/fetchFromState';
 import { State } from './redux/store';
 import { Feature, isFeatureEnabled } from './Feature';
 import DinPlan from './pages/din-plan/DinPlan';
+import MinidialogSvar from './pages/mindialog-svar/MinidialogSvar';
 
 interface Props {
     saker: FetchState<Sak[]>;
@@ -107,6 +108,13 @@ class Foreldrepengeoversikt extends React.Component<Props, OwnState> {
                     <Route path={Routes.KVITTERING} render={(props) => <KvitteringPage {...props} />} />
                     {isFeatureEnabled(Feature.dinPlan) && (
                         <Route path={Routes.DIN_PLAN} render={(props) => <DinPlan {...props} />} />
+                    )}
+                    {isFeatureEnabled(Feature.miniDialog) && (
+                        <Route
+                            path={Routes.MINIDIALOG}
+                            exact={true}
+                            render={(props) => <MinidialogSvar {...props} />}
+                        />
                     )}
                     <Route
                         path={Routes.DINE_FORELDREPENGER}

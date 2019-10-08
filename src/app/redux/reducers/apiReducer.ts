@@ -11,7 +11,7 @@ export interface ApiState {
     saker: FetchState<Sak[]>;
     storageKvittering: FetchState<StorageKvittering>;
     historikk: FetchState<HistorikkInnslag[]>;
-    miniDialog: FetchState<MinidialogInnslag[]>;
+    minidialogInnslagListe: FetchState<MinidialogInnslag[]>;
 }
 
 const getDefaultState = (): ApiState => ({
@@ -27,7 +27,7 @@ const getDefaultState = (): ApiState => ({
     historikk: {
         status: FetchStatus.UNFETCHED
     },
-    miniDialog: {
+    minidialogInnslagListe: {
         status: FetchStatus.UNFETCHED
     }
 });
@@ -141,7 +141,7 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
         case ApiActionTypes.GET_MINIDIALOG_REQUEST:
             return {
                 ...state,
-                miniDialog: {
+                minidialogInnslagListe: {
                     status: FetchStatus.IN_PROGRESS
                 }
             };
@@ -149,18 +149,16 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
         case ApiActionTypes.GET_MINIDIALOG_SUCCESS:
             return {
                 ...state,
-                miniDialog: {
+                minidialogInnslagListe: {
                     status: FetchStatus.SUCCESS,
-                    data: {
-                        ...action.payload.miniDialog
-                    }
+                    data: action.payload.minidialogInnslagListe
                 }
             };
 
         case ApiActionTypes.GET_MINIDIALOG_FAILURE:
             return {
                 ...state,
-                miniDialog: {
+                minidialogInnslagListe: {
                     status: FetchStatus.FAILURE,
                     error: action.payload.error
                 }

@@ -65,7 +65,7 @@ router.delete('/rest/storage/vedlegg/:id', (req, res) => {
 });
 
 router.post('/rest/soknad/ettersend', (req,res) => {
-    res.sendStatus(200);
+    res.sendStatus(500);
 });
 
 app.use('', router);

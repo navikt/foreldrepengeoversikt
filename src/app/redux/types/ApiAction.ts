@@ -101,7 +101,7 @@ export interface GetMiniDialogRequest {
 export interface GetMinidialogSuccess {
     type: ApiActionTypes.GET_MINIDIALOG_SUCCESS;
     payload: {
-        miniDialog: MinidialogInnslag[];
+        minidialogInnslagListe: MinidialogInnslag[];
     };
 }
 export interface GetMinidialogFailure {

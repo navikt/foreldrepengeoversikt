@@ -13,7 +13,6 @@ import normalizeName from 'app/utils/normalizeName';
 import { StorageKvittering } from 'app/api/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
-import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 import { uttaksperiodeDtoToPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
 import {
     slåSammenLikeOgSammenhengendeUttaksperioder,
@@ -46,7 +45,7 @@ function* getSakerSaga(_: GetSakerRequest) {
         let saker: Sak[] = response.data;
         if (saker) {
             saker.sort(sakByDescendingOrder);
-            if(isFeatureEnabled(Feature.dinPlan)) {
+            if (isFeatureEnabled(Feature.dinPlan)) {
                 saker = yield all(saker.map(uttaksplanTilSakMapper));
             }
         }
@@ -64,7 +63,7 @@ function* uttaksplanTilSakMapper(sak: Sak): IterableIterator<any> {
             const perioder = fjernAvslåttePerioderEtterSisteInnvilgetPeriode(sak.saksgrunnlag!.perioder).filter(
                 fjernIrrelevanteTaptePerioder
             );
-            
+
             sak.perioder = slåSammenLikeOgSammenhengendeUttaksperioder(perioder)
                 .map((p) => uttaksperiodeDtoToPeriode(p, sak.saksgrunnlag!.grunnlag.søkerErFarEllerMedmor))
                 .reduce(fyllInnHull, []);
@@ -98,8 +97,13 @@ function* getHistorikk(_: GetHistorikkRequest) {
 function* getMiniDialog(_: GetMiniDialogRequest) {
     try {
         const response = yield call(Api.getMiniDialog);
-        const miniDialog: MinidialogInnslag[] = response.data;
-        yield put({ type: ApiActionTypes.GET_MINIDIALOG_SUCCESS, payload: { miniDialog } });
+        const minidialogInnslagListe = response.data;
+        yield put({
+            type: ApiActionTypes.GET_MINIDIALOG_SUCCESS,
+            payload: {
+                minidialogInnslagListe
+            }
+        });
     } catch (error) {
         yield put({ type: ApiActionTypes.GET_MINIDIALOG_FAILURE, payload: { error } });
     }

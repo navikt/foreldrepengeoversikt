@@ -122,7 +122,7 @@
         "nav-frontend-ikoner-assets": "^1.0.2",
         "nav-frontend-js-utils": "1.0.6",
         "nav-frontend-knapper": "1.0.21",
-        "nav-frontend-lenkepanel": "1.0.18",
+        "nav-frontend-lenkepanel": "^1.0.28",
         "nav-frontend-lenker": "^1.0.28",
         "nav-frontend-lukknapp": "^1.0.22",
         "nav-frontend-modal": "^1.0.28",

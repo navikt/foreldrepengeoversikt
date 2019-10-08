@@ -1,9 +1,9 @@
 export interface MinidialogInnslag {
+    referanseId: string;
     type: string;
     fnr: string;
     hendelse: HendelseType;
     gyldigTil: string;
-    journalpostId: string;
     tekst: string;
     aktørId: string;
     saksnr: string;

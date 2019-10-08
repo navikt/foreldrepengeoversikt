@@ -1,36 +1,23 @@
 {
-    "fnr": "12015649893",
-    "fornavn": "SEDAT",
-    "etternavn": "SAKS",
+    "fnr": "31058623469",
+    "fornavn": "BLÅ",
+    "etternavn": "SNERK",
     "kjønn": "K",
-    "fødselsdato": "1956-01-12",
+    "fødselsdato": "1986-05-31",
     "land": "NO",
     "ikkeNordiskEøsLand": false,
     "barn": [
         {
-            "fornavn": "ABSURD",
-            "etternavn": "VEGGPRYD",
-            "fnr": "28081975401",
+            "fornavn": "SMEKKER",
+            "etternavn": "KNOTT",
+            "fnr": "22021974491",
             "kjønn": "K",
-            "fødselsdato": "2019-08-28",
+            "fødselsdato": "2019-02-22",
             "annenForelder": {
-                "fnr": "21115549933",
-                "fornavn": "TUNGSINDIG",
-                "etternavn": "HEST",
-                "fødselsdato": "1955-11-21"
-            }
-        },
-        {
-            "fornavn": "SNILL",
-            "etternavn": "VEGGPRYD",
-            "fnr": "27081974255",
-            "kjønn": "K",
-            "fødselsdato": "2019-08-27",
-            "annenForelder": {
-                "fnr": "21115549933",
-                "fornavn": "TUNGSINDIG",
-                "etternavn": "HEST",
-                "fødselsdato": "1955-11-21"
+                "fnr": "27117430850",
+                "fornavn": "GØYAL",
+                "etternavn": "TAREMEL",
+                "fødselsdato": "1974-11-27"
             }
         }
     ]
