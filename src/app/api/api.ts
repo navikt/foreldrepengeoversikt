@@ -14,7 +14,9 @@ const getSaker = () => {
 };
 
 const sendEttersending = (ettersending: EttersendingDto) => {
-    return AxiosApiInterceptor.post('/soknad/ettersend', ettersending);
+    return AxiosApiInterceptor.post('/soknad/ettersend', ettersending), {
+        timeout: 120 * 1000
+    };
 };
 
 const getStorageKvittering = () => {

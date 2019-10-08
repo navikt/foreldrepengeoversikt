@@ -1,7 +1,8 @@
-import { all, call, takeLatest } from 'redux-saga/effects';
+import { all, call, takeLatest, put } from 'redux-saga/effects';
 import Api from '../../api/api';
 import { InnsendingActionTypes, SendEttersendelse } from '../types/InnsendingAction';
 import { Routes } from 'app/utils/routes';
+import { FetchStatus } from '../types/FetchState';
 
 function* ettersend(action: SendEttersendelse) {
     try {
@@ -13,7 +14,10 @@ function* ettersend(action: SendEttersendelse) {
             });
         }
     } catch (error) {
-        console.log(error);
+        yield put({
+            type: InnsendingActionTypes.SEND_ETTERSENDELSE_FAILED,
+            payload: { ettersendelse: { status: FetchStatus.FAILURE, error }}
+        });
     }
 }
 

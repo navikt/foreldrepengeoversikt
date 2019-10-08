@@ -89,8 +89,9 @@ export const erInfotrygdSak = (sak: Sak): boolean => {
     return sak.type === SakType.SAK;
 };
 
-export const opprettSak = (storageKvittering: StorageKvittering) => {
+export const opprettFiktivSak = (storageKvittering: StorageKvittering) => {
     const sak: Sak = {
+        saksnummer: '',
         type: SakType.SAK,
         erJornalført: false,
         opprettet: storageKvittering.innsendingstidspunkt

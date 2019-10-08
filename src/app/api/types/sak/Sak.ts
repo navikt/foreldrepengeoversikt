@@ -9,7 +9,7 @@ export default interface Sak {
     erJornalført?: boolean;
     behandlinger?: Behandling[];
     status?: FagsakStatus;
-    saksnummer?: string;
+    saksnummer: string;
     opprettet: string;
     saksgrunnlag?: UttaksplanDto;
     perioder?: Periode[];

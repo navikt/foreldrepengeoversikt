@@ -16,7 +16,7 @@ const Snakkeboble: React.StatelessComponent<Props> = ({ tittel, tekst }) => (
     <div className={classnames(bem.className, bem.modifier('hvit'))}>
         <div className={bem.element('innhold')}>
             {tittel && (
-                <div className={classnames(bem.element('tittel'), 'capitalizeName')}>
+                <div className={classnames(bem.element('tittel'))}>
                     <Element className="m_no-margin">{tittel}</Element>
                 </div>
             )}

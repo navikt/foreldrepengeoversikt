@@ -10,22 +10,22 @@ import KvitteringPage from './pages/kvittering-page/Kvittering';
 import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
 import { Routes } from './utils/routes';
 
-import Sak from './api/types/sak/Sak';
-import Person from './api/types/personinfo/Personinfo';
-import { StorageKvittering } from './api/types/StorageKvittering';
 import ApiAction, { ApiActionTypes } from './redux/types/ApiAction';
-import FetchState, { FetchStatus } from './redux/types/FetchState';
-import { extractUUID } from 'common/util/errorUtil';
+import FetchState, { FetchStatus, PostState, GetFailure } from './redux/types/FetchState';
+import { extractUUID, extractErrorMessage } from 'common/util/errorUtil';
 import { getErrorCode } from './redux/util/fetchFromState';
 import { State } from './redux/store';
 import { Feature, isFeatureEnabled } from './Feature';
 import DinPlan from './pages/din-plan/DinPlan';
-import MinidialogSvar from './pages/mindialog-svar/MinidialogSvar';
+import MinidialogPage from './pages/mindialog-svar/MinidialogSvar';
+import EttersendingDto from './api/types/ettersending/EttersendingDto';
+import Personinfo from './api/types/personinfo/Personinfo';
 
 interface Props {
-    saker: FetchState<Sak[]>;
-    storageKvittering: FetchState<StorageKvittering>;
-    personinfo: FetchState<Person>;
+    personinfo: FetchState<Personinfo>;
+    ettersendelse: PostState<EttersendingDto>;
+    shouldRenderApplicationSpinner: boolean;
+    feiletOppslag: GetFailure;
     requestPersoninfo: () => void;
     requestSaker: () => void;
     requestStorageKvittering: () => void;
@@ -33,18 +33,7 @@ interface Props {
     requestMinidialog: () => void;
 }
 
-interface OwnState {
-    isChangeBrowserModalRead: boolean;
-}
-
-class Foreldrepengeoversikt extends React.Component<Props, OwnState> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            isChangeBrowserModalRead: false
-        };
-    }
-
+class Foreldrepengeoversikt extends React.Component<Props> {
     componentWillMount(): void {
         this.fetchData();
     }
@@ -65,40 +54,25 @@ class Foreldrepengeoversikt extends React.Component<Props, OwnState> {
         }
     }
 
-    shouldRenderApplicationSpinner(): boolean {
-        const { personinfo, storageKvittering, saker } = this.props;
-        return (
-            personinfo.status === FetchStatus.UNFETCHED ||
-            personinfo.status === FetchStatus.IN_PROGRESS ||
-            saker.status === FetchStatus.UNFETCHED ||
-            saker.status === FetchStatus.IN_PROGRESS ||
-            storageKvittering.status === FetchStatus.UNFETCHED ||
-            storageKvittering.status === FetchStatus.IN_PROGRESS ||
-            getErrorCode(personinfo) === 401
-        );
-    }
-
-    shouldRenderErrorPage(): boolean {
-        const { personinfo, storageKvittering, saker } = this.props;
-        return (
-            personinfo.status === FetchStatus.FAILURE ||
-            storageKvittering.status === FetchStatus.FAILURE ||
-            saker.status === FetchStatus.FAILURE
-        );
-    }
-
-    render(): JSX.Element {
-        if (this.shouldRenderApplicationSpinner()) {
+    render() {
+        const { ettersendelse, feiletOppslag, shouldRenderApplicationSpinner } = this.props;
+        if (shouldRenderApplicationSpinner) {
             return <ApplicationSpinner />;
         }
 
-        const { personinfo, storageKvittering, saker } = this.props;
-        if (personinfo.status === FetchStatus.FAILURE && getErrorCode(personinfo) !== 401) {
-            return <ErrorPage uuid={extractUUID(personinfo.error)} />;
-        } else if (storageKvittering.status === FetchStatus.FAILURE && getErrorCode(personinfo) !== 401) {
-            return <ErrorPage uuid={extractUUID(storageKvittering.error)} />;
-        } else if (saker.status === FetchStatus.FAILURE && getErrorCode(personinfo) !== 401) {
-            return <ErrorPage uuid={extractUUID(saker.error)} />;
+        if (feiletOppslag) {
+            return <ErrorPage uuid={extractUUID(feiletOppslag.error)} />;
+        }
+
+        if (ettersendelse.status === FetchStatus.FAILURE) {
+            return (
+                <ErrorPage
+                    uuid={extractUUID(ettersendelse.error)}
+                    errorMessage={
+                        getErrorCode(ettersendelse) === 413 ? extractErrorMessage(ettersendelse.error) : undefined
+                    }
+                />
+            );
         }
 
         return (
@@ -113,7 +87,7 @@ class Foreldrepengeoversikt extends React.Component<Props, OwnState> {
                         <Route
                             path={Routes.MINIDIALOG}
                             exact={true}
-                            render={(props) => <MinidialogSvar {...props} />}
+                            render={(props) => <MinidialogPage {...props} />}
                         />
                     )}
                     <Route
@@ -128,11 +102,20 @@ class Foreldrepengeoversikt extends React.Component<Props, OwnState> {
     }
 }
 
-const mapStateToProps = (state: State) => ({
-    personinfo: state.api.personinfo,
-    saker: state.api.saker,
-    storageKvittering: state.api.storageKvittering
-});
+const mapStateToProps = (state: State) => {
+    console.log([...Object.values(state.api)]);
+    return {
+        personinfo: state.api.personinfo,
+        ettersendelse: state.innsending.ettersendelse,
+        feiletOppslag: [...Object.values(state.api)].find((oppslag) => oppslag.status === FetchStatus.FAILURE),
+        shouldRenderApplicationSpinner: [...Object.values(state.api)].some(
+            (oppslag) =>
+                oppslag.status === FetchStatus.UNFETCHED ||
+                oppslag.status === FetchStatus.IN_PROGRESS ||
+                getErrorCode(oppslag) === 401
+        )
+    };
+};
 
 const mapDispatchToProps = (dispatch: (action: ApiAction) => void) => ({
     requestPersoninfo: () => {

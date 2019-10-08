@@ -65,6 +65,13 @@ router.delete('/rest/storage/vedlegg/:id', (req, res) => {
 });
 
 router.post('/rest/soknad/ettersend', (req,res) => {
+    const kvittering = {
+        saksNr: '123',
+        jornalId: '123',
+        leveranseStatus: "SENDT_OG_FORSØKT_BEHANDLET_FPSAK",
+        mottattDato: '2019-01-01',
+        referanseId: '123'
+    }
     res.sendStatus(500);
 });
 

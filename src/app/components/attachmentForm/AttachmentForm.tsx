@@ -2,15 +2,15 @@ import React from 'react';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 
-export interface AttachmentFormProps {
-    attachments: Attachment[];
+export interface AttachmentFormProps extends AttachmentFormState {
     addAttachment: (attachments: Attachment[]) => void;
     editAttachment: (attachment: Attachment) => void;
     deleteAttachment: (attachments: Attachment[]) => void;
+    isReadyToSendAttachments: boolean;
 }
 
 interface AttachmentFormState {
-    attachments: Attachment[];
+    attachments: Attachment[]
 }
 
 export function withAttachments<T>(WrappedComponent: React.ComponentType<T>) {
@@ -46,7 +46,6 @@ export function withAttachments<T>(WrappedComponent: React.ComponentType<T>) {
             const attachmentsWithoutUploadError: Attachment[] = this.state.attachments.filter(
                 (a: Attachment) => !isAttachmentWithError(a)
             );
-
             return (
                 attachmentsWithoutUploadError.length > 0 &&
                 attachmentsWithoutUploadError.every((a: Attachment) => a.url !== undefined)
@@ -61,7 +60,8 @@ export function withAttachments<T>(WrappedComponent: React.ComponentType<T>) {
                     addAttachment={this.addAttachment}
                     editAttachment={this.editAttachment}
                     deleteAttachment={this.deleteAttachment}
-                    {...(otherProps as T)}
+                    isReadyToSendAttachments={this.isReadyToSendAttachments()}
+                    {...otherProps as T}
                 />
             );
         }

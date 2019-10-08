@@ -15,7 +15,7 @@ import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 import {
     erForeldrepengesak,
     erInfotrygdSak,
-    opprettSak,
+    opprettFiktivSak,
     skalKunneSøkeOmEndring,
     harSøkt
 } from '../../utils/sakerUtils';
@@ -124,7 +124,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     render() {
         const { saker, history, storageKvittering, søker, historikkInnslagListe, minidialogInnslagListe } = this.props;
         const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
-            ? opprettSak(storageKvittering!)
+            ? opprettFiktivSak(storageKvittering!)
             : saker.slice().shift();
 
         const cls = BEMHelper('dine-foreldrepenger');

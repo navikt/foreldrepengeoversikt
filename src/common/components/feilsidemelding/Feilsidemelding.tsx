@@ -4,9 +4,10 @@ import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import { VeilederProps } from '../veileder/Veileder';
 import VeilederMedSnakkeboble from '../veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import Block from 'common/components/block/Block';
+import { FormattedMessage } from 'react-intl';
+import BEMHelper from 'common/util/bem';
 
 import './feilsidemelding.less';
-import { FormattedMessage } from 'react-intl';
 
 export interface Props {
     containerId?: string;
@@ -25,8 +26,9 @@ export interface Props {
 }
 
 const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress, uuid }: Props) => {
+    const cls = BEMHelper('feilsidemelding');
     return (
-        <div id={containerId}>
+        <div className={cls.className} id={containerId}>
             {illustrasjon && (
                 <VeilederMedSnakkeboble
                     veileder={illustrasjon.veileder}
@@ -37,7 +39,7 @@ const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress, uuid }: P
                                 <div>{illustrasjon.tekst}</div>
 
                                 {illustrasjon.lenke && (
-                                    <Lenke className="intro-snakkelenke" href={illustrasjon.lenke.url}>
+                                    <Lenke className={cls.element('intro-snakkelenke')} href={illustrasjon.lenke.url}>
                                         {illustrasjon.lenke.tekst}
                                     </Lenke>
                                 )}
@@ -46,7 +48,7 @@ const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress, uuid }: P
                     }}
                 />
             )}
-            <div className="responsiveContainer">
+            <div className={cls.element('content')}>
                 <Block margin="s">
                     <Innholdstittel>{tittel}</Innholdstittel>
                 </Block>

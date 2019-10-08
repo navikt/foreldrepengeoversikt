@@ -26,7 +26,7 @@ interface State {
     fritekst: string;
 }
 
-class MinidialogSvar extends React.Component<Props, State> {
+class MinidialogPage extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
     }
@@ -81,4 +81,4 @@ const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props:
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MinidialogSvar);
+)(MinidialogPage);

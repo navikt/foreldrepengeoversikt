@@ -25,9 +25,9 @@ import Personinfo from 'app/api/types/personinfo/Personinfo';
 import BEMHelper from 'common/util/bem';
 import { lenker } from 'app/utils/lenker';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { redirect } from 'app/utils/redirect';
 
 import './saksinformasjonPanel.less';
-import { redirect } from 'app/utils/redirect';
 
 interface Props {
     søker?: Personinfo;
@@ -54,7 +54,12 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søker, sak, hi
                 <div className={cls.element('btn')}>
                     <Knapp
                         className={cls.element('ettersendelse-btn')}
-                        onClick={() => history.push(Routes.ETTERSENDELSE, { sak })}
+                        onClick={() =>
+                            history.push({
+                                pathname: Routes.ETTERSENDELSE,
+                                search: new URLSearchParams({ saksnummer: sak.saksnummer }).toString()
+                            })
+                        }
                         disabled={!isSakEligableForEttersendelse(sak)}>
                         <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
                     </Knapp>

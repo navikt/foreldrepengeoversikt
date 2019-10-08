@@ -22,7 +22,7 @@ interface GetSuccess<T> {
     data: T;
 }
 
-interface GetFailure {
+export interface GetFailure {
     status: FetchStatus.FAILURE;
     error: FetchError;
 }
