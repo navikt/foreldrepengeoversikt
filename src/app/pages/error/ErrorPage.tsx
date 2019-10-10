@@ -18,7 +18,9 @@ export interface ErrorPageProps {
 type Props = ErrorPageProps & InjectedIntlProps;
 const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearError, intl }) => {
     useEffect(() => {
-        clearError && clearError();
+        if (clearError !== undefined) {
+            clearError();
+        }
     });
 
     const cls = BEMHelper('error-page');
