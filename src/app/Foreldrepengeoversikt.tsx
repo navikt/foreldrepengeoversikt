@@ -103,7 +103,6 @@ class Foreldrepengeoversikt extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State) => {
-    console.log([...Object.values(state.api)]);
     return {
         personinfo: state.api.personinfo,
         ettersendelse: state.innsending.ettersendelse,
