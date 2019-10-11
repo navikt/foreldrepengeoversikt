@@ -78,10 +78,6 @@ export class DineForeldrepenger extends React.Component<Props> {
 
     renderSaksoversiktList(nyesteSak: Sak) {
         const { saker, history } = this.props;
-        if (!saker) {
-            return null;
-        }
-
         const cls = BEMHelper('saksoversikt-list');
         return (
             <ul className={cls.className}>
