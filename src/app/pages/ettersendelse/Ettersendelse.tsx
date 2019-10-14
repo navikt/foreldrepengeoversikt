@@ -18,7 +18,6 @@ import AttachmentList from 'common/storage/attachment/components/AttachmentList'
 import { Routes } from '../../utils/routes';
 
 import { erForeldrepengesak } from '../../utils/sakerUtils';
-import getMessage from 'common/util/i18nUtils';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import Page from '../page/Page';
 import { withAttachments, AttachmentFormProps } from 'app/components/attachmentForm/AttachmentForm';
@@ -30,7 +29,7 @@ import { InnsendingAction, InnsendingActionTypes } from 'app/redux/types/Innsend
 import './ettersendelse.less';
 
 interface EttersendelseProps {
-    sak: Sak;
+    sak?: Sak;
     history: History;
     sendEttersendelse: (ettersendingDto: EttersendingDto) => void;
 }
@@ -39,26 +38,25 @@ interface State {
     attachmentSkjemanummer?: Skjemanummer;
     attachmentBeskrivelse?: string;
     sendingEttersendelse: boolean;
-    error: {
-        hasOccured: boolean;
-        uuid?: string;
-        message?: string;
-    };
 }
 
 type Props = EttersendelseProps & InjectedIntlProps;
-class Ettersendelse extends React.Component<Props & AttachmentFormProps, State> {
+export class Ettersendelse extends React.Component<Props & AttachmentFormProps, State> {
     constructor(props: Props & AttachmentFormProps) {
         super(props);
         this.state = {
-            sendingEttersendelse: false,
-            error: { hasOccured: false }
+            sendingEttersendelse: false
         };
 
+        if (props.sak === undefined) {
+            props.history.push(Routes.DINE_FORELDREPENGER);
+        }
+
+        this.sendEttersendelse = this.sendEttersendelse.bind(this);
         this.handleAttachmentTypeSelectChange = this.handleAttachmentTypeSelectChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
         this.handleAttachmentBeskrivelseOnChange = this.handleAttachmentBeskrivelseOnChange.bind(this);
         this.handleBackClick = this.handleBackClick.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     handleBackClick(): void {
@@ -71,17 +69,17 @@ class Ettersendelse extends React.Component<Props & AttachmentFormProps, State> 
     }
 
     onSubmit(): void {
-        if (this.isReadyToUploadAttachments()) {
-            this.setState({ sendingEttersendelse: true }, this.sendEttersendelse);
+        const { sak, isReadyToSendAttachments } = this.props;
+        if (isReadyToSendAttachments && sak) {
+            this.setState({ sendingEttersendelse: true }, () => this.sendEttersendelse(sak));
         }
     }
 
-    sendEttersendelse(): void {
-        const { sak, attachments } = this.props;
+    sendEttersendelse(sak: Sak): void {
         const ettersending: EttersendingDto = {
             type: erForeldrepengesak(sak) ? 'foreldrepenger' : 'engangsstønad',
             saksnummer: sak.saksnummer!,
-            vedlegg: attachments.filter((a: Attachment) => !isAttachmentWithError(a))
+            vedlegg: this.props.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
         };
         this.props.sendEttersendelse(ettersending);
     }
@@ -129,12 +127,16 @@ class Ettersendelse extends React.Component<Props & AttachmentFormProps, State> 
                 onBackClick={this.handleBackClick}>
                 <form
                     onSubmit={(e) => {
-                        e.preventDefault()
+                        e.preventDefault();
                         this.onSubmit();
                     }}>
                     <Select
                         className={cls.element('attachment-type-select')}
-                        label={<Element>{getMessage(intl, 'ettersendelse.vedlegg.select.label')}</Element>}
+                        label={
+                            <Element>
+                                <FormattedMessage id="ettersendelse.vedlegg.select.label" />
+                            </Element>
+                        }
                         onChange={this.handleAttachmentTypeSelectChange}
                         defaultValue="default">
                         {getAttachmentTypeSelectOptions(intl, sak)}
@@ -143,7 +145,11 @@ class Ettersendelse extends React.Component<Props & AttachmentFormProps, State> 
                     {this.isAttachmentOfTypeAnnet() && (
                         <Input
                             className={cls.element('attachment-description')}
-                            label={<Element>{getMessage(intl, 'ettersendelse.vedlegg.beskrivelse')}</Element>}
+                            label={
+                                <Element>
+                                    <FormattedMessage id="ettersendelse.vedlegg.beskrivelse" />
+                                </Element>
+                            }
                             onChange={this.handleAttachmentBeskrivelseOnChange}
                         />
                     )}
