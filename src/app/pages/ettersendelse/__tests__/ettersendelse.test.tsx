@@ -258,7 +258,7 @@ describe('Ettersendelse page', () => {
             />
         ).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
-        expect(dropdown.children().length).toBe(20);
+        expect(dropdown.children().length).toBe(19);
     });
 
     it('attachment type dropdown should only render relevant attachment types for foreldrepengesoknad with endring', () => {
