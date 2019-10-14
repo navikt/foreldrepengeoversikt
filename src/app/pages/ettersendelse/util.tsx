@@ -10,6 +10,7 @@ import {
     isSkjemanummerForEngangsstønad,
     isSkjemanummerForSvangerskapspengesoknad
 } from 'app/utils/skjemanummerUtils';
+import { EttersendingType } from 'app/api/types/ettersending/EttersendingDto';
 
 export const getListOfUniqueSkjemanummer = (attachments: Attachment[]) => {
     return attachments
@@ -50,3 +51,13 @@ const getRelevanteSkjemanummer = (sak: Sak): Skjemanummer[] => {
         return alleSkjemanummere.filter(isSkjemanummerForSvangerskapspengesoknad);
     }
 };
+
+export const getEttersendingType = (sak: Sak): EttersendingType => {
+    if(erForeldrepengesak(sak) || erInfotrygdSak(sak)) {
+        return EttersendingType.FORELDREPENGER;
+    } else if(erEngangsstønad(sak)) {
+        return EttersendingType.ENGANGSSTØNAD;
+    } else {
+        return EttersendingType.SVANGERSKAPSPENGER
+    }
+}

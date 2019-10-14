@@ -13,11 +13,10 @@ import AttachmentsUploader from 'common/storage/attachment/components/Attachment
 import EttersendingDto from '../../api/types/ettersending/EttersendingDto';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import LetterIcon from '../../components/ikoner/LetterIcon';
-import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummer } from './util';
+import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummer, getEttersendingType } from './util';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 import { Routes } from '../../utils/routes';
 
-import { erForeldrepengesak } from '../../utils/sakerUtils';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import Page from '../page/Page';
 import { withAttachments, AttachmentFormProps } from 'app/components/attachmentForm/AttachmentForm';
@@ -77,7 +76,7 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
 
     sendEttersendelse(sak: Sak): void {
         const ettersending: EttersendingDto = {
-            type: erForeldrepengesak(sak) ? 'foreldrepenger' : 'engangsstønad',
+            type: getEttersendingType(sak),
             saksnummer: sak.saksnummer!,
             vedlegg: this.props.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
         };

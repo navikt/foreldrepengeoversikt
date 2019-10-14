@@ -1,7 +1,7 @@
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 export default interface EttersendingDto {
-    type: string;
+    type: EttersendingType;
     saksnummer: string,
     vedlegg: Attachment[];
     referanseId?: string;
@@ -11,3 +11,9 @@ export default interface EttersendingDto {
         overskrift: string;
     }
 }
+
+export enum EttersendingType {
+    FORELDREPENGER = 'foreldrepenger',
+    ENGANGSSTØNAD = 'engangsstønad',
+    SVANGERSKAPSPENGER =  'svangerskapspenger'
+} 
