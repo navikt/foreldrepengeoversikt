@@ -8,7 +8,7 @@ const autoprefixer = require('autoprefixer');
 
 const webpackConfig = {
     entry: {
-        bundle: ['babel-polyfill', `${__dirname}/../../app/bootstrap.tsx`]
+        bundle: ['babel-polyfill', 'url-search-params-polyfill', `${__dirname}/../../app/bootstrap.tsx`]
     },
     output: {
         path: path.resolve(__dirname, './../../../dist'),
