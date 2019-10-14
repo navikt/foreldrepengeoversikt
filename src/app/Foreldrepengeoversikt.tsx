@@ -103,11 +103,12 @@ class Foreldrepengeoversikt extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State) => {
+    const {personinfo, saker, storageKvittering} = state.api
     return {
         personinfo: state.api.personinfo,
         ettersendelse: state.innsending.ettersendelse,
         feiletOppslag: [...Object.values(state.api)].find((oppslag) => oppslag.status === FetchStatus.FAILURE),
-        shouldRenderApplicationSpinner: [...Object.values(state.api)].some(
+        shouldRenderApplicationSpinner: [personinfo, saker, storageKvittering].some(
             (oppslag) =>
                 oppslag.status === FetchStatus.UNFETCHED ||
                 oppslag.status === FetchStatus.IN_PROGRESS ||
