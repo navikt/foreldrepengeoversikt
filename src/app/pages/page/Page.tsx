@@ -12,7 +12,7 @@ interface Props {
     className?: string;
     pageTitle: string | React.ReactNode;
     icon?: () => React.ReactNode;
-    title: string | React.ReactNode;
+    title?: string | React.ReactNode;
     onBackClick?: () => void;
 }
 
@@ -26,7 +26,7 @@ class Page extends React.Component<Props> {
                 <div className={cls.element('content')}>
                     {onBackClick && <BackButton hidden={false} onClick={onBackClick} />}
                     {icon && <div className={cls.element('icon')}>{icon && icon()}</div>}
-                    <Innholdstittel className={cls.element('title')}>{title}</Innholdstittel>
+                    {title && <Innholdstittel className={cls.element('title')}>{title}</Innholdstittel>}
                     {children}
                 </div>
             </div>

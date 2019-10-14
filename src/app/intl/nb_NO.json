@@ -185,5 +185,9 @@
 	"vedlegg.forStort.flereFeil": "{filename} - Vedlegget må være mindre enn 9MB",
 	"vedlegg.lastoppknapp": "Legg ved dokumentasjon",
 	"vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
-	"vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })"
+	"vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
+
+
+	"miniDialog.pageTitle": "Spørsmål fra saksbehandler",
+	"miniDialog.sendButton": "Send"
 }

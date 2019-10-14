@@ -8,13 +8,23 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
 import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
+import { getEttersendingType } from '../../pages/ettersendelse/util';
+import Sak from 'app/api/types/sak/Sak';
+import Snakkeboble from 'nav-frontend-snakkeboble';
+import { formaterDatoForHendelse } from 'app/components/historikk/util';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import BEMHelper from 'common/util/bem';
+
+import './minidialogSkjema.less';
 
 interface Props {
+    sak: Sak;
     minidialog: MinidialogInnslag;
     onSubmit: (ettersendelse: EttersendingDto) => void;
 }
 
 const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = ({
+    sak,
     minidialog,
     attachments,
     addAttachment,
@@ -23,14 +33,16 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
     onSubmit
 }) => {
     const [fritekst, updateFritekst] = useState('');
+    const cls = BEMHelper('minidialog-skjema');
     return (
         <form
+            className={cls.className}
             onSubmit={(e) => {
                 e.preventDefault();
                 onSubmit({
                     vedlegg: attachments,
                     saksnummer: minidialog.saksnr,
-                    type: 'foreldrepenger',
+                    type: getEttersendingType(sak),
                     referanseId: minidialog.referanseId,
                     brukerTekst: {
                         dokumentType: Skjemanummer.TILBAKEBETALING,
@@ -39,7 +51,19 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
                     }
                 });
             }}>
-            <Textarea label="Textarea-label" value={fritekst} onChange={(e: any) => updateFritekst(e.target.value)} />
+            <Snakkeboble topp={formaterDatoForHendelse(minidialog.opprettet)} pilHoyre={false} ikonClass={'nav'}>
+                <Normaltekst tag="p">{minidialog.tekst}</Normaltekst>
+            </Snakkeboble>
+
+            <Undertittel>Svar på spørsmål</Undertittel>
+
+            <div className={cls.element('fritekstfelt')}>
+                <Textarea
+                    label="[Overskrift på spørsmålet]"
+                    value={fritekst}
+                    onChange={(e: any) => updateFritekst(e.target.value)}
+                />
+            </div>
             <AttachmentsUploader
                 attachments={attachments}
                 skjemanummer={Skjemanummer.TILBAKEBETALING}
@@ -47,6 +71,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
                 onFileUploadFinish={editAttachment}
                 onFileDeleteStart={deleteAttachment}
             />
+
             {attachments.length > 0 && (
                 <AttachmentList
                     intlKey={`ettersendelse.attachmentList.${Skjemanummer.TILBAKEBETALING}`}
@@ -54,6 +79,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
                     attachments={attachments}
                 />
             )}
+
             <Hovedknapp disabled={false} spinner={false}>
                 <FormattedMessage id="miniDialog.sendButton" />
             </Hovedknapp>
