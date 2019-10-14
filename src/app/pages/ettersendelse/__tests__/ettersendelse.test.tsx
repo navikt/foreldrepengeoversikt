@@ -10,7 +10,6 @@ import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import { Routes } from 'app/utils/routes';
 import { Ettersendelse } from '../Ettersendelse';
 import { shallow } from 'enzyme';
-import { Hovedknapp } from 'nav-frontend-knapper';
 
 loadTranslationObject(translations);
 
