@@ -2,14 +2,12 @@ import { all, put, call, takeLatest } from 'redux-saga/effects';
 import Api from '../../api/api';
 import {
     ApiActionTypes,
-    GetPersoninfoRequest,
+    GetSøkerinfoRequest,
     GetSakerRequest,
     GetHistorikkRequest,
     GetMiniDialogRequest
 } from '../types/ApiAction';
-import Personinfo from 'app/api/types/personinfo/Personinfo';
 import Sak, { SakType } from 'app/api/types/sak/Sak';
-import normalizeName from 'app/utils/normalizeName';
 import { StorageKvittering } from 'app/api/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
@@ -21,21 +19,17 @@ import {
     fjernAvslåttePerioderEtterSisteInnvilgetPeriode
 } from 'app/components/periode-oversikt/periodeUtils';
 import { isFeatureEnabled, Feature } from 'app/Feature';
+import { SøkerinfoDTO } from 'app/api/types/personinfo/SøkerinfoDto';
+import { getSøkerinfoFromDTO } from 'app/utils/søkerinfoDtoMapper';
 
-function* getPersoninfoSaga(_: GetPersoninfoRequest) {
+function* getPersoninfoSaga(_: GetSøkerinfoRequest) {
     try {
         const response = yield call(Api.getPersoninfo);
-        const responseData = response.data;
-        const personinfo: Personinfo = {
-            ...responseData,
-            fornavn: normalizeName(responseData.fornavn),
-            mellomnavn: responseData.mellomnavn ? normalizeName(responseData.mellomnavn) : undefined,
-            etternavn: normalizeName(responseData.etternavn)
-        };
-
-        yield put({ type: ApiActionTypes.GET_PERSONINFO_SUCCESS, payload: { personinfo } });
+        const responseData: SøkerinfoDTO = response.data;
+        const søkerinfo = getSøkerinfoFromDTO(responseData);
+        yield put({ type: ApiActionTypes.GET_SØKERINFO_SUCCESS, payload: { søkerinfo } });
     } catch (error) {
-        yield put({ type: ApiActionTypes.GET_PERSONINFO_FAILURE, payload: { error } });
+        yield put({ type: ApiActionTypes.GET_SØKERINFO_FAILURE, payload: { error } });
     }
 }
 
@@ -110,7 +104,7 @@ function* getMiniDialog(_: GetMiniDialogRequest) {
 }
 
 function* apiSaga() {
-    yield all([takeLatest(ApiActionTypes.GET_PERSONINFO_REQUEST, getPersoninfoSaga)]);
+    yield all([takeLatest(ApiActionTypes.GET_SØKERINFO_REQUEST, getPersoninfoSaga)]);
     yield all([takeLatest(ApiActionTypes.GET_SAKER_REQUEST, getSakerSaga)]);
     yield all([takeLatest(ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST, getStorageKvittering)]);
     yield all([takeLatest(ApiActionTypes.GET_HISTORIKK_REQUEST, getHistorikk)]);

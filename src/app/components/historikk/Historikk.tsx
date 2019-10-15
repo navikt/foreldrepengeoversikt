@@ -4,13 +4,13 @@ import { guid } from 'nav-frontend-js-utils';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 import HistorikkElement, { Hendelse } from './HistorikkElement';
-import Person from '../../api/types/personinfo/Personinfo';
 import BEMHelper from 'common/util/bem';
+import Person from 'app/types/Person';
 
 import './historikk.less';
 
 interface HistorikkProps {
-    person?: Person;
+    søker?: Person;
     hendelser: Hendelse[];
 }
 
@@ -20,11 +20,11 @@ class Historikk extends React.Component<HistorikkProps> {
     }
 
     fillInnInitials() {
-        const { person } = this.props;
-        if ((document as any) !== undefined && person) {
+        const { søker } = this.props;
+        if ((document as any) !== undefined && søker) {
             const list = (document as any).getElementsByClassName('bruker');
             for (const item of list) {
-                item.innerHTML = person.fornavn.substr(0, 1) + person.etternavn.substr(0, 1);
+                item.innerHTML = søker.fornavn.substr(0, 1) + søker.etternavn.substr(0, 1);
             }
         }
     }
@@ -32,7 +32,7 @@ class Historikk extends React.Component<HistorikkProps> {
     render() {
         const cls = BEMHelper('historikk');
         const { hendelser } = this.props;
-
+        
         return (
             <div className={cls.className}>
                 {hendelser.length === 0 && (

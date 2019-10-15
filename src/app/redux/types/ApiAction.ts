@@ -1,14 +1,14 @@
-import Personinfo from "app/api/types/personinfo/Personinfo";
 import Sak from "app/api/types/sak/Sak";
 import { FetchError } from "./FetchState";
 import { StorageKvittering } from "app/api/types/StorageKvittering";
 import { HistorikkInnslag } from "app/api/types/historikk/HistorikkInnslag";
 import { MinidialogInnslag } from "app/api/types/MinidialogInnslag";
+import { Søkerinfo } from "app/types/Søkerinfo";
 
 export enum ApiActionTypes {
-    'GET_PERSONINFO_REQUEST' = 'getPersoninfoRequest',
-    'GET_PERSONINFO_SUCCESS' = 'getPersoninfoSuccess',
-    'GET_PERSONINFO_FAILURE' = 'getPersoninfoFailure',
+    'GET_SØKERINFO_REQUEST' = 'getPersoninfoRequest',
+    'GET_SØKERINFO_SUCCESS' = 'getPersoninfoSuccess',
+    'GET_SØKERINFO_FAILURE' = 'getPersoninfoFailure',
     'GET_SAKER_REQUEST' = 'getSakerRequest',
     'GET_SAKER_SUCCESS' = 'getSøkerInfoSuccess',
     'GET_SAKER_FAILURE' = 'getSøkerInfoFailure',
@@ -23,19 +23,19 @@ export enum ApiActionTypes {
     'GET_MINIDIALOG_FAILURE' = 'getMinidialogFailure'
 }
 
-export interface GetPersoninfoRequest {
-    type: ApiActionTypes.GET_PERSONINFO_REQUEST;
+export interface GetSøkerinfoRequest {
+    type: ApiActionTypes.GET_SØKERINFO_REQUEST;
 }
 
-export interface GetPersoninfoSuccess {
-    type: ApiActionTypes.GET_PERSONINFO_SUCCESS;
+export interface GetSøkerinfoSuccess {
+    type: ApiActionTypes.GET_SØKERINFO_SUCCESS;
     payload: {
-        personinfo: Personinfo;
+        søkerinfo: Søkerinfo;
     };
 }
 
-export interface GetPersonfinoFailure {
-    type: ApiActionTypes.GET_PERSONINFO_FAILURE;
+export interface GetSøkerinfoFailure {
+    type: ApiActionTypes.GET_SØKERINFO_FAILURE;
     payload: {
         error: FetchError;
     };
@@ -112,9 +112,9 @@ export interface GetMinidialogFailure {
 }
 
 type ApiAction =
-    | GetPersoninfoRequest
-    | GetPersoninfoSuccess
-    | GetPersonfinoFailure
+    | GetSøkerinfoRequest
+    | GetSøkerinfoSuccess
+    | GetSøkerinfoFailure
     | GetSakerRequest
     | GetSakerSuccess
     | GetSakerFailure

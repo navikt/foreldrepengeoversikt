@@ -21,16 +21,16 @@ import Oversikt from '../oversikt/Oversikt';
 import { utledHendelser } from '../historikk/util';
 import { hentHistorikkForSak } from 'app/utils/historikkUtils';
 import Sak from 'app/api/types/sak/Sak';
-import Personinfo from 'app/api/types/personinfo/Personinfo';
 import BEMHelper from 'common/util/bem';
 import { lenker } from 'app/utils/lenker';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { redirect } from 'app/utils/redirect';
+import Person from 'app/types/Person';
 
 import './saksinformasjonPanel.less';
 
 interface Props {
-    søker?: Personinfo;
+    søker?: Person;
     sak: Sak;
     history: History;
     historikkInnslagListe?: HistorikkInnslag[];
@@ -124,7 +124,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søker, sak, hi
 
             {!erInfotrygdSak(sak) && (
                 <Oversikt
-                    person={søker}
+                    søker={søker}
                     hendelser={utledHendelser(sak.behandlinger, hentHistorikkForSak(sak, historikkInnslagListe))}
                 />
             )}

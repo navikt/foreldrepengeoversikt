@@ -7,8 +7,8 @@ import { Element } from 'nav-frontend-typografi';
 
 import BEMHelper from 'common/util/bem';
 import { formaterDatoForHendelse } from './util';
-import Person from '../../api/types/personinfo/Personinfo';
 import { BehandlingResultatType, BehandlingÅrsak } from '../../api/types/sak/Behandling';
+import Person from 'app/types/Person';
 
 import './historikk.less';
 
@@ -19,7 +19,7 @@ export interface Hendelse {
 }
 
 interface HistorikkElementProps {
-    person?: Person;
+    søker?: Person;
     hendelse: Hendelse;
 }
 

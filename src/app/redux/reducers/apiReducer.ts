@@ -1,13 +1,13 @@
 import ApiAction, { ApiActionTypes } from '../types/ApiAction';
-import Personinfo from 'app/api/types/personinfo/Personinfo';
 import FetchState, { FetchStatus } from '../types/FetchState';
 import Sak from 'app/api/types/sak/Sak';
 import { StorageKvittering } from 'app/api/types/StorageKvittering';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
+import { Søkerinfo } from 'app/types/Søkerinfo';
 
 export interface ApiState {
-    personinfo: FetchState<Personinfo>;
+    søkerinfo: FetchState<Søkerinfo>;
     saker: FetchState<Sak[]>;
     storageKvittering: FetchState<StorageKvittering>;
     historikk: FetchState<HistorikkInnslag[]>;
@@ -15,7 +15,7 @@ export interface ApiState {
 }
 
 const getDefaultState = (): ApiState => ({
-    personinfo: {
+    søkerinfo: {
         status: FetchStatus.UNFETCHED
     },
     saker: {
@@ -34,29 +34,29 @@ const getDefaultState = (): ApiState => ({
 
 const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
     switch (action.type) {
-        case ApiActionTypes.GET_PERSONINFO_REQUEST:
+        case ApiActionTypes.GET_SØKERINFO_REQUEST:
             return {
                 ...state,
-                personinfo: {
+                søkerinfo: {
                     status: FetchStatus.IN_PROGRESS
                 }
             };
 
-        case ApiActionTypes.GET_PERSONINFO_SUCCESS:
+        case ApiActionTypes.GET_SØKERINFO_SUCCESS:
             return {
                 ...state,
-                personinfo: {
+                søkerinfo: {
                     status: FetchStatus.SUCCESS,
                     data: {
-                        ...action.payload.personinfo
+                        ...action.payload.søkerinfo
                     }
                 }
             };
 
-        case ApiActionTypes.GET_PERSONINFO_FAILURE:
+        case ApiActionTypes.GET_SØKERINFO_FAILURE:
             return {
                 ...state,
-                personinfo: {
+                søkerinfo: {
                     status: FetchStatus.FAILURE,
                     error: action.payload.error
                 }

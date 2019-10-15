@@ -5,11 +5,11 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
 import { lenker } from 'app/utils/lenker';
 import { redirect } from 'app/utils/redirect';
-import Personinfo from 'app/api/types/personinfo/Personinfo';
 import { Kjønn } from 'app/api/types/personinfo/Kjønn';
+import Person from 'app/types/Person';
 
 interface Props {
-    søker?: Personinfo;
+    søker?: Person;
 }
 
 const SøkNåPanel: React.StatelessComponent<Props> = ({ søker }) => {

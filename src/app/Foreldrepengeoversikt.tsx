@@ -19,10 +19,10 @@ import { Feature, isFeatureEnabled } from './Feature';
 import DinPlan from './pages/din-plan/DinPlan';
 import MinidialogPage from './pages/mindialog-svar/MinidialogSvar';
 import EttersendingDto from './api/types/ettersending/EttersendingDto';
-import Personinfo from './api/types/personinfo/Personinfo';
+import { Søkerinfo } from './types/Søkerinfo';
 
 interface Props {
-    personinfo: FetchState<Personinfo>;
+    søkerinfo: FetchState<Søkerinfo>;
     ettersendelse: PostState<EttersendingDto>;
     shouldRenderApplicationSpinner: boolean;
     feiletOppslag: GetFailure;
@@ -39,7 +39,7 @@ class Foreldrepengeoversikt extends React.Component<Props> {
     }
 
     fetchData(): void {
-        if (this.props.personinfo.status === FetchStatus.UNFETCHED) {
+        if (this.props.søkerinfo.status === FetchStatus.UNFETCHED) {
             this.props.requestPersoninfo();
             this.props.requestSaker();
             this.props.requestStorageKvittering();
@@ -103,12 +103,12 @@ class Foreldrepengeoversikt extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State) => {
-    const {personinfo, saker, storageKvittering} = state.api
+    const { søkerinfo, saker, storageKvittering} = state.api
     return {
-        personinfo: state.api.personinfo,
+        søkerinfo,
         ettersendelse: state.innsending.ettersendelse,
         feiletOppslag: [...Object.values(state.api)].find((oppslag) => oppslag.status === FetchStatus.FAILURE),
-        shouldRenderApplicationSpinner: [personinfo, saker, storageKvittering].some(
+        shouldRenderApplicationSpinner: [søkerinfo, saker, storageKvittering].some(
             (oppslag) =>
                 oppslag.status === FetchStatus.UNFETCHED ||
                 oppslag.status === FetchStatus.IN_PROGRESS ||
@@ -119,7 +119,7 @@ const mapStateToProps = (state: State) => {
 
 const mapDispatchToProps = (dispatch: (action: ApiAction) => void) => ({
     requestPersoninfo: () => {
-        dispatch({ type: ApiActionTypes.GET_PERSONINFO_REQUEST });
+        dispatch({ type: ApiActionTypes.GET_SØKERINFO_REQUEST });
     },
     requestSaker: () => {
         dispatch({ type: ApiActionTypes.GET_SAKER_REQUEST });

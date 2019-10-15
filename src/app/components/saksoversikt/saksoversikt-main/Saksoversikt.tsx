@@ -8,10 +8,10 @@ import SøkNåPanel from 'app/components/søk-nå-panel/SøkNåPanel';
 
 import Sak from '../../../api/types/sak/Sak';
 import BEMHelper from 'common/util/bem';
-import Person from '../../../api/types/personinfo/Personinfo';
 import SaksoversiktHeader from './SaksoversiktHeader';
 import Etikett from '../../etikett/etikett';
 import { harSøkt } from 'app/utils/sakerUtils';
+import Person from 'app/types/Person';
 
 import './saksoversikt.less';
 

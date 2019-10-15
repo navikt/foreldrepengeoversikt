@@ -10,7 +10,7 @@ import Page from '../page/Page';
 import CalendarIkon from 'app/components/ikoner/CalendarIkon';
 import { Routes } from 'app/utils/routes';
 
-import Personinfo from 'app/api/types/personinfo/Personinfo';
+import Person from 'app/types/Person';
 import Sak from 'app/api/types/sak/Sak';
 import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
 import {
@@ -23,7 +23,7 @@ import './dinPlan.less';
 
 interface Props {
     history: History;
-    søker?: Personinfo;
+    søker?: Person;
     sak?: Sak;
 }
 
@@ -56,7 +56,7 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
 const mapStateToProps = (state: State, ownProps: Props) => {
     const params = new URLSearchParams(ownProps.history.location.search);
     return {
-        søker: getData(state.api.personinfo, undefined),
+        søker: getData(state.api.søkerinfo, {}).person,
         sak: getData(state.api.saker, []).find((saker) => saker.saksnummer === params.get('saksnummer'))
     };
 };

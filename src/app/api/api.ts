@@ -6,7 +6,7 @@ import AxiosApiInterceptor from './interceptor';
 export const apiBaseUrl: string = Environment.REST_API_URL;
 
 const getPersoninfo = () => {
-    return AxiosApiInterceptor.get('/personinfo');
+    return AxiosApiInterceptor.get('/sokerinfo');
 };
 
 const getSaker = () => {

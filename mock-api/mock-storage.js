@@ -19,8 +19,8 @@ const getFileContent = function(filnavn) {
     }
 };
 
-const getPersoninfo = function() {
-    return getFileContent('personinfo.json');
+const getSokerinfo = function() {
+    return getFileContent('sokerinfo.json');
 };
 
 const getSaker = function() {
@@ -53,7 +53,7 @@ const getUttaksplan = function() {
 };
 
 module.exports = {
-    getPersoninfo,
+    getSokerinfo,
     getSaker,
     getKvitteringStorage,
     getHistorikk,

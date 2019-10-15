@@ -3,12 +3,12 @@ import { FormattedMessage } from 'react-intl';
 
 import PeriodeListe from './PeriodeList/PeriodeList';
 import Periode from 'app/types/uttaksplan/Periode';
-import Personinfo from 'app/api/types/personinfo/Personinfo';
 import AnnenPart from 'app/api/types/sak/AnnenPart';
 import AlertStripe from 'nav-frontend-alertstriper';
+import Person from 'app/types/Person';
 
 interface Props {
-    søker: Personinfo;
+    søker: Person;
     annenPart?: AnnenPart;
     tidligerePerioder?: Periode[];
     nåværendePerioder?: Periode[];

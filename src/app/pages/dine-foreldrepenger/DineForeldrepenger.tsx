@@ -22,7 +22,6 @@ import {
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
 
-import Person from '../../api/types/personinfo/Personinfo';
 import { StorageKvittering } from '../../api/types/StorageKvittering';
 import Behandling from 'app/api/types/sak/Behandling';
 import { State } from 'app/redux/store';
@@ -32,6 +31,7 @@ import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import MinidialogLenkepanel from 'app/components/minidialog-lenkepanel/MinidialogLenkepanel';
 import { guid } from 'nav-frontend-js-utils';
 import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
+import Person from 'app/types/Person';
 
 import './dineForeldrepenger.less';
 
@@ -164,7 +164,7 @@ export class DineForeldrepenger extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State) => ({
-    søker: getData(state.api.personinfo, undefined),
+    søker: getData(state.api.søkerinfo, {}).person,
     saker: getData(state.api.saker, []),
     storageKvittering: getData(state.api.storageKvittering, undefined),
     historikkInnslagListe: getData(state.api.historikk, undefined),

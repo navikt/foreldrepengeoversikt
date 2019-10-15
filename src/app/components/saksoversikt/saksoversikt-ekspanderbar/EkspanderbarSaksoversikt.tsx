@@ -6,9 +6,9 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import BEMHelper from 'common/util/bem';
 import Sak from '../../../api/types/sak/Sak';
 import EkspanderbarSaksoversiktHeader from './EkspanderbarSaksoversiktHeader';
-import Person from '../../../api/types/personinfo/Personinfo';
 import Saksoversikt from '../saksoversikt-main/Saksoversikt';
 import { getSaksoversiktTitle } from '../utils';
+import Person from 'app/types/Person';
 
 import './ekspanderbarSaksoversikt.less';
 

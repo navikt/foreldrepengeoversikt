@@ -18,14 +18,14 @@ import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import UttaksplanAdvarselIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/UttaksplanAdvarselIkon';
 import PeriodeListElement from './PeriodeListElement';
 import AnnenPart from 'app/api/types/sak/AnnenPart';
-import Personinfo from 'app/api/types/personinfo/Personinfo';
+import Person from 'app/types/Person';
 
 import './periodeList.less';
 
 interface Props {
     tittel: string | React.ReactNode;
     perioder: Periode[];
-    søker: Personinfo;
+    søker: Person;
     annenPart?: AnnenPart;
 }
 
@@ -50,7 +50,7 @@ const getIkon = (periode: any) => {
 
 const getBeskrivelse = (
     periode: Periode,
-    aktører: { søker: Personinfo; annenPart?: AnnenPart },
+    aktører: { søker: Person; annenPart?: AnnenPart },
     intl: InjectedIntl
 ) => {
     return (

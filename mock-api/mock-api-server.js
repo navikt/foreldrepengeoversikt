@@ -3,6 +3,7 @@ const app = express();
 const router = express.Router();
 const multer = require('multer');
 const MockStorage = require('./mock-storage');
+const morgan = require('morgan');
 
 require('dotenv').config();
 
@@ -23,9 +24,10 @@ const delayAllResponses = function(millis) {
 app.use(allowCrossDomain);
 app.use(delayAllResponses(500));
 app.use(express.json());
+app.use(morgan('tiny'));
 
-router.get(['/rest/personinfo'], (req, res) => {
-    res.send(MockStorage.getPersoninfo());
+router.get(['/rest/sokerinfo'], (req, res) => {
+    res.send(MockStorage.getSokerinfo());
 });
 
 router.post('/rest/engangsstonad', (req, res) => res.sendStatus(200));
