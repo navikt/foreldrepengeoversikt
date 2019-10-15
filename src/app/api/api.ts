@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Environment from '../Environment';
 import EttersendingDto from './types/ettersending/EttersendingDto';
 import AxiosApiInterceptor from './interceptor';
@@ -39,15 +38,6 @@ const getUttaksplan = (saksnummer: string) => {
     });
 };
 
-const log = (error: any) => {
-    return axios.post('/log', error, {
-        timeout: 15 * 1000,
-        headers: {
-            'content-type': 'application/json'
-        }
-    });
-};
-
 const Api = {
     getSaker,
     getPersoninfo,
@@ -55,8 +45,7 @@ const Api = {
     getStorageKvittering,
     getHistorikk,
     getMiniDialog,
-    getUttaksplan,
-    log
+    getUttaksplan
 };
 
 export default Api;

@@ -1,10 +1,7 @@
 const express = require('express');
 const server = express();
 server.use(express.json());
-
-
 const path = require('path');
-const winston = require('winston');
 const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const getDecorator = require('./src/build/scripts/decorator');
@@ -27,11 +24,6 @@ server.use((req, res, next) => {
     next();
 });
 
-const logger = winston.createLogger({
-    format: winston.format.json(),
-    transports: [new winston.transports.Console()]
-});
-
 const renderApp = (decoratorFragments) =>
     new Promise((resolve, reject) => {
         server.render('index.html', decoratorFragments, (err, html) => {
@@ -45,28 +37,16 @@ const renderApp = (decoratorFragments) =>
 
 const startServer = (html) => {
     server.use('/dist/js', express.static(path.resolve(__dirname, 'dist/js')));
-    server.use(
-        '/dist/css',
-        express.static(path.resolve(__dirname, 'dist/css'))
-    );
+    server.use('/dist/css', express.static(path.resolve(__dirname, 'dist/css')));
 
-    server.use(
-        '/dist/assets',
-        express.static(path.resolve(__dirname, 'dist/assets'))
-    );
-    
+    server.use('/dist/assets', express.static(path.resolve(__dirname, 'dist/assets')));
+
     server.get(['/dist/js/settings.js'], (req, res) => {
         res.sendFile(path.resolve(`../../dist/js/settings.js`));
     });
 
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
     server.get('/health/isReady', (req, res) => res.sendStatus(200));
-    server.post('/log', (req, res) => {
-        const { message, ...rest } = req.body;
-        logger.warn(message, { ...rest });
-        res.sendStatus(200);
-    });
-
     server.get(/^\/(?!.*dist).*$/, (req, res) => {
         res.send(html);
     });

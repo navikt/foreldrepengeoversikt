@@ -7,13 +7,11 @@ import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 import { getData } from 'app/redux/util/fetchFromState';
 import { connect } from 'react-redux';
 import { State as AppState } from 'app/redux/store';
-import { Attachment } from 'common/storage/attachment/types/Attachment';
 import MinidialogSkjema from '../../components/minidialog-skjema/MinidialogSkjema';
 import { InnsendingActionTypes, InnsendingAction } from 'app/redux/types/InnsendingAction';
 import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
 import Sak from 'app/api/types/sak/Sak';
 import { Routes } from 'app/utils/routes';
-
 
 interface Props {
     history: History;
@@ -22,16 +20,11 @@ interface Props {
     sendEttersendelse: (ettersendelse: EttersendingDto) => void;
 }
 
-interface State {
-    attachments: Attachment[];
-    fritekst: string;
-}
-
-class MinidialogPage extends React.Component<Props, State> {
+class MinidialogPage extends React.Component<Props> {
     render() {
         const { sak, sendEttersendelse, minidialog, history } = this.props;
         if (!minidialog || !sak) {
-            return null;
+            throw new Error('test');
         }
 
         const cls = BEMHelper('minidialog');

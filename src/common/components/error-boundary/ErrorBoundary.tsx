@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
-import { BotInfo, BrowserInfo, detect, NodeInfo } from 'detect-browser';
-import Api from '../../../app/api/api';
-import { Feature, isFeatureEnabled } from '../../../app/Feature';
 import Feilsidemelding from '../feilsidemelding/Feilsidemelding';
 import getMessage from 'common/util/i18nUtils';
 import Lenke from 'nav-frontend-lenker';
@@ -14,15 +11,14 @@ interface State {
     hasError: boolean;
 }
 
+type Props = InjectedIntlProps;
 class ErrorBoundary extends React.Component<InjectedIntlProps, State> {
-    constructor(props: any) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             eventId: null,
             hasError: false
         };
-
-        this.logError = this.logError.bind(this);
     }
 
     componentDidCatch(error: Error | null, errorInfo: object) {
@@ -32,25 +28,7 @@ class ErrorBoundary extends React.Component<InjectedIntlProps, State> {
             this.setState({ eventId });
         });
 
-        this.setState({ hasError: true }, () => {
-            if (isFeatureEnabled(Feature.logging)) {
-                this.logError(error, detect(), errorInfo);
-            }
-        });
-    }
-
-    logError(
-        error: Error | null | undefined,
-        browserInfo: BrowserInfo | BotInfo | NodeInfo | null | false,
-        reactStackTrace?: any
-    ) {
-        Api.log({
-            message: error ? error.message : undefined,
-            trace: error ? error.stack : undefined,
-            componentStack:
-                reactStackTrace && reactStackTrace.componentStack ? reactStackTrace.componentStack : undefined,
-            browserInfo
-        });
+        this.setState({ hasError: true });
     }
 
     render() {
