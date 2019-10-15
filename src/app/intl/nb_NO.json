@@ -183,6 +183,8 @@
 	"vedlegg.feilmelding.tittel.flereFeil": "Opplasting av vedlegg feilet for:",
 	"vedlegg.forStort": "Vedlegget må være mindre enn 9MB",
 	"vedlegg.forStort.flereFeil": "{filename} - Vedlegget må være mindre enn 9MB",
+	"vedlegg.passordbeskyttet": "Vedlegget du forsøker å laste opp er passordbeskyttet. Du må endre vedlegget slik at det ikke er passordbeskyttet eller laste opp et annet vedlegg.",
+	"vedlegg.passordbeskyttet.flereFeil": "{filename} - Vedlegget du forsøker å laste opp er passordbeskyttet. Du må endre vedlegget slik at det ikke er passordbeskyttet eller laste opp et annet vedlegg.",
 	"vedlegg.lastoppknapp": "Legg ved dokumentasjon",
 	"vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
 	"vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
