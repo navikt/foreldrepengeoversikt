@@ -9,7 +9,8 @@ import {
     getStønadskontoFarge,
     getVarighetString,
     harAnnenForelderSamtidigUttakISammePeriode,
-    getStønadskontoTypeFromOppholdsÅrsak
+    getStønadskontoTypeFromOppholdsÅrsak,
+    skalVisesIPeriodeListe
 } from '../periodeUtils';
 import UttakIkon from 'app/components/ikoner/UttakIkon';
 import Periode, { PeriodeType, Utsettelsesperiode, Uttaksperiode, Oppholdsperiode } from 'app/types/uttaksplan/Periode';
@@ -77,7 +78,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
             <Normaltekst className={cls.element('tittel')}>{tittel}</Normaltekst>
             <ol>
                 {perioder
-                    .filter((p) => (p as Uttaksperiode).samtidigUttak !== true)
+                    .filter((p) => skalVisesIPeriodeListe(p, perioder))
                     .map((p) => {
                         switch (p.type) {
                             case PeriodeType.Uttak:
@@ -151,7 +152,9 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                         beskrivelse={
                                             <FormattedMessage
                                                 id="dinPlan.opphold.beskrivelse"
-                                                values={{ navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen' }}
+                                                values={{
+                                                    navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen'
+                                                }}
                                             />
                                         }
                                         tidsperiode={p.tidsperiode}
@@ -161,16 +164,15 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                 return (
                                     <PeriodeListElement
                                         key={guid()}
-                                        tittel={
-                                            <FormattedMessage
-                                                id="dinPlan.taptPeriode"
-                                            />
-                                        }
+                                        tittel={<FormattedMessage id="dinPlan.taptPeriode" />}
                                         ikon={<UttaksplanAdvarselIkon />}
                                         beskrivelse={
                                             <FormattedMessage
                                                 id="dinPlan.taptPeriode.beskrivelse"
-                                                values={{ navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen' }}
+                                                values={{
+                                                    navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen',
+                                                    antallDager: getVarighetString(p.antallUttaksdager, intl)
+                                                }}
                                             />
                                         }
                                         tidsperiode={p.tidsperiode}

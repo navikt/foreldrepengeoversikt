@@ -11,8 +11,8 @@ import './page.less';
 interface Props {
     className?: string;
     pageTitle: string | React.ReactNode;
-    icon: () => React.ReactNode;
-    title: string | React.ReactNode;
+    icon?: () => React.ReactNode;
+    title?: string | React.ReactNode;
     onBackClick?: () => void;
 }
 
@@ -25,8 +25,8 @@ class Page extends React.Component<Props> {
                 <Søknadstittel>{this.props.pageTitle}</Søknadstittel>
                 <div className={cls.element('content')}>
                     {onBackClick && <BackButton hidden={false} onClick={onBackClick} />}
-                    <div className={cls.element('icon')}>{icon && icon()}</div>
-                    <Innholdstittel className={cls.element('title')}>{title}</Innholdstittel>
+                    {icon && <div className={cls.element('icon')}>{icon && icon()}</div>}
+                    {title && <Innholdstittel className={cls.element('title')}>{title}</Innholdstittel>}
                     {children}
                 </div>
             </div>

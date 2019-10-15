@@ -2,7 +2,8 @@ import {
     getUkerOgDagerFromDager,
     finnFremtidigePerioder,
     slåSammenLikeOgSammenhengendeUttaksperioder,
-    erSammenhengende
+    erSammenhengende,
+    harAnnenForelderSamtidigUttakISammePeriode
 } from '../periodeUtils';
 import {
     UttaksPeriodeDto,
@@ -13,7 +14,7 @@ import {
     UtsettelsePeriodeType
 } from 'app/api/types/UttaksplanDto';
 import moment from 'moment';
-import Periode from 'app/types/uttaksplan/Periode';
+import Periode, { Uttaksperiode } from 'app/types/uttaksplan/Periode';
 
 describe('periodeUtils', () => {
     describe('getUkerOgDagerFromDager', () => {
@@ -124,16 +125,8 @@ describe('periodeUtils', () => {
             },
             morsAktivitet: MorsAktivitetDto.Arbeid
         };
-
-        const perioder = [
-            mockPeriode,
-            { ...mockPeriode, periode: { fom: '2019-01-03', tom: '2019-01-04' } }
-        ];
-
-        expect(
-            slåSammenLikeOgSammenhengendeUttaksperioder(perioder).length
-        ).toEqual(1);
-
+        const perioder = [mockPeriode, { ...mockPeriode, periode: { fom: '2019-01-03', tom: '2019-01-04' } }];
+        expect(slåSammenLikeOgSammenhengendeUttaksperioder(perioder).length).toEqual(1);
         expect(slåSammenLikeOgSammenhengendeUttaksperioder(perioder)[0].trekkDager).toEqual(40);
     });
 
@@ -141,5 +134,57 @@ describe('periodeUtils', () => {
         expect(
             erSammenhengende({ fom: '2019-09-02', tom: '2019-09-27' }, { fom: '2019-09-28', tom: '2019-10-08' })
         ).toBeTruthy();
+    });
+
+    it('en periode skal regnes som sammenhengende selv om neste periode starter på en lørdag', () => {
+        expect(
+            erSammenhengende({ fom: '2019-08-30', tom: '2019-09-01' }, { fom: '2019-09-02', tom: '2019-10-08' })
+        ).toBeTruthy();
+    });
+
+    it('like tidsperioder skal ikke betraktes som sammenhengende', () => {
+        expect(
+            erSammenhengende({ fom: '2019-09-02', tom: '2019-09-27' }, { fom: '2019-09-02', tom: '2019-09-27' })
+        ).toBeFalsy();
+    });
+
+    it('like tidsperioder skal ikke betraktes som sammenhengende', () => {
+        expect(
+            erSammenhengende({ fom: '2019-08-28', tom: '2019-09-01' }, { fom: '2019-09-02', tom: '2019-09-27' })
+        ).toBeTruthy();
+    });
+
+    it('test', () => {
+        const perioder = [
+            {
+                type: 'UTTAK',
+                gjelderAnnenPart: false,
+                tidsperiode: {
+                    fom: '2019-09-28',
+                    tom: '2019-10-08'
+                },
+                forelder: 'farMedmor',
+                antallUttaksdager: 7,
+                stønadskontotype: 'FEDREKVOTE',
+                graderingInnvilget: false,
+                samtidigUttak: true,
+                samtidigUttaksprosent: 100
+            },
+            {
+                type: 'UTTAK',
+                gjelderAnnenPart: true,
+                tidsperiode: {
+                    fom: '2019-09-28',
+                    tom: '2019-10-08'
+                },
+                forelder: 'mor',
+                antallUttaksdager: 7,
+                stønadskontotype: 'MØDREKVOTE',
+                graderingInnvilget: false,
+                samtidigUttak: false
+            }
+        ];
+
+        expect(harAnnenForelderSamtidigUttakISammePeriode(perioder[1] as Uttaksperiode, perioder as Periode[])).toBeTruthy();
     });
 });

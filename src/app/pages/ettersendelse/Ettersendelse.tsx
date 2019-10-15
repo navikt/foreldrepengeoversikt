@@ -1,94 +1,61 @@
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import { History } from 'history';
+import { connect } from 'react-redux';
 import { Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Select, Input } from 'nav-frontend-skjema';
+import { History } from 'history';
 
 import Sak from '../../api/types/sak/Sak';
 import BEMHelper from '../../../common/util/bem';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
-import { AxiosError } from '../../../../node_modules/axios';
-import Api from '../../api/api';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import EttersendingDto from '../../api/types/ettersending/EttersendingDto';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import LetterIcon from '../../components/ikoner/LetterIcon';
-import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummer } from './util';
+import { getAttachmentTypeSelectOptions, getListOfUniqueSkjemanummer, getEttersendingType } from './util';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 import { Routes } from '../../utils/routes';
 
-import { extractErrorMessage, extractUUID } from 'common/util/errorUtil';
-import { erForeldrepengesak } from '../../utils/sakerUtils';
-import getMessage from 'common/util/i18nUtils';
-import ErrorPage from '../error/ErrorPage';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import Page from '../page/Page';
+import { withAttachments, AttachmentFormProps } from 'app/components/attachmentForm/AttachmentForm';
+import { State as AppState } from 'app/redux/store';
+
+import { getData } from 'app/redux/util/fetchFromState';
+import { InnsendingAction, InnsendingActionTypes } from 'app/redux/types/InnsendingAction';
 
 import './ettersendelse.less';
 
 interface EttersendelseProps {
+    sak?: Sak;
     history: History;
+    sendEttersendelse: (ettersendingDto: EttersendingDto) => void;
 }
 
 interface State {
-    sak: Sak;
-    attachments: Attachment[];
     attachmentSkjemanummer?: Skjemanummer;
     attachmentBeskrivelse?: string;
     sendingEttersendelse: boolean;
-    error: {
-        hasOccured: boolean;
-        uuid?: string;
-        message?: string;
-    };
 }
 
 type Props = EttersendelseProps & InjectedIntlProps;
-
-class Ettersendelse extends React.Component<Props, State> {
-    constructor(props: Props) {
+export class Ettersendelse extends React.Component<Props & AttachmentFormProps, State> {
+    constructor(props: Props & AttachmentFormProps) {
         super(props);
         this.state = {
-            ...this.props.history.location.state,
-            sendingEttersendelse: false,
-            attachments: [],
-            error: { hasOccured: false }
+            sendingEttersendelse: false
         };
 
-        if (!this.state.sak) {
-            this.props.history.push(Routes.DINE_FORELDREPENGER);
+        if (props.sak === undefined) {
+            props.history.push(Routes.DINE_FORELDREPENGER);
         }
 
-        this.addAttachment = this.addAttachment.bind(this);
-        this.editAttachment = this.editAttachment.bind(this);
-        this.deleteAttachment = this.deleteAttachment.bind(this);
+        this.sendEttersendelse = this.sendEttersendelse.bind(this);
         this.handleAttachmentTypeSelectChange = this.handleAttachmentTypeSelectChange.bind(this);
-        this.handleSendEttersendelseOnClick = this.handleSendEttersendelseOnClick.bind(this);
         this.handleAttachmentBeskrivelseOnChange = this.handleAttachmentBeskrivelseOnChange.bind(this);
         this.handleBackClick = this.handleBackClick.bind(this);
-    }
-
-    addAttachment(attachments: Attachment[]): void {
-        attachments.forEach((a) => {
-            if (this.state.attachmentSkjemanummer === Skjemanummer.ANNET) {
-                a.beskrivelse = this.state.attachmentBeskrivelse;
-            }
-        });
-        this.setState({ attachments: this.state.attachments.concat(attachments) });
-    }
-
-    editAttachment(attachment: Attachment): void {
-        const attachmentsCopy = this.state.attachments.slice();
-        const index = this.state.attachments.indexOf(attachment);
-        attachmentsCopy[index] = attachment;
-        this.setState({ attachments: attachmentsCopy });
-    }
-
-    deleteAttachment(attachments: Attachment[]): void {
-        const newAttachmentList = [...this.state.attachments];
-        attachments.forEach((a) => newAttachmentList.splice(newAttachmentList.indexOf(a), 1));
-        this.setState({ attachments: newAttachmentList });
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     handleBackClick(): void {
@@ -100,39 +67,20 @@ class Ettersendelse extends React.Component<Props, State> {
         this.setState({ attachmentSkjemanummer: selectedValue !== '' ? selectedValue : undefined });
     }
 
-    handleSendEttersendelseOnClick(): void {
-        if (this.isReadyToUploadAttachments()) {
-            this.setState({ sendingEttersendelse: true }, this.sendEttersendelse);
+    onSubmit(): void {
+        const { sak, isReadyToSendAttachments } = this.props;
+        if (isReadyToSendAttachments && sak) {
+            this.setState({ sendingEttersendelse: true }, () => this.sendEttersendelse(sak));
         }
     }
 
-    sendEttersendelse(): void {
+    sendEttersendelse(sak: Sak): void {
         const ettersending: EttersendingDto = {
-            type: erForeldrepengesak(this.state.sak) ? 'foreldrepenger' : 'engangsstønad',
-            saksnummer: this.state.sak.saksnummer!,
-            vedlegg: this.state.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
+            type: getEttersendingType(sak),
+            saksnummer: sak.saksnummer!,
+            vedlegg: this.props.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
         };
-
-        Api.sendEttersending(ettersending)
-            .then((response) => {
-                this.setState({ sendingEttersendelse: false, attachmentBeskrivelse: undefined }, () => {
-                    this.props.history.push(Routes.KVITTERING, {
-                        kvittering: response.data,
-                        attachments: ettersending.vedlegg
-                    });
-                });
-            })
-            .catch((error: AxiosError) => {
-                this.setState({
-                    sendingEttersendelse: false,
-                    error: {
-                        hasOccured: true,
-                        uuid: extractUUID(error),
-                        message:
-                            error.response && error.response.status === 413 ? extractErrorMessage(error) : undefined
-                    }
-                });
-            });
+        this.props.sendEttersendelse(ettersending);
     }
 
     isReadyToUploadAttachments(): boolean {
@@ -141,17 +89,6 @@ class Ettersendelse extends React.Component<Props, State> {
             return this.state.attachmentBeskrivelse !== undefined && this.state.attachmentBeskrivelse !== '';
         }
         return attachmentSkjemanummer !== undefined;
-    }
-
-    isReadyToSendAttachments(): boolean {
-        const attachmentsWithoutUploadError: Attachment[] = this.state.attachments.filter(
-            (a: Attachment) => !isAttachmentWithError(a)
-        );
-
-        return (
-            attachmentsWithoutUploadError.length > 0 &&
-            attachmentsWithoutUploadError.every((a: Attachment) => a.url !== undefined)
-        );
     }
 
     isAttachmentOfTypeAnnet(): boolean {
@@ -163,19 +100,23 @@ class Ettersendelse extends React.Component<Props, State> {
     }
 
     render() {
-        const { intl } = this.props;
-        const { sak, attachments, attachmentSkjemanummer, sendingEttersendelse } = this.state;
+        const {
+            intl,
+            sak,
+            attachments,
+            addAttachment,
+            deleteAttachment,
+            editAttachment,
+            isReadyToSendAttachments
+        } = this.props;
+        const { attachmentSkjemanummer, sendingEttersendelse } = this.state;
+
         if (!sak) {
             return null;
         }
 
         const uploadedAttachments = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
         const cls = BEMHelper('ettersendelse');
-
-        if (this.state.error.hasOccured) {
-            return <ErrorPage uuid={this.state.error.uuid} errorMessage={this.state.error.message} />;
-        }
-
         return (
             <Page
                 className={cls.className}
@@ -183,55 +124,90 @@ class Ettersendelse extends React.Component<Props, State> {
                 icon={() => <LetterIcon />}
                 title={<FormattedMessage id="ettersendelse.title" values={{ saksnummer: sak.saksnummer }} />}
                 onBackClick={this.handleBackClick}>
-                <Select
-                    className={cls.element('attachment-type-select')}
-                    label={<Element>{getMessage(intl, 'ettersendelse.vedlegg.select.label')}</Element>}
-                    onChange={this.handleAttachmentTypeSelectChange}
-                    defaultValue="default">
-                    {getAttachmentTypeSelectOptions(intl, sak)}
-                </Select>
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        this.onSubmit();
+                    }}>
+                    <Select
+                        className={cls.element('attachment-type-select')}
+                        label={
+                            <Element>
+                                <FormattedMessage id="ettersendelse.vedlegg.select.label" />
+                            </Element>
+                        }
+                        onChange={this.handleAttachmentTypeSelectChange}
+                        defaultValue="default">
+                        {getAttachmentTypeSelectOptions(intl, sak)}
+                    </Select>
 
-                {this.isAttachmentOfTypeAnnet() && (
-                    <Input
-                        className={cls.element('attachment-description')}
-                        label={<Element>{getMessage(intl, 'ettersendelse.vedlegg.beskrivelse')}</Element>}
-                        onChange={this.handleAttachmentBeskrivelseOnChange}
-                    />
-                )}
-
-                {this.isReadyToUploadAttachments() && (
-                    <div className={cls.element('uploader')}>
-                        <AttachmentsUploader
-                            attachments={attachments}
-                            skjemanummer={attachmentSkjemanummer ? attachmentSkjemanummer : Skjemanummer.ANNET}
-                            onFilesUploadStart={this.addAttachment}
-                            onFileUploadFinish={this.editAttachment}
-                            onFileDeleteStart={this.deleteAttachment}
+                    {this.isAttachmentOfTypeAnnet() && (
+                        <Input
+                            className={cls.element('attachment-description')}
+                            label={
+                                <Element>
+                                    <FormattedMessage id="ettersendelse.vedlegg.beskrivelse" />
+                                </Element>
+                            }
+                            onChange={this.handleAttachmentBeskrivelseOnChange}
                         />
-                    </div>
-                )}
+                    )}
 
-                {getListOfUniqueSkjemanummer(uploadedAttachments).map((skjemanummer: Skjemanummer) => (
-                    <AttachmentList
-                        key={skjemanummer}
-                        intlKey={`ettersendelse.attachmentList.${skjemanummer}`}
-                        onDelete={this.deleteAttachment}
-                        attachments={uploadedAttachments.filter((a: Attachment) => a.skjemanummer === skjemanummer)}
-                    />
-                ))}
+                    {this.isReadyToUploadAttachments() && (
+                        <div className={cls.element('uploader')}>
+                            <AttachmentsUploader
+                                attachments={attachments}
+                                skjemanummer={attachmentSkjemanummer ? attachmentSkjemanummer : Skjemanummer.ANNET}
+                                onFilesUploadStart={addAttachment}
+                                onFileUploadFinish={editAttachment}
+                                onFileDeleteStart={deleteAttachment}
+                            />
+                        </div>
+                    )}
 
-                {this.isReadyToSendAttachments() && (
-                    <div className={cls.element('send-button')}>
-                        <Hovedknapp
-                            onClick={this.handleSendEttersendelseOnClick}
-                            disabled={sendingEttersendelse}
-                            spinner={sendingEttersendelse}>
-                            <FormattedMessage id="ettersendelse.sendButton" />
-                        </Hovedknapp>
-                    </div>
-                )}
+                    {getListOfUniqueSkjemanummer(uploadedAttachments).map((skjemanummer: Skjemanummer) => (
+                        <AttachmentList
+                            key={skjemanummer}
+                            intlKey={`ettersendelse.attachmentList.${skjemanummer}`}
+                            onDelete={deleteAttachment}
+                            attachments={uploadedAttachments.filter((a: Attachment) => a.skjemanummer === skjemanummer)}
+                        />
+                    ))}
+
+                    {isReadyToSendAttachments && (
+                        <div className={cls.element('send-button')}>
+                            <Hovedknapp disabled={sendingEttersendelse} spinner={sendingEttersendelse}>
+                                <FormattedMessage id="ettersendelse.sendButton" />
+                            </Hovedknapp>
+                        </div>
+                    )}
+                </form>
             </Page>
         );
     }
 }
-export default injectIntl(Ettersendelse);
+
+const mapStateToProps = (state: AppState, props: Props) => {
+    const params = new URLSearchParams(props.history.location.search);
+    const sak = getData(state.api.saker, []).find((s) => s.saksnummer === params.get('saksnummer'));
+    return {
+        sak
+    };
+};
+
+const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props: Props) => ({
+    sendEttersendelse: (ettersendelse: EttersendingDto) => {
+        dispatch({
+            type: InnsendingActionTypes.SEND_ETTERSENDELSE,
+            payload: {
+                ettersending: ettersendelse,
+                history: props.history
+            }
+        });
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(injectIntl(withAttachments<Props>(Ettersendelse)));

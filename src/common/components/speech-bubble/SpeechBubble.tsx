@@ -12,7 +12,7 @@ const SpeechBubble: React.StatelessComponent<Props> = ({ title = null, text }) =
     <div className={`speechBubble speechBubble--white`}>
         <div className="speechBubble__content">
             {title && (
-                <div className="speechBubble__title capitalizeName">
+                <div className="speechBubble__title">
                     <Element className="m_no-margin">{title}</Element>
                 </div>
             )}

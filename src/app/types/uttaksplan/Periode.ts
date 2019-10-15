@@ -16,7 +16,7 @@ export interface Uttaksperiode extends Periode {
     stønadskontotype: StønadskontoType;
     graderingInnvilget: boolean;
     samtidigUttak: boolean;
-    samtidigUttaksprosent?: number; 
+    samtidigUttaksprosent?: number;
 }
 
 export interface Utsettelsesperiode extends Periode {

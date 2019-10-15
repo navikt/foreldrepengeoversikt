@@ -7,7 +7,14 @@ import SøkIkon from '../ikoner/sidepanel/SøkIkon';
 import UtbetalingerIkon from '../ikoner/sidepanel/UtbetalingerIkon';
 import { finnNesteUtbetalingsdato } from 'app/utils/dateUtils';
 import Sak from 'app/api/types/sak/Sak';
-import { erLøpende, erForeldrepengesak, erAvsluttet, erInfotrygdSak, erEngangsstønad } from 'app/utils/sakerUtils';
+import {
+    erLøpende,
+    erForeldrepengesak,
+    erAvsluttet,
+    erInfotrygdSak,
+    erEngangsstønad,
+    harSøkt
+} from 'app/utils/sakerUtils';
 
 import './sidepanel.less';
 
@@ -19,7 +26,7 @@ const Sidepanel: FunctionComponent<Props> = ({ sak }) => {
     const cls = BEMHelper('sidepanel');
     return (
         <aside className={cls.className}>
-            {sak && !erInfotrygdSak(sak) && erForeldrepengesak(sak) && erLøpende(sak) && (
+            {sak && !erInfotrygdSak(sak) && erForeldrepengesak(sak) && erLøpende(sak) && harSøkt(sak) && (
                 <SidepanelElement
                     title={finnNesteUtbetalingsdato().format('DD. MMMM')}
                     tekst="sidepanel.utbetalingsdato"
@@ -36,7 +43,7 @@ const Sidepanel: FunctionComponent<Props> = ({ sak }) => {
                         }}
                     />
                 )}
-            {sak !== undefined && erForeldrepengesak(sak) && (
+            {sak !== undefined && erForeldrepengesak(sak) && harSøkt(sak) && (
                 <SidepanelElement
                     icon={<SøkIkon />}
                     lenke={{

@@ -34,7 +34,7 @@ export const annenInformasjonLenker = {
     regelverket: {
         text: 'Regelverket',
         href:
-            'https://www.nav.no/rettskildene/Forside/Folketrygdloven/kapittel-14-ytelser-ved-svangerskap-f%C3%B8dsel-og-adopsjon'
+            'https://lovdata.no/nav/folketrygdloven/kap14'
     },
     meldFraOmEndringer: {
         text: 'Meld fra om endringer',
@@ -53,5 +53,6 @@ export const lenker = {
     chat: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger',
     utbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/#',
     søk: 'https://foreldrepengesoknad.nav.no',
-    svangerskapspengesøknad: 'https://svangerskapspengesoknad.nav.no'
+    svangerskapspengesøknad: 'https://svangerskapspengesoknad.nav.no',
+    hvaSøkerDu: "https://familie.nav.no/hva-soker-du"
 };

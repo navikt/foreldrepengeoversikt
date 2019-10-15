@@ -13,9 +13,14 @@ import normalizeName from 'app/utils/normalizeName';
 import { StorageKvittering } from 'app/api/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
-import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 import { uttaksperiodeDtoToPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
-import { slåSammenLikeOgSammenhengendeUttaksperioder, fyllInnHull } from 'app/components/periode-oversikt/periodeUtils';
+import {
+    slåSammenLikeOgSammenhengendeUttaksperioder,
+    fyllInnHull,
+    fjernIrrelevanteTaptePerioder,
+    fjernAvslåttePerioderEtterSisteInnvilgetPeriode
+} from 'app/components/periode-oversikt/periodeUtils';
+import { isFeatureEnabled, Feature } from 'app/Feature';
 
 function* getPersoninfoSaga(_: GetPersoninfoRequest) {
     try {
@@ -40,7 +45,9 @@ function* getSakerSaga(_: GetSakerRequest) {
         let saker: Sak[] = response.data;
         if (saker) {
             saker.sort(sakByDescendingOrder);
-            saker = yield all(saker.map(uttaksplanTilSakMapper));
+            if (isFeatureEnabled(Feature.dinPlan)) {
+                saker = yield all(saker.map(uttaksplanTilSakMapper));
+            }
         }
         yield put({ type: ApiActionTypes.GET_SAKER_SUCCESS, payload: { saker } });
     } catch (error) {
@@ -53,9 +60,13 @@ function* uttaksplanTilSakMapper(sak: Sak): IterableIterator<any> {
         if (sak.saksnummer && sak.type === SakType.FPSAK && erForeldrepengesak(sak)) {
             const response = yield call(Api.getUttaksplan, sak.saksnummer);
             sak.saksgrunnlag = response.data;
-            sak.perioder = slåSammenLikeOgSammenhengendeUttaksperioder(sak.saksgrunnlag!.perioder).map((p) =>
-                uttaksperiodeDtoToPeriode(p, sak.saksgrunnlag!.grunnlag.søkerErFarEllerMedmor)
-            ).reduce(fyllInnHull, []);
+            const perioder = fjernAvslåttePerioderEtterSisteInnvilgetPeriode(sak.saksgrunnlag!.perioder).filter(
+                fjernIrrelevanteTaptePerioder
+            );
+
+            sak.perioder = slåSammenLikeOgSammenhengendeUttaksperioder(perioder)
+                .map((p) => uttaksperiodeDtoToPeriode(p, sak.saksgrunnlag!.grunnlag.søkerErFarEllerMedmor))
+                .reduce(fyllInnHull, []);
         }
         return sak;
     } catch (error) {
@@ -86,8 +97,13 @@ function* getHistorikk(_: GetHistorikkRequest) {
 function* getMiniDialog(_: GetMiniDialogRequest) {
     try {
         const response = yield call(Api.getMiniDialog);
-        const miniDialog: MinidialogInnslag[] = response.data;
-        yield put({ type: ApiActionTypes.GET_MINIDIALOG_SUCCESS, payload: { miniDialog } });
+        const minidialogInnslagListe = response.data;
+        yield put({
+            type: ApiActionTypes.GET_MINIDIALOG_SUCCESS,
+            payload: {
+                minidialogInnslagListe
+            }
+        });
     } catch (error) {
         yield put({ type: ApiActionTypes.GET_MINIDIALOG_FAILURE, payload: { error } });
     }

@@ -34,11 +34,11 @@ router.get('/rest/innsyn/saker', (req, res) => {
     res.send(MockStorage.getSaker());
 });
 
-router.get('/rest/historikk/historikk', (req, res) => {
+router.get('/rest/historikk', (req, res) => {
     res.send(MockStorage.getHistorikk());
 });
 
-router.get('/rest/minidialog/minidialog', (req, res) => {
+router.get('/rest/minidialog', (req, res) => {
     res.send(MockStorage.getMinidialog());
 });
 
@@ -65,7 +65,14 @@ router.delete('/rest/storage/vedlegg/:id', (req, res) => {
 });
 
 router.post('/rest/soknad/ettersend', (req,res) => {
-    res.sendStatus(200);
+    const kvittering = {
+        saksNr: '123',
+        jornalId: '123',
+        leveranseStatus: "SENDT_OG_FORSØKT_BEHANDLET_FPSAK",
+        mottattDato: '2019-01-01',
+        referanseId: '123'
+    }
+    res.sendStatus(500);
 });
 
 app.use('', router);

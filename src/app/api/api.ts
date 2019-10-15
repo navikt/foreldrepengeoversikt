@@ -14,7 +14,9 @@ const getSaker = () => {
 };
 
 const sendEttersending = (ettersending: EttersendingDto) => {
-    return AxiosApiInterceptor.post('/soknad/ettersend', ettersending);
+    return AxiosApiInterceptor.post('/soknad/ettersend', ettersending, {
+        timeout: 120 * 1000
+    });
 };
 
 const getStorageKvittering = () => {
@@ -24,11 +26,11 @@ const getStorageKvittering = () => {
 };
 
 const getHistorikk = () => {
-    return AxiosApiInterceptor.get('/historikk/historikk');
+    return AxiosApiInterceptor.get('/historikk');
 };
 
 const getMiniDialog = () => {
-    return AxiosApiInterceptor.get('/minidialog/minidialog');
+    return AxiosApiInterceptor.get('/minidialog');
 };
 
 const getUttaksplan = (saksnummer: string) => {

@@ -2,14 +2,17 @@ import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import api, { ApiState } from './reducers/apiReducer';
+import innsending, { InnsendingState } from './reducers/innsendingReducer';
 import rootSaga from './sagas';
 
 export interface State {
     api: ApiState;
+    innsending: InnsendingState;
 }
 
 const rootReducer = combineReducers({
-    api
+    api,
+    innsending
 });
 
 declare global {

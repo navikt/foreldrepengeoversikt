@@ -4,6 +4,13 @@ import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { erForeldrepengesak, harSendtInnEndringssøknad, erEngangsstønad, erInfotrygdSak } from '../../utils/sakerUtils';
 import Sak from '../../api/types/sak/Sak';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
+import {
+    isSkjemanummerForEndringssøknadForeldrepenger,
+    skjemanummerForFørstegangssøknadForeldrepenger,
+    isSkjemanummerForEngangsstønad,
+    isSkjemanummerForSvangerskapspengesoknad
+} from 'app/utils/skjemanummerUtils';
+import { EttersendingType } from 'app/api/types/ettersending/EttersendingDto';
 
 export const getListOfUniqueSkjemanummer = (attachments: Attachment[]) => {
     return attachments
@@ -45,49 +52,12 @@ const getRelevanteSkjemanummer = (sak: Sak): Skjemanummer[] => {
     }
 };
 
-export const skjemanummerForFørstegangssøknadForeldrepenger = (skjemanummer: Skjemanummer): boolean => {
-    return !isSkjemanummerForSvangerskapspengesoknad(skjemanummer) || skjemanummer === Skjemanummer.ANNET;
-};
-
-export const isSkjemanummerForEndringssøknadForeldrepenger = (skjemanummer: Skjemanummer): boolean => {
-    switch (skjemanummer) {
-        case Skjemanummer.ANNET:
-        case Skjemanummer.BEKREFTELSE_DELTAR_KVALIFISERINGSPROGRAM:
-        case Skjemanummer.BEKREFTELSE_FRA_ARBEIDSGIVER:
-        case Skjemanummer.BEKREFTELSE_FRA_STUDIESTED:
-        case Skjemanummer.BEKREFTELSE_PÅ_AVTALT_FERIE:
-        case Skjemanummer.DOK_AV_ALENEOMSORG:
-        case Skjemanummer.DOK_BEGRUNNELSE_SØKE_TILBAKE_I_TID:
-        case Skjemanummer.DOK_DELTAKELSE_I_INTRODUKSJONSPROGRAMMET:
-        case Skjemanummer.DOK_INNLEGGELSE:
-        case Skjemanummer.DOK_MORS_UTDANNING_ARBEID_SYKDOM:
-        case Skjemanummer.DOK_OVERFØRING_FOR_SYK:
-        case Skjemanummer.OMSORGSOVERTAKELSESDATO:
-            return true;
-        default:
-            return false;
+export const getEttersendingType = (sak: Sak): EttersendingType => {
+    if(erForeldrepengesak(sak) || erInfotrygdSak(sak)) {
+        return EttersendingType.FORELDREPENGER;
+    } else if(erEngangsstønad(sak)) {
+        return EttersendingType.ENGANGSSTØNAD;
+    } else {
+        return EttersendingType.SVANGERSKAPSPENGER
     }
-};
-
-export const isSkjemanummerForSvangerskapspengesoknad = (skjemanummer: Skjemanummer): boolean => {
-    switch (skjemanummer) {
-        case Skjemanummer.ANNET:
-        case Skjemanummer.SKJEMA_FOR_TILRETTELEGGING_OG_OMPLASSERING:
-        case Skjemanummer.TILRETTELEGGING_FOR_ARBEIDSTAKERE:
-        case Skjemanummer.TILRETTELEGGING_FOR_FRILANS_ELLER_SELVSTENDIG:
-            return true;
-        default:
-            return false;
-    }
-};
-
-export const isSkjemanummerForEngangsstønad = (skjemanummer: Skjemanummer): boolean => {
-    switch (skjemanummer) {
-        case Skjemanummer.ANNET:
-        case Skjemanummer.TERMINBEKREFTELSE:
-        case Skjemanummer.FØDSELSATTEST:
-            return true;
-        default:
-            return false;
-    }
-};
+}

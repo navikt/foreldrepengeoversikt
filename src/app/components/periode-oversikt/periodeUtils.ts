@@ -1,7 +1,7 @@
 import moment from 'moment';
-import { UttaksPeriodeDto, StønadskontoType, OppholdsÅrsak } from 'app/api/types/UttaksplanDto';
+import { UttaksPeriodeDto, StønadskontoType, OppholdsÅrsak, PeriodeResultatType } from 'app/api/types/UttaksplanDto';
 import { Tidsperiode } from 'app/types/Tidsperiode';
-import _ from 'lodash';
+import { isEqual } from 'lodash';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import { InjectedIntl } from 'react-intl';
 import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Periode';
@@ -65,12 +65,12 @@ export const erSammenhengende = (tidsperiode1: Tidsperiode, tidsperiode2: Tidspe
         finnNesteMuligeUttaksdag(tidsperiode1.tom) === tidsperiode2.fom ||
         moment(tidsperiode1.tom)
             .add(1, 'days')
-            .format('YYYY-MM-DD') === tidsperiode2.fom
+            .isSame(moment(tidsperiode2.fom), 'days')
     );
 };
 
 const erLike = (uttaksperiode1: UttaksPeriodeDto, uttaksperiode2: UttaksPeriodeDto): boolean => {
-    return _.isEqual(
+    return isEqual(
         getRelevanteFelterForSammenligning(uttaksperiode1),
         getRelevanteFelterForSammenligning(uttaksperiode2)
     );
@@ -185,21 +185,19 @@ export const fyllInnHull = (periodeAcc: Periode[], periode: Periode, index: numb
     return periodeAcc;
 };
 
-const erHullMellomPerioder = (periode: Periode, nestePeriode?: Periode) => {
+export const erHullMellomPerioder = (periode: Periode, nestePeriode?: Periode) => {
     return (
-        nestePeriode &&
-        finnNesteMuligeUttaksdag(periode.tidsperiode.tom) !== nestePeriode.tidsperiode.fom &&
-        (nestePeriode as Uttaksperiode).samtidigUttak === false
+        nestePeriode !== undefined &&
+        !erSammenhengende(periode.tidsperiode, nestePeriode.tidsperiode) &&
+        moment(periode.tidsperiode.tom).isBefore(nestePeriode.tidsperiode.fom, 'days')
     );
 };
 
 export const harAnnenForelderSamtidigUttakISammePeriode = (periode: Periode, perioder: Periode[]): boolean =>
     periode.type === PeriodeType.Uttak
         ? perioder
-              .filter((p) => (p as Uttaksperiode).samtidigUttak)
-              .some(
-                  (p) => (p as Uttaksperiode).gjelderAnnenPart === true && _.isEqual(periode.tidsperiode, p.tidsperiode)
-              )
+              .filter((p) => p.type === PeriodeType.Uttak && !isEqual(p, periode))
+              .some((p) => isEqual(periode.tidsperiode.fom, p.tidsperiode.fom))
         : false;
 
 export const getStønadskontoTypeFromOppholdsÅrsak = (årsak: OppholdsÅrsak): StønadskontoType => {
@@ -211,4 +209,31 @@ export const getStønadskontoTypeFromOppholdsÅrsak = (årsak: OppholdsÅrsak): 
         case OppholdsÅrsak.UTTAK_MØDREKVOTE_ANNEN_FORELDER:
             return StønadskontoType.Mødrekvote;
     }
+};
+
+export const skalVisesIPeriodeListe = (periode: Periode, perioder: Periode[]) => {
+    return perioder.length <= 1
+        ? true
+        : ((periode as Uttaksperiode).samtidigUttak !== true &&
+              !harAnnenForelderSamtidigUttakISammePeriode(periode, perioder)) ||
+              (harAnnenForelderSamtidigUttakISammePeriode(periode, perioder) && !periode.gjelderAnnenPart);
+};
+
+export const erTaptPeriode = (uttaksperiodeDto: UttaksPeriodeDto) => {
+    return (
+        (uttaksperiodeDto.periodeResultatType === PeriodeResultatType.Avslått &&
+            uttaksperiodeDto.utbetalingsprosent === 0) ||
+        (uttaksperiodeDto.trekkDager > 0 && uttaksperiodeDto.utbetalingsprosent === 0)
+    );
+};
+
+export const fjernIrrelevanteTaptePerioder = (periode: UttaksPeriodeDto, _: number, perioder: UttaksPeriodeDto[]) =>
+    !(erTaptPeriode(periode) && periode.stønadskontotype === StønadskontoType.ForeldrepengerFørFødsel) &&
+    !(erTaptPeriode(periode) && perioder.some((p) => isEqual(p.periode.fom, periode.periode.fom)));
+
+export const fjernAvslåttePerioderEtterSisteInnvilgetPeriode = (perioder: UttaksPeriodeDto[]) => {
+    while (perioder[perioder.length - 1].periodeResultatType === PeriodeResultatType.Avslått) {
+        perioder.pop();
+    }
+    return perioder;
 };

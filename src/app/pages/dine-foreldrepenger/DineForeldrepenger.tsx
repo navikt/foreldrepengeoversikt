@@ -12,7 +12,13 @@ import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
 import RelatertInformasjon from 'app/components/relatert-informasjon/RelatertInformasjon';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
-import { erForeldrepengesak, erInfotrygdSak, opprettSak, skalKunneSøkeOmEndring } from '../../utils/sakerUtils';
+import {
+    erForeldrepengesak,
+    erInfotrygdSak,
+    opprettFiktivSak,
+    skalKunneSøkeOmEndring,
+    harSøkt
+} from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
 
@@ -23,6 +29,10 @@ import { State } from 'app/redux/store';
 import { getData } from 'app/redux/util/fetchFromState';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
+import MinidialogLenkepanel from 'app/components/minidialog-lenkepanel/MinidialogLenkepanel';
+import { guid } from 'nav-frontend-js-utils';
+import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
+
 import './dineForeldrepenger.less';
 
 interface Props {
@@ -31,6 +41,7 @@ interface Props {
     søker?: Person;
     history: History;
     historikkInnslagListe?: HistorikkInnslag[];
+    minidialogInnslagListe?: MinidialogInnslag[];
 }
 
 export class DineForeldrepenger extends React.Component<Props> {
@@ -62,15 +73,11 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     shouldRenderAlertStripe(nyesteSak: Sak): boolean {
-        return !skalKunneSøkeOmEndring(nyesteSak) || erInfotrygdSak(nyesteSak);
+        return (harSøkt(nyesteSak) && !skalKunneSøkeOmEndring(nyesteSak)) || erInfotrygdSak(nyesteSak);
     }
 
     renderSaksoversiktList(nyesteSak: Sak) {
         const { saker, history } = this.props;
-        if (!saker) {
-            return null;
-        }
-
         const cls = BEMHelper('saksoversikt-list');
         return (
             <ul className={cls.className}>
@@ -111,9 +118,9 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     render() {
-        const { saker, history, storageKvittering, søker, historikkInnslagListe } = this.props;
+        const { saker, history, storageKvittering, søker, historikkInnslagListe, minidialogInnslagListe } = this.props;
         const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
-            ? opprettSak(storageKvittering!)
+            ? opprettFiktivSak(storageKvittering!)
             : saker.slice().shift();
 
         const cls = BEMHelper('dine-foreldrepenger');
@@ -124,6 +131,12 @@ export class DineForeldrepenger extends React.Component<Props> {
                     <div className={cls.element('main-content')}>
                         {nyesteSak === undefined && <IngenSaker />}
                         {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe(nyesteSak)}
+
+                        {minidialogInnslagListe &&
+                            minidialogInnslagListe.map((minidialogInnslag) => (
+                                <MinidialogLenkepanel key={guid()} minidialogInnslag={minidialogInnslag} />
+                            ))}
+
                         {nyesteSak && (
                             <>
                                 <Saksoversikt
@@ -131,7 +144,6 @@ export class DineForeldrepenger extends React.Component<Props> {
                                     søker={søker}
                                     history={history}
                                     historikkInnslagListe={historikkInnslagListe}
-                                    skalKunneSøkeOmEndring={skalKunneSøkeOmEndring(nyesteSak)}
                                     withHeader={true}
                                 />
                                 {this.renderSaksoversiktList(nyesteSak)}
@@ -155,7 +167,8 @@ const mapStateToProps = (state: State) => ({
     søker: getData(state.api.personinfo, undefined),
     saker: getData(state.api.saker, []),
     storageKvittering: getData(state.api.storageKvittering, undefined),
-    historikkInnslagListe: getData(state.api.historikk, undefined)
+    historikkInnslagListe: getData(state.api.historikk, undefined),
+    minidialogInnslagListe: getData(state.api.minidialogInnslagListe, [])
 });
 
 export default connect(mapStateToProps)(DineForeldrepenger);

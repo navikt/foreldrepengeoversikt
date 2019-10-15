@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import MediaQuery from 'react-responsive';
+
 import Snakkeboble from 'nav-frontend-snakkeboble';
 import { Element } from 'nav-frontend-typografi';
 

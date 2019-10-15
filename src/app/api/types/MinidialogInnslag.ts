@@ -1,8 +1,28 @@
 export interface MinidialogInnslag {
+    referanseId: string;
+    type: string;
+    fnr: string;
+    hendelse: HendelseType;
+    gyldigTil: string;
+    tekst: string;
     aktørId: string;
-    melding: string;
     saksnr: string;
     opprettet: string;
-    gyldigTil: string;
-    handling: string;
+    aktiv: boolean;
+}
+
+export enum HendelseType {
+    TILBAKEKREVING_SPM = "TILBAKEKREVING_SPM ",
+    TILBAKEKREVING_SVAR = "TILBAKEKREVING_SVAR",
+    VEDTAK = "VEDTAK",
+    INNTEKTSMELDING = "INNTEKTSMELDING",
+    INITIELL_ENGANGSSTØNAD = "INITIELL_ENGANGSSTØNAD",
+    INITIELL_FORELDREPENGER = "INITIELL_FORELDREPENGER",
+    INITIELL_SVANGERSKAPSPENGER = "INITIELL_SVANGERSKAPSPENGER",
+    ETTERSENDING_FORELDREPENGER = "ETTERSENDING_FORELDREPENGER",
+    ETTERSENDING_ENGANGSSTØNAD = "ETTERSENDING_ENGANGSSTØNAD",
+    ETTERSENDING_SVANGERSKAPSPENGER = "ETTERSENDING_SVANGERSKAPSPENGER",
+    ENDRING_FORELDREPENGER = "ENDRING_FORELDREPENGER",
+    ENDRING_SVANGERSKAPSPENGER = "ENDRING_SVANGERSKAPSPENGER",
+    UKJENT = "UKJENT"
 }

@@ -7,21 +7,34 @@ import Feilsidemelding from '../feilsidemelding/Feilsidemelding';
 import getMessage from 'common/util/i18nUtils';
 import Lenke from 'nav-frontend-lenker';
 import { lenker } from 'app/utils/lenker';
+import * as Sentry from '@sentry/browser';
 
-class ErrorBoundary extends React.Component<InjectedIntlProps, { hasError: boolean }> {
+interface State {
+    eventId: string | null;
+    hasError: boolean;
+}
+
+class ErrorBoundary extends React.Component<InjectedIntlProps, State> {
     constructor(props: any) {
         super(props);
         this.state = {
+            eventId: null,
             hasError: false
         };
 
         this.logError = this.logError.bind(this);
     }
 
-    componentDidCatch(error: Error | null, reactStackTrace: object) {
+    componentDidCatch(error: Error | null, errorInfo: object) {
+        Sentry.withScope((scope) => {
+            scope.setExtras(errorInfo);
+            const eventId = Sentry.captureException(error);
+            this.setState({ eventId });
+        });
+
         this.setState({ hasError: true }, () => {
             if (isFeatureEnabled(Feature.logging)) {
-                this.logError(error, detect(), reactStackTrace);
+                this.logError(error, detect(), errorInfo);
             }
         });
     }
