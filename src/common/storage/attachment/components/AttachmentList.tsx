@@ -1,12 +1,15 @@
 import * as React from 'react';
-import AttachmentComponent from './AttachmentListElement';
+import { FormattedMessage } from 'react-intl';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 import { Attachment } from 'common/storage/attachment/types/Attachment';
-import './attachment.less';
 import Block from 'common/components/block/Block';
 import LabelText from 'common/components/labeltekst/Labeltekst';
-import { FormattedMessage } from 'react-intl';
 import { bytesString, getTotalFileSize } from 'common/util/filesize';
+
+import AttachmentComponent from './AttachmentListElement';
+
+import './attachment.less';
 
 interface Props {
     attachments: Attachment[];

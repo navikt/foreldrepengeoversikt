@@ -14,7 +14,7 @@ export interface SøkerinfoDTOBarn extends SøkerinfoDTOPerson {
 }
 
 export interface SøkerinfoDTOSøker extends SøkerinfoDTOPerson {
-    ikkeNordiskEøsLand?: boolean;
+    ikkeNordiskEøsLand: boolean;
     barn?: SøkerinfoDTOBarn[];
 }
 

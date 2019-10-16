@@ -10,7 +10,7 @@ const getPerson = (søkerinfo: SøkerinfoDTO): Person => {
     return {
         ...person,
         fødselsdato: person.fødselsdato,
-        ikkeNordiskEøsLand: person.ikkeNordiskEøsLand || false,
+        ikkeNordiskEøsLand: person.ikkeNordiskEøsLand,
         erMyndig: erMyndig(person.fødselsdato)
     };
 };
