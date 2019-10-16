@@ -10,6 +10,7 @@ import { Attachment } from 'common/storage/attachment/types/Attachment';
 import Block from 'common/components/block/Block';
 import AlertstripeWithCloseButton from 'common/components/alertstripe-content/AlertstripeWithCloseButton';
 import { Skjemanummer } from '../types/Skjemanummer';
+import { AxiosError } from 'axios';
 
 export interface AttachmentOverviewProps {
     attachments: Attachment[];
@@ -32,7 +33,7 @@ class AttachmentOverview extends React.Component<Props> {
         const attachmentsWithError = attachments.filter(isAttachmentWithError);
         const multipleErrors = attachmentsWithError.length > 1;
         attachmentsWithError.forEach((a: Attachment) => {
-            const error = a.error;
+            const error: AxiosError = a.error;
             if (error && error.response !== undefined && error.response.status === 413) {
                 errorMessages.push(
                     <FormattedMessage
@@ -41,7 +42,13 @@ class AttachmentOverview extends React.Component<Props> {
                     />
                 );
             } else if (error && error.response !== undefined && error.response.status === 422) {
-                const intlId = error.response.message && error.response.message.contains('decrypt') ? 'vedlegg.passordbeskyttet' : 'vedlegg.virus';
+                const intlId =
+                    error.response.data &&
+                    error.response.data.messages &&
+                    error.response.data.messages.contains('decrypt')
+                        ? 'vedlegg.passordbeskyttet'
+                        : 'vedlegg.virus';
+                        
                 errorMessages.push(
                     <FormattedMessage
                         id={multipleErrors ? `${intlId}.flereFeil` : intlId}
