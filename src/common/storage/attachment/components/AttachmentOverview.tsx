@@ -45,10 +45,10 @@ class AttachmentOverview extends React.Component<Props> {
                 const intlId =
                     error.response.data &&
                     error.response.data.messages &&
-                    error.response.data.messages.contains('decrypt')
+                    error.response.data.messages.includes('decrypt')
                         ? 'vedlegg.passordbeskyttet'
                         : 'vedlegg.virus';
-                        
+
                 errorMessages.push(
                     <FormattedMessage
                         id={multipleErrors ? `${intlId}.flereFeil` : intlId}
