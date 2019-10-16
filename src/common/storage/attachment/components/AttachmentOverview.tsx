@@ -41,7 +41,7 @@ class AttachmentOverview extends React.Component<Props> {
                     />
                 );
             } else if (error && error.response !== undefined && error.response.status === 422) {
-                const intlId = error.response.message && error.respnse.message.contains('decrypt') ? 'vedlegg.passordbeskyttet' : 'vedlegg.virus';
+                const intlId = error.response.message && error.response.message.contains('decrypt') ? 'vedlegg.passordbeskyttet' : 'vedlegg.virus';
                 errorMessages.push(
                     <FormattedMessage
                         id={multipleErrors ? `${intlId}.flereFeil` : intlId}
