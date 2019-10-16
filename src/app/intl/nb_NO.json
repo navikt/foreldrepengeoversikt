@@ -187,6 +187,8 @@
 	"vedlegg.passordbeskyttet.flereFeil": "{filename} - Vedlegget du forsøker å laste opp er passordbeskyttet. Du må endre vedlegget slik at det ikke er passordbeskyttet eller laste opp et annet vedlegg.",
 	"vedlegg.lastoppknapp": "Legg ved dokumentasjon",
 	"vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
+	"vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha",
+    "vedlegg.virus.flereFeil": "{filename} - Vedlegget inneholder noe vi ikke vil ha",
 	"vedlegg.liste.tittel": "Valgte vedlegg ({ størrelse })",
 	"miniDialog.pageTitle": "Spørsmål fra saksbehandler",
 	"miniDialog.sendButton": "Send"
