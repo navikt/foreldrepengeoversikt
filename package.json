@@ -10,7 +10,7 @@
         "start": "node ./src/build/scripts/start-dev.js",
         "start-no-decorator": "node ./src/build/scripts/start-dev-nodecorator.js",
         "precommit": "pretty-quick --staged",
-        "jest": "jest --config ./jest/jest.config.js --testTimeout=10000",
+        "jest": "jest --config ./jest/jest.config.js",
         "jest-update-snapshot": "jest --config --updateSnapshot ./jest/jest.config.js",
         "jest-watch": "jest --watch --verbose --config ./jest/jest.config.js",
         "jest-coverage": "jest --config ./jest/jest.config.js --coverage --collectCoverageFrom=src/**/*.{ts,tsx} --collectCoverageFrom=!src/**/*.d.{ts,tsx}"
