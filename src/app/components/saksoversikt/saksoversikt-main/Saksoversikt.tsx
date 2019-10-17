@@ -11,14 +11,14 @@ import BEMHelper from 'common/util/bem';
 import SaksoversiktHeader from './SaksoversiktHeader';
 import Etikett from '../../etikett/etikett';
 import { harSøkt } from 'app/utils/sakerUtils';
-import Person from 'app/types/Person';
+import { Søkerinfo } from 'app/types/Søkerinfo';
 
 import './saksoversikt.less';
 
 interface Props {
     sak: Sak;
-    søker?: Person;
-    historikkInnslagListe?: HistorikkInnslag[];
+    søkerinfo?: Søkerinfo;
+    historikkInnslagListe: HistorikkInnslag[];
     history: History;
     withHeader?: boolean;
 }
@@ -27,7 +27,7 @@ const Saksoversikt: React.StatelessComponent<Props> = ({
     sak,
     historikkInnslagListe,
     withHeader = false,
-    søker,
+    søkerinfo,
     history
 }) => {
     const cls = BEMHelper('saksoversikt');
@@ -45,15 +45,14 @@ const Saksoversikt: React.StatelessComponent<Props> = ({
 
             {harSøkt(sak) ? (
                 <SaksinformasjonPanel
-                    søker={søker}
+                    søkerinfo={søkerinfo}
                     sak={sak}
                     historikkInnslagListe={historikkInnslagListe}
                     history={history}
                 />
             ) : (
-                <SøkNåPanel søker={søker} />
+                <SøkNåPanel søker={søkerinfo ? søkerinfo.person : undefined} />
             )}
-
         </div>
     );
 };

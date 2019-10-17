@@ -1,7 +1,12 @@
 import React from 'react';
 import { History } from 'history';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import { erInfotrygdSak, erSvangerskapepengesak, erForeldrepengesak } from 'app/utils/sakerUtils';
+import {
+    erInfotrygdSak,
+    erSvangerskapepengesak,
+    erForeldrepengesak,
+    skalKunneSøkeOmEndring
+} from 'app/utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 import { Knapp } from 'nav-frontend-knapper';
@@ -19,29 +24,45 @@ import {
 } from '../periode-oversikt/periodeUtils';
 import Oversikt from '../oversikt/Oversikt';
 import { utledHendelser } from '../historikk/util';
-import { hentHistorikkForSak } from 'app/utils/historikkUtils';
 import Sak from 'app/api/types/sak/Sak';
 import BEMHelper from 'common/util/bem';
 import { lenker } from 'app/utils/lenker';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { redirect } from 'app/utils/redirect';
-import Person from 'app/types/Person';
+import Behandligsfrist from '../behandligsfrist/Behandligsfrist';
+import { Søkerinfo } from 'app/types/Søkerinfo';
+import { Hendelse } from 'app/api/types/historikk/Hendelse';
+import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 
 import './saksinformasjonPanel.less';
 
 interface Props {
-    søker?: Person;
+    søkerinfo?: Søkerinfo;
     sak: Sak;
     history: History;
-    historikkInnslagListe?: HistorikkInnslag[];
+    historikkInnslagListe: HistorikkInnslag[];
 }
 
-const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søker, sak, history, historikkInnslagListe }) => {
+const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak, history, historikkInnslagListe }) => {
     const erSakForeldrepengesak = erForeldrepengesak(sak);
     const { perioder } = sak;
+    const initiellForeldrepengesøknadHendelse = historikkInnslagListe.find(
+        ({ hendelse }) => hendelse === Hendelse.InitiellForeldrepenger
+    );
+
     const cls = BEMHelper('saksinformasjon-panel');
     return (
         <div>
+            {søkerinfo &&
+                initiellForeldrepengesøknadHendelse &&
+                initiellForeldrepengesøknadHendelse.behandlingsdato &&
+                !skalKunneSøkeOmEndring(sak) && (
+                    <Behandligsfrist
+                        harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
+                        behandligsdato={initiellForeldrepengesøknadHendelse.behandlingsdato}
+                    />
+                )}
+
             {erInfotrygdSak(sak) && <MeldingOmVedtakLenkepanel />}
 
             {erSakForeldrepengesak && (
@@ -101,7 +122,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søker, sak, hi
                 erSakForeldrepengesak &&
                 sak.saksnummer &&
                 perioder &&
-                søker !== undefined && (
+                søkerinfo !== undefined && (
                     <SectionSeparator
                         title="Din Plan"
                         sectionLink={{
@@ -116,7 +137,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søker, sak, hi
                             fremtidigePerioder={finnFremtidigePerioder(perioder)
                                 .filter((p) => skalVisesIPeriodeListe(p, perioder))
                                 .slice(0, 1)}
-                            søker={søker}
+                            søker={søkerinfo.person}
                             annenPart={sak.annenPart}
                         />
                     </SectionSeparator>
@@ -124,8 +145,8 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søker, sak, hi
 
             {!erInfotrygdSak(sak) && (
                 <Oversikt
-                    søker={søker}
-                    hendelser={utledHendelser(sak.behandlinger, hentHistorikkForSak(sak, historikkInnslagListe))}
+                    søker={søkerinfo ? søkerinfo.person : undefined}
+                    hendelser={utledHendelser(sak.behandlinger, undefined)}
                 />
             )}
         </div>

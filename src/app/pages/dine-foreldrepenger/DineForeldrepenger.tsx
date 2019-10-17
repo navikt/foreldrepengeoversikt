@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedHTMLMessage } from 'react-intl';
 import MediaQuery from 'react-responsive';
 import { History } from 'history';
-import AlertStripe from 'nav-frontend-alertstriper';
+import { guid } from 'nav-frontend-js-utils';
 import moment from 'moment';
 
 import Sak from '../../api/types/sak/Sak';
@@ -13,11 +12,8 @@ import BEMHelper from '../../../common/util/bem';
 import RelatertInformasjon from 'app/components/relatert-informasjon/RelatertInformasjon';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 import {
-    erForeldrepengesak,
     erInfotrygdSak,
-    opprettFiktivSak,
-    skalKunneSøkeOmEndring,
-    harSøkt
+    opprettFiktivSak
 } from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
@@ -29,26 +25,21 @@ import { getData } from 'app/redux/util/fetchFromState';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
 import MinidialogLenkepanel from 'app/components/minidialog-lenkepanel/MinidialogLenkepanel';
-import { guid } from 'nav-frontend-js-utils';
 import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
-import Person from 'app/types/Person';
+import { Søkerinfo } from 'app/types/Søkerinfo';
 
 import './dineForeldrepenger.less';
 
 interface Props {
     saker: Sak[];
     storageKvittering?: StorageKvittering;
-    søker?: Person;
+    søkerinfo?: Søkerinfo;
     history: History;
-    historikkInnslagListe?: HistorikkInnslag[];
-    minidialogInnslagListe?: MinidialogInnslag[];
+    historikkInnslagListe: HistorikkInnslag[];
+    minidialogInnslagListe: MinidialogInnslag[];
 }
 
 export class DineForeldrepenger extends React.Component<Props> {
-    constructor(props: Props) {
-        super(props);
-    }
-
     shouldRenderStorageKvitteringAsSak(): boolean {
         const { saker, storageKvittering } = this.props;
         if (storageKvittering === undefined || storageKvittering.innsendingstidspunkt === undefined) {
@@ -72,12 +63,8 @@ export class DineForeldrepenger extends React.Component<Props> {
         );
     }
 
-    shouldRenderAlertStripe(nyesteSak: Sak): boolean {
-        return (harSøkt(nyesteSak) && !skalKunneSøkeOmEndring(nyesteSak)) || erInfotrygdSak(nyesteSak);
-    }
-
     renderSaksoversiktList(nyesteSak: Sak) {
-        const { saker, history } = this.props;
+        const { saker, history, historikkInnslagListe, søkerinfo } = this.props;
         const cls = BEMHelper('saksoversikt-list');
         return (
             <ul className={cls.className}>
@@ -86,7 +73,12 @@ export class DineForeldrepenger extends React.Component<Props> {
                     .map((sak: Sak) => {
                         return (
                             <li className={cls.element('element')} key={sak.saksnummer}>
-                                <EkspanderbarSaksoversikt søker={this.props.søker} sak={sak} history={history} />
+                                <EkspanderbarSaksoversikt
+                                    søkerinfo={søkerinfo}
+                                    sak={sak}
+                                    history={history}
+                                    historikkInnslagListe={historikkInnslagListe}
+                                />
                             </li>
                         );
                     })}
@@ -103,22 +95,8 @@ export class DineForeldrepenger extends React.Component<Props> {
         );
     }
 
-    renderAlertStripe(sak: Sak) {
-        return (
-            <AlertStripe type="info">
-                <FormattedHTMLMessage
-                    id={
-                        erForeldrepengesak(sak)
-                            ? 'dineForeldrepenger.alertstripe.fpsak'
-                            : 'dineForeldrepenger.alertstripe.infotrygd'
-                    }
-                />
-            </AlertStripe>
-        );
-    }
-
     render() {
-        const { saker, history, storageKvittering, søker, historikkInnslagListe, minidialogInnslagListe } = this.props;
+        const { saker, history, storageKvittering, søkerinfo, historikkInnslagListe, minidialogInnslagListe } = this.props;
         const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettFiktivSak(storageKvittering!)
             : saker.slice().shift();
@@ -130,7 +108,6 @@ export class DineForeldrepenger extends React.Component<Props> {
                 <div className={cls.className}>
                     <div className={cls.element('main-content')}>
                         {nyesteSak === undefined && <IngenSaker />}
-                        {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe(nyesteSak)}
 
                         {minidialogInnslagListe &&
                             minidialogInnslagListe.map((minidialogInnslag) => (
@@ -141,7 +118,7 @@ export class DineForeldrepenger extends React.Component<Props> {
                             <>
                                 <Saksoversikt
                                     sak={nyesteSak}
-                                    søker={søker}
+                                    søkerinfo={søkerinfo}
                                     history={history}
                                     historikkInnslagListe={historikkInnslagListe}
                                     withHeader={true}
@@ -164,7 +141,7 @@ export class DineForeldrepenger extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State) => ({
-    søker: getData(state.api.søkerinfo, {}).person,
+    søkerinfo: getData(state.api.søkerinfo, {}),
     saker: getData(state.api.saker, []),
     storageKvittering: getData(state.api.storageKvittering, undefined),
     historikkInnslagListe: getData(state.api.historikk, undefined),

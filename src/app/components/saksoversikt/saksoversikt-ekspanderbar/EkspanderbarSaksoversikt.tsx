@@ -8,25 +8,26 @@ import Sak from '../../../api/types/sak/Sak';
 import EkspanderbarSaksoversiktHeader from './EkspanderbarSaksoversiktHeader';
 import Saksoversikt from '../saksoversikt-main/Saksoversikt';
 import { getSaksoversiktTitle } from '../utils';
-import Person from 'app/types/Person';
+import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { Søkerinfo } from 'app/types/Søkerinfo';
 
 import './ekspanderbarSaksoversikt.less';
 
 interface Props {
-    søker?: Person;
+    søkerinfo?: Søkerinfo;
     sak: Sak;
     history: History;
+    historikkInnslagListe: HistorikkInnslag[];
 }
 
-const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = (props) => {
-    const { sak, søker, history } = props;
+const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = ({ sak, søkerinfo, history, historikkInnslagListe }) => {
     const cls = BEMHelper('ekspanderbar-saksoversikt');
     return (
         <div className={cls.className}>
             <EkspanderbartpanelBase
                 heading={<EkspanderbarSaksoversiktHeader sak={sak} />}
                 ariaTittel={getSaksoversiktTitle(sak)}>
-                <Saksoversikt sak={sak} history={history} søker={søker} />
+                <Saksoversikt sak={sak} history={history} søkerinfo={søkerinfo} historikkInnslagListe={historikkInnslagListe} />
             </EkspanderbartpanelBase>
         </div>
     );

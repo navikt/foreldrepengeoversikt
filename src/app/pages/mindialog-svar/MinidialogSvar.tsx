@@ -24,7 +24,7 @@ class MinidialogPage extends React.Component<Props> {
     render() {
         const { sak, sendEttersendelse, minidialog, history } = this.props;
         if (!minidialog || !sak) {
-            throw new Error('test');
+            throw new Error('minidialog eller sak er undefined');
         }
 
         const cls = BEMHelper('minidialog');

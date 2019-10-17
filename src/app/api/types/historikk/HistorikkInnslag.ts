@@ -15,4 +15,5 @@ export interface HistorikkInnslag {
     hendelse: Hendelse;
     journalpostId: string;
     vedlegg?: Skjemanummer[];
+    behandlingsdato: string;
 }
