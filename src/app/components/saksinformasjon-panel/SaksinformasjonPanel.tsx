@@ -35,6 +35,7 @@ import { Hendelse } from 'app/api/types/historikk/Hendelse';
 import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 
 import './saksinformasjonPanel.less';
+import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 
 interface Props {
     søkerinfo?: Søkerinfo;
@@ -56,14 +57,21 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
             {søkerinfo &&
                 initiellForeldrepengesøknadHendelse &&
                 initiellForeldrepengesøknadHendelse.behandlingsdato &&
-                !harEnAvsluttetBehandling(sak) && (
+                !harEnAvsluttetBehandling(sak) && !erInfotrygdSak(sak) && (
                     <Behandligsfrist
                         harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
                         behandligsdato={initiellForeldrepengesøknadHendelse.behandlingsdato}
                     />
                 )}
 
-            {erInfotrygdSak(sak) && <MeldingOmVedtakLenkepanel />}
+            {erInfotrygdSak(sak) && (
+                <>
+                    <MeldingOmVedtakLenkepanel />
+                    <div className="blokk-xs">
+                        <UtsettelsePanel />
+                    </div>
+                </>
+            )}
 
             <div className={cls.element('valg')}>
                 <div className={cls.element('btn')}>

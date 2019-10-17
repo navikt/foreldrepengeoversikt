@@ -11,13 +11,7 @@ import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
 import RelatertInformasjon from 'app/components/relatert-informasjon/RelatertInformasjon';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
-import {
-    erInfotrygdSak,
-    opprettFiktivSak,
-    harSøkt,
-    skalKunneSøkeOmEndring,
-    erForeldrepengesak
-} from '../../utils/sakerUtils';
+import { erInfotrygdSak, opprettFiktivSak, harSøkt, skalKunneSøkeOmEndring } from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
 
@@ -105,20 +99,15 @@ export class DineForeldrepenger extends React.Component<Props> {
     shouldRenderAlertStripe(sak: Sak): boolean {
         return (
             (!this.props.historikkInnslagListe.find(({ hendelse }) => hendelse === Hendelse.InitiellForeldrepenger) &&
-                (harSøkt(sak) && !skalKunneSøkeOmEndring(sak))) || erInfotrygdSak(sak)
+                (harSøkt(sak) && !skalKunneSøkeOmEndring(sak))) ||
+            erInfotrygdSak(sak)
         );
     }
 
-    renderAlertStripe(sak: Sak) {
+    renderAlertStripe() {
         return (
             <AlertStripe type="info">
-                <FormattedHTMLMessage
-                    id={
-                        erForeldrepengesak(sak)
-                            ? 'dineForeldrepenger.alertstripe.fpsak'
-                            : 'dineForeldrepenger.alertstripe.infotrygd'
-                    }
-                />
+                <FormattedHTMLMessage id="dineForeldrepenger.alertstripe" />
             </AlertStripe>
         );
     }
@@ -143,7 +132,7 @@ export class DineForeldrepenger extends React.Component<Props> {
                 <div className={cls.className}>
                     <div className={cls.element('main-content')}>
                         {nyesteSak === undefined && <IngenSaker />}
-                        {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe(nyesteSak)}
+                        {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe()}
 
                         {minidialogInnslagListe &&
                             minidialogInnslagListe.map((minidialogInnslag) => (
