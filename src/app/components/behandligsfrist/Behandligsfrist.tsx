@@ -26,7 +26,7 @@ const Behandligsfrist: React.StatelessComponent<Props> = ({ behandligsdato, harL
 
     return (
         <AlertStripe className={cls.className} type="info">
-            {harLøpendeArbeidsforhold ? (
+            {!harLøpendeArbeidsforhold ? (
                 <>
                     <Undertittel className="blokk-xs">
                         <FormattedMessage id="dineForeldrepenger.behandligsfrist" values={{ dato: formatDate(dato) }} />
