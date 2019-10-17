@@ -11,7 +11,13 @@ import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
 import RelatertInformasjon from 'app/components/relatert-informasjon/RelatertInformasjon';
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
-import { erInfotrygdSak, opprettFiktivSak, harSøkt, skalKunneSøkeOmEndring } from '../../utils/sakerUtils';
+import {
+    erInfotrygdSak,
+    opprettFiktivSak,
+    harSøkt,
+    skalKunneSøkeOmEndring,
+    erSvangerskapepengesak
+} from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
 
@@ -99,7 +105,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     shouldRenderAlertStripe(sak: Sak): boolean {
         return (
             (!this.props.historikkInnslagListe.find(({ hendelse }) => hendelse === Hendelse.InitiellForeldrepenger) &&
-                (harSøkt(sak) && !skalKunneSøkeOmEndring(sak))) ||
+                (harSøkt(sak) && !skalKunneSøkeOmEndring(sak) && !erSvangerskapepengesak(sak))) ||
             erInfotrygdSak(sak)
         );
     }

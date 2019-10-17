@@ -33,9 +33,9 @@ import Behandligsfrist from '../behandligsfrist/Behandligsfrist';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { Hendelse } from 'app/api/types/historikk/Hendelse';
 import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
+import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 
 import './saksinformasjonPanel.less';
-import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 
 interface Props {
     søkerinfo?: Søkerinfo;
@@ -47,9 +47,9 @@ interface Props {
 const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak, history, historikkInnslagListe }) => {
     const erSakForeldrepengesak = erForeldrepengesak(sak);
     const { perioder } = sak;
-    const initiellForeldrepengesøknadHendelse = historikkInnslagListe.find(
-        ({ hendelse }) => hendelse === Hendelse.InitiellForeldrepenger
-    );
+    const initiellForeldrepengesøknadHendelse = historikkInnslagListe
+        .filter(({ saksnr }) => sak.saksnummer === saksnr)
+        .find(({ hendelse }) => hendelse === Hendelse.InitiellForeldrepenger);
 
     const cls = BEMHelper('saksinformasjon-panel');
     return (
@@ -57,7 +57,8 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
             {søkerinfo &&
                 initiellForeldrepengesøknadHendelse &&
                 initiellForeldrepengesøknadHendelse.behandlingsdato &&
-                !harEnAvsluttetBehandling(sak) && !erInfotrygdSak(sak) && (
+                !harEnAvsluttetBehandling(sak) &&
+                !erInfotrygdSak(sak) && (
                     <Behandligsfrist
                         harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
                         behandligsdato={initiellForeldrepengesøknadHendelse.behandlingsdato}
