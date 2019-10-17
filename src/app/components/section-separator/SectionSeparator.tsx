@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Systemtittel } from 'nav-frontend-typografi';
+import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 import { Link } from 'react-router-dom';
 import { Routes } from 'app/utils/routes';
@@ -11,7 +11,7 @@ interface Props {
     sectionLink?: {
         path: Routes;
         text: string | React.ReactNode;
-        search?: any;
+        search?: string;
     };
 }
 
@@ -22,7 +22,9 @@ const SectionSeparator: React.FunctionComponent<Props> = ({ children, title, sec
             <div className={cls.element('header')}>
                 <Systemtittel>{title}</Systemtittel>
                 {sectionLink && (
-                    <Link to={{ pathname: sectionLink.path, search: sectionLink.search }}>{sectionLink.text}</Link>
+                    <Link className="lenke" to={{ pathname: sectionLink.path, search: sectionLink.search }}>
+                        <Normaltekst>{sectionLink.text}</Normaltekst>
+                    </Link>
                 )}
             </div>
             {children}
