@@ -45,19 +45,19 @@ const Behandligsfrist: React.StatelessComponent<Props> = ({ behandligsdato, harL
                                     values={{ dato: formatDate(dato) }}
                                 />
                             </Undertittel>
+                            <>
+                                <FormattedHTMLMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.1" />
+                                <div className={cls.element('viktig-informasjon')}>
+                                    <Lenke href={lenker.saksoversikt}>
+                                        <FormattedMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.lenke" />
+                                    </Lenke>
+                                </div>
+                            </>
                         </span>
                     }
                     border={false}
                     apneTekst={<FormattedMessage id="dineForeldrepenger.behandligsfrist.lesMer" />}>
-                    <>
-                        <FormattedHTMLMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.1" />
-                        <div className={cls.element('viktig-informasjon')}>
-                            <Lenke href={lenker.saksoversikt}>
-                                <FormattedMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.lenke" />
-                            </Lenke>
-                        </div>
-                        <FormattedHTMLMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.2" />
-                    </>
+                    <FormattedHTMLMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.2" />
                 </Lesmerpanel>
             )}
         </AlertStripe>
