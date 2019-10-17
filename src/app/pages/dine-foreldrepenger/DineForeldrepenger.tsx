@@ -13,7 +13,10 @@ import RelatertInformasjon from 'app/components/relatert-informasjon/RelatertInf
 import IngenSaker from 'app/components/ingen-saker/IngenSaker';
 import {
     erInfotrygdSak,
-    opprettFiktivSak
+    opprettFiktivSak,
+    harSøkt,
+    skalKunneSøkeOmEndring,
+    erForeldrepengesak
 } from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
@@ -27,6 +30,10 @@ import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import MinidialogLenkepanel from 'app/components/minidialog-lenkepanel/MinidialogLenkepanel';
 import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 import { Søkerinfo } from 'app/types/Søkerinfo';
+
+import AlertStripe from 'nav-frontend-alertstriper';
+import { FormattedHTMLMessage } from 'react-intl';
+import { Hendelse } from 'app/api/types/historikk/Hendelse';
 
 import './dineForeldrepenger.less';
 
@@ -95,8 +102,36 @@ export class DineForeldrepenger extends React.Component<Props> {
         );
     }
 
+    shouldRenderAlertStripe(sak: Sak): boolean {
+        return (
+            (!this.props.historikkInnslagListe.find(({ hendelse }) => hendelse === Hendelse.InitiellForeldrepenger) &&
+                (harSøkt(sak) && !skalKunneSøkeOmEndring(sak))) || erInfotrygdSak(sak)
+        );
+    }
+
+    renderAlertStripe(sak: Sak) {
+        return (
+            <AlertStripe type="info">
+                <FormattedHTMLMessage
+                    id={
+                        erForeldrepengesak(sak)
+                            ? 'dineForeldrepenger.alertstripe.fpsak'
+                            : 'dineForeldrepenger.alertstripe.infotrygd'
+                    }
+                />
+            </AlertStripe>
+        );
+    }
+
     render() {
-        const { saker, history, storageKvittering, søkerinfo, historikkInnslagListe, minidialogInnslagListe } = this.props;
+        const {
+            saker,
+            history,
+            storageKvittering,
+            søkerinfo,
+            historikkInnslagListe,
+            minidialogInnslagListe
+        } = this.props;
         const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettFiktivSak(storageKvittering!)
             : saker.slice().shift();
@@ -108,6 +143,7 @@ export class DineForeldrepenger extends React.Component<Props> {
                 <div className={cls.className}>
                     <div className={cls.element('main-content')}>
                         {nyesteSak === undefined && <IngenSaker />}
+                        {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe(nyesteSak)}
 
                         {minidialogInnslagListe &&
                             minidialogInnslagListe.map((minidialogInnslag) => (

@@ -5,10 +5,9 @@ import {
     erInfotrygdSak,
     erSvangerskapepengesak,
     erForeldrepengesak,
-    skalKunneSøkeOmEndring
+    harEnAvsluttetBehandling
 } from 'app/utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
-import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 import { Knapp } from 'nav-frontend-knapper';
 import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../saksoversikt/utils';
 import { FormattedMessage } from 'react-intl';
@@ -56,7 +55,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
             {søkerinfo &&
                 initiellForeldrepengesøknadHendelse &&
                 initiellForeldrepengesøknadHendelse.behandlingsdato &&
-                !skalKunneSøkeOmEndring(sak) && (
+                !harEnAvsluttetBehandling(sak) && (
                     <Behandligsfrist
                         harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
                         behandligsdato={initiellForeldrepengesøknadHendelse.behandlingsdato}
@@ -64,12 +63,6 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 )}
 
             {erInfotrygdSak(sak) && <MeldingOmVedtakLenkepanel />}
-
-            {erSakForeldrepengesak && (
-                <div className="blokk-xs">
-                    <UtsettelsePanel />
-                </div>
-            )}
 
             <div className={cls.element('valg')}>
                 <div className={cls.element('btn')}>

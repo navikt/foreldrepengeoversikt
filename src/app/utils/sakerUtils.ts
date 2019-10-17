@@ -74,14 +74,14 @@ export const harEnAvsluttetBehandling = (sak: Sak): boolean => {
         : false;
 };
 
-export const skalKunneSøkeOmEndring = (nyesteSak: Sak): boolean => {
-    if (!erForeldrepengesak(nyesteSak) || nyesteSak.saksnummer === undefined) {
+export const skalKunneSøkeOmEndring = (sak: Sak): boolean => {
+    if (!erForeldrepengesak(sak) || sak.saksnummer === undefined) {
         return false;
     }
 
     return (
-        (nyesteSak.status !== FagsakStatus.AVSLUTTET && harEnAvsluttetBehandling(nyesteSak)) ||
-        erInfotrygdSak(nyesteSak)
+        (sak.status !== FagsakStatus.AVSLUTTET && harEnAvsluttetBehandling(sak)) ||
+        erInfotrygdSak(sak)
     );
 };
 

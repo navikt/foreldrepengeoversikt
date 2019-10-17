@@ -12,6 +12,7 @@ import BEMHelper from 'common/util/bem';
 import SlettKnapp from '../../../components/slett-knapp/SlettKnapp';
 
 import './attachment.less';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 interface OwnProps {
     attachment: Attachment;
@@ -41,23 +42,18 @@ const AttachmentListElement: React.StatelessComponent<Props> = ({ attachment, sh
                         {attachment.filename}
                     </Lenke>
                 ) : (
-                    <React.Fragment>{attachment.filename}</React.Fragment>
+                    <Normaltekst>{attachment.filename}</Normaltekst>
                 )}
                 {showFileSize && <div>{bytesString(attachment.filesize)}</div>}
             </div>
-            {onDelete &&
-                attachment.url &&
-                !attachment.pending && (
-                    <span className={BEM.element('deleteButton')}>
-                        <SlettKnapp
-                            onClick={() => onDelete([attachment])}
-                            ariaLabel={intl.formatMessage(
-                                { id: 'vedlegg.arialabel.slett' },
-                                { navn: attachment.filename }
-                            )}
-                        />
-                    </span>
-                )}
+            {onDelete && attachment.url && !attachment.pending && (
+                <span className={BEM.element('deleteButton')}>
+                    <SlettKnapp
+                        onClick={() => onDelete([attachment])}
+                        ariaLabel={intl.formatMessage({ id: 'vedlegg.arialabel.slett' }, { navn: attachment.filename })}
+                    />
+                </span>
+            )}
         </div>
     );
 };

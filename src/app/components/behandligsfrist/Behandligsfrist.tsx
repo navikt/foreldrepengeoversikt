@@ -2,8 +2,15 @@ import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Undertittel } from 'nav-frontend-typografi';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import Lenke from 'nav-frontend-lenker';
+import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
+
 import BEMHelper from 'common/util/bem';
+import { formatDate } from '../saksoversikt/utils';
+import VedleggIkon from 'common/components/ikoner/VedleggIkon';
+
+import { lenker } from 'app/utils/lenker';
 
 import './behandlingsfrist.less';
 
@@ -14,6 +21,10 @@ interface Props {
 
 const Behandligsfrist: React.StatelessComponent<Props> = ({ behandligsdato, harLøpendeArbeidsforhold }) => {
     const cls = BEMHelper('behandlingsfrist');
+    const dato = moment(behandligsdato).isSameOrAfter(moment(), 'days')
+        ? behandligsdato
+        : moment().format('YYYY-MM-DD');
+
     return (
         <AlertStripe className={cls.className} type="info">
             <Lesmerpanel
@@ -22,22 +33,27 @@ const Behandligsfrist: React.StatelessComponent<Props> = ({ behandligsdato, harL
                         <Undertittel>
                             <FormattedMessage
                                 id="dineForeldrepenger.behandligsfrist"
-                                values={{ dato: behandligsdato }}
+                                values={{ dato: formatDate(dato) }}
                             />
                         </Undertittel>
                     </span>
                 }
                 border={false}>
-                <div>
-                    <p style={{ marginTop: 0 }}>
-                        <FormattedHTMLMessage
-                            id={
-                                harLøpendeArbeidsforhold
-                                    ? 'dineForeldrepenger.behandligsfrist.arbeidstaker'
-                                    : 'dineForeldrepenger.behandligsfrist.selvstendig'
-                            }
-                        />
-                    </p>
+                <div className={cls.element('main-content')}>
+                    {harLøpendeArbeidsforhold ? (
+                        <>
+                            <FormattedMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.1" />
+                            <div className={cls.element('dokument-lenke')}>
+                                <VedleggIkon width={20} height={20} />
+                                <Lenke href={lenker.saksoversikt}>
+                                    <FormattedMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.lenke" />
+                                </Lenke>
+                            </div>
+                            <FormattedMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.2" />
+                        </>
+                    ) : (
+                        <FormattedMessage id={'dineForeldrepenger.behandligsfrist.selvstendig'} />
+                    )}
                 </div>
             </Lesmerpanel>
         </AlertStripe>
