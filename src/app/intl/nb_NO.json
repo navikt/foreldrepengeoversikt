@@ -153,7 +153,7 @@
     "relatertInformasjon.header": "Relatert informasjon",
     "sakInfo.sistEndret": "Mottatt { date }",
     "sakInfo.tittel": "Søknad om foreldrepenger",
-    "saksoversikt.content.endringssøknad.button": "Endre perioden din",
+    "saksoversikt.content.endringssøknad.button": "Endre {erEndringssøknad, select, true {perioden} false {søknaden}} din",
     "saksoversikt.content.endringssøknad.button.svp": "Ny søknad",
     "saksoversikt.content.ettersendelse.button": "Ettersend vedlegg",
     "saksoversikt.endringssøknad.hjelpetekst": "Fristen for å sende inn endringssøknad er utløpt",

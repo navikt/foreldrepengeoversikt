@@ -5,7 +5,8 @@ import {
     erInfotrygdSak,
     erSvangerskapepengesak,
     erForeldrepengesak,
-    harEnAvsluttetBehandling
+    harEnAvsluttetBehandling,
+    skalKunneSøkeOmEndring
 } from 'app/utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
 import { Knapp } from 'nav-frontend-knapper';
@@ -105,6 +106,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                                         ? 'saksoversikt.content.endringssøknad.button'
                                         : 'saksoversikt.content.endringssøknad.button.svp'
                                 }
+                                values={{ erEndringssøknad: skalKunneSøkeOmEndring(sak) }}
                             />
                         </Knapp>
                     </div>
