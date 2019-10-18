@@ -20,12 +20,12 @@ export const annenInformasjonLenker = {
         href: 'https://familie.nav.no/om-foreldrepenger#nar-kan-du-soke'
     },
     klagePåSøknad: {
-        text: 'Klag på vedtak',
+        text: 'Klag på et vedtak',
         href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Klage+ris+og+ros'
     },
     kontaktOss: {
-        text: 'Kontakt oss',
-        href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger'
+        text: 'Hvordan søke om endring?',
+        href: 'https://familie.nav.no/soke-om-foreldrepenger'
     },
     saksbehandlingstider: {
         text: 'Saksbehandlingstider',
@@ -44,7 +44,7 @@ export const annenInformasjonLenker = {
 };
 
 export const lenker = {
-    utsettelse: 'https://familie.nav.no/om-foreldrepenger#hvis-du-skal-pa-ferie',
+    utsettelse: 'https://familie.nav.no/soke-om-foreldrepenger',
     endringssøknad: 'https://foreldrepengesoknad.nav.no',
     saksoversikt: 'https://tjenester.nav.no/saksoversikt/app/tema/FOR',
     brukerstøtte:  'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749',
