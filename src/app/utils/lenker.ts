@@ -20,7 +20,7 @@ export const annenInformasjonLenker = {
         href: 'https://familie.nav.no/om-foreldrepenger#nar-kan-du-soke'
     },
     klagePåSøknad: {
-        text: 'Klag på et vedtak',
+        text: 'Slik klager du',
         href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Klage+ris+og+ros'
     },
     kontaktOss: {
