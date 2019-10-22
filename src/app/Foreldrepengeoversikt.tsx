@@ -17,7 +17,7 @@ import { getErrorCode } from './redux/util/fetchFromState';
 import { State } from './redux/store';
 import { Feature, isFeatureEnabled } from './Feature';
 import DinPlan from './pages/din-plan/DinPlan';
-import MinidialogPage from './pages/mindialog-svar/MinidialogSvar';
+import MinidialogPage from './pages/minidialog/MinidialogPage';
 import EttersendingDto from './api/types/ettersending/EttersendingDto';
 import { Søkerinfo } from './types/Søkerinfo';
 
