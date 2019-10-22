@@ -102,8 +102,9 @@ export class DineForeldrepenger extends React.Component<Props> {
 
     shouldRenderAlertStripe(sak: Sak): boolean {
         return (
-            (!this.props.historikkInnslagListe
-                .find(({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER) &&
+            (!this.props.historikkInnslagListe.find(
+                ({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER
+            ) &&
                 (harSøkt(sak) && !skalKunneSøkeOmEndring(sak) && !erSvangerskapepengesak(sak))) ||
             erInfotrygdSak(sak)
         );
@@ -140,9 +141,11 @@ export class DineForeldrepenger extends React.Component<Props> {
                         {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe()}
 
                         {minidialogInnslagListe &&
-                            minidialogInnslagListe.map((minidialogInnslag) => (
-                                <MinidialogLenkepanel key={guid()} minidialogInnslag={minidialogInnslag} />
-                            ))}
+                            minidialogInnslagListe
+                                .filter(({ gyldigTil, aktiv }) => aktiv && moment(gyldigTil).isSameOrAfter(moment(), 'days'))
+                                .map((minidialogInnslag) => (
+                                    <MinidialogLenkepanel key={guid()} minidialogInnslag={minidialogInnslag} />
+                                ))}
 
                         {nyesteSak && (
                             <>
