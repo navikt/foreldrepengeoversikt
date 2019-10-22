@@ -8,7 +8,7 @@ import Sak from '../../../api/types/sak/Sak';
 import EkspanderbarSaksoversiktHeader from './EkspanderbarSaksoversiktHeader';
 import Saksoversikt from '../saksoversikt-main/Saksoversikt';
 import { getSaksoversiktTitle } from '../utils';
-import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { Innsendingsinnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 
 import './ekspanderbarSaksoversikt.less';
@@ -17,7 +17,7 @@ interface Props {
     søkerinfo?: Søkerinfo;
     sak: Sak;
     history: History;
-    historikkInnslagListe: HistorikkInnslag[];
+    historikkInnslagListe: Innsendingsinnslag[];
 }
 
 const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = ({ sak, søkerinfo, history, historikkInnslagListe }) => {

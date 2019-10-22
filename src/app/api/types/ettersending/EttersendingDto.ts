@@ -4,7 +4,7 @@ export default interface EttersendingDto {
     type: EttersendingType;
     saksnummer: string,
     vedlegg: Attachment[];
-    referanseId?: string;
+    dialogId?: string;
     brukerTekst?: {
         dokumentType: string;
         tekst: string;

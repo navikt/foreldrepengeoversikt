@@ -3,7 +3,6 @@ import { History } from 'history';
 import Page from '../page/Page';
 import BEMHelper from 'common/util/bem';
 import { FormattedMessage } from 'react-intl';
-import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 import { getData } from 'app/redux/util/fetchFromState';
 import { connect } from 'react-redux';
 import { State as AppState } from 'app/redux/store';
@@ -12,6 +11,7 @@ import { InnsendingActionTypes, InnsendingAction } from 'app/redux/types/Innsend
 import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
 import Sak from 'app/api/types/sak/Sak';
 import { Routes } from 'app/utils/routes';
+import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
 interface Props {
     history: History;
@@ -46,7 +46,7 @@ class MinidialogPage extends React.Component<Props> {
 const mapStateToProps = (state: AppState, props: Props) => {
     const params = new URLSearchParams(props.history.location.search);
     const minidialog = getData(state.api.minidialogInnslagListe, []).find(
-        (md) => md.referanseId === params.get('referanseId')
+        (md) => md.dialogId === params.get('dialogId')
     );
 
     return {

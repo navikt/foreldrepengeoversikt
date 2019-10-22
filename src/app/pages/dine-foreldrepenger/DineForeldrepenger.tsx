@@ -25,15 +25,13 @@ import { StorageKvittering } from '../../api/types/StorageKvittering';
 import Behandling from 'app/api/types/sak/Behandling';
 import { State } from 'app/redux/store';
 import { getData } from 'app/redux/util/fetchFromState';
-import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { Innsendingsinnslag, MinidialogInnslag, HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
 
 import MinidialogLenkepanel from 'app/components/minidialog-lenkepanel/MinidialogLenkepanel';
-import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 
 import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedHTMLMessage } from 'react-intl';
-import { Hendelse } from 'app/api/types/historikk/Hendelse';
 
 import './dineForeldrepenger.less';
 
@@ -42,7 +40,7 @@ interface Props {
     storageKvittering?: StorageKvittering;
     søkerinfo?: Søkerinfo;
     history: History;
-    historikkInnslagListe: HistorikkInnslag[];
+    historikkInnslagListe: Innsendingsinnslag[];
     minidialogInnslagListe: MinidialogInnslag[];
 }
 
@@ -104,7 +102,8 @@ export class DineForeldrepenger extends React.Component<Props> {
 
     shouldRenderAlertStripe(sak: Sak): boolean {
         return (
-            (!this.props.historikkInnslagListe.find(({ hendelse }) => hendelse === Hendelse.InitiellForeldrepenger) &&
+            (!this.props.historikkInnslagListe
+                .find(({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER) &&
                 (harSøkt(sak) && !skalKunneSøkeOmEndring(sak) && !erSvangerskapepengesak(sak))) ||
             erInfotrygdSak(sak)
         );

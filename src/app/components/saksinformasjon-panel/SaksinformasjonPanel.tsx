@@ -27,11 +27,10 @@ import { utledHendelser } from '../historikk/util';
 import Sak from 'app/api/types/sak/Sak';
 import BEMHelper from 'common/util/bem';
 import { lenker } from 'app/utils/lenker';
-import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { Innsendingsinnslag, HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
 import { redirect } from 'app/utils/redirect';
 import Behandligsfrist from '../behandligsfrist/Behandligsfrist';
 import { Søkerinfo } from 'app/types/Søkerinfo';
-import { Hendelse } from 'app/api/types/historikk/Hendelse';
 import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 
@@ -41,7 +40,7 @@ interface Props {
     søkerinfo?: Søkerinfo;
     sak: Sak;
     history: History;
-    historikkInnslagListe: HistorikkInnslag[];
+    historikkInnslagListe: Innsendingsinnslag[];
 }
 
 const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak, history, historikkInnslagListe }) => {
@@ -49,7 +48,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
     const { perioder } = sak;
     const initiellForeldrepengesøknadHendelse = historikkInnslagListe
         .filter(({ saksnr }) => sak.saksnummer === saksnr)
-        .find(({ hendelse }) => hendelse === Hendelse.InitiellForeldrepenger);
+        .find(({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER);
 
     const cls = BEMHelper('saksinformasjon-panel');
     return (

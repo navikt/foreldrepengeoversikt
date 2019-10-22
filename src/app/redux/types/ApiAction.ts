@@ -1,8 +1,7 @@
 import Sak from "app/api/types/sak/Sak";
 import { FetchError } from "./FetchState";
 import { StorageKvittering } from "app/api/types/StorageKvittering";
-import { HistorikkInnslag } from "app/api/types/historikk/HistorikkInnslag";
-import { MinidialogInnslag } from "app/api/types/MinidialogInnslag";
+import { Innsendingsinnslag, MinidialogInnslag } from "app/api/types/historikk/HistorikkInnslag";
 import { Søkerinfo } from "app/types/Søkerinfo";
 
 export enum ApiActionTypes {
@@ -84,7 +83,7 @@ export interface GetHistorikkRequest {
 export interface GetHistorikkSuccess {
     type: ApiActionTypes.GET_HISTORIKK_SUCCESS;
     payload: {
-        historikk: HistorikkInnslag[];
+        historikk: Innsendingsinnslag[];
     };
 }
 export interface GetHistorikkFailure {

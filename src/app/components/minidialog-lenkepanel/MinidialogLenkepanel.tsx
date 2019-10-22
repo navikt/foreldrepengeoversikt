@@ -5,7 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Icon from 'nav-frontend-ikoner-assets';
 import moment from 'moment';
 
-import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
+import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
 import BEMHelper from 'common/util/bem';
 import { Routes } from 'app/utils/routes';
@@ -21,7 +21,7 @@ const MinidialogLenkepanel: React.StatelessComponent<Props> = ({ minidialogInnsl
         <Link
             to={{
                 pathname: Routes.MINIDIALOG,
-                search: new URLSearchParams({ referanseId: minidialogInnslag.referanseId }).toString()
+                search: new URLSearchParams({ dialogId: minidialogInnslag.dialogId }).toString()
             }}
             {...props}>
             {props.children}

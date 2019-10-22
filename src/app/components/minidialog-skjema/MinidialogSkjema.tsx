@@ -6,7 +6,6 @@ import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
-import { MinidialogInnslag } from 'app/api/types/MinidialogInnslag';
 import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
 import { getEttersendingType } from '../../pages/ettersendelse/util';
 import Sak from 'app/api/types/sak/Sak';
@@ -14,6 +13,7 @@ import Snakkeboble from 'nav-frontend-snakkeboble';
 import { formaterDatoForHendelse } from 'app/components/historikk/util';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
+import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
 import './minidialogSkjema.less';
 
@@ -43,7 +43,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
                     vedlegg: attachments,
                     saksnummer: minidialog.saksnr,
                     type: getEttersendingType(sak),
-                    referanseId: minidialog.referanseId,
+                    dialogId: minidialog.dialogId,
                     brukerTekst: {
                         dokumentType: Skjemanummer.TILBAKEBETALING,
                         overskrift: 'overskrift',

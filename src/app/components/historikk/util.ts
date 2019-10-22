@@ -2,7 +2,7 @@ import { Hendelse } from './HistorikkElement';
 import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingÅrsak } from '../../api/types/sak/Behandling';
 import { formatDate } from '../saksoversikt/utils';
 import { behandlingByDescendingOrder } from '../../utils/sakerUtils';
-import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { Innsendingsinnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
 export const formaterDatoForHendelse = (dato: string) => {
     return formatDate(dato, 'D. MMMM YYYY [kl.] HH:mm:ss');
@@ -77,7 +77,7 @@ const erHendelseRelevant = (h: Hendelse): boolean => {
     );
 };
 
-export const opprettHendelserFraHistorikkinnslagListe = (historikkInnslagListe: HistorikkInnslag[]): Hendelse[] => {
+export const opprettHendelserFraHistorikkinnslagListe = (historikkInnslagListe: Innsendingsinnslag[]): Hendelse[] => {
     return historikkInnslagListe.map((historikkInnslagEttersendelser) => ({
         dato: historikkInnslagEttersendelser.opprettet,
         beskrivelse: historikkInnslagEttersendelser.hendelse,
@@ -111,7 +111,7 @@ const utledHendelserUtenHistorikkInnslag = (behandlinger: Behandling[]) => {
     return utledSøknadMotattHendelse(hendelser);
 };
 
-const utledHendelserMedHistorikkInnslag = (behandlinger: Behandling[], historikkInnslagListe: HistorikkInnslag[]) => {
+const utledHendelserMedHistorikkInnslag = (behandlinger: Behandling[], historikkInnslagListe: Innsendingsinnslag[]) => {
     const hendelser: Hendelse[] = [];
     behandlinger
         .filter(fjernBehandlingerMedLikOpprettetDato)
@@ -152,7 +152,7 @@ const utledHendelserMedHistorikkInnslag = (behandlinger: Behandling[], historikk
     return hendelser;
 };
 
-export const utledHendelser = (behandlinger?: Behandling[], historikkInnslagListe?: HistorikkInnslag[]): Hendelse[] => {
+export const utledHendelser = (behandlinger?: Behandling[], historikkInnslagListe?: Innsendingsinnslag[]): Hendelse[] => {
     let hendelser: Hendelse[] = [];
     if (behandlinger === undefined || behandlinger.length === 0) {
         return hendelser;

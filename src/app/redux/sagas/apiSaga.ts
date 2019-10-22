@@ -10,7 +10,7 @@ import {
 import Sak, { SakType } from 'app/api/types/sak/Sak';
 import { StorageKvittering } from 'app/api/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
-import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { Innsendingsinnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { uttaksperiodeDtoToPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
 import {
     slåSammenLikeOgSammenhengendeUttaksperioder,
@@ -81,7 +81,7 @@ function* getStorageKvittering(_: GetSakerRequest) {
 function* getHistorikk(_: GetHistorikkRequest) {
     try {
         const response = yield call(Api.getHistorikk);
-        const historikk: HistorikkInnslag[] = response.data;
+        const historikk: Innsendingsinnslag[] = response.data;
         yield put({ type: ApiActionTypes.GET_HISTORIKK_SUCCESS, payload: { historikk } });
     } catch (error) {
         yield put({ type: ApiActionTypes.GET_HISTORIKK_FAILURE, payload: { error } });
