@@ -140,12 +140,13 @@ export class DineForeldrepenger extends React.Component<Props> {
                         {nyesteSak === undefined && <IngenSaker />}
                         {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe()}
 
-                        {minidialogInnslagListe &&
-                            minidialogInnslagListe
-                                .filter(({ gyldigTil, aktiv }) => aktiv && moment(gyldigTil).isSameOrAfter(moment(), 'days'))
-                                .map((minidialogInnslag) => (
-                                    <MinidialogLenkepanel key={guid()} minidialogInnslag={minidialogInnslag} />
-                                ))}
+                        {minidialogInnslagListe
+                            .filter(
+                                ({ gyldigTil, aktiv }) => aktiv && moment(gyldigTil).isSameOrAfter(moment(), 'days')
+                            )
+                            .map((minidialogInnslag) => (
+                                <MinidialogLenkepanel key={guid()} minidialogInnslag={minidialogInnslag} />
+                            ))}
 
                         {nyesteSak && (
                             <>
@@ -177,7 +178,7 @@ const mapStateToProps = (state: State) => ({
     søkerinfo: getData(state.api.søkerinfo, {}),
     saker: getData(state.api.saker, []),
     storageKvittering: getData(state.api.storageKvittering, undefined),
-    historikkInnslagListe: getData(state.api.historikk, undefined),
+    historikkInnslagListe: getData(state.api.historikk, []),
     minidialogInnslagListe: getData(state.api.minidialogInnslagListe, [])
 });
 
