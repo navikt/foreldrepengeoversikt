@@ -15,6 +15,7 @@ export interface Uttaksperiode extends Periode {
     type: PeriodeType.Uttak;
     stønadskontotype: StønadskontoType;
     graderingInnvilget: boolean;
+    graderingsprosent: string;
     samtidigUttak: boolean;
     samtidigUttaksprosent?: number;
 }

@@ -88,6 +88,10 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                         tittel={
                                             <FormattedMessage
                                                 id={`kvote.${(p as Uttaksperiode).stønadskontotype.toLowerCase()}`}
+                                                values={{
+                                                    erGradert: (p as Uttaksperiode).graderingInnvilget,
+                                                    graderingsprosent: (p as Uttaksperiode).graderingsprosent
+                                                }}
                                             />
                                         }
                                         ikon={getIkon(p)}

@@ -82,6 +82,7 @@ const uttaksperiodeDtoUTottaksperiode = (
         antallUttaksdager: uttaksperiodeDto.trekkDager,
         stønadskontotype: uttaksperiodeDto.stønadskontotype,
         graderingInnvilget: uttaksperiodeDto.graderingInnvilget,
+        graderingsprosent: (100 - uttaksperiodeDto.arbeidstidprosent).toFixed(1),
         samtidigUttak: uttaksperiodeDto.samtidigUttak,
         samtidigUttaksprosent: uttaksperiodeDto.samtidigUttaksprosent
     };
