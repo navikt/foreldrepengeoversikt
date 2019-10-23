@@ -11,7 +11,7 @@ import {
     harAnnenForelderSamtidigUttakISammePeriode,
     getStønadskontoTypeFromOppholdsÅrsak,
     skalVisesIPeriodeListe
-} from '../periodeUtils';
+} from '../../../utils/periodeUtils';
 import UttakIkon from 'app/components/ikoner/UttakIkon';
 import Periode, { PeriodeType, Utsettelsesperiode, Uttaksperiode, Oppholdsperiode } from 'app/types/uttaksplan/Periode';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';

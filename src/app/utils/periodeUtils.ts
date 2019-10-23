@@ -34,6 +34,7 @@ export const getUkerOgDagerFromDager = (dager: number): { uker: number; dager: n
 export const slåSammenLikeOgSammenhengendeUttaksperioder = (uttaksperioder: UttaksPeriodeDto[]): UttaksPeriodeDto[] => {
     return uttaksperioder.reduce((uttaksperiodeAccumulator: UttaksPeriodeDto[], uttaksperiode, index) => {
         const previousUttaksperiode = uttaksperiodeAccumulator[index - 1];
+
         if (skalKunneSlåSammenUttaksperioer(previousUttaksperiode, uttaksperiode)) {
             uttaksperiodeAccumulator.pop();
             uttaksperiodeAccumulator.push({
@@ -236,4 +237,27 @@ export const fjernAvslåttePerioderEtterSisteInnvilgetPeriode = (perioder: Uttak
         perioder.pop();
     }
     return perioder;
+};
+
+export const getPeriodetype = (
+    uttaksperiodeDto: UttaksPeriodeDto
+): PeriodeType.Opphold | PeriodeType.Utsettelse | PeriodeType.Uttak | PeriodeType.TaptPeriode => {
+    if (erTaptPeriode(uttaksperiodeDto)) {
+        return PeriodeType.TaptPeriode;
+    }
+
+    if (uttaksperiodeDto.oppholdAarsak) {
+        return PeriodeType.Opphold;
+    }
+
+    return uttaksperiodeDto.stønadskontotype && uttaksperiodeDto.utsettelsePeriodeType === undefined
+        ? PeriodeType.Uttak
+        : PeriodeType.Utsettelse;
+};
+
+export const getForelderForPeriode = (uttaksperiodeDto: UttaksPeriodeDto, søkerErFarEllerMedmor: boolean): Rolle => {
+    if (uttaksperiodeDto.gjelderAnnenPart) {
+        return søkerErFarEllerMedmor ? Rolle.mor : Rolle.farMedmor;
+    }
+    return søkerErFarEllerMedmor ? Rolle.farMedmor : Rolle.mor;
 };

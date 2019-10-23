@@ -6,31 +6,11 @@ import {
     Oppholdsperiode,
     TaptPeriode
 } from 'app/types/uttaksplan/Periode';
-import { getAntallUttaksdagerITidsperiode, erTaptPeriode } from 'app/components/periode-oversikt/periodeUtils';
-import { Rolle } from 'app/types/Rolle';
-
-const getPeriodetype = (
-    uttaksperiodeDto: UttaksPeriodeDto
-): PeriodeType.Opphold | PeriodeType.Utsettelse | PeriodeType.Uttak | PeriodeType.TaptPeriode => {
-    if (erTaptPeriode(uttaksperiodeDto)) {
-        return PeriodeType.TaptPeriode;
-    }
-    
-    if (uttaksperiodeDto.oppholdAarsak) {
-        return PeriodeType.Opphold;
-    }
-
-    return uttaksperiodeDto.stønadskontotype && uttaksperiodeDto.utsettelsePeriodeType === undefined
-        ? PeriodeType.Uttak
-        : PeriodeType.Utsettelse;
-};
-
-const getForelderForPeriode = (uttaksperiodeDto: UttaksPeriodeDto, søkerErFarEllerMedmor: boolean): Rolle => {
-    if (uttaksperiodeDto.gjelderAnnenPart) {
-        return søkerErFarEllerMedmor ? Rolle.mor : Rolle.farMedmor;
-    }
-    return søkerErFarEllerMedmor ? Rolle.farMedmor : Rolle.mor;
-};
+import {
+    getAntallUttaksdagerITidsperiode,
+    getPeriodetype,
+    getForelderForPeriode
+} from 'app/utils/periodeUtils';
 
 export const uttaksperiodeDtoToPeriode = (uttaksperiodeDto: UttaksPeriodeDto, søkerErFarEllerMedmor: boolean) => {
     switch (getPeriodetype(uttaksperiodeDto)) {

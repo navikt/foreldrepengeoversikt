@@ -21,7 +21,7 @@ import {
     finnNåværendePerioder,
     skalVisesIPeriodeListe,
     finnFremtidigePerioder
-} from '../periode-oversikt/periodeUtils';
+} from '../../utils/periodeUtils';
 import Oversikt from '../oversikt/Oversikt';
 import { utledHendelser } from '../historikk/util';
 import Sak from 'app/api/types/sak/Sak';

@@ -4,7 +4,7 @@ import {
     slåSammenLikeOgSammenhengendeUttaksperioder,
     erSammenhengende,
     harAnnenForelderSamtidigUttakISammePeriode
-} from '../periodeUtils';
+} from '../../../utils/periodeUtils';
 import {
     UttaksPeriodeDto,
     MorsAktivitetDto,

@@ -17,7 +17,7 @@ import {
     finnNåværendePerioder,
     finnFremtidigePerioder,
     finnTidligerePerioder
-} from 'app/components/periode-oversikt/periodeUtils';
+} from 'app/utils/periodeUtils';
 
 import './dinPlan.less';
 

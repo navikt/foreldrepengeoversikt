@@ -17,7 +17,7 @@ import {
     fyllInnHull,
     fjernIrrelevanteTaptePerioder,
     fjernAvslåttePerioderEtterSisteInnvilgetPeriode
-} from 'app/components/periode-oversikt/periodeUtils';
+} from 'app/utils/periodeUtils';
 import { isFeatureEnabled, Feature } from 'app/Feature';
 import { SøkerinfoDTO } from 'app/api/types/personinfo/SøkerinfoDto';
 import { getSøkerinfoFromDTO } from 'app/utils/søkerinfoDtoMapper';
