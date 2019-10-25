@@ -11,7 +11,7 @@ import CalendarIkon from 'app/components/ikoner/CalendarIkon';
 import { Routes } from 'app/utils/routes';
 
 import Person from 'app/types/Person';
-import Sak from 'app/api/types/sak/Sak';
+import SakBase from 'app/api/types/sak/Sak';
 import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
 import {
     finnNåværendePerioder,
@@ -24,7 +24,7 @@ import './dinPlan.less';
 interface Props {
     history: History;
     søker?: Person;
-    sak?: Sak;
+    sak?: SakBase;
 }
 
 export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker }) => {

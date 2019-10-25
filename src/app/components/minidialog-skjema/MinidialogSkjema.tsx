@@ -8,7 +8,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
 import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
 import { getEttersendingType } from '../../pages/ettersendelse/util';
-import Sak from 'app/api/types/sak/Sak';
+import SakBase from 'app/api/types/sak/Sak';
 import Snakkeboble from 'nav-frontend-snakkeboble';
 import { formaterDatoForHendelse } from 'app/components/historikk/util';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
@@ -18,7 +18,7 @@ import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import './minidialogSkjema.less';
 
 interface Props {
-    sak: Sak;
+    sak: SakBase;
     minidialog: MinidialogInnslag;
     onSubmit: (ettersendelse: EttersendingDto) => void;
 }

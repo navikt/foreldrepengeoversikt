@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { History } from 'history';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 
-import Sak from 'app/api/types/sak/Sak';
+import SakBase from 'app/api/types/sak/Sak';
 import BEMHelper from '../../../common/util/bem';
 import NavigationColumLinks from '../navigation-colum-links/NavigationColumLinks';
 import { getRandomIcon, getHeaderTitleIntlKey } from './util';
@@ -11,7 +11,7 @@ import { getRandomIcon, getHeaderTitleIntlKey } from './util';
 import './header.less';
 
 interface Props {
-    saker: Sak[];
+    saker: SakBase[];
     history: History;
 }
 

@@ -24,7 +24,7 @@ import {
 } from '../../utils/periodeUtils';
 import Oversikt from '../oversikt/Oversikt';
 import { utledHendelser } from '../historikk/util';
-import Sak from 'app/api/types/sak/Sak';
+import SakBase from 'app/api/types/sak/Sak';
 import BEMHelper from 'common/util/bem';
 import { lenker } from 'app/utils/lenker';
 import { Innsendingsinnslag, HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
@@ -38,7 +38,7 @@ import './saksinformasjonPanel.less';
 
 interface Props {
     søkerinfo?: Søkerinfo;
-    sak: Sak;
+    sak: SakBase;
     history: History;
     historikkInnslagListe: Innsendingsinnslag[];
 }

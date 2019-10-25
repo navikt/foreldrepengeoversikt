@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { erForeldrepengesak, harSendtInnEndringssøknad, erEngangsstønad, erInfotrygdSak } from '../../utils/sakerUtils';
-import Sak from '../../api/types/sak/Sak';
+import SakBase from '../../api/types/sak/Sak';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import {
     isSkjemanummerForEndringssøknadForeldrepenger,
@@ -18,7 +18,7 @@ export const getListOfUniqueSkjemanummer = (attachments: Attachment[]) => {
         .filter((s: Skjemanummer, index, self) => self.indexOf(s) === index);
 };
 
-export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: Sak) => (
+export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: SakBase) => (
     <>
         <option value="default" disabled={true} hidden={true}>
             {intl.formatMessage({ id: `ettersendelse.select.defaultValue` })}
@@ -37,7 +37,7 @@ export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: Sak) => 
     </>
 );
 
-const getRelevanteSkjemanummer = (sak: Sak): Skjemanummer[] => {
+const getRelevanteSkjemanummer = (sak: SakBase): Skjemanummer[] => {
     const alleSkjemanummere = Object.values(Skjemanummer);
     if (erInfotrygdSak(sak)) {
         return alleSkjemanummere;
@@ -52,7 +52,7 @@ const getRelevanteSkjemanummer = (sak: Sak): Skjemanummer[] => {
     }
 };
 
-export const getEttersendingType = (sak: Sak): EttersendingType => {
+export const getEttersendingType = (sak: SakBase): EttersendingType => {
     if(erForeldrepengesak(sak) || erInfotrygdSak(sak)) {
         return EttersendingType.FORELDREPENGER;
     } else if(erEngangsstønad(sak)) {

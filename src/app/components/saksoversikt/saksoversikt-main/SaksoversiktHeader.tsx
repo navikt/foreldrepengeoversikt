@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Innholdstittel } from 'nav-frontend-typografi';
 
-import Sak from '../../../api/types/sak/Sak';
+import SakBase from '../../../api/types/sak/Sak';
 import { finnNyesteBehandling, harSøkt } from '../../../utils/sakerUtils';
 import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus, getSaksoversiktTitle } from '../utils';
 import BEMHelper from 'common/util/bem';
@@ -14,7 +14,7 @@ import BamseIkon from '../../ikoner/BamseIkon';
 import './saksoversikt.less';
 
 interface SaksoversiktHeaderProps {
-    sak: Sak;
+    sak: SakBase;
 }
 
 const SaksoversiktHeader: FunctionComponent<SaksoversiktHeaderProps> = ({ sak }) => {

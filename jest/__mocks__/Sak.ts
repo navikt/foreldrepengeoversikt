@@ -1,6 +1,6 @@
 import { FagsakStatus } from '../../src/app/api/types/sak/FagsakStatus';
 import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingTema, BehandlingÅrsak, BehandligType } from '../../src/app/api/types/sak/Behandling';
-import Sak, { SakType } from 'app/api/types/sak/Sak';
+import SakBase, { SakType } from 'app/api/types/sak/Sak';
 
 
 export const engangssønadBehandligMock: Behandling = {
@@ -55,13 +55,13 @@ export const endringssøknadBehandligMock: Behandling = {
     inntektsmeldinger: []
 }
 
-const infotrygd: Sak = {
+const infotrygd: SakBase = {
     type: SakType.SAK,
     saksnummer: '123',
     opprettet: '2018-09-01'
 };
 
-const fpsakSVP:  Sak = {
+const fpsakSVP:  SakBase = {
     type: SakType.FPSAK,
     saksnummer: '234',
     opprettet: '2018-10-01',
@@ -69,7 +69,7 @@ const fpsakSVP:  Sak = {
     behandlinger: [svpBehandligMock]
 };
 
-const fpsakFP:  Sak = {
+const fpsakFP:  SakBase = {
     type: SakType.FPSAK,
     saksnummer: '234',
     opprettet: '2018-10-01',
@@ -77,7 +77,7 @@ const fpsakFP:  Sak = {
     behandlinger: [foreldrepengesoknadBehandlingMock]
 };
 
-const fpsakES: Sak = {
+const fpsakES: SakBase = {
     type: SakType.FPSAK,
     saksnummer: '234',
     opprettet: '2018-10-01',
@@ -85,7 +85,7 @@ const fpsakES: Sak = {
     behandlinger: [engangssønadBehandligMock]
 };
 
-const fpsakEndring: Sak = {
+const fpsakEndring: SakBase = {
     type: SakType.FPSAK,
     saksnummer: '234',
     opprettet: '2018-10-01',

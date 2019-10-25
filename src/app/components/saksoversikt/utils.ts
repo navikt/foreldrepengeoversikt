@@ -1,14 +1,14 @@
 import moment from 'moment';
 import { FagsakStatus } from '../../api/types/sak/FagsakStatus';
-import Sak from 'app/api/types/sak/Sak';
+import SakBase from 'app/api/types/sak/Sak';
 import { erInfotrygdSak, getNyesteBehandling } from 'app/utils/sakerUtils';
 import { BehandligType } from 'app/api/types/sak/Behandling';
 
-export const isSakTooOldForEttersendelse = (sak: Sak): boolean => {
+export const isSakTooOldForEttersendelse = (sak: SakBase): boolean => {
     return !moment(sak.opprettet).isSameOrAfter(moment().subtract(150, 'days'));
 };
 
-export const isSakEligableForEttersendelse = (sak: Sak): boolean => {
+export const isSakEligableForEttersendelse = (sak: SakBase): boolean => {
     if (sak.saksnummer === undefined) {
         return false;
     };
@@ -36,10 +36,10 @@ export const getIntlKeyForStatus = (status: FagsakStatus): string => {
     }
 };
 
-export const getEtikettTypeForSaksstatus = (sak: Sak): 'suksess' | 'fokus' =>
+export const getEtikettTypeForSaksstatus = (sak: SakBase): 'suksess' | 'fokus' =>
     sak.status === FagsakStatus.LOPENDE || sak.status === FagsakStatus.AVSLUTTET ? 'suksess' : 'fokus';
 
-export const getSaksoversiktTitle = (sak: Sak): string => {
+export const getSaksoversiktTitle = (sak: SakBase): string => {
     const nyesteBehandlig = getNyesteBehandling(sak);
     const type = nyesteBehandlig && nyesteBehandlig.type;
     switch (type) {

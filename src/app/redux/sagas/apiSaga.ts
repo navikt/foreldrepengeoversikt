@@ -7,7 +7,7 @@ import {
     GetHistorikkRequest,
     GetMiniDialogRequest
 } from '../types/ApiAction';
-import Sak, { SakType } from 'app/api/types/sak/Sak';
+import SakBase, { SakType } from 'app/api/types/sak/Sak';
 import { StorageKvittering } from 'app/api/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
 import { Innsendingsinnslag } from 'app/api/types/historikk/HistorikkInnslag';
@@ -36,7 +36,7 @@ function* getPersoninfoSaga(_: GetSøkerinfoRequest) {
 function* getSakerSaga(_: GetSakerRequest) {
     try {
         const response = yield call(Api.getSaker);
-        let saker: Sak[] = response.data;
+        let saker: SakBase[] = response.data;
         if (saker) {
             saker.sort(sakByDescendingOrder);
             if (isFeatureEnabled(Feature.dinPlan)) {
@@ -49,7 +49,7 @@ function* getSakerSaga(_: GetSakerRequest) {
     }
 }
 
-function* uttaksplanTilSakMapper(sak: Sak): IterableIterator<any> {
+function* uttaksplanTilSakMapper(sak: SakBase): IterableIterator<any> {
     try {
         if (sak.saksnummer && sak.type === SakType.FPSAK && erForeldrepengesak(sak)) {
             const response = yield call(Api.getUttaksplan, sak.saksnummer);

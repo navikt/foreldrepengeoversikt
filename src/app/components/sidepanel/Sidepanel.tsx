@@ -6,7 +6,7 @@ import ChatIkon from '../ikoner/sidepanel/ChatIkon';
 import SøkIkon from '../ikoner/sidepanel/SøkIkon';
 import UtbetalingerIkon from '../ikoner/sidepanel/UtbetalingerIkon';
 import { finnNesteUtbetalingsdato } from 'app/utils/dateUtils';
-import Sak from 'app/api/types/sak/Sak';
+import SakBase from 'app/api/types/sak/Sak';
 import {
     erLøpende,
     erForeldrepengesak,
@@ -19,7 +19,7 @@ import {
 import './sidepanel.less';
 
 interface Props {
-    sak?: Sak;
+    sak?: SakBase;
 }
 
 const Sidepanel: FunctionComponent<Props> = ({ sak }) => {

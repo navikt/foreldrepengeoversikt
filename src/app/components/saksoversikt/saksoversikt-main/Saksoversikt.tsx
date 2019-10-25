@@ -6,7 +6,7 @@ import { Innsendingsinnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import SaksinformasjonPanel from 'app/components/saksinformasjon-panel/SaksinformasjonPanel';
 import SøkNåPanel from 'app/components/søk-nå-panel/SøkNåPanel';
 
-import Sak from '../../../api/types/sak/Sak';
+import SakBase from '../../../api/types/sak/Sak';
 import BEMHelper from 'common/util/bem';
 import SaksoversiktHeader from './SaksoversiktHeader';
 import Etikett from '../../etikett/etikett';
@@ -16,7 +16,7 @@ import { Søkerinfo } from 'app/types/Søkerinfo';
 import './saksoversikt.less';
 
 interface Props {
-    sak: Sak;
+    sak: SakBase;
     søkerinfo?: Søkerinfo;
     historikkInnslagListe: Innsendingsinnslag[];
     history: History;

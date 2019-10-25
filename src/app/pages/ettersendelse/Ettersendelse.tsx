@@ -6,7 +6,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { Select, Input } from 'nav-frontend-skjema';
 import { History } from 'history';
 
-import Sak from '../../api/types/sak/Sak';
+import SakBase from '../../api/types/sak/Sak';
 import BEMHelper from '../../../common/util/bem';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
@@ -28,7 +28,7 @@ import { InnsendingAction, InnsendingActionTypes } from 'app/redux/types/Innsend
 import './ettersendelse.less';
 
 interface EttersendelseProps {
-    sak?: Sak;
+    sak?: SakBase;
     history: History;
     sendEttersendelse: (ettersendingDto: EttersendingDto) => void;
 }
@@ -74,7 +74,7 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
         }
     }
 
-    sendEttersendelse(sak: Sak): void {
+    sendEttersendelse(sak: SakBase): void {
         const ettersending: EttersendingDto = {
             type: getEttersendingType(sak),
             saksnummer: sak.saksnummer!,

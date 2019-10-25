@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
 
-import Sak from '../../../api/types/sak/Sak';
+import SakBase from '../../../api/types/sak/Sak';
 import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus, getSaksoversiktTitle } from '../utils';
 import BEMHelper from 'common/util/bem';
 
@@ -11,7 +11,7 @@ import './ekspanderbarSaksoversikt.less';
 import { harSøkt } from 'app/utils/sakerUtils';
 
 interface Props {
-    sak: Sak;
+    sak: SakBase;
 }
 
 const EkspanderbarSaksoversiktHeader: React.FunctionComponent<Props> = ({ sak }) => {

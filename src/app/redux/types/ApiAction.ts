@@ -1,4 +1,4 @@
-import Sak from "app/api/types/sak/Sak";
+import SakBase from "app/api/types/sak/Sak";
 import { FetchError } from "./FetchState";
 import { StorageKvittering } from "app/api/types/StorageKvittering";
 import { Innsendingsinnslag, MinidialogInnslag } from "app/api/types/historikk/HistorikkInnslag";
@@ -47,7 +47,7 @@ export interface GetSakerRequest {
 export interface GetSakerSuccess {
     type: ApiActionTypes.GET_SAKER_SUCCESS;
     payload: {
-        saker: Sak[];
+        saker: SakBase[];
     };
 }
 

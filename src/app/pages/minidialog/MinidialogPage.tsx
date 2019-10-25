@@ -9,14 +9,14 @@ import { State as AppState } from 'app/redux/store';
 import MinidialogSkjema from '../../components/minidialog-skjema/MinidialogSkjema';
 import { InnsendingActionTypes, InnsendingAction } from 'app/redux/types/InnsendingAction';
 import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
-import Sak from 'app/api/types/sak/Sak';
+import SakBase from 'app/api/types/sak/Sak';
 import { Routes } from 'app/utils/routes';
 import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
 interface Props {
     history: History;
     minidialog?: MinidialogInnslag;
-    sak?: Sak;
+    sak?: SakBase;
     sendEttersendelse: (ettersendelse: EttersendingDto) => void;
 }
 

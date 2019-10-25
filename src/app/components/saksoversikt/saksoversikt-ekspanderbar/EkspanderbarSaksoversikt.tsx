@@ -4,7 +4,7 @@ import { History } from 'history';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 
 import BEMHelper from 'common/util/bem';
-import Sak from '../../../api/types/sak/Sak';
+import SakBase from '../../../api/types/sak/Sak';
 import EkspanderbarSaksoversiktHeader from './EkspanderbarSaksoversiktHeader';
 import Saksoversikt from '../saksoversikt-main/Saksoversikt';
 import { getSaksoversiktTitle } from '../utils';
@@ -15,7 +15,7 @@ import './ekspanderbarSaksoversikt.less';
 
 interface Props {
     søkerinfo?: Søkerinfo;
-    sak: Sak;
+    sak: SakBase;
     history: History;
     historikkInnslagListe: Innsendingsinnslag[];
 }

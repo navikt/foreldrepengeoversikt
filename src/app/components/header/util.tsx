@@ -7,7 +7,7 @@ import Familie3 from '../ikoner/familier/Familie3';
 import Familie4 from '../ikoner/familier/Familie4';
 import Familie5 from '../ikoner/familier/Familie5';
 
-import Sak from 'app/api/types/sak/Sak';
+import SakBase from 'app/api/types/sak/Sak';
 import { FagsakStatus } from 'app/api/types/sak/FagsakStatus';
 import { erForeldrepengesak, erEngangsstønad, erSvangerskapepengesak } from 'app/utils/sakerUtils';
 import BEMHelper from 'common/util/bem';
@@ -26,7 +26,7 @@ export const getRandomIcon = () => {
     return ikoner[randomIconIndex];
 };
 
-export const getHeaderTitleIntlKey = (saker: Sak[]): string => {
+export const getHeaderTitleIntlKey = (saker: SakBase[]): string => {
     const aktiveSaker = saker.filter((s) => s.status !== FagsakStatus.AVSLUTTET);
     const keys = [];
     if (aktiveSaker.some((s) => erForeldrepengesak(s))) {

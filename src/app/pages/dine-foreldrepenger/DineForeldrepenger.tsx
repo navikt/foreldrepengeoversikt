@@ -5,7 +5,7 @@ import { History } from 'history';
 import { guid } from 'nav-frontend-js-utils';
 import moment from 'moment';
 
-import Sak from '../../api/types/sak/Sak';
+import SakBase from '../../api/types/sak/Sak';
 import EkspanderbarSaksoversikt from '../../components/saksoversikt/saksoversikt-ekspanderbar/EkspanderbarSaksoversikt';
 import Header from '../../components/header/Header';
 import BEMHelper from '../../../common/util/bem';
@@ -36,7 +36,7 @@ import { FormattedHTMLMessage } from 'react-intl';
 import './dineForeldrepenger.less';
 
 interface Props {
-    saker: Sak[];
+    saker: SakBase[];
     storageKvittering?: StorageKvittering;
     søkerinfo?: Søkerinfo;
     history: History;
@@ -56,11 +56,11 @@ export class DineForeldrepenger extends React.Component<Props> {
         }
 
         if (erInfotrygdSak(saker[0])) {
-            return saker.every((sak: Sak) => moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt));
+            return saker.every((sak: SakBase) => moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt));
         }
 
         return (
-            saker.every((sak: Sak) => moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt)) &&
+            saker.every((sak: SakBase) => moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt)) &&
             saker[0].behandlinger !== undefined &&
             saker[0].behandlinger.every((b: Behandling) =>
                 moment(b.endretTidspunkt).isBefore(storageKvittering.innsendingstidspunkt, 'days')
@@ -68,14 +68,14 @@ export class DineForeldrepenger extends React.Component<Props> {
         );
     }
 
-    renderSaksoversiktList(nyesteSak: Sak) {
+    renderSaksoversiktList(nyesteSak: SakBase) {
         const { saker, history, historikkInnslagListe, søkerinfo } = this.props;
         const cls = BEMHelper('saksoversikt-list');
         return (
             <ul className={cls.className}>
                 {saker
-                    .filter((s: Sak) => s.saksnummer !== nyesteSak.saksnummer)
-                    .map((sak: Sak) => {
+                    .filter((s: SakBase) => s.saksnummer !== nyesteSak.saksnummer)
+                    .map((sak: SakBase) => {
                         return (
                             <li className={cls.element('element')} key={sak.saksnummer}>
                                 <EkspanderbarSaksoversikt
@@ -91,7 +91,7 @@ export class DineForeldrepenger extends React.Component<Props> {
         );
     }
 
-    renderSidepanel(sak?: Sak) {
+    renderSidepanel(sak?: SakBase) {
         const cls = BEMHelper('sak-info-panel');
         return (
             <div className={cls.className}>
@@ -100,7 +100,7 @@ export class DineForeldrepenger extends React.Component<Props> {
         );
     }
 
-    shouldRenderAlertStripe(sak: Sak): boolean {
+    shouldRenderAlertStripe(sak: SakBase): boolean {
         return (
             (!this.props.historikkInnslagListe.find(
                 ({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER
@@ -127,7 +127,7 @@ export class DineForeldrepenger extends React.Component<Props> {
             historikkInnslagListe,
             minidialogInnslagListe
         } = this.props;
-        const nyesteSak: Sak | undefined = this.shouldRenderStorageKvitteringAsSak()
+        const nyesteSak: SakBase | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettFiktivSak(storageKvittering!)
             : saker.slice().shift();
 
