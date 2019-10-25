@@ -194,12 +194,15 @@ export const erHullMellomPerioder = (periode: Periode, nestePeriode?: Periode) =
     );
 };
 
-export const harAnnenForelderSamtidigUttakISammePeriode = (periode: Periode, perioder: Periode[]): boolean =>
-    periode.type === PeriodeType.Uttak
-        ? perioder
-              .filter((p) => p.type === PeriodeType.Uttak && !isEqual(p, periode))
-              .some((p) => isEqual(periode.tidsperiode.fom, p.tidsperiode.fom))
-        : false;
+export const getAnnenPartsPeriodeMedSamtidigUttak = (periode: Periode, perioder: Periode[]): Periode | undefined => {
+    return perioder
+        .filter((p) => p.type === PeriodeType.Uttak && !isEqual(p, periode))
+        .find((p) => isEqual(periode.tidsperiode.fom, p.tidsperiode.fom));
+};
+
+export const harAnnenForelderSamtidigUttakISammePeriode = (periode: Periode, perioder: Periode[]): boolean => {
+    return getAnnenPartsPeriodeMedSamtidigUttak(periode, perioder) !== undefined;
+};
 
 export const getStønadskontoTypeFromOppholdsÅrsak = (årsak: OppholdsÅrsak): StønadskontoType => {
     switch (årsak) {

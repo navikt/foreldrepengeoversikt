@@ -8,17 +8,18 @@ import IconBox from 'app/components/ikoner/uttaksplanIkon/iconBox/IconBox';
 import {
     getStønadskontoFarge,
     getVarighetString,
-    harAnnenForelderSamtidigUttakISammePeriode,
     getStønadskontoTypeFromOppholdsÅrsak,
-    skalVisesIPeriodeListe
+    skalVisesIPeriodeListe,
+    getAnnenPartsPeriodeMedSamtidigUttak
 } from '../../../utils/periodeUtils';
 import UttakIkon from 'app/components/ikoner/UttakIkon';
 import Periode, { PeriodeType, Utsettelsesperiode, Uttaksperiode, Oppholdsperiode } from 'app/types/uttaksplan/Periode';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import UttaksplanAdvarselIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/UttaksplanAdvarselIkon';
-import PeriodeListElement from './PeriodeListElement';
 import AnnenPart from 'app/api/types/sak/AnnenPart';
 import Person from 'app/types/Person';
+
+import PeriodeListElement from '../PeriodeListElement/PeriodeListElement';
 
 import './periodeList.less';
 
@@ -29,10 +30,10 @@ interface Props {
     annenPart?: AnnenPart;
 }
 
-const getIconFarge = (periode: any) => {
+const getIconFarge = (periode: Periode) => {
     switch (periode.type) {
         case PeriodeType.Uttak:
-            return getStønadskontoFarge(periode.stønadskontotype, undefined, true);
+            return getStønadskontoFarge((periode as Uttaksperiode).stønadskontotype, undefined, true);
         case PeriodeType.Utsettelse:
             return UttaksplanColor.green;
         default:
@@ -40,19 +41,17 @@ const getIconFarge = (periode: any) => {
     }
 };
 
-const getIkon = (periode: any) => {
+const getIkon = (periode: Periode) => {
     return (
-        <IconBox color={getIconFarge(periode)} stripes={periode.graderingInnvilget}>
+        <IconBox
+            color={getIconFarge(periode)}
+            stripes={periode.type === PeriodeType.Uttak ? (periode as Uttaksperiode).graderingInnvilget : false}>
             <UttakIkon title="uttak ikon" />
         </IconBox>
     );
 };
 
-const getBeskrivelse = (
-    periode: Periode,
-    aktører: { søker: Person; annenPart?: AnnenPart },
-    intl: InjectedIntl
-) => {
+const getBeskrivelse = (periode: Periode, aktører: { søker: Person; annenPart?: AnnenPart }, intl: InjectedIntl) => {
     return (
         <>
             {getVarighetString(periode.antallUttaksdager, intl)}
@@ -97,8 +96,12 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                         ikon={getIkon(p)}
                                         beskrivelse={getBeskrivelse(p, { søker, annenPart }, intl)}
                                         tidsperiode={p.tidsperiode}
-                                        erSamtidigUttak={harAnnenForelderSamtidigUttakISammePeriode(p, perioder)}
+                                        annenForelderSamtidigUttakPeriode={getAnnenPartsPeriodeMedSamtidigUttak(
+                                            p,
+                                            perioder
+                                        )}
                                         annenPart={annenPart}
+                                        color={getIconFarge(p)}
                                     />
                                 );
                             case PeriodeType.Utsettelse:
@@ -120,6 +123,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                         ikon={getIkon(p)}
                                         beskrivelse={getBeskrivelse(p, { søker, annenPart }, intl)}
                                         tidsperiode={p.tidsperiode}
+                                        color={getIconFarge(p)}
                                     />
                                 );
                             case PeriodeType.Hull:
@@ -134,6 +138,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                                 values={{ antallDager: p.antallUttaksdager }}
                                             />
                                         }
+                                        color={getIconFarge(p)}
                                     />
                                 );
                             case PeriodeType.Opphold:
@@ -162,6 +167,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                             />
                                         }
                                         tidsperiode={p.tidsperiode}
+                                        color={getIconFarge(p)}
                                     />
                                 );
                             case PeriodeType.TaptPeriode:
@@ -180,6 +186,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                             />
                                         }
                                         tidsperiode={p.tidsperiode}
+                                        color={getIconFarge(p)}
                                     />
                                 );
                         }

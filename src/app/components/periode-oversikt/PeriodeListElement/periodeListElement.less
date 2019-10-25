@@ -1,14 +1,20 @@
 @import '../../../styles/variables.less';
 
 .periodelisteItemHeader {
-    border-radius: 0.25rem;
-    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: stretch;
     padding-right: 0.5rem;
+    border-radius: 0.25rem;
     border-left: 0.5rem solid transparent;
     box-shadow: 0 2px 4px 0 @navGra20;
+    flex-flow: column;
+    
+    &__main-content {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: stretch;
+        width: 100%;
+    }
 
     abbr[title] {
         text-decoration: none;
@@ -35,24 +41,10 @@
     &__beskrivelse__tekst {
         min-width: 225px;
     }
+
     &__advarsel {
         width: 3rem;
         flex-grow: 0;
-    }
-
-    &__samtidig-uttak-punkt {
-        position: relative;
-        padding-right: 1rem;
-
-        &:before {
-            content: ' \00b7';
-            font-size: 70px;
-            display: inline-block;
-            color: #634689;
-            position: absolute;
-            left: -1.25rem;
-            top: -0.125rem;
-        }
     }
 
     &__tidsrom {
@@ -81,6 +73,41 @@
             }
         }
     }
+    
+    &__samtidig-uttak {
+        align-items: center;
+        display: flex;
+        border: 1px dotted #c6c2bf;
+        border-radius: 0.25rem;
+        margin-bottom: 1.25rem;
+        margin-left: 1rem;
+        padding-left: 1rem;
+    }
+    
+    &-samtidig-uttak-mor {
+        border-left: 8px solid @c-periodefarge-lilla;
+    }
+
+    &-samtidig-uttak-far {
+        border-left: 8px solid @c-periodefarge-blaa;
+    }
+
+    &--purple {
+        border-left: 8px solid @c-periodefarge-lilla;
+    }
+
+    &--blue, &--purpleBlue  {
+        border-left: 8px solid @c-periodefarge-blaa;
+    }
+
+    &--green {
+        border-left: 8px solid @c-periodefarge-gronn;
+    }
+
+    &--yellow {
+        border-left: 8px solid @c-periodefarge-yellow;
+    }
+
     @media (max-width: @mobile-breakpoint) {
         flex-wrap: wrap;
         &__beskrivelse {

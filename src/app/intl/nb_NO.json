@@ -197,5 +197,10 @@
     "vedlegg.passordbeskyttet.flereFeil": "{filename} - Vedlegget du forsøker å laste opp er passordbeskyttet. Du må endre vedlegget slik at det ikke er passordbeskyttet eller laste opp et annet vedlegg.",
     "vedlegg.passordbeskyttet": "Vedlegget du forsøker å laste opp er passordbeskyttet. Du må endre vedlegget slik at det ikke er passordbeskyttet eller laste opp et annet vedlegg.",
     "vedlegg.virus.flereFeil": "{filename} - Vedlegget inneholder noe vi ikke vil ha",
-    "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha"
+    "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha",
+
+
+    "morsAktivitet.SamtidigUttak": "Samtidig uttak"
+
+
 }
