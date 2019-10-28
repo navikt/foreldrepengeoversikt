@@ -1,4 +1,5 @@
 import { Tidsperiode } from '../../types/Tidsperiode';
+import { Dekningsgrad } from 'app/types/Dekningsgrad';
 
 export interface UttaksPeriodeDto {
     periodeResultatType: PeriodeResultatType;
@@ -24,21 +25,23 @@ export interface UttaksPeriodeDto {
     oppholdAarsak?: OppholdsÅrsak;
 }
 
+export interface Søknadsgrunnlag {
+    dekningsgrad: Dekningsgrad;
+    antallBarn: number;
+    søkerErFarEllerMedmor: boolean;
+    morErAleneOmOmsorg: boolean;
+    morHarRett: boolean;
+    morErUfør: boolean;
+    farMedmorErAleneOmOmsorg: boolean;
+    farMedmorHarRett: boolean;
+    søkerKjønn: string;
+    termindato?: string;
+    fødselsdato?: string;
+    omsorgsovertakelsesdato: string;
+}
+
 export interface UttaksplanDto {
-    grunnlag: {
-        dekningsgrad: number;
-        antallBarn: number;
-        søkerErFarEllerMedmor: boolean;
-        morErAleneOmOmsorg: boolean;
-        morHarRett: boolean;
-        morErUfør: boolean;
-        farMedmorErAleneOmOmsorg: boolean;
-        farMedmorHarRett: boolean;
-        søkerKjønn: string;
-        termindato?: string;
-        fødselsdato?: string;
-        omsorgsovertakelsesdato: string;
-    };
+    grunnlag: Søknadsgrunnlag;
     perioder: UttaksPeriodeDto[];
 }
 
@@ -86,8 +89,8 @@ export enum UtsettelsePeriodeType {
 }
 
 export enum UttakArbeidType {
-    "OrdinærtArbeid" = 'ORDINÆRT_ARBEID',
-    "SelvstendigNæringsdrivende" = 'SELVSTENDIG_NÆRINGSDRIVENDE',
-    "Frilans" = 'FRILANS',
-    "Annet" = 'ANNET'
+    'OrdinærtArbeid' = 'ORDINÆRT_ARBEID',
+    'SelvstendigNæringsdrivende' = 'SELVSTENDIG_NÆRINGSDRIVENDE',
+    'Frilans' = 'FRILANS',
+    'Annet' = 'ANNET'
 }

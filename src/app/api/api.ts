@@ -1,8 +1,21 @@
 import Environment from '../Environment';
 import EttersendingDto from './types/ettersending/EttersendingDto';
 import AxiosApiInterceptor from './interceptor';
+import axios from 'axios';
+import { formaterDato } from 'app/utils/dateUtils';
 
-export const apiBaseUrl: string = Environment.REST_API_URL;
+export interface GetTilgjengeligeStønadskontoerParams {
+    antallBarn: number;
+    morHarRett: boolean;
+    farHarRett: boolean;
+    dekningsgrad: '100' | '80';
+    termindato?: string;
+    fødselsdato?: string;
+    omsorgsovertakelsesdato?: string;
+    morHarAleneomsorg?: boolean;
+    farHarAleneomsorg?: boolean;
+    startdatoUttak: string;
+}
 
 const getPersoninfo = () => {
     return AxiosApiInterceptor.get('/sokerinfo');
@@ -38,6 +51,37 @@ const getUttaksplan = (saksnummer: string) => {
     });
 };
 
+function getUttakskontoer({
+    antallBarn,
+    farHarRett,
+    morHarRett,
+    dekningsgrad,
+    fødselsdato,
+    termindato,
+    omsorgsovertakelsesdato,
+    morHarAleneomsorg,
+    farHarAleneomsorg,
+    startdatoUttak
+}: GetTilgjengeligeStønadskontoerParams) {
+    const urlParams = {
+        farHarRett,
+        morHarRett,
+        morHarAleneomsorg: morHarAleneomsorg || false,
+        farHarAleneomsorg: farHarAleneomsorg || false,
+        dekningsgrad,
+        antallBarn,
+        fødselsdato: fødselsdato ? formaterDato(fødselsdato, 'YYYYMMDD') : undefined,
+        termindato: termindato ? formaterDato(termindato, 'YYYYMMDD') : undefined,
+        omsorgsovertakelseDato: omsorgsovertakelsesdato ? formaterDato(omsorgsovertakelsesdato, 'YYYYMMDD') : undefined,
+        startdatoUttak: formaterDato(startdatoUttak, 'YYYYMMDD')
+    };
+
+    return axios.get(`${Environment.UTTAK_API_URL}/konto`, {
+        timeout: 15 * 1000,
+        params: urlParams
+    });
+}
+
 const Api = {
     getSaker,
     getPersoninfo,
@@ -45,7 +89,8 @@ const Api = {
     getStorageKvittering,
     getHistorikk,
     getMiniDialog,
-    getUttaksplan
+    getUttaksplan,
+    getUttakskontoer
 };
 
 export default Api;

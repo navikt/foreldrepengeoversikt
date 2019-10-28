@@ -20,7 +20,7 @@ import { Routes } from '../../utils/routes';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import Page from '../page/Page';
 import { withAttachments, AttachmentFormProps } from 'app/components/attachmentForm/AttachmentForm';
-import { State as AppState } from 'app/redux/store';
+import { AppState } from 'app/redux/store';
 
 import { getData } from 'app/redux/util/fetchFromState';
 import { InnsendingAction, InnsendingActionTypes } from 'app/redux/types/InnsendingAction';

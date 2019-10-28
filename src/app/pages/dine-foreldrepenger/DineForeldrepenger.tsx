@@ -23,7 +23,7 @@ import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksov
 
 import { StorageKvittering } from '../../api/types/StorageKvittering';
 import Behandling from 'app/api/types/sak/Behandling';
-import { State } from 'app/redux/store';
+import { AppState } from 'app/redux/store';
 import { getData } from 'app/redux/util/fetchFromState';
 import { Innsendingsinnslag, MinidialogInnslag, HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
 
@@ -174,7 +174,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: AppState) => ({
     søkerinfo: getData(state.api.søkerinfo, {}),
     saker: getData(state.api.saker, []),
     storageKvittering: getData(state.api.storageKvittering, undefined),

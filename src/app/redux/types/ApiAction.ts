@@ -1,8 +1,8 @@
-import SakBase from "app/api/types/sak/Sak";
 import { FetchError } from "./FetchState";
 import { StorageKvittering } from "app/api/types/StorageKvittering";
 import { Innsendingsinnslag, MinidialogInnslag } from "app/api/types/historikk/HistorikkInnslag";
 import { Søkerinfo } from "app/types/Søkerinfo";
+import Sak from "app/api/types/sak/Sak";
 
 export enum ApiActionTypes {
     'GET_SØKERINFO_REQUEST' = 'getPersoninfoRequest',
@@ -19,7 +19,8 @@ export enum ApiActionTypes {
     'GET_HISTORIKK_FAILURE' = 'getHistorikkFailure',
     'GET_MINIDIALOG_REQUEST' = 'getMinidialogRequest',
     'GET_MINIDIALOG_SUCCESS' = 'getMinidialogSuccess',
-    'GET_MINIDIALOG_FAILURE' = 'getMinidialogFailure'
+    'GET_MINIDIALOG_FAILURE' = 'getMinidialogFailure',
+    'GET_TILGJENGELIGE_STØNADSKONTOER' = 'getTilgjengeligeStønadskontoer'
 }
 
 export interface GetSøkerinfoRequest {
@@ -47,7 +48,7 @@ export interface GetSakerRequest {
 export interface GetSakerSuccess {
     type: ApiActionTypes.GET_SAKER_SUCCESS;
     payload: {
-        saker: SakBase[];
+        saker: Sak[];
     };
 }
 
@@ -110,6 +111,13 @@ export interface GetMinidialogFailure {
     };
 }
 
+export interface GetTilgjengeligeStønadskontoer {
+    type: ApiActionTypes.GET_TILGJENGELIGE_STØNADSKONTOER;
+    payload: {
+        sak: Sak
+    }
+}
+
 type ApiAction =
     | GetSøkerinfoRequest
     | GetSøkerinfoSuccess
@@ -126,6 +134,7 @@ type ApiAction =
     | GetMiniDialogRequest
     | GetMinidialogSuccess 
     | GetMinidialogFailure
+    | GetTilgjengeligeStønadskontoer
 
 
 export default ApiAction;

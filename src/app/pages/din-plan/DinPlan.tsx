@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { History } from 'history';
 
 import { getData } from 'app/redux/util/fetchFromState';
-import { State } from 'app/redux/store';
+import { AppState } from 'app/redux/store';
 import BEMHelper from 'common/util/bem';
 import Page from '../page/Page';
 import CalendarIkon from 'app/components/ikoner/CalendarIkon';
@@ -53,7 +53,7 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
     );
 };
 
-const mapStateToProps = (state: State, ownProps: Props) => {
+const mapStateToProps = (state: AppState, ownProps: Props) => {
     const params = new URLSearchParams(ownProps.history.location.search);
     return {
         søker: getData(state.api.søkerinfo, {}).person,

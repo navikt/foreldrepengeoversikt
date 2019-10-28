@@ -21,6 +21,7 @@ import {
 import { isFeatureEnabled, Feature } from 'app/Feature';
 import { SøkerinfoDTO } from 'app/api/types/personinfo/SøkerinfoDto';
 import { getSøkerinfoFromDTO } from 'app/utils/søkerinfoDtoMapper';
+import { getTilgjengeligeStønadskontoer } from './stønadskontoSaga';
 
 function* getPersoninfoSaga(_: GetSøkerinfoRequest) {
     try {
@@ -41,6 +42,7 @@ function* getSakerSaga(_: GetSakerRequest) {
             saker.sort(sakByDescendingOrder);
             if (isFeatureEnabled(Feature.dinPlan)) {
                 saker = yield all(saker.map(uttaksplanTilSakMapper));
+                saker[0].tilgjengeligeKontoer = yield call(getTilgjengeligeStønadskontoer, saker[0]);
             }
         }
         yield put({ type: ApiActionTypes.GET_SAKER_SUCCESS, payload: { saker } });
@@ -49,7 +51,7 @@ function* getSakerSaga(_: GetSakerRequest) {
     }
 }
 
-function* uttaksplanTilSakMapper(sak: SakBase): IterableIterator<any> {
+function* uttaksplanTilSakMapper(sak: SakBase) {
     try {
         if (sak.saksnummer && sak.type === SakType.FPSAK && erForeldrepengesak(sak)) {
             const response = yield call(Api.getUttaksplan, sak.saksnummer);

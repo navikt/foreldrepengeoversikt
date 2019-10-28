@@ -5,7 +5,7 @@ import BEMHelper from 'common/util/bem';
 import { FormattedMessage } from 'react-intl';
 import { getData } from 'app/redux/util/fetchFromState';
 import { connect } from 'react-redux';
-import { State as AppState } from 'app/redux/store';
+import { AppState } from 'app/redux/store';
 import MinidialogSkjema from '../../components/minidialog-skjema/MinidialogSkjema';
 import { InnsendingActionTypes, InnsendingAction } from 'app/redux/types/InnsendingAction';
 import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';

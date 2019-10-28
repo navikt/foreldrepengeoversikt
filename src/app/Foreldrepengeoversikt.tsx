@@ -14,7 +14,7 @@ import ApiAction, { ApiActionTypes } from './redux/types/ApiAction';
 import FetchState, { FetchStatus, PostState, GetFailure } from './redux/types/FetchState';
 import { extractUUID, extractErrorMessage } from 'common/util/errorUtil';
 import { getErrorCode } from './redux/util/fetchFromState';
-import { State } from './redux/store';
+import { AppState } from './redux/store';
 import { Feature, isFeatureEnabled } from './Feature';
 import DinPlan from './pages/din-plan/DinPlan';
 import MinidialogPage from './pages/minidialog/MinidialogPage';
@@ -102,7 +102,7 @@ class Foreldrepengeoversikt extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: AppState) => {
     const { søkerinfo, saker, storageKvittering, historikk} = state.api
     return {
         søkerinfo,
