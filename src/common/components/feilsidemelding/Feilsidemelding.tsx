@@ -28,7 +28,7 @@ export interface Props {
 const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress, uuid }: Props) => {
     const cls = BEMHelper('feilsidemelding');
     return (
-        <div className={cls.className} id={containerId}>
+        <div className={cls.block} id={containerId}>
             {illustrasjon && (
                 <VeilederMedSnakkeboble
                     veileder={illustrasjon.veileder}

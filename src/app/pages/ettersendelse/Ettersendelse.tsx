@@ -119,7 +119,7 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
         const cls = BEMHelper('ettersendelse');
         return (
             <Page
-                className={cls.className}
+                className={cls.block}
                 pageTitle={<FormattedMessage id="ettersendelse.pageTitle" />}
                 icon={() => <LetterIcon />}
                 title={<FormattedMessage id="ettersendelse.title" values={{ saksnummer: sak.saksnummer }} />}

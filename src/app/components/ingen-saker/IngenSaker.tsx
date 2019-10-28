@@ -15,7 +15,7 @@ import './ingenSaker.less';
 const IngenSaker = () => {
     const cls = BEMHelper('ingen-saker');
     return (
-        <div className={classnames(cls.className, 'blokk-m')}>
+        <div className={classnames(cls.block, 'blokk-m')}>
             <CryBabyIcon className={cls.element('icon')} />
 
             <Undertittel className={cls.element('title')}>

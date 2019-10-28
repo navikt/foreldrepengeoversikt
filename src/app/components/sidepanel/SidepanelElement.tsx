@@ -19,7 +19,7 @@ interface SidepanelElementProps {
 const SidepanelElement = ({ title, icon, lenke, tekst }: SidepanelElementProps) => {
     const cls = BEMHelper('sidepanel-element');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             {title && <Systemtittel className="blokk-xs">{title}</Systemtittel>}
             <div className="blokk-xs">{icon}</div>
 

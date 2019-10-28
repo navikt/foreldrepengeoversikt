@@ -30,7 +30,7 @@ const MinidialogLenkepanel: React.StatelessComponent<Props> = ({ minidialogInnsl
 
     const cls = BEMHelper('minidalog-lenkepanel');
     return (
-        <LenkepanelBase className={cls.className} href="#" border={true} linkCreator={linkCreator}>
+        <LenkepanelBase className={cls.block} href="#" border={true} linkCreator={linkCreator}>
             <div className={cls.element('content')}>
                 <div className={cls.element('icon')}>
                     <Icon kind="advarsel-sirkel-fyll" />

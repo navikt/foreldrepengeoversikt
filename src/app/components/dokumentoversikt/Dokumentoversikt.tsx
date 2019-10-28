@@ -11,7 +11,7 @@ import './dokuentoversikt.less';
 const Dokumentoversikt = () => {
     const cls = BEMHelper('dokumentoversikt');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <AlertStripe className={cls.element('alertstripe')} type="info">
                 <FormattedMessage
                     id="dokumentoversikt.info"

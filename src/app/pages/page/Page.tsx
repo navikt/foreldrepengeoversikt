@@ -21,7 +21,7 @@ class Page extends React.Component<Props> {
         const { className, onBackClick, icon, children, title } = this.props;
         const cls = BEMHelper('page');
         return (
-            <div className={classNames(cls.className, { className })}>
+            <div className={classNames(cls.block, { className })}>
                 <Søknadstittel>{this.props.pageTitle}</Søknadstittel>
                 <div className={cls.element('content')}>
                     {onBackClick && <BackButton hidden={false} onClick={onBackClick} />}

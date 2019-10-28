@@ -18,7 +18,7 @@ interface Props {
 const Header: React.FunctionComponent<Props> = ({ saker, history }) => {
     const cls = BEMHelper('header');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
                 <div className={cls.element('content')}>
                     <div className={cls.element('text')}>
                         <NavigationColumLinks history={history} />

@@ -13,7 +13,7 @@ import './meldingOmVedtakLenkepanel.less';
 const MeldingOmVedtakLenkepanel = () => {
     const cls = BEMHelper('melding-om-vedtak-lenkepanel');
     return (
-        <Lenkepanel className={cls.className} href={lenker.saksoversikt} tittelProps="element">
+        <Lenkepanel className={cls.block} href={lenker.saksoversikt} tittelProps="element">
             <MediaQuery minWidth={576}>
                 <span>
                     <KonfoluttIkon />

@@ -23,7 +23,7 @@ interface Props {
 const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = ({ sak, søkerinfo, history, historikkInnslagListe }) => {
     const cls = BEMHelper('ekspanderbar-saksoversikt');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <EkspanderbartpanelBase
                 heading={<EkspanderbarSaksoversiktHeader sak={sak} />}
                 ariaTittel={getSaksoversiktTitle(sak)}>

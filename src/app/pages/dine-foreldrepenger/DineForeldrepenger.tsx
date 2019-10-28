@@ -72,7 +72,7 @@ export class DineForeldrepenger extends React.Component<Props> {
         const { saker, history, historikkInnslagListe, søkerinfo } = this.props;
         const cls = BEMHelper('saksoversikt-list');
         return (
-            <ul className={cls.className}>
+            <ul className={cls.block}>
                 {saker
                     .filter((s: SakBase) => s.saksnummer !== nyesteSak.saksnummer)
                     .map((sak: SakBase) => {
@@ -94,7 +94,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     renderSidepanel(sak?: SakBase) {
         const cls = BEMHelper('sak-info-panel');
         return (
-            <div className={cls.className}>
+            <div className={cls.block}>
                 <Sidepanel sak={sak} />
             </div>
         );
@@ -135,7 +135,7 @@ export class DineForeldrepenger extends React.Component<Props> {
         return (
             <>
                 <Header saker={saker} history={this.props.history} />
-                <div className={cls.className}>
+                <div className={cls.block}>
                     <div className={cls.element('main-content')}>
                         {nyesteSak === undefined && <IngenSaker />}
                         {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe()}

@@ -37,7 +37,7 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
     const cls = BEMHelper('din-plan');
     return (
         <Page
-            className={cls.className}
+            className={cls.block}
             pageTitle={<FormattedMessage id="dinPlan.pageTitle" />}
             icon={() => <CalendarIkon />}
             title={<FormattedMessage id="dinPlan.title" />}

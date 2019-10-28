@@ -88,7 +88,7 @@ class AttachmentInput extends React.Component<Props> {
                 id={id}
                 tabIndex={0}
                 htmlFor={inputId}
-                className={BEM.className}
+                className={BEM.block}
                 onDragOver={(e) => this.onFileDragOverHandler(e)}
                 onDrop={(e) => this.onFileDropHandler(e)}
                 onKeyPress={(e) => this.onKeyPress(e)}>

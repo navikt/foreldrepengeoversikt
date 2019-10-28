@@ -18,7 +18,7 @@ const EkspanderbarSaksoversiktHeader: React.FunctionComponent<Props> = ({ sak })
     const statusIntlKey = sak.status && getIntlKeyForStatus(sak.status);
     const cls = BEMHelper('ekspenderbar-saksoversikt-header');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <div className={cls.element('left')}>
                 <Undertittel>
                     <FormattedMessage id={getSaksoversiktTitle(sak)} />

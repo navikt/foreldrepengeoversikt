@@ -9,7 +9,7 @@ export interface Props {}
 const ApplicationSpinner: React.StatelessComponent<Props> = () => {
     const cls = BEMHelper('applicationSpinner');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <div className={cls.element('spinner')}>
                 <Spinner type="XXL" />
             </div>

@@ -30,7 +30,7 @@ class MinidialogPage extends React.Component<Props> {
         const cls = BEMHelper('minidialog');
         return (
             <Page
-                className={cls.className}
+                className={cls.block}
                 pageTitle={<FormattedMessage id="miniDialog.pageTitle" />}
                 onBackClick={() => history.push(Routes.DINE_FORELDREPENGER)}>
                 <MinidialogSkjema

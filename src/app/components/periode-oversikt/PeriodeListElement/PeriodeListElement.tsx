@@ -57,7 +57,7 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
     color
 }) => {
     return (
-        <li className={classnames(BEM.className, 'typo-normal', BEM.modifier(color))}>
+        <li className={classnames(BEM.block, 'typo-normal', BEM.modifier(color))}>
             <div className={BEM.element('main-content')}>
                 <div className={BEM.element('ikon')} role="presentation" aria-hidden={true}>
                     {ikon}

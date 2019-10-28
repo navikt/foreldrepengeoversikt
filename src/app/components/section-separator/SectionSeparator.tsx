@@ -18,7 +18,7 @@ interface Props {
 const SectionSeparator: React.FunctionComponent<Props> = ({ children, title, sectionLink }) => {
     const cls = BEMHelper('section-separator');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <div className={cls.element('header')}>
                 <Systemtittel>{title}</Systemtittel>
                 {sectionLink && (

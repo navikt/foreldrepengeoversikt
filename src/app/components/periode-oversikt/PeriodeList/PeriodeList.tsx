@@ -73,7 +73,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
 }) => {
     const cls = BEMHelper('periode-list');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <Normaltekst className={cls.element('tittel')}>{tittel}</Normaltekst>
             <ol>
                 {perioder

@@ -25,7 +25,7 @@ interface Props {
 const Sidepanel: FunctionComponent<Props> = ({ sak }) => {
     const cls = BEMHelper('sidepanel');
     return (
-        <aside className={cls.className}>
+        <aside className={cls.block}>
             {sak && !erInfotrygdSak(sak) && erForeldrepengesak(sak) && erLøpende(sak) && harSøkt(sak) && (
                 <SidepanelElement
                     title={finnNesteUtbetalingsdato().format('DD. MMMM')}

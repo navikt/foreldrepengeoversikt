@@ -36,7 +36,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
     const cls = BEMHelper('minidialog-skjema');
     return (
         <form
-            className={cls.className}
+            className={cls.block}
             onSubmit={(e) => {
                 e.preventDefault();
                 onSubmit({

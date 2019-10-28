@@ -30,7 +30,7 @@ function HistorikkElement(props: Props) {
 
     const cls = BEMHelper('historikk-element');
     return (
-        <li className={cls.className}>
+        <li className={cls.block}>
             <MediaQuery maxWidth={745}>
                 {(matches) => {
                     return (

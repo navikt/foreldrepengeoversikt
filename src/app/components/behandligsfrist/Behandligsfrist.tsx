@@ -25,7 +25,7 @@ const Behandligsfrist: React.StatelessComponent<Props> = ({ behandligsdato, harL
         : moment().format('YYYY-MM-DD');
 
     return (
-        <AlertStripe className={cls.className} type="info">
+        <AlertStripe className={cls.block} type="info">
             {!harLøpendeArbeidsforhold ? (
                 <>
                     <Undertittel className="blokk-xs">

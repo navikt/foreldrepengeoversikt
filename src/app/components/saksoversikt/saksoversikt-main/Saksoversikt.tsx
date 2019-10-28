@@ -32,7 +32,7 @@ const Saksoversikt: React.StatelessComponent<Props> = ({
 }) => {
     const cls = BEMHelper('saksoversikt');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             {withHeader ? (
                 <SaksoversiktHeader sak={sak} />
             ) : (

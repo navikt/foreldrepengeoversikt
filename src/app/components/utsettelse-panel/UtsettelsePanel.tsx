@@ -12,7 +12,7 @@ import './utsettelsePanel.less';
 const UtsettelsePanel = () => {
     const cls = BEMHelper('utsettelse-panel');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <Undertittel className="blokk-xxs">
                 <FormattedMessage id="utsettelsepanel.title" />
             </Undertittel>

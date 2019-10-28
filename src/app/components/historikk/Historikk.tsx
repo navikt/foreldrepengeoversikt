@@ -34,7 +34,7 @@ class Historikk extends React.Component<HistorikkProps> {
         const { hendelser } = this.props;
         
         return (
-            <div className={cls.className}>
+            <div className={cls.block}>
                 {hendelser.length === 0 && (
                     <div className={cls.element('ingen-hendelser')}>
                         <AlertStripe type="info">

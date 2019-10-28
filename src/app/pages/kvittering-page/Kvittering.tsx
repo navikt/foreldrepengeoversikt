@@ -53,7 +53,7 @@ class KvitteringPage extends React.Component<Props, State> {
         const cls = BEMHelper('kvittering');
         return (
             <Page
-                className={cls.className}
+                className={cls.block}
                 pageTitle={<FormattedMessage id="ettersendelse.pageTitle" />}
                 icon={() => <LetterIcon />}
                 title={<FormattedMessage id="kvittering.headline" />}

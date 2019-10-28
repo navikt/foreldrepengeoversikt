@@ -23,7 +23,7 @@ const SaksoversiktHeader: FunctionComponent<SaksoversiktHeaderProps> = ({ sak })
 
     const cls = BEMHelper('saksoversikt-header');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <div className={cls.element('top')}>
                 <Innholdstittel>
                     <FormattedMessage id={getSaksoversiktTitle(sak)} />

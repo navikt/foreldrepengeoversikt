@@ -25,7 +25,7 @@ const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearEr
 
     const cls = BEMHelper('error-page');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <Feilsidemelding
                 illustrasjon={{
                     tittel: getMessage(intl, 'feilside.bobletittel'),

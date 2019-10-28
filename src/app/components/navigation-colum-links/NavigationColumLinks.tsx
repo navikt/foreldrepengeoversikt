@@ -24,7 +24,7 @@ const NavigationColumLinks = (props: Props) => {
     const cls = BEMHelper('navigation-colum-links');
     const links = Object.values(headerLinks);
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <UserIcon />
             {links.map((link: NavigationLinks) => {
                 if (

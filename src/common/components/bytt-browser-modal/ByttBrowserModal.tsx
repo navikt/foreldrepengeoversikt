@@ -19,7 +19,7 @@ const ByttBrowserModal: React.FunctionComponent<Props> = ({ intl }) => {
     const cls = BEMHelper('bytt-browser-modal');
     return (
         <Modal
-            className={cls.className}
+            className={cls.block}
             contentLabel={getMessage(intl, 'byttBrowser.tittel')}
             closeButton={false}
             isOpen={isOpen}

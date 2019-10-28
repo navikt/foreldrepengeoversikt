@@ -15,7 +15,7 @@ const RelatertInformasjon = () => {
             <Undertittel className={cls.element('subheader')}>
                 <FormattedMessage id="relatertInformasjon.header" />
             </Undertittel>
-            <div className={cls.className}>
+            <div className={cls.block}>
                 <nav className={cls.element('links')}>
                     {Object.values(annenInformasjonLenker).map((link) => (
                         <div key={link.href} className={cls.element('link-container')}>
