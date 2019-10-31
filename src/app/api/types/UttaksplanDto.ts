@@ -25,7 +25,7 @@ export interface UttaksPeriodeDto {
     oppholdAarsak?: OppholdsÅrsak;
 }
 
-export interface Søknadsgrunnlag {
+export interface UttaksplanGrunnlagDto {
     dekningsgrad: Dekningsgrad;
     antallBarn: number;
     søkerErFarEllerMedmor: boolean;
@@ -41,7 +41,7 @@ export interface Søknadsgrunnlag {
 }
 
 export interface UttaksplanDto {
-    grunnlag: Søknadsgrunnlag;
+    grunnlag: UttaksplanGrunnlagDto;
     perioder: UttaksPeriodeDto[];
 }
 

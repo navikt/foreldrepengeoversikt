@@ -41,7 +41,7 @@ const getIconFarge = (periode: Periode) => {
     }
 };
 
-const getIkon = (periode: Periode) => {
+export const getIkon = (periode: Periode) => {
     return (
         <IconBox
             color={getIconFarge(periode)}

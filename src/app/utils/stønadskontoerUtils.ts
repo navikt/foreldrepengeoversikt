@@ -1,9 +1,11 @@
 import moment from 'moment';
 import { TilgjengeligStønadskonto } from 'app/types/TilgjengeligStønadskonto';
 import { StønadskontoType } from 'app/api/types/UttaksplanDto';
-import Periode, { PeriodeType } from 'app/types/uttaksplan/Periode';
+import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Periode';
 import { Dekningsgrad } from 'app/types/Dekningsgrad';
 import { StønadskontoerDTO } from 'app/api/types/stønadskontoerDto';
+import cloneDeep from 'lodash/cloneDeep';
+
 
 const date1July2018 = moment(new Date(2018, 6, 1));
 const UKERFØRJULI = 10;
@@ -92,4 +94,42 @@ export const stønadskontoerDtoTilTilgjengeligStønadskontoMapper = (
             konto: konto as StønadskontoType,
             dager: stønadskontoerDto.kontoer[konto]
         }));
+};
+
+export const getResterendeStønadskontoer = (
+    tilgjengeligeKontoer: TilgjengeligStønadskonto[],
+    perioder: Periode[]
+): TilgjengeligStønadskonto[] => {
+
+    return getBrukteStønadskontoer(perioder).reduce(
+        (resterndeKontoer: TilgjengeligStønadskonto[], bruktKonto: TilgjengeligStønadskonto) => {
+            const kontoIndex = resterndeKontoer.findIndex(({ konto }) => konto === bruktKonto.konto);
+            if (kontoIndex >= 0) {
+                resterndeKontoer[kontoIndex].dager -= bruktKonto.dager;
+            }
+            return resterndeKontoer;
+        },
+        cloneDeep(tilgjengeligeKontoer)
+    );
+};
+
+export const getBrukteStønadskontoer = (
+    perioder: Periode[]
+): TilgjengeligStønadskonto[] => {
+    return perioder
+        .filter(({ type }) => type === PeriodeType.Uttak)
+        .map((periode: Uttaksperiode) => ({
+            konto: periode.stønadskontotype,
+            dager: periode.antallUttaksdager
+        }))
+        .reduce(
+            (brukteStønadskontoer: TilgjengeligStønadskonto[], brukteDager: TilgjengeligStønadskonto) => {
+                const kontoIndex = brukteStønadskontoer.findIndex(({ konto }) => konto === brukteDager.konto);
+                kontoIndex >= 0
+                    ? (brukteStønadskontoer[kontoIndex].dager += brukteDager.dager)
+                    : brukteStønadskontoer.push(brukteDager);
+                return brukteStønadskontoer;
+            },
+            [] as TilgjengeligStønadskonto[]
+        );
 };

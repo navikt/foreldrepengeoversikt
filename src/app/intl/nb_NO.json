@@ -199,8 +199,21 @@
     "vedlegg.virus.flereFeil": "{filename} - Vedlegget inneholder noe vi ikke vil ha",
     "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha",
 
+    "morsAktivitet.SamtidigUttak": "Samtidig uttak",
 
-    "morsAktivitet.SamtidigUttak": "Samtidig uttak"
+    "oversiktBrukteDager.tittel.foreldre": "Brukte foreldrepenger",
+    "oversiktBrukteDager.tittel.kontoer.brukteDager": "Foreldrepenger  {antall, plural, one {du} other {dere}} har registrert",
+    "oversiktBrukteDager.tittel.kontoer.ikkeBrukteDager": "Foreldrepenger {antall, plural, one {du} other {dere}} har igjen",
 
-
+    "stønadskontotype.AKTIVITETSFRI_FLERBARNSDAGER": "Flerbarnsuker uten aktivitetskrav",
+    "stønadskontotype.AKTIVITETSFRI_KVOTE": "Foreldrepenger uten aktivitetskrav",
+    "stønadskontotype.FEDREKVOTE": "Fars kvote",
+    "stønadskontotype.FELLESPERIODE": "Fellesperiode",
+    "stønadskontotype.FLERBARNSDAGER": "Flerbarnsuker",
+    "stønadskontotype.FLERBARNSUKER": "Flerbarnsuker",
+    "stønadskontotype.FORELDREPENGER": "Foreldrepenger",
+    "stønadskontotype.FORELDREPENGER_FØR_FØDSEL": "Foreldrepenger før fødsel",
+    "stønadskontotype.MØDREKVOTE": "Mors kvote",
+    "stønadskontotype.foreldernavn.kvote": "{navn} kvote",
+    "stønadskontotype.undefined": "Ny periode uten kvote"
 }

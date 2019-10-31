@@ -13,11 +13,11 @@ import { Routes } from 'app/utils/routes';
 import Person from 'app/types/Person';
 import SakBase from 'app/api/types/sak/Sak';
 import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
-import {
-    finnNåværendePerioder,
-    finnFremtidigePerioder,
-    finnTidligerePerioder
-} from 'app/utils/periodeUtils';
+import { finnNåværendePerioder, finnFremtidigePerioder, finnTidligerePerioder } from 'app/utils/periodeUtils';
+import OversiktBrukteDager from 'common/components/oversikt-brukte-dager/OversiktBrukteDager';
+import { erEksisterendeSakErDeltUttak } from 'app/utils/søknadsgrunnlagUtil';
+import { getResterendeStønadskontoer, getBrukteStønadskontoer } from 'app/utils/stønadskontoerUtils';
+import { Rolle } from 'app/types/Rolle';
 
 import './dinPlan.less';
 
@@ -28,13 +28,14 @@ interface Props {
 }
 
 export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker }) => {
-    if (sak === undefined || søker === undefined || sak.perioder === undefined) {
+    if (sak === undefined || søker === undefined || sak.perioder === undefined || sak.saksgrunnlag === undefined) {
         history.push(Routes.DINE_FORELDREPENGER);
         return null;
     }
 
-    const { perioder } = sak;
+    const { perioder, tilgjengeligeKontoer } = sak;
     const cls = BEMHelper('din-plan');
+
     return (
         <Page
             className={cls.block}
@@ -49,6 +50,25 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
                 nåværendePerioder={finnNåværendePerioder(perioder!)}
                 fremtidigePerioder={finnFremtidigePerioder(perioder!)}
             />
+            {tilgjengeligeKontoer && (
+                <OversiktBrukteDager
+                    resterendeStønadskonter={getResterendeStønadskontoer(tilgjengeligeKontoer, perioder)}
+                    brukteStønadskontoer={{
+                        mor: getBrukteStønadskontoer(perioder.filter((p) => p.forelder === Rolle.mor))
+                            .map((k) => k.dager)
+                            .reduce((a, b) => a + b, 0),
+                        farMedmor: getBrukteStønadskontoer(perioder.filter((p) => p.forelder === Rolle.farMedmor))
+                            .map((k) => k.dager)
+                            .reduce((a, b) => a + b, 0)
+                    }}
+                    erDeltUttak={erEksisterendeSakErDeltUttak(sak.saksgrunnlag.grunnlag)}
+                    erFarMedmor={sak.saksgrunnlag.grunnlag.søkerErFarEllerMedmor}
+                    navnPåForeldre={{
+                        mor: 'mor',
+                        farMedmor: 'farMedMor'
+                    }}
+                />
+            )}
         </Page>
     );
 };
