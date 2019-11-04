@@ -8,7 +8,8 @@ interface Props {
 }
 
 const ForelderIkon: React.StatelessComponent<Props> = ({ forelder, width }) => {
-    const svg = require(`./assets/${forelder}.svg`).default;
+    // TODO fix broken import
+    const svg = require(`./assets/${forelder}.svg`)
     const scale = width ? width / 31 : 1;
     return <FlexibleSvg className="forelderIkon" iconRef={svg} width={31 * scale} height={45 * scale} />;
 };
