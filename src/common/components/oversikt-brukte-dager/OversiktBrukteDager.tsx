@@ -11,21 +11,13 @@ import ForelderIkon from '../foreldrepar/ForelderIkon';
 import { getVarighetString } from 'app/utils/periodeUtils';
 import Uttaksoppsummering from '../uttaksoppsummering/Uttaksoppsummering';
 import { TilgjengeligStønadskonto } from 'app/types/TilgjengeligStønadskonto';
+import { ForeldreparSituasjon } from '../foreldrepar/foreldreparTypes';
 
 import './oversiktBrukteDager.less';
 
 export interface NavnPåForeldre {
     mor: string;
     farMedmor: string;
-}
-
-export enum ForeldreparSituasjon {
-    'farOgMor' = 'farOgMor',
-    'bareFar' = 'bareFar',
-    'bareMor' = 'bareMor',
-    'aleneomsorg' = 'aleneomsorg',
-    'farOgFar' = 'farOgFar',
-    'morOgMedmor' = 'morOgMedmor'
 }
 
 interface Props {
@@ -42,7 +34,6 @@ interface Props {
     };
 }
 
-const bem = BEMHelper('oversiktBrukteDager');
 
 const OversiktBrukteDager: React.StatelessComponent<Props & InjectedIntlProps> = ({
     resterendeStønadskonter,
@@ -52,9 +43,11 @@ const OversiktBrukteDager: React.StatelessComponent<Props & InjectedIntlProps> =
     erFarMedmor,
     intl
 }) => {
+    // TODO utled situasjon
     const situasjon = ForeldreparSituasjon.farOgMor;
     const info = getSituasjonForelderSvg(situasjon);
-
+    
+    const bem = BEMHelper('oversiktBrukteDager');
     return (
         <div className={bem.block}>
             <div className={bem.element('brukteDager')}>

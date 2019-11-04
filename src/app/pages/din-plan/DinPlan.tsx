@@ -18,9 +18,9 @@ import OversiktBrukteDager from 'common/components/oversikt-brukte-dager/Oversik
 import { erEksisterendeSakErDeltUttak } from 'app/utils/søknadsgrunnlagUtil';
 import { getResterendeStønadskontoer, getBrukteStønadskontoer } from 'app/utils/stønadskontoerUtils';
 import { Rolle } from 'app/types/Rolle';
+import { isFeatureEnabled, Feature } from 'app/Feature';
 
 import './dinPlan.less';
-import { isFeatureEnabled, Feature } from 'app/Feature';
 
 interface Props {
     history: History;
@@ -51,6 +51,7 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
                 nåværendePerioder={finnNåværendePerioder(perioder!)}
                 fremtidigePerioder={finnFremtidigePerioder(perioder!)}
             />
+
             {isFeatureEnabled(Feature.kontooveriskt) && tilgjengeligeKontoer && (
                 <OversiktBrukteDager
                     resterendeStønadskonter={getResterendeStønadskontoer(tilgjengeligeKontoer, perioder)}
