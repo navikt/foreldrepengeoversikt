@@ -32,7 +32,7 @@ const Behandligsfrist: React.StatelessComponent<Props> = ({ behandligsdato, harL
                         <FormattedMessage id="dineForeldrepenger.behandligsfrist" values={{ dato: formatDate(dato) }} />
                     </Undertittel>
                     <div>
-                        <FormattedMessage id={'dineForeldrepenger.behandligsfrist.selvstendig'} />
+                        <FormattedHTMLMessage id={'dineForeldrepenger.behandligsfrist.selvstendig'} />
                     </div>
                 </>
             ) : (
