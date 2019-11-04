@@ -3,12 +3,13 @@ import EttersendingDto from './types/ettersending/EttersendingDto';
 import AxiosApiInterceptor from './interceptor';
 import axios from 'axios';
 import { formaterDato } from 'app/utils/dateUtils';
+import { Dekningsgrad } from 'app/types/Dekningsgrad';
 
 export interface GetTilgjengeligeStønadskontoerParams {
     antallBarn: number;
     morHarRett: boolean;
     farHarRett: boolean;
-    dekningsgrad: '100' | '80';
+    dekningsgrad: Dekningsgrad;
     termindato?: string;
     fødselsdato?: string;
     omsorgsovertakelsesdato?: string;
