@@ -6,7 +6,7 @@ export const getData = <T>(fetchState: FetchState<T>, defaultValue: any): T => {
 };
 
 export const getErrorCode = (fetchState: FetchState<any>): number | undefined => {
-    return fetchState && fetchState.status === FetchStatus.FAILURE && fetchState.error.response
+    return fetchState && fetchState.status === FetchStatus.FAILURE && fetchState.error && fetchState.error.response
         ? get(fetchState, 'error.response.status')
         : undefined;
 };
