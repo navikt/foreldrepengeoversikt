@@ -6,7 +6,6 @@ import { Dekningsgrad } from 'app/types/Dekningsgrad';
 import { StønadskontoerDTO } from 'app/api/types/stønadskontoerDto';
 import cloneDeep from 'lodash/cloneDeep';
 
-
 const date1July2018 = moment(new Date(2018, 6, 1));
 const UKERFØRJULI = 10;
 
@@ -100,7 +99,6 @@ export const getResterendeStønadskontoer = (
     tilgjengeligeKontoer: TilgjengeligStønadskonto[],
     perioder: Periode[]
 ): TilgjengeligStønadskonto[] => {
-
     return getBrukteStønadskontoer(perioder).reduce(
         (resterndeKontoer: TilgjengeligStønadskonto[], bruktKonto: TilgjengeligStønadskonto) => {
             const kontoIndex = resterndeKontoer.findIndex(({ konto }) => konto === bruktKonto.konto);
@@ -113,23 +111,19 @@ export const getResterendeStønadskontoer = (
     );
 };
 
-export const getBrukteStønadskontoer = (
-    perioder: Periode[]
-): TilgjengeligStønadskonto[] => {
+export const getBrukteStønadskontoer = (perioder: Periode[]): TilgjengeligStønadskonto[] => {
     return perioder
         .filter(({ type }) => type === PeriodeType.Uttak)
         .map((periode: Uttaksperiode) => ({
             konto: periode.stønadskontotype,
             dager: periode.antallUttaksdager
         }))
-        .reduce(
-            (brukteStønadskontoer: TilgjengeligStønadskonto[], brukteDager: TilgjengeligStønadskonto) => {
-                const kontoIndex = brukteStønadskontoer.findIndex(({ konto }) => konto === brukteDager.konto);
-                kontoIndex >= 0
-                    ? (brukteStønadskontoer[kontoIndex].dager += brukteDager.dager)
-                    : brukteStønadskontoer.push(brukteDager);
-                return brukteStønadskontoer;
-            },
-            [] as TilgjengeligStønadskonto[]
-        );
+        .reduce((brukteStønadskontoer: TilgjengeligStønadskonto[], brukteDager: TilgjengeligStønadskonto) => {
+            const kontoIndex = brukteStønadskontoer.findIndex(({ konto }) => konto === brukteDager.konto);
+            kontoIndex >= 0
+                ? (brukteStønadskontoer[kontoIndex].dager += brukteDager.dager)
+                : brukteStønadskontoer.push(brukteDager);
+
+            return brukteStønadskontoer;
+        }, []);
 };
