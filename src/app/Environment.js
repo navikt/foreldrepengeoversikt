@@ -7,6 +7,7 @@ const Environment = () => {
         ["FEATURE_HISTORIKK"]: window.appSettings["FEATURE_HISTORIKK"],
         ["FEATURE_MINI_DIALOG"]: window.appSettings["FEATURE_MINI_DIALOG"],
         ["FEATURE_DIN_PLAN"]: window.appSettings["FEATURE_DIN_PLAN"],
+        ["FEATURE_KONTOOVERSIKT"]: window.appSettings["FEATURE_KONTOOVERSIKT"]
     };
 };
 

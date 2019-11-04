@@ -11,6 +11,7 @@ function createEnvSettingsFile(settingsFile) {
                 FEATURE_LOGGING:'${process.env.FEATURE_LOGGING}',
                 FEATURE_HISTORIKK:'${process.env.FEATURE_HISTORIKK}',
                 FEATURE_MINI_DIALOG:'${process.env.FEATURE_MINI_DIALOG}',
+                FEATURE_KONTOOVERSIKT: '${process.env.FEATURE_KONTOOVERSIKT}',
                 FEATURE_DIN_PLAN: '${process.env.FEATURE_DIN_PLAN}'
             };`
         );

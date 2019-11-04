@@ -20,6 +20,7 @@ import { getResterendeStønadskontoer, getBrukteStønadskontoer } from 'app/util
 import { Rolle } from 'app/types/Rolle';
 
 import './dinPlan.less';
+import { isFeatureEnabled, Feature } from 'app/Feature';
 
 interface Props {
     history: History;
@@ -50,7 +51,7 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
                 nåværendePerioder={finnNåværendePerioder(perioder!)}
                 fremtidigePerioder={finnFremtidigePerioder(perioder!)}
             />
-            {tilgjengeligeKontoer && (
+            {isFeatureEnabled(Feature.kontooveriskt) && tilgjengeligeKontoer && (
                 <OversiktBrukteDager
                     resterendeStønadskonter={getResterendeStønadskontoer(tilgjengeligeKontoer, perioder)}
                     brukteStønadskontoer={{

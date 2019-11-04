@@ -8,6 +8,7 @@
         "FEATURE_LOGGING": "on",
         "FEATURE_MINI_DIALOG": "on",
         "FEATURE_HISTORIKK":"on",
-        "FEATURE_DIN_PLAN": "on"
+        "FEATURE_DIN_PLAN": "on",
+        "FEATURE_KONTOOVERSIKT": "off"
     }
 }
