@@ -64,6 +64,7 @@ function getUttakskontoer({
     farHarAleneomsorg,
     startdatoUttak
 }: GetTilgjengeligeStønadskontoerParams) {
+    const fpUttakServiceDateFormat = 'YYYYMMDD';
     const urlParams = {
         farHarRett,
         morHarRett,
@@ -71,10 +72,10 @@ function getUttakskontoer({
         farHarAleneomsorg: farHarAleneomsorg || false,
         dekningsgrad,
         antallBarn,
-        fødselsdato: fødselsdato ? formaterDato(fødselsdato, 'YYYYMMDD') : undefined,
-        termindato: termindato ? formaterDato(termindato, 'YYYYMMDD') : undefined,
-        omsorgsovertakelseDato: omsorgsovertakelsesdato ? formaterDato(omsorgsovertakelsesdato, 'YYYYMMDD') : undefined,
-        startdatoUttak: formaterDato(startdatoUttak, 'YYYYMMDD')
+        fødselsdato: fødselsdato ? formaterDato(fødselsdato, fpUttakServiceDateFormat) : undefined,
+        termindato: termindato ? formaterDato(termindato, fpUttakServiceDateFormat) : undefined,
+        omsorgsovertakelseDato: omsorgsovertakelsesdato ? formaterDato(omsorgsovertakelsesdato, fpUttakServiceDateFormat) : undefined,
+        startdatoUttak: formaterDato(startdatoUttak, fpUttakServiceDateFormat)
     };
 
     return axios.get(`${Environment.UTTAK_API_URL}/konto`, {
