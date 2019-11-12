@@ -48,11 +48,11 @@ export const slåSammenLikeOgSammenhengendeUttaksperioder = (perioder: PeriodeDt
         return perioder;
     }
 
-    return perioder.reduce((uttaksperiodeAccumulator: PeriodeDto[], periode) => {
-        const previousUttaksperiode = uttaksperiodeAccumulator[uttaksperiodeAccumulator.length - 1];
+    return perioder.reduce((periodeResult: PeriodeDto[], periode) => {
+        const previousUttaksperiode = periodeResult[periodeResult.length - 1];
         if (skalKunneSlåSammenUttaksperioer(previousUttaksperiode, periode)) {
-            uttaksperiodeAccumulator.pop();
-            uttaksperiodeAccumulator.push({
+            periodeResult.pop();
+            periodeResult.push({
                 ...previousUttaksperiode,
                 trekkDager: previousUttaksperiode.trekkDager + periode.trekkDager,
                 periode: {
@@ -61,9 +61,9 @@ export const slåSammenLikeOgSammenhengendeUttaksperioder = (perioder: PeriodeDt
                 }
             });
         } else {
-            uttaksperiodeAccumulator.push(periode);
+            periodeResult.push(periode);
         }
-        return uttaksperiodeAccumulator;
+        return periodeResult;
     }, []);
 };
 
@@ -73,11 +73,10 @@ export const skalKunneSlåSammenUttaksperioer = (periode1?: PeriodeDto, periode2
         : erSammenhengende(periode1.periode, periode2.periode) && erLike(periode1, periode2);
 };
 
-export const erTaptPeriode = (uttaksperiodeDto: PeriodeDto) => {
+export const erTaptPeriode = (perioder: PeriodeDto) => {
     return (
-        (uttaksperiodeDto.periodeResultatType === PeriodeResultatType.Avslått &&
-            uttaksperiodeDto.utbetalingsprosent === 0) ||
-        (uttaksperiodeDto.trekkDager > 0 && uttaksperiodeDto.utbetalingsprosent === 0)
+        (perioder.periodeResultatType === PeriodeResultatType.Avslått && perioder.utbetalingsprosent === 0) ||
+        (perioder.trekkDager > 0 && perioder.utbetalingsprosent === 0)
     );
 };
 
@@ -107,8 +106,8 @@ const getRelevanteFelterForSammenslåing = ({
     return relevanteFelter;
 };
 
-export const finnDuplikatePerioderPgaArbeidsforohld = (periode: PeriodeDto, uttaksperiodeDtoListe: PeriodeDto[]) => {
-    return uttaksperiodeDtoListe
+export const finnDuplikatePerioderPgaArbeidsforohld = (periode: PeriodeDto, perioder: PeriodeDto[]) => {
+    return perioder
         .filter((p) => periode !== p)
         .filter((p) =>
             isEqual(
@@ -158,9 +157,9 @@ const reduceDuplikateSaksperioderGrunnetArbeidsforhold = (
 };
 
 export const cleanupUttaksplanDto = (uttaksperioderDto: PeriodeDto[]): PeriodeDto[] => {
-    const tmp = uttaksperioderDto.filter((p) => !erEnAvslåttPeriodeEtterSisteInnvilgetPeriode(p, uttaksperioderDto));
     return slåSammenLikeOgSammenhengendeUttaksperioder(
-        tmp
+        uttaksperioderDto
+            .filter((p) => !erEnAvslåttPeriodeEtterSisteInnvilgetPeriode(p, uttaksperioderDto))
             .reduce(reduceDuplikateSaksperioderGrunnetArbeidsforhold, [])
             .filter((p) => fjernIrrelevanteTaptePerioder(p, uttaksperioderDto))
     );
