@@ -49,6 +49,7 @@ describe('stønadskontoerUtils', () => {
             expect(
                 getBrukteStønadskontoer([
                     { ...periodeMock, stønadskontotype: StønadskontoType.Mødrekvote },
+                    { ...periodeMock, stønadskontotype: StønadskontoType.Mødrekvote },
                     { ...periodeMock, stønadskontotype: StønadskontoType.Fedrekvote },
                     { ...periodeMock, stønadskontotype: StønadskontoType.Fellesperiode },
                     { ...periodeMock, stønadskontotype: StønadskontoType.ForeldrepengerFørFødsel },
@@ -58,7 +59,7 @@ describe('stønadskontoerUtils', () => {
             ).toEqual([
                 {
                     konto: StønadskontoType.Mødrekvote,
-                    dager: 10
+                    dager: 20
                 },
                 {
                     konto: StønadskontoType.Fedrekvote,

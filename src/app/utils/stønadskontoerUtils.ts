@@ -5,32 +5,30 @@ import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Period
 import { Dekningsgrad } from 'app/types/Dekningsgrad';
 import { StønadskontoerDTO } from 'app/api/types/stønadskontoerDto';
 import cloneDeep from 'lodash/cloneDeep';
-
-const date1July2018 = moment(new Date(2018, 6, 1));
-const UKERFØRJULI = 10;
+import { ANTALL_UTTAKSDAGER_PR_UKE, ANTALL_TILGJENGELIGE_UKER_FØR_JULI as ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 } from './constants';
 
 export const skalTilgjengeligeKontoerJusteresPgaFamiliehendelsesdatoFørJuli2018 = (
     familiehendelsesdato: string,
     tilgjengeligeStønadskontoer: TilgjengeligStønadskonto[]
 ): boolean => {
     const harKontoerSomErBerørt = tilgjengeligeStønadskontoer.find((ts) => ts.konto === StønadskontoType.Mødrekvote);
-    return harKontoerSomErBerørt !== undefined && moment(familiehendelsesdato).isBefore(date1July2018);
+    return harKontoerSomErBerørt !== undefined && moment(familiehendelsesdato).isBefore('2018-07-01', 'days');
 };
 
-export const overstyrAntallTilgjengeligeUkerForBarnFørJuli2018 = (
+export const overstyrAntallTilgjengeligeUttaksdagerForBarnFørJuli2018 = (
     tilgjengeligeStønadskontoer: TilgjengeligStønadskonto[]
 ): TilgjengeligStønadskonto[] => {
     const mødrekvote = tilgjengeligeStønadskontoer.find((konto) => konto.konto === StønadskontoType.Mødrekvote);
     const fedrekvote = tilgjengeligeStønadskontoer.find((konto) => konto.konto === StønadskontoType.Fedrekvote);
 
-    const ekstraMødrekvoteDager = mødrekvote!.dager - UKERFØRJULI * 5;
-    const ekstraFedrekvoteDager = fedrekvote!.dager - UKERFØRJULI * 5;
+    const ekstraMødrekvoteDager = mødrekvote!.dager - ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 * ANTALL_UTTAKSDAGER_PR_UKE;
+    const ekstraFedrekvoteDager = fedrekvote!.dager - ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 * ANTALL_UTTAKSDAGER_PR_UKE;
 
     return tilgjengeligeStønadskontoer.map((konto) => {
         if (konto.konto === StønadskontoType.Fedrekvote || konto.konto === StønadskontoType.Mødrekvote) {
             return {
                 konto: konto.konto,
-                dager: UKERFØRJULI * 5
+                dager: ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 * ANTALL_UTTAKSDAGER_PR_UKE
             };
         } else if (konto.konto === StønadskontoType.Fellesperiode) {
             return {
@@ -58,7 +56,7 @@ export const getAktivitetsFrieUkerForeldrepenger = (dekningsgrad: Dekningsgrad, 
     if (dekningsgrad === Dekningsgrad.HUNDRE_PROSENT) {
         return 15;
     }
-    return moment(startdatoUttak).isBefore(moment(new Date(2019, 0, 1))) ? 15 : 19;
+    return moment(startdatoUttak).isBefore(moment('2019-01-01')) ? 15 : 19;
 };
 
 export const opprettAktivitetsFriKonto = (
@@ -67,7 +65,8 @@ export const opprettAktivitetsFriKonto = (
     startdatoUttak: string
 ): TilgjengeligStønadskonto[] => {
     const nyeKontoer: TilgjengeligStønadskonto[] = [];
-    const aktivitetskravFrieDagerForeldrepenger = getAktivitetsFrieUkerForeldrepenger(dekningsgrad, startdatoUttak) * 5;
+    const aktivitetskravFrieDagerForeldrepenger =
+        getAktivitetsFrieUkerForeldrepenger(dekningsgrad, startdatoUttak) * ANTALL_UTTAKSDAGER_PR_UKE;
     nyeKontoer.push({ ...kontoer[0], dager: kontoer[0].dager - aktivitetskravFrieDagerForeldrepenger });
     nyeKontoer.push({ konto: StønadskontoType.AktivitetsfriKvote, dager: aktivitetskravFrieDagerForeldrepenger });
     return nyeKontoer;

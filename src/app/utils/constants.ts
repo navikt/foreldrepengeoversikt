@@ -1,0 +1,2 @@
+export const ANTALL_UTTAKSDAGER_PR_UKE: number = 5;
+export const ANTALL_TILGJENGELIGE_UKER_FØR_JULI = 10;

@@ -10,7 +10,7 @@ import {
     opprettAktivitetsFriKonto,
     getRelevantFamiliehendelseDato,
     skalTilgjengeligeKontoerJusteresPgaFamiliehendelsesdatoFørJuli2018,
-    overstyrAntallTilgjengeligeUkerForBarnFørJuli2018,
+    overstyrAntallTilgjengeligeUttaksdagerForBarnFørJuli2018,
     stønadskontoerDtoTilTilgjengeligStønadskontoMapper
 } from 'app/utils/stønadskontoerUtils';
 import { AxiosResponse } from 'axios';
@@ -90,7 +90,7 @@ export function* getTilgjengeligeStønadskontoer(sak: Sak) {
             }),
             tilgjengeligeStønadskontoer
         )
-            ? overstyrAntallTilgjengeligeUkerForBarnFørJuli2018(tilgjengeligeStønadskontoer)
+            ? overstyrAntallTilgjengeligeUttaksdagerForBarnFørJuli2018(tilgjengeligeStønadskontoer)
             : tilgjengeligeStønadskontoer;
             
     } catch (error) {

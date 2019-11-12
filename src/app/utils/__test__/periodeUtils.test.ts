@@ -1,12 +1,11 @@
 import {
     getUkerOgDagerFromDager,
     finnFremtidigePerioder,
-    slåSammenLikeOgSammenhengendeUttaksperioder,
     erSammenhengende,
     harAnnenForelderSamtidigUttakISammePeriode
-} from '../../../utils/periodeUtils';
+} from '../periodeUtils';
 import {
-    UttaksPeriodeDto,
+    PeriodeDto,
     MorsAktivitetDto,
     StønadskontoType,
     PeriodeResultatType,
@@ -15,6 +14,7 @@ import {
 } from 'app/api/types/UttaksplanDto';
 import moment from 'moment';
 import Periode, { Uttaksperiode } from 'app/types/uttaksplan/Periode';
+import { slåSammenLikeOgSammenhengendeUttaksperioder } from 'app/utils/uttaksplanDtoUtils';
 
 describe('periodeUtils', () => {
     describe('getUkerOgDagerFromDager', () => {
@@ -100,7 +100,7 @@ describe('periodeUtils', () => {
     });
 
     it('like og sammenhengende perioder skal slås sammen', () => {
-        const mockPeriode: UttaksPeriodeDto = {
+        const mockPeriode: PeriodeDto = {
             periodeResultatType: PeriodeResultatType.Innvilget,
             utsettelsePeriodeType: UtsettelsePeriodeType.Arbeid,
             graderingInnvilget: false,
@@ -136,6 +136,12 @@ describe('periodeUtils', () => {
         ).toBeTruthy();
     });
 
+    it('en periode skal regnes som sammenhengende selv om forrige periode slutter på en sønadg', () => {
+        expect(
+            erSammenhengende({ fom: "2020-03-02", tom: "2020-03-15" }, { fom: '2020-03-16', tom: '2020-03-27' })
+        ).toBeTruthy();
+    });
+
     it('en periode skal regnes som sammenhengende selv om neste periode starter på en lørdag', () => {
         expect(
             erSammenhengende({ fom: '2019-08-30', tom: '2019-09-01' }, { fom: '2019-09-02', tom: '2019-10-08' })
@@ -154,7 +160,7 @@ describe('periodeUtils', () => {
         ).toBeTruthy();
     });
 
-    it('test', () => {
+    it('Skal finne annen parts periode hvis det er samtidig uttak', () => {
         const perioder = [
             {
                 type: 'UTTAK',

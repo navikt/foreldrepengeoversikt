@@ -79,25 +79,18 @@ export const skalKunneSøkeOmEndring = (sak: SakBase): boolean => {
         return false;
     }
 
-    return (
-        (sak.status !== FagsakStatus.AVSLUTTET && harEnAvsluttetBehandling(sak)) ||
-        erInfotrygdSak(sak)
-    );
+    return (sak.status !== FagsakStatus.AVSLUTTET && harEnAvsluttetBehandling(sak)) || erInfotrygdSak(sak);
 };
 
 export const erInfotrygdSak = (sak: SakBase): boolean => {
     return sak.type === SakType.SAK;
 };
 
-export const opprettFiktivSak = (storageKvittering: StorageKvittering) => {
-    const sak: SakBase = {
-        saksnummer: '',
-        type: SakType.SAK,
-        erJornalført: false,
-        opprettet: storageKvittering.innsendingstidspunkt
-    };
-    return sak;
-};
+export const opprettFiktivSak = (storageKvittering: StorageKvittering): SakBase => ({
+    saksnummer: '',
+    type: SakType.SAK,
+    opprettet: storageKvittering.innsendingstidspunkt
+});
 
 export const harSøkt = (sak: SakBase): boolean => {
     return !erInfotrygdSak(sak) ? sak.behandlinger !== undefined && sak.behandlinger.length > 0 : true;

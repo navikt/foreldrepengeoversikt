@@ -12,16 +12,12 @@ import { StorageKvittering } from 'app/api/types/StorageKvittering';
 import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
 import { Innsendingsinnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { uttaksperiodeDtoToPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
-import {
-    slåSammenLikeOgSammenhengendeUttaksperioder,
-    fyllInnHull,
-    fjernIrrelevanteTaptePerioder,
-    fjernAvslåttePerioderEtterSisteInnvilgetPeriode
-} from 'app/utils/periodeUtils';
+import { fyllInnHull } from 'app/utils/periodeUtils';
 import { isFeatureEnabled, Feature } from 'app/Feature';
 import { SøkerinfoDTO } from 'app/api/types/personinfo/SøkerinfoDto';
 import { getSøkerinfoFromDTO } from 'app/utils/søkerinfoDtoMapper';
 import { getTilgjengeligeStønadskontoer } from './stønadskontoSaga';
+import { cleanupUttaksplanDto } from 'app/utils/uttaksplanDtoUtils';
 
 function* getPersoninfoSaga(_: GetSøkerinfoRequest) {
     try {
@@ -58,11 +54,8 @@ function* uttaksplanTilSakMapper(sak: SakBase) {
         if (sak.saksnummer && sak.type === SakType.FPSAK && erForeldrepengesak(sak)) {
             const response = yield call(Api.getUttaksplan, sak.saksnummer);
             sak.saksgrunnlag = response.data;
-            const perioder = fjernAvslåttePerioderEtterSisteInnvilgetPeriode(sak.saksgrunnlag!.perioder).filter(
-                fjernIrrelevanteTaptePerioder
-            );
 
-            sak.perioder = slåSammenLikeOgSammenhengendeUttaksperioder(perioder)
+            sak.perioder = cleanupUttaksplanDto(sak.saksgrunnlag!.perioder)
                 .map((p) => uttaksperiodeDtoToPeriode(p, sak.saksgrunnlag!.grunnlag.søkerErFarEllerMedmor))
                 .reduce(fyllInnHull, []);
         }

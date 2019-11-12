@@ -13,4 +13,4 @@ export const mapFileToAttachment = (file: File, skjemanummer: Skjemanummer): Att
     skjemanummer
 });
 
-export const isAttachmentWithError = ({ pending, url, error }: Attachment) => error || (!pending && url === undefined);
+export const isAttachmentWithError = ({ pending, url, error, filesize }: Attachment) => error || (!pending && url === undefined) || filesize === 0;

@@ -35,9 +35,9 @@ export interface TaptPeriode extends Periode {
 };
 
 export enum PeriodeType {
-    "Uttak" = "UTTAK",
-    "Hull" = "HULL",
-    "Utsettelse" = "UTSETTELSE",
-    "Opphold" = "OPPHOLD",
-    "TaptPeriode" = "TAPT_PERIODE"
+    Uttak = "UTTAK",
+    Hull = "HULL",
+    Utsettelse = "UTSETTELSE",
+    Opphold = "OPPHOLD",
+    TaptPeriode = "TAPT_PERIODE"
 }

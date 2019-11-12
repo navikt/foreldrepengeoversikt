@@ -1,4 +1,4 @@
-import { UttaksPeriodeDto } from 'app/api/types/UttaksplanDto';
+import { PeriodeDto } from 'app/api/types/UttaksplanDto';
 import {
     PeriodeType,
     Utsettelsesperiode,
@@ -6,27 +6,24 @@ import {
     Oppholdsperiode,
     TaptPeriode
 } from 'app/types/uttaksplan/Periode';
-import {
-    getAntallUttaksdagerITidsperiode,
-    getPeriodetype,
-    getForelderForPeriode
-} from 'app/utils/periodeUtils';
+import { getAntallUttaksdagerITidsperiode } from 'app/utils/periodeUtils';
+import { getPeriodetype, getForelderForPeriode, getGraderingsprosent } from './uttaksplanDtoUtils';
 
-export const uttaksperiodeDtoToPeriode = (uttaksperiodeDto: UttaksPeriodeDto, søkerErFarEllerMedmor: boolean) => {
+export const uttaksperiodeDtoToPeriode = (uttaksperiodeDto: PeriodeDto, søkerErFarEllerMedmor: boolean) => {
     switch (getPeriodetype(uttaksperiodeDto)) {
         case PeriodeType.Uttak:
-            return uttaksperiodeDtoUTottaksperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
+            return periodeDtoUTottaksperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
         case PeriodeType.Utsettelse:
-            return uttaksperiodeDtoToUtsettelsesperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
+            return periodeDtoToUtsettelsesperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
         case PeriodeType.Opphold:
-            return uttaksperiodeDtoUToOppholdsperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
+            return periodeDtoUToOppholdsperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
         case PeriodeType.TaptPeriode:
-            return uttaksperiodeDtoUToTaptPeriode(uttaksperiodeDto, søkerErFarEllerMedmor);
+            return periodeDtoUToTaptPeriode(uttaksperiodeDto, søkerErFarEllerMedmor);
     }
 };
 
-const uttaksperiodeDtoUToTaptPeriode = (
-    uttaksperiodeDto: UttaksPeriodeDto,
+const periodeDtoUToTaptPeriode = (
+    uttaksperiodeDto: PeriodeDto,
     søkerErFarEllerMedmor: boolean
 ): TaptPeriode => ({
     type: PeriodeType.TaptPeriode,
@@ -36,8 +33,8 @@ const uttaksperiodeDtoUToTaptPeriode = (
     stønadskontotype: uttaksperiodeDto.stønadskontotype
 });
 
-const uttaksperiodeDtoUToOppholdsperiode = (
-    uttaksperiodeDto: UttaksPeriodeDto,
+const periodeDtoUToOppholdsperiode = (
+    uttaksperiodeDto: PeriodeDto,
     søkerErFarEllerMedmor: boolean
 ): Oppholdsperiode => {
     return {
@@ -50,8 +47,8 @@ const uttaksperiodeDtoUToOppholdsperiode = (
     };
 };
 
-const uttaksperiodeDtoUTottaksperiode = (
-    uttaksperiodeDto: UttaksPeriodeDto,
+const periodeDtoUTottaksperiode = (
+    uttaksperiodeDto: PeriodeDto,
     søkerErFarEllerMedmor: boolean
 ): Uttaksperiode => {
     return {
@@ -62,14 +59,14 @@ const uttaksperiodeDtoUTottaksperiode = (
         antallUttaksdager: uttaksperiodeDto.trekkDager,
         stønadskontotype: uttaksperiodeDto.stønadskontotype,
         graderingInnvilget: uttaksperiodeDto.graderingInnvilget,
-        graderingsprosent: (100 - uttaksperiodeDto.arbeidstidprosent).toFixed(1),
+        graderingsprosent: getGraderingsprosent(uttaksperiodeDto).toFixed(1),
         samtidigUttak: uttaksperiodeDto.samtidigUttak,
         samtidigUttaksprosent: uttaksperiodeDto.samtidigUttaksprosent
     };
 };
 
-const uttaksperiodeDtoToUtsettelsesperiode = (
-    uttaksperiodeDto: UttaksPeriodeDto,
+const periodeDtoToUtsettelsesperiode = (
+    uttaksperiodeDto: PeriodeDto,
     søkerErFarEllerMedmor: boolean
 ): Utsettelsesperiode => {
     return {

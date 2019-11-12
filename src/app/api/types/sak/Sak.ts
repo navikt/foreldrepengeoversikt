@@ -7,7 +7,6 @@ import { TilgjengeligStønadskonto } from 'app/types/TilgjengeligStønadskonto';
 
 export interface SakBase {
     type: SakType;
-    erJornalført?: boolean;
     behandlinger?: Behandling[];
     status?: FagsakStatus;
     saksnummer: string;
