@@ -9,6 +9,7 @@ import { getVarighetString } from 'app/utils/periodeUtils';
 import { NavnPåForeldre } from '../oversikt-brukte-dager/OversiktBrukteDager';
 import StønadskontoIkon from 'app/components/ikoner/uttaksplanIkon/StønadskontoIkon';
 import { TilgjengeligStønadskonto } from 'app/types/TilgjengeligStønadskonto';
+
 import './kontostatus.less';
 
 export interface Props {

@@ -28,10 +28,7 @@ interface Props {
         mor: number;
         farMedmor: number;
     };
-    navnPåForeldre: {
-        mor: string;
-        farMedmor: string;
-    };
+    navnPåForeldre: NavnPåForeldre;
 }
 
 
@@ -46,7 +43,8 @@ const OversiktBrukteDager: React.StatelessComponent<Props & InjectedIntlProps> =
     // TODO utled situasjon
     const situasjon = ForeldreparSituasjon.farOgMor;
     const info = getSituasjonForelderSvg(situasjon);
-    
+   
+    console.log(navnPåForeldre);
     const bem = BEMHelper('oversiktBrukteDager');
     return (
         <div className={bem.block}>
@@ -59,7 +57,7 @@ const OversiktBrukteDager: React.StatelessComponent<Props & InjectedIntlProps> =
                 </Undertittel>
                 <TilesList columns={'flex'}>
                     {(erDeltUttak || !erFarMedmor) && (
-                        <Personkort ikon={<ForelderIkon forelder={info.mor} />} tittel={navnPåForeldre.farMedmor}>
+                        <Personkort ikon={<ForelderIkon forelder={info.mor} />} tittel={navnPåForeldre.mor}>
                             <strong>{getVarighetString(brukteStønadskontoer.mor, intl)}</strong>
                         </Personkort>
                     )}

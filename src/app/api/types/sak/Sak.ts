@@ -2,8 +2,8 @@ import { FagsakStatus } from './FagsakStatus';
 import Behandling from './Behandling';
 import AnnenPart from './AnnenPart';
 import Periode from '../../../types/uttaksplan/Periode';
-import { UttaksplanDto } from 'app/api/types/UttaksplanDto';
 import { TilgjengeligStønadskonto } from 'app/types/TilgjengeligStønadskonto';
+import { UttaksplanDto } from '../UttaksplanDto';
 
 export interface SakBase {
     type: SakType;

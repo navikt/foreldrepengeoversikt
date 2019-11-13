@@ -20,6 +20,8 @@ import { getResterendeStønadskontoer, getBrukteStønadskontoer } from 'app/util
 import { Rolle } from 'app/types/Rolle';
 import { isFeatureEnabled, Feature } from 'app/Feature';
 
+import { getNavnPåForeldre } from 'app/utils/søkerinfoUtils';
+
 import './dinPlan.less';
 
 interface Props {
@@ -65,10 +67,7 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
                     }}
                     erDeltUttak={erEksisterendeSakErDeltUttak(sak.saksgrunnlag.grunnlag)}
                     erFarMedmor={sak.saksgrunnlag.grunnlag.søkerErFarEllerMedmor}
-                    navnPåForeldre={{
-                        mor: 'mor',
-                        farMedmor: 'farMedMor'
-                    }}
+                    navnPåForeldre={getNavnPåForeldre(sak, søker)}
                 />
             )}
         </Page>
