@@ -153,7 +153,14 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                             <FormattedMessage
                                                 id="dinPlan.opphold"
                                                 values={{
-                                                    kvote: <FormattedMessage id={`kvote.${kvote.toLowerCase()}`} />
+                                                    kvote: (
+                                                        <FormattedMessage
+                                                            id={`kvote.${kvote.toLowerCase()}`}
+                                                            values={{
+                                                                erGradert: false
+                                                            }}
+                                                        />
+                                                    )
                                                 }}
                                             />
                                         }
