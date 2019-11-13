@@ -17,11 +17,7 @@ import { isFeatureEnabled, Feature } from 'app/Feature';
 import SectionSeparator from '../section-separator/SectionSeparator';
 import { Routes } from 'app/utils/routes';
 import PeriodeOversikt from '../periode-oversikt/PeriodeOversikt';
-import {
-    finnNåværendePerioder,
-    skalVisesIPeriodeListe,
-    finnFremtidigePerioder
-} from '../../utils/periodeUtils';
+import { finnNåværendePerioder, skalVisesIPeriodeListe, finnFremtidigePerioder } from '../../utils/periodeUtils';
 import Oversikt from '../oversikt/Oversikt';
 import { utledHendelser } from '../historikk/util';
 import SakBase from 'app/api/types/sak/Sak';
@@ -80,7 +76,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                         onClick={() =>
                             history.push({
                                 pathname: Routes.ETTERSENDELSE,
-                                search: new URLSearchParams({ saksnummer: sak.saksnummer }).toString()
+                                search: new URLSearchParams({ saksnummer: sak.saksnummer! }).toString()
                             })
                         }
                         disabled={!isSakEligableForEttersendelse(sak)}>

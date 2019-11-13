@@ -87,7 +87,7 @@ export const erInfotrygdSak = (sak: SakBase): boolean => {
 };
 
 export const opprettFiktivSak = (storageKvittering: StorageKvittering): SakBase => ({
-    saksnummer: '',
+    saksnummer: undefined,
     type: SakType.SAK,
     opprettet: storageKvittering.innsendingstidspunkt
 });

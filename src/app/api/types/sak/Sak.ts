@@ -9,7 +9,7 @@ export interface SakBase {
     type: SakType;
     behandlinger?: Behandling[];
     status?: FagsakStatus;
-    saksnummer: string;
+    saksnummer?: string;
     opprettet: string;
     annenPart?: AnnenPart;
 }
