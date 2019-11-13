@@ -174,7 +174,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                             />
                                         }
                                         tidsperiode={p.tidsperiode}
-                                        color={getIconFarge(p)}
+                                        color={UttaksplanColor.yellow}
                                     />
                                 );
                             case PeriodeType.TaptPeriode:
@@ -193,7 +193,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                             />
                                         }
                                         tidsperiode={p.tidsperiode}
-                                        color={getIconFarge(p)}
+                                        color={UttaksplanColor.yellow}
                                     />
                                 );
                         }
