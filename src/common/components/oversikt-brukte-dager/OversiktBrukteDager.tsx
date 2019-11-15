@@ -43,8 +43,6 @@ const OversiktBrukteDager: React.StatelessComponent<Props & InjectedIntlProps> =
     // TODO utled situasjon
     const situasjon = ForeldreparSituasjon.farOgMor;
     const info = getSituasjonForelderSvg(situasjon);
-   
-    console.log(navnPåForeldre);
     const bem = BEMHelper('oversiktBrukteDager');
     return (
         <div className={bem.block}>

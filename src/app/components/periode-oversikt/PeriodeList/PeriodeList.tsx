@@ -10,7 +10,8 @@ import {
     getVarighetString,
     getStønadskontoTypeFromOppholdsÅrsak,
     skalVisesIPeriodeListe,
-    getAnnenPartsPeriodeMedSamtidigUttak
+    getAnnenPartsPeriodeMedSamtidigUttak,
+    erGradert
 } from '../../../utils/periodeUtils';
 import UttakIkon from 'app/components/ikoner/UttakIkon';
 import Periode, { PeriodeType, Utsettelsesperiode, Uttaksperiode, Oppholdsperiode } from 'app/types/uttaksplan/Periode';
@@ -43,9 +44,7 @@ const getIconFarge = (periode: Periode) => {
 
 export const getIkon = (periode: Periode) => {
     return (
-        <IconBox
-            color={getIconFarge(periode)}
-            stripes={periode.type === PeriodeType.Uttak ? (periode as Uttaksperiode).graderingInnvilget : false}>
+        <IconBox color={getIconFarge(periode)} stripes={erGradert(periode)}>
             <UttakIkon title="uttak ikon" />
         </IconBox>
     );
@@ -88,7 +87,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                             <FormattedMessage
                                                 id={`kvote.${(p as Uttaksperiode).stønadskontotype.toLowerCase()}`}
                                                 values={{
-                                                    erGradert: (p as Uttaksperiode).graderingInnvilget,
+                                                    erGradert: erGradert(p),
                                                     graderingsprosent: (p as Uttaksperiode).graderingsprosent
                                                 }}
                                             />
@@ -138,7 +137,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                                 values={{ antallDager: p.antallUttaksdager }}
                                             />
                                         }
-                                        color={getIconFarge(p)}
+                                        color={UttaksplanColor.yellow}
                                     />
                                 );
                             case PeriodeType.Opphold:

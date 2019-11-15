@@ -13,7 +13,12 @@ import { Routes } from 'app/utils/routes';
 import Person from 'app/types/Person';
 import SakBase from 'app/api/types/sak/Sak';
 import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
-import { finnNåværendePerioder, finnFremtidigePerioder, finnTidligerePerioder } from 'app/utils/periodeUtils';
+import {
+    finnNåværendePerioder,
+    finnFremtidigePerioder,
+    finnTidligerePerioder,
+    getPerioderForRolle
+} from 'app/utils/periodeUtils';
 import OversiktBrukteDager from 'common/components/oversikt-brukte-dager/OversiktBrukteDager';
 import { erEksisterendeSakErDeltUttak } from 'app/utils/søknadsgrunnlagUtil';
 import { getResterendeStønadskontoer, getBrukteStønadskontoer } from 'app/utils/stønadskontoerUtils';
@@ -58,10 +63,10 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
                 <OversiktBrukteDager
                     resterendeStønadskonter={getResterendeStønadskontoer(tilgjengeligeKontoer, perioder)}
                     brukteStønadskontoer={{
-                        mor: getBrukteStønadskontoer(perioder.filter((p) => p.forelder === Rolle.mor))
+                        mor: getBrukteStønadskontoer(getPerioderForRolle(Rolle.mor, perioder))
                             .map((k) => k.dager)
                             .reduce((a, b) => a + b, 0),
-                        farMedmor: getBrukteStønadskontoer(perioder.filter((p) => p.forelder === Rolle.farMedmor))
+                        farMedmor: getBrukteStønadskontoer(getPerioderForRolle(Rolle.farMedmor, perioder))
                             .map((k) => k.dager)
                             .reduce((a, b) => a + b, 0)
                     }}

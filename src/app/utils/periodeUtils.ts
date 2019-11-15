@@ -183,3 +183,11 @@ export const skalVisesIPeriodeListe = (periode: Periode, perioder: Periode[]) =>
               !harAnnenForelderSamtidigUttakISammePeriode(periode, perioder)) ||
               (harAnnenForelderSamtidigUttakISammePeriode(periode, perioder) && !periode.gjelderAnnenPart);
 };
+
+export const getPerioderForRolle = (rolle: Rolle, perioder: Periode[]) => {
+    return perioder.filter((p) => p.forelder === rolle);
+};
+
+export const erGradert = (periode: Periode) => {
+    return periode.type === PeriodeType.Uttak ? (periode as Uttaksperiode).graderingInnvilget : false
+}
