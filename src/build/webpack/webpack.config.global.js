@@ -1,8 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postCSS = require('../../../postcss.config');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const autoprefixer = require('autoprefixer');
 
@@ -31,7 +32,7 @@ const webpackConfig = {
                 loader: require.resolve('tslint-loader'),
                 enforce: 'pre',
                 resolve: {
-                    extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
+                    extensions: ['.ts', '.tsx', '.js', '.json', '.jsx']
                 }
             },
             {
@@ -53,13 +54,26 @@ const webpackConfig = {
                 test: /\.less$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
             },
+            // {
+            //     test: /\.svg$/,
+            //     use: [
+            //         {
+            //             loader: 'svg-sprite-loader'
+            //         },
+            //         {
+            //             loader: 'file-loader',
+            //             options: {
+            //                 regExp: /^.*utsettelse-background.*\.svg$/i,
+            //                 outputPath: 'assets/',
+            //                 name: '[name].[ext]',
+            //                 publicPath: '/dist/assets'
+            //             }
+            //         },
+            //     ]
+            // },
             {
                 test: /\.svg$/,
-                use: [{ loader: 'file-loader', options: {
-                    outputPath: 'assets/',
-                    name: '[name].[ext]',
-                    publicPath: '/dist/assets',
-                  } }]
+                loader: 'svg-sprite-loader'
             }
         ]
     },
@@ -69,7 +83,8 @@ const webpackConfig = {
             filename: 'css/[name].css?[hash]-[chunkhash]-[name]',
             disable: false,
             allChunks: true
-        })
+        }),
+        new SpriteLoaderPlugin()
     ]
 };
 
