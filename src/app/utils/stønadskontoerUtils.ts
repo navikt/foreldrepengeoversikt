@@ -1,28 +1,27 @@
 import moment from 'moment';
 import { TilgjengeligStønadskonto } from 'app/types/TilgjengeligStønadskonto';
-import { StønadskontoType } from 'app/api/types/UttaksplanDto';
+import { StønadskontoType, UttaksplanGrunnlagDto } from 'app/api/types/UttaksplanDto';
 import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Periode';
 import { Dekningsgrad } from 'app/types/Dekningsgrad';
 import { StønadskontoerDTO } from 'app/api/types/stønadskontoerDto';
 import cloneDeep from 'lodash/cloneDeep';
-import { ANTALL_UTTAKSDAGER_PR_UKE, ANTALL_TILGJENGELIGE_UKER_FØR_JULI as ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 } from './constants';
+import { ANTALL_UTTAKSDAGER_PR_UKE, ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 } from './constants';
 
 export const skalTilgjengeligeKontoerJusteresPgaFamiliehendelsesdatoFørJuli2018 = (
     familiehendelsesdato: string,
     tilgjengeligeStønadskontoer: TilgjengeligStønadskonto[]
 ): boolean => {
-    const harKontoerSomErBerørt = tilgjengeligeStønadskontoer.find((ts) => ts.konto === StønadskontoType.Mødrekvote);
-    return harKontoerSomErBerørt !== undefined && moment(familiehendelsesdato).isBefore('2018-07-01', 'days');
+    const harKontoerSomErBerørt = tilgjengeligeStønadskontoer.some(
+        ({ konto }) => konto === StønadskontoType.Mødrekvote
+    );
+    return harKontoerSomErBerørt && moment(familiehendelsesdato).isBefore('2018-07-01', 'days');
 };
 
 export const overstyrAntallTilgjengeligeUttaksdagerForBarnFørJuli2018 = (
     tilgjengeligeStønadskontoer: TilgjengeligStønadskonto[]
 ): TilgjengeligStønadskonto[] => {
-    const mødrekvote = tilgjengeligeStønadskontoer.find((konto) => konto.konto === StønadskontoType.Mødrekvote);
-    const fedrekvote = tilgjengeligeStønadskontoer.find((konto) => konto.konto === StønadskontoType.Fedrekvote);
-
-    const ekstraMødrekvoteDager = mødrekvote!.dager - ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 * ANTALL_UTTAKSDAGER_PR_UKE;
-    const ekstraFedrekvoteDager = fedrekvote!.dager - ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 * ANTALL_UTTAKSDAGER_PR_UKE;
+    const mødrekvote = getTilgjengeligStønadskonto(tilgjengeligeStønadskontoer, StønadskontoType.Mødrekvote);
+    const fedrekvote = getTilgjengeligStønadskonto(tilgjengeligeStønadskontoer, StønadskontoType.Fedrekvote);
 
     return tilgjengeligeStønadskontoer.map((konto) => {
         if (konto.konto === StønadskontoType.Fedrekvote || konto.konto === StønadskontoType.Mødrekvote) {
@@ -30,27 +29,35 @@ export const overstyrAntallTilgjengeligeUttaksdagerForBarnFørJuli2018 = (
                 konto: konto.konto,
                 dager: ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 * ANTALL_UTTAKSDAGER_PR_UKE
             };
-        } else if (konto.konto === StønadskontoType.Fellesperiode) {
+        }
+        if (konto.konto === StønadskontoType.Fellesperiode) {
             return {
                 konto: konto.konto,
-                dager: konto.dager + ekstraFedrekvoteDager + ekstraMødrekvoteDager
+                dager:
+                    konto.dager +
+                    beregnEkstraDagerForBarnFødtFørJuli2018(fedrekvote!) +
+                    beregnEkstraDagerForBarnFødtFørJuli2018(mødrekvote!)
             };
-        } else {
-            return konto;
         }
+        return konto;
     });
+};
+
+const beregnEkstraDagerForBarnFødtFørJuli2018 = (tilgjengligKonto: TilgjengeligStønadskonto) => {
+    return tilgjengligKonto!.dager - ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 * ANTALL_UTTAKSDAGER_PR_UKE;
+};
+
+export const getTilgjengeligStønadskonto = (
+    tilgjengeligeStønadskontoer: TilgjengeligStønadskonto[],
+    støndaskontotype: StønadskontoType
+) => {
+    return tilgjengeligeStønadskontoer.find(({ konto }) => konto === støndaskontotype);
 };
 
 export const getFørsteUttaksdagDato = (perioder: Periode[]): string | undefined => {
     const førsteUttaksperiode = perioder.find((p) => p.type === PeriodeType.Uttak);
     return førsteUttaksperiode ? førsteUttaksperiode.tidsperiode.fom : undefined;
 };
-
-export interface FamiliehendelseDatoer {
-    fødselsdato: string | undefined;
-    termindato: string | undefined;
-    omsorgsovertakelsesdato: string | undefined;
-}
 
 export const getAktivitetsFrieUkerForeldrepenger = (dekningsgrad: Dekningsgrad, startdatoUttak: string): number => {
     if (dekningsgrad === Dekningsgrad.HUNDRE_PROSENT) {
@@ -73,10 +80,10 @@ export const opprettAktivitetsFriKonto = (
 };
 
 export const getRelevantFamiliehendelseDato = ({
-    termindato,
     fødselsdato,
+    termindato,
     omsorgsovertakelsesdato
-}: FamiliehendelseDatoer): string => {
+}: UttaksplanGrunnlagDto): string => {
     if (fødselsdato) {
         return fødselsdato;
     }

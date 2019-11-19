@@ -53,7 +53,7 @@ export function* getTilgjengeligeStønadskontoer(sak: Sak) {
             response.data
         );
 
-        const annenForelderErUkjent = true;
+        const annenForelderErUkjent = sak.annenPart === undefined;
 
         if (!morHarRett && !annenForelderErUkjent && !erAleneOmOmsorg(saksgrunnlag.grunnlag)) {
             tilgjengeligeStønadskontoer = opprettAktivitetsFriKonto(
@@ -83,16 +83,11 @@ export function* getTilgjengeligeStønadskontoer(sak: Sak) {
         }
 
         return skalTilgjengeligeKontoerJusteresPgaFamiliehendelsesdatoFørJuli2018(
-            getRelevantFamiliehendelseDato({
-                termindato,
-                fødselsdato,
-                omsorgsovertakelsesdato
-            }),
+            getRelevantFamiliehendelseDato(saksgrunnlag.grunnlag),
             tilgjengeligeStønadskontoer
         )
             ? overstyrAntallTilgjengeligeUttaksdagerForBarnFørJuli2018(tilgjengeligeStønadskontoer)
             : tilgjengeligeStønadskontoer;
-            
     } catch (error) {
         return undefined;
     }

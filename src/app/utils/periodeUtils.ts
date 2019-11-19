@@ -9,17 +9,15 @@ import { Rolle } from 'app/types/Rolle';
 import { ANTALL_UTTAKSDAGER_PR_UKE } from './constants';
 
 export const finnTidligerePerioder = (perioder: Periode[]): Periode[] => {
-    return perioder.filter((periode) => moment(periode.tidsperiode.tom).isBefore(moment(), 'days'));
+    return perioder.filter(({ tidsperiode }) => moment(tidsperiode.tom).isBefore(moment(), 'days'));
 };
 
 export const finnNåværendePerioder = (perioder: Periode[]): Periode[] => {
-    return perioder.filter((periode) =>
-        moment().isBetween(periode.tidsperiode.fom, periode.tidsperiode.tom, 'days', '[]')
-    );
+    return perioder.filter(({ tidsperiode }) => moment().isBetween(tidsperiode.fom, tidsperiode.tom, 'days', '[]'));
 };
 
 export const finnFremtidigePerioder = (perioder: Periode[]): Periode[] => {
-    return perioder.filter((periode) => moment(periode.tidsperiode.fom).isAfter(moment(), 'days'));
+    return perioder.filter(({ tidsperiode }) => moment(tidsperiode.fom).isAfter(moment(), 'days'));
 };
 
 export const getUkerOgDagerFromDager = (dager: number): { uker: number; dager: number } => {
@@ -70,23 +68,24 @@ export const getStønadskontoFarge = (
         return UttaksplanColor.purpleBlue;
     }
 
-    if (forelder === undefined) {
-        switch (konto) {
-            case StønadskontoType.Fedrekvote:
-            case StønadskontoType.AktivitetsfriKvote:
-                return UttaksplanColor.blue;
-            case StønadskontoType.Mødrekvote:
-            case StønadskontoType.Foreldrepenger:
-            case StønadskontoType.ForeldrepengerFørFødsel:
-                return UttaksplanColor.purple;
-            case StønadskontoType.Fellesperiode:
-            case StønadskontoType.Flerbarnsdager:
-                return UttaksplanColor.purpleBlue;
-            default:
-                return UttaksplanColor.transparent;
-        }
+    if (forelder) {
+        return forelder === Rolle.mor ? UttaksplanColor.purple : UttaksplanColor.blue;
     }
-    return forelder === Rolle.mor ? UttaksplanColor.purple : UttaksplanColor.blue;
+
+    switch (konto) {
+        case StønadskontoType.Fedrekvote:
+        case StønadskontoType.AktivitetsfriKvote:
+            return UttaksplanColor.blue;
+        case StønadskontoType.Mødrekvote:
+        case StønadskontoType.Foreldrepenger:
+        case StønadskontoType.ForeldrepengerFørFødsel:
+            return UttaksplanColor.purple;
+        case StønadskontoType.Fellesperiode:
+        case StønadskontoType.Flerbarnsdager:
+            return UttaksplanColor.purpleBlue;
+        default:
+            return UttaksplanColor.transparent;
+    }
 };
 
 export const getVarighetString = (antallDager: number, intl: InjectedIntl): string => {
@@ -185,9 +184,9 @@ export const skalVisesIPeriodeListe = (periode: Periode, perioder: Periode[]) =>
 };
 
 export const getPerioderForRolle = (rolle: Rolle, perioder: Periode[]) => {
-    return perioder.filter((p) => p.forelder === rolle);
+    return perioder.filter(({ forelder }) => forelder === rolle);
 };
 
 export const erGradert = (periode: Periode) => {
-    return periode.type === PeriodeType.Uttak ? (periode as Uttaksperiode).graderingInnvilget : false
-}
+    return periode.type === PeriodeType.Uttak ? (periode as Uttaksperiode).graderingInnvilget : false;
+};
