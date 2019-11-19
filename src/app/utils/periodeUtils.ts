@@ -176,11 +176,21 @@ export const getStønadskontoTypeFromOppholdsÅrsak = (årsak: OppholdsÅrsak): 
 };
 
 export const skalVisesIPeriodeListe = (periode: Periode, perioder: Periode[]) => {
-    return perioder.length <= 1
-        ? true
-        : ((periode as Uttaksperiode).samtidigUttak !== true &&
-              !harAnnenForelderSamtidigUttakISammePeriode(periode, perioder)) ||
-              (harAnnenForelderSamtidigUttakISammePeriode(periode, perioder) && !periode.gjelderAnnenPart);
+    if (perioder.length <= 1) {
+        return true;
+    }
+
+    if ((periode as Uttaksperiode).samtidigUttak !== true) {
+        return (
+            !harAnnenForelderSamtidigUttakISammePeriode(periode, perioder) ||
+            (harAnnenForelderSamtidigUttakISammePeriode(periode, perioder) && !periode.gjelderAnnenPart)
+        );
+    }
+
+    if ((periode as Uttaksperiode).samtidigUttak) {
+        return !harAnnenForelderSamtidigUttakISammePeriode(periode, perioder);
+    }
+    return true;
 };
 
 export const getPerioderForRolle = (rolle: Rolle, perioder: Periode[]) => {

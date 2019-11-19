@@ -2,7 +2,8 @@ import {
     getUkerOgDagerFromDager,
     finnFremtidigePerioder,
     erSammenhengende,
-    harAnnenForelderSamtidigUttakISammePeriode
+    harAnnenForelderSamtidigUttakISammePeriode,
+    skalVisesIPeriodeListe
 } from '../periodeUtils';
 import {
     PeriodeDto,
@@ -13,8 +14,9 @@ import {
     UtsettelsePeriodeType
 } from 'app/api/types/UttaksplanDto';
 import moment from 'moment';
-import Periode, { Uttaksperiode } from 'app/types/uttaksplan/Periode';
+import Periode, { Uttaksperiode, PeriodeType } from 'app/types/uttaksplan/Periode';
 import { slåSammenLikeOgSammenhengendeUttaksperioder } from 'app/utils/uttaksplanDtoUtils';
+import { Rolle } from 'app/types/Rolle';
 
 describe('periodeUtils', () => {
     describe('getUkerOgDagerFromDager', () => {
@@ -138,7 +140,7 @@ describe('periodeUtils', () => {
 
     it('en periode skal regnes som sammenhengende selv om forrige periode slutter på en sønadg', () => {
         expect(
-            erSammenhengende({ fom: "2020-03-02", tom: "2020-03-15" }, { fom: '2020-03-16', tom: '2020-03-27' })
+            erSammenhengende({ fom: '2020-03-02', tom: '2020-03-15' }, { fom: '2020-03-16', tom: '2020-03-27' })
         ).toBeTruthy();
     });
 
@@ -191,6 +193,113 @@ describe('periodeUtils', () => {
             }
         ];
 
-        expect(harAnnenForelderSamtidigUttakISammePeriode(perioder[1] as Uttaksperiode, perioder as Periode[])).toBeTruthy();
+        expect(
+            harAnnenForelderSamtidigUttakISammePeriode(perioder[1] as Uttaksperiode, perioder as Periode[])
+        ).toBeTruthy();
+    });
+
+    describe('skalVisesIPeriodeListe', () => {
+        it('skal returnere false hvis perioden er annen parts samtidig uttak', () => {
+            const perioder = [
+                {
+                    type: PeriodeType.Uttak,
+                    gjelderAnnenPart: true,
+                    tidsperiode: {
+                        fom: '2019-09-28',
+                        tom: '2019-10-08'
+                    },
+                    forelder: Rolle.mor,
+                    antallUttaksdager: 7,
+                    stønadskontotype: StønadskontoType.Mødrekvote,
+                    graderingInnvilget: false,
+                    samtidigUttak: false,
+                    samtidigUttaksprosent: 100
+                },
+                {
+                    type: PeriodeType.Uttak,
+                    gjelderAnnenPart: false,
+                    tidsperiode: {
+                        fom: '2019-09-28',
+                        tom: '2019-10-08'
+                    },
+                    forelder: Rolle.farMedmor,
+                    antallUttaksdager: 7,
+                    stønadskontotype: StønadskontoType.Mødrekvote,
+                    graderingInnvilget: false,
+                    samtidigUttak: true,
+                    samtidigUttaksprosent: 100
+                }
+            ] as Uttaksperiode[];
+            expect(skalVisesIPeriodeListe(perioder[0], perioder)).toBeFalsy();
+        });
+
+        it('skal returnere false hvis perioden er annen parts samtidig uttak', () => {
+            const perioder = [
+                {
+                    type: PeriodeType.Uttak,
+                    gjelderAnnenPart: true,
+                    tidsperiode: {
+                        fom: '2019-09-28',
+                        tom: '2019-10-08'
+                    },
+                    forelder: Rolle.mor,
+                    antallUttaksdager: 7,
+                    stønadskontotype: StønadskontoType.Mødrekvote,
+                    graderingInnvilget: false,
+                    samtidigUttak: false,
+                    samtidigUttaksprosent: 100
+                },
+                {
+                    type: PeriodeType.Uttak,
+                    gjelderAnnenPart: false,
+                    tidsperiode: {
+                        fom: '2019-09-28',
+                        tom: '2019-10-08'
+                    },
+                    forelder: Rolle.farMedmor,
+                    antallUttaksdager: 7,
+                    stønadskontotype: StønadskontoType.Mødrekvote,
+                    graderingInnvilget: false,
+                    samtidigUttak: true,
+                    samtidigUttaksprosent: 100
+                }
+            ] as Uttaksperiode[];
+            expect(skalVisesIPeriodeListe(perioder[0], perioder)).toBeFalsy();
+        });
+
+        it('skal returnere true hvis perioden er søkers periode med samtidig uttak', () => {
+            const perioder = [
+                {
+                    type: PeriodeType.Uttak,
+                    gjelderAnnenPart: false,
+                    tidsperiode: {
+                        fom: '2019-09-28',
+                        tom: '2019-10-08'
+                    },
+                    forelder: Rolle.mor,
+                    antallUttaksdager: 7,
+                    stønadskontotype: StønadskontoType.Mødrekvote,
+                    graderingInnvilget: false,
+                    samtidigUttak: false,
+                    samtidigUttaksprosent: 100
+                },
+                {
+                    type: PeriodeType.Uttak,
+                    gjelderAnnenPart: true,
+                    tidsperiode: {
+                        fom: '2019-09-28',
+                        tom: '2019-10-08'
+                    },
+                    forelder: Rolle.farMedmor,
+                    antallUttaksdager: 7,
+                    stønadskontotype: StønadskontoType.Mødrekvote,
+                    graderingInnvilget: false,
+                    samtidigUttak: true,
+                    samtidigUttaksprosent: 100
+                }
+            ] as Uttaksperiode[];
+            expect(skalVisesIPeriodeListe(perioder[0], perioder)).toBeTruthy();
+        });
+
     });
 });
