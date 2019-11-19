@@ -101,8 +101,8 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                         <Knapp
                             onClick={() =>
                                 erForeldrepengesak(sak)
-                                    ? redirect(lenker.endringssøknad)
-                                    : redirect(lenker.svangerskapspengesøknad)
+                                    ? redirect(new URL(lenker.endringssøknad))
+                                    : redirect(new URL(lenker.svangerskapspengesøknad))
                             }>
                             <FormattedMessage
                                 id={

@@ -1,7 +1,10 @@
 import Environment from '../Environment';
 
-export const redirect = (url: string, searchParams?: URLSearchParams) => {
-    window.location.href = searchParams ? url + searchParams.toString() : url;
+export const redirect = (url: URL, searchParams?: URLSearchParams) => {
+    if (searchParams) {
+        searchParams.forEach((value, key) => url.searchParams.append(key, value));
+    }
+    window.location.replace(url.href)
 };
 
 export const redirectToLogin = () => {
