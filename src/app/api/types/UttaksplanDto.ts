@@ -18,12 +18,12 @@ export interface UttaksplanGrunnlagDto {
 export interface PeriodeDto {
     periodeResultatType: PeriodeResultatType;
     utsettelsePeriodeType: UtsettelsePeriodeType;
-    graderingInnvilget: boolean;
+    graderingInnvilget?: boolean;
     samtidigUttak: boolean;
     samtidigUttaksprosent: number;
     stønadskontotype: StønadskontoType;
     trekkDager: number;
-    arbeidstidprosent: number;
+    arbeidstidprosent?: number;
     utbetalingsprosent: number;
     gjelderAnnenPart: boolean;
     flerbarnsdager: boolean;

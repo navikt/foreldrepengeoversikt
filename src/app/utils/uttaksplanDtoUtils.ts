@@ -28,8 +28,8 @@ export const getForelderForPeriode = (periode: PeriodeDto, søkerErFarEllerMedmo
     return søkerErFarEllerMedmor ? Rolle.farMedmor : Rolle.mor;
 };
 
-export const getGraderingsprosent = (periode: PeriodeDto): number => {
-    return 100 - periode.arbeidstidprosent;
+export const getGraderingsprosent = (periode: PeriodeDto): string | undefined => {
+    return periode.arbeidstidprosent ? (100 - periode.arbeidstidprosent).toFixed(0) : undefined;
 };
 
 export const fjernIrrelevanteTaptePerioder = (periode: PeriodeDto, perioder: PeriodeDto[]) => {
@@ -141,7 +141,7 @@ const reduceDuplikateSaksperioderGrunnetArbeidsforhold = (
     perioder: PeriodeDto[]
 ) => {
     if (erDuplikatPeriodePgaFlereArbeidsforhold(periode, perioder)) {
-        if (periode.graderingInnvilget && periode.arbeidstidprosent > 0) {
+        if (periode.graderingInnvilget && periode.arbeidstidprosent && periode.arbeidstidprosent > 0) {
             resultatPerioder.push(periode);
             return resultatPerioder;
         }

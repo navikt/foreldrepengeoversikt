@@ -22,10 +22,7 @@ export const uttaksperiodeDtoToPeriode = (uttaksperiodeDto: PeriodeDto, søkerEr
     }
 };
 
-const periodeDtoUToTaptPeriode = (
-    uttaksperiodeDto: PeriodeDto,
-    søkerErFarEllerMedmor: boolean
-): TaptPeriode => ({
+const periodeDtoUToTaptPeriode = (uttaksperiodeDto: PeriodeDto, søkerErFarEllerMedmor: boolean): TaptPeriode => ({
     type: PeriodeType.TaptPeriode,
     tidsperiode: uttaksperiodeDto.periode,
     antallUttaksdager: getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode),
@@ -47,10 +44,7 @@ const periodeDtoUToOppholdsperiode = (
     };
 };
 
-const periodeDtoUTottaksperiode = (
-    uttaksperiodeDto: PeriodeDto,
-    søkerErFarEllerMedmor: boolean
-): Uttaksperiode => {
+const periodeDtoUTottaksperiode = (uttaksperiodeDto: PeriodeDto, søkerErFarEllerMedmor: boolean): Uttaksperiode => {
     return {
         type: PeriodeType.Uttak,
         gjelderAnnenPart: uttaksperiodeDto.gjelderAnnenPart,
@@ -58,8 +52,9 @@ const periodeDtoUTottaksperiode = (
         forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
         antallUttaksdager: uttaksperiodeDto.trekkDager,
         stønadskontotype: uttaksperiodeDto.stønadskontotype,
-        graderingInnvilget: uttaksperiodeDto.graderingInnvilget,
-        graderingsprosent: getGraderingsprosent(uttaksperiodeDto).toFixed(1),
+        graderingInnvilget:
+            uttaksperiodeDto.graderingInnvilget !== undefined ? uttaksperiodeDto.graderingInnvilget : false,
+        graderingsprosent: getGraderingsprosent(uttaksperiodeDto) || '0',
         samtidigUttak: uttaksperiodeDto.samtidigUttak,
         samtidigUttaksprosent: uttaksperiodeDto.samtidigUttaksprosent
     };
