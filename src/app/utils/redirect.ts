@@ -4,7 +4,7 @@ export const redirect = (url: URL, searchParams?: URLSearchParams) => {
     if (searchParams) {
         searchParams.forEach((value, key) => url.searchParams.append(key, value));
     }
-    window.location.replace(url.href)
+    window.location.href = url.href;
 };
 
 export const redirectToLogin = () => {
