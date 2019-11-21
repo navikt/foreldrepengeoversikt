@@ -27,6 +27,11 @@ import { isFeatureEnabled, Feature } from 'app/Feature';
 
 import { getNavnPåForeldre } from 'app/utils/søkerinfoUtils';
 
+import { Knapp } from 'nav-frontend-knapper';
+import { skalKunneSøkeOmEndring } from 'app/utils/sakerUtils';
+import { redirect } from 'app/utils/redirect';
+import { lenker } from 'app/utils/lenker';
+
 import './dinPlan.less';
 
 interface Props {
@@ -74,6 +79,16 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
                     erFarMedmor={sak.saksgrunnlag.grunnlag.søkerErFarEllerMedmor}
                     navnPåForeldre={getNavnPåForeldre(sak, søker)}
                 />
+            )}
+            {skalKunneSøkeOmEndring(sak) && (
+                <div className={cls.element('endringssoknad-btn')}>
+                    <Knapp onClick={() => redirect(lenker.endringssøknad)}>
+                        <FormattedMessage
+                            id="saksoversikt.content.endringssøknad.button"
+                            values={{ erEndringssøknad: true }}
+                        />
+                    </Knapp>
+                </div>
             )}
         </Page>
     );
