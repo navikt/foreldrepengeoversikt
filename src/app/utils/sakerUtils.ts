@@ -69,9 +69,11 @@ export const erSvangerskapepengesak = (sak: SakBase): boolean => {
 };
 
 export const harEnAvsluttetBehandling = (sak: SakBase): boolean => {
-    return sak.behandlinger
-        ? sak.behandlinger.some((behandling: Behandling) => behandling.status === BehandlingStatus.AVSLUTTET)
-        : false;
+    return sak.behandlinger ? sak.behandlinger.some(erBehandlingAvsluttet) : false;
+};
+
+export const erBehandlingAvsluttet = (behandling: Behandling) => {
+    return behandling.status === BehandlingStatus.AVSLUTTET;
 };
 
 export const skalKunneSøkeOmEndring = (sak: SakBase): boolean => {
