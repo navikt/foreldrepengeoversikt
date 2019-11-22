@@ -6,7 +6,7 @@ export enum HistorikkInnslagType {
     "minidialog" = "minidialog"
 }
 
-export interface HistorikkInnslagBase {
+export interface HistorikkInnslag {
     type: HistorikkInnslagType;
     aktørId: string;
     saksnr: string;
@@ -15,7 +15,7 @@ export interface HistorikkInnslagBase {
     fnr: string;
 }
 
-export interface Innsendingsinnslag extends HistorikkInnslagBase {
+export interface Innsendingsinnslag extends HistorikkInnslag {
     type: HistorikkInnslagType.søknad,
     hendelse: HendelseType;
     vedlegg?: Skjemanummer[];
@@ -24,14 +24,15 @@ export interface Innsendingsinnslag extends HistorikkInnslagBase {
     dialogId?: string;
 }
 
-export interface InntektsmeldingInnslag extends HistorikkInnslagBase {
-    arbeidsgiver: object;
+export interface InntektsmeldingInnslag extends HistorikkInnslag {
+    arbeidsgiver: {
+        navn: string;
+    };
     referanseId: string;
     dialogId: string;
 }
 
-
-export interface MinidialogInnslag extends HistorikkInnslagBase {
+export interface MinidialogInnslag extends HistorikkInnslag {
     type: HistorikkInnslagType.minidialog;
     gyldigTil: string;
     tekst: string;

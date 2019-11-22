@@ -2,19 +2,27 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import MediaQuery from 'react-responsive';
 
+import { guid } from 'nav-frontend-js-utils';
 import Snakkeboble from 'nav-frontend-snakkeboble';
-import { Element } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import BEMHelper from 'common/util/bem';
-import { formaterDatoForHendelse } from './util';
 import { BehandlingResultatType, BehandlingÅrsak } from '../../api/types/sak/Behandling';
 import Person from 'app/types/Person';
+import normalizeName from 'app/utils/normalizeName';
+
+import { formaterDatoForHendelse } from './util';
 
 import './historikk.less';
 
 export interface Hendelse {
     dato: string;
-    beskrivelse: BehandlingÅrsak | BehandlingResultatType | string;
+    type: BehandlingÅrsak | BehandlingResultatType | string;
+    beskrivelse: string;
+    arbeidsgiver?: {
+        navn: string;
+    };
+    skjemanumre?: string[];
     brukerInitiertHendelse: boolean;
 }
 
@@ -25,7 +33,7 @@ interface HistorikkElementProps {
 
 type Props = HistorikkElementProps;
 
-function HistorikkElement(props: Props) {
+const HistorikkElement: React.StatelessComponent<Props> = (props: Props) => {
     const { hendelse } = props;
 
     const cls = BEMHelper('historikk-element');
@@ -38,15 +46,31 @@ function HistorikkElement(props: Props) {
                             dato={formaterDatoForHendelse(hendelse.dato)}
                             pilHoyre={!hendelse.brukerInitiertHendelse && !matches}
                             ikonClass={hendelse.brukerInitiertHendelse ? 'bruker' : 'nav'}>
-                            <Element tag="p">
-                                <FormattedMessage id={`historikk.${hendelse.beskrivelse}`} />
-                            </Element>
+                            <>
+                                <Element tag="p">
+                                    <FormattedMessage id={`historikk.${hendelse.beskrivelse}`} />
+                                </Element>
+                                <div className={cls.element('tilleggsinformasjon')}>
+                                    {hendelse.arbeidsgiver !== undefined && (
+                                        <Normaltekst tag="p">{normalizeName(hendelse.arbeidsgiver!.navn)}</Normaltekst>
+                                    )}
+                                    {hendelse.skjemanumre && hendelse.skjemanumre.length > 0 && (
+                                        <ul>
+                                            {hendelse.skjemanumre.map((skjemanummer) => (
+                                                <li key={guid()}>
+                                                    <FormattedMessage id={`historikk.${skjemanummer}`} />
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                            </>
                         </Snakkeboble>
                     );
                 }}
             </MediaQuery>
         </li>
     );
-}
+};
 
 export default HistorikkElement;

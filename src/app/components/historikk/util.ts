@@ -1,8 +1,14 @@
 import { Hendelse } from './HistorikkElement';
 import Behandling, { BehandlingResultatType, BehandlingÅrsak } from '../../api/types/sak/Behandling';
 import { formatDate } from '../saksoversikt/utils';
-import { Innsendingsinnslag } from 'app/api/types/historikk/HistorikkInnslag';
-import { erBehandlingAvsluttet } from 'app/utils/sakerUtils';
+import {
+    Innsendingsinnslag,
+    HistorikkInnslagType,
+    HistorikkInnslag,
+    HendelseType,
+    InntektsmeldingInnslag
+} from 'app/api/types/historikk/HistorikkInnslag';
+import { erBehandlingAvsluttet, getEldsteBehadnling } from 'app/utils/sakerUtils';
 
 export const formaterDatoForHendelse = (dato: string) => {
     return formatDate(dato, 'D. MMMM YYYY [kl.] HH:mm:ss');
@@ -27,62 +33,69 @@ const erInitiertAvBruker = (årsak?: BehandlingÅrsak | null): boolean => {
     }
 };
 
-const utledSøknadMotattHendelse = (hendelser: Hendelse[]) => {
-    const søknadMotattHendelseIndex = hendelser
-        .slice()
-        .reverse()
-        .findIndex((h: Hendelse) => h.beskrivelse !== 'inntektsmelding-motatt');
-
-    hendelser[hendelser.length - 1 - søknadMotattHendelseIndex] = {
-        ...hendelser[hendelser.length - 1 - søknadMotattHendelseIndex],
-        beskrivelse: 'søknad-sendt',
-        brukerInitiertHendelse: true
-    };
-    return hendelser;
-};
-
 const erHendelseRelevant = (h: Hendelse): boolean => {
     return (
         Object.values(BehandlingResultatType)
             .map((brt) => brt.toString())
-            .includes(h.beskrivelse) ||
-        h.beskrivelse === 'søknad-sendt' ||
-        h.beskrivelse === 'inntektsmelding-motatt' ||
-        h.beskrivelse === BehandlingÅrsak.ENDRET_INNTEKTSMELDING ||
-        h.beskrivelse === BehandlingÅrsak.ENDRING_FRA_BRUKER
+            .includes(h.type) ||
+        h.type === 'søknad-sendt' ||
+        h.type === 'inntektsmelding-motatt' ||
+        h.type === BehandlingÅrsak.ENDRET_INNTEKTSMELDING ||
+        h.type === BehandlingÅrsak.ENDRING_FRA_BRUKER ||
+        h.type === HistorikkInnslagType.søknad ||
+        h.type === HistorikkInnslagType.inntekt
     );
 };
 
-export const opprettHendelserFraHistorikkinnslagListe = (historikkInnslagListe: Innsendingsinnslag[]): Hendelse[] => {
-    return historikkInnslagListe.map((historikkInnslagEttersendelser) => ({
-        dato: historikkInnslagEttersendelser.opprettet,
-        beskrivelse: historikkInnslagEttersendelser.hendelse,
-        brukerInitiertHendelse: true
-    }));
-};
-
-const utledHendelserUtenHistorikkInnslag = (behandlinger: Behandling[]): Hendelse[] => {
+const utledHendelserMedBehandlinger = (
+    behandlinger: Behandling[],
+    utledInnteksmeldinger: boolean,
+    skalUtledInnsendingstidspunkt: boolean
+): Hendelse[] => {
     const behanldingerUtenDuplikater = behandlinger.filter(fjernBehandlingerMedLikOpprettetDato);
     const behandlingsresultatHendelser = behanldingerUtenDuplikater
         .filter(erBehandlingAvsluttet)
         .map(behandlingsResultatTilHendelse);
 
     const behandlingsÅrsakHendelser = behanldingerUtenDuplikater
-        .filter((b) => b.årsak !== null)
+        .filter((b) => b.årsak !== null && b.årsak !== BehandlingÅrsak.ENDRET_INNTEKTSMELDING)
         .map(behandlingÅrsakTilHendelse);
 
-    const inntektsmeldingHendeliser = behanldingerUtenDuplikater
-        .filter((b) => b.inntektsmeldinger.length > 0)
-        .map(behandlingMedInntektmeldingerTilHendelse);
+    const inntektsmeldingHendeliser = utledInnteksmeldinger
+        ? behanldingerUtenDuplikater
+              .filter((b) => b.inntektsmeldinger.length > 0)
+              .map(behandlingMedInntektmeldingerTilHendelse)
+        : [];
+
+    if (skalUtledInnsendingstidspunkt) {
+        const søknadSendtHendelse = utledInnsendingstidspunkt(behandlinger);
+        if(søknadSendtHendelse) {
+            behandlingsÅrsakHendelser.push(søknadSendtHendelse)
+        } 
+    }
 
     return [...behandlingsresultatHendelser, ...behandlingsÅrsakHendelser, ...inntektsmeldingHendeliser].sort(
         sortHendlser
     );
 };
 
+const utledInnsendingstidspunkt = (behandlinger: Behandling[]): Hendelse | undefined => {
+    const eldsteBehandling = getEldsteBehadnling(behandlinger);
+    if (eldsteBehandling) {
+        return {
+            dato: eldsteBehandling.opprettetTidspunkt,
+            type: 'søknad-sendt',
+            beskrivelse: 'søknad-sendt',
+            brukerInitiertHendelse: true
+        };
+    }
+    return undefined;
+};
+
 const behandlingMedInntektmeldingerTilHendelse = (behandling: Behandling): Hendelse => {
     return {
         dato: behandling.opprettetTidspunkt,
+        type: 'inntektsmelding-motatt',
         beskrivelse: 'inntektsmelding-motatt',
         brukerInitiertHendelse: false
     };
@@ -91,6 +104,7 @@ const behandlingMedInntektmeldingerTilHendelse = (behandling: Behandling): Hende
 const behandlingsResultatTilHendelse = (behandling: Behandling): Hendelse => {
     return {
         dato: behandling.endretTidspunkt,
+        type: behandling.behandlingResultat,
         beskrivelse: behandling.behandlingResultat,
         brukerInitiertHendelse: false
     };
@@ -99,23 +113,61 @@ const behandlingsResultatTilHendelse = (behandling: Behandling): Hendelse => {
 const behandlingÅrsakTilHendelse = (behandling: Behandling): Hendelse => {
     return {
         dato: behandling.opprettetTidspunkt,
+        type: behandling.årsak!,
         beskrivelse: behandling.årsak!,
         brukerInitiertHendelse: erInitiertAvBruker(behandling.årsak)
     };
 };
 
-export const utledHendelser = (
-    behandlinger?: Behandling[],
-    historikkInnslagListe?: Innsendingsinnslag[]
-): Hendelse[] => {
+const historikkInnslagTilHendelse = (historikkInnslag: HistorikkInnslag): Hendelse => {
+    return {
+        dato: historikkInnslag.opprettet,
+        type: historikkInnslag.type,
+        beskrivelse: getBeskrivelseForHistorikkInnslag(historikkInnslag),
+        brukerInitiertHendelse: historikkInnslag.type === HistorikkInnslagType.søknad,
+        skjemanumre: (historikkInnslag as Innsendingsinnslag).vedlegg,
+        arbeidsgiver: (historikkInnslag as InntektsmeldingInnslag).arbeidsgiver
+    };
+};
+
+const getBeskrivelseForHistorikkInnslag = (historikkInnslag: HistorikkInnslag): string => {
+    if (historikkInnslag.type === HistorikkInnslagType.søknad) {
+        return (historikkInnslag as Innsendingsinnslag).hendelse;
+    }
+    return historikkInnslag.type;
+};
+
+export const hentHendelserFraHistorikkinnslagListe = (historikkInnslagListe?: HistorikkInnslag[]): Hendelse[] => {
+    if (historikkInnslagListe === undefined) {
+        return [];
+    }
+
+    const historikkInnslag = historikkInnslagListe
+        .filter((h) => h.type === HistorikkInnslagType.inntekt || HistorikkInnslagType.søknad)
+        .filter(
+            (h) =>
+                (h as Innsendingsinnslag).hendelse !== HendelseType.INITIELL_FORELDREPENGER &&
+                (h as Innsendingsinnslag).hendelse !== HendelseType.ENDRING_FORELDREPENGER &&
+                (h as Innsendingsinnslag).hendelse !== HendelseType.INITIELL_ENGANGSSTØNAD &&
+                (h as Innsendingsinnslag).hendelse !== HendelseType.INITIELL_SVANGERSKAPSPENGER
+        );
+
+    return historikkInnslag.map(historikkInnslagTilHendelse);
+};
+
+export const utledHendelser = (behandlinger?: Behandling[], historikkInnslagListe?: HistorikkInnslag[]): Hendelse[] => {
     if (behandlinger === undefined || behandlinger.length === 0) {
         return [];
     }
 
-    let hendelser = utledHendelserUtenHistorikkInnslag(behandlinger);
-    hendelser = utledSøknadMotattHendelse(hendelser);
+    const utledInnteksmeldingerVedHjelpAvBehandlinger =
+        historikkInnslagListe === undefined ||
+        !historikkInnslagListe.some((historikkInnslag) => historikkInnslag.type === HistorikkInnslagType.inntekt);
 
-    return hendelser.filter(erHendelseRelevant).sort(sortHendlser);
+    return utledHendelserMedBehandlinger(behandlinger, utledInnteksmeldingerVedHjelpAvBehandlinger, true)
+        .concat(...hentHendelserFraHistorikkinnslagListe(historikkInnslagListe))
+        .filter(erHendelseRelevant)
+        .sort(sortHendlser);
 };
 
 const sortHendlser = (h1: Hendelse, h2: Hendelse) => h2.dato.localeCompare(h1.dato);

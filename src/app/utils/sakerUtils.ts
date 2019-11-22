@@ -80,7 +80,6 @@ export const skalKunneSøkeOmEndring = (sak: SakBase): boolean => {
     if (!erForeldrepengesak(sak) || sak.saksnummer === undefined) {
         return false;
     }
-
     return (sak.status !== FagsakStatus.AVSLUTTET && harEnAvsluttetBehandling(sak)) || erInfotrygdSak(sak);
 };
 
@@ -96,4 +95,11 @@ export const opprettFiktivSak = (storageKvittering: StorageKvittering): SakBase 
 
 export const harSøkt = (sak: SakBase): boolean => {
     return !erInfotrygdSak(sak) ? sak.behandlinger !== undefined && sak.behandlinger.length > 0 : true;
+};
+
+export const getEldsteBehadnling = (behandlinger: Behandling[]): Behandling | undefined => {
+    if (behandlinger !== undefined && behandlinger.length > 0) {
+        return behandlinger.sort(behandlingByDescendingOrder).reverse()[0];
+    }
+    return undefined;
 };

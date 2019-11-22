@@ -145,7 +145,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
             {!erInfotrygdSak(sak) && (
                 <Oversikt
                     søker={søkerinfo ? søkerinfo.person : undefined}
-                    hendelser={utledHendelser(sak.behandlinger, undefined)}
+                    hendelser={utledHendelser(sak.behandlinger, historikkInnslagListe)}
                 />
             )}
         </div>

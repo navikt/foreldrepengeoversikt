@@ -12,14 +12,14 @@ describe('historikk', () => {
 
     it('Første behandling skal føre til en brukerinitiert søknad sendt hendelse', () => {
         const behanlding1 = { ...foreldrepengesoknadBehandlingMock, årsak: null };
-        expect(utledHendelser([behanlding1])[0].beskrivelse).toEqual('søknad-sendt');
+        expect(utledHendelser([behanlding1])[0].type).toEqual('søknad-sendt');
     });
 
     it('Første behandling skal føre til en innteksmelding mottatt hendelse hvis behandlingen har referanse til inntektsmelding', () => {
         const behanlding1 = { ...foreldrepengesoknadBehandlingMock, årsak: null, inntektsmeldinger: ['1234'] };
         expect(utledHendelser([behanlding1]).length).toEqual(2);
-        expect(utledHendelser([behanlding1])[0].beskrivelse).toEqual('inntektsmelding-motatt');
-        expect(utledHendelser([behanlding1])[1].beskrivelse).toEqual('søknad-sendt');
+        expect(utledHendelser([behanlding1])[1].type).toEqual('inntektsmelding-motatt');
+        expect(utledHendelser([behanlding1])[0].type).toEqual('søknad-sendt');
     });
 
     it('En avsluttet behandling skal ha behandlnigens resultat som egen hendelse', () => {
@@ -30,7 +30,7 @@ describe('historikk', () => {
             hendelser.some((h: Hendelse) =>
                 Object.values(BehandlingResultatType)
                     .map((brt) => brt.toString())
-                    .includes(h.beskrivelse)
+                    .includes(h.type)
             )
         ).toBeTruthy();
     });
@@ -66,7 +66,7 @@ describe('historikk', () => {
             endretTidspunkt: '2018-01-21T12:10:00.33'
         };
         expect(
-            utledHendelser([behanlding], undefined).find((hendelse) => hendelse.beskrivelse === 'søknad-sendt')
+            utledHendelser([behanlding], undefined).find((hendelse) => hendelse.type === 'søknad-sendt')
         ).toBeTruthy();
     });
 });
