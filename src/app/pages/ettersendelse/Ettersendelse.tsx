@@ -168,7 +168,7 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
                     {getListOfUniqueSkjemanummer(uploadedAttachments).map((skjemanummer: Skjemanummer) => (
                         <AttachmentList
                             key={skjemanummer}
-                            intlKey={`ettersendelse.attachmentList.${skjemanummer}`}
+                            intlKey={`ettersendelse.${skjemanummer}`}
                             onDelete={deleteAttachment}
                             attachments={uploadedAttachments.filter((a: Attachment) => a.skjemanummer === skjemanummer)}
                         />

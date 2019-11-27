@@ -74,7 +74,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
 
             {attachments.length > 0 && (
                 <AttachmentList
-                    intlKey={`ettersendelse.attachmentList.${Skjemanummer.TILBAKEBETALING}`}
+                    intlKey={`ettersendelse.${Skjemanummer.TILBAKEBETALING}`}
                     onDelete={deleteAttachment}
                     attachments={attachments}
                 />

@@ -26,7 +26,7 @@ export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: SakBase)
         {getRelevanteSkjemanummer(sak)
             .map((skjemanummer) => ({
                 skjemanummer,
-                text: intl.formatMessage({ id: `ettersendelse.select.${skjemanummer}` })
+                text: intl.formatMessage({ id: `ettersendelse.${skjemanummer}` })
             }))
             .sort((selectOption, nextSelectOption) => selectOption.text.localeCompare(nextSelectOption.text))
             .map(({ skjemanummer, text }) => (
