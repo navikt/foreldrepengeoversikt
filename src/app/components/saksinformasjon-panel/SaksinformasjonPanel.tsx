@@ -137,7 +137,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                                 .filter((p) => skalVisesIPeriodeListe(p, perioder))
                                 .slice(0, 1)}
                             søker={søkerinfo.person}
-                            annenPart={sak.annenPart}
+                            sak={sak}
                         />
                     </SectionSeparator>
                 )}

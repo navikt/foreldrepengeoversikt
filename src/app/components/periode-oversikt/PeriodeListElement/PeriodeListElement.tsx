@@ -6,11 +6,12 @@ import moment from 'moment';
 
 import BEMHelper from 'common/util/bem';
 import UttakIkon from 'app/components/ikoner/UttakIkon';
-import AnnenPart from 'app/api/types/sak/AnnenPart';
 import { Rolle } from 'app/types/Rolle';
 import Periode from 'app/types/uttaksplan/Periode';
 import { getAntallUttaksdagerITidsperiode } from 'app/utils/periodeUtils';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
+import { NavnPåForeldre } from 'common/components/oversikt-brukte-dager/OversiktBrukteDager';
+import { Tidsperiode } from 'app/types/Tidsperiode';
 
 import './periodeListElement.less';
 
@@ -20,9 +21,9 @@ interface Props {
     ikon: React.ReactNode | undefined;
     beskrivelse?: string | React.ReactNode;
     melding?: string;
-    tidsperiode?: any;
-    annenPart?: AnnenPart;
+    tidsperiode?: Tidsperiode;
     annenForelderSamtidigUttakPeriode?: Periode;
+    navnPåForeldre?: NavnPåForeldre;
     beskrivelseSamtidigUttak?: React.ReactNode;
     color: UttaksplanColor;
 }
@@ -52,8 +53,8 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
     beskrivelse,
     melding,
     tidsperiode,
-    annenPart,
     annenForelderSamtidigUttakPeriode,
+    navnPåForeldre,
     color
 }) => {
     return (
@@ -102,11 +103,9 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
                                     <em className={BEM.element('hvem')}>
                                         {' '}
                                         -{' '}
-                                        {annenPart ? (
-                                            annenPart.navn.fornavn
-                                        ) : (
-                                            <FormattedMessage id="denAndreForelderen" />
-                                        )}
+                                        {annenForelderSamtidigUttakPeriode.forelder === Rolle.mor
+                                            ? navnPåForeldre!.mor
+                                            : navnPåForeldre!.farMedmor}
                                     </em>
                                 </>
                             </Normaltekst>

@@ -58,7 +58,7 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
             onBackClick={() => history.push(Routes.DINE_FORELDREPENGER)}>
             <PeriodeOversikt
                 søker={søker}
-                annenPart={sak.annenPart}
+                sak={sak}
                 tidligerePerioder={finnTidligerePerioder(perioder!)}
                 nåværendePerioder={finnNåværendePerioder(perioder!)}
                 fremtidigePerioder={finnFremtidigePerioder(perioder!)}

@@ -17,18 +17,19 @@ import UttakIkon from 'app/components/ikoner/UttakIkon';
 import Periode, { PeriodeType, Utsettelsesperiode, Uttaksperiode, Oppholdsperiode } from 'app/types/uttaksplan/Periode';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import UttaksplanAdvarselIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/UttaksplanAdvarselIkon';
-import AnnenPart from 'app/api/types/sak/AnnenPart';
-import Person from 'app/types/Person';
 
 import PeriodeListElement from '../PeriodeListElement/PeriodeListElement';
+
+import { getStønadskontoNavn } from 'common/components/uttaksoppsummering/Kontostatus';
+import { NavnPåForeldre } from 'common/components/oversikt-brukte-dager/OversiktBrukteDager';
+import { Rolle } from 'app/types/Rolle';
 
 import './periodeList.less';
 
 interface Props {
     tittel: string | React.ReactNode;
     perioder: Periode[];
-    søker: Person;
-    annenPart?: AnnenPart;
+    navnPåForeldre: NavnPåForeldre;
 }
 
 const getIconFarge = (periode: Periode) => {
@@ -50,14 +51,13 @@ export const getIkon = (periode: Periode) => {
     );
 };
 
-const getBeskrivelse = (periode: Periode, aktører: { søker: Person; annenPart?: AnnenPart }, intl: InjectedIntl) => {
+const getBeskrivelse = (periode: Periode, navnPåForeldre: NavnPåForeldre, intl: InjectedIntl) => {
     return (
         <>
             {getVarighetString(periode.antallUttaksdager, intl)}
             <em className="periode-list__hvem">
                 {' '}
-                -{' '}
-                {periode.gjelderAnnenPart && aktører.annenPart ? aktører.annenPart.navn.fornavn : aktører.søker.fornavn}
+                - {periode.forelder === Rolle.mor ? navnPåForeldre.mor : navnPåForeldre.farMedmor}
             </em>
         </>
     );
@@ -66,8 +66,7 @@ const getBeskrivelse = (periode: Periode, aktører: { søker: Person; annenPart?
 const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
     tittel,
     perioder,
-    søker,
-    annenPart,
+    navnPåForeldre,
     intl
 }) => {
     const cls = BEMHelper('periode-list');
@@ -83,23 +82,19 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                 return (
                                     <PeriodeListElement
                                         key={guid()}
-                                        tittel={
-                                            <FormattedMessage
-                                                id={`kvote.${(p as Uttaksperiode).stønadskontotype.toLowerCase()}`}
-                                                values={{
-                                                    erGradert: erGradert(p),
-                                                    graderingsprosent: (p as Uttaksperiode).graderingsprosent
-                                                }}
-                                            />
-                                        }
+                                        tittel={getStønadskontoNavn(
+                                            intl,
+                                            (p as Uttaksperiode).stønadskontotype,
+                                            navnPåForeldre
+                                        )}
                                         ikon={getIkon(p)}
-                                        beskrivelse={getBeskrivelse(p, { søker, annenPart }, intl)}
+                                        beskrivelse={getBeskrivelse(p, navnPåForeldre, intl)}
                                         tidsperiode={p.tidsperiode}
                                         annenForelderSamtidigUttakPeriode={getAnnenPartsPeriodeMedSamtidigUttak(
                                             p,
                                             perioder
                                         )}
-                                        annenPart={annenPart}
+                                        navnPåForeldre={navnPåForeldre}
                                         color={getIconFarge(p)}
                                     />
                                 );
@@ -120,7 +115,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                             />
                                         }
                                         ikon={getIkon(p)}
-                                        beskrivelse={getBeskrivelse(p, { søker, annenPart }, intl)}
+                                        beskrivelse={getBeskrivelse(p, navnPåForeldre, intl)}
                                         tidsperiode={p.tidsperiode}
                                         color={getIconFarge(p)}
                                     />
@@ -168,7 +163,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                             <FormattedMessage
                                                 id="dinPlan.opphold.beskrivelse"
                                                 values={{
-                                                    navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen'
+           
                                                 }}
                                             />
                                         }
@@ -186,7 +181,7 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
                                             <FormattedMessage
                                                 id="dinPlan.taptPeriode.beskrivelse"
                                                 values={{
-                                                    navn: annenPart ? annenPart.navn.fornavn : 'Den andre forelderen',
+                                                    navn: p.forelder === Rolle.mor ? navnPåForeldre.mor : navnPåForeldre.farMedmor,
                                                     antallDager: getVarighetString(p.antallUttaksdager, intl)
                                                 }}
                                             />
