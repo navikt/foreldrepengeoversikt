@@ -103,12 +103,20 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     shouldRenderAlertStripe(sak: SakBase): boolean {
-        return (
+        console.log(
             !this.props.historikkInnslagListe.find(
                 ({ hendelse }) =>
                     hendelse === HendelseType.INITIELL_FORELDREPENGER &&
                     (harSøkt(sak) && erForeldrepengesak(sak) && !harEnAvsluttetBehandling(sak))
             ) || erInfotrygdSak(sak)
+        );
+
+        return (
+            (!this.props.historikkInnslagListe.find(
+                ({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER
+            ) &&
+                (harSøkt(sak) && erForeldrepengesak(sak) && !harEnAvsluttetBehandling(sak))) ||
+            erInfotrygdSak(sak)
         );
     }
 
