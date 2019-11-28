@@ -69,9 +69,9 @@ const utledHendelserMedBehandlinger = (
 
     if (skalUtledInnsendingstidspunkt) {
         const søknadSendtHendelse = utledInnsendingstidspunkt(behandlinger);
-        if(søknadSendtHendelse) {
-            behandlingsÅrsakHendelser.push(søknadSendtHendelse)
-        } 
+        if (søknadSendtHendelse) {
+            behandlingsÅrsakHendelser.push(søknadSendtHendelse);
+        }
     }
 
     return [...behandlingsresultatHendelser, ...behandlingsÅrsakHendelser, ...inntektsmeldingHendeliser].sort(
@@ -132,7 +132,14 @@ const historikkInnslagTilHendelse = (historikkInnslag: HistorikkInnslag): Hendel
 
 const getBeskrivelseForHistorikkInnslag = (historikkInnslag: HistorikkInnslag): string => {
     if (historikkInnslag.type === HistorikkInnslagType.søknad) {
-        return (historikkInnslag as Innsendingsinnslag).hendelse;
+        switch ((historikkInnslag as Innsendingsinnslag).hendelse) {
+            case HendelseType.ETTERSENDING_ENGANGSSTØNAD:
+            case HendelseType.ETTERSENDING_FORELDREPENGER:
+            case HendelseType.ETTERSENDING_SVANGERSKAPSPENGER:
+                return 'ettersendelse';
+            default:
+                return (historikkInnslag as Innsendingsinnslag).hendelse;
+        }
     }
     return historikkInnslag.type;
 };
