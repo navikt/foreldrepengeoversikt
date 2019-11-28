@@ -15,8 +15,8 @@ import {
     erInfotrygdSak,
     opprettFiktivSak,
     harSøkt,
-    skalKunneSøkeOmEndring,
-    erSvangerskapepengesak
+    harEnAvsluttetBehandling,
+    erForeldrepengesak
 } from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
@@ -56,7 +56,9 @@ export class DineForeldrepenger extends React.Component<Props> {
         }
 
         if (erInfotrygdSak(saker[0])) {
-            return saker.every((sak: SakBase) => moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt));
+            return saker.every((sak: SakBase) =>
+                moment(sak.opprettet).isBefore(storageKvittering.innsendingstidspunkt)
+            );
         }
 
         return (
@@ -102,11 +104,11 @@ export class DineForeldrepenger extends React.Component<Props> {
 
     shouldRenderAlertStripe(sak: SakBase): boolean {
         return (
-            (!this.props.historikkInnslagListe.find(
-                ({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER
-            ) &&
-                (harSøkt(sak) && !skalKunneSøkeOmEndring(sak) && !erSvangerskapepengesak(sak))) ||
-            erInfotrygdSak(sak)
+            !this.props.historikkInnslagListe.find(
+                ({ hendelse }) =>
+                    hendelse === HendelseType.INITIELL_FORELDREPENGER &&
+                    (harSøkt(sak) && erForeldrepengesak(sak) && !harEnAvsluttetBehandling(sak))
+            ) || erInfotrygdSak(sak)
         );
     }
 
