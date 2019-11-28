@@ -267,7 +267,7 @@ describe('periodeUtils', () => {
             expect(skalVisesIPeriodeListe(perioder[0], perioder)).toBeFalsy();
         });
 
-        it('skal returnere true hvis perioden er søkers periode med samtidig uttak', () => {
+        it('skal returnere true hvis perioden er søkers periode og annen part har samtidig uttak', () => {
             const perioder = [
                 {
                     type: PeriodeType.Uttak,
@@ -299,7 +299,44 @@ describe('periodeUtils', () => {
                 }
             ] as Uttaksperiode[];
             expect(skalVisesIPeriodeListe(perioder[0], perioder)).toBeTruthy();
+            expect(skalVisesIPeriodeListe(perioder[1], perioder)).toBeFalsy();
         });
 
+        it('skal returnere true hvis perioden er søkers periode med samtidig uttak', () => {
+            const perioder = [
+                {
+                    type: 'UTTAK',
+                    gjelderAnnenPart: false,
+                    tidsperiode: {
+                        fom: '2019-12-30',
+                        tom: '2019-12-31'
+                    },
+                    forelder: 'farMedmor',
+                    antallUttaksdager: 1,
+                    stønadskontotype: 'FEDREKVOTE',
+                    graderingInnvilget: false,
+                    graderingsprosent: '0',
+                    samtidigUttak: true,
+                    samtidigUttaksprosent: 50
+                },
+                {
+                    type: 'UTTAK',
+                    gjelderAnnenPart: true,
+                    tidsperiode: {
+                        fom: '2019-12-30',
+                        tom: '2019-12-31'
+                    },
+                    forelder: 'mor',
+                    antallUttaksdager: 1,
+                    stønadskontotype: 'MØDREKVOTE',
+                    graderingInnvilget: false,
+                    graderingsprosent: '0',
+                    samtidigUttak: true,
+                    samtidigUttaksprosent: 50
+                }
+            ] as Uttaksperiode[];
+            expect(skalVisesIPeriodeListe(perioder[0], perioder)).toBeTruthy();
+            expect(skalVisesIPeriodeListe(perioder[1], perioder)).toBeFalsy();
+        });
     });
 });

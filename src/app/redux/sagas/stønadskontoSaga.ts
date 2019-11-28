@@ -1,4 +1,3 @@
-import { StønadskontoType } from 'app/api/types/UttaksplanDto';
 import { all, takeEvery, call } from 'redux-saga/effects';
 import Api from 'app/api/api';
 import { TilgjengeligStønadskonto } from 'app/types/TilgjengeligStønadskonto';
@@ -11,7 +10,8 @@ import {
     getRelevantFamiliehendelseDato,
     skalTilgjengeligeKontoerJusteresPgaFamiliehendelsesdatoFørJuli2018,
     overstyrAntallTilgjengeligeUttaksdagerForBarnFørJuli2018,
-    stønadskontoerDtoTilTilgjengeligStønadskontoMapper
+    stønadskontoerDtoTilTilgjengeligStønadskontoMapper,
+    justerTilgjengeligeStøndakontoerNårMorIkkeHarRettOgIkkeErUfør
 } from 'app/utils/stønadskontoerUtils';
 import { AxiosResponse } from 'axios';
 
@@ -63,22 +63,9 @@ export function* getTilgjengeligeStønadskontoer(sak: Sak) {
             );
 
             if (!morErUfør) {
-                const aktivitetsFriKvoteDager = tilgjengeligeStønadskontoer.find(
-                    (konto) => konto.konto === StønadskontoType.AktivitetsfriKvote
-                )!.dager;
-                tilgjengeligeStønadskontoer = tilgjengeligeStønadskontoer
-                    .map((konto) => {
-                        if (konto.konto === StønadskontoType.AktivitetsfriKvote) {
-                            konto.dager = 0;
-                        }
-
-                        if (konto.konto === StønadskontoType.Foreldrepenger) {
-                            konto.dager = konto.dager + aktivitetsFriKvoteDager;
-                        }
-
-                        return konto;
-                    })
-                    .filter((konto) => konto.dager !== 0);
+                tilgjengeligeStønadskontoer = justerTilgjengeligeStøndakontoerNårMorIkkeHarRettOgIkkeErUfør(
+                    tilgjengeligeStønadskontoer
+                );
             }
         }
 

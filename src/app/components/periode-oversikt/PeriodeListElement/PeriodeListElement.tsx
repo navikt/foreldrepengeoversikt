@@ -85,7 +85,7 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
             </div>
             {annenForelderSamtidigUttakPeriode && (
                 <div
-                    className={classnames(BEM.element('samtidig-uttak'), BEM.modifier(color), {
+                    className={classnames(BEM.element('samtidig-uttak'), {
                         [BEM.modifier('samtidig-uttak-mor')]: annenForelderSamtidigUttakPeriode.forelder === Rolle.mor,
                         [BEM.modifier('samtidig-uttak-far')]:
                             annenForelderSamtidigUttakPeriode.forelder === Rolle.farMedmor

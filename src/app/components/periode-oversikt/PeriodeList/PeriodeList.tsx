@@ -197,4 +197,4 @@ const PeriodeList: React.FunctionComponent<Props & InjectedIntlProps> = ({
     );
 };
 
-export default injectIntl(PeriodeList);
+ export default injectIntl(PeriodeList);
