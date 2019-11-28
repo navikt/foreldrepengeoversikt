@@ -2,14 +2,11 @@ import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Undertittel } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import moment from 'moment';
 
 import BEMHelper from 'common/util/bem';
 import { formatDate } from '../saksoversikt/utils';
-
-import { lenker } from 'app/utils/lenker';
 
 import './behandlingsfrist.less';
 
@@ -45,14 +42,10 @@ const Behandligsfrist: React.StatelessComponent<Props> = ({ behandligsdato, harL
                                     values={{ dato: formatDate(dato) }}
                                 />
                             </Undertittel>
-                            <>
-                                <FormattedHTMLMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.1" />
-                                <div className={cls.element('viktig-informasjon')}>
-                                    <Lenke href={lenker.saksoversikt}>
-                                        <FormattedMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.lenke" />
-                                    </Lenke>
-                                </div>
-                            </>
+                            <FormattedHTMLMessage
+                                id="dineForeldrepenger.behandligsfrist.arbeidstaker.1"
+                                values={{ dato }}
+                            />
                         </span>
                     }
                     border={false}
