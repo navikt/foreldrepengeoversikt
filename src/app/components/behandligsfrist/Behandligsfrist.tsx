@@ -44,7 +44,7 @@ const Behandligsfrist: React.StatelessComponent<Props> = ({ behandligsdato, harL
                             </Undertittel>
                             <FormattedHTMLMessage
                                 id="dineForeldrepenger.behandligsfrist.arbeidstaker.1"
-                                values={{ dato }}
+                                values={{ dato: formatDate(dato)}}
                             />
                         </span>
                     }
