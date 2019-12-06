@@ -67,7 +67,7 @@
     "ettersendelse.I000065": "Bekreftelse fra arbeidsgiver",
     "ettersendelse.I000109": "Tilretteleggings- og omplasseringsskjema for frilans eller selvstendig",
     "ettersendelse.I000110": "Dokumentasjon av aleneomsorg",
-    "ettersendelse.I000111": "Begrunnelese for sen søknad",
+    "ettersendelse.I000111": "Begrunnelse for sen søknad",
     "ettersendelse.I000112": "Dokumentasjon av deltakelse i introduksjonsprogrammet",
     "ettersendelse.I000114": "Svar på varsel om tilbakebetaling",
     "ettersendelse.sendButton": "Ettersend vedlegg",
@@ -203,8 +203,8 @@
 
     "historikk.I000001": "Tilretteleggingsskjema for frilans eller selvstendig",
     "historikk.I000007": "Inntektsopplysninger for selvstendig næringsdrivende",
-    "historikk.I000023": "Dokumentasjon av ykdom",
-    "historikk.I000036": "Bekreftelse på avtalt ferie",
+    "historikk.I000023": "Dokumentasjon av sykdom",
+    "historikk.I000036": "Bekreftelse på ferie",
     "historikk.I000037": "Dokumentasjon av innleggelse i helseinstitusjon",
     "historikk.I000038": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
     "historikk.I000039": "Tjenestebevis fra førstegangstjenesten i forsvaret eller sivilforsvaret",
@@ -219,7 +219,7 @@
     "historikk.I000065": "Bekreftelse fra arbeidsgiver",
     "historikk.I000109": "Tilrettelegging og omplassering for frilansere eller selvstendig næringsdrivende",
     "historikk.I000110": "Bekreftelse på aleneomsorg",
-    "historikk.I000111": "Begrunnelese for sen søknad",
+    "historikk.I000111": "Begrunnelse for sen søknad",
     "historikk.I000112": "Deltakelse i introduksjonsprogrammet",
     "historikk.I000114": "Svar på varsel om tilbakebetaling"
 }
