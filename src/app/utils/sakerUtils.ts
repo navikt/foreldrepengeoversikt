@@ -98,7 +98,7 @@ export const harSøkt = (sak: SakBase): boolean => {
 };
 
 export const getEldsteBehadnling = (behandlinger: Behandling[]): Behandling | undefined => {
-    if (behandlinger !== undefined && behandlinger.length > 0) {
+    if (behandlinger !== undefined) {
         return behandlinger.sort(behandlingByDescendingOrder).reverse()[0];
     }
     return undefined;

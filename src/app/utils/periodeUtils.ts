@@ -7,6 +7,7 @@ import { InjectedIntl } from 'react-intl';
 import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Periode';
 import { Rolle } from 'app/types/Rolle';
 import { ANTALL_UTTAKSDAGER_PR_UKE } from './constants';
+import { NavnPåForeldre } from 'common/components/oversikt-brukte-dager/OversiktBrukteDager';
 
 export const finnTidligerePerioder = (perioder: Periode[]): Periode[] => {
     return perioder.filter(({ tidsperiode }) => moment(tidsperiode.tom).isBefore(moment(), 'days'));
@@ -192,4 +193,8 @@ export const getPerioderForRolle = (rolle: Rolle, perioder: Periode[]) => {
 
 export const erGradert = (periode: Periode) => {
     return periode.type === PeriodeType.Uttak ? (periode as Uttaksperiode).graderingInnvilget : false;
+};
+
+export const getNavnPåForelderForPeriode = (periode: Periode, navnPåForeldre: NavnPåForeldre) => {
+    return periode.forelder === Rolle.mor ? navnPåForeldre.mor : navnPåForeldre.farMedmor;
 };

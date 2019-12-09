@@ -6,6 +6,8 @@ import { Dekningsgrad } from 'app/types/Dekningsgrad';
 import { StønadskontoerDTO } from 'app/api/types/stønadskontoerDto';
 import cloneDeep from 'lodash/cloneDeep';
 import { ANTALL_UTTAKSDAGER_PR_UKE, ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 } from './constants';
+import { Rolle } from 'app/types/Rolle';
+import { getPerioderForRolle } from './periodeUtils';
 
 export const skalTilgjengeligeKontoerJusteresPgaFamiliehendelsesdatoFørJuli2018 = (
     familiehendelsesdato: string,
@@ -134,11 +136,13 @@ export const getBrukteStønadskontoer = (perioder: Periode[]): TilgjengeligStøn
         }, []);
 };
 
-export const justerTilgjengeligeStøndakontoerNårMorIkkeHarRettOgIkkeErUfør = (tilgjengeligeStønadskontoer: TilgjengeligStønadskonto[]): TilgjengeligStønadskonto[] => {
+export const justerTilgjengeligeStøndakontoerNårMorIkkeHarRettOgIkkeErUfør = (
+    tilgjengeligeStønadskontoer: TilgjengeligStønadskonto[]
+): TilgjengeligStønadskonto[] => {
     const aktivitetsFriKvoteDager = tilgjengeligeStønadskontoer.find(
         (konto) => konto.konto === StønadskontoType.AktivitetsfriKvote
     )!.dager;
-    
+
     return tilgjengeligeStønadskontoer
         .map((konto) => {
             if (konto.konto === StønadskontoType.AktivitetsfriKvote) {
@@ -152,4 +156,10 @@ export const justerTilgjengeligeStøndakontoerNårMorIkkeHarRettOgIkkeErUfør = 
             return konto;
         })
         .filter((konto) => konto.dager !== 0);
+};
+
+export const getTotaltBrukteDager = (rolle: Rolle, perioder: Periode[]) => {
+    return getBrukteStønadskontoer(getPerioderForRolle(rolle, perioder))
+        .map((k) => k.dager)
+        .reduce((a, b) => a + b, 0);
 };

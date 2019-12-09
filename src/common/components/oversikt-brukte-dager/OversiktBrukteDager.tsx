@@ -24,7 +24,7 @@ interface Props {
     erDeltUttak: boolean;
     erFarMedmor: boolean;
     resterendeStønadskonter: TilgjengeligStønadskonto[];
-    brukteStønadskontoer: {
+    brukteDager: {
         mor: number;
         farMedmor: number;
     };
@@ -34,7 +34,7 @@ interface Props {
 
 const OversiktBrukteDager: React.StatelessComponent<Props & InjectedIntlProps> = ({
     resterendeStønadskonter,
-    brukteStønadskontoer,
+    brukteDager,
     navnPåForeldre,
     erDeltUttak,
     erFarMedmor,
@@ -56,12 +56,12 @@ const OversiktBrukteDager: React.StatelessComponent<Props & InjectedIntlProps> =
                 <TilesList columns={'flex'}>
                     {(erDeltUttak || !erFarMedmor) && (
                         <Personkort ikon={<ForelderIkon forelder={info.mor} />} tittel={navnPåForeldre.mor}>
-                            <strong>{getVarighetString(brukteStønadskontoer.mor, intl)}</strong>
+                            <strong>{getVarighetString(brukteDager.mor, intl)}</strong>
                         </Personkort>
                     )}
                     {(erDeltUttak || erFarMedmor) && (
                         <Personkort ikon={<ForelderIkon forelder={info.farMedmor} />} tittel={navnPåForeldre.farMedmor}>
-                            <strong>{getVarighetString(brukteStønadskontoer.farMedmor, intl)}</strong>
+                            <strong>{getVarighetString(brukteDager.farMedmor, intl)}</strong>
                         </Personkort>
                     )}
                 </TilesList>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import classnames from 'classnames';
 import { Element, Normaltekst, EtikettLiten } from 'nav-frontend-typografi';
 import moment from 'moment';
@@ -8,7 +8,7 @@ import BEMHelper from 'common/util/bem';
 import UttakIkon from 'app/components/ikoner/UttakIkon';
 import { Rolle } from 'app/types/Rolle';
 import Periode from 'app/types/uttaksplan/Periode';
-import { getAntallUttaksdagerITidsperiode } from 'app/utils/periodeUtils';
+import { getVarighetString } from 'app/utils/periodeUtils';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import { NavnPåForeldre } from 'common/components/oversikt-brukte-dager/OversiktBrukteDager';
 import { Tidsperiode } from 'app/types/Tidsperiode';
@@ -47,7 +47,7 @@ const renderDagMnd = (dato: string, visÅr: boolean = true): JSX.Element => {
     );
 };
 
-const PeriodeListElement: React.FunctionComponent<Props> = ({
+const PeriodeListElement: React.FunctionComponent<Props & InjectedIntlProps> = ({
     ikon,
     tittel,
     beskrivelse,
@@ -55,7 +55,8 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
     tidsperiode,
     annenForelderSamtidigUttakPeriode,
     navnPåForeldre,
-    color
+    color,
+    intl
 }) => {
     return (
         <li className={classnames(BEM.block, 'typo-normal', BEM.modifier(color))}>
@@ -99,7 +100,7 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
                         <div className={BEM.element('beskrivelse__tekst')}>
                             <Normaltekst>
                                 <>
-                                    {getAntallUttaksdagerITidsperiode(annenForelderSamtidigUttakPeriode.tidsperiode)}
+                                    {getVarighetString(annenForelderSamtidigUttakPeriode.antallUttaksdager, intl)}
                                     <em className={BEM.element('hvem')}>
                                         {' '}
                                         -{' '}
@@ -123,4 +124,4 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
     );
 };
 
-export default PeriodeListElement;
+export default injectIntl(PeriodeListElement);

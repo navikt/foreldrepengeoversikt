@@ -16,12 +16,14 @@ import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
 import {
     finnNåværendePerioder,
     finnFremtidigePerioder,
-    finnTidligerePerioder,
-    getPerioderForRolle
+    finnTidligerePerioder
 } from 'app/utils/periodeUtils';
 import OversiktBrukteDager from 'common/components/oversikt-brukte-dager/OversiktBrukteDager';
 import { erEksisterendeSakErDeltUttak } from 'app/utils/søknadsgrunnlagUtil';
-import { getResterendeStønadskontoer, getBrukteStønadskontoer } from 'app/utils/stønadskontoerUtils';
+import {
+    getResterendeStønadskontoer,
+    getTotaltBrukteDager
+} from 'app/utils/stønadskontoerUtils';
 import { Rolle } from 'app/types/Rolle';
 import { isFeatureEnabled, Feature } from 'app/Feature';
 
@@ -63,17 +65,12 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
                 nåværendePerioder={finnNåværendePerioder(perioder!)}
                 fremtidigePerioder={finnFremtidigePerioder(perioder!)}
             />
-
             {isFeatureEnabled(Feature.kontooveriskt) && tilgjengeligeKontoer && (
                 <OversiktBrukteDager
                     resterendeStønadskonter={getResterendeStønadskontoer(tilgjengeligeKontoer, perioder)}
-                    brukteStønadskontoer={{
-                        mor: getBrukteStønadskontoer(getPerioderForRolle(Rolle.mor, perioder))
-                            .map((k) => k.dager)
-                            .reduce((a, b) => a + b, 0),
-                        farMedmor: getBrukteStønadskontoer(getPerioderForRolle(Rolle.farMedmor, perioder))
-                            .map((k) => k.dager)
-                            .reduce((a, b) => a + b, 0)
+                    brukteDager={{
+                        mor: getTotaltBrukteDager(Rolle.mor, perioder),
+                        farMedmor: getTotaltBrukteDager(Rolle.farMedmor, perioder)
                     }}
                     erDeltUttak={erEksisterendeSakErDeltUttak(sak.saksgrunnlag.grunnlag)}
                     erFarMedmor={sak.saksgrunnlag.grunnlag.søkerErFarEllerMedmor}
