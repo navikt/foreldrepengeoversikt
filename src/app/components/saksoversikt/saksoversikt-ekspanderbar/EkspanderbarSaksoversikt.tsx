@@ -20,14 +20,24 @@ interface Props {
     historikkInnslagListe: Innsendingsinnslag[];
 }
 
-const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = ({ sak, søkerinfo, history, historikkInnslagListe }) => {
+const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = ({
+    sak,
+    søkerinfo,
+    history,
+    historikkInnslagListe
+}) => {
     const cls = BEMHelper('ekspanderbar-saksoversikt');
     return (
         <div className={cls.block}>
             <EkspanderbartpanelBase
                 heading={<EkspanderbarSaksoversiktHeader sak={sak} />}
                 ariaTittel={getSaksoversiktTitle(sak)}>
-                <Saksoversikt sak={sak} history={history} søkerinfo={søkerinfo} historikkInnslagListe={historikkInnslagListe} />
+                <Saksoversikt
+                    sak={sak}
+                    history={history}
+                    søkerinfo={søkerinfo}
+                    historikkInnslagListe={historikkInnslagListe}
+                />
             </EkspanderbartpanelBase>
         </div>
     );

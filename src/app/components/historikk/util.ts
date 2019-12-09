@@ -9,6 +9,7 @@ import {
     InntektsmeldingInnslag
 } from 'app/api/types/historikk/HistorikkInnslag';
 import { erBehandlingAvsluttet, getEldsteBehadnling } from 'app/utils/sakerUtils';
+import moment from 'moment';
 
 export const formaterDatoForHendelse = (dato: string) => {
     return formatDate(dato, 'D. MMMM YYYY [kl.] HH:mm:ss');
@@ -49,7 +50,7 @@ const erHendelseRelevant = (h: Hendelse): boolean => {
 
 const utledHendelserMedBehandlinger = (
     behandlinger: Behandling[],
-    utledInnteksmeldinger: boolean,
+    utledInnteksmeldingerTom: string | undefined,
     skalUtledInnsendingstidspunkt: boolean
 ): Hendelse[] => {
     const behanldingerUtenDuplikater = behandlinger.filter(fjernBehandlingerMedLikOpprettetDato);
@@ -61,11 +62,12 @@ const utledHendelserMedBehandlinger = (
         .filter((b) => b.årsak !== null && b.årsak !== BehandlingÅrsak.ENDRET_INNTEKTSMELDING)
         .map(behandlingÅrsakTilHendelse);
 
-    const inntektsmeldingHendeliser = utledInnteksmeldinger
-        ? behanldingerUtenDuplikater
-              .filter((b) => b.inntektsmeldinger.length > 0)
-              .map(behandlingMedInntektmeldingerTilHendelse)
-        : [];
+    const inntektsmeldingHendeliser = behanldingerUtenDuplikater
+        .filter((b) =>
+            utledInnteksmeldingerTom ? moment(b.endretTidspunkt).isBefore(utledInnteksmeldingerTom, 'days') : true
+        )
+        .filter((b) => b.inntektsmeldinger.length > 0)
+        .map(behandlingMedInntektmeldingerTilHendelse);
 
     if (skalUtledInnsendingstidspunkt) {
         const søknadSendtHendelse = utledInnsendingstidspunkt(behandlinger);
@@ -167,11 +169,15 @@ export const utledHendelser = (behandlinger?: Behandling[], historikkInnslagList
         return [];
     }
 
-    const utledInnteksmeldingerVedHjelpAvBehandlinger =
-        historikkInnslagListe === undefined ||
-        !historikkInnslagListe.some((historikkInnslag) => historikkInnslag.type === HistorikkInnslagType.inntekt);
+    const førsteInntektsmeldingHendelse =
+        historikkInnslagListe &&
+        historikkInnslagListe.find((historikkInnslag) => historikkInnslag.type === HistorikkInnslagType.inntekt);
 
-    return utledHendelserMedBehandlinger(behandlinger, utledInnteksmeldingerVedHjelpAvBehandlinger, true)
+    return utledHendelserMedBehandlinger(
+        behandlinger,
+        førsteInntektsmeldingHendelse ? førsteInntektsmeldingHendelse.opprettet : undefined,
+        true
+    )
         .concat(...hentHendelserFraHistorikkinnslagListe(historikkInnslagListe))
         .filter(erHendelseRelevant)
         .sort(sortHendlser);

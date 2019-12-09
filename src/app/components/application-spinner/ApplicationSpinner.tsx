@@ -4,13 +4,11 @@ import BEMHelper from '../../../common/util/bem';
 
 import './applicationSpinner.less';
 
-export interface Props {}
-
-const ApplicationSpinner: React.StatelessComponent<Props> = () => {
+const ApplicationSpinner: React.StatelessComponent = () => {
     const cls = BEMHelper('applicationSpinner');
     return (
         <div className={cls.block}>
-            <div className={cls.element('spinner')}>
+            <div>
                 <Spinner type="XXL" />
             </div>
         </div>
