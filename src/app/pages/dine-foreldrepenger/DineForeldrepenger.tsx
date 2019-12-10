@@ -140,7 +140,7 @@ export class DineForeldrepenger extends React.Component<Props> {
 
                 <div className={cls.block}>
                     <div className={cls.element('main-content')}>
-                        <AlertStripe type="info">Ettersendelse er ikke tilgjenglig mellom klokken 12-13</AlertStripe>
+                        <AlertStripe type="info">Ettersendelse er ikke tilgjenglig mellom klokken 12-14:30</AlertStripe>
                         {nyesteSak === undefined && <IngenSaker />}
                         {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe()}
 
