@@ -20,7 +20,7 @@ describe('SaksinformasjonPanel', () => {
         expect(uploadButton.props().disabled).toBeTruthy();
     });
 
-    it.skip('Ettersendelse should be enabled 150 days after the application is sent if sak is from infotrygd', () => {
+    it('Ettersendelse should be enabled 150 days after the application is sent if sak is from infotrygd', () => {
         const opprettetDate = moment()
             .subtract(149, 'days')
             .format('YYYY-MM-DD');

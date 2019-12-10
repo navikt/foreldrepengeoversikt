@@ -137,10 +137,8 @@ export class DineForeldrepenger extends React.Component<Props> {
         return (
             <>
                 <Header saker={saker} history={this.props.history} />
-
                 <div className={cls.block}>
                     <div className={cls.element('main-content')}>
-                        <AlertStripe type="info">Ettersendelse er ikke tilgjenglig mellom klokken 12-14:30</AlertStripe>
                         {nyesteSak === undefined && <IngenSaker />}
                         {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe()}
 

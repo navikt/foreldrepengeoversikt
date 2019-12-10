@@ -10,6 +10,7 @@ import {
 } from 'app/utils/sakerUtils';
 import MeldingOmVedtakLenkepanel from '../melding-om-vedtak-lenkepanel/MeldingOmVedtakLenkepanel';
 import { Knapp } from 'nav-frontend-knapper';
+import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../saksoversikt/utils';
 import { FormattedMessage } from 'react-intl';
 import { guid } from 'nav-frontend-js-utils';
 import { isFeatureEnabled, Feature } from 'app/Feature';
@@ -30,7 +31,6 @@ import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 
 import './saksinformasjonPanel.less';
-import { Normaltekst } from 'nav-frontend-typografi';
 
 interface Props {
     søkerinfo?: Søkerinfo;
@@ -79,13 +79,19 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                                 search: new URLSearchParams({ saksnummer: sak.saksnummer! }).toString()
                             })
                         }
-                        disabled={true}>
+                        disabled={!isSakEligableForEttersendelse(sak)}>
                         <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
                     </Knapp>
 
-                    {true && (
+                    {!isSakEligableForEttersendelse(sak) && (
                         <Hjelpetekst id={guid()}>
-                            <Normaltekst>"Ettersendelse er for ikke tilgjengelig for øyeblikket"</Normaltekst>
+                            <FormattedMessage
+                                id={
+                                    isSakTooOldForEttersendelse(sak)
+                                        ? 'saksoversikt.ettersendelse.hjelpetekst.utløptFrist'
+                                        : 'saksoversikt.ettersendelse.hjelpetekst.ikkeJournalført'
+                                }
+                            />
                         </Hjelpetekst>
                     )}
                 </div>
