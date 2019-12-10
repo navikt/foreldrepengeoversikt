@@ -47,7 +47,7 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
             sendingEttersendelse: false
         };
 
-        if (props.sak === undefined) {
+        if (props.sak === undefined || true) {
             props.history.push(Routes.DINE_FORELDREPENGER);
         }
 
