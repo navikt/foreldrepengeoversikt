@@ -88,7 +88,7 @@
 
     "historikk.AVSLÅTT": "Vi avslo søknaden din",
     "historikk.BERØRT-BEHANDLING": "Berørt behandling",
-    "historikk.ettersendelse.info": "Ettersendelse av dokumentasjon vises ikke i historikken.",
+    "historikk.ettersendelse.info": "Hvis du har ettersendt dokumentasjon før 1. september 2019 vises ikke dette i historikken.",
     "historikk.ettersendelse": "Du ettersendte:",
     "historikk.FORELDREPENGER_ENDRET": "Vi endret vedtaket ditt",
     "historikk.HENLAGT_KLAGE_TRUKKET": "Du har trukket klagen din",
