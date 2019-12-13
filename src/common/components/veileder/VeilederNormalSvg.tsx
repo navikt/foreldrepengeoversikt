@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface Props {
-    svgProps: any;
+    svgProps?: any;
 }
 
 // tslint:disable max-line-length

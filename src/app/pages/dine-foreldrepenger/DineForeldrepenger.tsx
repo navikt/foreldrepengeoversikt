@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import MediaQuery from 'react-responsive';
 import { History } from 'history';
-import { guid } from 'nav-frontend-js-utils';
 import moment from 'moment';
 
 import SakBase from '../../api/types/sak/Sak';
@@ -25,13 +24,13 @@ import { StorageKvittering } from '../../api/types/StorageKvittering';
 import Behandling from 'app/api/types/sak/Behandling';
 import { AppState } from 'app/redux/store';
 import { getData } from 'app/redux/util/fetchFromState';
-import { Innsendingsinnslag, MinidialogInnslag, HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
+import { Innsendingsinnslag, HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
 
-import MinidialogLenkepanel from 'app/components/minidialog-lenkepanel/MinidialogLenkepanel';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 
 import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedHTMLMessage } from 'react-intl';
+import MinidialogContainer from 'app/components/minidialog-container/MinidialogContainer';
 
 import './dineForeldrepenger.less';
 
@@ -40,8 +39,7 @@ interface Props {
     storageKvittering?: StorageKvittering;
     søkerinfo?: Søkerinfo;
     history: History;
-    historikkInnslagListe: Innsendingsinnslag[];
-    minidialogInnslagListe: MinidialogInnslag[];
+    historikkInnslagListe: Innsendingsinnslag[]
 }
 
 export class DineForeldrepenger extends React.Component<Props> {
@@ -126,8 +124,7 @@ export class DineForeldrepenger extends React.Component<Props> {
             history,
             storageKvittering,
             søkerinfo,
-            historikkInnslagListe,
-            minidialogInnslagListe
+            historikkInnslagListe
         } = this.props;
         const nyesteSak: SakBase | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettFiktivSak(storageKvittering!)
@@ -141,15 +138,7 @@ export class DineForeldrepenger extends React.Component<Props> {
                     <div className={cls.element('main-content')}>
                         {nyesteSak === undefined && <IngenSaker />}
                         {nyesteSak && this.shouldRenderAlertStripe(nyesteSak) && this.renderAlertStripe()}
-
-                        {minidialogInnslagListe
-                            .filter(
-                                ({ gyldigTil, aktiv }) => aktiv && moment(gyldigTil).isSameOrAfter(moment(), 'days')
-                            )
-                            .map((minidialogInnslag) => (
-                                <MinidialogLenkepanel key={guid()} minidialogInnslag={minidialogInnslag} />
-                            ))}
-
+                        <MinidialogContainer />
                         {nyesteSak && (
                             <>
                                 <Saksoversikt
@@ -180,8 +169,7 @@ const mapStateToProps = (state: AppState) => ({
     søkerinfo: getData(state.api.søkerinfo, {}),
     saker: getData(state.api.saker, []),
     storageKvittering: getData(state.api.storageKvittering, undefined),
-    historikkInnslagListe: getData(state.api.historikk, []),
-    minidialogInnslagListe: getData(state.api.minidialogInnslagListe, [])
+    historikkInnslagListe: getData(state.api.historikk, [])
 });
 
 export default connect(mapStateToProps)(DineForeldrepenger);

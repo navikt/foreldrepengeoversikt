@@ -47,10 +47,6 @@ class Foreldrepengeoversikt extends React.Component<Props> {
             if (isFeatureEnabled(Feature.historikk)) {
                 this.props.requestHistorikk();
             }
-
-            if (isFeatureEnabled(Feature.miniDialog)) {
-                this.props.requestMinidialog();
-            }
         }
     }
 
@@ -129,9 +125,6 @@ const mapDispatchToProps = (dispatch: (action: ApiAction) => void) => ({
     },
     requestHistorikk: () => {
         dispatch({ type: ApiActionTypes.GET_HISTORIKK_REQUEST });
-    },
-    requestMinidialog: () => {
-        dispatch({ type: ApiActionTypes.GET_MINIDIALOG_REQUEST });
     }
 });
 

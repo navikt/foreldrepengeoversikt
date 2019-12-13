@@ -1,22 +1,21 @@
 import React from 'react';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import { Link } from 'react-router-dom';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Icon from 'nav-frontend-ikoner-assets';
-import moment from 'moment';
-
 import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
-
 import BEMHelper from 'common/util/bem';
 import { Routes } from 'app/utils/routes';
+import { formaterDato } from 'app/utils/dateUtils';
 
 import './minidialogLenkepanel.less';
 
 interface Props {
+    tittel: React.ReactNode | string;
     minidialogInnslag: MinidialogInnslag;
 }
 
-const MinidialogLenkepanel: React.StatelessComponent<Props> = ({ minidialogInnslag }) => {
+const MinidialogLenkepanel: React.StatelessComponent<Props> = ({ tittel, minidialogInnslag }) => {
     const linkCreator = (props: any) => (
         <Link
             to={{
@@ -36,8 +35,8 @@ const MinidialogLenkepanel: React.StatelessComponent<Props> = ({ minidialogInnsl
                     <Icon kind="advarsel-sirkel-fyll" />
                 </div>
                 <div>
-                    <Normaltekst>{minidialogInnslag.hendelse}</Normaltekst>
-                    <Normaltekst>{moment(minidialogInnslag.opprettet).format('YYYY-MM-DD')}</Normaltekst>
+                    <Normaltekst>{tittel}</Normaltekst>
+                    <Undertekst>{formaterDato(minidialogInnslag.opprettet, "DD.MM.YYYY")}</Undertekst>
                 </div>
             </div>
         </LenkepanelBase>

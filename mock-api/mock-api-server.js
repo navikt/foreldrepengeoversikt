@@ -74,7 +74,7 @@ router.post('/rest/soknad/ettersend', (req,res) => {
         mottattDato: '2019-01-01',
         referanseId: '123'
     }
-    res.sendStatus(500);
+    res.send(kvittering);
 });
 
 app.use('', router);

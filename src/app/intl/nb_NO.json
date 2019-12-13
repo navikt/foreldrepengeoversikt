@@ -128,6 +128,7 @@
     "meldingOmVedtak.tekst": "Klikk her for å gå til dine dokumenter, der du finner alle vedtak og dokumenter som vi har sendt deg. Du finner også alle søknader og ettersendelser som du har sendt inn.",
     "meldingOmVedtak.tittel": "Dokumenter i saken?",
     "miniDialog.pageTitle": "Spørsmål fra saksbehandler",
+    "miniDialog.tilbakekreving": "NAV har sendt deg melding om at du har fått for mye utbetalt i { sakstype }.",
     "miniDialog.sendButton": "Send",
     "ok": "Ok",
     "oversikt": "Oversikt",
