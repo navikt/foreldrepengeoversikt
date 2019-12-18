@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { withAttachments, AttachmentFormProps } from 'app/components/attachmentForm/AttachmentForm';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Textarea, RadioPanelGruppe } from 'nav-frontend-skjema';
+import Snakkeboble from 'nav-frontend-snakkeboble';
+import { Hovedknapp } from 'nav-frontend-knapper';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+
+import { withAttachments, AttachmentFormProps } from 'app/components/attachmentForm/AttachmentForm';
+import SakBase from 'app/api/types/sak/Sak';
+import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
+import { formaterDatoForHendelse } from 'app/components/historikk/util';
+import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { FormattedMessage } from 'react-intl';
-import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
-import { getEttersendingType as getSakstype } from '../../pages/ettersendelse/util';
-import SakBase from 'app/api/types/sak/Sak';
-import Snakkeboble from 'nav-frontend-snakkeboble';
-import { formaterDatoForHendelse } from 'app/components/historikk/util';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
-import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
-
-import Veilederpanel from 'nav-frontend-veilederpanel';
+import { getEttersendingType as getSakstype } from '../../pages/ettersendelse/util';
 import VeilederNormal from 'common/components/veileder/VeilederNormalSvg';
+import { isAttachmentWithError } from 'common/storage/attachment/components/util';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
+import getMessage from 'common/util/i18nUtils';
 
 import './minidialogSkjema.less';
 
@@ -31,54 +35,64 @@ export enum JaNeiSpørsmål {
     NEI = 'NEI'
 }
 
-const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = ({
+const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & InjectedIntlProps> = ({
     sak,
     minidialog,
     attachments,
     addAttachment,
     deleteAttachment,
     editAttachment,
-    onSubmit
+    onSubmit,
+    intl
 }) => {
     const [fritekst, updateFritekst] = useState('');
     const [svar, update] = useState('');
+    const [sending, updateSending] = useState(false);
+    const brukerØnskerÅUttaleSeg = svar === JaNeiSpørsmål.JA;
+
     const cls = BEMHelper('minidialog-skjema');
-    const brukerØnskerIkkeÅUttaleSeg = svar === JaNeiSpørsmål.NEI;
     return (
         <form
             className={cls.block}
             onSubmit={(e) => {
                 e.preventDefault();
                 onSubmit({
-                    vedlegg: brukerØnskerIkkeÅUttaleSeg ? [] : attachments,
+                    vedlegg: brukerØnskerÅUttaleSeg
+                        ? attachments.filter((a: Attachment) => !isAttachmentWithError(a))
+                        : [],
                     saksnummer: minidialog.saksnr,
                     type: getSakstype(sak),
                     dialogId: minidialog.dialogId,
                     brukerTekst: {
                         dokumentType: Skjemanummer.TILBAKEBETALING,
                         overskrift: 'Svar på tilbakebetalingen',
-                        tekst: brukerØnskerIkkeÅUttaleSeg ? 'Bruker ønsker ikke å uttale seg' : fritekst
+                        tekst: brukerØnskerÅUttaleSeg ? fritekst : 'Bruker ønsker ikke å uttale seg'
                     }
                 });
             }}>
             <Snakkeboble topp={formaterDatoForHendelse(minidialog.opprettet)} pilHoyre={false} ikonClass={'nav'}>
                 <Normaltekst tag="p">
-                    <FormattedMessage id="miniDialog.tilbakekreving" values={{ sakstype: getSakstype(sak) }} />
+                    <FormattedMessage id="miniDialog.tilbakekreving.tittel" values={{ sakstype: getSakstype(sak) }} />
                 </Normaltekst>
             </Snakkeboble>
-            <Undertittel className="blokk-xs">Svar på spørsmål</Undertittel>
+            <Undertittel className="blokk-xs">
+                <FormattedMessage id="miniDialog.tilbakekreving.undertittel" />
+            </Undertittel>
             <RadioPanelGruppe
                 name="name"
                 className="blokk-xs"
-                radios={[{ label: 'Ja', value: JaNeiSpørsmål.JA }, { label: 'Nei', value: JaNeiSpørsmål.NEI }]}
-                legend="Ønsker du å uttale deg i saken før vi behandler den?"
+                radios={[
+                    { label: getMessage(intl, 'ja'), value: JaNeiSpørsmål.JA },
+                    { label: getMessage(intl, 'nei'), value: JaNeiSpørsmål.NEI }
+                ]}
+                legend={getMessage(intl, 'miniDialog.tilbakekreving.radioPanelGruppe.legend')}
                 checked={svar}
                 onChange={(e: any, value: string) => update(value)}
             />
             {svar === JaNeiSpørsmål.NEI && (
                 <div className="blokk-xs">
                     <Veilederpanel svg={<VeilederNormal />}>
-                        Saken vil bli behandlet med de opplysningene vi har tilgjengelig.
+                        <FormattedMessage id="minidialog.tilbakekreving.veilederpanel" />
                     </Veilederpanel>
                 </div>
             )}
@@ -86,7 +100,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
                 <>
                     <div className={cls.element('fritekstfelt')}>
                         <Textarea
-                            label="Svar på tilbakebetalingen:"
+                            label={getMessage(intl, 'minidialog.tilbakekreving.tilbakekreving.label')}
                             value={fritekst}
                             onChange={(e: any) => updateFritekst(e.target.value)}
                         />
@@ -98,7 +112,6 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
                         onFileUploadFinish={editAttachment}
                         onFileDeleteStart={deleteAttachment}
                     />
-
                     {attachments.length > 0 && (
                         <AttachmentList
                             intlKey={`ettersendelse.${Skjemanummer.TILBAKEBETALING}`}
@@ -108,10 +121,10 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
                     )}
                 </>
             )}
-            {svar !== '' && (
+            {svar === JaNeiSpørsmål.JA || svar === JaNeiSpørsmål.NEI  && (
                 <div className={cls.element('btn')}>
-                    <Hovedknapp disabled={false} spinner={false}>
-                        <FormattedMessage id="miniDialog.sendButton" />
+                    <Hovedknapp onClick={() => updateSending(true)} disabled={sending} spinner={sending}>
+                        <FormattedMessage id="miniDialog.tilbakekreving.sendButton" />
                     </Hovedknapp>
                 </div>
             )}
@@ -119,4 +132,4 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
     );
 };
 
-export default withAttachments<Props>(MinidialogSkjema);
+export default withAttachments<Props>(injectIntl(MinidialogSkjema));
