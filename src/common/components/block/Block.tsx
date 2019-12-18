@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import BEMHelper from 'common/util/bem';
 
 import './block.less';
-import Infoboks from 'common/components/infoboks/Infoboks';
 
 export type BlockPadding = 'l' | 'm' | 's' | 'xs' | 'xxs' | 'none';
 
@@ -43,7 +42,6 @@ const Block: React.StatelessComponent<BlockProps> = ({
             <section className={contentClass}>
                 <div className="heading">
                     <h1 className={`typo-element ${cls.element('title')}`}>{header.title}</h1>
-                    {header.info && <Infoboks tekst={header.info} />}
                 </div>
                 {children}
             </section>
