@@ -1,0 +1,35 @@
+{
+    "søker": {
+        "fnr": "29076127431",
+        "fornavn": "RAUS",
+        "etternavn": "SEKK",
+        "kjønn": "K",
+        "fødselsdato": "1961-07-29",
+        "land": "NO",
+        "ikkeNordiskEøsLand": false,
+        "barn": [
+            {
+                "fnr": "10111950100",
+                "fornavn": "BRÅKETE",
+                "etternavn": "MIDTPUNKT",
+                "kjønn": "M",
+                "fødselsdato": "2019-11-10",
+                "annenForelder": {
+                    "fnr": "05036523354",
+                    "fornavn": "VAKKER",
+                    "etternavn": "HATT",
+                    "fødselsdato": "1965-03-05"
+                }
+            }
+        ]
+    },
+    "arbeidsforhold": [
+        {
+            "arbeidsgiverId": "973861778",
+            "arbeidsgiverIdType": "orgnr",
+            "arbeidsgiverNavn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET",
+            "stillingsprosent": 100.0,
+            "fom": "2017-01-01"
+        }
+    ]
+}

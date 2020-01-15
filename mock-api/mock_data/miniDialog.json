@@ -1,0 +1,13 @@
+[
+    {
+        "type": "minidialog",
+        "hendelse": "TILBAKEKREVING_SPM",
+        "gyldigTil": "2999-12-12",
+        "tekst": "tekst jeg skriver selv",
+        "dialogId": "6158886769874716672",
+        "aktørId": "1247406671728",
+        "saksnr": "140260600",
+        "opprettet": "2019-10-22T11:52:27.377367",
+        "aktiv": true
+    }
+]
