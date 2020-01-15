@@ -50,7 +50,7 @@ const periodeDtoUTottaksperiode = (uttaksperiodeDto: PeriodeDto, søkerErFarElle
         gjelderAnnenPart: uttaksperiodeDto.gjelderAnnenPart,
         tidsperiode: uttaksperiodeDto.periode,
         forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
-        antallUttaksdager: uttaksperiodeDto.trekkDager,
+        antallUttaksdager: getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode, getGraderingsprosent(uttaksperiodeDto), uttaksperiodeDto.samtidigUttaksprosent),
         stønadskontotype: uttaksperiodeDto.stønadskontotype,
         graderingInnvilget:
             uttaksperiodeDto.graderingInnvilget !== undefined ? uttaksperiodeDto.graderingInnvilget : false,

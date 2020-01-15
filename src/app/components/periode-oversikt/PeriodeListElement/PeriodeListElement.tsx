@@ -43,8 +43,8 @@ const renderDagMnd = (dato: string, visÅr: boolean = true): JSX.Element => {
             )}
         </div>
     ) : (
-        <div className={BEM.element('dagmnd')}>-</div>
-    );
+            <div className={BEM.element('dagmnd')}>-</div>
+        );
 };
 
 const PeriodeListElement: React.FunctionComponent<Props & InjectedIntlProps> = ({
