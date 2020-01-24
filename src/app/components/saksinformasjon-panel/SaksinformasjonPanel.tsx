@@ -31,6 +31,7 @@ import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 
 import './saksinformasjonPanel.less';
+import moment from 'moment';
 
 interface Props {
     søkerinfo?: Søkerinfo;
@@ -46,17 +47,23 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
         .filter(({ saksnr }) => sak.saksnummer === saksnr)
         .find(({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER);
 
+    const behandlingsdato = initiellForeldrepengesøknadHendelse && initiellForeldrepengesøknadHendelse.behandlingsdato;
     const cls = BEMHelper('saksinformasjon-panel');
     return (
         <div>
             {søkerinfo &&
                 initiellForeldrepengesøknadHendelse &&
-                initiellForeldrepengesøknadHendelse.behandlingsdato &&
+                behandlingsdato &&
                 !harEnAvsluttetBehandling(sak) &&
                 !erInfotrygdSak(sak) && (
                     <Behandligsfrist
                         harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
-                        behandligsdato={initiellForeldrepengesøknadHendelse.behandlingsdato}
+                        behandligsdato={
+                            moment(behandlingsdato).isSameOrAfter(moment(), 'days') ||
+                            moment(initiellForeldrepengesøknadHendelse.opprettet).isBefore(behandlingsdato)
+                                ? behandlingsdato
+                                : moment().format('YYYY-MM-DD')
+                        }
                     />
                 )}
 
