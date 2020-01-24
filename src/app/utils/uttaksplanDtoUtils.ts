@@ -3,7 +3,6 @@ import { PeriodeType } from 'app/types/uttaksplan/Periode';
 import { Rolle } from 'app/types/Rolle';
 import { isEqual } from 'lodash';
 import { erSammenhengende } from './periodeUtils';
-import moment from 'moment';
 
 export const getPeriodetype = (
     periode: PeriodeDto
@@ -80,17 +79,6 @@ export const erTaptPeriode = (perioder: PeriodeDto) => {
     );
 };
 
-export const erEnAvslåttPeriodeEtterSisteInnvilgetPeriode = (periode: PeriodeDto, perioder: PeriodeDto[]): boolean => {
-    return (
-        periode.periodeResultatType === PeriodeResultatType.Avslått &&
-        perioder.some(
-            (p) =>
-                moment(p.periode.fom).isSameOrAfter(periode.periode.fom, 'days') &&
-                p.periodeResultatType === PeriodeResultatType.Innvilget
-        )
-    );
-};
-
 export const erLike = (periode1: PeriodeDto, periode2: PeriodeDto): boolean => {
     return isEqual(getRelevanteFelterForSammenslåing(periode1), getRelevanteFelterForSammenslåing(periode2));
 };
@@ -159,7 +147,6 @@ const reduceDuplikateSaksperioderGrunnetArbeidsforhold = (
 export const cleanupUttaksplanDto = (uttaksperioderDto: PeriodeDto[]): PeriodeDto[] => {
     return slåSammenLikeOgSammenhengendeUttaksperioder(
         uttaksperioderDto
-            .filter((p) => !erEnAvslåttPeriodeEtterSisteInnvilgetPeriode(p, uttaksperioderDto))
             .reduce(reduceDuplikateSaksperioderGrunnetArbeidsforhold, [])
             .filter((p) => fjernIrrelevanteTaptePerioder(p, uttaksperioderDto))
     );

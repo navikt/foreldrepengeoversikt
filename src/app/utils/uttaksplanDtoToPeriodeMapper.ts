@@ -14,6 +14,9 @@ export const uttaksperiodeDtoToPeriode = (uttaksperiodeDto: PeriodeDto, søkerEr
         case PeriodeType.Uttak:
             return periodeDtoUTottaksperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
         case PeriodeType.Utsettelse:
+            if (uttaksperiodeDto.utbetalingsprosent > 0) {
+                return periodeDtoUTottaksperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
+            }
             return periodeDtoToUtsettelsesperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
         case PeriodeType.Opphold:
             return periodeDtoUToOppholdsperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
@@ -50,7 +53,11 @@ const periodeDtoUTottaksperiode = (uttaksperiodeDto: PeriodeDto, søkerErFarElle
         gjelderAnnenPart: uttaksperiodeDto.gjelderAnnenPart,
         tidsperiode: uttaksperiodeDto.periode,
         forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
-        antallUttaksdager: getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode, getGraderingsprosent(uttaksperiodeDto), uttaksperiodeDto.samtidigUttaksprosent),
+        antallUttaksdager: getAntallUttaksdagerITidsperiode(
+            uttaksperiodeDto.periode,
+            getGraderingsprosent(uttaksperiodeDto),
+            uttaksperiodeDto.samtidigUttaksprosent
+        ),
         stønadskontotype: uttaksperiodeDto.stønadskontotype,
         graderingInnvilget:
             uttaksperiodeDto.graderingInnvilget !== undefined ? uttaksperiodeDto.graderingInnvilget : false,
