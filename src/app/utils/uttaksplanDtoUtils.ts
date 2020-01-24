@@ -49,7 +49,7 @@ export const slåSammenLikeOgSammenhengendeUttaksperioder = (perioder: PeriodeDt
 
     return perioder.reduce((periodeResult: PeriodeDto[], periode) => {
         const previousUttaksperiode = periodeResult[periodeResult.length - 1];
-        if (skalKunneSlåSammenUttaksperioer(previousUttaksperiode, periode)) {
+        if (skalKunneSlåSammenUttaksperioder(previousUttaksperiode, periode)) {
             periodeResult.pop();
             periodeResult.push({
                 ...previousUttaksperiode,
@@ -66,7 +66,7 @@ export const slåSammenLikeOgSammenhengendeUttaksperioder = (perioder: PeriodeDt
     }, []);
 };
 
-export const skalKunneSlåSammenUttaksperioer = (periode1?: PeriodeDto, periode2?: PeriodeDto): boolean => {
+export const skalKunneSlåSammenUttaksperioder = (periode1?: PeriodeDto, periode2?: PeriodeDto): boolean => {
     return periode1 === undefined || periode2 === undefined
         ? false
         : erSammenhengende(periode1.periode, periode2.periode) && erLike(periode1, periode2);
@@ -89,6 +89,7 @@ const getRelevanteFelterForSammenslåing = ({
     utbetalingsprosent,
     manueltBehandlet,
     arbeidsgiverInfo,
+    uttakArbeidType,
     ...relevanteFelter
 }: PeriodeDto) => {
     return relevanteFelter;
@@ -110,6 +111,7 @@ export const getFelterForSammenligningAvDuplikatePerioderPgaArbeidsforhold = ({
     arbeidstidprosent,
     trekkDager,
     utbetalingsprosent,
+    uttakArbeidType,
     ...uttaksperiodeDtoUtenArbeidsgiverInfo
 }: PeriodeDto) => {
     return uttaksperiodeDtoUtenArbeidsgiverInfo;
