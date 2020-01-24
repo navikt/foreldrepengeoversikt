@@ -39,7 +39,7 @@ function* getSakerSaga(_: GetSakerRequest) {
             if (isFeatureEnabled(Feature.dinPlan)) {
                 saker = yield all(saker.map(uttaksplanTilSakMapper));
                 if (isFeatureEnabled(Feature.kontooveriskt)) {
-                    if (saker[0].tilgjengeligeKontoer) {
+                    if (saker.length > 0) {
                         saker[0].tilgjengeligeKontoer = yield call(getTilgjengeligeStønadskontoer, saker[0]);
                     }
                 }
