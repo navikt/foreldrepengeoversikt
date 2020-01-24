@@ -146,9 +146,29 @@ const reduceDuplikateSaksperioderGrunnetArbeidsforhold = (
     return resultatPerioder;
 };
 
+const fjernAvslåttePerioderPåSlutten = (uttaksperioderDto: PeriodeDto[]): PeriodeDto[] => {
+    if (uttaksperioderDto.length === 0) {
+        return uttaksperioderDto;
+    }
+
+    uttaksperioderDto.reverse();
+    while (
+        uttaksperioderDto.findIndex(
+            (p) => p.periodeResultatType === PeriodeResultatType.Avslått && p.trekkDager === 0
+        ) === 0
+    ) {
+        uttaksperioderDto.shift();
+    }
+    uttaksperioderDto.reverse();
+
+    return uttaksperioderDto;
+};
+
 export const cleanupUttaksplanDto = (uttaksperioderDto: PeriodeDto[]): PeriodeDto[] => {
+    const uttaksPerioderDtoUtenAvslagPåSlutten = fjernAvslåttePerioderPåSlutten(uttaksperioderDto);
+
     return slåSammenLikeOgSammenhengendeUttaksperioder(
-        uttaksperioderDto
+        uttaksPerioderDtoUtenAvslagPåSlutten
             .reduce(reduceDuplikateSaksperioderGrunnetArbeidsforhold, [])
             .filter((p) => fjernIrrelevanteTaptePerioder(p, uttaksperioderDto))
     );
