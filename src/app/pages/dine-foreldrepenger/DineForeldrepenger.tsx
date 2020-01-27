@@ -39,7 +39,7 @@ interface Props {
     storageKvittering?: StorageKvittering;
     søkerinfo?: Søkerinfo;
     history: History;
-    historikkInnslagListe: Innsendingsinnslag[]
+    historikkInnslagListe: Innsendingsinnslag[];
 }
 
 export class DineForeldrepenger extends React.Component<Props> {
@@ -82,7 +82,9 @@ export class DineForeldrepenger extends React.Component<Props> {
                                     søkerinfo={søkerinfo}
                                     sak={sak}
                                     history={history}
-                                    historikkInnslagListe={historikkInnslagListe}
+                                    historikkInnslagListe={historikkInnslagListe.filter(
+                                        (h) => h.saksnr === sak.saksnummer
+                                    )}
                                 />
                             </li>
                         );
@@ -119,13 +121,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     render() {
-        const {
-            saker,
-            history,
-            storageKvittering,
-            søkerinfo,
-            historikkInnslagListe
-        } = this.props;
+        const { saker, history, storageKvittering, søkerinfo, historikkInnslagListe } = this.props;
         const nyesteSak: SakBase | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettFiktivSak(storageKvittering!)
             : saker.slice().shift();
@@ -145,7 +141,9 @@ export class DineForeldrepenger extends React.Component<Props> {
                                     sak={nyesteSak}
                                     søkerinfo={søkerinfo}
                                     history={history}
-                                    historikkInnslagListe={historikkInnslagListe}
+                                    historikkInnslagListe={historikkInnslagListe.filter(
+                                        (h) => h.saksnr === nyesteSak.saksnummer
+                                    )}
                                     withHeader={true}
                                 />
                                 {this.renderSaksoversiktList(nyesteSak)}
