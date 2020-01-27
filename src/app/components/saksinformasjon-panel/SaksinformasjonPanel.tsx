@@ -29,9 +29,9 @@ import Behandlingsfrist from '../behandlingsfrist/Behandlingsfrist';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
+import moment from 'moment';
 
 import './saksinformasjonPanel.less';
-import moment from 'moment';
 
 interface Props {
     søkerinfo?: Søkerinfo;
@@ -43,29 +43,28 @@ interface Props {
 const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak, history, historikkInnslagListe }) => {
     const erSakForeldrepengesak = erForeldrepengesak(sak);
     const { perioder } = sak;
+    const tidligesteBehandlingsdato =
+        perioder && perioder.length > 0 ? moment(perioder[0].tidsperiode.fom).subtract(4, 'weeks') : undefined;
     const initiellForeldrepengesøknadHendelse = historikkInnslagListe
         .filter(({ saksnr }) => sak.saksnummer === saksnr)
+        .sort((a, b) => (moment(a.opprettet).isSameOrBefore(moment(b.opprettet)) ? 1 : -1))
         .find(({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER);
+    const opprettetDato = initiellForeldrepengesøknadHendelse
+        ? initiellForeldrepengesøknadHendelse.opprettet
+        : undefined;
+    const behandlingsdato = moment(opprettetDato).isSameOrAfter(moment(tidligesteBehandlingsdato))
+        ? moment(opprettetDato)
+        : tidligesteBehandlingsdato;
 
-    const behandlingsdato = initiellForeldrepengesøknadHendelse && initiellForeldrepengesøknadHendelse.behandlingsdato;
     const cls = BEMHelper('saksinformasjon-panel');
     return (
         <div>
-            {søkerinfo &&
-                initiellForeldrepengesøknadHendelse &&
-                behandlingsdato &&
-                !harEnAvsluttetBehandling(sak) &&
-                !erInfotrygdSak(sak) && (
-                    <Behandlingsfrist
-                        harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
-                        behandlingsdato={
-                            moment(behandlingsdato).isSameOrAfter(moment(), 'days') ||
-                            moment(initiellForeldrepengesøknadHendelse.opprettet).isBefore(behandlingsdato)
-                                ? behandlingsdato
-                                : moment().format('YYYY-MM-DD')
-                        }
-                    />
-                )}
+            {søkerinfo && behandlingsdato && !harEnAvsluttetBehandling(sak) && !erInfotrygdSak(sak) && (
+                <Behandlingsfrist
+                    harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
+                    behandlingsdato={behandlingsdato.format('YYYY-MM-DD')}
+                />
+            )}
 
             {erInfotrygdSak(sak) && (
                 <>
