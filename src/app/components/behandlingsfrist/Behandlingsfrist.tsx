@@ -10,20 +10,23 @@ import './behandlingsfrist.less';
 
 interface Props {
     harLøpendeArbeidsforhold: boolean;
-    behandligsdato: string;
+    behandlingsdato: string;
 }
 
-const Behandligsfrist: React.StatelessComponent<Props> = ({ behandligsdato, harLøpendeArbeidsforhold }) => {
+const Behandlingsfrist: React.StatelessComponent<Props> = ({ behandlingsdato, harLøpendeArbeidsforhold }) => {
     const cls = BEMHelper('behandlingsfrist');
     return (
         <AlertStripe className={cls.block} type="info">
             {!harLøpendeArbeidsforhold ? (
                 <>
                     <Undertittel className="blokk-xs">
-                        <FormattedMessage id="dineForeldrepenger.behandligsfrist" values={{ dato: formatDate(behandligsdato) }} />
+                        <FormattedMessage
+                            id="dineForeldrepenger.behandlingsfrist"
+                            values={{ dato: formatDate(behandlingsdato) }}
+                        />
                     </Undertittel>
                     <div>
-                        <FormattedHTMLMessage id={'dineForeldrepenger.behandligsfrist.selvstendig'} />
+                        <FormattedHTMLMessage id={'dineForeldrepenger.behandlingsfrist.selvstendig'} />
                     </div>
                 </>
             ) : (
@@ -32,23 +35,23 @@ const Behandligsfrist: React.StatelessComponent<Props> = ({ behandligsdato, harL
                         <span>
                             <Undertittel>
                                 <FormattedMessage
-                                    id="dineForeldrepenger.behandligsfrist"
-                                    values={{ dato: formatDate(behandligsdato) }}
+                                    id="dineForeldrepenger.behandlingsfrist"
+                                    values={{ dato: formatDate(behandlingsdato) }}
                                 />
                             </Undertittel>
                             <FormattedHTMLMessage
-                                id="dineForeldrepenger.behandligsfrist.arbeidstaker.1"
-                                values={{ dato: formatDate(behandligsdato)}}
+                                id="dineForeldrepenger.behandlingsfrist.arbeidstaker.1"
+                                values={{ dato: formatDate(behandlingsdato) }}
                             />
                         </span>
                     }
                     border={false}
-                    apneTekst={<FormattedMessage id="dineForeldrepenger.behandligsfrist.lesMer" />}>
-                    <FormattedHTMLMessage id="dineForeldrepenger.behandligsfrist.arbeidstaker.2" />
+                    apneTekst={<FormattedMessage id="dineForeldrepenger.behandlingsfrist.lesMer" />}>
+                    <FormattedHTMLMessage id="dineForeldrepenger.behandlingsfrist.arbeidstaker.2" />
                 </Lesmerpanel>
             )}
         </AlertStripe>
     );
 };
 
-export default Behandligsfrist;
+export default Behandlingsfrist;

@@ -25,7 +25,7 @@ import BEMHelper from 'common/util/bem';
 import { lenker } from 'app/utils/lenker';
 import { Innsendingsinnslag, HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
 import { redirect } from 'app/utils/redirect';
-import Behandligsfrist from '../behandligsfrist/Behandligsfrist';
+import Behandlingsfrist from '../behandlingsfrist/Behandlingsfrist';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
@@ -56,9 +56,9 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 behandlingsdato &&
                 !harEnAvsluttetBehandling(sak) &&
                 !erInfotrygdSak(sak) && (
-                    <Behandligsfrist
+                    <Behandlingsfrist
                         harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
-                        behandligsdato={
+                        behandlingsdato={
                             moment(behandlingsdato).isSameOrAfter(moment(), 'days') ||
                             moment(initiellForeldrepengesøknadHendelse.opprettet).isBefore(behandlingsdato)
                                 ? behandlingsdato
