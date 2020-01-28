@@ -55,7 +55,7 @@ jobs:
         id: createdeployissue
         with:
           token: ${{ secrets.NOTIFICATION }}
-          title: Deploy av ${{ env.TAG }}
+          title: Bygg av ${{ env.TAG }}
           labels: deployment
           body: |
             Kommenter med <b>/promote ${{ env.TAG }} cluster</b>, hvor <b>cluster</b> er et gyldig clusternavn
