@@ -100,6 +100,7 @@ const PeriodeList: React.StatelessComponent<Props & InjectedIntlProps> = ({
                                             />
                                         }
                                         color={UttaksplanColor.yellow}
+                                        tidsperiode={p.tidsperiode}
                                     />
                                 );
                             case PeriodeType.Opphold:
