@@ -42,13 +42,6 @@ jobs:
           echo  ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
           docker push ${IMAGE_BASE}   
     
-      - name: Tag release      
-        uses: maxkomarychev/oction-create-release@v0.7.1
-        id: release
-        with:
-          token: ${{ secrets.NOTIFICATION }}
-          tag_name: ${{ env.TAG }}
-  
       - name: Opprett deployment issue
         if: success()
         uses: maxkomarychev/oction-create-issue@v0.7.1
@@ -65,7 +58,7 @@ jobs:
             <tr><td>prod-sbs</tr>
             </table>
      
-      - name: Trigg deploy til dev-fss t4
+      - name: Trigg deploy til dev-fss 
         if: success()
         uses: actions/github-script@0.3.0
         with:
@@ -76,6 +69,6 @@ jobs:
                             issue_number: ${{ steps.createdeployissue.outputs.number }} }
             github.issues.createComment({...issue,
                                     title: 'Deploy av ${{ env.TAG }}',
-                                    body: '/promote ${{ env.TAG }}  dev-sbs'})
+                                    body: '/promote ${{ env.TAG }} dev-sbs'})
 
      
