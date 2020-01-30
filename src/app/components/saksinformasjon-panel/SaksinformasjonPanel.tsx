@@ -59,12 +59,16 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
     const cls = BEMHelper('saksinformasjon-panel');
     return (
         <div>
-            {søkerinfo && behandlingsdato && !harEnAvsluttetBehandling(sak) && !erInfotrygdSak(sak) && (
-                <Behandlingsfrist
-                    harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
-                    behandlingsdato={behandlingsdato.format('YYYY-MM-DD')}
-                />
-            )}
+            {søkerinfo &&
+                behandlingsdato &&
+                !harEnAvsluttetBehandling(sak) &&
+                !erInfotrygdSak(sak) &&
+                erForeldrepengesak(sak) && (
+                    <Behandlingsfrist
+                        harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
+                        behandlingsdato={behandlingsdato.format('YYYY-MM-DD')}
+                    />
+                )}
 
             {erInfotrygdSak(sak) && (
                 <>
