@@ -121,7 +121,7 @@ export const getResterendeStønadskontoer = (
 
 export const getBrukteStønadskontoer = (perioder: Periode[]): TilgjengeligStønadskonto[] => {
     return perioder
-        .filter(({ type }) => type === PeriodeType.Uttak)
+        .filter(({ type }) => type === PeriodeType.Uttak || type === PeriodeType.TaptPeriode)
         .map((periode: Uttaksperiode) => ({
             konto: periode.stønadskontotype,
             dager: periode.antallUttaksdager
