@@ -33,6 +33,14 @@ interface HistorikkElementProps {
 
 type Props = HistorikkElementProps;
 
+const getIkonClass = (hendelse: Hendelse) => {
+    if (hendelse.brukerInitiertHendelse) {
+        return 'bruker';
+    } else {
+        return hendelse.type === 'inntektsmelding-motatt' ? 'arbeidsgiver' : 'nav';
+    }
+};
+
 const HistorikkElement: React.StatelessComponent<Props> = (props: Props) => {
     const { hendelse } = props;
 
@@ -45,14 +53,14 @@ const HistorikkElement: React.StatelessComponent<Props> = (props: Props) => {
                         <Snakkeboble
                             dato={formaterDatoForHendelse(hendelse.dato)}
                             pilHoyre={!hendelse.brukerInitiertHendelse && !matches}
-                            ikonClass={hendelse.brukerInitiertHendelse ? 'bruker' : 'nav'}>
+                            ikonClass={getIkonClass(hendelse)}>
                             <>
                                 <Element tag="p">
                                     <FormattedMessage id={`historikk.${hendelse.beskrivelse}`} />
                                 </Element>
                                 <div className={cls.element('tilleggsinformasjon')}>
                                     {hendelse.arbeidsgiver !== undefined && (
-                                        <Normaltekst tag="p">{normalizeName(hendelse.arbeidsgiver!.navn)}</Normaltekst>
+                                        <Normaltekst tag="p">{normalizeName(hendelse.arbeidsgiver.navn)}</Normaltekst>
                                     )}
                                     {hendelse.skjemanumre && hendelse.skjemanumre.length > 0 && (
                                         <ul>
