@@ -1,4 +1,4 @@
-import { PeriodeDto, StønadskontoType, PeriodeResultatType } from 'app/api/types/UttaksplanDto';
+import { PeriodeDto, StønadskontoType, PeriodeResultatType, UtsettelsePeriodeType } from 'app/api/types/UttaksplanDto';
 import { PeriodeType } from 'app/types/uttaksplan/Periode';
 import { Rolle } from 'app/types/Rolle';
 import { isEqual } from 'lodash';
@@ -34,6 +34,15 @@ export const getGraderingsprosent = (periode: PeriodeDto): string | undefined =>
 export const fjernIrrelevanteTaptePerioder = (periode: PeriodeDto, perioder: PeriodeDto[]) => {
     if (erDuplikatPeriodePgaFlereArbeidsforhold(periode, perioder)) {
         return !(erTaptPeriode(periode) && periode.stønadskontotype === StønadskontoType.ForeldrepengerFørFødsel);
+    }
+
+    // Spesialtilfelle - Prematuruker
+    if (
+        erTaptPeriode(periode) &&
+        periode.utsettelsePeriodeType === UtsettelsePeriodeType.BarnInnlagt &&
+        periode.trekkDager > 0
+    ) {
+        return true;
     }
 
     return (
