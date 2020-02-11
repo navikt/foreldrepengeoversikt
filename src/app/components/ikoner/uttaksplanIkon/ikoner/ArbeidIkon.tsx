@@ -11,7 +11,7 @@ const ArbeidIkon = (props: UttaksplanIkonProps) => {
             width={32}
             height={32}
             {...rest}>
-            <title>{props.title}</title>
+            <title>{title}</title>
             <defs>
                 <rect id="a" width={32} height={32} rx={10} />
             </defs>

@@ -32,6 +32,7 @@ import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 import moment from 'moment';
 
 import './saksinformasjonPanel.less';
+import Søknadsoversikt from '../søknadsoversikt/Søknadsoversikt';
 
 interface Props {
     søkerinfo?: Søkerinfo;
@@ -126,6 +127,8 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                     </div>
                 )}
             </div>
+
+            <Søknadsoversikt søknadsDato={sak.opprettet} />
 
             {isFeatureEnabled(Feature.dinPlan) &&
                 erSakForeldrepengesak &&

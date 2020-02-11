@@ -216,5 +216,10 @@
     "vedlegg.passordbeskyttet.flereFeil": "{filename} - Vedlegget du forsøker å laste opp er passordbeskyttet. Du må endre vedlegget slik at det ikke er passordbeskyttet eller laste opp et annet vedlegg.",
     "vedlegg.passordbeskyttet": "Vedlegget du forsøker å laste opp er passordbeskyttet. Du må endre vedlegget slik at det ikke er passordbeskyttet eller laste opp et annet vedlegg.",
     "vedlegg.virus.flereFeil": "{filename} - Vedlegget inneholder noe vi ikke vil ha",
-    "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha, du må laste opp et annet vedlegg."
+    "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha, du må laste opp et annet vedlegg.",
+    "søknadsoversikt.tittel": "Søknad",
+    "søknadsoversikt.duHarSøkt": "Du har søkt",
+    "søknadsoversikt.arbeidsgiverKanSendeInnInntektsmelding": "Arbeidsgiveren din kan sende oss inntektsopplysninger fra {dato}",
+    "søknadsoversikt.navBehandlerSøknaden": "Vi behandler søknaden din",
+    "søknadsoversikt.navBehandlerSøknaden.innhold": "Du får svar fra oss så fort vi har behandlet ferdig søknaden din. Det pleier å ta rundt 6 uker fra vi får inntektsmeldingen din."
 }
