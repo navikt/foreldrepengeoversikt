@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Innholdstittel } from 'nav-frontend-typografi';
 
 import SakBase from '../../../api/types/sak/Sak';
-import { finnNyesteBehandling, harSøkt } from '../../../utils/sakerUtils';
+import { harSøkt, getNyesteBehandling } from '../../../utils/sakerUtils';
 import { formatDate, getIntlKeyForStatus, getEtikettTypeForSaksstatus, getSaksoversiktTitle } from '../utils';
 import BEMHelper from 'common/util/bem';
 import Etikett from '../../etikett/etikett';
@@ -19,7 +19,7 @@ interface SaksoversiktHeaderProps {
 
 const SaksoversiktHeader: FunctionComponent<SaksoversiktHeaderProps> = ({ sak }) => {
     const statusIntlKey = sak.status && getIntlKeyForStatus(sak.status);
-    const nyesteBehandling = finnNyesteBehandling(sak);
+    const nyesteBehandling = getNyesteBehandling(sak.behandlinger);
 
     const cls = BEMHelper('saksoversikt-header');
     return (
