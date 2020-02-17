@@ -106,7 +106,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
             {svar !== undefined && (
                 <div className={cls.element('btn')}>
                     <Hovedknapp
-                        onClick={() =>
+                        onClick={() => 
                             onSubmit({
                                 vedlegg: brukerØnskerÅUttaleSeg
                                     ? attachments.filter((a: Attachment) => !isAttachmentWithError(a))

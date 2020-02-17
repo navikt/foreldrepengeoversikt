@@ -1,1 +1,21 @@
-[]
+[
+    {
+        "type": "FPSAK",
+        "saksnummer": "142634614",
+        "status": "AVSLU",
+        "opprettet": "2020-02-11",
+        "behandlinger": [
+            {
+                "opprettetTidspunkt": "2020-02-11T09:01:54.064",
+                "endretTidspunkt": "2020-02-11T09:02:07.904",
+                "status": "AVSLU",
+                "type": "ES",
+                "tema": "ENGST",
+                "behandlingResultat": "INNVILGET",
+                "behandlendeEnhet": "4842",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Stord",
+                "inntektsmeldinger": []
+            }
+        ]
+    }
+]
