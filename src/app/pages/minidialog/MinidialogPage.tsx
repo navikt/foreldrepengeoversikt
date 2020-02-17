@@ -37,7 +37,7 @@ class MinidialogPage extends React.Component<Props> {
                 <MinidialogSkjema
                     sak={sak}
                     minidialog={minidialog}
-                    onSubmit={(ettersendingDto: EttersendingDto) => sendEttersendelse(ettersendingDto)}
+                    onSubmit={sendEttersendelse}
                 />
             </Page>
         );
