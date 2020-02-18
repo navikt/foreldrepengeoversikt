@@ -1,5 +1,5 @@
 module.exports = {
-    setupTestFrameworkScriptFile: './jest/setup.ts',
+    setupFilesAfterEnv: ['./jest/setup.ts'],
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?|ts?)$',
     moduleNameMapper: {
         '\\.(css|jpg|png|svg|less)$': '<rootDir>/jest/mockFile.js',

@@ -1,1 +1,30 @@
-[]
+[
+    {
+        "type": "FPSAK",
+        "saksnummer": "140377753",
+        "status": "LOP",
+        "opprettet": "2020-01-29",
+        "annenPart": {
+            "fnr": "16115326752",
+            "aktørId": "1445951577491",
+            "navn": {
+                "fornavn": "ROBUST",
+                "etternavn": "FLOSKEL",
+                "kjønn": "M"
+            }
+        },
+        "behandlinger": [
+            {
+                "opprettetTidspunkt": "2020-01-29T15:50:27.918",
+                "endretTidspunkt": "2020-01-29T16:36:01.795",
+                "status": "AVSLU",
+                "type": "FP",
+                "tema": "FORP_FODS",
+                "behandlingResultat": "INNVILGET",
+                "behandlendeEnhet": "4812",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Bergen",
+                "inntektsmeldinger": []
+            }
+        ]
+    }
+]

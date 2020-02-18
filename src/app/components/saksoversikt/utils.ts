@@ -2,7 +2,7 @@ import moment from 'moment';
 import { FagsakStatus } from '../../api/types/sak/FagsakStatus';
 import SakBase from 'app/api/types/sak/Sak';
 import { erInfotrygdSak, getNyesteBehandling } from 'app/utils/sakerUtils';
-import { BehandligType } from 'app/api/types/sak/Behandling';
+import { BehandligType, BehandlingResultatType } from 'app/api/types/sak/Behandling';
 
 export const isSakTooOldForEttersendelse = (sak: SakBase): boolean => {
     return !moment(sak.opprettet).isSameOrAfter(moment().subtract(150, 'days'));
@@ -11,13 +11,27 @@ export const isSakTooOldForEttersendelse = (sak: SakBase): boolean => {
 export const isSakEligableForEttersendelse = (sak: SakBase): boolean => {
     if (sak.saksnummer === undefined) {
         return false;
-    };
+    }
 
     if (erInfotrygdSak(sak)) {
         return !isSakTooOldForEttersendelse(sak);
-    };
+    }
 
-    return sak.status ? sak.status !== FagsakStatus.AVSLUTTET : false; 
+    const nyesteInnvilgetElllerAvslåtteBehandlig =
+        sak.behandlinger &&
+        getNyesteBehandling(
+            sak.behandlinger.filter(
+                ({ behandlingResultat }) =>
+                    behandlingResultat === BehandlingResultatType.INNVILGET ||
+                    behandlingResultat === BehandlingResultatType.AVSLÅTT
+            )
+        );
+
+    return (
+        sak.status !== FagsakStatus.AVSLUTTET ||
+        (nyesteInnvilgetElllerAvslåtteBehandlig !== undefined &&
+            moment(nyesteInnvilgetElllerAvslåtteBehandlig.endretTidspunkt).isSameOrBefore(moment().add(7, 'weeks')))
+    );
 };
 
 export function formatDate(dato: string, datoformat?: string): string {
@@ -40,7 +54,7 @@ export const getEtikettTypeForSaksstatus = (sak: SakBase): 'suksess' | 'fokus' =
     sak.status === FagsakStatus.LOPENDE || sak.status === FagsakStatus.AVSLUTTET ? 'suksess' : 'fokus';
 
 export const getSaksoversiktTitle = (sak: SakBase): string => {
-    const nyesteBehandlig = getNyesteBehandling(sak);
+    const nyesteBehandlig = getNyesteBehandling(sak.behandlinger);
     const type = nyesteBehandlig && nyesteBehandlig.type;
     switch (type) {
         case BehandligType.ENDRINGSSØKNAD:
@@ -48,7 +62,7 @@ export const getSaksoversiktTitle = (sak: SakBase): string => {
             return 'saksoversikt.heading.top.foreldrepenger';
         case BehandligType.ENGANGSSØNAD:
             return 'saksoversikt.heading.top.engangsstønad';
-        case BehandligType.SVANGERSKAPSPENGESØKNAD:     
+        case BehandligType.SVANGERSKAPSPENGESØKNAD:
             return 'saksoversikt.heading.top.svangerskapspengesoknad';
         default:
             return 'saksoversikt.heading.top.ukjent';

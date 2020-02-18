@@ -1,24 +1,24 @@
 {
     "søker": {
-        "fnr": "29076127431",
-        "fornavn": "RAUS",
-        "etternavn": "SEKK",
+        "fnr": "12089023449",
+        "fornavn": "FORFJAMSET",
+        "etternavn": "KAMELEON",
         "kjønn": "K",
-        "fødselsdato": "1961-07-29",
+        "fødselsdato": "1990-08-12",
         "land": "NO",
         "ikkeNordiskEøsLand": false,
         "barn": [
             {
-                "fnr": "10111950100",
-                "fornavn": "BRÅKETE",
-                "etternavn": "MIDTPUNKT",
-                "kjønn": "M",
-                "fødselsdato": "2019-11-10",
+                "fnr": "27012050076",
+                "fornavn": "RAUS",
+                "etternavn": "TRANFLASKE",
+                "kjønn": "K",
+                "fødselsdato": "2020-01-27",
                 "annenForelder": {
-                    "fnr": "05036523354",
-                    "fornavn": "VAKKER",
-                    "etternavn": "HATT",
-                    "fødselsdato": "1965-03-05"
+                    "fnr": "16115326752",
+                    "fornavn": "ROBUST",
+                    "etternavn": "FLOSKEL",
+                    "fødselsdato": "1953-11-16"
                 }
             }
         ]
@@ -28,8 +28,8 @@
             "arbeidsgiverId": "973861778",
             "arbeidsgiverIdType": "orgnr",
             "arbeidsgiverNavn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET",
-            "stillingsprosent": 100.0,
-            "fom": "2017-01-01"
+            "stillingsprosent": 100,
+            "fom": "2000-01-29"
         }
     ]
 }

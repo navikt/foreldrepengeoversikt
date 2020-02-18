@@ -26,9 +26,9 @@ export const getNyesteSak = (saker: SakBase[]): SakBase | undefined => {
     return saker.sort(sakByDescendingOrder)[0];
 };
 
-export const getNyesteBehandling = (sak: SakBase): Behandling | undefined => {
-    if (sak.behandlinger !== undefined && sak.behandlinger.length > 0) {
-        return sak.behandlinger.sort(behandlingByDescendingOrder)[0];
+export const getNyesteBehandling = (behandlinger?: Behandling[]): Behandling | undefined => {
+    if (behandlinger !== undefined && behandlinger.length > 0) {
+        return behandlinger.sort(behandlingByDescendingOrder)[0];
     }
     return undefined;
 };
@@ -43,10 +43,6 @@ export const getAlleBehandlinger = (saker: SakBase[]): Behandling[] => {
     return behandlinger;
 };
 
-export const finnNyesteBehandling = (sak: SakBase): Behandling | undefined => {
-    return sak.behandlinger && sak.behandlinger.sort(behandlingByDescendingOrder)[0];
-};
-
 export const harSendtInnEndringssøknad = (sak: SakBase) => {
     return sak.behandlinger === undefined
         ? false
@@ -54,17 +50,17 @@ export const harSendtInnEndringssøknad = (sak: SakBase) => {
 };
 
 export const erForeldrepengesak = (sak: SakBase): boolean => {
-    const behandling = getNyesteBehandling(sak);
+    const behandling = getNyesteBehandling(sak.behandlinger);
     return behandling === undefined ? true : behandling.type === BehandligType.FORELDREPENGESØKNAD;
 };
 
 export const erEngangsstønad = (sak: SakBase): boolean => {
-    const behandling = getNyesteBehandling(sak);
+    const behandling = getNyesteBehandling(sak.behandlinger);
     return behandling === undefined ? false : behandling.type === BehandligType.ENGANGSSØNAD;
 };
 
 export const erSvangerskapepengesak = (sak: SakBase): boolean => {
-    const behandlig = getNyesteBehandling(sak);
+    const behandlig = getNyesteBehandling(sak.behandlinger);
     return behandlig === undefined ? false : behandlig.type === BehandligType.SVANGERSKAPSPENGESØKNAD;
 };
 

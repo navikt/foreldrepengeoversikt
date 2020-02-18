@@ -46,30 +46,12 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
     intl
 }) => {
     const [fritekst, updateFritekst] = useState('');
-    const [svar, update] = useState('');
-    const [sending, updateSending] = useState(false);
+    const [svar, update] = useState<string | undefined>(undefined);
     const brukerØnskerÅUttaleSeg = svar === JaNeiSpørsmål.JA;
 
     const cls = BEMHelper('minidialog-skjema');
     return (
-        <form
-            className={cls.block}
-            onSubmit={(e) => {
-                e.preventDefault();
-                onSubmit({
-                    vedlegg: brukerØnskerÅUttaleSeg
-                        ? attachments.filter((a: Attachment) => !isAttachmentWithError(a))
-                        : [],
-                    saksnummer: minidialog.saksnr,
-                    type: getSakstype(sak),
-                    dialogId: minidialog.dialogId,
-                    brukerTekst: {
-                        dokumentType: Skjemanummer.TILBAKEBETALING,
-                        overskrift: 'Svar på tilbakebetalingen',
-                        tekst: brukerØnskerÅUttaleSeg ? fritekst : 'Bruker ønsker ikke å uttale seg'
-                    }
-                });
-            }}>
+        <form className={cls.block}>
             <Snakkeboble topp={formaterDatoForHendelse(minidialog.opprettet)} pilHoyre={false} ikonClass={'nav'}>
                 <Normaltekst tag="p">
                     <FormattedMessage id="miniDialog.tilbakekreving.tittel" values={{ sakstype: getSakstype(sak) }} />
@@ -121,9 +103,26 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
                     )}
                 </>
             )}
-            {svar === JaNeiSpørsmål.JA || svar === JaNeiSpørsmål.NEI  && (
+            {svar !== undefined && (
                 <div className={cls.element('btn')}>
-                    <Hovedknapp onClick={() => updateSending(true)} disabled={sending} spinner={sending}>
+                    <Hovedknapp
+                        onClick={() => 
+                            onSubmit({
+                                vedlegg: brukerØnskerÅUttaleSeg
+                                    ? attachments.filter((a: Attachment) => !isAttachmentWithError(a))
+                                    : [],
+                                saksnummer: minidialog.saksnr,
+                                type: getSakstype(sak),
+                                dialogId: minidialog.dialogId,
+                                brukerTekst: {
+                                    dokumentType: Skjemanummer.TILBAKEBETALING,
+                                    overskrift: 'Svar på tilbakebetalingen',
+                                    tekst: brukerØnskerÅUttaleSeg ? fritekst : 'Bruker ønsker ikke å uttale seg'
+                                }
+                            })
+                        }
+                        disabled={false}
+                        spinner={false}>
                         <FormattedMessage id="miniDialog.tilbakekreving.sendButton" />
                     </Hovedknapp>
                 </div>
