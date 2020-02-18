@@ -6,10 +6,12 @@ import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import CheckmarkIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/CheckmarkIkon';
 import { formatDate } from 'app/components/saksoversikt/utils';
 import AdvarselIkonSirkel from 'app/components/ikoner/uttaksplanIkon/ikoner/AdvarselIkonSirkel';
+import Arbeidsforhold from 'app/types/Arbeidsforhold';
 
 interface Props {
     søknadsDato: string;
     intl: InjectedIntl;
+    arbeidsforhold: Arbeidsforhold[] | undefined;
 }
 
 const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({ søknadsDato, intl }) => {

@@ -128,7 +128,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 )}
             </div>
 
-            <Søknadsoversikt søknadsDato={sak.opprettet} />
+            <Søknadsoversikt søknadsDato={sak.opprettet} arbeidsforhold={søkerinfo?.arbeidsforhold} />
 
             {isFeatureEnabled(Feature.dinPlan) &&
                 erSakForeldrepengesak &&
