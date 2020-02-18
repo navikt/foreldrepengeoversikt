@@ -1,20 +1,35 @@
 {
     "søker": {
-        "fnr": "26066522430",
-        "fornavn": "RAUS",
-        "etternavn": "RISPBÆRBUSK",
+        "fnr": "12089023449",
+        "fornavn": "FORFJAMSET",
+        "etternavn": "KAMELEON",
         "kjønn": "K",
-        "fødselsdato": "1965-06-26",
+        "fødselsdato": "1990-08-12",
         "land": "NO",
         "ikkeNordiskEøsLand": false,
         "barn": [
             {
-                "fnr": "10022098611",
-                "fornavn": "NYDELIG",
-                "etternavn": "STAUDE",
+                "fnr": "27012050076",
+                "fornavn": "RAUS",
+                "etternavn": "TRANFLASKE",
                 "kjønn": "K",
-                "fødselsdato": "2020-02-10"
+                "fødselsdato": "2020-01-27",
+                "annenForelder": {
+                    "fnr": "16115326752",
+                    "fornavn": "ROBUST",
+                    "etternavn": "FLOSKEL",
+                    "fødselsdato": "1953-11-16"
+                }
             }
         ]
-    }
+    },
+    "arbeidsforhold": [
+        {
+            "arbeidsgiverId": "973861778",
+            "arbeidsgiverIdType": "orgnr",
+            "arbeidsgiverNavn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET",
+            "stillingsprosent": 100,
+            "fom": "2000-01-29"
+        }
+    ]
 }

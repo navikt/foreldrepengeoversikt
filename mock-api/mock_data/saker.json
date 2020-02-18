@@ -1,19 +1,28 @@
 [
     {
         "type": "FPSAK",
-        "saksnummer": "142634614",
-        "status": "AVSLU",
-        "opprettet": "2020-02-11",
+        "saksnummer": "140377753",
+        "status": "LOP",
+        "opprettet": "2020-01-29",
+        "annenPart": {
+            "fnr": "16115326752",
+            "aktørId": "1445951577491",
+            "navn": {
+                "fornavn": "ROBUST",
+                "etternavn": "FLOSKEL",
+                "kjønn": "M"
+            }
+        },
         "behandlinger": [
             {
-                "opprettetTidspunkt": "2020-02-11T09:01:54.064",
-                "endretTidspunkt": "2020-02-11T09:02:07.904",
+                "opprettetTidspunkt": "2020-01-29T15:50:27.918",
+                "endretTidspunkt": "2020-01-29T16:36:01.795",
                 "status": "AVSLU",
-                "type": "ES",
-                "tema": "ENGST",
+                "type": "FP",
+                "tema": "FORP_FODS",
                 "behandlingResultat": "INNVILGET",
-                "behandlendeEnhet": "4842",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Stord",
+                "behandlendeEnhet": "4812",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Bergen",
                 "inntektsmeldinger": []
             }
         ]
