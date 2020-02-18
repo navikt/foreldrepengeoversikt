@@ -1,11 +1,10 @@
 import React from 'react';
 import { injectIntl, InjectedIntl } from 'react-intl';
+import Icon from 'nav-frontend-ikoner-assets';
 
 import SøknadsoversiktHendelseListeItem from './SøknadsoversiktHendelseListeItem';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
-import CheckmarkIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/CheckmarkIkon';
 import { formatDate } from 'app/components/saksoversikt/utils';
-import AdvarselIkonSirkel from 'app/components/ikoner/uttaksplanIkon/ikoner/AdvarselIkonSirkel';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 
 interface Props {
@@ -18,13 +17,13 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({ søkna
     return (
         <div>
             <SøknadsoversiktHendelseListeItem
-                ikon={<CheckmarkIkon width={24} height={24} title="Checkmarkikon" />}
+                ikon={<Icon kind="ok-sirkel-fyll" />}
                 color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.duHarSøkt' })}
                 content={formatDate(søknadsDato)}
             />
             <SøknadsoversiktHendelseListeItem
-                ikon={<AdvarselIkonSirkel width={24} height={24} title="Checkmarkikon" />}
+                ikon={<Icon kind="advarsel-sirkel-fyll" size="24" />}
                 color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage(
                     { id: 'søknadsoversikt.arbeidsgiverKanSendeInnInntektsmelding' },
