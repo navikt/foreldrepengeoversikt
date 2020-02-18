@@ -1,15 +1,12 @@
 import * as React from 'react';
 
 const CheckmarkIkon = (props: any) => (
-    <svg focusable="false" role="presentation" width={40} height={40} viewBox="0 0 40 40" {...props}>
-        <g fill="none" fillRule="evenodd">
+    <svg viewBox="0 0 24 24" {...props}>
+        <g fillRule="evenodd" clipRule="evenodd">
+            <path d="M12 0c6.6 0 12 5.4 12 12s-5.4 12-12 12S0 18.6 0 12 5.4 0 12 0z" fill="#06893a" />
             <path
-                fill="#06893a"
-                d="M12 .5C18.34.5 23.5 5.66 23.5 12S18.34 23.5 12 23.5C5.659 23.5.5 18.341.5 12S5.659.5 12 .5z"
-            />
-            <path
-                fill="#FFF"
-                d="M16.329 7.76a1 1 0 1 1 1.363 1.464l-7.52 7.007a1 1 0 0 1-1.388-.024L6.28 13.709a1 1 0 0 1 1.413-1.416l1.82 1.817 6.816-6.35z"
+                d="M16.5 7.6c.4-.4 1.1-.4 1.5.1.4.4.4 1.1-.1 1.5l-7.8 7.3c-.4.4-1.1.4-1.4 0L6 13.8c-.4-.4-.4-1.1 0-1.5.4-.4 1.1-.4 1.5 0l1.9 1.9 7.1-6.6z"
+                fill="#fff"
             />
         </g>
     </svg>

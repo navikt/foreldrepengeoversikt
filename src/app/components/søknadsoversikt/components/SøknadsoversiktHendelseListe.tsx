@@ -1,11 +1,11 @@
 import React from 'react';
+import { injectIntl, InjectedIntl } from 'react-intl';
+
 import SøknadsoversiktHendelseListeItem from './SøknadsoversiktHendelseListeItem';
-import ArbeidIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/ArbeidIkon';
-import NavIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/NavIkon';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import CheckmarkIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/CheckmarkIkon';
 import { formatDate } from 'app/components/saksoversikt/utils';
-import { injectIntl, InjectedIntl } from 'react-intl';
+import AdvarselIkonSirkel from 'app/components/ikoner/uttaksplanIkon/ikoner/AdvarselIkonSirkel';
 
 interface Props {
     søknadsDato: string;
@@ -16,21 +16,21 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({ søkna
     return (
         <div>
             <SøknadsoversiktHendelseListeItem
-                ikon={<CheckmarkIkon title="Checkmarkikon" />}
+                ikon={<CheckmarkIkon width={24} height={24} title="Checkmarkikon" />}
                 color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.duHarSøkt' })}
                 content={formatDate(søknadsDato)}
             />
             <SøknadsoversiktHendelseListeItem
-                ikon={<ArbeidIkon title="Navikon" />}
-                color={UttaksplanColor.green}
+                ikon={<AdvarselIkonSirkel width={24} height={24} title="Checkmarkikon" />}
+                color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage(
                     { id: 'søknadsoversikt.arbeidsgiverKanSendeInnInntektsmelding' },
                     { dato: formatDate(søknadsDato) }
                 )}
+                rightSideContent="Testy test"
             />
             <SøknadsoversiktHendelseListeItem
-                ikon={<NavIkon title="Arbeidsikon" />}
                 color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.navBehandlerSøknaden' })}
                 content={intl.formatMessage({ id: 'søknadsoversikt.navBehandlerSøknaden.innhold' })}

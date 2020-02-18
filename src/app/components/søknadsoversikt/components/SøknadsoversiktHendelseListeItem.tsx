@@ -2,15 +2,16 @@ import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 
-import './søknadsoversiktHendelseListeItem.less';
 import IconBox from 'app/components/ikoner/uttaksplanIkon/iconBox/IconBox';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 
+import './søknadsoversiktHendelseListeItem.less';
+
 interface Props {
-    ikon: React.ReactNode;
-    tittel: string;
-    content?: string;
     color: UttaksplanColor;
+    tittel: string;
+    ikon?: React.ReactNode;
+    content?: string;
     rightSideContent?: string;
 }
 
@@ -32,7 +33,7 @@ const SøknadsoversiktHendelseListeItem: React.StatelessComponent<Props> = ({
                 <Element>{tittel}</Element>
                 {content && <Normaltekst>{content}</Normaltekst>}
             </div>
-            <div className={cls.element('rightSide')}>{rightSideContent && 'Tekst'}</div>
+            <span className={cls.element('rightSide')}>{rightSideContent}</span>
         </div>
     );
 };
