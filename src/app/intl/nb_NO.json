@@ -150,7 +150,7 @@
     "miniDialog.tilbakekreving.radioPanelGruppe.legend": "Ønsker du å uttale deg i saken før vi behandler den?",
     "miniDialog.tilbakekreving.sendButton": "Send",
     "minidialog.tilbakekreving.tilbakekreving.label": "Svar på tilbakebetalingen: ",
-    "miniDialog.tilbakekreving.tittel": "NAV har sendt deg melding om varsel om at du har fått for mye utbetalte { sakstype }. Før vi avgjør om du skal betale tilbake eller ikke, kan du gi en uttalelse og legge ved relevant dokumentasjon om du har det. <br/><br/>Du finner relevant informasjon om hva som har skjedd i saken og dine rettigheter i meldingen om varsel som vi har sendt til deg.",
+    "miniDialog.tilbakekreving.tittel": "NAV har sendt deg melding om varsel om at du har fått for mye utbetalte { sakstype }. Før vi avgjør om du skal betale tilbake eller ikke, kan du gi en uttalelse og legge ved relevant dokumentasjon om du har det. Du finner relevant informasjon om hva som har skjedd i saken og dine rettigheter i meldingen om varsel som vi har sendt til deg.",
     "miniDialog.tilbakekreving.undertittel": "Svar på tilbakebetaling",
     "minidialog.tilbakekreving.veilederpanel": "Saken vil bli behandlet med de opplysningene vi har tilgjengelig. Vi sender deg et vedtak når saken er ferdig behandlet.",
     "morsAktivitet.SamtidigUttak": "Samtidig uttak",
