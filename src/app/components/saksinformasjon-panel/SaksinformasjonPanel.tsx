@@ -133,6 +133,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 søknadsDato={sak.opprettet}
                 arbeidsforhold={søkerinfo?.arbeidsforhold}
                 inntektsmeldinger={inntektsmeldinger}
+                brukerHarSendtSøknad={initiellForeldrepengesøknadHendelse !== undefined}
             />
 
             {isFeatureEnabled(Feature.dinPlan) &&

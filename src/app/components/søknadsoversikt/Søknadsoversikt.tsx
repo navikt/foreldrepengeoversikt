@@ -8,15 +8,22 @@ interface Props {
     søknadsDato: string;
     arbeidsforhold: Arbeidsforhold[] | undefined;
     inntektsmeldinger: InntektsmeldingInnslag[];
+    brukerHarSendtSøknad: boolean;
 }
 
-const Søknadsoversikt: React.StatelessComponent<Props> = ({ søknadsDato, arbeidsforhold, inntektsmeldinger }) => {
+const Søknadsoversikt: React.StatelessComponent<Props> = ({
+    søknadsDato,
+    arbeidsforhold,
+    brukerHarSendtSøknad,
+    inntektsmeldinger
+}) => {
     return (
         <SectionSeparator title="Søknad">
             <SøknadsoversiktHendelseListe
                 søknadsDato={søknadsDato}
                 arbeidsforhold={arbeidsforhold}
                 inntektsmeldinger={inntektsmeldinger}
+                brukerHarSendtSøknad={brukerHarSendtSøknad}
             />
         </SectionSeparator>
     );

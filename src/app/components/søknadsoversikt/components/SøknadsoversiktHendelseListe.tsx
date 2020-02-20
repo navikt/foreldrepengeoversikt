@@ -14,18 +14,26 @@ interface Props {
     intl: InjectedIntl;
     arbeidsforhold: Arbeidsforhold[] | undefined;
     inntektsmeldinger: InntektsmeldingInnslag[];
+    brukerHarSendtSøknad: boolean;
 }
 
 const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
     søknadsDato,
     arbeidsforhold,
     inntektsmeldinger,
+    brukerHarSendtSøknad,
     intl
 }) => {
     return (
         <div>
             <SøknadsoversiktHendelseListeItem
-                ikon={<Icon kind="ok-sirkel-fyll" size="24" />}
+                ikon={
+                    brukerHarSendtSøknad ? (
+                        <Icon kind="ok-sirkel-fyll" size="24" />
+                    ) : (
+                        <Icon kind="advarsel-sirkel-fyll" size="24" />
+                    )
+                }
                 color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.duHarSøkt' })}
                 content={formatDate(søknadsDato)}
