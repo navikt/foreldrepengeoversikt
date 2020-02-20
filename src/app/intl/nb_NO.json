@@ -147,13 +147,13 @@
     "kvote.mødrekvote": "Mødrekvote {erGradert, select, true {{graderingsprosent}%} false {}}",
     "meldingOmVedtak.tekst": "Klikk her for å gå til dine dokumenter, der du finner alle vedtak og dokumenter som vi har sendt deg. Du finner også alle søknader og ettersendelser som du har sendt inn.",
     "meldingOmVedtak.tittel": "Dokumenter i saken?",
-    "miniDialog.pageTitle": "Spørsmål fra saksbehandler",
+    "miniDialog.pageTitle": "Svar på varsel",
     "miniDialog.tilbakekreving.radioPanelGruppe.legend": "Ønsker du å uttale deg i saken før vi behandler den?",
     "miniDialog.tilbakekreving.sendButton": "Send",
     "minidialog.tilbakekreving.tilbakekreving.label": "Svar på tilbakebetalingen: ",
-    "miniDialog.tilbakekreving.tittel": "NAV har sendt deg melding om at du har fått for mye utbetalt i { sakstype }.",
-    "miniDialog.tilbakekreving.undertittel": "Svar på spørsmål",
-    "minidialog.tilbakekreving.veilederpanel": "Saken vil bli behandlet med de opplysningene vi har tilgjengelig.",
+    "miniDialog.tilbakekreving.tittel": "NAV har sendt deg melding om varsel om at du har fått for mye utbetalte { sakstype }. Før vi avgjør om du skal betale tilbake eller ikke, kan du gi en uttalelse og legge ved relevant dokumentasjon om du har det. Du finner relevant informasjon om hva som har skjedd i saken og dine rettigheter i meldingen om varsel som vi har sendt til deg.",
+    "miniDialog.tilbakekreving.undertittel": "Svar på tilbakebetaling",
+    "minidialog.tilbakekreving.veilederpanel": "Saken vil bli behandlet med de opplysningene vi har tilgjengelig. Vi sender deg et vedtak når saken er ferdig behandlet.",
     "morsAktivitet.SamtidigUttak": "Samtidig uttak",
     "nei": "Nei",
     "ok": "Ok",
@@ -228,5 +228,7 @@
     "søknadsoversikt.lesMer.innhold3": "Arbeidsgiveren din kan lese mer om {lenke}",
     "søknadsoversikt.lesMer.innhold3.lenke": "hvordan sende inn inntektsmelding.",
     "søknadsoversikt.arbeidsgiverHarSendtInntektsmelding": "Har sendt inntektsmelding",
-    "søknadsoversikt.arbeidsgiverHarIkkeSendtInntektsmelding": "Har ikke sendt inntektsmelding"
+    "søknadsoversikt.arbeidsgiverHarIkkeSendtInntektsmelding": "Har ikke sendt inntektsmelding",
+    "SLETTMEG.arbeidstaker": "Dette er fordi vi må bruke de nyeste opplysningene om inntekten din for å beregne hvor mye foreldrepenger du vil få. Det er også derfor arbeidsgiveren din først kan sende inntektsmelding til oss 4 uker før du skal starte foreldrepengene dine. Det er fint om du minner arbeidsgiver på dette, slik at vi tidligst mulig kan behandle søknaden din.",
+    "SLETTMEG.ikkeArbeidstaker": "Dette er fordi vi må bruke de nyeste opplysningene om inntekten din for å beregne hvor mye foreldrepenger du vil få. Vi henter inn opplysningene vi trenger fra offentlige registre, og tar kontakt med deg hvis vi trenger flere opplysninger."
 }
