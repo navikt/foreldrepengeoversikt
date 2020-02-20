@@ -5,7 +5,7 @@
 
     &__container {
         display: flex;
-        padding-bottom: 2.5rem;
+        padding-bottom: 2rem;
         justify-content: space-between;
         position: relative;
 
@@ -42,11 +42,19 @@
     &__content {
         flex-grow: 9;
         width: 100%;
+
+        > .collapsableTextBlock {
+            margin-top: 0.5rem;
+        }
+    }
+
+    &__seMerContent {
+        padding-top: 1rem;
     }
 
     &__rightSide {
         flex-grow: 2;
         padding-left: 2rem;
-        min-width: 75px;
+        min-width: 105px;
     }
 }

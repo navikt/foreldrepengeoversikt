@@ -1,15 +1,26 @@
 @import '../../../common/styles/mixins.less';
 
-.infoToggler {
-    .knappeLenke();
+.collapseToggler {
+    position: relative;
+    border: none !important;
+    background: transparent;
+    padding: 0;
+    margin-bottom: 1rem;
+    display: inline-block;
+
+    &:focus {
+        .buttonFocus();
+    }
+
     &__content {
         color: #0067c5;
-        display: inline-block;
+        display: block;
         text-align: left;
         border-bottom: solid 1px #b7b1a9;
         padding-right: 1.5rem;
         position: relative;
     }
+
     &:hover,
     &:focus,
     &:active {
@@ -17,15 +28,15 @@
             border-bottom-color: #0067c5;
         }
     }
-    &__label  {
+
+    &__label {
         display: inline-block;
     }
+
     &__chevron {
+        line-height: 1.3rem;
         position: absolute;
         right: 0;
-        .nav-frontend-chevron {
-            margin-top: 0.2rem;
-            margin-left: 0.4rem;
-        }
+        top: 0;
     }
 }

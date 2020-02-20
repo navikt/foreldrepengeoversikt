@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { History } from 'history';
 
-import { Innsendingsinnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import SaksinformasjonPanel from 'app/components/saksinformasjon-panel/SaksinformasjonPanel';
 import SøkNåPanel from 'app/components/søk-nå-panel/SøkNåPanel';
 
@@ -18,7 +18,7 @@ import './saksoversikt.less';
 interface Props {
     sak: SakBase;
     søkerinfo?: Søkerinfo;
-    historikkInnslagListe: Innsendingsinnslag[];
+    historikkInnslagListe: HistorikkInnslag[];
     history: History;
     withHeader?: boolean;
 }

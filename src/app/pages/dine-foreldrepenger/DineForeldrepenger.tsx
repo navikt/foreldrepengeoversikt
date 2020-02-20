@@ -24,7 +24,12 @@ import { StorageKvittering } from '../../api/types/StorageKvittering';
 import Behandling from 'app/api/types/sak/Behandling';
 import { AppState } from 'app/redux/store';
 import { getData } from 'app/redux/util/fetchFromState';
-import { Innsendingsinnslag, HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
+import {
+    Innsendingsinnslag,
+    HendelseType,
+    HistorikkInnslag,
+    HistorikkInnslagType
+} from 'app/api/types/historikk/HistorikkInnslag';
 
 import { Søkerinfo } from 'app/types/Søkerinfo';
 
@@ -39,7 +44,7 @@ interface Props {
     storageKvittering?: StorageKvittering;
     søkerinfo?: Søkerinfo;
     history: History;
-    historikkInnslagListe: Innsendingsinnslag[];
+    historikkInnslagListe: HistorikkInnslag[];
 }
 
 export class DineForeldrepenger extends React.Component<Props> {
@@ -103,10 +108,12 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     shouldRenderAlertStripe(sak: SakBase): boolean {
+        const søknadsHistorikk = this.props.historikkInnslagListe.filter(
+            (h) => h.type === HistorikkInnslagType.søknad
+        ) as Innsendingsinnslag[];
+
         return (
-            (!this.props.historikkInnslagListe.find(
-                ({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER
-            ) &&
+            (!søknadsHistorikk.find(({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER) &&
                 (harSøkt(sak) && erForeldrepengesak(sak) && !harEnAvsluttetBehandling(sak))) ||
             erInfotrygdSak(sak)
         );

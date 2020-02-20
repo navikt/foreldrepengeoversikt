@@ -23,7 +23,7 @@ import { utledHendelser } from '../historikk/util';
 import SakBase from 'app/api/types/sak/Sak';
 import BEMHelper from 'common/util/bem';
 import { lenker } from 'app/utils/lenker';
-import { Innsendingsinnslag, HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
+import { Innsendingsinnslag, HendelseType, HistorikkInnslagType, HistorikkInnslag, InntektsmeldingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { redirect } from 'app/utils/redirect';
 import Behandlingsfrist from '../behandlingsfrist/Behandlingsfrist';
 import { Søkerinfo } from 'app/types/Søkerinfo';
@@ -38,7 +38,7 @@ interface Props {
     søkerinfo?: Søkerinfo;
     sak: SakBase;
     history: History;
-    historikkInnslagListe: Innsendingsinnslag[];
+    historikkInnslagListe: HistorikkInnslag[];
 }
 
 const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak, history, historikkInnslagListe }) => {
@@ -49,13 +49,14 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
     const initiellForeldrepengesøknadHendelse = historikkInnslagListe
         .filter(({ saksnr }) => sak.saksnummer === saksnr)
         .sort((a, b) => (moment(a.opprettet).isSameOrBefore(moment(b.opprettet)) ? 1 : -1))
-        .find(({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER);
+        .find((innslag: Innsendingsinnslag) => innslag.type === HistorikkInnslagType.søknad && innslag.hendelse === HendelseType.INITIELL_FORELDREPENGER);
     const opprettetDato = initiellForeldrepengesøknadHendelse
         ? initiellForeldrepengesøknadHendelse.opprettet
         : undefined;
     const behandlingsdato = moment(opprettetDato).isSameOrAfter(moment(tidligesteBehandlingsdato))
         ? moment(opprettetDato)
         : tidligesteBehandlingsdato;
+    const inntektsmeldinger = historikkInnslagListe.filter(h => h.type === HistorikkInnslagType.inntekt) as InntektsmeldingInnslag[];
 
     const cls = BEMHelper('saksinformasjon-panel');
     return (
@@ -128,7 +129,11 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 )}
             </div>
 
-            <Søknadsoversikt søknadsDato={sak.opprettet} arbeidsforhold={søkerinfo?.arbeidsforhold} />
+            <Søknadsoversikt
+                søknadsDato={sak.opprettet}
+                arbeidsforhold={søkerinfo?.arbeidsforhold}
+                inntektsmeldinger={inntektsmeldinger}
+            />
 
             {isFeatureEnabled(Feature.dinPlan) &&
                 erSakForeldrepengesak &&

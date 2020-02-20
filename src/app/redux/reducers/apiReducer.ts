@@ -2,14 +2,14 @@ import ApiAction, { ApiActionTypes } from '../types/ApiAction';
 import FetchState, { FetchStatus } from '../types/FetchState';
 import SakBase from 'app/api/types/sak/Sak';
 import { StorageKvittering } from 'app/api/types/StorageKvittering';
-import { Innsendingsinnslag, MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { MinidialogInnslag, HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 
 export interface ApiState {
     søkerinfo: FetchState<Søkerinfo>;
     saker: FetchState<SakBase[]>;
     storageKvittering: FetchState<StorageKvittering>;
-    historikk: FetchState<Innsendingsinnslag[]>;
+    historikk: FetchState<HistorikkInnslag[]>;
     minidialogInnslagListe: FetchState<MinidialogInnslag[]>;
 }
 

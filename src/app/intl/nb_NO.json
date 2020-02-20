@@ -19,6 +19,7 @@
     "common.varighet.separator--normal": ", ",
     "common.varighet.uker": "{uker, plural, one {# uke} other {# uker}}",
     "common.varighet.ukerogdager": "{uker, plural, zero {} one {# uke} other {# uker}} {dager, plural, =0 {} one {og # dag} other {og # dager}}",
+    "common.lesMer": "Les mer",
     "dineForeldrepenger.alertstripe": "Du får tidligst svar på søknaden din <b>4 uker</b> før foreldrepengeperioden din starter. Det er fordi vi bruker de nyeste opplysningene om inntekten din når vi skal beregne hva du skal få i foreldrepenger.",
     "dineForeldrepenger.behandlingsfrist.arbeidstaker.1": "Du får svar på søknaden tidligst 4 uker før foreldrepengeperioden din starter. Dette er fordi vi må bruke de nyeste opplysningene om inntekten din for å beregne hvor mye foreldrepenger du vil få. <br/><br/>Det er også derfor arbeidsgiveren din først kan sende inntektsmelding til oss den { dato }. Det er fint om du minner arbeidsgiver på dette, slik at vi tidligst mulig kan behandle søknaden din.",
     "dineForeldrepenger.behandlingsfrist.arbeidstaker.2": "Hvis du i tillegg er selvstendig næringsdrivende, frilanser eller du har andre inntektskilder henter vi inn opplysningene vi trenger fra offentlige registre. Vi tar kontakt med deg hvis vi trenger flere opplysninger.",
@@ -219,7 +220,13 @@
     "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha, du må laste opp et annet vedlegg.",
     "søknadsoversikt.tittel": "Søknad",
     "søknadsoversikt.duHarSøkt": "Du har søkt",
-    "søknadsoversikt.arbeidsgiverKanSendeInnInntektsmelding": "Arbeidsgiveren din kan sende oss inntektsopplysninger fra {dato}",
+    "søknadsoversikt.arbeidsgiverKanSendeInnInntektsmelding.entall": "Arbeidsgiveren din {arbeidsgiverNavn} kan sende oss inntektsopplysninger fra {dato}",
+    "søknadsoversikt.arbeidsgiverKanSendeInnInntektsmelding.flertall": "Arbeidsgiverene dine kan sende oss inntektsopplysninger fra {dato}",
     "søknadsoversikt.navBehandlerSøknaden": "Vi behandler søknaden din",
-    "søknadsoversikt.navBehandlerSøknaden.innhold": "Du får svar fra oss så fort vi har behandlet ferdig søknaden din. Det pleier å ta rundt 6 uker fra vi får inntektsmeldingen din."
+    "søknadsoversikt.navBehandlerSøknaden.innhold": "Du får svar fra oss så fort vi har behandlet ferdig søknaden din. Det pleier å ta rundt 6 uker fra vi får inntektsmeldingen din.",
+    "søknadsoversikt.lesMer.innhold1": "For at vi skal kunne starte behandlingen av søknaden din må arbeidsgiveren din sende inn inntektsmeldingen din. Det kan være lurt å minne arbeidsgiveren din på å gjøre dette.",
+    "søknadsoversikt.lesMer.innhold3": "Arbeidsgiveren din kan lese mer om {lenke}",
+    "søknadsoversikt.lesMer.innhold3.lenke": "hvordan sende inn inntektsmelding.",
+    "søknadsoversikt.arbeidsgiverHarSendtInntektsmelding": "Har sendt inntektsmelding",
+    "søknadsoversikt.arbeidsgiverHarIkkeSendtInntektsmelding": "Har ikke sendt inntektsmelding"
 }
