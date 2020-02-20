@@ -216,5 +216,7 @@
     "vedlegg.passordbeskyttet.flereFeil": "{filename} - Vedlegget du forsøker å laste opp er passordbeskyttet. Du må endre vedlegget slik at det ikke er passordbeskyttet eller laste opp et annet vedlegg.",
     "vedlegg.passordbeskyttet": "Vedlegget du forsøker å laste opp er passordbeskyttet. Du må endre vedlegget slik at det ikke er passordbeskyttet eller laste opp et annet vedlegg.",
     "vedlegg.virus.flereFeil": "{filename} - Vedlegget inneholder noe vi ikke vil ha",
-    "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha, du må laste opp et annet vedlegg."
+    "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha, du må laste opp et annet vedlegg.",
+    "SLETTMEG.arbeidstaker": "Dette er fordi vi må bruke de nyeste opplysningene om inntekten din for å beregne hvor mye foreldrepenger du vil få. Det er også derfor arbeidsgiveren din først kan sende inntektsmelding til oss 4 uker før du skal starte foreldrepengene dine. Det er fint om du minner arbeidsgiver på dette, slik at vi tidligst mulig kan behandle søknaden din.",
+    "SLETTMEG.ikkeArbeidstaker": "Dette er fordi vi må bruke de nyeste opplysningene om inntekten din for å beregne hvor mye foreldrepenger du vil få. Vi henter inn opplysningene vi trenger fra offentlige registre, og tar kontakt med deg hvis vi trenger flere opplysninger."
 }

@@ -30,6 +30,7 @@ import { Søkerinfo } from 'app/types/Søkerinfo';
 import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 import moment from 'moment';
+import MidlertidigInfo from './MidlertidigInfo';
 
 import './saksinformasjonPanel.less';
 
@@ -68,6 +69,12 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                         harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
                         behandlingsdato={behandlingsdato.format('YYYY-MM-DD')}
                     />
+                )}
+
+            {tidligesteBehandlingsdato === undefined &&
+                initiellForeldrepengesøknadHendelse &&
+                !harEnAvsluttetBehandling(sak) && (
+                    <MidlertidigInfo erArbeidstaker={søkerinfo !== undefined && søkerinfo.arbeidsforhold.length > 0} />
                 )}
 
             {erInfotrygdSak(sak) && (
