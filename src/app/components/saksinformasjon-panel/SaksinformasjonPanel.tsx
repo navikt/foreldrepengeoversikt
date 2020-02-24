@@ -74,7 +74,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 )}
 
             {tidligesteBehandlingsdato === undefined &&
-                initiellForeldrepengesøknadHendelse &&
+                initiellForeldrepengesøknadHendelse !== undefined &&
                 !harEnAvsluttetBehandling(sak) && (
                     <MidlertidigInfo erArbeidstaker={søkerinfo !== undefined && søkerinfo.arbeidsforhold.length > 0} />
                 )}

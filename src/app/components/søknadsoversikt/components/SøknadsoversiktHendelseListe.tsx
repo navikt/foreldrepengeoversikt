@@ -46,6 +46,7 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
                 />
             )}
             <SøknadsoversiktHendelseListeItem
+                ikon={<Icon kind="info-sirkel-fyll" width="24" height="24" />}
                 color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.navBehandlerSøknaden' })}
                 content={intl.formatMessage({ id: 'søknadsoversikt.navBehandlerSøknaden.innhold' })}
