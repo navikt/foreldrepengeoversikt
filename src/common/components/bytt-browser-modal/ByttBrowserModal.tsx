@@ -4,13 +4,13 @@ import { FormattedMessage, FormattedHTMLMessage, injectIntl, InjectedIntlProps }
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 import getMessage from 'common/util/i18nUtils';
-import AdvarselIkon from '../ikoner/AdvarselIkon';
 import { shouldChangeBrowser } from 'app/utils/browserUtils';
 
 import { Hovedknapp } from 'nav-frontend-knapper';
 import classNames from 'classnames';
 
 import './byttBrowserModal.less';
+import AdvarselIkonSirkel from 'app/components/ikoner/uttaksplanIkon/ikoner/AdvarselIkonSirkel';
 
 type Props = InjectedIntlProps;
 
@@ -24,7 +24,7 @@ const ByttBrowserModal: React.FunctionComponent<Props> = ({ intl }) => {
             closeButton={false}
             isOpen={isOpen}
             onRequestClose={() => undefined}>
-            <AdvarselIkon className={classNames(cls.element('ikon'), 'blokk-m')} />
+            <AdvarselIkonSirkel width="42" height="42" className={classNames(cls.element('ikon'), 'blokk-m')} />
             <Systemtittel className="blokk-m">
                 <FormattedHTMLMessage id="byttBrowser.tittel" />
             </Systemtittel>

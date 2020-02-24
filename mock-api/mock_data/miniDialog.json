@@ -10,17 +10,5 @@
         "saksnr": "42",
         "opprettet": "2020-02-17T15:05:08.931022",
         "aktiv": true
-    },
-    {
-        "type": "minidialog",
-        "hendelse": "TILBAKEKREVING_SPM",
-        "gyldigTil": "2999-12-12",
-        "journalpostId": "1234567890",
-        "tekst": "string",
-        "dialogId": "999",
-        "aktørId": "1861732092898",
-        "saksnr": "142634614",
-        "opprettet": "2020-02-17T15:08:25.155041",
-        "aktiv": true
     }
 ]

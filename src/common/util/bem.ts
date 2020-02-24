@@ -1,6 +1,15 @@
 import classNames from 'classnames';
 
-const BEMHelper = (cls: string) => ({
+export interface BEMHelperProps {
+    block: string;
+    element: (e?: string, m?: string) => string;
+    modifier: (m?: string) => string;
+    modifierConditional: (m: string | undefined, condition: boolean | undefined) => string | undefined;
+    child: (c: string) => BEMHelperProps;
+    classNames: any;
+}
+
+const BEMHelper = (cls: string): BEMHelperProps => ({
     block: cls,
     element: (e?: string, m?: string) => `${cls}__${e}${m ? ` ${cls}__${e}--${m}` : ''}`,
     modifier: (m?: string) => `${cls}--${m}`,

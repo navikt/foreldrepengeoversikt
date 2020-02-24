@@ -32,11 +32,11 @@ const MinidialogLenkepanel: React.StatelessComponent<Props> = ({ tittel, minidia
         <LenkepanelBase className={cls.block} href="#" border={true} linkCreator={linkCreator}>
             <div className={cls.element('content')}>
                 <div className={cls.element('icon')}>
-                    <Icon kind="advarsel-sirkel-fyll" />
+                    <Icon kind="advarsel-sirkel-fyll" size="24" />
                 </div>
                 <div>
                     <Normaltekst>{tittel}</Normaltekst>
-                    <Undertekst>{formaterDato(minidialogInnslag.opprettet, "DD.MM.YYYY")}</Undertekst>
+                    <Undertekst>{formaterDato(minidialogInnslag.opprettet, 'DD.MM.YYYY')}</Undertekst>
                 </div>
             </div>
         </LenkepanelBase>

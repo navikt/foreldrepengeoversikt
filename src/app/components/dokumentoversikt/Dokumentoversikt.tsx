@@ -6,7 +6,7 @@ import Lenke from 'nav-frontend-lenker';
 import { lenker } from '../../utils/lenker';
 import BEMHelper from 'common/util/bem';
 
-import './dokuentoversikt.less';
+import './dokumentoversikt.less';
 
 const Dokumentoversikt = () => {
     const cls = BEMHelper('dokumentoversikt');
