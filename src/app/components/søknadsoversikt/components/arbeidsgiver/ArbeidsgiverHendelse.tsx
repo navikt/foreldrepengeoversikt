@@ -111,7 +111,7 @@ const ArbeidsgiverHendelse: React.FunctionComponent<Props> = ({
             ikon={<Icon kind="advarsel-sirkel-fyll" size="24" />}
             color={UttaksplanColor.transparent}
             tittel={getTittel(arbeidsforhold, inntektsopplysningerDato, intl)}
-            content={arbeidsforhold.length > 1 ? renderContent(arbeidsforhold, inntektsmeldinger) : undefined}
+            content={arbeidsforhold.length > 0 ? renderContent(arbeidsforhold, inntektsmeldinger) : undefined}
             lesMerTittel={intl.formatMessage({ id: 'common.lesMer' })}
             lesMerInnhold={renderLesMerInnhold()}
         />
