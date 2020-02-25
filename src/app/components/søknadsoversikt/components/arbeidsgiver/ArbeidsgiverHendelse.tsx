@@ -100,18 +100,34 @@ const renderContent = (arbeidsforhold: Arbeidsforhold[], inntektsmeldinger: Innt
     });
 };
 
+const erAlleInntektsmeldingerMottatt = (
+    arbeidsforhold: Arbeidsforhold[],
+    inntektsmeldinger: InntektsmeldingInnslag[]
+) => {
+    let alleInntektsmeldingerMottatt = false;
+
+    arbeidsforhold.forEach((arb) => {
+        alleInntektsmeldingerMottatt =
+            inntektsmeldinger.find((innt) => innt.arbeidsgiver.navn === arb.arbeidsgiverNavn) !== undefined;
+    });
+
+    return alleInntektsmeldingerMottatt;
+};
+
 const ArbeidsgiverHendelse: React.FunctionComponent<Props> = ({
     inntektsopplysningerDato,
     arbeidsforhold,
     inntektsmeldinger,
     intl
 }) => {
+    const alleInntektsmeldingerMottatt = erAlleInntektsmeldingerMottatt(arbeidsforhold, inntektsmeldinger);
+
     return (
         <SøknadsoversiktHendelseListeItem
-            ikon={<Icon kind="advarsel-sirkel-fyll" size="24" />}
+            ikon={getInntektsmeldingStatusIkon(alleInntektsmeldingerMottatt)}
             color={UttaksplanColor.transparent}
             tittel={getTittel(arbeidsforhold, inntektsopplysningerDato, intl)}
-            content={arbeidsforhold.length > 0 ? renderContent(arbeidsforhold, inntektsmeldinger) : undefined}
+            content={arbeidsforhold.length > 1 ? renderContent(arbeidsforhold, inntektsmeldinger) : undefined}
             lesMerTittel={intl.formatMessage({ id: 'common.lesMer' })}
             lesMerInnhold={renderLesMerInnhold()}
         />
