@@ -34,6 +34,7 @@ import MidlertidigInfo from './MidlertidigInfo';
 
 import './saksinformasjonPanel.less';
 import Søknadsoversikt from '../søknadsoversikt/Søknadsoversikt';
+import { FagsakStatus } from 'app/api/types/sak/FagsakStatus';
 
 interface Props {
     søkerinfo?: Søkerinfo;
@@ -44,7 +45,7 @@ interface Props {
 
 const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak, history, historikkInnslagListe }) => {
     const erSakForeldrepengesak = erForeldrepengesak(sak);
-    const { perioder } = sak;
+    const { perioder, status } = sak;
     const tidligesteBehandlingsdato =
         perioder && perioder.length > 0 ? moment(perioder[0].tidsperiode.fom).subtract(4, 'weeks') : undefined;
     const initiellForeldrepengesøknadHendelse = historikkInnslagListe
@@ -58,6 +59,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
         ? moment(opprettetDato)
         : tidligesteBehandlingsdato;
     const inntektsmeldinger = historikkInnslagListe.filter(h => h.type === HistorikkInnslagType.inntekt) as InntektsmeldingInnslag[];
+    const behandlingErAvsluttet = status !== undefined && status === FagsakStatus.LOPENDE;
 
     const cls = BEMHelper('saksinformasjon-panel');
     return (
@@ -136,12 +138,14 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 )}
             </div>
 
-            <Søknadsoversikt
-                søknadsDato={sak.opprettet}
-                arbeidsforhold={søkerinfo?.arbeidsforhold}
-                inntektsmeldinger={inntektsmeldinger}
-                brukerHarSendtSøknad={initiellForeldrepengesøknadHendelse !== undefined}
-            />
+            {!behandlingErAvsluttet && 
+                <Søknadsoversikt
+                    søknadsDato={sak.opprettet}
+                    arbeidsforhold={søkerinfo?.arbeidsforhold}
+                    inntektsmeldinger={inntektsmeldinger}
+                    brukerHarSendtSøknad={initiellForeldrepengesøknadHendelse !== undefined}
+                />
+            }
 
             {isFeatureEnabled(Feature.dinPlan) &&
                 erSakForeldrepengesak &&
