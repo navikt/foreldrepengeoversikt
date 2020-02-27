@@ -37,7 +37,7 @@ const getIkonClass = (hendelse: Hendelse) => {
     if (hendelse.brukerInitiertHendelse) {
         return 'bruker';
     } else {
-        return hendelse.type === 'inntektsmelding-motatt' ? 'arbeidsgiver' : 'nav';
+        return hendelse.type === 'inntektsmelding-motatt' || hendelse.type === 'inntekt' ? 'arbeidsgiver' : 'nav';
     }
 };
 
