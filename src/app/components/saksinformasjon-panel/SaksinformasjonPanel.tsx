@@ -59,7 +59,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
         ? moment(opprettetDato)
         : tidligesteBehandlingsdato;
     const inntektsmeldinger = historikkInnslagListe.filter(h => h.type === HistorikkInnslagType.inntekt) as InntektsmeldingInnslag[];
-    const behandlingErAvsluttet = status !== undefined && status === FagsakStatus.LOPENDE;
+    const behandlingErAvsluttet = status !== undefined && (status === FagsakStatus.LOPENDE || status === FagsakStatus.AVSLUTTET);
 
     const cls = BEMHelper('saksinformasjon-panel');
     return (
@@ -138,7 +138,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 )}
             </div>
 
-            {!behandlingErAvsluttet && 
+            {erSakForeldrepengesak && !behandlingErAvsluttet && 
                 <Søknadsoversikt
                     søknadsDato={sak.opprettet}
                     arbeidsforhold={søkerinfo?.arbeidsforhold}
