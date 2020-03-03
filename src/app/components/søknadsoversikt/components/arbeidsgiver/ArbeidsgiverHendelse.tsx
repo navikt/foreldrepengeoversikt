@@ -104,11 +104,12 @@ const erAlleInntektsmeldingerMottatt = (
     arbeidsforhold: Arbeidsforhold[],
     inntektsmeldinger: InntektsmeldingInnslag[]
 ) => {
-    let alleInntektsmeldingerMottatt = false;
+    let alleInntektsmeldingerMottatt = true;
 
     arbeidsforhold.forEach((arb) => {
         alleInntektsmeldingerMottatt =
-            inntektsmeldinger.find((innt) => innt.arbeidsgiver.navn === arb.arbeidsgiverNavn) !== undefined;
+            inntektsmeldinger.find((innt) => innt.arbeidsgiver.navn === arb.arbeidsgiverNavn) !== undefined &&
+            alleInntektsmeldingerMottatt;
     });
 
     return alleInntektsmeldingerMottatt;
