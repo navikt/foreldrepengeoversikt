@@ -106,7 +106,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
             {svar !== undefined && (
                 <div className={cls.element('btn')}>
                     <Hovedknapp
-                        onClick={() => 
+                        onClick={() =>
                             onSubmit({
                                 vedlegg: brukerØnskerÅUttaleSeg
                                     ? attachments.filter((a: Attachment) => !isAttachmentWithError(a))
@@ -122,6 +122,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
                             })
                         }
                         disabled={false}
+                        htmlType="button"
                         spinner={false}>
                         <FormattedMessage id="miniDialog.tilbakekreving.sendButton" />
                     </Hovedknapp>
