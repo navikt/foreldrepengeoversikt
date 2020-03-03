@@ -8,11 +8,17 @@ export enum InnsendingActionTypes {
     'SEND_ETTERSENDELSE_FAILED' = 'sendEttersendelseFailed'
 }
 
+export enum EttersendelseOrigin {
+    'TILBAKEKREVING' = 'tilbakekreving',
+    'ETTERSENDELSE' = 'ettersendelse'
+}
+
 export interface SendEttersendelse {
     type: InnsendingActionTypes.SEND_ETTERSENDELSE;
     payload: {
         ettersending: EttersendingDto;
         history: History;
+        ettersendelseOrigin: EttersendelseOrigin;
     };
 }
 

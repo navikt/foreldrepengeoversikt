@@ -7,7 +7,7 @@ import { getData } from 'app/redux/util/fetchFromState';
 import { connect } from 'react-redux';
 import { AppState } from 'app/redux/store';
 import MinidialogSkjema from '../../components/minidialog-skjema/MinidialogSkjema';
-import { InnsendingActionTypes, InnsendingAction } from 'app/redux/types/InnsendingAction';
+import { InnsendingActionTypes, InnsendingAction, EttersendelseOrigin } from 'app/redux/types/InnsendingAction';
 import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
 import SakBase from 'app/api/types/sak/Sak';
 import { Routes } from 'app/utils/routes';
@@ -34,11 +34,7 @@ class MinidialogPage extends React.Component<Props> {
                 className={cls.block}
                 pageTitle={<FormattedMessage id="miniDialog.pageTitle" />}
                 onBackClick={() => history.push(Routes.DINE_FORELDREPENGER)}>
-                <MinidialogSkjema
-                    sak={sak}
-                    minidialog={minidialog}
-                    onSubmit={sendEttersendelse}
-                />
+                <MinidialogSkjema sak={sak} minidialog={minidialog} onSubmit={sendEttersendelse} />
             </Page>
         );
     }
@@ -62,7 +58,8 @@ const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props:
             type: InnsendingActionTypes.SEND_ETTERSENDELSE,
             payload: {
                 ettersending: ettersendelse,
-                history: props.history
+                history: props.history,
+                ettersendelseOrigin: EttersendelseOrigin.TILBAKEKREVING
             }
         });
     }

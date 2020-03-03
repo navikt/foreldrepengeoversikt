@@ -23,7 +23,7 @@ import { withAttachments, AttachmentFormProps } from 'app/components/attachmentF
 import { AppState } from 'app/redux/store';
 
 import { getData } from 'app/redux/util/fetchFromState';
-import { InnsendingAction, InnsendingActionTypes } from 'app/redux/types/InnsendingAction';
+import { InnsendingAction, InnsendingActionTypes, EttersendelseOrigin } from 'app/redux/types/InnsendingAction';
 
 import './ettersendelse.less';
 
@@ -121,7 +121,7 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
             <Page
                 className={cls.block}
                 pageTitle={<FormattedMessage id="ettersendelse.pageTitle" />}
-                icon={() => <LetterIcon />}
+                icon={() => <LetterIcon backgroundColor="#C6C2BF" />}
                 title={<FormattedMessage id="ettersendelse.title" values={{ saksnummer: sak.saksnummer }} />}
                 onBackClick={this.handleBackClick}>
                 <form
@@ -201,7 +201,8 @@ const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props:
             type: InnsendingActionTypes.SEND_ETTERSENDELSE,
             payload: {
                 ettersending: ettersendelse,
-                history: props.history
+                history: props.history,
+                ettersendelseOrigin: EttersendelseOrigin.ETTERSENDELSE
             }
         });
     }

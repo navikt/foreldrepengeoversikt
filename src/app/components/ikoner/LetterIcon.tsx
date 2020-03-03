@@ -13,7 +13,7 @@ const LetterIcon = (props: any) => (
             <circle id="b" cx="9.067" cy="9.067" r="9.067" />
         </defs>
         <g fill="none" fillRule="evenodd">
-            <use fill="#C6C2BF" xlinkHref="#a" />
+            <use fill={props.backgroundColor} xlinkHref="#a" />
             <path
                 fill="#0C576F"
                 d="M41.236 68.306c-.784-.786-4.496-3.482-3.71-4.267l-1.26-3.983L65.992 34.59a2.01 2.01 0 0 1 2.843 0l29.722 25.467-6.732 14.571c.783.785-24.616 13.786-25.4 14.573L41.236 68.306z"

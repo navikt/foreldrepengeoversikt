@@ -15,6 +15,7 @@ import Page from '../page/Page';
 import LetterIcon from 'app/components/ikoner/LetterIcon';
 
 import './kvittering.less';
+import { EttersendelseOrigin } from 'app/redux/types/InnsendingAction';
 
 interface Props {
     history: History;
@@ -38,6 +39,13 @@ class KvitteringPage extends React.Component<Props, State> {
         }
 
         this.handleBackClick = this.handleBackClick.bind(this);
+        this.getOriginOfEttersendelse = this.getOriginOfEttersendelse.bind(this);
+    }
+
+    getOriginOfEttersendelse() {
+        const { state } = this.props.history.location;
+
+        return state.ettersendelseOrigin;
     }
 
     handleBackClick(): void {
@@ -50,13 +58,18 @@ class KvitteringPage extends React.Component<Props, State> {
             return null;
         }
 
+        const erTilbakekrevingEttersendelse = this.getOriginOfEttersendelse() === EttersendelseOrigin.TILBAKEKREVING;
+        const titleTekstId = erTilbakekrevingEttersendelse
+            ? 'kvittering.headline.tilbakekreving'
+            : 'kvittering.headline.ettersendelse';
+
         const cls = BEMHelper('kvittering');
         return (
             <Page
                 className={cls.block}
                 pageTitle={<FormattedMessage id="ettersendelse.pageTitle" />}
-                icon={() => <LetterIcon />}
-                title={<FormattedMessage id="kvittering.headline" />}
+                icon={() => <LetterIcon backgroundColor="#9BD0B0" />}
+                title={<FormattedMessage id={titleTekstId} />}
                 onBackClick={this.handleBackClick}>
                 <Ingress className={cls.element('message')}>
                     <FormattedMessage
