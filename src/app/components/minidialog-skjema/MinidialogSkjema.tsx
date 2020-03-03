@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Textarea, RadioPanelGruppe } from 'nav-frontend-skjema';
 import Snakkeboble from 'nav-frontend-snakkeboble';
@@ -48,10 +48,28 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
     const [fritekst, updateFritekst] = useState('');
     const [svar, update] = useState<string | undefined>(undefined);
     const brukerØnskerÅUttaleSeg = svar === JaNeiSpørsmål.JA;
+    const submitData: EttersendingDto = {
+        vedlegg: brukerØnskerÅUttaleSeg ? attachments.filter((a: Attachment) => !isAttachmentWithError(a)) : [],
+        saksnummer: minidialog.saksnr,
+        type: getSakstype(sak),
+        dialogId: minidialog.dialogId,
+        brukerTekst: {
+            dokumentType: Skjemanummer.TILBAKEBETALING,
+            overskrift: 'Svar på tilbakebetalingen',
+            tekst: brukerØnskerÅUttaleSeg ? fritekst : 'Bruker ønsker ikke å uttale seg'
+        }
+    };
 
     const cls = BEMHelper('minidialog-skjema');
     return (
-        <form className={cls.block}>
+        <form
+            className={cls.block}
+            onSubmit={(event: FormEvent) => {
+                event.stopPropagation();
+                event.preventDefault();
+
+                return onSubmit(submitData);
+            }}>
             <Snakkeboble topp={formaterDatoForHendelse(minidialog.opprettet)} pilHoyre={false} ikonClass={'nav'}>
                 <Normaltekst tag="p">
                     <FormattedMessage id="miniDialog.tilbakekreving.tittel" values={{ sakstype: getSakstype(sak) }} />
@@ -105,25 +123,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
             )}
             {svar !== undefined && (
                 <div className={cls.element('btn')}>
-                    <Hovedknapp
-                        onClick={() =>
-                            onSubmit({
-                                vedlegg: brukerØnskerÅUttaleSeg
-                                    ? attachments.filter((a: Attachment) => !isAttachmentWithError(a))
-                                    : [],
-                                saksnummer: minidialog.saksnr,
-                                type: getSakstype(sak),
-                                dialogId: minidialog.dialogId,
-                                brukerTekst: {
-                                    dokumentType: Skjemanummer.TILBAKEBETALING,
-                                    overskrift: 'Svar på tilbakebetalingen',
-                                    tekst: brukerØnskerÅUttaleSeg ? fritekst : 'Bruker ønsker ikke å uttale seg'
-                                }
-                            })
-                        }
-                        disabled={false}
-                        htmlType="button"
-                        spinner={false}>
+                    <Hovedknapp disabled={false} spinner={false}>
                         <FormattedMessage id="miniDialog.tilbakekreving.sendButton" />
                     </Hovedknapp>
                 </div>

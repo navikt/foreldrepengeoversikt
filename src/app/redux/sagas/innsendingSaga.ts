@@ -8,15 +8,18 @@ function* ettersend(action: SendEttersendelse) {
     try {
         const response = yield call(Api.sendEttersending, action.payload.ettersending);
         if (response) {
+            const { ettersending, ettersendelseOrigin } = action.payload;
+
             action.payload.history.push(Routes.KVITTERING, {
                 kvittering: response.data,
-                attachments: action.payload.ettersending.vedlegg
+                attachments: ettersending.vedlegg,
+                ettersendelseOrigin
             });
         }
     } catch (error) {
         yield put({
             type: InnsendingActionTypes.SEND_ETTERSENDELSE_FAILED,
-            payload: { ettersendelse: { status: FetchStatus.FAILURE, error }}
+            payload: { ettersendelse: { status: FetchStatus.FAILURE, error } }
         });
     }
 }
