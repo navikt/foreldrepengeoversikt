@@ -46,12 +46,12 @@ interface Props {
 const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak, history, historikkInnslagListe }) => {
     const erSakForeldrepengesak = erForeldrepengesak(sak);
     const { perioder, status } = sak;
-    const tidligesteBehandlingsdato =
-        perioder && perioder.length > 0 ? moment(perioder[0].tidsperiode.fom).subtract(4, 'weeks') : undefined;
     const initiellForeldrepengesøknadHendelse = historikkInnslagListe
         .filter(({ saksnr }) => sak.saksnummer === saksnr)
         .sort((a, b) => (moment(a.opprettet).isSameOrBefore(moment(b.opprettet)) ? 1 : -1))
-        .find((innslag: Innsendingsinnslag) => innslag.type === HistorikkInnslagType.søknad && innslag.hendelse === HendelseType.INITIELL_FORELDREPENGER);
+        .find((innslag: Innsendingsinnslag) => innslag.type === HistorikkInnslagType.søknad && innslag.hendelse === HendelseType.INITIELL_FORELDREPENGER) as Innsendingsinnslag;
+    const tidligesteBehandlingsdato =
+        perioder && perioder.length > 0 ? moment(perioder[0].tidsperiode.fom).subtract(4, 'weeks') : initiellForeldrepengesøknadHendelse?.behandlingsdato;
     const opprettetDato = initiellForeldrepengesøknadHendelse
         ? initiellForeldrepengesøknadHendelse.opprettet
         : undefined;
@@ -71,7 +71,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 erForeldrepengesak(sak) && (
                     <Behandlingsfrist
                         harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
-                        behandlingsdato={behandlingsdato.format('YYYY-MM-DD')}
+                        behandlingsdato={moment(behandlingsdato).format('YYYY-MM-DD')}
                     />
                 )}
 
