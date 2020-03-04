@@ -15,6 +15,7 @@ interface Props {
     arbeidsforhold: Arbeidsforhold[] | undefined;
     inntektsmeldinger: InntektsmeldingInnslag[];
     brukerHarSendtSøknad: boolean;
+    behandlingsdato: string;
 }
 
 const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
@@ -22,6 +23,7 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
     arbeidsforhold,
     inntektsmeldinger,
     brukerHarSendtSøknad,
+    behandlingsdato,
     intl
 }) => {
     return (
@@ -41,7 +43,7 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
             {arbeidsforhold && arbeidsforhold.length > 0 && (
                 <ArbeidsgiverHendelse
                     arbeidsforhold={arbeidsforhold}
-                    inntektsopplysningerDato={søknadsDato}
+                    inntektsopplysningerDato={behandlingsdato}
                     inntektsmeldinger={inntektsmeldinger}
                 />
             )}
