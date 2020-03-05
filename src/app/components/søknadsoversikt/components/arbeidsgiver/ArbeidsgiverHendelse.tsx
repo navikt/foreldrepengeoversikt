@@ -105,7 +105,7 @@ const renderContent = (arbeidsforhold: Arbeidsforhold[], inntektsmeldinger: Innt
     });
 };
 
-const erAlleInntektsmeldingerMottatt = (
+export const erAlleInntektsmeldingerMottatt = (
     arbeidsforhold: Arbeidsforhold[],
     inntektsmeldinger: InntektsmeldingInnslag[]
 ) => {

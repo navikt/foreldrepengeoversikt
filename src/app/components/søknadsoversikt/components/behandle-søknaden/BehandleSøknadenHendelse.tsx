@@ -15,14 +15,15 @@ interface Props {
 }
 
 const getIkon = (behandlingsdato: string) => {
-    const kanBehandles = moment().isSameOrAfter(behandlingsdato, 'days');
-
-    return kanBehandles ? (
+    return behandleSøknadenHendelseErOk(behandlingsdato) ? (
         <Icon kind="ok-sirkel-fyll" width="24" height="24" />
     ) : (
         <Icon kind="advarsel-sirkel-fyll" width="24" height="24" />
     );
 };
+
+export const behandleSøknadenHendelseErOk = (behandlingsdato: string) =>
+    moment().isSameOrAfter(behandlingsdato, 'days');
 
 const BehandleSøknadenHendelse: React.FunctionComponent<Props> = ({ behandlingsdato, arbeidsforhold, intl }) => {
     const harArbeidsforhold = arbeidsforhold !== undefined && arbeidsforhold.length > 0;

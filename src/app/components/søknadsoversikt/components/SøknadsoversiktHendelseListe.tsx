@@ -6,9 +6,9 @@ import SøknadsoversiktHendelseListeItem from './SøknadsoversiktHendelseListeIt
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import { formatDate } from 'app/components/saksoversikt/utils';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import ArbeidsgiverHendelse from './arbeidsgiver/ArbeidsgiverHendelse';
+import ArbeidsgiverHendelse, { erAlleInntektsmeldingerMottatt } from './arbeidsgiver/ArbeidsgiverHendelse';
 import { InntektsmeldingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
-import BehandleSøknadenHendelse from './behandle-søknaden/BehandleSøknadenHendelse';
+import BehandleSøknadenHendelse, { behandleSøknadenHendelseErOk } from './behandle-søknaden/BehandleSøknadenHendelse';
 import moment from 'moment';
 
 interface Props {
@@ -20,7 +20,14 @@ interface Props {
     behandlingsdato: string;
 }
 
-const getAktiveArbeidsforhold = (arbeidsforhold: Arbeidsforhold[], aktiveFraDato: string): Arbeidsforhold[] => {
+const getAktiveArbeidsforhold = (
+    arbeidsforhold: Arbeidsforhold[] | undefined,
+    aktiveFraDato: string
+): Arbeidsforhold[] => {
+    if (arbeidsforhold === undefined) {
+        return [];
+    }
+
     return arbeidsforhold.filter(
         (a) =>
             a.tom === undefined ||
@@ -37,6 +44,11 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
     behandlingsdato,
     intl
 }) => {
+    const aktiveArbeidsforhold = getAktiveArbeidsforhold(arbeidsforhold, behandlingsdato);
+    const søknadenBehandles =
+        behandleSøknadenHendelseErOk(behandlingsdato) &&
+        erAlleInntektsmeldingerMottatt(aktiveArbeidsforhold, inntektsmeldinger);
+
     return (
         <div>
             <SøknadsoversiktHendelseListeItem
@@ -52,15 +64,15 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
                 content={formatDate(søknadsDato)}
             />
             <BehandleSøknadenHendelse behandlingsdato={behandlingsdato} arbeidsforhold={arbeidsforhold} />
-            {arbeidsforhold && arbeidsforhold.length > 0 && (
+            {aktiveArbeidsforhold.length > 0 && (
                 <ArbeidsgiverHendelse
-                    arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, behandlingsdato)}
+                    arbeidsforhold={aktiveArbeidsforhold}
                     inntektsopplysningerDato={behandlingsdato}
                     inntektsmeldinger={inntektsmeldinger}
                 />
             )}
             <SøknadsoversiktHendelseListeItem
-                ikon={<Icon kind="info-sirkel-fyll" width="24" height="24" />}
+                ikon={søknadenBehandles ? <Icon kind="info-sirkel-fyll" width="24" height="24" /> : undefined}
                 color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.navBehandlerSøknaden' })}
                 content={intl.formatMessage({ id: 'søknadsoversikt.navBehandlerSøknaden.innhold' })}
