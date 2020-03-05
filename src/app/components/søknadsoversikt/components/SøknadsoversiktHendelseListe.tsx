@@ -9,6 +9,7 @@ import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import ArbeidsgiverHendelse from './arbeidsgiver/ArbeidsgiverHendelse';
 import { InntektsmeldingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import BehandleSøknadenHendelse from './behandle-søknaden/BehandleSøknadenHendelse';
+import moment from 'moment';
 
 interface Props {
     søknadsDato: string;
@@ -18,6 +19,15 @@ interface Props {
     brukerHarSendtSøknad: boolean;
     behandlingsdato: string;
 }
+
+const getAktiveArbeidsforhold = (arbeidsforhold: Arbeidsforhold[], aktiveFraDato: string): Arbeidsforhold[] => {
+    return arbeidsforhold.filter(
+        (a) =>
+            a.tom === undefined ||
+            a.tom === null ||
+            (aktiveFraDato !== undefined && moment(aktiveFraDato).isSameOrBefore(a.tom, 'days'))
+    );
+};
 
 const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
     søknadsDato,
@@ -44,7 +54,7 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
             <BehandleSøknadenHendelse behandlingsdato={behandlingsdato} arbeidsforhold={arbeidsforhold} />
             {arbeidsforhold && arbeidsforhold.length > 0 && (
                 <ArbeidsgiverHendelse
-                    arbeidsforhold={arbeidsforhold}
+                    arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, behandlingsdato)}
                     inntektsopplysningerDato={behandlingsdato}
                     inntektsmeldinger={inntektsmeldinger}
                 />
