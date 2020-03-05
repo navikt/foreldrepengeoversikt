@@ -233,7 +233,7 @@
     "søknadsoversikt.arbeidsgiverHarIkkeSendtInntektsmelding": "Har ikke sendt inntektsmelding",
     "søknadsoversikt.behandleSøknaden.tittel": "Vi kan behandle søknaden din fra {dato}",
     "søknadsoversikt.behandleSøknaden.lesMer.tittel": "Les mer",
-    "søknadsoversikt.behandleSøknaden.lesMer.innhold": "Hvis du i tillegg er selvstendig næringsdrivende, frilanser eller du har andre inntektskilder henter vi inn opplysningene vi trenger fra offentlige registre. Vi tar kontakt med deg hvis vi trenger flere opplysninger.",
+    "søknadsoversikt.behandleSøknaden.lesMer.innhold": "Vi henter inn opplysningene vi trenger fra offentlige registre. Vi tar kontakt med deg hvis vi trenger flere opplysninger.",
     "SLETTMEG.arbeidstaker": "Dette er fordi vi må bruke de nyeste opplysningene om inntekten din for å beregne hvor mye foreldrepenger du vil få. Det er også derfor arbeidsgiveren din først kan sende inntektsmelding til oss 4 uker før du skal starte foreldrepengene dine. Det er fint om du minner arbeidsgiver på dette, slik at vi tidligst mulig kan behandle søknaden din.",
     "SLETTMEG.ikkeArbeidstaker": "Dette er fordi vi må bruke de nyeste opplysningene om inntekten din for å beregne hvor mye foreldrepenger du vil få. Vi henter inn opplysningene vi trenger fra offentlige registre, og tar kontakt med deg hvis vi trenger flere opplysninger."
 }
