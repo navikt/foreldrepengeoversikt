@@ -18,9 +18,9 @@ const getIkon = (behandlingsdato: string) => {
     const kanBehandles = moment().isSameOrAfter(behandlingsdato, 'days');
 
     return kanBehandles ? (
-        <Icon kind="advarsel-sirkel-fyll" width="24" height="24" />
+        <Icon kind="ok-sirkel-fyll" width="24" height="24" />
     ) : (
-        <Icon kind="info-sirkel-fyll" width="24" height="24" />
+        <Icon kind="advarsel-sirkel-fyll" width="24" height="24" />
     );
 };
 
