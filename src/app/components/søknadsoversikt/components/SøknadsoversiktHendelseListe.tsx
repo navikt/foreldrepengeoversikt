@@ -8,6 +8,7 @@ import { formatDate } from 'app/components/saksoversikt/utils';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import ArbeidsgiverHendelse from './arbeidsgiver/ArbeidsgiverHendelse';
 import { InntektsmeldingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import BehandleSøknadenHendelse from './behandle-søknaden/BehandleSøknadenHendelse';
 
 interface Props {
     søknadsDato: string;
@@ -40,6 +41,7 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.duHarSøkt' })}
                 content={formatDate(søknadsDato)}
             />
+            <BehandleSøknadenHendelse behandlingsdato={behandlingsdato} arbeidsforhold={arbeidsforhold} />
             {arbeidsforhold && arbeidsforhold.length > 0 && (
                 <ArbeidsgiverHendelse
                     arbeidsforhold={arbeidsforhold}

@@ -45,7 +45,7 @@ const renderLesMerInnhold = () => {
                     <FormattedMessage id="søknadsoversikt.lesMer.innhold1" />
                 </Normaltekst>
             </Block>
-            <Block margin="none">
+            <Block margin="xs">
                 <Normaltekst>
                     <FormattedMessage
                         id="søknadsoversikt.lesMer.innhold3"
@@ -57,6 +57,11 @@ const renderLesMerInnhold = () => {
                             )
                         }}
                     />
+                </Normaltekst>
+            </Block>
+            <Block margin="none">
+                <Normaltekst>
+                    <FormattedMessage id="søknadsoversikt.lesMer.innhold4" />
                 </Normaltekst>
             </Block>
         </>
