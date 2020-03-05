@@ -39,8 +39,13 @@ function* getSakerSaga(_: GetSakerRequest) {
             if (isFeatureEnabled(Feature.dinPlan)) {
                 saker = yield all(saker.map(uttaksplanTilSakMapper));
                 if (isFeatureEnabled(Feature.kontooversikt)) {
-                    if (saker.length > 0) {
-                        saker[0].tilgjengeligeKontoer = yield call(getTilgjengeligeStønadskontoer, saker[0]);
+                    const foreldrepengesaker = saker.filter(erForeldrepengesak);
+
+                    for (const foreldrepengesak of foreldrepengesaker) {
+                        foreldrepengesak.tilgjengeligeKontoer = yield call(
+                            getTilgjengeligeStønadskontoer,
+                            foreldrepengesak
+                        );
                     }
                 }
             }
