@@ -15,7 +15,7 @@ interface Props {
 }
 
 const getIkon = (behandlingsdato: string) => {
-    const kanBehandles = moment(behandlingsdato).isSameOrAfter(moment(), 'days');
+    const kanBehandles = moment().isSameOrAfter(behandlingsdato, 'days');
 
     return kanBehandles ? (
         <Icon kind="advarsel-sirkel-fyll" width="24" height="24" />
