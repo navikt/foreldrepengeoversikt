@@ -4,7 +4,7 @@ export enum Feature {
     historikk = 'FEATURE_HISTORIKK',
     miniDialog = 'FEATURE_MINI_DIALOG',
     dinPlan = 'FEATURE_DIN_PLAN',
-    kontooveriskt = 'FEATURE_KONTOOVERSIKT'
+    kontooversikt = 'FEATURE_KONTOOVERSIKT'
 }
 
 export const isFeatureEnabled = (feature: Feature): boolean => {

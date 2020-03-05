@@ -13,17 +13,10 @@ import { Routes } from 'app/utils/routes';
 import Person from 'app/types/Person';
 import SakBase from 'app/api/types/sak/Sak';
 import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
-import {
-    finnNåværendePerioder,
-    finnFremtidigePerioder,
-    finnTidligerePerioder
-} from 'app/utils/periodeUtils';
+import { finnNåværendePerioder, finnFremtidigePerioder, finnTidligerePerioder } from 'app/utils/periodeUtils';
 import OversiktBrukteDager from 'common/components/oversikt-brukte-dager/OversiktBrukteDager';
 import { erEksisterendeSakErDeltUttak } from 'app/utils/søknadsgrunnlagUtil';
-import {
-    getResterendeStønadskontoer,
-    getTotaltBrukteDager
-} from 'app/utils/stønadskontoerUtils';
+import { getResterendeStønadskontoer, getTotaltBrukteDager } from 'app/utils/stønadskontoerUtils';
 import { Rolle } from 'app/types/Rolle';
 import { isFeatureEnabled, Feature } from 'app/Feature';
 
@@ -65,7 +58,7 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
                 nåværendePerioder={finnNåværendePerioder(perioder!)}
                 fremtidigePerioder={finnFremtidigePerioder(perioder!)}
             />
-            {isFeatureEnabled(Feature.kontooveriskt) && tilgjengeligeKontoer && (
+            {isFeatureEnabled(Feature.kontooversikt) && tilgjengeligeKontoer && (
                 <OversiktBrukteDager
                     resterendeStønadskonter={getResterendeStønadskontoer(tilgjengeligeKontoer, perioder)}
                     brukteDager={{
