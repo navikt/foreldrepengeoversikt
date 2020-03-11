@@ -61,7 +61,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
             overskrift: 'Svar på tilbakebetalingen',
             tekst: brukerØnskerÅUttaleSeg
                 ? fritekst
-                : 'Jeg ønsker ikke å uttale meg. Saken vil bli behandlet med de opplysningene vi har tilgjengelig.'
+                : 'Jeg ønsker ikke å uttale meg. Saken vil bli behandlet med de opplysningene som NAV har tilgjengelig.'
         }
     };
 
