@@ -21,6 +21,7 @@ import VeilederNormal from 'common/components/veileder/VeilederNormalSvg';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import getMessage from 'common/util/i18nUtils';
+import HvaLeggerNAVVektPå from './hva-legger-nav-vekt-på/HvaLeggerNAVVektPå';
 
 import './minidialogSkjema.less';
 
@@ -78,6 +79,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
             <Undertittel className="blokk-xs">
                 <FormattedMessage id="miniDialog.tilbakekreving.undertittel" />
             </Undertittel>
+            <HvaLeggerNAVVektPå />
             <RadioPanelGruppe
                 name="name"
                 className="blokk-xs"
