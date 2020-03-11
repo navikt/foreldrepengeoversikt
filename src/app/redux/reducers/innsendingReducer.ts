@@ -22,6 +22,12 @@ const innsendingReducer = (state = getDefaultState(), action: InnsendingAction):
                     status: FetchStatus.IN_PROGRESS
                 }
             };
+        case InnsendingActionTypes.SEND_ETTERSENDELSE_SUCCESS:
+            return {
+                ettersendelse: {
+                    status: FetchStatus.SUCCESS
+                }
+            };
         case InnsendingActionTypes.SEND_ETTERSENDELSE_FAILED:
             return {
                 ettersendelse: {

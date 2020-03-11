@@ -15,6 +15,15 @@ function* ettersend(action: SendEttersendelse) {
                 attachments: ettersending.vedlegg,
                 ettersendelseOrigin
             });
+
+            yield put({
+                type: InnsendingActionTypes.SEND_ETTERSENDELSE_SUCCESS,
+                payload: {
+                    ettersendelse: {
+                        status: FetchStatus.SUCCESS
+                    }
+                }
+            });
         }
     } catch (error) {
         yield put({

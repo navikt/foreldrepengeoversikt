@@ -22,6 +22,13 @@ export interface SendEttersendelse {
     };
 }
 
+export interface SendEttersendelseSuccess {
+    type: InnsendingActionTypes.SEND_ETTERSENDELSE_SUCCESS;
+    payload: {
+        status: FetchStatus;
+    };
+}
+
 export interface SendEttersendelseFailed {
     type: InnsendingActionTypes.SEND_ETTERSENDELSE_FAILED;
     payload: {
@@ -30,4 +37,4 @@ export interface SendEttersendelseFailed {
     };
 }
 
-export type InnsendingAction = SendEttersendelse | SendEttersendelseFailed;
+export type InnsendingAction = SendEttersendelse | SendEttersendelseFailed | SendEttersendelseSuccess;

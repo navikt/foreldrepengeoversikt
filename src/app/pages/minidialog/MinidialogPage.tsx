@@ -12,17 +12,19 @@ import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
 import SakBase from 'app/api/types/sak/Sak';
 import { Routes } from 'app/utils/routes';
 import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { FetchStatus } from 'app/redux/types/FetchState';
 
 interface Props {
     history: History;
     minidialog?: MinidialogInnslag;
     sak?: SakBase;
     sendEttersendelse: (ettersendelse: EttersendingDto) => void;
+    isSendingEttersendelse: boolean;
 }
 
 class MinidialogPage extends React.Component<Props> {
     render() {
-        const { sak, sendEttersendelse, minidialog, history } = this.props;
+        const { sak, sendEttersendelse, minidialog, history, isSendingEttersendelse } = this.props;
         if (!minidialog || !sak) {
             history.push(Routes.DINE_FORELDREPENGER);
             return null;
@@ -34,7 +36,12 @@ class MinidialogPage extends React.Component<Props> {
                 className={cls.block}
                 pageTitle={<FormattedMessage id="miniDialog.pageTitle" />}
                 onBackClick={() => history.push(Routes.DINE_FORELDREPENGER)}>
-                <MinidialogSkjema sak={sak} minidialog={minidialog} onSubmit={sendEttersendelse} />
+                <MinidialogSkjema
+                    sak={sak}
+                    minidialog={minidialog}
+                    onSubmit={sendEttersendelse}
+                    isSendingEttersendelse={isSendingEttersendelse}
+                />
             </Page>
         );
     }
@@ -45,10 +52,12 @@ const mapStateToProps = (state: AppState, props: Props) => {
     const minidialog = getData(state.api.minidialogInnslagListe, []).find(
         (md) => md.dialogId === params.get('dialogId')
     );
+    const isSendingEttersendelse = state.innsending.ettersendelse.status === FetchStatus.IN_PROGRESS;
 
     return {
         minidialog,
-        sak: getData(state.api.saker, []).find((s) => minidialog && s.saksnummer === minidialog.saksnr)
+        sak: getData(state.api.saker, []).find((s) => minidialog && s.saksnummer === minidialog.saksnr),
+        isSendingEttersendelse
     };
 };
 

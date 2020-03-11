@@ -29,6 +29,7 @@ interface Props {
     sak: SakBase;
     minidialog: MinidialogInnslag;
     onSubmit: (ettersendelse: EttersendingDto) => void;
+    isSendingEttersendelse: boolean;
 }
 
 export enum JaNeiSpørsmål {
@@ -44,6 +45,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
     deleteAttachment,
     editAttachment,
     onSubmit,
+    isSendingEttersendelse,
     intl
 }) => {
     const [fritekst, updateFritekst] = useState('');
@@ -57,7 +59,9 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
         brukerTekst: {
             dokumentType: Skjemanummer.TILBAKEBETALING,
             overskrift: 'Svar på tilbakebetalingen',
-            tekst: brukerØnskerÅUttaleSeg ? fritekst : 'Bruker ønsker ikke å uttale seg'
+            tekst: brukerØnskerÅUttaleSeg
+                ? fritekst
+                : 'Jeg ønsker ikke å uttale meg. Saken vil bli behandlet med de opplysningene vi har tilgjengelig.'
         }
     };
 
@@ -125,7 +129,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
             )}
             {svar !== undefined && (
                 <div className={cls.element('btn')}>
-                    <Hovedknapp disabled={false} spinner={false}>
+                    <Hovedknapp disabled={isSendingEttersendelse} spinner={isSendingEttersendelse}>
                         <FormattedMessage id="miniDialog.tilbakekreving.sendButton" />
                     </Hovedknapp>
                 </div>
