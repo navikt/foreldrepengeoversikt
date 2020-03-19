@@ -54,7 +54,7 @@
         "enzyme": "3.10.0",
         "enzyme-adapter-react-16": "1.15.2",
         "enzyme-react-intl": "2.0.6",
-        "file-loader": "3.0.1",
+        "file-loader": "6.0.0",
         "fs": "0.0.1-security",
         "fs-extra": "7.0.1",
         "html-webpack-harddisk-plugin": "1.0.1",
