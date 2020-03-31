@@ -1,9 +1,9 @@
-import { Skjemanummer } from "common/storage/attachment/types/Skjemanummer";
+import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 
 export enum HistorikkInnslagType {
-    "søknad" = "søknad",
-    "inntekt" = "inntekt",
-    "minidialog" = "minidialog"
+    'søknad' = 'søknad',
+    'inntekt' = 'inntekt',
+    'minidialog' = 'minidialog'
 }
 
 export interface HistorikkInnslag {
@@ -16,7 +16,7 @@ export interface HistorikkInnslag {
 }
 
 export interface Innsendingsinnslag extends HistorikkInnslag {
-    type: HistorikkInnslagType.søknad,
+    type: HistorikkInnslagType.søknad;
     hendelse: HendelseType;
     vedlegg?: Skjemanummer[];
     behandlingsdato: string;
@@ -41,19 +41,24 @@ export interface MinidialogInnslag extends HistorikkInnslag {
     dialogId: string;
 }
 
+export const isMinidialogInnslag = (historikkInnslag: HistorikkInnslag): historikkInnslag is MinidialogInnslag =>
+    historikkInnslag.type === HistorikkInnslagType.minidialog;
+
+export const isInnsendingInnslag = (historikkInnslag: HistorikkInnslag): historikkInnslag is Innsendingsinnslag =>
+    historikkInnslag.type === HistorikkInnslagType.søknad;
 
 export enum HendelseType {
-    TILBAKEKREVING_SPM = "TILBAKEKREVING_SPM ",
-    TILBAKEKREVING_SVAR = "TILBAKEKREVING_SVAR",
-    VEDTAK = "VEDTAK",
-    INNTEKTSMELDING = "INNTEKTSMELDING",
-    INITIELL_ENGANGSSTØNAD = "INITIELL_ENGANGSSTØNAD",
-    INITIELL_FORELDREPENGER = "INITIELL_FORELDREPENGER",
-    INITIELL_SVANGERSKAPSPENGER = "INITIELL_SVANGERSKAPSPENGER",
-    ETTERSENDING_FORELDREPENGER = "ETTERSENDING_FORELDREPENGER",
-    ETTERSENDING_ENGANGSSTØNAD = "ETTERSENDING_ENGANGSSTØNAD",
-    ETTERSENDING_SVANGERSKAPSPENGER = "ETTERSENDING_SVANGERSKAPSPENGER",
-    ENDRING_FORELDREPENGER = "ENDRING_FORELDREPENGER",
-    ENDRING_SVANGERSKAPSPENGER = "ENDRING_SVANGERSKAPSPENGER",
-    UKJENT = "UKJENT"
+    TILBAKEKREVING_SPM = 'TILBAKEKREVING_SPM ',
+    TILBAKEKREVING_SVAR = 'TILBAKEKREVING_SVAR',
+    VEDTAK = 'VEDTAK',
+    INNTEKTSMELDING = 'INNTEKTSMELDING',
+    INITIELL_ENGANGSSTØNAD = 'INITIELL_ENGANGSSTØNAD',
+    INITIELL_FORELDREPENGER = 'INITIELL_FORELDREPENGER',
+    INITIELL_SVANGERSKAPSPENGER = 'INITIELL_SVANGERSKAPSPENGER',
+    ETTERSENDING_FORELDREPENGER = 'ETTERSENDING_FORELDREPENGER',
+    ETTERSENDING_ENGANGSSTØNAD = 'ETTERSENDING_ENGANGSSTØNAD',
+    ETTERSENDING_SVANGERSKAPSPENGER = 'ETTERSENDING_SVANGERSKAPSPENGER',
+    ENDRING_FORELDREPENGER = 'ENDRING_FORELDREPENGER',
+    ENDRING_SVANGERSKAPSPENGER = 'ENDRING_SVANGERSKAPSPENGER',
+    UKJENT = 'UKJENT'
 }

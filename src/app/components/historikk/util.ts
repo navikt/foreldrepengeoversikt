@@ -6,7 +6,9 @@ import {
     HistorikkInnslagType,
     HistorikkInnslag,
     HendelseType,
-    InntektsmeldingInnslag
+    InntektsmeldingInnslag,
+    isMinidialogInnslag,
+    isInnsendingInnslag
 } from 'app/api/types/historikk/HistorikkInnslag';
 import { erBehandlingAvsluttet, getEldsteBehadnling } from 'app/utils/sakerUtils';
 import moment from 'moment';
@@ -44,40 +46,41 @@ const erHendelseRelevant = (h: Hendelse): boolean => {
         h.type === BehandlingÅrsak.ENDRET_INNTEKTSMELDING ||
         h.type === BehandlingÅrsak.ENDRING_FRA_BRUKER ||
         h.type === HistorikkInnslagType.søknad ||
-        h.type === HistorikkInnslagType.inntekt
+        h.type === HistorikkInnslagType.inntekt ||
+        h.type === HistorikkInnslagType.minidialog
     );
 };
 
 const utledHendelserMedBehandlinger = (
     behandlinger: Behandling[],
-    utledInnteksmeldingerTom: string | undefined,
-    skalUtledInnsendingstidspunkt: boolean
+    utledInntektsmeldingerTom: string | undefined,
+    skalUtledeInnsendingstidspunkt: boolean
 ): Hendelse[] => {
-    const behanldingerUtenDuplikater = behandlinger.filter(fjernBehandlingerMedLikOpprettetDato);
-    const behandlingsresultatHendelser = behanldingerUtenDuplikater
+    const behandlingerUtenDuplikater = behandlinger.filter(fjernBehandlingerMedLikOpprettetDato);
+    const behandlingsresultatHendelser = behandlingerUtenDuplikater
         .filter(erBehandlingAvsluttet)
         .map(behandlingsResultatTilHendelse);
 
-    const behandlingsÅrsakHendelser = behanldingerUtenDuplikater
+    const behandlingsÅrsakHendelser = behandlingerUtenDuplikater
         .filter((b) => b.årsak !== null && b.årsak !== BehandlingÅrsak.ENDRET_INNTEKTSMELDING)
         .map(behandlingÅrsakTilHendelse);
 
-    const inntektsmeldingHendeliser = behanldingerUtenDuplikater
+    const inntektsmeldingHendelser = behandlingerUtenDuplikater
         .filter((b) =>
-            utledInnteksmeldingerTom ? moment(b.endretTidspunkt).isBefore(utledInnteksmeldingerTom, 'days') : true
+            utledInntektsmeldingerTom ? moment(b.endretTidspunkt).isBefore(utledInntektsmeldingerTom, 'days') : true
         )
         .filter((b) => b.inntektsmeldinger.length > 0)
         .map(behandlingMedInntektmeldingerTilHendelse);
 
-    if (skalUtledInnsendingstidspunkt) {
+    if (skalUtledeInnsendingstidspunkt) {
         const søknadSendtHendelse = utledInnsendingstidspunkt(behandlinger);
         if (søknadSendtHendelse) {
             behandlingsÅrsakHendelser.push(søknadSendtHendelse);
         }
     }
 
-    return [...behandlingsresultatHendelser, ...behandlingsÅrsakHendelser, ...inntektsmeldingHendeliser].sort(
-        sortHendlser
+    return [...behandlingsresultatHendelser, ...behandlingsÅrsakHendelser, ...inntektsmeldingHendelser].sort(
+        sortHendelser
     );
 };
 
@@ -133,8 +136,8 @@ const historikkInnslagTilHendelse = (historikkInnslag: HistorikkInnslag): Hendel
 };
 
 const getBeskrivelseForHistorikkInnslag = (historikkInnslag: HistorikkInnslag): string => {
-    if (historikkInnslag.type === HistorikkInnslagType.søknad) {
-        switch ((historikkInnslag as Innsendingsinnslag).hendelse) {
+    if (isInnsendingInnslag(historikkInnslag)) {
+        switch (historikkInnslag.hendelse) {
             case HendelseType.ETTERSENDING_ENGANGSSTØNAD:
             case HendelseType.ETTERSENDING_FORELDREPENGER:
             case HendelseType.ETTERSENDING_SVANGERSKAPSPENGER:
@@ -143,6 +146,11 @@ const getBeskrivelseForHistorikkInnslag = (historikkInnslag: HistorikkInnslag): 
                 return (historikkInnslag as Innsendingsinnslag).hendelse;
         }
     }
+
+    if (isMinidialogInnslag(historikkInnslag)) {
+        return historikkInnslag.hendelse;
+    }
+
     return historikkInnslag.type;
 };
 
@@ -152,7 +160,12 @@ export const hentHendelserFraHistorikkinnslagListe = (historikkInnslagListe?: Hi
     }
 
     const historikkInnslag = historikkInnslagListe
-        .filter((h) => h.type === HistorikkInnslagType.inntekt || HistorikkInnslagType.søknad)
+        .filter(
+            (h) =>
+                h.type === HistorikkInnslagType.inntekt ||
+                h.type === HistorikkInnslagType.søknad ||
+                h.type === HistorikkInnslagType.minidialog
+        )
         .filter(
             (h) =>
                 (h as Innsendingsinnslag).hendelse !== HendelseType.INITIELL_FORELDREPENGER &&
@@ -180,7 +193,7 @@ export const utledHendelser = (behandlinger?: Behandling[], historikkInnslagList
     )
         .concat(...hentHendelserFraHistorikkinnslagListe(historikkInnslagListe))
         .filter(erHendelseRelevant)
-        .sort(sortHendlser);
+        .sort(sortHendelser);
 };
 
-const sortHendlser = (h1: Hendelse, h2: Hendelse) => h2.dato.localeCompare(h1.dato);
+const sortHendelser = (h1: Hendelse, h2: Hendelse) => h2.dato.localeCompare(h1.dato);

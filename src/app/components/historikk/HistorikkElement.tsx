@@ -41,6 +41,10 @@ const getIkonClass = (hendelse: Hendelse) => {
     }
 };
 
+const getInnslagTittel = (hendelse: Hendelse): React.ReactNode => {
+    return <FormattedMessage id={`historikk.${hendelse.beskrivelse}`} />;
+};
+
 const HistorikkElement: React.StatelessComponent<Props> = (props: Props) => {
     const { hendelse } = props;
 
@@ -55,9 +59,7 @@ const HistorikkElement: React.StatelessComponent<Props> = (props: Props) => {
                             pilHoyre={!hendelse.brukerInitiertHendelse && !matches}
                             ikonClass={getIkonClass(hendelse)}>
                             <>
-                                <Element tag="p">
-                                    <FormattedMessage id={`historikk.${hendelse.beskrivelse}`} />
-                                </Element>
+                                <Element tag="p">{getInnslagTittel(hendelse)}</Element>
                                 <div className={cls.element('tilleggsinformasjon')}>
                                     {hendelse.arbeidsgiver !== undefined && (
                                         <Normaltekst tag="p">{normalizeName(hendelse.arbeidsgiver.navn)}</Normaltekst>
