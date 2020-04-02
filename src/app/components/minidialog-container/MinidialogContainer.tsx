@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { MinidialogInnslag, HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
 import moment from 'moment';
 import MinidialogLenkepanel from '../minidialog-lenkepanel/MinidialogLenkepanel';
 import { guid } from 'nav-frontend-js-utils';
@@ -20,7 +20,12 @@ class MinidialogContainer extends Component<Props> {
 
     render() {
         return this.props.minidialoger
-            .filter(({ gyldigTil, aktiv }) => aktiv && moment(gyldigTil).isSameOrAfter(moment(), 'days'))
+            .filter(
+                ({ gyldigTil, aktiv, hendelse }) =>
+                    aktiv &&
+                    moment(gyldigTil).isSameOrAfter(moment(), 'days') &&
+                    hendelse !== HendelseType.TILBAKEKREVING_FATTET_VEDTAK
+            )
             .map((minidialogInnslag) => (
                 <MinidialogLenkepanel
                     key={guid()}
