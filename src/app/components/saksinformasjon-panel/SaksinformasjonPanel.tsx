@@ -139,7 +139,11 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 )}
             </div>
 
-            {erSakForeldrepengesak && !behandlingErAvsluttet && initiellForeldrepengesøknadHendelse !== undefined && !erInfotrygdSak(sak) &&
+            {erSakForeldrepengesak
+                && !behandlingErAvsluttet
+                && initiellForeldrepengesøknadHendelse !== undefined
+                && !erInfotrygdSak(sak)
+                && isFeatureEnabled(Feature.saksoversikt) &&
                 <Søknadsoversikt
                     søknadsDato={sak.opprettet}
                     behandlingsdato={moment(behandlingsdato).format('YYYY-MM-DD')}

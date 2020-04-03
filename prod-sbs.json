@@ -8,6 +8,7 @@
         "FEATURE_MINI_DIALOG": "off",
         "FEATURE_HISTORIKK": "on",
         "FEATURE_DIN_PLAN": "on",
-        "FEATURE_KONTOOVERSIKT": "off"
+        "FEATURE_KONTOOVERSIKT": "off",
+        "FEATURE_SAKSOVERSIKT": "off"
     }
 }

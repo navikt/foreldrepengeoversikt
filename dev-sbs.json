@@ -1,13 +1,14 @@
 {
     "ingress": "https://foreldrepenger-q.nav.no",
-    "ingress-internal" : "https://foreldrepengeoversikt.nais.oera-q.local",
+    "ingress-internal": "https://foreldrepengeoversikt.nais.oera-q.local",
     "env": {
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice-q.nav.no/login",
         "FP_UTTAK_SERVICE_URL": "https://fp-uttak-service-q.nav.no",
         "FEATURE_MINI_DIALOG": "on",
-        "FEATURE_HISTORIKK":"on",
+        "FEATURE_HISTORIKK": "on",
         "FEATURE_DIN_PLAN": "on",
-        "FEATURE_KONTOOVERSIKT": "on"
+        "FEATURE_KONTOOVERSIKT": "on",
+        "FEATURE_SAKSOVERSIKT": "on"
     }
 }
