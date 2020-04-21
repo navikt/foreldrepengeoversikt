@@ -1,4 +1,4 @@
-import { Skjemanummer } from "common/storage/attachment/types/Skjemanummer";
+import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 
 export const skjemanummerForFørstegangssøknadForeldrepenger = (skjemanummer: Skjemanummer): boolean => {
     switch (skjemanummer) {
@@ -26,6 +26,8 @@ export const isSkjemanummerForEndringssøknadForeldrepenger = (skjemanummer: Skj
         case Skjemanummer.DOK_OVERFØRING_FOR_SYK:
         case Skjemanummer.OMSORGSOVERTAKELSESDATO:
         case Skjemanummer.TILBAKEBETALING:
+        case Skjemanummer.HV_ØVELSE:
+        case Skjemanummer.NAV_TILTAK:
             return true;
         default:
             return false;
