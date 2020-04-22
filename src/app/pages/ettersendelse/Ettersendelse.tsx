@@ -26,6 +26,8 @@ import { getData } from 'app/redux/util/fetchFromState';
 import { InnsendingAction, InnsendingActionTypes, EttersendelseOrigin } from 'app/redux/types/InnsendingAction';
 
 import './ettersendelse.less';
+import UtvidetInformasjon from 'app/components/utvidetinformasjon/UtvidetInformasjon';
+import PictureScanningGuide from 'app/components/picture-scanning-guide/PictureScanningGuide';
 
 interface EttersendelseProps {
     sak?: SakBase;
@@ -162,6 +164,9 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
                                 onFileUploadFinish={editAttachment}
                                 onFileDeleteStart={deleteAttachment}
                             />
+                            <UtvidetInformasjon apneLabel="Les mer om hvordan ta et bra bilde av vedlegg">
+                                <PictureScanningGuide />
+                            </UtvidetInformasjon>
                         </div>
                     )}
 
