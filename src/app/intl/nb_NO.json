@@ -64,6 +64,8 @@
     "ettersendelse.I000111": "Begrunnelse for sen søknad",
     "ettersendelse.I000112": "Dokumentasjon av deltakelse i introduksjonsprogrammet",
     "ettersendelse.I000114": "Svar på varsel om tilbakebetaling",
+    "ettersendelse.I000116": "Dokumentasjon på NAV tiltak som utgjør 100% arbeid",
+    "ettersendelse.I000117": "Dokumentasjon på øvelse eller tjeneste i Heimevernet",
     "ettersendelse.pageTitle": "Ettersending av vedlegg",
     "ettersendelse.select.defaultValue": "Velg type vedlegg",
     "ettersendelse.sendButton": "Ettersend vedlegg",
