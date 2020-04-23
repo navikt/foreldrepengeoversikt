@@ -25,9 +25,9 @@ import BEMHelper from 'common/util/bem';
 import { lenker } from 'app/utils/lenker';
 import { Innsendingsinnslag, HendelseType, HistorikkInnslagType, HistorikkInnslag, InntektsmeldingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { redirect } from 'app/utils/redirect';
-import Behandlingsfrist from '../behandlingsfrist/Behandlingsfrist';
+// import Behandlingsfrist from '../behandlingsfrist/Behandlingsfrist';
+// import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 import { Søkerinfo } from 'app/types/Søkerinfo';
-import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 import moment from 'moment';
 import MidlertidigInfo from './MidlertidigInfo';
@@ -59,12 +59,12 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
         ? moment(opprettetDato)
         : tidligesteBehandlingsdato;
     const inntektsmeldinger = historikkInnslagListe.filter(h => h.type === HistorikkInnslagType.inntekt) as InntektsmeldingInnslag[];
-    const behandlingErAvsluttet = status !== undefined && (status === FagsakStatus.LOPENDE || status === FagsakStatus.AVSLUTTET);
+    const sakErFerdigBehandlet = status !== undefined && (status === FagsakStatus.LOPENDE || status === FagsakStatus.AVSLUTTET);
 
     const cls = BEMHelper('saksinformasjon-panel');
     return (
         <div>
-            {søkerinfo &&
+            {/* {søkerinfo &&
                 behandlingsdato &&
                 !harEnAvsluttetBehandling(sak) &&
                 !erInfotrygdSak(sak) &&
@@ -73,7 +73,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                         harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
                         behandlingsdato={moment(behandlingsdato).format('YYYY-MM-DD')}
                     />
-                )}
+                )} */}
 
             {tidligesteBehandlingsdato === undefined &&
                 initiellForeldrepengesøknadHendelse !== undefined &&
@@ -140,7 +140,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
             </div>
 
             {erSakForeldrepengesak
-                && !behandlingErAvsluttet
+                && !sakErFerdigBehandlet
                 && initiellForeldrepengesøknadHendelse !== undefined
                 && !erInfotrygdSak(sak)
                 && isFeatureEnabled(Feature.saksoversikt) &&
