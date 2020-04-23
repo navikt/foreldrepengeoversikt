@@ -1,28 +1,43 @@
 [
     {
         "type": "FPSAK",
-        "saksnummer": "140377753",
+        "saksnummer": "142637418",
         "status": "LOP",
-        "opprettet": "2020-01-29",
-        "annenPart": {
-            "fnr": "16115326752",
-            "aktørId": "1445951577491",
-            "navn": {
-                "fornavn": "ROBUST",
-                "etternavn": "FLOSKEL",
-                "kjønn": "M"
-            }
-        },
+        "opprettet": "2020-03-09",
         "behandlinger": [
             {
-                "opprettetTidspunkt": "2020-01-29T15:50:27.918",
-                "endretTidspunkt": "2020-01-29T16:36:01.795",
+                "opprettetTidspunkt": "2020-03-19T06:34:25.269",
+                "endretTidspunkt": "2020-03-20T08:29:12.118",
+                "status": "AVSLU",
+                "type": "FP",
+                "tema": "FORP_FODS",
+                "årsak": "RE-FRDLING",
+                "behandlingResultat": "FORELDREPENGER_ENDRET",
+                "behandlendeEnhet": "4849",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Tromsø",
+                "inntektsmeldinger": []
+            },
+            {
+                "opprettetTidspunkt": "2020-03-09T13:19:06.823",
+                "endretTidspunkt": "2020-03-09T13:21:58.897",
                 "status": "AVSLU",
                 "type": "FP",
                 "tema": "FORP_FODS",
                 "behandlingResultat": "INNVILGET",
-                "behandlendeEnhet": "4812",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Bergen",
+                "behandlendeEnhet": "4849",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Tromsø",
+                "inntektsmeldinger": ["466991530"]
+            },
+            {
+                "opprettetTidspunkt": "2020-03-30T08:04:45.685",
+                "endretTidspunkt": "2020-03-30T08:10:07.367",
+                "status": "AVSLU",
+                "type": "FP",
+                "tema": "FORP_FODS",
+                "årsak": "RE-FRDLING",
+                "behandlingResultat": "FORELDREPENGER_ENDRET",
+                "behandlendeEnhet": "4849",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Tromsø",
                 "inntektsmeldinger": []
             }
         ]
