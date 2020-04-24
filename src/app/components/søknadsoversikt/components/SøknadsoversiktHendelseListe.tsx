@@ -75,7 +75,12 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
                 ikon={søknadenBehandles ? <Icon kind="info-sirkel-fyll" width="24" height="24" /> : undefined}
                 color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.navBehandlerSøknaden' })}
-                content={intl.formatMessage({ id: 'søknadsoversikt.navBehandlerSøknaden.innhold' })}
+                content={intl.formatMessage({
+                    id:
+                        aktiveArbeidsforhold.length > 0
+                            ? 'søknadsoversikt.navBehandlerSøknaden.innhold'
+                            : 'søknadsoversikt.navBehandlerSøknaden.innhold.ikkeArbeidstaker'
+                })}
             />
         </div>
     );
