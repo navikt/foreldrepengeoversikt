@@ -54,6 +54,11 @@ const renderLesMerInnhold = () => {
                                 <Lenke href={lenker.sendeInntektsmelding}>
                                     <FormattedMessage id="søknadsoversikt.lesMer.innhold3.lenke" />
                                 </Lenke>
+                            ),
+                            dineSaker: (
+                                <Lenke href={lenker.saksoversikt}>
+                                    <FormattedMessage id="søknadsoversikt.lesMer.innhold3.lenke2" />
+                                </Lenke>
                             )
                         }}
                     />
