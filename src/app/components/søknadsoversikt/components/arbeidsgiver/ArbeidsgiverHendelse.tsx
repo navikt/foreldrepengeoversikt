@@ -51,7 +51,7 @@ const renderLesMerInnhold = () => {
                         id="søknadsoversikt.lesMer.innhold3"
                         values={{
                             lenke: (
-                                <Lenke href={lenker.søkOmForeldrepenger}>
+                                <Lenke href={lenker.sendeInntektsmelding}>
                                     <FormattedMessage id="søknadsoversikt.lesMer.innhold3.lenke" />
                                 </Lenke>
                             )
