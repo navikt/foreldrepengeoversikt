@@ -43,6 +43,9 @@ export const isSkjemanummerForSvangerskapspengesoknad = (skjemanummer: Skjemanum
         case Skjemanummer.TILRETTELEGGING_FOR_ARBEIDSTAKERE:
         case Skjemanummer.TILRETTELEGGING_FOR_FRILANS_ELLER_SELVSTENDIG:
         case Skjemanummer.TILBAKEBETALING:
+        case Skjemanummer.TERMINBEKREFTELSE:
+        case Skjemanummer.KOPI_SKATTEMELDING:
+        case Skjemanummer.RESULTATREGNSKAP:
             return true;
         default:
             return false;
