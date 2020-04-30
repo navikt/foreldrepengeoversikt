@@ -39,7 +39,6 @@ export const isSkjemanummerForSvangerskapspengesoknad = (skjemanummer: Skjemanum
         case Skjemanummer.ANNET:
         case Skjemanummer.DOK_MILITÆR_SILVIL_TJENESTE:
         case Skjemanummer.INNTEKTSOPPLYSNINGER_FRILANS_ELLER_SELVSTENDIG:
-        case Skjemanummer.SKJEMA_FOR_TILRETTELEGGING_OG_OMPLASSERING:
         case Skjemanummer.TILRETTELEGGING_FOR_ARBEIDSTAKERE:
         case Skjemanummer.TILRETTELEGGING_FOR_FRILANS_ELLER_SELVSTENDIG:
         case Skjemanummer.TILBAKEBETALING:
