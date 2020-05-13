@@ -40,7 +40,7 @@
     "dinPlan.taptPeriode": "Ikke innvilget periode",
     "dinPlan.title": "Deres plan",
     "dinPlan.utsettelsesårsak.ukjent": "Utsettelse - årsak ikke valgt",
-    "dinPlan.utsettelsesårsak": "Utsettelse - { årsak, select, arbeid { Arbeid } barn_innlagt { Barnet er innlagt } ferie { Ferie } søker_innlagt { Innlagt } sykdom_skade { Sykdom }}",
+    "dinPlan.utsettelsesårsak": "Utsettelse - { årsak, select, arbeid { Arbeid } barn_innlagt { Barnet er innlagt } ferie { Ferie } søker_innlagt { Innlagt } sykdom_skade { Sykdom } hv_ovelse { Øvelse eller tjeneste i Heimevernet }  nav_tiltak { NAV tiltak som utgjør 100 % arbeid }}",
     "dokumentoversikt.info.lenke": "dine saker",
     "dokumentoversikt.info": "Vi jobber med å kunne vise alle dokumenter du har i saken her. Inntil videre finner du disse under { lenke }. ",
     "ettersendelse.I000001": "Tilretteleggings- og omplasseringsskjema for frilans eller selvstendig",

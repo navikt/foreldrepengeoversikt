@@ -85,7 +85,9 @@ export enum UtsettelsePeriodeType {
     Ferie = 'FERIE',
     SykdomSkade = 'SYKDOM_SKADE',
     SøkerInnlagt = 'SØKER_INNLAGT',
-    BarnInnlagt = 'BARN_INNLAGT'
+    BarnInnlagt = 'BARN_INNLAGT',
+    HvØvelse = 'HV_OVELSE',
+    NavTiltak = 'NAV_TILTAK'
 }
 
 export enum UttakArbeidType {
