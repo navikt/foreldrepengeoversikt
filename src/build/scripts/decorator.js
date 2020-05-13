@@ -4,11 +4,11 @@ const request = require('request');
 const { JSDOM } = jsdom;
 
 const requestDecorator = (callback) => {
-    const baseUrl = process.env.NAIS_CLUSTER_NAME === 'dev-sbs' ? 'https://appres-q1.nav.no' : 'https://appres.nav.no';
-    return request(
-        `${baseUrl}/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer=true`,
-        callback
-    );
+    const baseUrl =
+        process.env.NAIS_CLUSTER_NAME === 'dev-sbs'
+            ? 'https://www-q1.nav.no/dekoratoren'
+            : 'https://www.nav.no/dekoratoren';
+    return request(`${baseUrl}/?simple=true`, callback);
 };
 
 const getDecorator = () =>
@@ -22,7 +22,7 @@ const getDecorator = () =>
                     NAV_SCRIPTS: document.getElementById('scripts')[prop],
                     NAV_STYLES: document.getElementById('styles')[prop],
                     NAV_HEADING: document.getElementById('header-withmenu')[prop],
-                    NAV_FOOTER: document.getElementById('footer')[prop],
+                    NAV_FOOTER: document.getElementById('footer-withmenu')[prop],
                     NAV_MEGAMENU_RESOURCES: document.getElementById('megamenu-resources')[prop]
                 };
                 resolve(data);
