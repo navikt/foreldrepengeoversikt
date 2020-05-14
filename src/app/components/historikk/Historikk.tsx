@@ -2,10 +2,12 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { guid } from 'nav-frontend-js-utils';
 import AlertStripe from 'nav-frontend-alertstriper';
+import moment from 'moment';
 
 import HistorikkElement, { Hendelse } from './HistorikkElement';
 import BEMHelper from 'common/util/bem';
 import Person from 'app/types/Person';
+import { HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
 
 import './historikk.less';
 
@@ -32,7 +34,12 @@ class Historikk extends React.Component<HistorikkProps> {
     render() {
         const cls = BEMHelper('historikk');
         const { hendelser } = this.props;
-        
+        const sendtSøknadHendelse = hendelser.find(
+            (h) => h.type === HendelseType.INITIELL_FORELDREPENGER || h.type === 'søknad-sendt'
+        );
+        const harSendtSøknadFørSeptember2019 =
+            sendtSøknadHendelse !== undefined ? moment(sendtSøknadHendelse.dato).isBefore('2019-09-01') : false;
+
         return (
             <div className={cls.block}>
                 {hendelser.length === 0 && (
@@ -50,11 +57,13 @@ class Historikk extends React.Component<HistorikkProps> {
                                 <HistorikkElement key={guid()} hendelse={h} />
                             ))}
                         </ol>
-                        <div className={cls.element('ettersendelse-info')}>
-                            <AlertStripe type="info">
-                                <FormattedMessage id="historikk.ettersendelse.info" />
-                            </AlertStripe>
-                        </div>
+                        {harSendtSøknadFørSeptember2019 && (
+                            <div className={cls.element('ettersendelse-info')}>
+                                <AlertStripe type="info">
+                                    <FormattedMessage id="historikk.ettersendelse.info" />
+                                </AlertStripe>
+                            </div>
+                        )}
                     </>
                 )}
             </div>
