@@ -4,6 +4,7 @@ import SakBase from 'app/api/types/sak/Sak';
 import { StorageKvittering } from 'app/api/types/StorageKvittering';
 import { MinidialogInnslag, HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { Søkerinfo } from 'app/types/Søkerinfo';
+import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 
 export interface ApiState {
     søkerinfo: FetchState<Søkerinfo>;
@@ -11,6 +12,7 @@ export interface ApiState {
     storageKvittering: FetchState<StorageKvittering>;
     historikk: FetchState<HistorikkInnslag[]>;
     minidialogInnslagListe: FetchState<MinidialogInnslag[]>;
+    manglendeVedlegg: FetchState<ManglendeVedlegg[]>;
 }
 
 const getDefaultState = (): ApiState => ({
@@ -27,6 +29,9 @@ const getDefaultState = (): ApiState => ({
         status: FetchStatus.UNFETCHED
     },
     minidialogInnslagListe: {
+        status: FetchStatus.UNFETCHED
+    },
+    manglendeVedlegg: {
         status: FetchStatus.UNFETCHED
     }
 });
@@ -162,6 +167,31 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                     error: action.payload.error
                 }
             };
+
+        case ApiActionTypes.GET_MANGLENDE_VEDLEGG_REQUEST:
+            return {
+                ...state,
+                manglendeVedlegg: {
+                    status: FetchStatus.IN_PROGRESS
+                }
+            };
+        case ApiActionTypes.GET_MANGLENDE_VEDLEGG_SUCCESS:
+            return {
+                ...state,
+                manglendeVedlegg: {
+                    status: FetchStatus.SUCCESS,
+                    data: action.payload.manglendeVedlegg
+                }
+            };
+        case ApiActionTypes.GET_MANGLENDE_VEDLEGG_FAILURE:
+            return {
+                ...state,
+                manglendeVedlegg: {
+                    status: FetchStatus.FAILURE,
+                    error: action.payload.error
+                }
+            };
+
         default: {
             return state;
         }

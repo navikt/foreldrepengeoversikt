@@ -1,8 +1,9 @@
-import { FetchError } from "./FetchState";
-import { StorageKvittering } from "app/api/types/StorageKvittering";
-import { Innsendingsinnslag, MinidialogInnslag } from "app/api/types/historikk/HistorikkInnslag";
-import { Søkerinfo } from "app/types/Søkerinfo";
-import Sak from "app/api/types/sak/Sak";
+import { FetchError } from './FetchState';
+import { StorageKvittering } from 'app/api/types/StorageKvittering';
+import { Innsendingsinnslag, MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { Søkerinfo } from 'app/types/Søkerinfo';
+import Sak from 'app/api/types/sak/Sak';
+import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 
 export enum ApiActionTypes {
     'GET_SØKERINFO_REQUEST' = 'getPersoninfoRequest',
@@ -20,7 +21,10 @@ export enum ApiActionTypes {
     'GET_MINIDIALOG_REQUEST' = 'getMinidialogRequest',
     'GET_MINIDIALOG_SUCCESS' = 'getMinidialogSuccess',
     'GET_MINIDIALOG_FAILURE' = 'getMinidialogFailure',
-    'GET_TILGJENGELIGE_STØNADSKONTOER' = 'getTilgjengeligeStønadskontoer'
+    'GET_TILGJENGELIGE_STØNADSKONTOER' = 'getTilgjengeligeStønadskontoer',
+    'GET_MANGLENDE_VEDLEGG_REQUEST' = 'getManglendeVedleggRequest',
+    'GET_MANGLENDE_VEDLEGG_FAILURE' = 'getManglendeVedleggFailure',
+    'GET_MANGLENDE_VEDLEGG_SUCCESS' = 'getManglendeVedleggSuccess'
 }
 
 export interface GetSøkerinfoRequest {
@@ -42,7 +46,7 @@ export interface GetSøkerinfoFailure {
 }
 
 export interface GetSakerRequest {
-    type: ApiActionTypes.GET_SAKER_REQUEST
+    type: ApiActionTypes.GET_SAKER_REQUEST;
 }
 
 export interface GetSakerSuccess {
@@ -60,7 +64,7 @@ export interface GetSakerFailure {
 }
 
 export interface GetStorageKvitteringRequest {
-    type: ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST
+    type: ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST;
 }
 
 export interface GetStorageKvitteringSuccess {
@@ -78,7 +82,7 @@ export interface GetStorageKvitteringFailure {
 }
 
 export interface GetHistorikkRequest {
-    type: ApiActionTypes.GET_HISTORIKK_REQUEST
+    type: ApiActionTypes.GET_HISTORIKK_REQUEST;
 }
 
 export interface GetHistorikkSuccess {
@@ -95,7 +99,7 @@ export interface GetHistorikkFailure {
 }
 
 export interface GetMiniDialogRequest {
-    type: ApiActionTypes.GET_MINIDIALOG_REQUEST
+    type: ApiActionTypes.GET_MINIDIALOG_REQUEST;
 }
 
 export interface GetMinidialogSuccess {
@@ -114,8 +118,25 @@ export interface GetMinidialogFailure {
 export interface GetTilgjengeligeStønadskontoer {
     type: ApiActionTypes.GET_TILGJENGELIGE_STØNADSKONTOER;
     payload: {
-        sak: Sak
-    }
+        sak: Sak;
+    };
+}
+
+export interface GetManglendeVedleggRequest {
+    type: ApiActionTypes.GET_MANGLENDE_VEDLEGG_REQUEST;
+}
+
+export interface GetManglendeVedleggRequestSuccess {
+    type: ApiActionTypes.GET_MANGLENDE_VEDLEGG_SUCCESS;
+    payload: {
+        manglendeVedlegg: ManglendeVedlegg[];
+    };
+}
+export interface GetManglendeVedleggRequestFailure {
+    type: ApiActionTypes.GET_MANGLENDE_VEDLEGG_FAILURE;
+    payload: {
+        error: FetchError;
+    };
 }
 
 type ApiAction =
@@ -126,15 +147,17 @@ type ApiAction =
     | GetSakerSuccess
     | GetSakerFailure
     | GetStorageKvitteringRequest
-    | GetStorageKvitteringSuccess 
+    | GetStorageKvitteringSuccess
     | GetStorageKvitteringFailure
     | GetHistorikkRequest
-    | GetHistorikkSuccess 
+    | GetHistorikkSuccess
     | GetHistorikkFailure
     | GetMiniDialogRequest
-    | GetMinidialogSuccess 
+    | GetMinidialogSuccess
     | GetMinidialogFailure
     | GetTilgjengeligeStønadskontoer
-
+    | GetManglendeVedleggRequest
+    | GetManglendeVedleggRequestFailure
+    | GetManglendeVedleggRequestSuccess;
 
 export default ApiAction;

@@ -99,7 +99,7 @@ class Foreldrepengeoversikt extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => {
-    const { søkerinfo, saker, storageKvittering, historikk } = state.api
+    const { søkerinfo, saker, storageKvittering, historikk } = state.api;
     return {
         søkerinfo,
         ettersendelse: state.innsending.ettersendelse,

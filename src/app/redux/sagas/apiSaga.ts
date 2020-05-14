@@ -5,7 +5,8 @@ import {
     GetSøkerinfoRequest,
     GetSakerRequest,
     GetHistorikkRequest,
-    GetMiniDialogRequest
+    GetMiniDialogRequest,
+    GetSakerSuccess
 } from '../types/ApiAction';
 import SakBase, { SakType } from 'app/api/types/sak/Sak';
 import { StorageKvittering } from 'app/api/types/StorageKvittering';
@@ -107,12 +108,37 @@ function* getMiniDialog(_: GetMiniDialogRequest) {
     }
 }
 
+function* getManglendeVedlegg(sakerSuccess: GetSakerSuccess) {
+    try {
+        const saker = sakerSuccess.payload.saker;
+
+        if (saker) {
+            saker.sort(sakByDescendingOrder);
+            const foreldrepengesaker = saker.filter(erForeldrepengesak);
+
+            if (foreldrepengesaker.length > 0 && foreldrepengesaker[0].saksnummer) {
+                const response = yield call(Api.getManglendeVedlegg, foreldrepengesaker[0].saksnummer);
+                const manglendeVedlegg = response.data;
+                yield put({
+                    type: ApiActionTypes.GET_MANGLENDE_VEDLEGG_SUCCESS,
+                    payload: {
+                        manglendeVedlegg
+                    }
+                });
+            }
+        }
+    } catch (error) {
+        yield put({ type: ApiActionTypes.GET_MANGLENDE_VEDLEGG_FAILURE, payload: { error } });
+    }
+}
+
 function* apiSaga() {
     yield all([takeLatest(ApiActionTypes.GET_SØKERINFO_REQUEST, getPersoninfoSaga)]);
     yield all([takeLatest(ApiActionTypes.GET_SAKER_REQUEST, getSakerSaga)]);
     yield all([takeLatest(ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST, getStorageKvittering)]);
     yield all([takeLatest(ApiActionTypes.GET_HISTORIKK_REQUEST, getHistorikk)]);
     yield all([takeLatest(ApiActionTypes.GET_MINIDIALOG_REQUEST, getMiniDialog)]);
+    yield all([takeLatest(ApiActionTypes.GET_SAKER_SUCCESS, getManglendeVedlegg)]);
 }
 
 export default apiSaga;

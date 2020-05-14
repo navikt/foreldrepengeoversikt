@@ -52,6 +52,12 @@ const getUttaksplan = (saksnummer: string) => {
     });
 };
 
+const getManglendeVedlegg = (saksnummer: string) => {
+    return AxiosApiInterceptor.get('/historikk/vedlegg', {
+        params: { saksnummer }
+    });
+};
+
 function getUttakskontoer({
     antallBarn,
     farHarRett,
@@ -74,7 +80,9 @@ function getUttakskontoer({
         antallBarn,
         fødselsdato: fødselsdato ? formaterDato(fødselsdato, fpUttakServiceDateFormat) : undefined,
         termindato: termindato ? formaterDato(termindato, fpUttakServiceDateFormat) : undefined,
-        omsorgsovertakelseDato: omsorgsovertakelsesdato ? formaterDato(omsorgsovertakelsesdato, fpUttakServiceDateFormat) : undefined,
+        omsorgsovertakelseDato: omsorgsovertakelsesdato
+            ? formaterDato(omsorgsovertakelsesdato, fpUttakServiceDateFormat)
+            : undefined,
         startdatoUttak: formaterDato(startdatoUttak, fpUttakServiceDateFormat)
     };
 
@@ -92,7 +100,8 @@ const Api = {
     getHistorikk,
     getMiniDialog,
     getUttaksplan,
-    getUttakskontoer
+    getUttakskontoer,
+    getManglendeVedlegg
 };
 
 export default Api;
