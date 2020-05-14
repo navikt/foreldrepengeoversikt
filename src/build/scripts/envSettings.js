@@ -12,7 +12,8 @@ function createEnvSettingsFile(settingsFile) {
                 FEATURE_MINI_DIALOG:'${process.env.FEATURE_MINI_DIALOG}',
                 FEATURE_KONTOOVERSIKT: '${process.env.FEATURE_KONTOOVERSIKT}',
                 FEATURE_DIN_PLAN: '${process.env.FEATURE_DIN_PLAN}',
-                FEATURE_SAKSOVERSIKT: '${process.env.FEATURE_SAKSOVERSIKT}'
+                FEATURE_SAKSOVERSIKT: '${process.env.FEATURE_SAKSOVERSIKT}',
+                FEATURE_MANGLENDE_VEDLEGG: '${process.env.FEATURE_MANGLENDE_VEDLEGG}'
             };`
         );
     });

@@ -9,6 +9,7 @@
         "FEATURE_HISTORIKK": "on",
         "FEATURE_DIN_PLAN": "on",
         "FEATURE_KONTOOVERSIKT": "on",
-        "FEATURE_SAKSOVERSIKT": "on"
+        "FEATURE_SAKSOVERSIKT": "on",
+        "FEATURE_MANGLENDE_VEDLEGG": "on"
     }
 }

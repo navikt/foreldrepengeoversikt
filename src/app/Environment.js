@@ -7,7 +7,8 @@ const Environment = () => {
         ['FEATURE_MINI_DIALOG']: window.appSettings['FEATURE_MINI_DIALOG'],
         ['FEATURE_DIN_PLAN']: window.appSettings['FEATURE_DIN_PLAN'],
         ['FEATURE_KONTOOVERSIKT']: window.appSettings['FEATURE_KONTOOVERSIKT'],
-        ['FEATURE_SAKSOVERSIKT']: window.appSettings['FEATURE_SAKSOVERSIKT']
+        ['FEATURE_SAKSOVERSIKT']: window.appSettings['FEATURE_SAKSOVERSIKT'],
+        ['FEATURE_MANGLENDE_VEDLEGG']: window.appSettings['FEATURE_MANGLENDE_VEDLEGG']
     };
 };
 

@@ -39,6 +39,10 @@ const getMinidialog = function() {
     return getFileContent('miniDialog.json');
 };
 
+const getManglendeVedlegg = function() {
+    return getFileContent('manglendeVedlegg.json');
+};
+
 const getUttaksplan = function() {
     const fileName = getFilePath('uttaksplan.json');
     if (!fs.existsSync(fileName)) {
@@ -58,5 +62,6 @@ module.exports = {
     getKvitteringStorage,
     getHistorikk,
     getMinidialog,
-    getUttaksplan
+    getUttaksplan,
+    getManglendeVedlegg
 };

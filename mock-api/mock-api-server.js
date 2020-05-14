@@ -44,6 +44,10 @@ router.get('/rest/minidialog', (req, res) => {
     res.send(MockStorage.getMinidialog());
 });
 
+router.get('/rest/historikk/vedlegg', (req, res) => {
+    res.send(MockStorage.getManglendeVedlegg());
+});
+
 router.delete('/rest/storage', (req, res) => {
     res.sendStatus(204);
 });
@@ -66,14 +70,14 @@ router.delete('/rest/storage/vedlegg/:id', (req, res) => {
     res.sendStatus(204);
 });
 
-router.post('/rest/soknad/ettersend', (req,res) => {
+router.post('/rest/soknad/ettersend', (req, res) => {
     const kvittering = {
         saksNr: '123',
         jornalId: '123',
-        leveranseStatus: "SENDT_OG_FORSØKT_BEHANDLET_FPSAK",
+        leveranseStatus: 'SENDT_OG_FORSØKT_BEHANDLET_FPSAK',
         mottattDato: '2019-01-01',
         referanseId: '123'
-    }
+    };
     res.send(kvittering);
 });
 
@@ -83,4 +87,3 @@ const port = process.env.PORT || 8888;
 app.listen(port, () => {
     console.log(`Mock-api listening on port: ${port}`);
 });
-
