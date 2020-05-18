@@ -98,7 +98,7 @@ const renderContent = (arbeidsforhold: Arbeidsforhold[], inntektsmeldinger: Innt
 
         return (
             <>
-                <div className={bem.element('test')} key={guid()}>
+                <div className={bem.element('arbeidsgiverHendelseStatus')} key={guid()}>
                     {getInntektsmeldingStatusIkon(inntektsmeldingErMottatt)}
                     <div>
                         <Element>{arbforhold.arbeidsgiverNavn}</Element>

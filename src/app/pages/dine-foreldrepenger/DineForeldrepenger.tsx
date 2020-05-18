@@ -38,6 +38,7 @@ import { FormattedHTMLMessage } from 'react-intl';
 import MinidialogContainer from 'app/components/minidialog-container/MinidialogContainer';
 
 import './dineForeldrepenger.less';
+import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 
 interface Props {
     saker: SakBase[];
@@ -45,6 +46,7 @@ interface Props {
     søkerinfo?: Søkerinfo;
     history: History;
     historikkInnslagListe: HistorikkInnslag[];
+    manglendeVedlegg: ManglendeVedlegg[];
 }
 
 export class DineForeldrepenger extends React.Component<Props> {
@@ -74,7 +76,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     renderSaksoversiktList(nyesteSak: SakBase) {
-        const { saker, history, historikkInnslagListe, søkerinfo } = this.props;
+        const { saker, history, historikkInnslagListe, søkerinfo, manglendeVedlegg } = this.props;
         const cls = BEMHelper('saksoversikt-list');
         return (
             <ul className={cls.block}>
@@ -90,6 +92,7 @@ export class DineForeldrepenger extends React.Component<Props> {
                                     historikkInnslagListe={historikkInnslagListe.filter(
                                         (h) => h.saksnr === sak.saksnummer
                                     )}
+                                    manglendeVedlegg={manglendeVedlegg}
                                 />
                             </li>
                         );
@@ -128,7 +131,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     }
 
     render() {
-        const { saker, history, storageKvittering, søkerinfo, historikkInnslagListe } = this.props;
+        const { saker, history, storageKvittering, søkerinfo, historikkInnslagListe, manglendeVedlegg } = this.props;
         const nyesteSak: SakBase | undefined = this.shouldRenderStorageKvitteringAsSak()
             ? opprettFiktivSak(storageKvittering!)
             : saker.slice().shift();
@@ -152,6 +155,7 @@ export class DineForeldrepenger extends React.Component<Props> {
                                         (h) => h.saksnr === nyesteSak.saksnummer
                                     )}
                                     withHeader={true}
+                                    manglendeVedlegg={manglendeVedlegg}
                                 />
                                 {this.renderSaksoversiktList(nyesteSak)}
                             </>
@@ -174,7 +178,8 @@ const mapStateToProps = (state: AppState) => ({
     søkerinfo: getData(state.api.søkerinfo, {}),
     saker: getData(state.api.saker, []),
     storageKvittering: getData(state.api.storageKvittering, undefined),
-    historikkInnslagListe: getData(state.api.historikk, [])
+    historikkInnslagListe: getData(state.api.historikk, []),
+    manglendeVedlegg: getData(state.api.manglendeVedlegg, [])
 });
 
 export default connect(mapStateToProps)(DineForeldrepenger);

@@ -10,6 +10,8 @@ import ArbeidsgiverHendelse, { erAlleInntektsmeldingerMottatt } from './arbeidsg
 import { InntektsmeldingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import BehandleSøknadenHendelse, { behandleSøknadenHendelseErOk } from './behandle-søknaden/BehandleSøknadenHendelse';
 import moment from 'moment';
+import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
+import ManglendeVedleggHendelse from './manglende-vedlegg/ManglendeVedleggHendelse';
 
 interface Props {
     søknadsDato: string;
@@ -18,6 +20,7 @@ interface Props {
     inntektsmeldinger: InntektsmeldingInnslag[];
     brukerHarSendtSøknad: boolean;
     behandlingsdato: string;
+    manglendeVedlegg: ManglendeVedlegg[];
 }
 
 const getAktiveArbeidsforhold = (
@@ -42,6 +45,7 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
     inntektsmeldinger,
     brukerHarSendtSøknad,
     behandlingsdato,
+    manglendeVedlegg,
     intl
 }) => {
     const aktiveArbeidsforhold = getAktiveArbeidsforhold(arbeidsforhold, behandlingsdato);
@@ -63,6 +67,7 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.duHarSøkt' })}
                 content={formatDate(søknadsDato)}
             />
+            {manglendeVedlegg.length > 0 && <ManglendeVedleggHendelse manglendeVedlegg={manglendeVedlegg} />}
             <BehandleSøknadenHendelse behandlingsdato={behandlingsdato} arbeidsforhold={arbeidsforhold} />
             {aktiveArbeidsforhold.length > 0 && (
                 <ArbeidsgiverHendelse
