@@ -12,19 +12,22 @@ import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 
 import './ekspanderbarSaksoversikt.less';
+import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 
 interface Props {
     søkerinfo?: Søkerinfo;
     sak: SakBase;
     history: History;
     historikkInnslagListe: HistorikkInnslag[];
+    manglendeVedlegg: ManglendeVedlegg[];
 }
 
 const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = ({
     sak,
     søkerinfo,
     history,
-    historikkInnslagListe
+    historikkInnslagListe,
+    manglendeVedlegg
 }) => {
     const cls = BEMHelper('ekspanderbar-saksoversikt');
     return (
@@ -37,6 +40,7 @@ const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = ({
                     history={history}
                     søkerinfo={søkerinfo}
                     historikkInnslagListe={historikkInnslagListe}
+                    manglendeVedlegg={manglendeVedlegg}
                 />
             </EkspanderbartpanelBase>
         </div>

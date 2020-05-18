@@ -7,14 +7,24 @@ import SøkNåPanel from 'app/components/søk-nå-panel/SøkNåPanel';
 describe('Saksoversikt component', () => {
     it('SøkNåPanel skal ikke vises hvis saken er fra infotrygd', () => {
         const wrapper = shallow(
-            <Saksoversikt sak={SakerMock.infotrygd} history={jest.fn() as any} historikkInnslagListe={[]} />
+            <Saksoversikt
+                sak={SakerMock.infotrygd}
+                history={jest.fn() as any}
+                historikkInnslagListe={[]}
+                manglendeVedlegg={[]}
+            />
         );
         expect(wrapper.find(SøkNåPanel).length).toBe(0);
     });
 
     it('SøkNåPanel skal ikke vises hvis saken er fra fpsak og saken har behandlinger', () => {
         const wrapper = shallow(
-            <Saksoversikt sak={SakerMock.fpsakFP} history={jest.fn() as any} historikkInnslagListe={[]} />
+            <Saksoversikt
+                sak={SakerMock.fpsakFP}
+                history={jest.fn() as any}
+                historikkInnslagListe={[]}
+                manglendeVedlegg={[]}
+            />
         );
         expect(wrapper.find(SøkNåPanel).length).toBe(0);
     });
@@ -25,6 +35,7 @@ describe('Saksoversikt component', () => {
                 sak={{ ...SakerMock.fpsakFP, behandlinger: [] }}
                 history={jest.fn() as any}
                 historikkInnslagListe={[]}
+                manglendeVedlegg={[]}
             />
         );
         expect(wrapper.find(SøkNåPanel).length).toBe(1);

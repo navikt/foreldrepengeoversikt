@@ -16,6 +16,7 @@ describe('SaksinformasjonPanel', () => {
                 sak={{ ...SakerMock.infotrygd, opprettet: opprettetDate }}
                 history={jest.fn() as any}
                 historikkInnslagListe={[]}
+                manglendeVedlegg={[]}
             />
         );
         const uploadButton = wrapper.find({ className: 'saksinformasjon-panel__ettersendelse-btn' });
@@ -32,6 +33,7 @@ describe('SaksinformasjonPanel', () => {
                 sak={{ ...SakerMock.infotrygd, opprettet: opprettetDate }}
                 history={jest.fn() as any}
                 historikkInnslagListe={[]}
+                manglendeVedlegg={[]}
             />
         );
         const ettersendelseButton = wrapper.find({ className: 'saksinformasjon-panel__ettersendelse-btn' });
@@ -56,6 +58,7 @@ describe('SaksinformasjonPanel', () => {
                 }}
                 history={jest.fn() as any}
                 historikkInnslagListe={[]}
+                manglendeVedlegg={[]}
             />
         );
         const ettersendelseButton = wrapper.find({ className: 'saksinformasjon-panel__ettersendelse-btn' });

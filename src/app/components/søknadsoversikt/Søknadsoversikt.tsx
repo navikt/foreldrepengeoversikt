@@ -3,6 +3,7 @@ import SectionSeparator from '../section-separator/SectionSeparator';
 import SøknadsoversiktHendelseListe from './components/SøknadsoversiktHendelseListe';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { InntektsmeldingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 
 interface Props {
     søknadsDato: string;
@@ -10,6 +11,7 @@ interface Props {
     inntektsmeldinger: InntektsmeldingInnslag[];
     brukerHarSendtSøknad: boolean;
     behandlingsdato: string;
+    manglendeVedlegg: ManglendeVedlegg[];
 }
 
 const Søknadsoversikt: React.StatelessComponent<Props> = ({
@@ -17,7 +19,8 @@ const Søknadsoversikt: React.StatelessComponent<Props> = ({
     arbeidsforhold,
     brukerHarSendtSøknad,
     inntektsmeldinger,
-    behandlingsdato
+    behandlingsdato,
+    manglendeVedlegg
 }) => {
     return (
         <SectionSeparator title="Søknad">
@@ -27,6 +30,7 @@ const Søknadsoversikt: React.StatelessComponent<Props> = ({
                 inntektsmeldinger={inntektsmeldinger}
                 brukerHarSendtSøknad={brukerHarSendtSøknad}
                 behandlingsdato={behandlingsdato}
+                manglendeVedlegg={manglendeVedlegg}
             />
         </SectionSeparator>
     );

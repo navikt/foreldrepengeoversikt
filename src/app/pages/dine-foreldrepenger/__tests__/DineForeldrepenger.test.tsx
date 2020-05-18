@@ -10,11 +10,7 @@ import Saksoversikt from 'app/components/saksoversikt/saksoversikt-main/Saksover
 describe('Dine Foreldrepenger page', () => {
     it('Should render ingen saker component if saker is an empty list', () => {
         const wrapper = shallow(
-            <DineForeldrepenger
-                saker={[]}
-                history={historyMock}
-                historikkInnslagListe={[]}
-            />
+            <DineForeldrepenger saker={[]} history={historyMock} historikkInnslagListe={[]} manglendeVedlegg={[]} />
         );
         expect(wrapper.find(IngenSaker).length).toEqual(1);
     });
@@ -26,6 +22,7 @@ describe('Dine Foreldrepenger page', () => {
                 saker={mockSaker}
                 history={historyMock}
                 historikkInnslagListe={[]}
+                manglendeVedlegg={[]}
             />
         );
         expect(wrapper.find(Saksoversikt).length).toEqual(1);
@@ -38,6 +35,7 @@ describe('Dine Foreldrepenger page', () => {
                 saker={mockSaker}
                 history={historyMock}
                 historikkInnslagListe={[]}
+                manglendeVedlegg={[]}
             />
         );
         expect(wrapper.find(EkspanderbarSaksoversikt).length).toEqual(1);

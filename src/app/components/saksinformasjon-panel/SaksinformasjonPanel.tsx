@@ -35,15 +35,17 @@ import MidlertidigInfo from './MidlertidigInfo';
 import './saksinformasjonPanel.less';
 import Søknadsoversikt from '../søknadsoversikt/Søknadsoversikt';
 import { FagsakStatus } from 'app/api/types/sak/FagsakStatus';
+import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 
 interface Props {
     søkerinfo?: Søkerinfo;
     sak: SakBase;
     history: History;
     historikkInnslagListe: HistorikkInnslag[];
+    manglendeVedlegg: ManglendeVedlegg[];
 }
 
-const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak, history, historikkInnslagListe }) => {
+const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak, history, historikkInnslagListe, manglendeVedlegg }) => {
     const erSakForeldrepengesak = erForeldrepengesak(sak);
     const { perioder, status } = sak;
     const initiellForeldrepengesøknadHendelse = historikkInnslagListe
@@ -150,6 +152,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                     arbeidsforhold={søkerinfo?.arbeidsforhold}
                     inntektsmeldinger={inntektsmeldinger}
                     brukerHarSendtSøknad={initiellForeldrepengesøknadHendelse !== undefined}
+                    manglendeVedlegg={manglendeVedlegg}
                 />
             }
 
