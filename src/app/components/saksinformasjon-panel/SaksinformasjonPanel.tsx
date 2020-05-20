@@ -62,6 +62,9 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
         : tidligesteBehandlingsdato;
     const inntektsmeldinger = historikkInnslagListe.filter(h => h.type === HistorikkInnslagType.inntekt) as InntektsmeldingInnslag[];
     const sakErFerdigBehandlet = status !== undefined && (status === FagsakStatus.LOPENDE || status === FagsakStatus.AVSLUTTET);
+    const erEndringssøknad = skalKunneSøkeOmEndring(sak);
+
+
 
     const cls = BEMHelper('saksinformasjon-panel');
     return (
@@ -145,6 +148,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 && !sakErFerdigBehandlet
                 && initiellForeldrepengesøknadHendelse !== undefined
                 && !erInfotrygdSak(sak)
+                && !erEndringssøknad
                 && isFeatureEnabled(Feature.saksoversikt) &&
                 <Søknadsoversikt
                     søknadsDato={sak.opprettet}
