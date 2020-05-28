@@ -112,18 +112,12 @@ export const hentHendelserFraHistorikkinnslagListe = (historikkInnslagListe?: Hi
         return [];
     }
 
-    const historikkInnslag = historikkInnslagListe
-        .filter(
-            (h) =>
-                h.type === HistorikkInnslagType.inntekt ||
-                h.type === HistorikkInnslagType.søknad ||
-                h.type === HistorikkInnslagType.minidialog
-        )
-        .filter(
-            (h) =>
-                (h as Innsendingsinnslag).hendelse !== HendelseType.ENDRING_FORELDREPENGER &&
-                (h as Innsendingsinnslag).hendelse !== HendelseType.INITIELL_ENGANGSSTØNAD
-        );
+    const historikkInnslag = historikkInnslagListe.filter(
+        (h) =>
+            h.type === HistorikkInnslagType.inntekt ||
+            h.type === HistorikkInnslagType.søknad ||
+            h.type === HistorikkInnslagType.minidialog
+    );
 
     return historikkInnslag.map(historikkInnslagTilHendelse);
 };
