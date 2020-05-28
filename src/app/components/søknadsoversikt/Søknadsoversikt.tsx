@@ -12,6 +12,7 @@ interface Props {
     brukerHarSendtSøknad: boolean;
     behandlingsdato: string;
     manglendeVedlegg: ManglendeVedlegg[];
+    navigateToEttersendelse: () => void;
 }
 
 const Søknadsoversikt: React.StatelessComponent<Props> = ({
@@ -20,7 +21,8 @@ const Søknadsoversikt: React.StatelessComponent<Props> = ({
     brukerHarSendtSøknad,
     inntektsmeldinger,
     behandlingsdato,
-    manglendeVedlegg
+    manglendeVedlegg,
+    navigateToEttersendelse
 }) => {
     return (
         <SectionSeparator title="Søknad">
@@ -31,6 +33,7 @@ const Søknadsoversikt: React.StatelessComponent<Props> = ({
                 brukerHarSendtSøknad={brukerHarSendtSøknad}
                 behandlingsdato={behandlingsdato}
                 manglendeVedlegg={manglendeVedlegg}
+                navigateToEttersendelse={navigateToEttersendelse}
             />
         </SectionSeparator>
     );

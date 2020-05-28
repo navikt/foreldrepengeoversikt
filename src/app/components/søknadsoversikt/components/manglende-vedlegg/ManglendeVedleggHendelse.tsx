@@ -1,5 +1,5 @@
 import React from 'react';
-import { injectIntl, InjectedIntl } from 'react-intl';
+import { injectIntl, InjectedIntl, FormattedMessage } from 'react-intl';
 import Icon from 'nav-frontend-ikoner-assets';
 import SøknadsoversiktHendelseListeItem from '../SøknadsoversiktHendelseListeItem';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
@@ -10,34 +10,51 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import './manglendeVeddleggHendelse.less';
 import BEMHelper from 'common/util/bem';
+import { Knapp } from 'nav-frontend-knapper';
 
 interface Props {
     manglendeVedlegg: ManglendeVedlegg[];
     intl: InjectedIntl;
+    navigateToEttersendelse: () => void;
 }
 
 const bem = BEMHelper('manglendeVedleggHendelse');
 
-const renderContent = (manglendeVedlegg: ManglendeVedlegg[], intl: InjectedIntl) => {
-    return manglendeVedlegg.map((mv) => (
+const renderContent = (
+    manglendeVedlegg: ManglendeVedlegg[],
+    intl: InjectedIntl,
+    navigateToEttersendelse: () => void
+) => {
+    return (
         <>
-            <div className={bem.element('manglendeVedleggHendelseStatus')} key={guid()}>
-                <Icon kind="advarsel-sirkel-fyll" width="24" height="24" />
-                <div>
-                    <Normaltekst>{getMessage(intl, `ettersendelse.${mv}`)}</Normaltekst>
-                </div>
-            </div>
+            {manglendeVedlegg.map((mv) => {
+                return (
+                    <div className={bem.element('manglendeVedleggHendelseStatus')} key={guid()}>
+                        <Icon kind="advarsel-sirkel-fyll" width="24" height="24" />
+                        <div>
+                            <Normaltekst>{getMessage(intl, `ettersendelse.${mv}`)}</Normaltekst>
+                        </div>
+                    </div>
+                );
+            })}
+            <Knapp onClick={navigateToEttersendelse}>
+                <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
+            </Knapp>
         </>
-    ));
+    );
 };
 
-const ManglendeVedleggHendelse: React.FunctionComponent<Props> = ({ manglendeVedlegg, intl }) => {
+const ManglendeVedleggHendelse: React.FunctionComponent<Props> = ({
+    manglendeVedlegg,
+    intl,
+    navigateToEttersendelse
+}) => {
     return (
         <SøknadsoversiktHendelseListeItem
             ikon={<Icon kind="advarsel-sirkel-fyll" width="24" height="24" />}
             color={UttaksplanColor.transparent}
             tittel={getMessage(intl, 'manglendeVedleggHendelse.tittel')}
-            content={renderContent(manglendeVedlegg, intl)}
+            content={renderContent(manglendeVedlegg, intl, navigateToEttersendelse)}
         />
     );
 };

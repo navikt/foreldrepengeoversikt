@@ -63,6 +63,10 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
     const inntektsmeldinger = historikkInnslagListe.filter(h => h.type === HistorikkInnslagType.inntekt) as InntektsmeldingInnslag[];
     const sakErFerdigBehandlet = status !== undefined && (status === FagsakStatus.LOPENDE || status === FagsakStatus.AVSLUTTET);
     const erEndringssøknad = skalKunneSøkeOmEndring(sak);
+    const navigateToEttersendelse = () => history.push({
+        pathname: Routes.ETTERSENDELSE,
+        search: new URLSearchParams({ saksnummer: sak.saksnummer! }).toString()
+    });
 
 
 
@@ -100,12 +104,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 <div className={cls.element('btn')}>
                     <Knapp
                         className={cls.element('ettersendelse-btn')}
-                        onClick={() =>
-                            history.push({
-                                pathname: Routes.ETTERSENDELSE,
-                                search: new URLSearchParams({ saksnummer: sak.saksnummer! }).toString()
-                            })
-                        }
+                        onClick={navigateToEttersendelse}
                         disabled={!isSakEligableForEttersendelse(sak)}>
                         <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
                     </Knapp>
@@ -157,6 +156,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                     inntektsmeldinger={inntektsmeldinger}
                     brukerHarSendtSøknad={initiellForeldrepengesøknadHendelse !== undefined}
                     manglendeVedlegg={manglendeVedlegg}
+                    navigateToEttersendelse={navigateToEttersendelse}
                 />
             }
 
