@@ -14,6 +14,7 @@ import normalizeName from 'app/utils/normalizeName';
 import { formaterDatoForHendelse } from './util';
 
 import './historikk.less';
+import { HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
 
 export interface Hendelse {
     dato: string;
@@ -42,6 +43,18 @@ const getIkonClass = (hendelse: Hendelse) => {
 };
 
 const getInnslagTittel = (hendelse: Hendelse): React.ReactNode => {
+    if (
+        (hendelse.beskrivelse === HendelseType.INITIELL_FORELDREPENGER ||
+            hendelse.beskrivelse === HendelseType.INITIELL_SVANGERSKAPSPENGER) &&
+        hendelse.skjemanumre
+    ) {
+        return hendelse.skjemanumre.length > 0 ? (
+            <FormattedMessage id={`historikk.${hendelse.beskrivelse}.medManglendeDokumentasjon`} />
+        ) : (
+            <FormattedMessage id={`historikk.${hendelse.beskrivelse}`} />
+        );
+    }
+
     return <FormattedMessage id={`historikk.${hendelse.beskrivelse}`} />;
 };
 
