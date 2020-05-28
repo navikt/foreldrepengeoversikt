@@ -21,6 +21,7 @@ interface Props {
     brukerHarSendtSøknad: boolean;
     behandlingsdato: string;
     manglendeVedlegg: ManglendeVedlegg[];
+    navigateToEttersendelse: () => void;
 }
 
 const getAktiveArbeidsforhold = (
@@ -46,13 +47,13 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
     brukerHarSendtSøknad,
     behandlingsdato,
     manglendeVedlegg,
-    intl
+    intl,
+    navigateToEttersendelse
 }) => {
     const aktiveArbeidsforhold = getAktiveArbeidsforhold(arbeidsforhold, behandlingsdato);
     const søknadenBehandles =
         behandleSøknadenHendelseErOk(behandlingsdato) &&
         erAlleInntektsmeldingerMottatt(aktiveArbeidsforhold, inntektsmeldinger);
-
     return (
         <div>
             <SøknadsoversiktHendelseListeItem
@@ -67,7 +68,14 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.duHarSøkt' })}
                 content={formatDate(søknadsDato)}
             />
-            {manglendeVedlegg.length > 0 && <ManglendeVedleggHendelse manglendeVedlegg={manglendeVedlegg} />}
+            {manglendeVedlegg.length > 0 && (
+                <>
+                    <ManglendeVedleggHendelse
+                        manglendeVedlegg={manglendeVedlegg}
+                        navigateToEttersendelse={navigateToEttersendelse}
+                    />
+                </>
+            )}
             <BehandleSøknadenHendelse behandlingsdato={behandlingsdato} arbeidsforhold={arbeidsforhold} />
             {aktiveArbeidsforhold.length > 0 && (
                 <ArbeidsgiverHendelse
