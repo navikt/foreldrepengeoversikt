@@ -5,27 +5,21 @@ import { Hendelse } from '../HistorikkElement';
 
 describe('historikk', () => {
     it('Fjerner behandlinger med samme opprettet tidsstempel fra historikk', () => {
-        const behanlding1 = { ...foreldrepengesoknadBehandlingMock };
-        const behanlding2 = { ...foreldrepengesoknadBehandlingMock };
-        expect([behanlding1, behanlding2].filter(fjernBehandlingerMedLikOpprettetDato).length).toEqual(1);
-    });
-
-    it('Første behandling skal føre til en brukerinitiert søknad sendt hendelse', () => {
-        const behanlding1 = { ...foreldrepengesoknadBehandlingMock, årsak: null };
-        expect(utledHendelser([behanlding1])[0].type).toEqual('søknad-sendt');
+        const behandling1 = { ...foreldrepengesoknadBehandlingMock };
+        const behandling2 = { ...foreldrepengesoknadBehandlingMock };
+        expect([behandling1, behandling2].filter(fjernBehandlingerMedLikOpprettetDato).length).toEqual(1);
     });
 
     it('Første behandling skal føre til en innteksmelding mottatt hendelse hvis behandlingen har referanse til inntektsmelding', () => {
-        const behanlding1 = { ...foreldrepengesoknadBehandlingMock, årsak: null, inntektsmeldinger: ['1234'] };
-        expect(utledHendelser([behanlding1]).length).toEqual(2);
-        expect(utledHendelser([behanlding1])[1].type).toEqual('inntektsmelding-motatt');
-        expect(utledHendelser([behanlding1])[0].type).toEqual('søknad-sendt');
+        const behandling1 = { ...foreldrepengesoknadBehandlingMock, årsak: null, inntektsmeldinger: ['1234'] };
+        expect(utledHendelser([behandling1]).length).toEqual(1);
+        expect(utledHendelser([behandling1])[0].type).toEqual('inntektsmelding-motatt');
     });
 
-    it('En avsluttet behandling skal ha behandlnigens resultat som egen hendelse', () => {
-        const behanlding1 = { ...foreldrepengesoknadBehandlingMock, status: BehandlingStatus.AVSLUTTET, årsak: null };
-        const hendelser: Hendelse[] = utledHendelser([behanlding1]);
-        expect(hendelser.length).toEqual(2);
+    it('En avsluttet behandling skal ha behandlingens resultat som egen hendelse', () => {
+        const behandling1 = { ...foreldrepengesoknadBehandlingMock, status: BehandlingStatus.AVSLUTTET, årsak: null };
+        const hendelser: Hendelse[] = utledHendelser([behandling1]);
+        expect(hendelser.length).toEqual(1);
         expect(
             hendelser.some((h: Hendelse) =>
                 Object.values(BehandlingResultatType)
@@ -36,12 +30,12 @@ describe('historikk', () => {
     });
 
     it('Hendelser skal være sortert i synkende rekkefølge etter dato', () => {
-        const behanlding1 = {
+        const behandling1 = {
             ...foreldrepengesoknadBehandlingMock,
             opprettetTidspunkt: '2018-01-21T12:10:00.33',
             endretTidspunkt: '2018-01-21T12:10:00.33'
         };
-        const behanlding2 = {
+        const behandling2 = {
             ...foreldrepengesoknadBehandlingMock,
             opprettetTidspunkt: '2019-01-21T12:10:00.33',
             endretTidspunkt: '2019-01-21T12:10:00.33'
@@ -52,21 +46,10 @@ describe('historikk', () => {
             endretTidspunkt: '2017-01-21T12:10:00.33'
         };
         expect(
-            utledHendelser([behanlding1, behanlding2, behanlding3]).some(
+            utledHendelser([behandling1, behandling2, behanlding3]).some(
                 (h: Hendelse, index: number, hendelser: Hendelse[]) =>
                     hendelser[index + 1] && h.dato < hendelser[index + 1].dato
             )
         ).toBeFalsy();
-    });
-
-    it('skal utlede initiell innsending hvis historikkinnslag ikke ekisterer', () => {
-        const behanlding = {
-            ...foreldrepengesoknadBehandlingMock,
-            opprettetTidspunkt: '2018-01-21T12:10:00.33',
-            endretTidspunkt: '2018-01-21T12:10:00.33'
-        };
-        expect(
-            utledHendelser([behanlding], undefined).find((hendelse) => hendelse.type === 'søknad-sendt')
-        ).toBeTruthy();
     });
 });
