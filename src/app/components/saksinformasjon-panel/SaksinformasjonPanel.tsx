@@ -23,7 +23,7 @@ import { utledHendelser } from '../historikk/util';
 import SakBase from 'app/api/types/sak/Sak';
 import BEMHelper from 'common/util/bem';
 import { lenker } from 'app/utils/lenker';
-import { Innsendingsinnslag, HendelseType, HistorikkInnslagType, HistorikkInnslag, InntektsmeldingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
+import { Innsendingsinnslag, HendelseType, HistorikkInnslagType, HistorikkInnslag, InntektsmeldingInnslag, isInnsendingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { redirect } from 'app/utils/redirect';
 // import Behandlingsfrist from '../behandlingsfrist/Behandlingsfrist';
 // import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
@@ -62,7 +62,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
         : tidligesteBehandlingsdato;
     const inntektsmeldinger = historikkInnslagListe.filter(h => h.type === HistorikkInnslagType.inntekt) as InntektsmeldingInnslag[];
     const sakErFerdigBehandlet = status !== undefined && (status === FagsakStatus.LOPENDE || status === FagsakStatus.AVSLUTTET);
-    const erEndringssøknad = skalKunneSøkeOmEndring(sak);
+    const erEndringssøknad = historikkInnslagListe.find((innslag) => isInnsendingInnslag(innslag) && innslag.hendelse === HendelseType.ENDRING_FORELDREPENGER) !== undefined;
     const navigateToEttersendelse = () => history.push({
         pathname: Routes.ETTERSENDELSE,
         search: new URLSearchParams({ saksnummer: sak.saksnummer! }).toString()
