@@ -13,7 +13,6 @@ import { Knapp } from 'nav-frontend-knapper';
 import { isSakEligableForEttersendelse, isSakTooOldForEttersendelse } from '../saksoversikt/utils';
 import { FormattedMessage } from 'react-intl';
 import { guid } from 'nav-frontend-js-utils';
-import { isFeatureEnabled, Feature } from 'app/Feature';
 import SectionSeparator from '../section-separator/SectionSeparator';
 import { Routes } from 'app/utils/routes';
 import PeriodeOversikt from '../periode-oversikt/PeriodeOversikt';
@@ -25,8 +24,6 @@ import BEMHelper from 'common/util/bem';
 import { lenker } from 'app/utils/lenker';
 import { Innsendingsinnslag, HendelseType, HistorikkInnslagType, HistorikkInnslag, InntektsmeldingInnslag, isInnsendingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { redirect } from 'app/utils/redirect';
-// import Behandlingsfrist from '../behandlingsfrist/Behandlingsfrist';
-// import { harAktivtArbeidsforhold } from 'app/utils/søkerinfoUtils';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import UtsettelsePanel from '../utsettelse-panel/UtsettelsePanel';
 import moment from 'moment';
@@ -73,17 +70,6 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
     const cls = BEMHelper('saksinformasjon-panel');
     return (
         <div>
-            {/* {søkerinfo &&
-                behandlingsdato &&
-                !harEnAvsluttetBehandling(sak) &&
-                !erInfotrygdSak(sak) &&
-                erForeldrepengesak(sak) && (
-                    <Behandlingsfrist
-                        harLøpendeArbeidsforhold={harAktivtArbeidsforhold(søkerinfo.arbeidsforhold)}
-                        behandlingsdato={moment(behandlingsdato).format('YYYY-MM-DD')}
-                    />
-                )} */}
-
             {tidligesteBehandlingsdato === undefined &&
                 initiellForeldrepengesøknadHendelse !== undefined &&
                 erInfotrygdSak(sak) &&
@@ -147,8 +133,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 && !sakErFerdigBehandlet
                 && initiellForeldrepengesøknadHendelse !== undefined
                 && !erInfotrygdSak(sak)
-                && !erEndringssøknad
-                && isFeatureEnabled(Feature.saksoversikt) &&
+                && !erEndringssøknad &&
                 <Søknadsoversikt
                     søknadsDato={sak.opprettet}
                     behandlingsdato={moment(behandlingsdato).format('YYYY-MM-DD')}
@@ -160,7 +145,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({ søkerinfo, sak
                 />
             }
 
-            {isFeatureEnabled(Feature.dinPlan) &&
+            {
                 erSakForeldrepengesak &&
                 sak.saksnummer &&
                 perioder &&

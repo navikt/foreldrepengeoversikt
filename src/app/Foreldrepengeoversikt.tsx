@@ -15,7 +15,6 @@ import FetchState, { FetchStatus, PostState, GetFailure } from './redux/types/Fe
 import { extractUUID, extractErrorMessage } from 'common/util/errorUtil';
 import { getErrorCode } from './redux/util/fetchFromState';
 import { AppState } from './redux/store';
-import { Feature, isFeatureEnabled } from './Feature';
 import DinPlan from './pages/din-plan/DinPlan';
 import MinidialogPage from './pages/minidialog/MinidialogPage';
 import EttersendingDto from './api/types/ettersending/EttersendingDto';
@@ -43,10 +42,7 @@ class Foreldrepengeoversikt extends React.Component<Props> {
             this.props.requestPersoninfo();
             this.props.requestSaker();
             this.props.requestStorageKvittering();
-
-            if (isFeatureEnabled(Feature.historikk)) {
-                this.props.requestHistorikk();
-            }
+            this.props.requestHistorikk();
         }
     }
 
@@ -76,16 +72,8 @@ class Foreldrepengeoversikt extends React.Component<Props> {
                 <Switch>
                     <Route path={Routes.ETTERSENDELSE} render={(props) => <Ettersendelse {...props} />} />
                     <Route path={Routes.KVITTERING} render={(props) => <KvitteringPage {...props} />} />
-                    {isFeatureEnabled(Feature.dinPlan) && (
-                        <Route path={Routes.DIN_PLAN} render={(props) => <DinPlan {...props} />} />
-                    )}
-                    {isFeatureEnabled(Feature.miniDialog) && (
-                        <Route
-                            path={Routes.MINIDIALOG}
-                            exact={true}
-                            render={(props) => <MinidialogPage {...props} />}
-                        />
-                    )}
+                    <Route path={Routes.DIN_PLAN} render={(props) => <DinPlan {...props} />} />
+                    <Route path={Routes.MINIDIALOG} exact={true} render={(props) => <MinidialogPage {...props} />} />
                     <Route
                         path={Routes.DINE_FORELDREPENGER}
                         exact={true}

@@ -14,7 +14,6 @@ import { sakByDescendingOrder, erForeldrepengesak } from 'app/utils/sakerUtils';
 import { Innsendingsinnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { uttaksperiodeDtoToPeriode } from 'app/utils/uttaksplanDtoToPeriodeMapper';
 import { fyllInnHull } from 'app/utils/periodeUtils';
-import { isFeatureEnabled, Feature } from 'app/Feature';
 import { SøkerinfoDTO } from 'app/api/types/personinfo/SøkerinfoDto';
 import { getSøkerinfoFromDTO } from 'app/utils/søkerinfoDtoMapper';
 import { getTilgjengeligeStønadskontoer } from './stønadskontoSaga';
@@ -37,18 +36,11 @@ function* getSakerSaga(_: GetSakerRequest) {
         let saker: SakBase[] = response.data;
         if (saker) {
             saker.sort(sakByDescendingOrder);
-            if (isFeatureEnabled(Feature.dinPlan)) {
-                saker = yield all(saker.map(uttaksplanTilSakMapper));
-                if (isFeatureEnabled(Feature.kontooversikt)) {
-                    const foreldrepengesaker = saker.filter(erForeldrepengesak);
+            saker = yield all(saker.map(uttaksplanTilSakMapper));
+            const foreldrepengesaker = saker.filter(erForeldrepengesak);
 
-                    for (const foreldrepengesak of foreldrepengesaker) {
-                        foreldrepengesak.tilgjengeligeKontoer = yield call(
-                            getTilgjengeligeStønadskontoer,
-                            foreldrepengesak
-                        );
-                    }
-                }
+            for (const foreldrepengesak of foreldrepengesaker) {
+                foreldrepengesak.tilgjengeligeKontoer = yield call(getTilgjengeligeStønadskontoer, foreldrepengesak);
             }
         }
         yield put({ type: ApiActionTypes.GET_SAKER_SUCCESS, payload: { saker } });
