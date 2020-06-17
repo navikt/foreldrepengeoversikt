@@ -1,0 +1,8 @@
+{
+    "ingresses": ["https://foreldrepenger.nav.no"],
+    "env": {
+        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.nav.no/rest",
+        "LOGINSERVICE_URL": "https://loginservice.nav.no/login",
+        "FP_UTTAK_SERVICE_URL": "https://fp-uttak-service.nav.no"
+    }
+}
