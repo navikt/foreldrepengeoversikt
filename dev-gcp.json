@@ -1,5 +1,5 @@
 {
-    "ingresses": ["https://foreldrepenger.dev-nav.no"],
+    "ingresses": ["https://foreldrepenger.dev-nav.no","https://foreldrepenger.dev-gcp.nais.io"],
     "env": {
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.dev-nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice.dev-nav.no/login",
