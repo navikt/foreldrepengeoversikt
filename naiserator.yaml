@@ -10,10 +10,12 @@ metadata:
   labels:
     team: teamforeldrepenger
 spec:
+{{#if namespace}}
   accessPolicy:
     outbound:
       external:
         - host: {{appres}}
+  {{/if}}
   image: {{image}}
   port: 8080
   replicas:
