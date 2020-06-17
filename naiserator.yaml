@@ -15,6 +15,7 @@ spec:
     outbound:
       external:
         - host: {{appres}}
+        - host: {{uttak}}
   {{/if}}
   image: {{image}}
   port: 8080

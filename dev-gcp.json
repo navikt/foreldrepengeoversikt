@@ -1,5 +1,6 @@
 {
     "appres": "appres-q1.nav.no",
+    "uttak": "fp-uttak-service.dev-nav.no",
     "namespace" : "teamforeldrepenger",
     "ingresses": ["https://foreldrepenger.dev-nav.no"],
     "env": {
