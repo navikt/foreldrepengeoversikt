@@ -1,4 +1,5 @@
 {
+    "uttak": "fp-uttak-service.dev-nav.no",
     "namespace": "teamforeldrepenger",
     "ingresses": [
         "https://foreldrepenger.nav.no"
