@@ -5,7 +5,7 @@ const { JSDOM } = jsdom;
 
 const requestDecorator = (callback) => {
     const baseUrl = process.env.APPRES_CMS_URL;
-    return request(`${baseUrl}/?simple=true`, callback);
+    return request(`${baseUrl}/`, callback);
 };
 
 const getDecorator = () =>
