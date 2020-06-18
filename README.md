@@ -5,6 +5,7 @@ foreldrepengesøknad.
 
 # Komme i gang
 
+
 For å kjøre opp app-en i dev:
 
 1.  `npm install`.
