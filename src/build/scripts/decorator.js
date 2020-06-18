@@ -5,7 +5,7 @@ const { JSDOM } = jsdom;
 
 const requestDecorator = (callback) => {
     const baseUrl =
-        process.env.NAIS_CLUSTER_NAME === 'dev-sbs'
+        process.env.NAIS_CLUSTER_NAME === ('dev-sbs' || 'dev-gcp')
             ? 'https://www-q1.nav.no/dekoratoren'
             : 'https://www.nav.no/dekoratoren';
     return request(`${baseUrl}/?simple=true`, callback);
