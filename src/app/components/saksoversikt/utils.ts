@@ -2,7 +2,7 @@ import moment from 'moment';
 import { FagsakStatus } from '../../api/types/sak/FagsakStatus';
 import SakBase from 'app/api/types/sak/Sak';
 import { erInfotrygdSak, getNyesteBehandling } from 'app/utils/sakerUtils';
-import { BehandligType, BehandlingResultatType } from 'app/api/types/sak/Behandling';
+import { BehandlingType, BehandlingResultatType } from 'app/api/types/sak/Behandling';
 
 export const isSakTooOldForEttersendelse = (sak: SakBase): boolean => {
     return !moment(sak.opprettet).isSameOrAfter(moment().subtract(150, 'days'));
@@ -57,12 +57,12 @@ export const getSaksoversiktTitle = (sak: SakBase): string => {
     const nyesteBehandlig = getNyesteBehandling(sak.behandlinger);
     const type = nyesteBehandlig && nyesteBehandlig.type;
     switch (type) {
-        case BehandligType.ENDRINGSSØKNAD:
-        case BehandligType.FORELDREPENGESØKNAD:
+        case BehandlingType.ENDRINGSSØKNAD:
+        case BehandlingType.FORELDREPENGESØKNAD:
             return 'saksoversikt.heading.top.foreldrepenger';
-        case BehandligType.ENGANGSSØNAD:
+        case BehandlingType.ENGANGSSØNAD:
             return 'saksoversikt.heading.top.engangsstønad';
-        case BehandligType.SVANGERSKAPSPENGESØKNAD:
+        case BehandlingType.SVANGERSKAPSPENGESØKNAD:
             return 'saksoversikt.heading.top.svangerskapspengesoknad';
         default:
             return 'saksoversikt.heading.top.ukjent';

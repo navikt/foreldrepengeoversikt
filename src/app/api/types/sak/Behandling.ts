@@ -5,7 +5,7 @@ export default interface Behandling {
     behandlendeEnhetNavn: string;
     status: BehandlingStatus;
     tema: BehandlingTema;
-    type: BehandligType;
+    type: BehandlingType;
     årsak: BehandlingÅrsak | null;
     behandlingResultat: BehandlingResultatType;
     inntektsmeldinger: string[];
@@ -74,7 +74,7 @@ export enum BehandlingÅrsak {
     YTELSE = 'RE-YTELSE'
 }
 
-export enum BehandligType {
+export enum BehandlingType {
     FORELDREPENGESØKNAD = 'FP',
     ENGANGSSØNAD = 'ES',
     ENDRINGSSØKNAD = 'ENDRING',

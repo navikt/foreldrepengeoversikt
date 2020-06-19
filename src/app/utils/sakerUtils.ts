@@ -1,6 +1,6 @@
 import SakBase, { SakType } from '../api/types/sak/Sak';
 import { FagsakStatus } from '../api/types/sak/FagsakStatus';
-import Behandling, { BehandlingStatus, BehandlingÅrsak, BehandligType } from '../api/types/sak/Behandling';
+import Behandling, { BehandlingStatus, BehandlingÅrsak, BehandlingType } from '../api/types/sak/Behandling';
 import { StorageKvittering } from '../api/types/StorageKvittering';
 
 export const sakByDescendingOrder = (a: SakBase, b: SakBase) => b.opprettet.localeCompare(a.opprettet);
@@ -51,17 +51,17 @@ export const harSendtInnEndringssøknad = (sak: SakBase) => {
 
 export const erForeldrepengesak = (sak: SakBase): boolean => {
     const behandling = getNyesteBehandling(sak.behandlinger);
-    return behandling === undefined ? true : behandling.type === BehandligType.FORELDREPENGESØKNAD;
+    return behandling === undefined ? true : behandling.type === BehandlingType.FORELDREPENGESØKNAD;
 };
 
 export const erEngangsstønad = (sak: SakBase): boolean => {
     const behandling = getNyesteBehandling(sak.behandlinger);
-    return behandling === undefined ? false : behandling.type === BehandligType.ENGANGSSØNAD;
+    return behandling === undefined ? false : behandling.type === BehandlingType.ENGANGSSØNAD;
 };
 
 export const erSvangerskapepengesak = (sak: SakBase): boolean => {
     const behandlig = getNyesteBehandling(sak.behandlinger);
-    return behandlig === undefined ? false : behandlig.type === BehandligType.SVANGERSKAPSPENGESØKNAD;
+    return behandlig === undefined ? false : behandlig.type === BehandlingType.SVANGERSKAPSPENGESØKNAD;
 };
 
 export const harEnAvsluttetBehandling = (sak: SakBase): boolean => {

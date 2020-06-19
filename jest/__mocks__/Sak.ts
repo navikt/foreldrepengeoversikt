@@ -1,16 +1,21 @@
 import { FagsakStatus } from '../../src/app/api/types/sak/FagsakStatus';
-import Behandling, { BehandlingResultatType, BehandlingStatus, BehandlingTema, BehandlingÅrsak, BehandligType } from '../../src/app/api/types/sak/Behandling';
+import Behandling, {
+    BehandlingResultatType,
+    BehandlingStatus,
+    BehandlingTema,
+    BehandlingÅrsak,
+    BehandlingType
+} from '../../src/app/api/types/sak/Behandling';
 import SakBase, { SakType } from 'app/api/types/sak/Sak';
-
 
 export const engangssønadBehandligMock: Behandling = {
     opprettetTidspunkt: '2019-01-01',
     endretTidspunkt: '2019-01-02',
-    behandlendeEnhet: "4833",
-    behandlendeEnhetNavn: "NAV Familie- og pensjonsytelser Oslo 1",
+    behandlendeEnhet: '4833',
+    behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
     status: BehandlingStatus.OPPRETTET,
     tema: BehandlingTema.ENGANGSTØNAD,
-    type: BehandligType.ENGANGSSØNAD,
+    type: BehandlingType.ENGANGSSØNAD,
     årsak: BehandlingÅrsak.YTELSE,
     behandlingResultat: BehandlingResultatType.INNVILGET,
     inntektsmeldinger: []
@@ -19,11 +24,11 @@ export const engangssønadBehandligMock: Behandling = {
 export const foreldrepengesoknadBehandlingMock: Behandling = {
     opprettetTidspunkt: '2019-01-01',
     endretTidspunkt: '2019-01-02',
-    behandlendeEnhet: "4833",
-    behandlendeEnhetNavn: "NAV Familie- og pensjonsytelser Oslo 1",
+    behandlendeEnhet: '4833',
+    behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
     status: BehandlingStatus.OPPRETTET,
     tema: BehandlingTema.FORELDREPENGER,
-    type: BehandligType.FORELDREPENGESØKNAD,
+    type: BehandlingType.FORELDREPENGESØKNAD,
     årsak: BehandlingÅrsak.YTELSE,
     behandlingResultat: BehandlingResultatType.INNVILGET,
     inntektsmeldinger: []
@@ -32,28 +37,28 @@ export const foreldrepengesoknadBehandlingMock: Behandling = {
 export const svpBehandligMock: Behandling = {
     opprettetTidspunkt: '2019-01-01',
     endretTidspunkt: '2019-01-02',
-    behandlendeEnhet: "4833",
-    behandlendeEnhetNavn: "NAV Familie- og pensjonsytelser Oslo 1",
+    behandlendeEnhet: '4833',
+    behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
     status: BehandlingStatus.OPPRETTET,
     tema: BehandlingTema.UDEFINERT,
-    type: BehandligType.SVANGERSKAPSPENGESØKNAD,
+    type: BehandlingType.SVANGERSKAPSPENGESØKNAD,
     årsak: BehandlingÅrsak.YTELSE,
     behandlingResultat: BehandlingResultatType.INNVILGET,
     inntektsmeldinger: []
-}
+};
 
 export const endringssøknadBehandligMock: Behandling = {
     opprettetTidspunkt: '2019-01-01',
     endretTidspunkt: '2019-01-02',
-    behandlendeEnhet: "4833",
-    behandlendeEnhetNavn: "NAV Familie- og pensjonsytelser Oslo 1",
+    behandlendeEnhet: '4833',
+    behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
     status: BehandlingStatus.OPPRETTET,
     tema: BehandlingTema.FORELDREPENGER,
-    type: BehandligType.FORELDREPENGESØKNAD,
+    type: BehandlingType.FORELDREPENGESØKNAD,
     årsak: BehandlingÅrsak.ENDRING_FRA_BRUKER,
     behandlingResultat: BehandlingResultatType.INNVILGET,
     inntektsmeldinger: []
-}
+};
 
 const infotrygd: SakBase = {
     type: SakType.SAK,
@@ -61,7 +66,7 @@ const infotrygd: SakBase = {
     opprettet: '2018-09-01'
 };
 
-const fpsakSVP:  SakBase = {
+const fpsakSVP: SakBase = {
     type: SakType.FPSAK,
     saksnummer: '234',
     opprettet: '2018-10-01',
@@ -69,7 +74,7 @@ const fpsakSVP:  SakBase = {
     behandlinger: [svpBehandligMock]
 };
 
-const fpsakFP:  SakBase = {
+const fpsakFP: SakBase = {
     type: SakType.FPSAK,
     saksnummer: '234',
     opprettet: '2018-10-01',
@@ -91,7 +96,7 @@ const fpsakEndring: SakBase = {
     opprettet: '2018-10-01',
     status: FagsakStatus.OPPRETTET,
     behandlinger: [endringssøknadBehandligMock]
-}
+};
 
 const SakerMock = { fpsakSVP, fpsakES, fpsakFP, fpsakEndring, infotrygd };
 export default SakerMock;
