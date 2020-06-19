@@ -23,7 +23,7 @@
         "@babel/plugin-transform-modules-commonjs": "^7.8.3",
         "@babel/preset-env": "^7.8.4",
         "@babel/preset-react": "^7.8.3",
-        "@types/bytes": "3.0.0",
+        "@types/bytes": "3.1.0",
         "@types/classnames": "2.2.6",
         "@types/detect-browser": "3.0.0",
         "@types/enzyme": "3.10.3",
