@@ -1,21 +1,16 @@
 import * as React from 'react';
 import KvitteringPage from '../Kvittering';
-// @ts-ignore
-import BackButton from 'common/components/back-button/BackButton';
 import { LeveransesStatus } from 'app/api/types/ettersending/Kvittering';
-// @ts-ignore
-import { loadTranslationObject, shallowWithIntl } from 'enzyme-react-intl';
-import translations from '../../../intl/nb_NO.json';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { Routes } from 'app/utils/routes';
-
-loadTranslationObject(translations);
+import { shallow } from 'enzyme';
+import { Knapp } from 'nav-frontend-knapper';
 
 describe('Kvittering', () => {
     let historyMock: any;
     let mockAttachment: Attachment;
-    
+
     beforeEach(() => {
         mockAttachment = {
             id: 'v123',
@@ -46,10 +41,8 @@ describe('Kvittering', () => {
 
     it('Should navigate to frontpage when back button is clicked', () => {
         const historySpy = jest.spyOn(historyMock, 'push');
-        const wrapper = shallowWithIntl(<KvitteringPage history={historyMock} />).shallow();
-        wrapper
-            .find(BackButton)
-            .simulate('click');
+        const wrapper = shallow(<KvitteringPage history={historyMock} />);
+        wrapper.find(Knapp).simulate('click');
         expect(historySpy).toHaveBeenCalledWith(Routes.DINE_FORELDREPENGER);
     });
 });
