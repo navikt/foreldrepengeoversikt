@@ -46,7 +46,8 @@ const Behandlingsfrist: React.StatelessComponent<Props> = ({ behandlingsdato, ha
                         </span>
                     }
                     border={false}
-                    apneTekst={<FormattedMessage id="dineForeldrepenger.behandlingsfrist.lesMer" />}>
+                    apneTekst={<FormattedMessage id="dineForeldrepenger.behandlingsfrist.lesMer" />}
+                >
                     <FormattedMessage id="dineForeldrepenger.behandlingsfrist.arbeidstaker.2" />
                 </Lesmerpanel>
             )}

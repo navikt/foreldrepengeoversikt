@@ -10,7 +10,8 @@ export const mapFileToAttachment = (file: File, skjemanummer: Skjemanummer): Att
     filename: file.name,
     filesize: file.size,
     pending: false,
-    skjemanummer
+    skjemanummer,
 });
 
-export const isAttachmentWithError = ({ pending, url, error, filesize }: Attachment) => error || (!pending && url === undefined) || filesize === 0;
+export const isAttachmentWithError = ({ pending, url, error, filesize }: Attachment) =>
+    error || (!pending && url === undefined) || filesize === 0;

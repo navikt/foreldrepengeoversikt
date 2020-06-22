@@ -65,8 +65,8 @@ export const slåSammenLikeOgSammenhengendeUttaksperioder = (perioder: PeriodeDt
                 trekkDager: previousUttaksperiode.trekkDager + periode.trekkDager,
                 periode: {
                     ...previousUttaksperiode.periode,
-                    tom: periode.periode.tom
-                }
+                    tom: periode.periode.tom,
+                },
             });
         } else {
             periodeResult.push(periode);
@@ -136,7 +136,7 @@ export const erDuplikatPeriodePgaFlereArbeidsforhold = (
 const reduceDuplikateSaksperioderGrunnetArbeidsforhold = (
     resultatPerioder: PeriodeDto[],
     periode: PeriodeDto,
-    index: number,
+    _index: number,
     perioder: PeriodeDto[]
 ) => {
     if (erDuplikatPeriodePgaFlereArbeidsforhold(periode, perioder)) {

@@ -20,9 +20,10 @@ const MinidialogLenkepanel: React.StatelessComponent<Props> = ({ tittel, minidia
         <Link
             to={{
                 pathname: Routes.MINIDIALOG,
-                search: new URLSearchParams({ dialogId: minidialogInnslag.dialogId }).toString()
+                search: new URLSearchParams({ dialogId: minidialogInnslag.dialogId }).toString(),
             }}
-            {...props}>
+            {...props}
+        >
             {props.children}
         </Link>
     );

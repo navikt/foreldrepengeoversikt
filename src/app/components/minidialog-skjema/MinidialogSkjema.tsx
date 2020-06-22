@@ -34,7 +34,7 @@ interface Props {
 
 export enum JaNeiSpørsmål {
     JA = 'JA',
-    NEI = 'NEI'
+    NEI = 'NEI',
 }
 
 const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = ({
@@ -45,7 +45,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
     deleteAttachment,
     editAttachment,
     onSubmit,
-    isSendingEttersendelse
+    isSendingEttersendelse,
 }) => {
     const intl = useIntl();
     const [fritekst, updateFritekst] = useState('');
@@ -61,8 +61,8 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
             overskrift: 'Svar på tilbakebetalingen',
             tekst: brukerØnskerÅUttaleSeg
                 ? fritekst
-                : 'Jeg ønsker ikke å uttale meg. Saken vil bli behandlet med de opplysningene som NAV har tilgjengelig.'
-        }
+                : 'Jeg ønsker ikke å uttale meg. Saken vil bli behandlet med de opplysningene som NAV har tilgjengelig.',
+        },
     };
 
     const cls = BEMHelper('minidialog-skjema');
@@ -74,7 +74,8 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
                 event.preventDefault();
 
                 return onSubmit(submitData);
-            }}>
+            }}
+        >
             <Snakkeboble topp={formaterDatoForHendelse(minidialog.opprettet)} pilHoyre={false} ikonClass={'nav'}>
                 <Normaltekst tag="p">
                     <FormattedMessage id="miniDialog.tilbakekreving.tittel" values={{ sakstype: getSakstype(sak) }} />
@@ -89,11 +90,11 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
                 className="blokk-xs"
                 radios={[
                     { label: getMessage(intl, 'ja'), value: JaNeiSpørsmål.JA },
-                    { label: getMessage(intl, 'nei'), value: JaNeiSpørsmål.NEI }
+                    { label: getMessage(intl, 'nei'), value: JaNeiSpørsmål.NEI },
                 ]}
                 legend={getMessage(intl, 'miniDialog.tilbakekreving.radioPanelGruppe.legend')}
                 checked={svar}
-                onChange={(e: any, value: string) => update(value)}
+                onChange={(_e: any, value: string) => update(value)}
             />
             {svar === JaNeiSpørsmål.NEI && (
                 <div className="blokk-xs">

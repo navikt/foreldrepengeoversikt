@@ -19,7 +19,7 @@ describe('Kvittering', () => {
             filename: 'mockFile.pdf',
             pending: false,
             url: undefined,
-            skjemanummer: Skjemanummer.ANNET
+            skjemanummer: Skjemanummer.ANNET,
         };
 
         historyMock = {
@@ -31,11 +31,11 @@ describe('Kvittering', () => {
                         mottattDato: '2019-01-01',
                         leveranseStatus: LeveransesStatus.SENDT_OG_FORSØKT_BEHANDLET_FPSAK,
                         journalId: '123',
-                        saksNr: '123'
+                        saksNr: '123',
                     },
-                    attachments: [mockAttachment]
-                }
-            }
+                    attachments: [mockAttachment],
+                },
+            },
         };
     });
 

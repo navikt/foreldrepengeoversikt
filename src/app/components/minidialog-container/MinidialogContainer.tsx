@@ -38,17 +38,14 @@ class MinidialogContainer extends Component<Props> {
 
 const mapStateToProps = (state: AppState) => {
     return {
-        minidialoger: getData(state.api.minidialogInnslagListe, [])
+        minidialoger: getData(state.api.minidialogInnslagListe, []),
     };
 };
 
 const mapDispatchToProps = (dispatch: (action: ApiAction) => void) => ({
     requestMinidialog: () => {
         dispatch({ type: ApiActionTypes.GET_MINIDIALOG_REQUEST });
-    }
+    },
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MinidialogContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MinidialogContainer);

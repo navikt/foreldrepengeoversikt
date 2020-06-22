@@ -21,7 +21,7 @@ const bem = BEMHelper('manglendeVedleggHendelse');
 
 const renderContent = (manglendeVedlegg: ManglendeVedlegg[], intl: IntlShape, navigateToEttersendelse: () => void) => {
     return (
-        <>
+        <div className={bem.block}>
             {manglendeVedlegg.map((mv) => {
                 return (
                     <div className={bem.element('manglendeVedleggHendelseStatus')} key={guid()}>
@@ -35,7 +35,7 @@ const renderContent = (manglendeVedlegg: ManglendeVedlegg[], intl: IntlShape, na
             <Knapp onClick={navigateToEttersendelse}>
                 <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
             </Knapp>
-        </>
+        </div>
     );
 };
 

@@ -29,7 +29,7 @@ export const overstyrAntallTilgjengeligeUttaksdagerForBarnFørJuli2018 = (
         if (konto.konto === StønadskontoType.Fedrekvote || konto.konto === StønadskontoType.Mødrekvote) {
             return {
                 konto: konto.konto,
-                dager: ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 * ANTALL_UTTAKSDAGER_PR_UKE
+                dager: ANTALL_TILGJENGELIGE_UKER_MED_UTTAK_FØR_JULI_2018 * ANTALL_UTTAKSDAGER_PR_UKE,
             };
         }
         if (konto.konto === StønadskontoType.Fellesperiode) {
@@ -38,7 +38,7 @@ export const overstyrAntallTilgjengeligeUttaksdagerForBarnFørJuli2018 = (
                 dager:
                     konto.dager +
                     beregnEkstraDagerForBarnFødtFørJuli2018(fedrekvote!) +
-                    beregnEkstraDagerForBarnFødtFørJuli2018(mødrekvote!)
+                    beregnEkstraDagerForBarnFødtFørJuli2018(mødrekvote!),
             };
         }
         return konto;
@@ -84,7 +84,7 @@ export const opprettAktivitetsFriKonto = (
 export const getRelevantFamiliehendelseDato = ({
     fødselsdato,
     termindato,
-    omsorgsovertakelsesdato
+    omsorgsovertakelsesdato,
 }: UttaksplanGrunnlagDto): string => {
     if (fødselsdato) {
         return fødselsdato;
@@ -99,7 +99,7 @@ export const stønadskontoerDtoTilTilgjengeligStønadskontoMapper = (
         .filter((konto: StønadskontoType) => konto !== StønadskontoType.Flerbarnsdager)
         .map((konto) => ({
             konto: konto as StønadskontoType,
-            dager: stønadskontoerDto.kontoer[konto]
+            dager: stønadskontoerDto.kontoer[konto],
         }));
 };
 
@@ -124,7 +124,7 @@ export const getBrukteStønadskontoer = (perioder: Periode[]): TilgjengeligStøn
         .filter(({ type }) => type === PeriodeType.Uttak || type === PeriodeType.TaptPeriode)
         .map((periode: Uttaksperiode) => ({
             konto: periode.stønadskontotype,
-            dager: periode.antallUttaksdager
+            dager: periode.antallUttaksdager,
         }))
         .reduce((brukteStønadskontoer: TilgjengeligStønadskonto[], brukteDager: TilgjengeligStønadskonto) => {
             const kontoIndex = brukteStønadskontoer.findIndex(({ konto }) => konto === brukteDager.konto);

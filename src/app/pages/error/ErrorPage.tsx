@@ -30,7 +30,7 @@ const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearEr
             <Feilsidemelding
                 illustrasjon={{
                     tittel: getMessage(intl, 'feilside.bobletittel'),
-                    tekst: getMessage(intl, 'feilside.bobletekst')
+                    tekst: getMessage(intl, 'feilside.bobletekst'),
                 }}
                 tittel={getMessage(intl, 'feilside.tittel')}
                 ingress={
@@ -44,7 +44,7 @@ const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearEr
                                     <Lenke href={lenker.brukerstøtte}>
                                         {getMessage(intl, 'feilside.ingress.lenke')}
                                     </Lenke>
-                                )
+                                ),
                             }}
                         />
                     )

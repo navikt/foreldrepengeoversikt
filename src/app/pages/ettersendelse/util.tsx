@@ -8,7 +8,7 @@ import {
     isSkjemanummerForEndringssøknadForeldrepenger,
     skjemanummerForFørstegangssøknadForeldrepenger,
     isSkjemanummerForEngangsstønad,
-    isSkjemanummerForSvangerskapspengesoknad
+    isSkjemanummerForSvangerskapspengesoknad,
 } from 'app/utils/skjemanummerUtils';
 import { EttersendingType } from 'app/api/types/ettersending/EttersendingDto';
 
@@ -26,7 +26,7 @@ export const getAttachmentTypeSelectOptions = (intl: IntlShape, sak: SakBase) =>
         {getRelevanteSkjemanummer(sak)
             .map((skjemanummer) => ({
                 skjemanummer,
-                text: intl.formatMessage({ id: `ettersendelse.${skjemanummer}` })
+                text: intl.formatMessage({ id: `ettersendelse.${skjemanummer}` }),
             }))
             .sort((selectOption, nextSelectOption) => selectOption.text.localeCompare(nextSelectOption.text))
             .map(({ skjemanummer, text }) => (

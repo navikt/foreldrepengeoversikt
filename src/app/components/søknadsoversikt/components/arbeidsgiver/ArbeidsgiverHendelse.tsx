@@ -58,7 +58,7 @@ const renderLesMerInnhold = () => {
                                 <Lenke href={lenker.saksoversikt}>
                                     <FormattedMessage id="søknadsoversikt.lesMer.innhold3.lenke2" />
                                 </Lenke>
-                            )
+                            ),
                         }}
                     />
                 </Normaltekst>
@@ -127,7 +127,7 @@ export const erAlleInntektsmeldingerMottatt = (
 const ArbeidsgiverHendelse: React.FunctionComponent<Props> = ({
     inntektsopplysningerDato,
     arbeidsforhold,
-    inntektsmeldinger
+    inntektsmeldinger,
 }) => {
     const intl = useIntl();
     const alleInntektsmeldingerMottatt = erAlleInntektsmeldingerMottatt(arbeidsforhold, inntektsmeldinger);

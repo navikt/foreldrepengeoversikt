@@ -12,6 +12,7 @@ import moment from 'moment';
 import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 import ManglendeVedleggHendelse from './manglende-vedlegg/ManglendeVedleggHendelse';
 import { useIntl } from 'react-intl';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 interface Props {
     søknadsDato: string;
@@ -46,7 +47,7 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
     brukerHarSendtSøknad,
     behandlingsdato,
     manglendeVedlegg,
-    navigateToEttersendelse
+    navigateToEttersendelse,
 }) => {
     const intl = useIntl();
     const aktiveArbeidsforhold = getAktiveArbeidsforhold(arbeidsforhold, behandlingsdato);
@@ -65,7 +66,7 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
                 }
                 color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.duHarSøkt' })}
-                content={formatDate(søknadsDato)}
+                content={<Normaltekst>{formatDate(søknadsDato)}</Normaltekst>}
             />
             {manglendeVedlegg.length > 0 && (
                 <>
@@ -87,12 +88,16 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
                 ikon={søknadenBehandles ? <Icon kind="info-sirkel-fyll" width="24" height="24" /> : undefined}
                 color={UttaksplanColor.transparent}
                 tittel={intl.formatMessage({ id: 'søknadsoversikt.navBehandlerSøknaden' })}
-                content={intl.formatMessage({
-                    id:
-                        aktiveArbeidsforhold.length > 0
-                            ? 'søknadsoversikt.navBehandlerSøknaden.innhold'
-                            : 'søknadsoversikt.navBehandlerSøknaden.innhold.ikkeArbeidstaker'
-                })}
+                content={
+                    <Normaltekst>
+                        {intl.formatMessage({
+                            id:
+                                aktiveArbeidsforhold.length > 0
+                                    ? 'søknadsoversikt.navBehandlerSøknaden.innhold'
+                                    : 'søknadsoversikt.navBehandlerSøknaden.innhold.ikkeArbeidstaker',
+                        })}
+                    </Normaltekst>
+                }
             />
         </div>
     );

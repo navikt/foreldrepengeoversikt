@@ -25,26 +25,21 @@ export const getUkerOgDagerFromDager = (dager: number): { uker: number; dager: n
     const uker = Math.floor(dager / ANTALL_UTTAKSDAGER_PR_UKE);
     return {
         dager: dager - uker * ANTALL_UTTAKSDAGER_PR_UKE,
-        uker
+        uker,
     };
 };
 
 export const erSammenhengende = (tidsperiode1: Tidsperiode, tidsperiode2: Tidsperiode): boolean => {
     return (
         finnNesteMuligeUttaksdag(tidsperiode1.tom) === tidsperiode2.fom ||
-        moment(tidsperiode1.tom)
-            .add(1, 'days')
-            .isSame(tidsperiode2.fom, 'days')
+        moment(tidsperiode1.tom).add(1, 'days').isSame(tidsperiode2.fom, 'days')
     );
 };
 
 const finnNesteMuligeUttaksdag = (dato: string): string => {
     const nesteDag = moment.utc(dato).add(1, 'day');
     return nesteDag.isoWeekday() >= 6
-        ? nesteDag
-              .add(1, 'weeks')
-              .startOf('isoWeek')
-              .format('YYYY-MM-DD')
+        ? nesteDag.add(1, 'weeks').startOf('isoWeek').format('YYYY-MM-DD')
         : nesteDag.format('YYYY-MM-DD');
 };
 
@@ -94,7 +89,7 @@ export const getVarighetString = (antallDager: number, intl: IntlShape): string 
     const dagerStr = intl.formatMessage(
         { id: 'common.varighet.dager' },
         {
-            dager
+            dager,
         }
     );
     if (uker === 0) {
@@ -103,7 +98,7 @@ export const getVarighetString = (antallDager: number, intl: IntlShape): string 
     const ukerStr = intl.formatMessage({ id: 'common.varighet.uker' }, { uker });
     if (dager > 0) {
         return `${ukerStr}${intl.formatMessage({
-            id: `common.varighet.separator--full`
+            id: `common.varighet.separator--full`,
         })}${dagerStr}`;
     }
     return ukerStr;
@@ -151,13 +146,13 @@ export const fyllInnHull = (periodeAcc: Periode[], periode: Periode, index: numb
     ) {
         const tidsperiode = {
             fom: finnNesteMuligeUttaksdag(periode.tidsperiode.tom),
-            tom: finnForrigeMuligeUttaksdag(nestePeriode.tidsperiode.fom)
+            tom: finnForrigeMuligeUttaksdag(nestePeriode.tidsperiode.fom),
         };
 
         periodeAcc.push({
             type: PeriodeType.Hull,
             tidsperiode,
-            antallUttaksdager: getAntallUttaksdagerITidsperiode(tidsperiode)
+            antallUttaksdager: getAntallUttaksdagerITidsperiode(tidsperiode),
         });
     }
     return periodeAcc;

@@ -6,7 +6,7 @@ import {
     GetSakerRequest,
     GetHistorikkRequest,
     GetMiniDialogRequest,
-    GetSakerSuccess
+    GetSakerSuccess,
 } from '../types/ApiAction';
 import SakBase, { SakType } from 'app/api/types/sak/Sak';
 import { StorageKvittering } from 'app/api/types/StorageKvittering';
@@ -92,8 +92,8 @@ function* getMiniDialog(_: GetMiniDialogRequest) {
         yield put({
             type: ApiActionTypes.GET_MINIDIALOG_SUCCESS,
             payload: {
-                minidialogInnslagListe
-            }
+                minidialogInnslagListe,
+            },
         });
     } catch (error) {
         yield put({ type: ApiActionTypes.GET_MINIDIALOG_FAILURE, payload: { error } });
@@ -114,8 +114,8 @@ function* getManglendeVedlegg(sakerSuccess: GetSakerSuccess) {
                 yield put({
                     type: ApiActionTypes.GET_MANGLENDE_VEDLEGG_SUCCESS,
                     payload: {
-                        manglendeVedlegg
-                    }
+                        manglendeVedlegg,
+                    },
                 });
             }
         }

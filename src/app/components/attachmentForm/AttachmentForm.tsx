@@ -10,7 +10,7 @@ export interface AttachmentFormProps extends AttachmentFormState {
 }
 
 interface AttachmentFormState {
-    attachments: Attachment[]
+    attachments: Attachment[];
 }
 
 export function withAttachments<T>(WrappedComponent: React.ComponentType<T>) {
@@ -18,7 +18,7 @@ export function withAttachments<T>(WrappedComponent: React.ComponentType<T>) {
         constructor(props: any) {
             super(props);
             this.state = {
-                attachments: []
+                attachments: [],
             };
             this.addAttachment = this.addAttachment.bind(this);
             this.editAttachment = this.editAttachment.bind(this);
@@ -61,7 +61,7 @@ export function withAttachments<T>(WrappedComponent: React.ComponentType<T>) {
                     editAttachment={this.editAttachment}
                     deleteAttachment={this.deleteAttachment}
                     isReadyToSendAttachments={this.isReadyToSendAttachments()}
-                    {...otherProps as T}
+                    {...(otherProps as T)}
                 />
             );
         }

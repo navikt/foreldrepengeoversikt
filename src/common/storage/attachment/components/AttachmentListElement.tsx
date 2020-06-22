@@ -24,7 +24,7 @@ const AttachmentListElement: React.StatelessComponent<Props> = ({ attachment, sh
     const intl = useIntl();
     const BEM = BEMHelper('attachment');
     const cls = classnames(BEM.block, {
-        [BEM.modifier('pending')]: attachment.pending
+        [BEM.modifier('pending')]: attachment.pending,
     });
 
     return (

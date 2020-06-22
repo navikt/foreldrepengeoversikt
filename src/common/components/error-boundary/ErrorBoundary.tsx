@@ -20,11 +20,11 @@ class ErrorBoundary extends React.Component<Props, State> {
         super(props);
         this.state = {
             eventId: null,
-            hasError: false
+            hasError: false,
         };
     }
 
-    componentDidCatch(error: Error | null, errorInfo: object) {
+    componentDidCatch(error: Error | null, errorInfo: any) {
         Sentry.withScope((scope) => {
             scope.setExtras(errorInfo);
             const eventId = Sentry.captureException(error);
@@ -44,7 +44,7 @@ class ErrorBoundary extends React.Component<Props, State> {
             <Feilsidemelding
                 illustrasjon={{
                     tittel: getMessage(intl, 'feilside.bobletittel'),
-                    tekst: getMessage(intl, 'feilside.bobletekst')
+                    tekst: getMessage(intl, 'feilside.bobletekst'),
                 }}
                 tittel={getMessage(intl, 'feilside.tittel')}
                 ingress={
@@ -53,7 +53,7 @@ class ErrorBoundary extends React.Component<Props, State> {
                         values={{
                             lenke: (
                                 <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'feilside.ingress.lenke')}</Lenke>
-                            )
+                            ),
                         }}
                     />
                 }

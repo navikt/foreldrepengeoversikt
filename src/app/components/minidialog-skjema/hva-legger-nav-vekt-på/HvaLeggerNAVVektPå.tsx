@@ -9,7 +9,7 @@ const punktTekster = [
     'minidialog.hvaLeggerNAVVektPå.punkt3',
     'minidialog.hvaLeggerNAVVektPå.punkt4',
     'minidialog.hvaLeggerNAVVektPå.punkt5',
-    'minidialog.hvaLeggerNAVVektPå.punkt6'
+    'minidialog.hvaLeggerNAVVektPå.punkt6',
 ];
 
 const HvaLeggerNAVVektPå: React.FunctionComponent = () => {
@@ -19,8 +19,8 @@ const HvaLeggerNAVVektPå: React.FunctionComponent = () => {
         <CollapsableTextBlock title={intl.formatMessage({ id: 'minidialog.hvaLeggerNAVVektPå.tittel' })}>
             <Normaltekst>
                 <ul>
-                    {punktTekster.map((punkt) => (
-                        <li>
+                    {punktTekster.map((punkt, index) => (
+                        <li key={`${punkt}+${index}`}>
                             <FormattedMessage id={punkt} />
                         </li>
                     ))}

@@ -13,7 +13,7 @@ describe('Ettersendelse page', () => {
     let mockAttachment: Attachment;
     beforeEach(() => {
         historyMock = {
-            push: jest.fn()
+            push: jest.fn(),
         };
         mockAttachment = {
             id: 'v123',
@@ -22,7 +22,7 @@ describe('Ettersendelse page', () => {
             filename: 'mockFile.pdf',
             pending: false,
             url: undefined,
-            skjemanummer: Skjemanummer.TERMINBEKREFTELSE
+            skjemanummer: Skjemanummer.TERMINBEKREFTELSE,
         };
     });
 

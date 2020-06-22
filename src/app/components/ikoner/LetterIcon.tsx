@@ -9,7 +9,8 @@ const LetterIcon = (props: any) => {
             width="136"
             height="136"
             viewBox="0 0 136 136"
-            {...rest}>
+            {...rest}
+        >
             <defs>
                 <circle id="a" cx="68" cy="68" r="68" />
                 <circle id="b" cx="9.067" cy="9.067" r="9.067" />

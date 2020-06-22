@@ -31,7 +31,7 @@ const Saksoversikt: React.StatelessComponent<Props> = ({
     withHeader = false,
     søkerinfo,
     manglendeVedlegg,
-    history
+    history,
 }) => {
     const cls = BEMHelper('saksoversikt');
     return (

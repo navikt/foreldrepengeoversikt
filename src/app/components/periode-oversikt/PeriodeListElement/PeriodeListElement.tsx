@@ -29,7 +29,7 @@ interface Props {
 }
 
 const BEM = BEMHelper('periodelisteItemHeader');
-const renderDagMnd = (dato: string, visÅr: boolean = true): JSX.Element => {
+const renderDagMnd = (dato: string, visÅr = true): JSX.Element => {
     const d = moment.utc(dato);
     return dato ? (
         <div className={BEM.element('dagmnd')}>
@@ -55,7 +55,7 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
     tidsperiode,
     annenForelderSamtidigUttakPeriode,
     navnPåForeldre,
-    color
+    color,
 }) => {
     const intl = useIntl();
 
@@ -90,8 +90,9 @@ const PeriodeListElement: React.FunctionComponent<Props> = ({
                     className={classnames(BEM.element('samtidig-uttak'), {
                         [BEM.modifier('samtidig-uttak-mor')]: annenForelderSamtidigUttakPeriode.forelder === Rolle.mor,
                         [BEM.modifier('samtidig-uttak-far')]:
-                            annenForelderSamtidigUttakPeriode.forelder === Rolle.farMedmor
-                    })}>
+                            annenForelderSamtidigUttakPeriode.forelder === Rolle.farMedmor,
+                    })}
+                >
                     <div>
                         <Element>
                             <FormattedMessage id="morsAktivitet.SamtidigUttak" />

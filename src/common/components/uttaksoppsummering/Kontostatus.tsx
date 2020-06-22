@@ -77,7 +77,8 @@ const Kontostatus: React.StatelessComponent<Props> = ({ uttak, navnPåForeldre, 
                 </div>
                 <strong
                     className={kontoErOvertrukket ? BEM.element('dagerOvertrukket') : BEM.element('dager')}
-                    data-name={uttak.konto}>
+                    data-name={uttak.konto}
+                >
                     {kontoErOvertrukket ? `- ${varighetString}` : varighetString}
                 </strong>
             </div>

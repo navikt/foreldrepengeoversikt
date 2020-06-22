@@ -24,7 +24,7 @@ export enum ApiActionTypes {
     'GET_TILGJENGELIGE_STØNADSKONTOER' = 'getTilgjengeligeStønadskontoer',
     'GET_MANGLENDE_VEDLEGG_REQUEST' = 'getManglendeVedleggRequest',
     'GET_MANGLENDE_VEDLEGG_FAILURE' = 'getManglendeVedleggFailure',
-    'GET_MANGLENDE_VEDLEGG_SUCCESS' = 'getManglendeVedleggSuccess'
+    'GET_MANGLENDE_VEDLEGG_SUCCESS' = 'getManglendeVedleggSuccess',
 }
 
 export interface GetSøkerinfoRequest {

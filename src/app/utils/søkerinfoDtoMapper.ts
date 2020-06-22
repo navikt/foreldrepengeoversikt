@@ -11,7 +11,7 @@ const getPerson = (søkerinfo: SøkerinfoDTO): Person => {
         ...person,
         fødselsdato: person.fødselsdato,
         ikkeNordiskEøsLand: person.ikkeNordiskEøsLand,
-        erMyndig: erMyndig(person.fødselsdato)
+        erMyndig: erMyndig(person.fødselsdato),
     };
 };
 
@@ -24,9 +24,9 @@ const getRegistrerteBarn = (søkerinfo: SøkerinfoDTO): RegistrertBarn[] => {
                   annenForelder: annenForelder
                       ? {
                             ...annenForelder,
-                            fødselsdato: annenForelder.fødselsdato
+                            fødselsdato: annenForelder.fødselsdato,
                         }
-                      : undefined
+                      : undefined,
               })
           )
         : [];
@@ -41,7 +41,7 @@ const getArbeidsforhold = ({ arbeidsforhold }: SøkerinfoDTO): Arbeidsforhold[] 
         ? uniqBy(arbeidsforhold, getArbeidsgiverId).map((a: SøkerinfoDTOArbeidsforhold) => ({
               ...a,
               fom: a.fom,
-              tom: a.tom ? a.tom : undefined
+              tom: a.tom ? a.tom : undefined,
           }))
         : [];
 };
@@ -50,6 +50,6 @@ export const getSøkerinfoFromDTO = (søkerinfo: SøkerinfoDTO): Søkerinfo => {
     return {
         person: getPerson(søkerinfo),
         registrerteBarn: getRegistrerteBarn(søkerinfo),
-        arbeidsforhold: getArbeidsforhold(søkerinfo)
+        arbeidsforhold: getArbeidsforhold(søkerinfo),
     };
 };

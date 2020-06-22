@@ -16,7 +16,7 @@ const CollapseContainer: React.StatelessComponent<Props> = ({
     children,
     animated = true,
     isOpen = false,
-    ariaLive = 'off'
+    ariaLive = 'off',
 }) => {
     const content = <div aria-live={ariaLive}>{isOpen ? <div>{children}</div> : <div />}</div>;
     if (!animated) {
@@ -26,8 +26,9 @@ const CollapseContainer: React.StatelessComponent<Props> = ({
         <Collapse
             isOpened={isOpen}
             className={classNames('ekspanderbartInnhold', {
-                'ekspanderbartInnhold--apen': isOpen
-            })}>
+                'ekspanderbartInnhold--apen': isOpen,
+            })}
+        >
             {content}
         </Collapse>
     );

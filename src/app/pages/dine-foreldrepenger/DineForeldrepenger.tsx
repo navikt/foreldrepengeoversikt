@@ -15,7 +15,7 @@ import {
     opprettFiktivSak,
     harSøkt,
     harEnAvsluttetBehandling,
-    erForeldrepengesak
+    erForeldrepengesak,
 } from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
@@ -28,7 +28,7 @@ import {
     Innsendingsinnslag,
     HendelseType,
     HistorikkInnslag,
-    HistorikkInnslagType
+    HistorikkInnslagType,
 } from 'app/api/types/historikk/HistorikkInnslag';
 
 import { Søkerinfo } from 'app/types/Søkerinfo';
@@ -181,7 +181,7 @@ const mapStateToProps = (state: AppState) => ({
     saker: getData(state.api.saker, []),
     storageKvittering: getData(state.api.storageKvittering, undefined),
     historikkInnslagListe: getData(state.api.historikk, []),
-    manglendeVedlegg: getData(state.api.manglendeVedlegg, [])
+    manglendeVedlegg: getData(state.api.manglendeVedlegg, []),
 });
 
 export default connect(mapStateToProps)(DineForeldrepenger);

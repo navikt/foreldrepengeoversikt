@@ -11,7 +11,7 @@ import {
     skalTilgjengeligeKontoerJusteresPgaFamiliehendelsesdatoFørJuli2018,
     overstyrAntallTilgjengeligeUttaksdagerForBarnFørJuli2018,
     stønadskontoerDtoTilTilgjengeligStønadskontoMapper,
-    justerTilgjengeligeStøndakontoerNårMorIkkeHarRettOgIkkeErUfør
+    justerTilgjengeligeStøndakontoerNårMorIkkeHarRettOgIkkeErUfør,
 } from 'app/utils/stønadskontoerUtils';
 import { AxiosResponse } from 'axios';
 
@@ -32,7 +32,7 @@ export function* getTilgjengeligeStønadskontoer(sak: Sak) {
             omsorgsovertakelsesdato,
             morErAleneOmOmsorg,
             farMedmorErAleneOmOmsorg,
-            morErUfør
+            morErUfør,
         } = saksgrunnlag.grunnlag;
         const startdatoUttak = getFørsteUttaksdagDato(perioder)!;
 
@@ -46,7 +46,7 @@ export function* getTilgjengeligeStønadskontoer(sak: Sak) {
             omsorgsovertakelsesdato,
             morHarAleneomsorg: morErAleneOmOmsorg,
             farHarAleneomsorg: farMedmorErAleneOmOmsorg,
-            startdatoUttak
+            startdatoUttak,
         });
 
         let tilgjengeligeStønadskontoer: TilgjengeligStønadskonto[] = stønadskontoerDtoTilTilgjengeligStønadskontoMapper(

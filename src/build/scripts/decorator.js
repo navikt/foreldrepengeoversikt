@@ -20,7 +20,7 @@ const getDecorator = () =>
                     NAV_STYLES: document.getElementById('styles')[prop],
                     NAV_HEADING: document.getElementById('header-withmenu')[prop],
                     NAV_FOOTER: document.getElementById('footer-withmenu')[prop],
-                    NAV_MEGAMENU_RESOURCES: document.getElementById('megamenu-resources')[prop]
+                    NAV_MEGAMENU_RESOURCES: document.getElementById('megamenu-resources')[prop],
                 };
                 resolve(data);
             } else {

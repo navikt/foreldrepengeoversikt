@@ -20,7 +20,7 @@ const Dokumentoversikt = () => {
                             <Lenke href={lenker.saksoversikt}>
                                 <FormattedMessage id="dokumentoversikt.info.lenke" />
                             </Lenke>
-                        )
+                        ),
                     }}
                 />
             </AlertStripe>

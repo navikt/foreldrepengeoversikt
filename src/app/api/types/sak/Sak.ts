@@ -17,10 +17,10 @@ export interface SakBase {
 export default interface Sak extends SakBase {
     saksgrunnlag?: UttaksplanDto;
     perioder?: Periode[];
-    tilgjengeligeKontoer?: TilgjengeligStønadskonto[]    
+    tilgjengeligeKontoer?: TilgjengeligStønadskonto[];
 }
 
 export enum SakType {
     SAK = 'SAK', // Indicates that sak is from infotrygd
-    FPSAK = 'FPSAK'
+    FPSAK = 'FPSAK',
 }

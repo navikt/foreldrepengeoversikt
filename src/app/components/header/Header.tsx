@@ -19,18 +19,18 @@ const Header: React.FunctionComponent<Props> = ({ saker, history }) => {
     const cls = BEMHelper('header');
     return (
         <div className={cls.block}>
-                <div className={cls.element('content')}>
-                    <div className={cls.element('text')}>
-                        <NavigationColumLinks history={history} />
-                        <Sidetittel className={cls.element('title')}>
-                            <FormattedMessage id={getHeaderTitleIntlKey(saker)} />
-                        </Sidetittel>
-                        <Normaltekst>
-                            <FormattedMessage id="header.undertitle" />
-                        </Normaltekst>
-                    </div>
-                    <div className={cls.element('svg-container')}>{getRandomIcon()}</div>
+            <div className={cls.element('content')}>
+                <div className={cls.element('text')}>
+                    <NavigationColumLinks history={history} />
+                    <Sidetittel className={cls.element('title')}>
+                        <FormattedMessage id={getHeaderTitleIntlKey(saker)} />
+                    </Sidetittel>
+                    <Normaltekst>
+                        <FormattedMessage id="header.undertitle" />
+                    </Normaltekst>
                 </div>
+                <div className={cls.element('svg-container')}>{getRandomIcon()}</div>
+            </div>
         </div>
     );
 };

@@ -25,9 +25,9 @@ const AttachmentList = (props: Props) => {
             <Block margin="xs">
                 <LabelText>
                     <FormattedMessage
-                        id={intlKey ? intlKey : "vedlegg.liste.tittel"}
+                        id={intlKey ? intlKey : 'vedlegg.liste.tittel'}
                         values={{
-                            size: bytesString(getTotalFileSize(attachments.map((a: Attachment) => a.file)))
+                            size: bytesString(getTotalFileSize(attachments.map((a: Attachment) => a.file))),
                         }}
                     />
                 </LabelText>

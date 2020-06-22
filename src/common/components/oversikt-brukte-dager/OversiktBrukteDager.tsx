@@ -36,7 +36,7 @@ const OversiktBrukteDager: React.StatelessComponent<Props> = ({
     brukteDager,
     navnPåForeldre,
     erDeltUttak,
-    erFarMedmor
+    erFarMedmor,
 }) => {
     const intl = useIntl();
     // TODO utled situasjon

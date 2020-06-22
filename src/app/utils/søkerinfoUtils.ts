@@ -20,7 +20,7 @@ export const getNavnPåForeldre = (sak: Sak, søker: Person): NavnPåForeldre =>
     const søkerErFarEllerMedmor = sak.saksgrunnlag && sak.saksgrunnlag.grunnlag.søkerErFarEllerMedmor;
     return {
         farMedmor: getNavnForRolle(Rolle.farMedmor, søker, sak.annenPart, søkerErFarEllerMedmor),
-        mor: getNavnForRolle(Rolle.mor, søker, sak.annenPart, søkerErFarEllerMedmor)
+        mor: getNavnForRolle(Rolle.mor, søker, sak.annenPart, søkerErFarEllerMedmor),
     };
 };
 
@@ -34,7 +34,7 @@ const getNavnForRolle = (
     if (rolle === Rolle.farMedmor) {
         fornavn = søkerErFarEllerMedmor ? søker.fornavn : annenPart && annenPart.navn.fornavn;
     }
-    if(rolle === Rolle.mor) {
+    if (rolle === Rolle.mor) {
         fornavn = !søkerErFarEllerMedmor ? søker.fornavn : annenPart && annenPart.navn.fornavn;
     }
     return fornavn ? fornavn : 'Den andre forelderen';

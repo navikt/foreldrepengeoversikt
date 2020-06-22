@@ -8,7 +8,7 @@ webpackConfig.mode = 'production';
 webpackConfig.plugins.push(
     new HtmlWebpackPlugin({
         template: `${__dirname}/../../app/index.html`,
-        inject: 'body'
+        inject: 'body',
     })
 );
 
@@ -20,10 +20,10 @@ webpackConfig.optimization = {
                 mangle: true, // Note `mangle.properties` is `false` by default.
                 ie8: true,
                 keep_classnames: true,
-                keep_fnames: true
-            }
-        })
-    ]
+                keep_fnames: true,
+            },
+        }),
+    ],
 };
 
 module.exports = webpackConfig;

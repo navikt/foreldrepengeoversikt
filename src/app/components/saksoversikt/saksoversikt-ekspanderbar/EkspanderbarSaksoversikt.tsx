@@ -5,14 +5,13 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 
 import BEMHelper from 'common/util/bem';
 import SakBase from '../../../api/types/sak/Sak';
-import EkspanderbarSaksoversiktHeader from './EkspanderbarSaksoversiktHeader';
 import Saksoversikt from '../saksoversikt-main/Saksoversikt';
-import { getSaksoversiktTitle } from '../utils';
 import { HistorikkInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 
 import './ekspanderbarSaksoversikt.less';
 import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
+import EkspanderbarSaksoversiktHeader from './EkspanderbarSaksoversiktHeader';
 
 interface Props {
     søkerinfo?: Søkerinfo;
@@ -27,14 +26,18 @@ const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = ({
     søkerinfo,
     history,
     historikkInnslagListe,
-    manglendeVedlegg
+    manglendeVedlegg,
 }) => {
+    const [open, setOpen] = React.useState(false);
     const cls = BEMHelper('ekspanderbar-saksoversikt');
+
     return (
         <div className={cls.block}>
             <EkspanderbartpanelBase
-                heading={<EkspanderbarSaksoversiktHeader sak={sak} />}
-                ariaTittel={getSaksoversiktTitle(sak)}>
+                tittel={<EkspanderbarSaksoversiktHeader sak={sak} />}
+                apen={open}
+                onClick={() => setOpen(!open)}
+            >
                 <Saksoversikt
                     sak={sak}
                     history={history}

@@ -5,7 +5,7 @@ import {
     UtsettelsePeriodeType,
     StønadskontoType,
     UttakArbeidType,
-    MorsAktivitetDto
+    MorsAktivitetDto,
 } from 'app/api/types/UttaksplanDto';
 
 describe('uttaksplanDtoUtils', () => {
@@ -27,9 +27,9 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
-                    periode: { fom: '2019-10-29', tom: '2019-11-15' }
+                    periode: { fom: '2019-10-29', tom: '2019-11-15' },
                 },
                 {
                     utsettelsePeriodeType: 'FERIE',
@@ -46,10 +46,10 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '984042442',
                         type: 'ORGANISASJON',
-                        navn: 'EQUINOR ASA, AVD TNE RD FORSKNINGSSENTER'
+                        navn: 'EQUINOR ASA, AVD TNE RD FORSKNINGSSENTER',
                     },
-                    periode: { fom: '2019-10-29', tom: '2019-11-15' }
-                }
+                    periode: { fom: '2019-10-29', tom: '2019-11-15' },
+                },
             ] as PeriodeDto[];
             expect(erDuplikatPeriodePgaFlereArbeidsforhold(list[0], list)).toBeTruthy();
         });
@@ -73,10 +73,10 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
                     periode: { fom: '2019-10-29', tom: '2019-11-15' },
-                    morsAktivitet: MorsAktivitetDto.Arbeid
+                    morsAktivitet: MorsAktivitetDto.Arbeid,
                 },
                 {
                     utsettelsePeriodeType: UtsettelsePeriodeType.Ferie,
@@ -93,10 +93,10 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '984042442',
                         type: 'ORGANISASJON',
-                        navn: 'EQUINOR ASA, AVD TNE RD FORSKNINGSSENTER'
+                        navn: 'EQUINOR ASA, AVD TNE RD FORSKNINGSSENTER',
                     },
-                    periode: { fom: '2019-10-29', tom: '2019-11-15' }
-                }
+                    periode: { fom: '2019-10-29', tom: '2019-11-15' },
+                },
             ] as PeriodeDto[];
             expect(erDuplikatPeriodePgaFlereArbeidsforhold(list[0], list)).toBeFalsy();
         });
@@ -122,10 +122,10 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
                     periode: { fom: '2019-10-29', tom: '2019-11-15' },
-                    morsAktivitet: MorsAktivitetDto.Arbeid
+                    morsAktivitet: MorsAktivitetDto.Arbeid,
                 },
                 {
                     periodeResultatType: PeriodeResultatType.Innvilget,
@@ -144,11 +144,11 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
                     periode: { fom: '2019-11-16', tom: '2019-11-20' },
-                    morsAktivitet: MorsAktivitetDto.Arbeid
-                }
+                    morsAktivitet: MorsAktivitetDto.Arbeid,
+                },
             ] as PeriodeDto[];
             expect(cleanupUttaksplanDto(list).length).toEqual(1);
             expect(cleanupUttaksplanDto(list)).toEqual([list[1]]);
@@ -173,10 +173,10 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
                     periode: { fom: '2019-11-16', tom: '2019-11-20' },
-                    morsAktivitet: MorsAktivitetDto.Arbeid
+                    morsAktivitet: MorsAktivitetDto.Arbeid,
                 },
                 {
                     periodeResultatType: PeriodeResultatType.Innvilget,
@@ -195,11 +195,11 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
                     periode: { fom: '2019-11-16', tom: '2019-11-20' },
-                    morsAktivitet: MorsAktivitetDto.Arbeid
-                }
+                    morsAktivitet: MorsAktivitetDto.Arbeid,
+                },
             ] as PeriodeDto[];
             expect(cleanupUttaksplanDto(list).length).toEqual(1);
             expect(cleanupUttaksplanDto(list)).toEqual([list[1]]);
@@ -224,10 +224,10 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
                     periode: { fom: '2019-11-16', tom: '2019-11-20' },
-                    morsAktivitet: MorsAktivitetDto.Arbeid
+                    morsAktivitet: MorsAktivitetDto.Arbeid,
                 },
                 {
                     periodeResultatType: PeriodeResultatType.Innvilget,
@@ -246,11 +246,11 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
                     periode: { fom: '2019-11-16', tom: '2019-11-20' },
-                    morsAktivitet: MorsAktivitetDto.Arbeid
-                }
+                    morsAktivitet: MorsAktivitetDto.Arbeid,
+                },
             ] as PeriodeDto[];
             expect(cleanupUttaksplanDto(list).length).toEqual(2);
             expect(cleanupUttaksplanDto(list)).toEqual(list);
@@ -275,10 +275,10 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
                     periode: { fom: '2019-11-16', tom: '2019-11-20' },
-                    morsAktivitet: MorsAktivitetDto.Arbeid
+                    morsAktivitet: MorsAktivitetDto.Arbeid,
                 },
                 {
                     periodeResultatType: PeriodeResultatType.Avslått,
@@ -297,10 +297,10 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
                     periode: { fom: '2019-11-16', tom: '2019-11-20' },
-                    morsAktivitet: MorsAktivitetDto.Arbeid
+                    morsAktivitet: MorsAktivitetDto.Arbeid,
                 },
                 {
                     periodeResultatType: PeriodeResultatType.Avslått,
@@ -319,11 +319,11 @@ describe('uttaksplanDtoUtils', () => {
                     arbeidsgiverInfo: {
                         id: '12345',
                         type: 'ORGANISASJON',
-                        navn: 'NAV'
+                        navn: 'NAV',
                     },
                     periode: { fom: '2019-11-16', tom: '2019-11-20' },
-                    morsAktivitet: MorsAktivitetDto.Arbeid
-                }
+                    morsAktivitet: MorsAktivitetDto.Arbeid,
+                },
             ] as PeriodeDto[];
 
             expect(cleanupUttaksplanDto(list).length).toEqual(1);
@@ -348,9 +348,9 @@ describe('uttaksplanDtoUtils', () => {
                 arbeidsgiverInfo: {
                     id: '973861778',
                     type: 'ORGANISASJON',
-                    navn: 'EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET'
+                    navn: 'EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET',
                 },
-                periode: { fom: '2019-08-19', tom: '2019-09-06' }
+                periode: { fom: '2019-08-19', tom: '2019-09-06' },
             },
             {
                 periodeResultatType: 'AVSLÅTT',
@@ -365,8 +365,8 @@ describe('uttaksplanDtoUtils', () => {
                 flerbarnsdager: false,
                 uttakArbeidType: 'ORDINÆRT_ARBEID',
                 arbeidsgiverInfo: { id: '973135678', type: 'ORGANISASJON', navn: 'COLOR LINE CREW AS' },
-                periode: { fom: '2019-08-19', tom: '2019-09-06' }
-            }
+                periode: { fom: '2019-08-19', tom: '2019-09-06' },
+            },
         ] as PeriodeDto[];
         expect(cleanupUttaksplanDto(list).length).toEqual(0);
         expect(cleanupUttaksplanDto(list)).toEqual([]);
@@ -387,7 +387,7 @@ describe('uttaksplanDtoUtils', () => {
                 flerbarnsdager: false,
                 uttakArbeidType: 'ORDINÆRT_ARBEID',
                 arbeidsgiverInfo: { id: '973135678', type: 'ORGANISASJON', navn: 'COLOR LINE CREW AS' },
-                periode: { fom: '2020-03-16', tom: '2020-03-27' }
+                periode: { fom: '2020-03-16', tom: '2020-03-27' },
             },
             {
                 periodeResultatType: 'INNVILGET',
@@ -402,8 +402,8 @@ describe('uttaksplanDtoUtils', () => {
                 flerbarnsdager: false,
                 uttakArbeidType: 'ORDINÆRT_ARBEID',
                 arbeidsgiverInfo: { id: '995428563', type: 'ORGANISASJON', navn: 'FORSVARET' },
-                periode: { fom: '2020-03-16', tom: '2020-03-27' }
-            }
+                periode: { fom: '2020-03-16', tom: '2020-03-27' },
+            },
         ] as PeriodeDto[];
 
         expect(cleanupUttaksplanDto(list).length).toEqual(1);

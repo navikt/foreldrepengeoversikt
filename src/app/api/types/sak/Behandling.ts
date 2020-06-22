@@ -32,7 +32,7 @@ export enum BehandlingResultatType {
     INNSYN_DELVIS_INNVILGET = 'INNSYN_DELVIS_INNVILGET',
     INNSYN_AVVIST = 'INNSYN_AVVIST',
 
-    FORELDREPENGER_ENDRET = 'FORELDREPENGER_ENDRET'
+    FORELDREPENGER_ENDRET = 'FORELDREPENGER_ENDRET',
 }
 
 export enum BehandlingStatus {
@@ -40,7 +40,7 @@ export enum BehandlingStatus {
     UTREDES = 'UTRED',
     FATTER_VEDTAK = 'FVED',
     IVERKSETTER_VEDTAK = 'IVED',
-    AVSLUTTET = 'AVSLU'
+    AVSLUTTET = 'AVSLU',
 }
 
 export enum BehandlingÅrsak {
@@ -71,14 +71,14 @@ export enum BehandlingÅrsak {
     TILSTØTENDE_YTELSE_INNVILGET = 'RE-TILST-YT-INNVIL',
     TILSTØTENDE_YTELSE_OPPHØRT = 'RE-TILST-YT-OPPH',
     ULIKT_ANTALL_BARN = 'RE-AVAB',
-    YTELSE = 'RE-YTELSE'
+    YTELSE = 'RE-YTELSE',
 }
 
 export enum BehandlingType {
     FORELDREPENGESØKNAD = 'FP',
     ENGANGSSØNAD = 'ES',
     ENDRINGSSØKNAD = 'ENDRING',
-    SVANGERSKAPSPENGESØKNAD = 'SVP'
+    SVANGERSKAPSPENGESØKNAD = 'SVP',
 }
 
 export enum BehandlingTema {
@@ -88,5 +88,5 @@ export enum BehandlingTema {
     FORELDREPENGER = 'FORP',
     FORELDREPENGER_ADOPSJON = 'FORP_ADOP',
     FORELDREPENGER_FØDSEL = 'FORP_FODS',
-    UDEFINERT = '-'
+    UDEFINERT = '-',
 }

@@ -27,8 +27,9 @@ const EkspanderbartInnhold = ({ children, animert = true, erApen = false, ariaLi
         <Collapse
             isOpened={erApen}
             className={classnames('ekspanderbartInnhold', {
-                'ekspanderbartInnhold--apen': erApen
-            })}>
+                'ekspanderbartInnhold--apen': erApen,
+            })}
+        >
             {content}
         </Collapse>
     );

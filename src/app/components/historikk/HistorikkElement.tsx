@@ -70,7 +70,8 @@ const HistorikkElement: React.StatelessComponent<Props> = (props: Props) => {
                         <Snakkeboble
                             dato={formaterDatoForHendelse(hendelse.dato)}
                             pilHoyre={!hendelse.brukerInitiertHendelse && !matches}
-                            ikonClass={getIkonClass(hendelse)}>
+                            ikonClass={getIkonClass(hendelse)}
+                        >
                             <>
                                 <Element tag="p">{getInnslagTittel(hendelse)}</Element>
                                 <div className={cls.element('tilleggsinformasjon')}>

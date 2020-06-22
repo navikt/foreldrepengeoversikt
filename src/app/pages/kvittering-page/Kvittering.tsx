@@ -31,7 +31,7 @@ class KvitteringPage extends React.Component<Props, State> {
         super(props);
         this.state = {
             attachments: [],
-            ...this.props.history.location.state
+            ...this.props.history.location.state,
         };
 
         if (!this.state.kvittering) {
@@ -70,13 +70,14 @@ class KvitteringPage extends React.Component<Props, State> {
                 pageTitle={<FormattedMessage id="ettersendelse.pageTitle" />}
                 icon={() => <LetterIcon backgroundColor="#9BD0B0" />}
                 title={<FormattedMessage id={titleTekstId} />}
-                onBackClick={this.handleBackClick}>
+                onBackClick={this.handleBackClick}
+            >
                 <Ingress className={cls.element('message')}>
                     <FormattedMessage
                         id="kvittering.message"
                         values={{
                             timeOfDay: moment(kvittering.mottattDato).format('HH:mm'),
-                            date: moment(kvittering.mottattDato).format('LL')
+                            date: moment(kvittering.mottattDato).format('LL'),
                         }}
                     />
                 </Ingress>

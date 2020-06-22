@@ -9,7 +9,7 @@ export const finnNesteUtbetalingsdato = (): Moment => {
     nesteUtbetalingsdato.set('date', 25);
 
     return nesteUtbetalingsdato;
-}
+};
 
 export function formaterDato(dato: string | undefined, datoformat?: string): string {
     return moment.utc(dato).format(datoformat || 'dddd D. MMMM YYYY');

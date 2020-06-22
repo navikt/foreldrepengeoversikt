@@ -35,7 +35,8 @@ class MinidialogPage extends React.Component<Props> {
             <Page
                 className={cls.block}
                 pageTitle={<FormattedMessage id="miniDialog.pageTitle" />}
-                onBackClick={() => history.push(Routes.DINE_FORELDREPENGER)}>
+                onBackClick={() => history.push(Routes.DINE_FORELDREPENGER)}
+            >
                 <MinidialogSkjema
                     sak={sak}
                     minidialog={minidialog}
@@ -57,7 +58,7 @@ const mapStateToProps = (state: AppState, props: Props) => {
     return {
         minidialog,
         sak: getData(state.api.saker, []).find((s) => minidialog && s.saksnummer === minidialog.saksnr),
-        isSendingEttersendelse
+        isSendingEttersendelse,
     };
 };
 
@@ -68,13 +69,10 @@ const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props:
             payload: {
                 ettersending: ettersendelse,
                 history: props.history,
-                ettersendelseOrigin: EttersendelseOrigin.TILBAKEKREVING
-            }
+                ettersendelseOrigin: EttersendelseOrigin.TILBAKEKREVING,
+            },
         });
-    }
+    },
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MinidialogPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MinidialogPage);

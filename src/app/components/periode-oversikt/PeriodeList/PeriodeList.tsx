@@ -19,7 +19,7 @@ import {
     skalVisesIPeriodeListe,
     getAnnenPartsPeriodeMedSamtidigUttak,
     getStønadskontoFarge,
-    getNavnPåForelderForPeriode
+    getNavnPåForelderForPeriode,
 } from '../../../utils/periodeUtils';
 
 import './periodeList.less';
@@ -74,7 +74,7 @@ const PeriodeList: React.StatelessComponent<Props> = ({ tittel, perioder, navnP�
                                             <FormattedMessage
                                                 id="dinPlan.utsettelsesårsak"
                                                 values={{
-                                                    årsak: (p as Utsettelsesperiode).årsak.toLowerCase()
+                                                    årsak: (p as Utsettelsesperiode).årsak.toLowerCase(),
                                                 }}
                                             />
                                         }
@@ -112,7 +112,7 @@ const PeriodeList: React.StatelessComponent<Props> = ({ tittel, perioder, navnP�
                                             <FormattedMessage
                                                 id={`kvote.${kvote.toLowerCase()}`}
                                                 values={{
-                                                    erGradert: false
+                                                    erGradert: false,
                                                 }}
                                             />
                                         }
@@ -138,7 +138,7 @@ const PeriodeList: React.StatelessComponent<Props> = ({ tittel, perioder, navnP�
                                                 id="dinPlan.taptPeriode.beskrivelse"
                                                 values={{
                                                     navn: getNavnPåForelderForPeriode(p, navnPåForeldre),
-                                                    antallDager: getVarighetString(p.antallUttaksdager, intl)
+                                                    antallDager: getVarighetString(p.antallUttaksdager, intl),
                                                 }}
                                             />
                                         }

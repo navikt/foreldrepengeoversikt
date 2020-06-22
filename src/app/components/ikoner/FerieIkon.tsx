@@ -9,7 +9,8 @@ const FerieIkon = (props: any) => {
             xmlnsXlink="http://www.w3.org/1999/xlink"
             width={32}
             height={32}
-            {...rest}>
+            {...rest}
+        >
             <title>{props.title}</title>
             <defs>
                 <rect id="a" width={32} height={32} rx={10} />

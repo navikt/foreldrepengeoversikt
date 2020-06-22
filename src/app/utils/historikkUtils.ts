@@ -6,5 +6,3 @@ export const hentHistorikkForSak = (sak: SakBase, historikkInnslagListe?: Innsen
         ? historikkInnslagListe.filter((histoikkInnslag) => histoikkInnslag.saksnr === sak.saksnummer)
         : [];
 };
-
-

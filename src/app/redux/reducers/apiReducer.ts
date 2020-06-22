@@ -17,23 +17,23 @@ export interface ApiState {
 
 const getDefaultState = (): ApiState => ({
     søkerinfo: {
-        status: FetchStatus.UNFETCHED
+        status: FetchStatus.UNFETCHED,
     },
     saker: {
-        status: FetchStatus.UNFETCHED
+        status: FetchStatus.UNFETCHED,
     },
     storageKvittering: {
-        status: FetchStatus.UNFETCHED
+        status: FetchStatus.UNFETCHED,
     },
     historikk: {
-        status: FetchStatus.UNFETCHED
+        status: FetchStatus.UNFETCHED,
     },
     minidialogInnslagListe: {
-        status: FetchStatus.UNFETCHED
+        status: FetchStatus.UNFETCHED,
     },
     manglendeVedlegg: {
-        status: FetchStatus.UNFETCHED
-    }
+        status: FetchStatus.UNFETCHED,
+    },
 });
 
 const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
@@ -42,8 +42,8 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
             return {
                 ...state,
                 søkerinfo: {
-                    status: FetchStatus.IN_PROGRESS
-                }
+                    status: FetchStatus.IN_PROGRESS,
+                },
             };
 
         case ApiActionTypes.GET_SØKERINFO_SUCCESS:
@@ -52,9 +52,9 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 søkerinfo: {
                     status: FetchStatus.SUCCESS,
                     data: {
-                        ...action.payload.søkerinfo
-                    }
-                }
+                        ...action.payload.søkerinfo,
+                    },
+                },
             };
 
         case ApiActionTypes.GET_SØKERINFO_FAILURE:
@@ -62,15 +62,15 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 søkerinfo: {
                     status: FetchStatus.FAILURE,
-                    error: action.payload.error
-                }
+                    error: action.payload.error,
+                },
             };
         case ApiActionTypes.GET_SAKER_REQUEST:
             return {
                 ...state,
                 saker: {
-                    status: FetchStatus.IN_PROGRESS
-                }
+                    status: FetchStatus.IN_PROGRESS,
+                },
             };
 
         case ApiActionTypes.GET_SAKER_SUCCESS:
@@ -78,8 +78,8 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 saker: {
                     status: FetchStatus.SUCCESS,
-                    data: action.payload.saker
-                }
+                    data: action.payload.saker,
+                },
             };
 
         case ApiActionTypes.GET_SAKER_FAILURE:
@@ -87,15 +87,15 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 saker: {
                     status: FetchStatus.FAILURE,
-                    error: action.payload.error
-                }
+                    error: action.payload.error,
+                },
             };
         case ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST:
             return {
                 ...state,
                 storageKvittering: {
-                    status: FetchStatus.IN_PROGRESS
-                }
+                    status: FetchStatus.IN_PROGRESS,
+                },
             };
 
         case ApiActionTypes.GET_STORAGE_KVITTERING_SUCCESS:
@@ -104,9 +104,9 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 storageKvittering: {
                     status: FetchStatus.SUCCESS,
                     data: {
-                        ...action.payload.storageKvittering
-                    }
-                }
+                        ...action.payload.storageKvittering,
+                    },
+                },
             };
 
         case ApiActionTypes.GET_STORAGE_KVITTERING_FAILURE:
@@ -114,15 +114,15 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 storageKvittering: {
                     status: FetchStatus.FAILURE,
-                    error: action.payload.error
-                }
+                    error: action.payload.error,
+                },
             };
         case ApiActionTypes.GET_HISTORIKK_REQUEST:
             return {
                 ...state,
                 historikk: {
-                    status: FetchStatus.IN_PROGRESS
-                }
+                    status: FetchStatus.IN_PROGRESS,
+                },
             };
 
         case ApiActionTypes.GET_HISTORIKK_SUCCESS:
@@ -130,8 +130,8 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 historikk: {
                     status: FetchStatus.SUCCESS,
-                    data: action.payload.historikk
-                }
+                    data: action.payload.historikk,
+                },
             };
 
         case ApiActionTypes.GET_HISTORIKK_FAILURE:
@@ -139,15 +139,15 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 historikk: {
                     status: FetchStatus.FAILURE,
-                    error: action.payload.error
-                }
+                    error: action.payload.error,
+                },
             };
         case ApiActionTypes.GET_MINIDIALOG_REQUEST:
             return {
                 ...state,
                 minidialogInnslagListe: {
-                    status: FetchStatus.IN_PROGRESS
-                }
+                    status: FetchStatus.IN_PROGRESS,
+                },
             };
 
         case ApiActionTypes.GET_MINIDIALOG_SUCCESS:
@@ -155,8 +155,8 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 minidialogInnslagListe: {
                     status: FetchStatus.SUCCESS,
-                    data: action.payload.minidialogInnslagListe
-                }
+                    data: action.payload.minidialogInnslagListe,
+                },
             };
 
         case ApiActionTypes.GET_MINIDIALOG_FAILURE:
@@ -164,32 +164,32 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 minidialogInnslagListe: {
                     status: FetchStatus.FAILURE,
-                    error: action.payload.error
-                }
+                    error: action.payload.error,
+                },
             };
 
         case ApiActionTypes.GET_MANGLENDE_VEDLEGG_REQUEST:
             return {
                 ...state,
                 manglendeVedlegg: {
-                    status: FetchStatus.IN_PROGRESS
-                }
+                    status: FetchStatus.IN_PROGRESS,
+                },
             };
         case ApiActionTypes.GET_MANGLENDE_VEDLEGG_SUCCESS:
             return {
                 ...state,
                 manglendeVedlegg: {
                     status: FetchStatus.SUCCESS,
-                    data: action.payload.manglendeVedlegg
-                }
+                    data: action.payload.manglendeVedlegg,
+                },
             };
         case ApiActionTypes.GET_MANGLENDE_VEDLEGG_FAILURE:
             return {
                 ...state,
                 manglendeVedlegg: {
                     status: FetchStatus.FAILURE,
-                    error: action.payload.error
-                }
+                    error: action.payload.error,
+                },
             };
 
         default: {

@@ -2,7 +2,7 @@ import {
     PeriodeResultatType,
     StønadskontoType,
     UtsettelsePeriodeType,
-    OppholdsÅrsak
+    OppholdsÅrsak,
 } from 'app/api/types/UttaksplanDto';
 import { Tidsperiode } from '../Tidsperiode';
 import { Rolle } from '../Rolle';
@@ -44,7 +44,7 @@ export enum PeriodeType {
     Hull = 'HULL',
     Utsettelse = 'UTSETTELSE',
     Opphold = 'OPPHOLD',
-    TaptPeriode = 'TAPT_PERIODE'
+    TaptPeriode = 'TAPT_PERIODE',
 }
 
 export function isUtsettelsesperiode(periode: Periode): periode is Utsettelsesperiode {

@@ -3,7 +3,7 @@ import {
     getStønadskontoFarge,
     erGradert,
     getVarighetString,
-    getNavnPåForelderForPeriode
+    getNavnPåForelderForPeriode,
 } from 'app/utils/periodeUtils';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import IconBox from 'app/components/ikoner/uttaksplanIkon/iconBox/IconBox';

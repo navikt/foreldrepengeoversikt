@@ -22,7 +22,8 @@ const ByttBrowserModal: React.FunctionComponent = () => {
             contentLabel={getMessage(intl, 'byttBrowser.tittel')}
             closeButton={false}
             isOpen={isOpen}
-            onRequestClose={() => undefined}>
+            onRequestClose={() => undefined}
+        >
             <AdvarselIkonSirkel width="42" height="42" className={classNames(cls.element('ikon'), 'blokk-m')} />
             <Systemtittel className="blokk-m">
                 <FormattedMessage id="byttBrowser.tittel" />

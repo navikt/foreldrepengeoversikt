@@ -1,4 +1,4 @@
-import { Skjemanummer } from "./Skjemanummer";
+import { Skjemanummer } from './Skjemanummer';
 
 export interface Attachment {
     id: string;
