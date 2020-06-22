@@ -23,13 +23,13 @@ class Oversikt extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            aktivTab: 0
+            aktivTab: 0,
         };
 
         this.handleTabOnClick = this.handleTabOnClick.bind(this);
     }
 
-    handleTabOnClick(e: any, index: number) {
+    handleTabOnClick(_e: any, index: number) {
         this.setState({ aktivTab: index });
     }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 
 import BEMHelper from 'common/util/bem';
 import IconBox from 'app/components/ikoner/uttaksplanIkon/iconBox/IconBox';
@@ -25,7 +25,7 @@ const SøknadsoversiktHendelseListeItem: React.StatelessComponent<Props> = ({
     tittel,
     content,
     lesMerTittel,
-    lesMerInnhold
+    lesMerInnhold,
 }) => {
     return (
         <div className={cls.element('container')}>
@@ -35,7 +35,7 @@ const SøknadsoversiktHendelseListeItem: React.StatelessComponent<Props> = ({
             <div className={cls.element('content')}>
                 <Element>{tittel}</Element>
                 {lesMerTittel && <CollapsableTextBlock title={lesMerTittel}>{lesMerInnhold}</CollapsableTextBlock>}
-                {content && <Normaltekst>{content}</Normaltekst>}
+                {content !== undefined && content}
             </div>
         </div>
     );

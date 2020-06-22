@@ -3,7 +3,7 @@ import {
     finnFremtidigePerioder,
     erSammenhengende,
     harAnnenForelderSamtidigUttakISammePeriode,
-    skalVisesIPeriodeListe
+    skalVisesIPeriodeListe,
 } from '../periodeUtils';
 import {
     PeriodeDto,
@@ -11,7 +11,7 @@ import {
     StønadskontoType,
     PeriodeResultatType,
     UttakArbeidType,
-    UtsettelsePeriodeType
+    UtsettelsePeriodeType,
 } from 'app/api/types/UttaksplanDto';
 import moment from 'moment';
 import Periode, { Uttaksperiode, PeriodeType } from 'app/types/uttaksplan/Periode';
@@ -23,19 +23,19 @@ describe('periodeUtils', () => {
         it('converts trekkdager to uttak days and weeks', () => {
             expect(getUkerOgDagerFromDager(0)).toEqual({
                 dager: 0,
-                uker: 0
+                uker: 0,
             });
             expect(getUkerOgDagerFromDager(5)).toEqual({
                 dager: 0,
-                uker: 1
+                uker: 1,
             });
             expect(getUkerOgDagerFromDager(6)).toEqual({
                 dager: 1,
-                uker: 1
+                uker: 1,
             });
             expect(getUkerOgDagerFromDager(4)).toEqual({
                 dager: 4,
-                uker: 0
+                uker: 0,
             });
         });
     });
@@ -48,25 +48,17 @@ describe('periodeUtils', () => {
                     {
                         ...periodeMock,
                         tidsperiode: {
-                            fom: moment()
-                                .subtract(2, 'months')
-                                .format('YYYY-MM-DD'),
-                            tom: moment()
-                                .subtract(1, 'months')
-                                .format('YYYY-MM-DD')
-                        }
+                            fom: moment().subtract(2, 'months').format('YYYY-MM-DD'),
+                            tom: moment().subtract(1, 'months').format('YYYY-MM-DD'),
+                        },
                     },
                     {
                         ...periodeMock,
                         tidsperiode: {
-                            fom: moment()
-                                .subtract(1, 'days')
-                                .format('YYYY-MM-DD'),
-                            tom: moment()
-                                .add(1, 'days')
-                                .format('YYYY-MM-DD')
-                        }
-                    }
+                            fom: moment().subtract(1, 'days').format('YYYY-MM-DD'),
+                            tom: moment().add(1, 'days').format('YYYY-MM-DD'),
+                        },
+                    },
                 ]).length
             ).toEqual(0);
         });
@@ -77,25 +69,17 @@ describe('periodeUtils', () => {
                     {
                         ...periodeMock,
                         tidsperiode: {
-                            fom: moment()
-                                .subtract(2, 'months')
-                                .format('YYYY-MM-DD'),
-                            tom: moment()
-                                .subtract(1, 'months')
-                                .format('YYYY-MM-DD')
-                        }
+                            fom: moment().subtract(2, 'months').format('YYYY-MM-DD'),
+                            tom: moment().subtract(1, 'months').format('YYYY-MM-DD'),
+                        },
                     },
                     {
                         ...periodeMock,
                         tidsperiode: {
-                            fom: moment()
-                                .add(1, 'days')
-                                .format('YYYY-MM-DD'),
-                            tom: moment()
-                                .add(1, 'months')
-                                .format('YYYY-MM-DD')
-                        }
-                    }
+                            fom: moment().add(1, 'days').format('YYYY-MM-DD'),
+                            tom: moment().add(1, 'months').format('YYYY-MM-DD'),
+                        },
+                    },
                 ]).length
             ).toEqual(1);
         });
@@ -119,13 +103,13 @@ describe('periodeUtils', () => {
             arbeidsgiverInfo: {
                 id: 'string',
                 type: 'string',
-                navn: 'string'
+                navn: 'string',
             },
             periode: {
                 fom: '2019-01-01',
-                tom: '2019-01-02'
+                tom: '2019-01-02',
             },
-            morsAktivitet: MorsAktivitetDto.Arbeid
+            morsAktivitet: MorsAktivitetDto.Arbeid,
         };
         const perioder = [mockPeriode, { ...mockPeriode, periode: { fom: '2019-01-03', tom: '2019-01-04' } }];
         expect(slåSammenLikeOgSammenhengendeUttaksperioder(perioder).length).toEqual(1);
@@ -169,28 +153,28 @@ describe('periodeUtils', () => {
                 gjelderAnnenPart: false,
                 tidsperiode: {
                     fom: '2019-09-28',
-                    tom: '2019-10-08'
+                    tom: '2019-10-08',
                 },
                 forelder: 'farMedmor',
                 antallUttaksdager: 7,
                 stønadskontotype: 'FEDREKVOTE',
                 graderingInnvilget: false,
                 samtidigUttak: true,
-                samtidigUttaksprosent: 100
+                samtidigUttaksprosent: 100,
             },
             {
                 type: 'UTTAK',
                 gjelderAnnenPart: true,
                 tidsperiode: {
                     fom: '2019-09-28',
-                    tom: '2019-10-08'
+                    tom: '2019-10-08',
                 },
                 forelder: 'mor',
                 antallUttaksdager: 7,
                 stønadskontotype: 'MØDREKVOTE',
                 graderingInnvilget: false,
-                samtidigUttak: false
-            }
+                samtidigUttak: false,
+            },
         ];
 
         expect(
@@ -206,29 +190,29 @@ describe('periodeUtils', () => {
                     gjelderAnnenPart: true,
                     tidsperiode: {
                         fom: '2019-09-28',
-                        tom: '2019-10-08'
+                        tom: '2019-10-08',
                     },
                     forelder: Rolle.mor,
                     antallUttaksdager: 7,
                     stønadskontotype: StønadskontoType.Mødrekvote,
                     graderingInnvilget: false,
                     samtidigUttak: false,
-                    samtidigUttaksprosent: 100
+                    samtidigUttaksprosent: 100,
                 },
                 {
                     type: PeriodeType.Uttak,
                     gjelderAnnenPart: false,
                     tidsperiode: {
                         fom: '2019-09-28',
-                        tom: '2019-10-08'
+                        tom: '2019-10-08',
                     },
                     forelder: Rolle.farMedmor,
                     antallUttaksdager: 7,
                     stønadskontotype: StønadskontoType.Mødrekvote,
                     graderingInnvilget: false,
                     samtidigUttak: true,
-                    samtidigUttaksprosent: 100
-                }
+                    samtidigUttaksprosent: 100,
+                },
             ] as Uttaksperiode[];
             expect(skalVisesIPeriodeListe(perioder[0], perioder)).toBeFalsy();
         });
@@ -240,29 +224,29 @@ describe('periodeUtils', () => {
                     gjelderAnnenPart: true,
                     tidsperiode: {
                         fom: '2019-09-28',
-                        tom: '2019-10-08'
+                        tom: '2019-10-08',
                     },
                     forelder: Rolle.mor,
                     antallUttaksdager: 7,
                     stønadskontotype: StønadskontoType.Mødrekvote,
                     graderingInnvilget: false,
                     samtidigUttak: false,
-                    samtidigUttaksprosent: 100
+                    samtidigUttaksprosent: 100,
                 },
                 {
                     type: PeriodeType.Uttak,
                     gjelderAnnenPart: false,
                     tidsperiode: {
                         fom: '2019-09-28',
-                        tom: '2019-10-08'
+                        tom: '2019-10-08',
                     },
                     forelder: Rolle.farMedmor,
                     antallUttaksdager: 7,
                     stønadskontotype: StønadskontoType.Mødrekvote,
                     graderingInnvilget: false,
                     samtidigUttak: true,
-                    samtidigUttaksprosent: 100
-                }
+                    samtidigUttaksprosent: 100,
+                },
             ] as Uttaksperiode[];
             expect(skalVisesIPeriodeListe(perioder[0], perioder)).toBeFalsy();
         });
@@ -274,29 +258,29 @@ describe('periodeUtils', () => {
                     gjelderAnnenPart: false,
                     tidsperiode: {
                         fom: '2019-09-28',
-                        tom: '2019-10-08'
+                        tom: '2019-10-08',
                     },
                     forelder: Rolle.mor,
                     antallUttaksdager: 7,
                     stønadskontotype: StønadskontoType.Mødrekvote,
                     graderingInnvilget: false,
                     samtidigUttak: false,
-                    samtidigUttaksprosent: 100
+                    samtidigUttaksprosent: 100,
                 },
                 {
                     type: PeriodeType.Uttak,
                     gjelderAnnenPart: true,
                     tidsperiode: {
                         fom: '2019-09-28',
-                        tom: '2019-10-08'
+                        tom: '2019-10-08',
                     },
                     forelder: Rolle.farMedmor,
                     antallUttaksdager: 7,
                     stønadskontotype: StønadskontoType.Mødrekvote,
                     graderingInnvilget: false,
                     samtidigUttak: true,
-                    samtidigUttaksprosent: 100
-                }
+                    samtidigUttaksprosent: 100,
+                },
             ] as Uttaksperiode[];
             expect(skalVisesIPeriodeListe(perioder[0], perioder)).toBeTruthy();
             expect(skalVisesIPeriodeListe(perioder[1], perioder)).toBeFalsy();
@@ -309,7 +293,7 @@ describe('periodeUtils', () => {
                     gjelderAnnenPart: false,
                     tidsperiode: {
                         fom: '2019-12-30',
-                        tom: '2019-12-31'
+                        tom: '2019-12-31',
                     },
                     forelder: 'farMedmor',
                     antallUttaksdager: 1,
@@ -317,14 +301,14 @@ describe('periodeUtils', () => {
                     graderingInnvilget: false,
                     graderingsprosent: '0',
                     samtidigUttak: true,
-                    samtidigUttaksprosent: 50
+                    samtidigUttaksprosent: 50,
                 },
                 {
                     type: 'UTTAK',
                     gjelderAnnenPart: true,
                     tidsperiode: {
                         fom: '2019-12-30',
-                        tom: '2019-12-31'
+                        tom: '2019-12-31',
                     },
                     forelder: 'mor',
                     antallUttaksdager: 1,
@@ -332,8 +316,8 @@ describe('periodeUtils', () => {
                     graderingInnvilget: false,
                     graderingsprosent: '0',
                     samtidigUttak: true,
-                    samtidigUttaksprosent: 50
-                }
+                    samtidigUttaksprosent: 50,
+                },
             ] as Uttaksperiode[];
             expect(skalVisesIPeriodeListe(perioder[0], perioder)).toBeTruthy();
             expect(skalVisesIPeriodeListe(perioder[1], perioder)).toBeFalsy();

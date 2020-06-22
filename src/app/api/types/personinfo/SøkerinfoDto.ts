@@ -1,4 +1,4 @@
-import { Kjønn } from "./Kjønn";
+import { Kjønn } from './Kjønn';
 
 export interface SøkerinfoDTOPerson {
     fnr: string;

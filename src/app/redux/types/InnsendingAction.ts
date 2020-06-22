@@ -5,12 +5,12 @@ import { History } from 'history';
 export enum InnsendingActionTypes {
     'SEND_ETTERSENDELSE' = 'sendEttersendelse',
     'SEND_ETTERSENDELSE_SUCCESS' = 'sendEttersendelseSuccess',
-    'SEND_ETTERSENDELSE_FAILED' = 'sendEttersendelseFailed'
+    'SEND_ETTERSENDELSE_FAILED' = 'sendEttersendelseFailed',
 }
 
 export enum EttersendelseOrigin {
     'TILBAKEKREVING' = 'tilbakekreving',
-    'ETTERSENDELSE' = 'ettersendelse'
+    'ETTERSENDELSE' = 'ettersendelse',
 }
 
 export interface SendEttersendelse {

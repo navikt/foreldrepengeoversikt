@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { guid } from 'nav-frontend-js-utils';
 
@@ -19,7 +19,7 @@ import {
     skalVisesIPeriodeListe,
     getAnnenPartsPeriodeMedSamtidigUttak,
     getStønadskontoFarge,
-    getNavnPåForelderForPeriode
+    getNavnPåForelderForPeriode,
 } from '../../../utils/periodeUtils';
 
 import './periodeList.less';
@@ -30,13 +30,10 @@ interface Props {
     navnPåForeldre: NavnPåForeldre;
 }
 
-const PeriodeList: React.StatelessComponent<Props & InjectedIntlProps> = ({
-    tittel,
-    perioder,
-    navnPåForeldre,
-    intl
-}) => {
+const PeriodeList: React.StatelessComponent<Props> = ({ tittel, perioder, navnPåForeldre }) => {
+    const intl = useIntl();
     const cls = BEMHelper('periode-list');
+
     return (
         <div className={cls.block}>
             <Normaltekst className={cls.element('tittel')}>{tittel}</Normaltekst>
@@ -77,7 +74,7 @@ const PeriodeList: React.StatelessComponent<Props & InjectedIntlProps> = ({
                                             <FormattedMessage
                                                 id="dinPlan.utsettelsesårsak"
                                                 values={{
-                                                    årsak: (p as Utsettelsesperiode).årsak.toLowerCase()
+                                                    årsak: (p as Utsettelsesperiode).årsak.toLowerCase(),
                                                 }}
                                             />
                                         }
@@ -115,7 +112,7 @@ const PeriodeList: React.StatelessComponent<Props & InjectedIntlProps> = ({
                                             <FormattedMessage
                                                 id={`kvote.${kvote.toLowerCase()}`}
                                                 values={{
-                                                    erGradert: false
+                                                    erGradert: false,
                                                 }}
                                             />
                                         }
@@ -141,7 +138,7 @@ const PeriodeList: React.StatelessComponent<Props & InjectedIntlProps> = ({
                                                 id="dinPlan.taptPeriode.beskrivelse"
                                                 values={{
                                                     navn: getNavnPåForelderForPeriode(p, navnPåForeldre),
-                                                    antallDager: getVarighetString(p.antallUttaksdager, intl)
+                                                    antallDager: getVarighetString(p.antallUttaksdager, intl),
                                                 }}
                                             />
                                         }
@@ -156,4 +153,4 @@ const PeriodeList: React.StatelessComponent<Props & InjectedIntlProps> = ({
     );
 };
 
-export default injectIntl(PeriodeList);
+export default PeriodeList;

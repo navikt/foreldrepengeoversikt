@@ -1,24 +1,19 @@
 import * as React from 'react';
-// @ts-ignore
-import { shallowWithIntl, loadTranslationObject, mountWithIntl } from 'enzyme-react-intl';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
-import BackButton from 'common/components/back-button/BackButton';
-import translations from '../../../intl/nb_NO.json';
 import SakerMock from '../../../../../jest/__mocks__/Sak';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 import { Routes } from 'app/utils/routes';
 import { Ettersendelse } from '../Ettersendelse';
 import { shallow } from 'enzyme';
-
-loadTranslationObject(translations);
+import { Select } from 'nav-frontend-skjema';
 
 describe('Ettersendelse page', () => {
     let historyMock: any;
     let mockAttachment: Attachment;
     beforeEach(() => {
         historyMock = {
-            push: jest.fn()
+            push: jest.fn(),
         };
         mockAttachment = {
             id: 'v123',
@@ -27,7 +22,7 @@ describe('Ettersendelse page', () => {
             filename: 'mockFile.pdf',
             pending: false,
             url: undefined,
-            skjemanummer: Skjemanummer.TERMINBEKREFTELSE
+            skjemanummer: Skjemanummer.TERMINBEKREFTELSE,
         };
     });
 
@@ -43,33 +38,14 @@ describe('Ettersendelse page', () => {
                 deleteAttachment={jest.fn()}
                 isReadyToSendAttachments={true}
                 sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
+                intl={{ formatMessage: () => '' } as any}
             />
         );
         expect(historySpy).toHaveBeenCalledWith(Routes.DINE_FORELDREPENGER);
     });
 
-    it('Should navigate to frontpage when back button is clicked', () => {
-        const historySpy = jest.spyOn(historyMock, 'push');
-        const wrapper = mountWithIntl(
-            <Ettersendelse
-                history={historyMock}
-                sak={SakerMock.fpsakFP}
-                attachments={[]}
-                addAttachment={jest.fn()}
-                editAttachment={jest.fn()}
-                deleteAttachment={jest.fn()}
-                isReadyToSendAttachments={true}
-                sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
-            />
-        ).mount();
-        wrapper.find(BackButton).simulate('click');
-        expect(historySpy).toHaveBeenCalledWith(Routes.DINE_FORELDREPENGER);
-    });
-
     it('Attachment type dropdown should render', () => {
-        const wrapper = shallowWithIntl(
+        const wrapper = shallow(
             <Ettersendelse
                 history={historyMock}
                 sak={SakerMock.fpsakFP}
@@ -79,7 +55,7 @@ describe('Ettersendelse page', () => {
                 deleteAttachment={jest.fn()}
                 isReadyToSendAttachments={true}
                 sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
+                intl={{ formatMessage: () => '' } as any}
             />
         ).shallow();
         const attachmentTypeSelector = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
@@ -87,7 +63,7 @@ describe('Ettersendelse page', () => {
     });
 
     it('AttachmentUploader should only render when attachment type is selected in dropdown', () => {
-        const wrapper = mountWithIntl(
+        const wrapper = shallow(
             <Ettersendelse
                 history={historyMock}
                 sak={SakerMock.fpsakFP}
@@ -97,16 +73,16 @@ describe('Ettersendelse page', () => {
                 deleteAttachment={jest.fn()}
                 isReadyToSendAttachments={true}
                 sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
+                intl={{ formatMessage: () => '' } as any}
             />
-        ).mount();
+        );
         expect(wrapper.find(AttachmentsUploader).length).toEqual(0);
-        wrapper.find('select').simulate('change', { target: { value: Skjemanummer.TERMINBEKREFTELSE } });
+        wrapper.find(Select).simulate('change', { target: { value: Skjemanummer.TERMINBEKREFTELSE } });
         expect(wrapper.find(AttachmentsUploader).length).toEqual(1);
     });
 
     it('Send ettersendelse button should render when isReadyToSendAttachments is true', () => {
-        const wrapper = shallowWithIntl(
+        const wrapper = shallow(
             <Ettersendelse
                 history={historyMock}
                 sak={SakerMock.fpsakFP}
@@ -116,14 +92,14 @@ describe('Ettersendelse page', () => {
                 deleteAttachment={jest.fn()}
                 isReadyToSendAttachments={true}
                 sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
+                intl={{ formatMessage: () => '' } as any}
             />
         ).shallow();
         expect(wrapper.find({ className: 'ettersendelse__send-button' }).length).toEqual(1);
     });
 
     it('Send ettersendelse button should be hidden if isReadyToSendAttachments is set to false', () => {
-        const wrapper = shallowWithIntl(
+        const wrapper = shallow(
             <Ettersendelse
                 history={historyMock}
                 sak={SakerMock.fpsakFP}
@@ -133,7 +109,7 @@ describe('Ettersendelse page', () => {
                 deleteAttachment={jest.fn()}
                 isReadyToSendAttachments={false}
                 sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
+                intl={{ formatMessage: () => '' } as any}
             />
         ).shallow();
         expect(wrapper.find({ className: 'ettersendelse__send-button' }).length).toEqual(0);
@@ -148,13 +124,13 @@ describe('Ettersendelse page', () => {
     //         },
     //         {
     //             ...mockAttachment,
-    //             url: undefined,
+    //             url: '',
     //             pending: false
     //         }
     //     ];
 
     //     const sendEttersendelseMock = jest.fn();
-    //     const wrapper = shallowWithIntl(
+    //     const wrapper = shallow(
     //         <Ettersendelse
     //             history={historyMock}
     //             sak={SakerMock.fpsakFP}
@@ -164,7 +140,7 @@ describe('Ettersendelse page', () => {
     //             deleteAttachment={jest.fn()}
     //             isReadyToSendAttachments={true}
     //             sendEttersendelse={sendEttersendelseMock}
-    //             intl={jest.genMockFromModule('react-intl')}
+    //             intl={{ formatMessage: () => '' } as any}
     //         />
     //     )
     //         .setState({ attachmentSkjemanummer: Skjemanummer.TERMINBEKREFTELSE })
@@ -181,7 +157,7 @@ describe('Ettersendelse page', () => {
     // });
 
     it('attachment type dropdown should render all attachment types for saker from infotrygd', () => {
-        const wrapper = shallowWithIntl(
+        const wrapper = shallow(
             <Ettersendelse
                 history={historyMock}
                 sak={SakerMock.infotrygd}
@@ -191,7 +167,7 @@ describe('Ettersendelse page', () => {
                 deleteAttachment={jest.fn()}
                 isReadyToSendAttachments={true}
                 sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
+                intl={{ formatMessage: () => '' } as any}
             />
         ).shallow();
         expect(wrapper.find({ className: 'ettersendelse__attachment-type-select' }).children().length).toBe(
@@ -200,7 +176,7 @@ describe('Ettersendelse page', () => {
     });
 
     it('attachment type dropdown options should be sorted alphabetically except first element', () => {
-        const wrapper = shallowWithIntl(
+        const wrapper = shallow(
             <Ettersendelse
                 history={historyMock}
                 sak={SakerMock.infotrygd}
@@ -210,7 +186,7 @@ describe('Ettersendelse page', () => {
                 deleteAttachment={jest.fn()}
                 isReadyToSendAttachments={true}
                 sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
+                intl={{ formatMessage: () => '' } as any}
             />
         ).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
@@ -226,7 +202,7 @@ describe('Ettersendelse page', () => {
     });
 
     it('attachment type dropdown should only render relevant attachment types for engangsstønad', () => {
-        const wrapper = shallowWithIntl(
+        const wrapper = shallow(
             <Ettersendelse
                 history={historyMock}
                 sak={SakerMock.fpsakES}
@@ -236,7 +212,7 @@ describe('Ettersendelse page', () => {
                 deleteAttachment={jest.fn()}
                 isReadyToSendAttachments={true}
                 sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
+                intl={{ formatMessage: () => '' } as any}
             />
         ).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
@@ -244,7 +220,7 @@ describe('Ettersendelse page', () => {
     });
 
     it('attachment type dropdown should only render relevant attachment types for foreldrepengesøknad', () => {
-        const wrapper = shallowWithIntl(
+        const wrapper = shallow(
             <Ettersendelse
                 history={historyMock}
                 sak={SakerMock.fpsakFP}
@@ -254,7 +230,7 @@ describe('Ettersendelse page', () => {
                 deleteAttachment={jest.fn()}
                 isReadyToSendAttachments={true}
                 sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
+                intl={{ formatMessage: () => '' } as any}
             />
         ).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });
@@ -262,7 +238,7 @@ describe('Ettersendelse page', () => {
     });
 
     it('attachment type dropdown should only render relevant attachment types for foreldrepengesoknad with endring', () => {
-        const wrapper = shallowWithIntl(
+        const wrapper = shallow(
             <Ettersendelse
                 history={historyMock}
                 sak={SakerMock.fpsakEndring}
@@ -272,7 +248,7 @@ describe('Ettersendelse page', () => {
                 deleteAttachment={jest.fn()}
                 isReadyToSendAttachments={true}
                 sendEttersendelse={jest.fn()}
-                intl={jest.genMockFromModule('react-intl')}
+                intl={{ formatMessage: () => '' } as any}
             />
         ).shallow();
         const dropdown = wrapper.find({ className: 'ettersendelse__attachment-type-select' });

@@ -22,7 +22,7 @@ const Søknadsoversikt: React.StatelessComponent<Props> = ({
     inntektsmeldinger,
     behandlingsdato,
     manglendeVedlegg,
-    navigateToEttersendelse
+    navigateToEttersendelse,
 }) => {
     return (
         <SectionSeparator title="Søknad">

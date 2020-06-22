@@ -2,44 +2,44 @@ export const headerLinks = {
     dittNav: {
         text: 'Ditt Nav',
         href: 'https://tjenester.nav.no/dittnav',
-        external: true
+        external: true,
     },
     innsyn: {
         text: 'Dine foreldrepenger',
-        href: '/'
+        href: '/',
     },
     ettersendelse: {
         text: 'Ettersendelse av vedlegg',
-        href: '/ettersendelse'
-    }
+        href: '/ettersendelse',
+    },
 };
 
 export const annenInformasjonLenker = {
     viktigeFrister: {
         text: 'Viktige frister',
-        href: 'https://familie.nav.no/om-foreldrepenger#nar-kan-du-soke'
+        href: 'https://familie.nav.no/om-foreldrepenger#nar-kan-du-soke',
     },
     klagePåSøknad: {
         text: 'Slik klager du',
-        href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Klage+ris+og+ros'
+        href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Klage+ris+og+ros',
     },
     kontaktOss: {
         text: 'Hvordan søke om endring?',
-        href: 'https://familie.nav.no/soke-om-foreldrepenger'
+        href: 'https://familie.nav.no/soke-om-foreldrepenger',
     },
     saksbehandlingstider: {
         text: 'Saksbehandlingstider',
-        href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Saksbehandlingstider+i+NAV'
+        href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Saksbehandlingstider+i+NAV',
     },
     regelverket: {
         text: 'Regelverket',
-        href: 'https://lovdata.no/nav/folketrygdloven/kap14'
+        href: 'https://lovdata.no/nav/folketrygdloven/kap14',
     },
     meldFraOmEndringer: {
         text: 'Meld fra om endringer',
         href:
-            'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Relatert+informasjon/du-har-plikt-til-%C3%A5-gi-nav-riktige-opplysninger'
-    }
+            'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Relatert+informasjon/du-har-plikt-til-%C3%A5-gi-nav-riktige-opplysninger',
+    },
 };
 
 export const lenker = {
@@ -55,5 +55,5 @@ export const lenker = {
     søk: 'https://foreldrepengesoknad.nav.no',
     svangerskapspengesøknad: 'https://svangerskapspengesoknad.nav.no',
     hvaSøkerDu: 'https://familie.nav.no/hva-soker-du',
-    sendeInntektsmelding: 'https://www.nav.no/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/inntektsmelding'
+    sendeInntektsmelding: 'https://www.nav.no/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/inntektsmelding',
 };

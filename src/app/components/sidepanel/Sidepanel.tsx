@@ -13,7 +13,7 @@ import {
     erAvsluttet,
     erInfotrygdSak,
     erEngangsstønad,
-    harSøkt
+    harSøkt,
 } from 'app/utils/sakerUtils';
 
 import './sidepanel.less';
@@ -39,7 +39,7 @@ const Sidepanel: FunctionComponent<Props> = ({ sak }) => {
                         icon={<UtbetalingerIkon />}
                         lenke={{
                             lenketekst: 'sidepanel.utbetalinger',
-                            href: lenker.utbetalinger
+                            href: lenker.utbetalinger,
                         }}
                     />
                 )}
@@ -48,7 +48,7 @@ const Sidepanel: FunctionComponent<Props> = ({ sak }) => {
                     icon={<SøkIkon />}
                     lenke={{
                         lenketekst: 'sidepanel.søk',
-                        href: lenker.søk
+                        href: lenker.søk,
                     }}
                 />
             )}
@@ -56,7 +56,7 @@ const Sidepanel: FunctionComponent<Props> = ({ sak }) => {
                 icon={<ChatIkon />}
                 lenke={{
                     lenketekst: 'sidepanel.chat',
-                    href: lenker.chat
+                    href: lenker.chat,
                 }}
             />
         </aside>

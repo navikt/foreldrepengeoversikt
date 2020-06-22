@@ -26,7 +26,8 @@ const CollapseToggler: React.StatelessComponent<Props> = (props) => {
                 onToggle();
             }}
             aria-expanded={isOpen}
-            aria-controls={contentId}>
+            aria-controls={contentId}
+        >
             <span className={bem.element('content')}>
                 <span className={bem.element('label')}>{children}</span>
                 <span className={bem.element('chevron')}>

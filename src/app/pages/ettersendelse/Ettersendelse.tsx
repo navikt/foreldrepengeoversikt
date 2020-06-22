@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -30,9 +30,19 @@ import UtvidetInformasjon from 'app/components/utvidetinformasjon/UtvidetInforma
 import PictureScanningGuide from 'app/components/picture-scanning-guide/PictureScanningGuide';
 
 interface EttersendelseProps {
-    sak?: SakBase;
     history: History;
-    sendEttersendelse: (ettersendingDto: EttersendingDto) => void;
+}
+
+interface InjectedProps {
+    intl: IntlShape;
+}
+
+interface ReduxStateProps {
+    sak: SakBase | undefined;
+}
+
+interface ReduxDispatchProps {
+    sendEttersendelse: (ettersendelse: EttersendingDto) => void;
 }
 
 interface State {
@@ -41,12 +51,13 @@ interface State {
     sendingEttersendelse: boolean;
 }
 
-type Props = EttersendelseProps & InjectedIntlProps;
-export class Ettersendelse extends React.Component<Props & AttachmentFormProps, State> {
-    constructor(props: Props & AttachmentFormProps) {
+type Props = EttersendelseProps & AttachmentFormProps & InjectedProps & ReduxStateProps & ReduxDispatchProps;
+
+export class Ettersendelse extends React.Component<Props, State> {
+    constructor(props: Props & InjectedProps & AttachmentFormProps) {
         super(props);
         this.state = {
-            sendingEttersendelse: false
+            sendingEttersendelse: false,
         };
 
         if (props.sak === undefined) {
@@ -80,7 +91,7 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
         const ettersending: EttersendingDto = {
             type: getEttersendingType(sak),
             saksnummer: sak.saksnummer!,
-            vedlegg: this.props.attachments.filter((a: Attachment) => !isAttachmentWithError(a))
+            vedlegg: this.props.attachments.filter((a: Attachment) => !isAttachmentWithError(a)),
         };
         this.props.sendEttersendelse(ettersending);
     }
@@ -109,7 +120,7 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
             addAttachment,
             deleteAttachment,
             editAttachment,
-            isReadyToSendAttachments
+            isReadyToSendAttachments,
         } = this.props;
         const { attachmentSkjemanummer, sendingEttersendelse } = this.state;
 
@@ -125,12 +136,14 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
                 pageTitle={<FormattedMessage id="ettersendelse.pageTitle" />}
                 icon={() => <LetterIcon backgroundColor="#C6C2BF" />}
                 title={<FormattedMessage id="ettersendelse.title" values={{ saksnummer: sak.saksnummer }} />}
-                onBackClick={this.handleBackClick}>
+                onBackClick={this.handleBackClick}
+            >
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
                         this.onSubmit();
-                    }}>
+                    }}
+                >
                     <Select
                         className={cls.element('attachment-type-select')}
                         label={
@@ -139,7 +152,8 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
                             </Element>
                         }
                         onChange={this.handleAttachmentTypeSelectChange}
-                        defaultValue="default">
+                        defaultValue="default"
+                    >
                         {getAttachmentTypeSelectOptions(intl, sak)}
                     </Select>
 
@@ -192,11 +206,11 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
     }
 }
 
-const mapStateToProps = (state: AppState, props: Props) => {
+const mapStateToProps = (state: AppState, props: Props): ReduxStateProps => {
     const params = new URLSearchParams(props.history.location.search);
     const sak = getData(state.api.saker, []).find((s) => s.saksnummer === params.get('saksnummer'));
     return {
-        sak
+        sak,
     };
 };
 
@@ -207,13 +221,13 @@ const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props:
             payload: {
                 ettersending: ettersendelse,
                 history: props.history,
-                ettersendelseOrigin: EttersendelseOrigin.ETTERSENDELSE
-            }
+                ettersendelseOrigin: EttersendelseOrigin.ETTERSENDELSE,
+            },
         });
-    }
+    },
 });
 
-export default connect(
+export default connect<ReduxStateProps, ReduxDispatchProps>(
     mapStateToProps,
     mapDispatchToProps
 )(injectIntl(withAttachments<Props>(Ettersendelse)));

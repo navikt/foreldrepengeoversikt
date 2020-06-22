@@ -21,7 +21,7 @@ const PeriodeOversikt: React.StatelessComponent<Props> = ({
     nåværendePerioder = [],
     fremtidigePerioder = [],
     søker,
-    sak
+    sak,
 }) => {
     return (
         <>

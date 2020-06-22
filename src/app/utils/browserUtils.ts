@@ -1,4 +1,4 @@
-import { detect } from "detect-browser";
+import { detect } from 'detect-browser';
 
 export const shouldChangeBrowser = () => {
     const browserInfo = detect();

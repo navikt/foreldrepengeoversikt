@@ -13,22 +13,22 @@ function* ettersend(action: SendEttersendelse) {
             action.payload.history.push(Routes.KVITTERING, {
                 kvittering: response.data,
                 attachments: ettersending.vedlegg,
-                ettersendelseOrigin
+                ettersendelseOrigin,
             });
 
             yield put({
                 type: InnsendingActionTypes.SEND_ETTERSENDELSE_SUCCESS,
                 payload: {
                     ettersendelse: {
-                        status: FetchStatus.SUCCESS
-                    }
-                }
+                        status: FetchStatus.SUCCESS,
+                    },
+                },
             });
         }
     } catch (error) {
         yield put({
             type: InnsendingActionTypes.SEND_ETTERSENDELSE_FAILED,
-            payload: { ettersendelse: { status: FetchStatus.FAILURE, error } }
+            payload: { ettersendelse: { status: FetchStatus.FAILURE, error } },
         });
     }
 }

@@ -34,7 +34,7 @@ describe('Block component', () => {
             shallowBlock = renderBlock({
                 children,
                 visible: false,
-                animated: false
+                animated: false,
             });
         });
 
@@ -48,7 +48,7 @@ describe('Block component', () => {
         beforeEach(() => {
             shallowBlock = renderBlock({
                 children,
-                animated: false
+                animated: false,
             });
         });
 

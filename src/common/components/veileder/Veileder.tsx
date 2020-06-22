@@ -21,13 +21,7 @@ interface OwnProps {
 type Props = VeilederProps & OwnProps;
 
 const Veileder = (props: Props) => {
-    const {
-        className,
-        farge = 'lilla',
-        ansikt = 'glad',
-        stil = 'normal',
-        ...rest
-    } = props;
+    const { className, farge = 'lilla', ansikt = 'glad', stil = 'normal', ...rest } = props;
 
     const svgProps = {
         ...rest,
@@ -37,13 +31,9 @@ const Veileder = (props: Props) => {
             `veileder--${ansikt}`,
             `veileder--${stil}`,
             props.className
-        )
+        ),
     };
-    return stil === 'normal' ? (
-        <VeilederNormal svgProps={svgProps} />
-    ) : (
-        <VeilederKompakt svgProps={svgProps} />
-    );
+    return stil === 'normal' ? <VeilederNormal svgProps={svgProps} /> : <VeilederKompakt svgProps={svgProps} />;
 };
 
 export default Veileder;

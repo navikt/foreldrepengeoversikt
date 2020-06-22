@@ -1,6 +1,6 @@
 import * as React from 'react';
 import UttaksplanIkon, { UttaksplanIkonKeys } from './UttaksplanIkon';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import IconBox from './iconBox/IconBox';
 import { StønadskontoType } from 'app/api/types/UttaksplanDto';
 import { NavnPåForeldre } from 'common/components/oversikt-brukte-dager/OversiktBrukteDager';
@@ -15,16 +15,14 @@ export interface Props {
     navnPåForeldre: NavnPåForeldre;
 }
 
-const StønadskontoIkon: React.StatelessComponent<Props & InjectedIntlProps> = ({
-    konto,
-    forelder,
-    gradert,
-    intl,
-    navnPåForeldre
-}) => (
-    <IconBox color={getStønadskontoFarge(konto, forelder, true)} stripes={gradert}>
-        <UttaksplanIkon ikon={UttaksplanIkonKeys.uttak} title={getStønadskontoNavn(intl, konto, navnPåForeldre)} />
-    </IconBox>
-);
+const StønadskontoIkon: React.StatelessComponent<Props> = ({ konto, forelder, gradert, navnPåForeldre }) => {
+    const intl = useIntl();
 
-export default injectIntl(StønadskontoIkon);
+    return (
+        <IconBox color={getStønadskontoFarge(konto, forelder, true)} stripes={gradert}>
+            <UttaksplanIkon ikon={UttaksplanIkonKeys.uttak} title={getStønadskontoNavn(intl, konto, navnPåForeldre)} />
+        </IconBox>
+    );
+};
+
+export default StønadskontoIkon;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { injectIntl, InjectedIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import Icon from 'nav-frontend-ikoner-assets';
 import Lenke from 'nav-frontend-lenker';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
@@ -12,18 +12,17 @@ import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import Block from 'common/components/block/Block';
 import { lenker } from '../../../../utils/lenker';
 import BEMHelper from 'common/util/bem';
-
-import './arbeidsgiverHendelse.less';
 import { InntektsmeldingInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 
+import './arbeidsgiverHendelse.less';
+
 interface Props {
-    intl: InjectedIntl;
     inntektsopplysningerDato: string;
     arbeidsforhold: Arbeidsforhold[];
     inntektsmeldinger: InntektsmeldingInnslag[];
 }
 
-const getTittel = (arbeidsforhold: Arbeidsforhold[], inntektsopplysningerDato: string, intl: InjectedIntl) => {
+const getTittel = (arbeidsforhold: Arbeidsforhold[], inntektsopplysningerDato: string, intl: IntlShape) => {
     if (arbeidsforhold.length === 1) {
         return intl.formatMessage(
             { id: 'søknadsoversikt.arbeidsgiverKanSendeInnInntektsmelding.entall' },
@@ -59,7 +58,7 @@ const renderLesMerInnhold = () => {
                                 <Lenke href={lenker.saksoversikt}>
                                     <FormattedMessage id="søknadsoversikt.lesMer.innhold3.lenke2" />
                                 </Lenke>
-                            )
+                            ),
                         }}
                     />
                 </Normaltekst>
@@ -129,8 +128,8 @@ const ArbeidsgiverHendelse: React.FunctionComponent<Props> = ({
     inntektsopplysningerDato,
     arbeidsforhold,
     inntektsmeldinger,
-    intl
 }) => {
+    const intl = useIntl();
     const alleInntektsmeldingerMottatt = erAlleInntektsmeldingerMottatt(arbeidsforhold, inntektsmeldinger);
 
     return (
@@ -145,4 +144,4 @@ const ArbeidsgiverHendelse: React.FunctionComponent<Props> = ({
     );
 };
 
-export default injectIntl(ArbeidsgiverHendelse);
+export default ArbeidsgiverHendelse;

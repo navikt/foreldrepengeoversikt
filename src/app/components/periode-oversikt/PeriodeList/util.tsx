@@ -3,14 +3,14 @@ import {
     getStønadskontoFarge,
     erGradert,
     getVarighetString,
-    getNavnPåForelderForPeriode
+    getNavnPåForelderForPeriode,
 } from 'app/utils/periodeUtils';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
 import IconBox from 'app/components/ikoner/uttaksplanIkon/iconBox/IconBox';
 import React from 'react';
 import UttakIkon from 'app/components/ikoner/UttakIkon';
 import { NavnPåForeldre } from 'common/components/oversikt-brukte-dager/OversiktBrukteDager';
-import { InjectedIntl } from 'react-intl';
+import { IntlShape } from 'react-intl';
 import { UtsettelsePeriodeType } from 'app/api/types/UttaksplanDto';
 import ArbeidIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/ArbeidIkon';
 import SykdomIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/SykdomIkon';
@@ -60,7 +60,7 @@ export const getIkon = (periode: Periode) => {
     );
 };
 
-export const getBeskrivelse = (periode: Periode, navnPåForeldre: NavnPåForeldre, intl: InjectedIntl) => {
+export const getBeskrivelse = (periode: Periode, navnPåForeldre: NavnPåForeldre, intl: IntlShape) => {
     return (
         <>
             {getVarighetString(periode.antallUttaksdager, intl)}

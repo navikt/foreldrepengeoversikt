@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage, IntlShape } from 'react-intl';
 import Feilsidemelding from '../feilsidemelding/Feilsidemelding';
 import getMessage from 'common/util/i18nUtils';
 import Lenke from 'nav-frontend-lenker';
@@ -11,17 +11,20 @@ interface State {
     hasError: boolean;
 }
 
-type Props = InjectedIntlProps;
-class ErrorBoundary extends React.Component<InjectedIntlProps, State> {
+interface Props {
+    intl: IntlShape;
+}
+
+class ErrorBoundary extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
             eventId: null,
-            hasError: false
+            hasError: false,
         };
     }
 
-    componentDidCatch(error: Error | null, errorInfo: object) {
+    componentDidCatch(error: Error | null, errorInfo: any) {
         Sentry.withScope((scope) => {
             scope.setExtras(errorInfo);
             const eventId = Sentry.captureException(error);
@@ -41,7 +44,7 @@ class ErrorBoundary extends React.Component<InjectedIntlProps, State> {
             <Feilsidemelding
                 illustrasjon={{
                     tittel: getMessage(intl, 'feilside.bobletittel'),
-                    tekst: getMessage(intl, 'feilside.bobletekst')
+                    tekst: getMessage(intl, 'feilside.bobletekst'),
                 }}
                 tittel={getMessage(intl, 'feilside.tittel')}
                 ingress={
@@ -50,7 +53,7 @@ class ErrorBoundary extends React.Component<InjectedIntlProps, State> {
                         values={{
                             lenke: (
                                 <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'feilside.ingress.lenke')}</Lenke>
-                            )
+                            ),
                         }}
                     />
                 }

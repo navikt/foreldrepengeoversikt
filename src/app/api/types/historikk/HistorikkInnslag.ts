@@ -3,7 +3,7 @@ import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 export enum HistorikkInnslagType {
     'søknad' = 'søknad',
     'inntekt' = 'inntekt',
-    'minidialog' = 'minidialog'
+    'minidialog' = 'minidialog',
 }
 
 export interface HistorikkInnslag {
@@ -61,5 +61,5 @@ export enum HendelseType {
     ETTERSENDING_SVANGERSKAPSPENGER = 'ETTERSENDING_SVANGERSKAPSPENGER',
     ENDRING_FORELDREPENGER = 'ENDRING_FORELDREPENGER',
     ENDRING_SVANGERSKAPSPENGER = 'ENDRING_SVANGERSKAPSPENGER',
-    UKJENT = 'UKJENT'
+    UKJENT = 'UKJENT',
 }

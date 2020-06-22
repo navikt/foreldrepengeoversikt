@@ -8,9 +8,7 @@ import { FagsakStatus } from 'app/api/types/sak/FagsakStatus';
 
 describe('SaksinformasjonPanel', () => {
     it('Ettersendelse should be disabled if sak is from infotrygd and the 150 day deadline on ettersendelse has expired', () => {
-        const opprettetDate = moment()
-            .subtract(151, 'days')
-            .format('YYYY-MM-DD');
+        const opprettetDate = moment().subtract(151, 'days').format('YYYY-MM-DD');
         const wrapper = shallow(
             <SaksinformasjonPanel
                 sak={{ ...SakerMock.infotrygd, opprettet: opprettetDate }}
@@ -24,9 +22,7 @@ describe('SaksinformasjonPanel', () => {
     });
 
     it('Ettersendelse should be enabled 150 days after the application is sent if sak is from infotrygd', () => {
-        const opprettetDate = moment()
-            .subtract(149, 'days')
-            .format('YYYY-MM-DD');
+        const opprettetDate = moment().subtract(149, 'days').format('YYYY-MM-DD');
 
         const wrapper = shallow(
             <SaksinformasjonPanel
@@ -50,11 +46,9 @@ describe('SaksinformasjonPanel', () => {
                         {
                             ...foreldrepengesoknadBehandlingMock,
                             behandlingResultat: BehandlingResultatType.INNVILGET,
-                            endretTidspunkt: moment()
-                                .add(7, 'weeks')
-                                .format(moment.HTML5_FMT.DATE)
-                        }
-                    ]
+                            endretTidspunkt: moment().add(7, 'weeks').format(moment.HTML5_FMT.DATE),
+                        },
+                    ],
                 }}
                 history={jest.fn() as any}
                 historikkInnslagListe={[]}

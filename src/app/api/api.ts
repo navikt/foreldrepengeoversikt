@@ -28,13 +28,13 @@ const getSaker = () => {
 
 const sendEttersending = (ettersending: EttersendingDto) => {
     return AxiosApiInterceptor.post('/soknad/ettersend', ettersending, {
-        timeout: 120 * 1000
+        timeout: 120 * 1000,
     });
 };
 
 const getStorageKvittering = () => {
     return AxiosApiInterceptor.get('/storage/kvittering/foreldrepenger', {
-        timeout: 15 * 1000
+        timeout: 15 * 1000,
     });
 };
 
@@ -48,13 +48,13 @@ const getMiniDialog = () => {
 
 const getUttaksplan = (saksnummer: string) => {
     return AxiosApiInterceptor.get('innsyn/uttaksplan', {
-        params: { saksnummer }
+        params: { saksnummer },
     });
 };
 
 const getManglendeVedlegg = (saksnummer: string) => {
     return AxiosApiInterceptor.get('/historikk/vedlegg', {
-        params: { saksnummer }
+        params: { saksnummer },
     });
 };
 
@@ -68,7 +68,7 @@ function getUttakskontoer({
     omsorgsovertakelsesdato,
     morHarAleneomsorg,
     farHarAleneomsorg,
-    startdatoUttak
+    startdatoUttak,
 }: GetTilgjengeligeStønadskontoerParams) {
     const fpUttakServiceDateFormat = 'YYYYMMDD';
     const urlParams = {
@@ -83,12 +83,12 @@ function getUttakskontoer({
         omsorgsovertakelseDato: omsorgsovertakelsesdato
             ? formaterDato(omsorgsovertakelsesdato, fpUttakServiceDateFormat)
             : undefined,
-        startdatoUttak: formaterDato(startdatoUttak, fpUttakServiceDateFormat)
+        startdatoUttak: formaterDato(startdatoUttak, fpUttakServiceDateFormat),
     };
 
     return axios.get(`${Environment.UTTAK_API_URL}/konto`, {
         timeout: 15 * 1000,
-        params: urlParams
+        params: urlParams,
     });
 }
 
@@ -101,7 +101,7 @@ const Api = {
     getMiniDialog,
     getUttaksplan,
     getUttakskontoer,
-    getManglendeVedlegg
+    getManglendeVedlegg,
 };
 
 export default Api;

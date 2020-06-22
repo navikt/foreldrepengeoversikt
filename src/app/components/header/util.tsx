@@ -19,7 +19,7 @@ export const getRandomIcon = () => {
         <Familie2 key={guid()} className={cls.element('icon')} />,
         <Familie3 key={guid()} className={cls.element('icon')} />,
         <Familie4 key={guid()} className={cls.element('icon')} />,
-        <Familie5 key={guid()} className={cls.element('icon')} />
+        <Familie5 key={guid()} className={cls.element('icon')} />,
     ];
 
     const randomIconIndex = Math.floor(Math.random() * Math.floor(ikoner.length));

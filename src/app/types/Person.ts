@@ -1,5 +1,5 @@
-import { Kjønn } from "app/api/types/personinfo/Kjønn";
-import Bankkonto from "app/api/types/personinfo/Bankkonto";
+import { Kjønn } from 'app/api/types/personinfo/Kjønn';
+import Bankkonto from 'app/api/types/personinfo/Bankkonto';
 
 export interface PersonBase {
     fnr: string;

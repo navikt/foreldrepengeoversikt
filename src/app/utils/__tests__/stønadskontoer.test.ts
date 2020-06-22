@@ -6,25 +6,25 @@ describe('stønadskontoerUtils', () => {
     describe('stønadskontoerDtoTilTilgjengeligStønadskontoMapper', () => {
         expect(
             stønadskontoerDtoTilTilgjengeligStønadskontoMapper({
-                kontoer: { MØDREKVOTE: 75, FEDREKVOTE: 75, FELLESPERIODE: 80, FORELDREPENGER_FØR_FØDSEL: 15 }
+                kontoer: { MØDREKVOTE: 75, FEDREKVOTE: 75, FELLESPERIODE: 80, FORELDREPENGER_FØR_FØDSEL: 15 },
             })
         ).toEqual([
             {
                 konto: StønadskontoType.Mødrekvote,
-                dager: 75
+                dager: 75,
             },
             {
                 konto: StønadskontoType.Fedrekvote,
-                dager: 75
+                dager: 75,
             },
             {
                 konto: StønadskontoType.Fellesperiode,
-                dager: 80
+                dager: 80,
             },
             {
                 konto: StønadskontoType.ForeldrepengerFørFødsel,
-                dager: 15
-            }
+                dager: 15,
+            },
         ]);
     });
 
@@ -40,8 +40,8 @@ describe('stønadskontoerUtils', () => {
                 antallUttaksdager: 10,
                 tidsperiode: {
                     fom: '2019-05-21',
-                    tom: '"2019-06-05" '
-                }
+                    tom: '"2019-06-05" ',
+                },
             };
         });
 
@@ -54,33 +54,33 @@ describe('stønadskontoerUtils', () => {
                     { ...periodeMock, stønadskontotype: StønadskontoType.Fellesperiode },
                     { ...periodeMock, stønadskontotype: StønadskontoType.ForeldrepengerFørFødsel },
                     { ...periodeMock, stønadskontotype: StønadskontoType.Foreldrepenger },
-                    { ...periodeMock, stønadskontotype: StønadskontoType.AktivitetsfriKvote }
+                    { ...periodeMock, stønadskontotype: StønadskontoType.AktivitetsfriKvote },
                 ] as Uttaksperiode[])
             ).toEqual([
                 {
                     konto: StønadskontoType.Mødrekvote,
-                    dager: 20
+                    dager: 20,
                 },
                 {
                     konto: StønadskontoType.Fedrekvote,
-                    dager: 10
+                    dager: 10,
                 },
                 {
                     konto: StønadskontoType.Fellesperiode,
-                    dager: 10
+                    dager: 10,
                 },
                 {
                     konto: StønadskontoType.ForeldrepengerFørFødsel,
-                    dager: 10
+                    dager: 10,
                 },
                 {
                     konto: StønadskontoType.Foreldrepenger,
-                    dager: 10
+                    dager: 10,
                 },
                 {
                     konto: StønadskontoType.AktivitetsfriKvote,
-                    dager: 10
-                }
+                    dager: 10,
+                },
             ]);
         });
 

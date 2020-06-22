@@ -26,7 +26,8 @@ const SøkNåPanel: React.StatelessComponent<Props> = ({ søker }) => {
                     søker && søker.kjønn === Kjønn.M
                         ? redirect(lenker.søkOmForeldrepenger)
                         : redirect(lenker.hvaSøkerDu)
-                }>
+                }
+            >
                 <FormattedMessage id="søkNåPanel.søkNåButton" />
             </Hovedknapp>
         </AlertStripe>

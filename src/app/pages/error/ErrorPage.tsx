@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 
 import BEMHelper from 'common/util/bem';
@@ -9,14 +9,15 @@ import { lenker } from '../../utils/lenker';
 
 import './errorPage.less';
 
-export interface ErrorPageProps {
+export interface Props {
     errorMessage?: string;
     uuid?: string;
     clearError?: () => void;
 }
 
-type Props = ErrorPageProps & InjectedIntlProps;
-const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearError, intl }) => {
+const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearError }) => {
+    const intl = useIntl();
+
     useEffect(() => {
         if (clearError !== undefined) {
             clearError();
@@ -29,7 +30,7 @@ const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearEr
             <Feilsidemelding
                 illustrasjon={{
                     tittel: getMessage(intl, 'feilside.bobletittel'),
-                    tekst: getMessage(intl, 'feilside.bobletekst')
+                    tekst: getMessage(intl, 'feilside.bobletekst'),
                 }}
                 tittel={getMessage(intl, 'feilside.tittel')}
                 ingress={
@@ -43,7 +44,7 @@ const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearEr
                                     <Lenke href={lenker.brukerstøtte}>
                                         {getMessage(intl, 'feilside.ingress.lenke')}
                                     </Lenke>
-                                )
+                                ),
                             }}
                         />
                     )
@@ -54,4 +55,4 @@ const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearEr
     );
 };
 
-export default injectIntl(ErrorPage);
+export default ErrorPage;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import classnames from 'classnames';
 import { Element, Normaltekst, EtikettLiten } from 'nav-frontend-typografi';
 import moment from 'moment';
@@ -29,7 +29,7 @@ interface Props {
 }
 
 const BEM = BEMHelper('periodelisteItemHeader');
-const renderDagMnd = (dato: string, visÅr: boolean = true): JSX.Element => {
+const renderDagMnd = (dato: string, visÅr = true): JSX.Element => {
     const d = moment.utc(dato);
     return dato ? (
         <div className={BEM.element('dagmnd')}>
@@ -47,7 +47,7 @@ const renderDagMnd = (dato: string, visÅr: boolean = true): JSX.Element => {
     );
 };
 
-const PeriodeListElement: React.FunctionComponent<Props & InjectedIntlProps> = ({
+const PeriodeListElement: React.FunctionComponent<Props> = ({
     ikon,
     tittel,
     beskrivelse,
@@ -56,8 +56,9 @@ const PeriodeListElement: React.FunctionComponent<Props & InjectedIntlProps> = (
     annenForelderSamtidigUttakPeriode,
     navnPåForeldre,
     color,
-    intl
 }) => {
+    const intl = useIntl();
+
     return (
         <li className={classnames(BEM.block, 'typo-normal', BEM.modifier(color))}>
             <div className={BEM.element('main-content')}>
@@ -89,8 +90,9 @@ const PeriodeListElement: React.FunctionComponent<Props & InjectedIntlProps> = (
                     className={classnames(BEM.element('samtidig-uttak'), {
                         [BEM.modifier('samtidig-uttak-mor')]: annenForelderSamtidigUttakPeriode.forelder === Rolle.mor,
                         [BEM.modifier('samtidig-uttak-far')]:
-                            annenForelderSamtidigUttakPeriode.forelder === Rolle.farMedmor
-                    })}>
+                            annenForelderSamtidigUttakPeriode.forelder === Rolle.farMedmor,
+                    })}
+                >
                     <div>
                         <Element>
                             <FormattedMessage id="morsAktivitet.SamtidigUttak" />
@@ -124,4 +126,4 @@ const PeriodeListElement: React.FunctionComponent<Props & InjectedIntlProps> = (
     );
 };
 
-export default injectIntl(PeriodeListElement);
+export default PeriodeListElement;

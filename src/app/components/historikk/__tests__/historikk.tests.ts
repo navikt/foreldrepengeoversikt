@@ -33,17 +33,17 @@ describe('historikk', () => {
         const behandling1 = {
             ...foreldrepengesoknadBehandlingMock,
             opprettetTidspunkt: '2018-01-21T12:10:00.33',
-            endretTidspunkt: '2018-01-21T12:10:00.33'
+            endretTidspunkt: '2018-01-21T12:10:00.33',
         };
         const behandling2 = {
             ...foreldrepengesoknadBehandlingMock,
             opprettetTidspunkt: '2019-01-21T12:10:00.33',
-            endretTidspunkt: '2019-01-21T12:10:00.33'
+            endretTidspunkt: '2019-01-21T12:10:00.33',
         };
         const behanlding3 = {
             ...foreldrepengesoknadBehandlingMock,
             opprettetTidspunkt: '2017-01-21T12:10:00.33',
-            endretTidspunkt: '2017-01-21T12:10:00.33'
+            endretTidspunkt: '2017-01-21T12:10:00.33',
         };
         expect(
             utledHendelser([behandling1, behandling2, behanlding3]).some(

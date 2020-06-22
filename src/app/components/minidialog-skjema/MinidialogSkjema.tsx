@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from 'react';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Textarea, RadioPanelGruppe } from 'nav-frontend-skjema';
 import Snakkeboble from 'nav-frontend-snakkeboble';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -34,10 +34,10 @@ interface Props {
 
 export enum JaNeiSpørsmål {
     JA = 'JA',
-    NEI = 'NEI'
+    NEI = 'NEI',
 }
 
-const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & InjectedIntlProps> = ({
+const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = ({
     sak,
     minidialog,
     attachments,
@@ -46,8 +46,8 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
     editAttachment,
     onSubmit,
     isSendingEttersendelse,
-    intl
 }) => {
+    const intl = useIntl();
     const [fritekst, updateFritekst] = useState('');
     const [svar, update] = useState<string | undefined>(undefined);
     const brukerØnskerÅUttaleSeg = svar === JaNeiSpørsmål.JA;
@@ -61,8 +61,8 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
             overskrift: 'Svar på tilbakebetalingen',
             tekst: brukerØnskerÅUttaleSeg
                 ? fritekst
-                : 'Jeg ønsker ikke å uttale meg. Saken vil bli behandlet med de opplysningene som NAV har tilgjengelig.'
-        }
+                : 'Jeg ønsker ikke å uttale meg. Saken vil bli behandlet med de opplysningene som NAV har tilgjengelig.',
+        },
     };
 
     const cls = BEMHelper('minidialog-skjema');
@@ -74,7 +74,8 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
                 event.preventDefault();
 
                 return onSubmit(submitData);
-            }}>
+            }}
+        >
             <Snakkeboble topp={formaterDatoForHendelse(minidialog.opprettet)} pilHoyre={false} ikonClass={'nav'}>
                 <Normaltekst tag="p">
                     <FormattedMessage id="miniDialog.tilbakekreving.tittel" values={{ sakstype: getSakstype(sak) }} />
@@ -89,11 +90,11 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
                 className="blokk-xs"
                 radios={[
                     { label: getMessage(intl, 'ja'), value: JaNeiSpørsmål.JA },
-                    { label: getMessage(intl, 'nei'), value: JaNeiSpørsmål.NEI }
+                    { label: getMessage(intl, 'nei'), value: JaNeiSpørsmål.NEI },
                 ]}
                 legend={getMessage(intl, 'miniDialog.tilbakekreving.radioPanelGruppe.legend')}
                 checked={svar}
-                onChange={(e: any, value: string) => update(value)}
+                onChange={(_e: any, value: string) => update(value)}
             />
             {svar === JaNeiSpørsmål.NEI && (
                 <div className="blokk-xs">
@@ -138,4 +139,4 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
     );
 };
 
-export default withAttachments<Props>(injectIntl(MinidialogSkjema));
+export default withAttachments<Props>(MinidialogSkjema);

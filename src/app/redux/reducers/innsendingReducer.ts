@@ -9,8 +9,8 @@ export interface InnsendingState {
 
 const getDefaultState = (): InnsendingState => ({
     ettersendelse: {
-        status: FetchStatus.UNFETCHED
-    }
+        status: FetchStatus.UNFETCHED,
+    },
 });
 
 const innsendingReducer = (state = getDefaultState(), action: InnsendingAction): InnsendingState => {
@@ -19,20 +19,20 @@ const innsendingReducer = (state = getDefaultState(), action: InnsendingAction):
             return {
                 ...state,
                 ettersendelse: {
-                    status: FetchStatus.IN_PROGRESS
-                }
+                    status: FetchStatus.IN_PROGRESS,
+                },
             };
         case InnsendingActionTypes.SEND_ETTERSENDELSE_SUCCESS:
             return {
                 ettersendelse: {
-                    status: FetchStatus.SUCCESS
-                }
+                    status: FetchStatus.SUCCESS,
+                },
             };
         case InnsendingActionTypes.SEND_ETTERSENDELSE_FAILED:
             return {
                 ettersendelse: {
-                    status: FetchStatus.FAILURE
-                }
+                    status: FetchStatus.FAILURE,
+                },
             };
         default: {
             return state;

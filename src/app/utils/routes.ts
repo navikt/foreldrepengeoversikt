@@ -3,5 +3,5 @@ export enum Routes {
     DIN_PLAN = '/dinPlan',
     ETTERSENDELSE = '/etterssendelse',
     KVITTERING = '/kvittering',
-    MINIDIALOG = '/minidialog'
+    MINIDIALOG = '/minidialog',
 }

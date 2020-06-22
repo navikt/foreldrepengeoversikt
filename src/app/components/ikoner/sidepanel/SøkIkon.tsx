@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const SøkIkon = (props: any) => (
     <svg width={42} height={46} {...props}>
@@ -56,4 +56,4 @@ const SøkIkon = (props: any) => (
     </svg>
 );
 
-export default SøkIkon
+export default SøkIkon;

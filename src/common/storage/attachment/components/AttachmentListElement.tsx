@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import * as classnames from 'classnames';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Lenke from 'nav-frontend-lenker';
@@ -14,18 +14,17 @@ import SlettKnapp from '../../../components/slett-knapp/SlettKnapp';
 import './attachment.less';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-interface OwnProps {
+interface Props {
     attachment: Attachment;
     showFileSize?: boolean;
     onDelete?: (files: Attachment[]) => void;
 }
 
-type Props = OwnProps & InjectedIntlProps;
-
-const AttachmentListElement: React.StatelessComponent<Props> = ({ attachment, showFileSize, onDelete, intl }) => {
+const AttachmentListElement: React.StatelessComponent<Props> = ({ attachment, showFileSize, onDelete }) => {
+    const intl = useIntl();
     const BEM = BEMHelper('attachment');
     const cls = classnames(BEM.block, {
-        [BEM.modifier('pending')]: attachment.pending
+        [BEM.modifier('pending')]: attachment.pending,
     });
 
     return (
@@ -58,4 +57,4 @@ const AttachmentListElement: React.StatelessComponent<Props> = ({ attachment, sh
     );
 };
 
-export default injectIntl(AttachmentListElement);
+export default AttachmentListElement;

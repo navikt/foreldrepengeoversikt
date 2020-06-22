@@ -7,7 +7,7 @@ const mockedArbeidsforhold: Arbeidsforhold = {
     arbeidsgiverIdType: 'orgnr',
     arbeidsgiverNavn: 'navn',
     arbeidsgiverId: '123412341',
-    stillingsprosent: 80
+    stillingsprosent: 80,
 };
 
 describe('søkerinfoUtils', () => {
@@ -24,7 +24,7 @@ describe('søkerinfoUtils', () => {
             const inaktivtArbeidsforhold: Arbeidsforhold = {
                 ...mockedArbeidsforhold,
                 fom: '2016-01-01',
-                tom: '2019-01-01'
+                tom: '2019-01-01',
             };
 
             expect(getAktiveArbeidsforhold([inaktivtArbeidsforhold], moment('2019-06-01'))).toEqual([]);

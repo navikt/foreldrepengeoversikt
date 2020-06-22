@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const ChatIkon = (props: any) => (
     <svg width={108} height={52} {...props}>
@@ -14,4 +14,4 @@ const ChatIkon = (props: any) => (
         </g>
     </svg>
 );
-export default ChatIkon
+export default ChatIkon;

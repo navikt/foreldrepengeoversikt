@@ -12,7 +12,7 @@ export interface AppState {
 
 const rootReducer = combineReducers({
     api,
-    innsending
+    innsending,
 });
 
 declare global {

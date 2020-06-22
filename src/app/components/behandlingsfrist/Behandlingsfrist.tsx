@@ -2,7 +2,7 @@ import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Undertittel } from 'nav-frontend-typografi';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import BEMHelper from 'common/util/bem';
 import { formatDate } from '../saksoversikt/utils';
 
@@ -26,7 +26,7 @@ const Behandlingsfrist: React.StatelessComponent<Props> = ({ behandlingsdato, ha
                         />
                     </Undertittel>
                     <div>
-                        <FormattedHTMLMessage id={'dineForeldrepenger.behandlingsfrist.selvstendig'} />
+                        <FormattedMessage id={'dineForeldrepenger.behandlingsfrist.selvstendig'} />
                     </div>
                 </>
             ) : (
@@ -39,15 +39,16 @@ const Behandlingsfrist: React.StatelessComponent<Props> = ({ behandlingsdato, ha
                                     values={{ dato: formatDate(behandlingsdato) }}
                                 />
                             </Undertittel>
-                            <FormattedHTMLMessage
+                            <FormattedMessage
                                 id="dineForeldrepenger.behandlingsfrist.arbeidstaker.1"
                                 values={{ dato: formatDate(behandlingsdato) }}
                             />
                         </span>
                     }
                     border={false}
-                    apneTekst={<FormattedMessage id="dineForeldrepenger.behandlingsfrist.lesMer" />}>
-                    <FormattedHTMLMessage id="dineForeldrepenger.behandlingsfrist.arbeidstaker.2" />
+                    apneTekst={<FormattedMessage id="dineForeldrepenger.behandlingsfrist.lesMer" />}
+                >
+                    <FormattedMessage id="dineForeldrepenger.behandlingsfrist.arbeidstaker.2" />
                 </Lesmerpanel>
             )}
         </AlertStripe>

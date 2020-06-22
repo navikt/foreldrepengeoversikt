@@ -4,7 +4,7 @@ import {
     Utsettelsesperiode,
     Uttaksperiode,
     Oppholdsperiode,
-    TaptPeriode
+    TaptPeriode,
 } from 'app/types/uttaksplan/Periode';
 import { getAntallUttaksdagerITidsperiode } from 'app/utils/periodeUtils';
 import { getPeriodetype, getForelderForPeriode, getGraderingsprosent } from './uttaksplanDtoUtils';
@@ -30,7 +30,7 @@ const periodeDtoUToTaptPeriode = (uttaksperiodeDto: PeriodeDto, søkerErFarEller
     tidsperiode: uttaksperiodeDto.periode,
     antallUttaksdager: getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode),
     forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
-    stønadskontotype: uttaksperiodeDto.stønadskontotype
+    stønadskontotype: uttaksperiodeDto.stønadskontotype,
 });
 
 const periodeDtoUToOppholdsperiode = (
@@ -43,7 +43,7 @@ const periodeDtoUToOppholdsperiode = (
         tidsperiode: uttaksperiodeDto.periode,
         forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
         antallUttaksdager: getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode),
-        oppholdsårsak: uttaksperiodeDto.oppholdAarsak!
+        oppholdsårsak: uttaksperiodeDto.oppholdAarsak!,
     };
 };
 
@@ -63,7 +63,7 @@ const periodeDtoUTottaksperiode = (uttaksperiodeDto: PeriodeDto, søkerErFarElle
             uttaksperiodeDto.graderingInnvilget !== undefined ? uttaksperiodeDto.graderingInnvilget : false,
         graderingsprosent: getGraderingsprosent(uttaksperiodeDto) || '0',
         samtidigUttak: uttaksperiodeDto.samtidigUttak,
-        samtidigUttaksprosent: uttaksperiodeDto.samtidigUttaksprosent
+        samtidigUttaksprosent: uttaksperiodeDto.samtidigUttaksprosent,
     };
 };
 
@@ -77,6 +77,6 @@ const periodeDtoToUtsettelsesperiode = (
         tidsperiode: uttaksperiodeDto.periode,
         forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
         antallUttaksdager: getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode),
-        årsak: uttaksperiodeDto.utsettelsePeriodeType
+        årsak: uttaksperiodeDto.utsettelsePeriodeType,
     };
 };

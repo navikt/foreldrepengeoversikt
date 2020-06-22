@@ -8,7 +8,7 @@ import {
     HendelseType,
     InntektsmeldingInnslag,
     isMinidialogInnslag,
-    isInnsendingInnslag
+    isInnsendingInnslag,
 } from 'app/api/types/historikk/HistorikkInnslag';
 import { erBehandlingAvsluttet } from 'app/utils/sakerUtils';
 import moment from 'moment';
@@ -64,7 +64,7 @@ const behandlingMedInntektmeldingerTilHendelse = (behandling: Behandling): Hende
         dato: behandling.opprettetTidspunkt,
         type: 'inntektsmelding-motatt',
         beskrivelse: 'inntektsmelding-motatt',
-        brukerInitiertHendelse: false
+        brukerInitiertHendelse: false,
     };
 };
 
@@ -73,7 +73,7 @@ const behandlingsResultatTilHendelse = (behandling: Behandling): Hendelse => {
         dato: behandling.endretTidspunkt,
         type: behandling.behandlingResultat,
         beskrivelse: behandling.behandlingResultat,
-        brukerInitiertHendelse: false
+        brukerInitiertHendelse: false,
     };
 };
 
@@ -84,7 +84,7 @@ const historikkInnslagTilHendelse = (historikkInnslag: HistorikkInnslag): Hendel
         beskrivelse: getBeskrivelseForHistorikkInnslag(historikkInnslag),
         brukerInitiertHendelse: historikkInnslag.type === HistorikkInnslagType.søknad,
         skjemanumre: (historikkInnslag as Innsendingsinnslag).vedlegg,
-        arbeidsgiver: (historikkInnslag as InntektsmeldingInnslag).arbeidsgiver
+        arbeidsgiver: (historikkInnslag as InntektsmeldingInnslag).arbeidsgiver,
     };
 };
 

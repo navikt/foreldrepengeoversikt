@@ -12,7 +12,11 @@ export interface Props {
     erDeltUttak: boolean;
 }
 
-const Uttaksoppsummering: React.StatelessComponent<Props> = ({ resterendeStønadskonter, navnPåForeldre, erDeltUttak }) => (
+const Uttaksoppsummering: React.StatelessComponent<Props> = ({
+    resterendeStønadskonter,
+    navnPåForeldre,
+    erDeltUttak,
+}) => (
     <section>
         <Undertittel tag="h2" className="blokk-xs">
             {

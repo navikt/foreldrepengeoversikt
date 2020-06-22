@@ -9,5 +9,5 @@ export enum Hendelse {
     EttersendingSvangerskapspenger = 'ETTERSENDING_SVANGERSKAPSPENGER',
     EndringForeldrepenger = 'ENDRING_FORELDREPENGER',
     Ukjent = 'UKJENT',
-    EndringSvangerskapspenger = 'ENDRING_SVANGERSKAPSPENGER'
+    EndringSvangerskapspenger = 'ENDRING_SVANGERSKAPSPENGER',
 }

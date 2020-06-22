@@ -49,7 +49,8 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
             pageTitle={<FormattedMessage id="dinPlan.pageTitle" />}
             icon={() => <CalendarIkon />}
             title={<FormattedMessage id="dinPlan.title" />}
-            onBackClick={() => history.push(Routes.DINE_FORELDREPENGER)}>
+            onBackClick={() => history.push(Routes.DINE_FORELDREPENGER)}
+        >
             <PeriodeOversikt
                 søker={søker}
                 sak={sak}
@@ -62,7 +63,7 @@ export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker 
                     resterendeStønadskonter={getResterendeStønadskontoer(tilgjengeligeKontoer, perioder)}
                     brukteDager={{
                         mor: getTotaltBrukteDager(Rolle.mor, perioder),
-                        farMedmor: getTotaltBrukteDager(Rolle.farMedmor, perioder)
+                        farMedmor: getTotaltBrukteDager(Rolle.farMedmor, perioder),
                     }}
                     erDeltUttak={erEksisterendeSakErDeltUttak(sak.saksgrunnlag.grunnlag)}
                     erFarMedmor={sak.saksgrunnlag.grunnlag.søkerErFarEllerMedmor}
@@ -87,7 +88,7 @@ const mapStateToProps = (state: AppState, ownProps: Props) => {
     const params = new URLSearchParams(ownProps.history.location.search);
     return {
         søker: getData(state.api.søkerinfo, {}).person,
-        sak: getData(state.api.saker, []).find((saker) => saker.saksnummer === params.get('saksnummer'))
+        sak: getData(state.api.saker, []).find((saker) => saker.saksnummer === params.get('saksnummer')),
     };
 };
 

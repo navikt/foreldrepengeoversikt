@@ -48,7 +48,7 @@ export interface UttaksplanDto {
 export enum OppholdsÅrsak {
     UTTAK_MØDREKVOTE_ANNEN_FORELDER = 'UTTAK_MØDREKVOTE_ANNEN_FORELDER',
     UTTAK_FEDREKVOTE_ANNEN_FORELDER = 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
-    UTTAK_FELLESP_ANNEN_FORELDER = 'UTTAK_FELLESP_ANNEN_FORELDER'
+    UTTAK_FELLESP_ANNEN_FORELDER = 'UTTAK_FELLESP_ANNEN_FORELDER',
 }
 
 export enum MorsAktivitetDto {
@@ -60,7 +60,7 @@ export enum MorsAktivitetDto {
     Innlagt = 'INNLAGT',
     ArbeidOgUtdanning = 'ARBEID_OG_UTDANNING',
     Uføre = 'UFØRE',
-    SamtidigUttak = 'SAMTIDIGUTTAK'
+    SamtidigUttak = 'SAMTIDIGUTTAK',
 }
 
 export enum StønadskontoType {
@@ -70,14 +70,14 @@ export enum StønadskontoType {
     Foreldrepenger = 'FORELDREPENGER',
     ForeldrepengerFørFødsel = 'FORELDREPENGER_FØR_FØDSEL',
     Flerbarnsdager = 'FLERBARNSDAGER', // Ikke brukt som egen type i periodene
-    AktivitetsfriKvote = 'AKTIVITETSFRI_KVOTE' // Foreldrepenger
+    AktivitetsfriKvote = 'AKTIVITETSFRI_KVOTE', // Foreldrepenger
 }
 
 export enum PeriodeResultatType {
     Innvilget = 'INNVILGET',
     Avslått = 'AVSLÅTT',
     IkkeFastssatt = 'IKKE_FASTSATT',
-    ManuellBehanldig = 'MANUELL_BEHANDLING'
+    ManuellBehanldig = 'MANUELL_BEHANDLING',
 }
 
 export enum UtsettelsePeriodeType {
@@ -87,12 +87,12 @@ export enum UtsettelsePeriodeType {
     SøkerInnlagt = 'SØKER_INNLAGT',
     BarnInnlagt = 'BARN_INNLAGT',
     HvØvelse = 'HV_OVELSE',
-    NavTiltak = 'NAV_TILTAK'
+    NavTiltak = 'NAV_TILTAK',
 }
 
 export enum UttakArbeidType {
     OrdinærtArbeid = 'ORDINÆRT_ARBEID',
     SelvstendigNæringsdrivende = 'SELVSTENDIG_NÆRINGSDRIVENDE',
     Frilans = 'FRILANS',
-    Annet = 'ANNET'
+    Annet = 'ANNET',
 }

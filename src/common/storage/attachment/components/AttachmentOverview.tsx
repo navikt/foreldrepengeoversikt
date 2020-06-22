@@ -93,7 +93,7 @@ class AttachmentOverview extends React.Component<Props> {
                                 <AlertstripeWithCloseButton
                                     lukknappProps={{
                                         hvit: true,
-                                        type: 'button'
+                                        type: 'button',
                                     }}
                                     errorMessages={this.createErrorMessagesForFailedAttachments(
                                         this.props.attachments.filter(isAttachmentWithError)

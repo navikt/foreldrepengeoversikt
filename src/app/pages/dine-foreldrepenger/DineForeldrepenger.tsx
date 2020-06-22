@@ -15,7 +15,7 @@ import {
     opprettFiktivSak,
     harSøkt,
     harEnAvsluttetBehandling,
-    erForeldrepengesak
+    erForeldrepengesak,
 } from '../../utils/sakerUtils';
 import Sidepanel from '../../components/sidepanel/Sidepanel';
 import Saksoversikt from '../../components/saksoversikt/saksoversikt-main/Saksoversikt';
@@ -28,13 +28,13 @@ import {
     Innsendingsinnslag,
     HendelseType,
     HistorikkInnslag,
-    HistorikkInnslagType
+    HistorikkInnslagType,
 } from 'app/api/types/historikk/HistorikkInnslag';
 
 import { Søkerinfo } from 'app/types/Søkerinfo';
 
 import AlertStripe from 'nav-frontend-alertstriper';
-import { FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import MinidialogContainer from 'app/components/minidialog-container/MinidialogContainer';
 
 import './dineForeldrepenger.less';
@@ -117,7 +117,9 @@ export class DineForeldrepenger extends React.Component<Props> {
 
         return (
             (!søknadsHistorikk.find(({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER) &&
-                (harSøkt(sak) && erForeldrepengesak(sak) && !harEnAvsluttetBehandling(sak))) ||
+                harSøkt(sak) &&
+                erForeldrepengesak(sak) &&
+                !harEnAvsluttetBehandling(sak)) ||
             erInfotrygdSak(sak)
         );
     }
@@ -125,7 +127,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     renderAlertStripe() {
         return (
             <AlertStripe type="info">
-                <FormattedHTMLMessage id="dineForeldrepenger.alertstripe" />
+                <FormattedMessage id="dineForeldrepenger.alertstripe" values={{ b: (msg: any) => <b>{msg}</b> }} />
             </AlertStripe>
         );
     }
@@ -179,7 +181,7 @@ const mapStateToProps = (state: AppState) => ({
     saker: getData(state.api.saker, []),
     storageKvittering: getData(state.api.storageKvittering, undefined),
     historikkInnslagListe: getData(state.api.historikk, []),
-    manglendeVedlegg: getData(state.api.manglendeVedlegg, [])
+    manglendeVedlegg: getData(state.api.manglendeVedlegg, []),
 });
 
 export default connect(mapStateToProps)(DineForeldrepenger);

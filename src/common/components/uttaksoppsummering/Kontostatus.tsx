@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps, InjectedIntl } from 'react-intl';
+import { useIntl, IntlShape } from 'react-intl';
 import BEMHelper from 'common/util/bem';
 
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -35,8 +35,7 @@ export const getNavnGenitivEierform = (navn: string, locale: string): string => 
     return `${navn}s`;
 };
 
-
-export const getStønadskontoNavn = (intl: InjectedIntl, konto: StønadskontoType, navnPåForeldre: NavnPåForeldre) => {
+export const getStønadskontoNavn = (intl: IntlShape, konto: StønadskontoType, navnPåForeldre: NavnPåForeldre) => {
     let navn;
     switch (konto) {
         case StønadskontoType.Mødrekvote:
@@ -57,12 +56,9 @@ export const getStønadskontoNavn = (intl: InjectedIntl, konto: StønadskontoTyp
     return intl.formatMessage({ id: `stønadskontotype.${konto}` });
 };
 
-const Kontostatus: React.StatelessComponent<Props & InjectedIntlProps> = ({
-    uttak,
-    navnPåForeldre,
-    erEndringssøknad,
-    intl
-}) => {
+const Kontostatus: React.StatelessComponent<Props> = ({ uttak, navnPåForeldre, erEndringssøknad }) => {
+    const intl = useIntl();
+
     if (erEndringssøknad && uttak.konto === StønadskontoType.ForeldrepengerFørFødsel) {
         uttak.dager = 0;
     }
@@ -73,7 +69,7 @@ const Kontostatus: React.StatelessComponent<Props & InjectedIntlProps> = ({
     return (
         <Normaltekst className={BEM.block} tag="div">
             <div className={BEM.element('ikon')} aria-hidden={true} role="presentation">
-                <StønadskontoIkon konto={uttak.konto} navnPåForeldre={navnPåForeldre} /> 
+                <StønadskontoIkon konto={uttak.konto} navnPåForeldre={navnPåForeldre} />
             </div>
             <div className={BEM.element('content')}>
                 <div className={kontoErOvertrukket ? BEM.element('kontoOvertrukket') : BEM.element('konto')}>
@@ -81,7 +77,8 @@ const Kontostatus: React.StatelessComponent<Props & InjectedIntlProps> = ({
                 </div>
                 <strong
                     className={kontoErOvertrukket ? BEM.element('dagerOvertrukket') : BEM.element('dager')}
-                    data-name={uttak.konto}>
+                    data-name={uttak.konto}
+                >
                     {kontoErOvertrukket ? `- ${varighetString}` : varighetString}
                 </strong>
             </div>
@@ -89,4 +86,4 @@ const Kontostatus: React.StatelessComponent<Props & InjectedIntlProps> = ({
     );
 };
 
-export default injectIntl(Kontostatus);
+export default Kontostatus;

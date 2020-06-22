@@ -1,20 +1,16 @@
 const path = require('path');
-const webpack = require('webpack');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const postCSS = require('../../../postcss.config');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-
-const autoprefixer = require('autoprefixer');
 
 const webpackConfig = {
     entry: {
-        bundle: ['babel-polyfill', 'url-search-params-polyfill', `${__dirname}/../../app/bootstrap.tsx`]
+        bundle: ['babel-polyfill', 'url-search-params-polyfill', `${__dirname}/../../app/bootstrap.tsx`],
     },
     output: {
         path: path.resolve(__dirname, './../../../dist'),
         filename: 'js/[name].js',
-        publicPath: '/dist'
+        publicPath: '/dist',
     },
     devtool: 'source-map',
     resolve: {
@@ -22,70 +18,53 @@ const webpackConfig = {
         alias: {
             app: path.resolve(__dirname, './../../app'),
             common: path.resolve(__dirname, './../../common'),
-            assets: path.resolve(__dirname, './../../assets')
-        }
+            assets: path.resolve(__dirname, './../../assets'),
+        },
     },
     module: {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                loader: require.resolve('tslint-loader'),
-                enforce: 'pre',
-                resolve: {
-                    extensions: ['.ts', '.tsx', '.js', '.json', '.jsx']
-                }
-            },
-            {
-                test: /\.(ts|tsx)$/,
                 include: [
                     path.resolve(__dirname, './../../app'),
                     path.resolve(__dirname, './../../common'),
-                    path.resolve(__dirname, './../../storage')
+                    path.resolve(__dirname, './../../storage'),
                 ],
-                loader: require.resolve('awesome-typescript-loader')
+                loader: require.resolve('awesome-typescript-loader'),
             },
-
+            {
+                enforce: 'pre',
+                test: /\.(js|ts|tsx)$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    cache: true,
+                },
+            },
             {
                 test: /\.js$/,
                 use: [{ loader: 'babel-loader' }],
-                exclude: /node_modules/
+                exclude: /node_modules/,
             },
             {
                 test: /\.less$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
             },
-            // {
-            //     test: /\.svg$/,
-            //     use: [
-            //         {
-            //             loader: 'svg-sprite-loader'
-            //         },
-            //         {
-            //             loader: 'file-loader',
-            //             options: {
-            //                 regExp: /^.*utsettelse-background.*\.svg$/i,
-            //                 outputPath: 'assets/',
-            //                 name: '[name].[ext]',
-            //                 publicPath: '/dist/assets'
-            //             }
-            //         },
-            //     ]
-            // },
             {
                 test: /\.svg$/,
-                loader: 'svg-sprite-loader'
-            }
-        ]
+                loader: 'svg-sprite-loader',
+            },
+        ],
     },
     plugins: [
         new CaseSensitivePathsPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css?[hash]-[chunkhash]-[name]',
             disable: false,
-            allChunks: true
+            allChunks: true,
         }),
-        new SpriteLoaderPlugin()
-    ]
+        new SpriteLoaderPlugin(),
+    ],
 };
 
 module.exports = webpackConfig;

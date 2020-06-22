@@ -44,7 +44,7 @@ const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress, uuid }: P
                                     </Lenke>
                                 )}
                             </div>
-                        )
+                        ),
                     }}
                 />
             )}

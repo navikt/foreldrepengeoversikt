@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { InjectedIntl } from 'react-intl';
+import { IntlShape } from 'react-intl';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { erForeldrepengesak, harSendtInnEndringssøknad, erEngangsstønad, erInfotrygdSak } from '../../utils/sakerUtils';
 import SakBase from '../../api/types/sak/Sak';
@@ -8,7 +8,7 @@ import {
     isSkjemanummerForEndringssøknadForeldrepenger,
     skjemanummerForFørstegangssøknadForeldrepenger,
     isSkjemanummerForEngangsstønad,
-    isSkjemanummerForSvangerskapspengesoknad
+    isSkjemanummerForSvangerskapspengesoknad,
 } from 'app/utils/skjemanummerUtils';
 import { EttersendingType } from 'app/api/types/ettersending/EttersendingDto';
 
@@ -18,7 +18,7 @@ export const getListOfUniqueSkjemanummer = (attachments: Attachment[]) => {
         .filter((s: Skjemanummer, index, self) => self.indexOf(s) === index);
 };
 
-export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: SakBase) => (
+export const getAttachmentTypeSelectOptions = (intl: IntlShape, sak: SakBase) => (
     <>
         <option value="default" disabled={true} hidden={true}>
             {intl.formatMessage({ id: `ettersendelse.select.defaultValue` })}
@@ -26,7 +26,7 @@ export const getAttachmentTypeSelectOptions = (intl: InjectedIntl, sak: SakBase)
         {getRelevanteSkjemanummer(sak)
             .map((skjemanummer) => ({
                 skjemanummer,
-                text: intl.formatMessage({ id: `ettersendelse.${skjemanummer}` })
+                text: intl.formatMessage({ id: `ettersendelse.${skjemanummer}` }),
             }))
             .sort((selectOption, nextSelectOption) => selectOption.text.localeCompare(nextSelectOption.text))
             .map(({ skjemanummer, text }) => (
@@ -53,11 +53,11 @@ const getRelevanteSkjemanummer = (sak: SakBase): Skjemanummer[] => {
 };
 
 export const getEttersendingType = (sak: SakBase): EttersendingType => {
-    if(erForeldrepengesak(sak) || erInfotrygdSak(sak)) {
+    if (erForeldrepengesak(sak) || erInfotrygdSak(sak)) {
         return EttersendingType.FORELDREPENGER;
-    } else if(erEngangsstønad(sak)) {
+    } else if (erEngangsstønad(sak)) {
         return EttersendingType.ENGANGSSTØNAD;
     } else {
-        return EttersendingType.SVANGERSKAPSPENGER
+        return EttersendingType.SVANGERSKAPSPENGER;
     }
-}
+};

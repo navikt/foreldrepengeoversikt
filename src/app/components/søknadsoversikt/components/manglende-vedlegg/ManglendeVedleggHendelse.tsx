@@ -1,5 +1,5 @@
 import React from 'react';
-import { injectIntl, InjectedIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import Icon from 'nav-frontend-ikoner-assets';
 import SøknadsoversiktHendelseListeItem from '../SøknadsoversiktHendelseListeItem';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
@@ -14,19 +14,14 @@ import { Knapp } from 'nav-frontend-knapper';
 
 interface Props {
     manglendeVedlegg: ManglendeVedlegg[];
-    intl: InjectedIntl;
     navigateToEttersendelse: () => void;
 }
 
 const bem = BEMHelper('manglendeVedleggHendelse');
 
-const renderContent = (
-    manglendeVedlegg: ManglendeVedlegg[],
-    intl: InjectedIntl,
-    navigateToEttersendelse: () => void
-) => {
+const renderContent = (manglendeVedlegg: ManglendeVedlegg[], intl: IntlShape, navigateToEttersendelse: () => void) => {
     return (
-        <>
+        <div className={bem.block}>
             {manglendeVedlegg.map((mv) => {
                 return (
                     <div className={bem.element('manglendeVedleggHendelseStatus')} key={guid()}>
@@ -40,15 +35,13 @@ const renderContent = (
             <Knapp onClick={navigateToEttersendelse}>
                 <FormattedMessage id="saksoversikt.content.ettersendelse.button" />
             </Knapp>
-        </>
+        </div>
     );
 };
 
-const ManglendeVedleggHendelse: React.FunctionComponent<Props> = ({
-    manglendeVedlegg,
-    intl,
-    navigateToEttersendelse
-}) => {
+const ManglendeVedleggHendelse: React.FunctionComponent<Props> = ({ manglendeVedlegg, navigateToEttersendelse }) => {
+    const intl = useIntl();
+
     return (
         <SøknadsoversiktHendelseListeItem
             ikon={<Icon kind="advarsel-sirkel-fyll" width="24" height="24" />}
@@ -59,4 +52,4 @@ const ManglendeVedleggHendelse: React.FunctionComponent<Props> = ({
     );
 };
 
-export default injectIntl(ManglendeVedleggHendelse);
+export default ManglendeVedleggHendelse;
