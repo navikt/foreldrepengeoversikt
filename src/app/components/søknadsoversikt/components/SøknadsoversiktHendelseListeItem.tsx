@@ -35,7 +35,7 @@ const SøknadsoversiktHendelseListeItem: React.StatelessComponent<Props> = ({
             <div className={cls.element('content')}>
                 <Element>{tittel}</Element>
                 {lesMerTittel && <CollapsableTextBlock title={lesMerTittel}>{lesMerInnhold}</CollapsableTextBlock>}
-                {content && content}
+                {content !== undefined && content}
             </div>
         </div>
     );
