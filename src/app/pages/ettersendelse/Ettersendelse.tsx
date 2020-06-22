@@ -30,10 +30,19 @@ import UtvidetInformasjon from 'app/components/utvidetinformasjon/UtvidetInforma
 import PictureScanningGuide from 'app/components/picture-scanning-guide/PictureScanningGuide';
 
 interface EttersendelseProps {
-    sak?: SakBase;
     history: History;
-    sendEttersendelse: (ettersendingDto: EttersendingDto) => void;
+}
+
+interface InjectedProps {
     intl: IntlShape;
+}
+
+interface ReduxStateProps {
+    sak: SakBase | undefined;
+}
+
+interface ReduxDispatchProps {
+    sendEttersendelse: (ettersendelse: EttersendingDto) => void;
 }
 
 interface State {
@@ -42,9 +51,10 @@ interface State {
     sendingEttersendelse: boolean;
 }
 
-type Props = EttersendelseProps;
-export class Ettersendelse extends React.Component<Props & AttachmentFormProps, State> {
-    constructor(props: Props & AttachmentFormProps) {
+type Props = EttersendelseProps & AttachmentFormProps & InjectedProps & ReduxStateProps & ReduxDispatchProps;
+
+export class Ettersendelse extends React.Component<Props, State> {
+    constructor(props: Props & InjectedProps & AttachmentFormProps) {
         super(props);
         this.state = {
             sendingEttersendelse: false,
@@ -196,7 +206,7 @@ export class Ettersendelse extends React.Component<Props & AttachmentFormProps, 
     }
 }
 
-const mapStateToProps = (state: AppState, props: Props) => {
+const mapStateToProps = (state: AppState, props: Props): ReduxStateProps => {
     const params = new URLSearchParams(props.history.location.search);
     const sak = getData(state.api.saker, []).find((s) => s.saksnummer === params.get('saksnummer'));
     return {
@@ -217,4 +227,7 @@ const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props:
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(withAttachments<Props>(Ettersendelse)));
+export default connect<ReduxStateProps, ReduxDispatchProps>(
+    mapStateToProps,
+    mapDispatchToProps
+)(injectIntl(withAttachments<Props>(Ettersendelse)));

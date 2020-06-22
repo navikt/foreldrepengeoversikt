@@ -29,7 +29,6 @@ interface Props {
     requestSaker: () => void;
     requestStorageKvittering: () => void;
     requestHistorikk: () => void;
-    requestMinidialog: () => void;
 }
 
 class Foreldrepengeoversikt extends React.Component<Props> {

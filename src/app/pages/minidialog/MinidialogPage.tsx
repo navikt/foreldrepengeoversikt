@@ -14,13 +14,21 @@ import { Routes } from 'app/utils/routes';
 import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
 import { FetchStatus } from 'app/redux/types/FetchState';
 
-interface Props {
+interface OwnProps {
     history: History;
-    minidialog?: MinidialogInnslag;
-    sak?: SakBase;
-    sendEttersendelse: (ettersendelse: EttersendingDto) => void;
+}
+
+interface ReduxStateProps {
+    minidialog: MinidialogInnslag | undefined;
+    sak: SakBase | undefined;
     isSendingEttersendelse: boolean;
 }
+
+interface ReduxDispatchProps {
+    sendEttersendelse: (ettersendelse: EttersendingDto) => void;
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps;
 
 class MinidialogPage extends React.Component<Props> {
     render() {
@@ -48,7 +56,7 @@ class MinidialogPage extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: AppState, props: Props) => {
+const mapStateToProps = (state: AppState, props: Props): ReduxStateProps => {
     const params = new URLSearchParams(props.history.location.search);
     const minidialog = getData(state.api.minidialogInnslagListe, []).find(
         (md) => md.dialogId === params.get('dialogId')
@@ -62,7 +70,7 @@ const mapStateToProps = (state: AppState, props: Props) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props: Props) => ({
+const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props: Props): ReduxDispatchProps => ({
     sendEttersendelse: (ettersendelse: EttersendingDto) => {
         dispatch({
             type: InnsendingActionTypes.SEND_ETTERSENDELSE,
@@ -75,4 +83,4 @@ const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props:
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MinidialogPage);
+export default connect<ReduxStateProps, ReduxDispatchProps>(mapStateToProps, mapDispatchToProps)(MinidialogPage);
