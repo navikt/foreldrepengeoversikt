@@ -1,5 +1,4 @@
 import React from 'react';
-import { injectIntl, InjectedIntl } from 'react-intl';
 import Icon from 'nav-frontend-ikoner-assets';
 
 import SøknadsoversiktHendelseListeItem from './SøknadsoversiktHendelseListeItem';
@@ -12,10 +11,10 @@ import BehandleSøknadenHendelse, { behandleSøknadenHendelseErOk } from './beha
 import moment from 'moment';
 import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 import ManglendeVedleggHendelse from './manglende-vedlegg/ManglendeVedleggHendelse';
+import { useIntl } from 'react-intl';
 
 interface Props {
     søknadsDato: string;
-    intl: InjectedIntl;
     arbeidsforhold: Arbeidsforhold[] | undefined;
     inntektsmeldinger: InntektsmeldingInnslag[];
     brukerHarSendtSøknad: boolean;
@@ -47,9 +46,9 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
     brukerHarSendtSøknad,
     behandlingsdato,
     manglendeVedlegg,
-    intl,
     navigateToEttersendelse
 }) => {
+    const intl = useIntl();
     const aktiveArbeidsforhold = getAktiveArbeidsforhold(arbeidsforhold, behandlingsdato);
     const søknadenBehandles =
         behandleSøknadenHendelseErOk(behandlingsdato) &&
@@ -99,4 +98,4 @@ const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
     );
 };
 
-export default injectIntl(SøknadsoversiktHendelseListe);
+export default SøknadsoversiktHendelseListe;

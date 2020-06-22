@@ -34,7 +34,7 @@ import {
 import { Søkerinfo } from 'app/types/Søkerinfo';
 
 import AlertStripe from 'nav-frontend-alertstriper';
-import { FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import MinidialogContainer from 'app/components/minidialog-container/MinidialogContainer';
 
 import './dineForeldrepenger.less';
@@ -117,7 +117,9 @@ export class DineForeldrepenger extends React.Component<Props> {
 
         return (
             (!søknadsHistorikk.find(({ hendelse }) => hendelse === HendelseType.INITIELL_FORELDREPENGER) &&
-                (harSøkt(sak) && erForeldrepengesak(sak) && !harEnAvsluttetBehandling(sak))) ||
+                harSøkt(sak) &&
+                erForeldrepengesak(sak) &&
+                !harEnAvsluttetBehandling(sak)) ||
             erInfotrygdSak(sak)
         );
     }
@@ -125,7 +127,7 @@ export class DineForeldrepenger extends React.Component<Props> {
     renderAlertStripe() {
         return (
             <AlertStripe type="info">
-                <FormattedHTMLMessage id="dineForeldrepenger.alertstripe" />
+                <FormattedMessage id="dineForeldrepenger.alertstripe" values={{ b: (msg: any) => <b>{msg}</b> }} />
             </AlertStripe>
         );
     }

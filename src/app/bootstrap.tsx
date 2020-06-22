@@ -11,6 +11,11 @@ import ByttBrowserModal from 'common/components/bytt-browser-modal/ByttBrowserMo
 
 import './styles/app.less';
 
+if (!Intl.PluralRules) {
+    require('@formatjs/intl-pluralrules/polyfill');
+    require('@formatjs/intl-pluralrules/dist/locale-data/nb');
+}
+
 Sentry.init({
     dsn: 'https://b4fd4db97e7d4663852a5203961e3cee@sentry.gc.nav.no/6',
     release: (window as any).APP_VERSION,
@@ -18,12 +23,11 @@ Sentry.init({
     integrations: [new Sentry.Integrations.Breadcrumbs({ console: false })]
 });
 
-
 const root = document.getElementById('app');
 render(
     <IntlProvider>
         <ErrorBoundary>
-            <Provider store={store}>             
+            <Provider store={store}>
                 <ByttBrowserModal />
                 <Foreldrepengeoversikt />
             </Provider>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Element } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -33,6 +33,7 @@ interface EttersendelseProps {
     sak?: SakBase;
     history: History;
     sendEttersendelse: (ettersendingDto: EttersendingDto) => void;
+    intl: IntlShape;
 }
 
 interface State {
@@ -41,7 +42,7 @@ interface State {
     sendingEttersendelse: boolean;
 }
 
-type Props = EttersendelseProps & InjectedIntlProps;
+type Props = EttersendelseProps;
 export class Ettersendelse extends React.Component<Props & AttachmentFormProps, State> {
     constructor(props: Props & AttachmentFormProps) {
         super(props);
@@ -213,7 +214,4 @@ const mapDispatchToProps = (dispatch: (action: InnsendingAction) => void, props:
     }
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(injectIntl(withAttachments<Props>(Ettersendelse)));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(withAttachments<Props>(Ettersendelse)));

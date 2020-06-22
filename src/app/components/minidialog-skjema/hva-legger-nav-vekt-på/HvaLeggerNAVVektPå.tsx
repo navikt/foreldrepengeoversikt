@@ -1,11 +1,7 @@
 import React from 'react';
 import CollapsableTextBlock from 'app/components/collapsable-text-block/CollapsableTextBlock';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
-
-interface Props {
-    intl: InjectedIntl;
-}
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const punktTekster = [
     'minidialog.hvaLeggerNAVVektPå.punkt1',
@@ -16,7 +12,9 @@ const punktTekster = [
     'minidialog.hvaLeggerNAVVektPå.punkt6'
 ];
 
-const HvaLeggerNAVVektPå: React.FunctionComponent<Props> = ({ intl }) => {
+const HvaLeggerNAVVektPå: React.FunctionComponent = () => {
+    const intl = useIntl();
+
     return (
         <CollapsableTextBlock title={intl.formatMessage({ id: 'minidialog.hvaLeggerNAVVektPå.tittel' })}>
             <Normaltekst>
@@ -32,4 +30,4 @@ const HvaLeggerNAVVektPå: React.FunctionComponent<Props> = ({ intl }) => {
     );
 };
 
-export default injectIntl(HvaLeggerNAVVektPå);
+export default HvaLeggerNAVVektPå;

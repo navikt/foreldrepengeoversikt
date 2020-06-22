@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from 'react';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Textarea, RadioPanelGruppe } from 'nav-frontend-skjema';
 import Snakkeboble from 'nav-frontend-snakkeboble';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -37,7 +37,7 @@ export enum JaNeiSpørsmål {
     NEI = 'NEI'
 }
 
-const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & InjectedIntlProps> = ({
+const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = ({
     sak,
     minidialog,
     attachments,
@@ -45,9 +45,9 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
     deleteAttachment,
     editAttachment,
     onSubmit,
-    isSendingEttersendelse,
-    intl
+    isSendingEttersendelse
 }) => {
+    const intl = useIntl();
     const [fritekst, updateFritekst] = useState('');
     const [svar, update] = useState<string | undefined>(undefined);
     const brukerØnskerÅUttaleSeg = svar === JaNeiSpørsmål.JA;
@@ -138,4 +138,4 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps & In
     );
 };
 
-export default withAttachments<Props>(injectIntl(MinidialogSkjema));
+export default withAttachments<Props>(MinidialogSkjema);

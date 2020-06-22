@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 import UploadIkon from 'app/components/ikoner/UploadIkon';
@@ -10,9 +10,10 @@ interface AttachmentInputProps {
     id: string;
     onFilesSelect: (files: File[]) => void;
     onClick: () => void;
+    intl: IntlShape;
 }
 
-type Props = AttachmentInputProps & InjectedIntlProps;
+type Props = AttachmentInputProps;
 
 class AttachmentInput extends React.Component<Props> {
     constructor(props: Props) {

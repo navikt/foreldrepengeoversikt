@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import classnames from 'classnames';
 import { Element, Normaltekst, EtikettLiten } from 'nav-frontend-typografi';
 import moment from 'moment';
@@ -47,7 +47,7 @@ const renderDagMnd = (dato: string, visÅr: boolean = true): JSX.Element => {
     );
 };
 
-const PeriodeListElement: React.FunctionComponent<Props & InjectedIntlProps> = ({
+const PeriodeListElement: React.FunctionComponent<Props> = ({
     ikon,
     tittel,
     beskrivelse,
@@ -55,9 +55,10 @@ const PeriodeListElement: React.FunctionComponent<Props & InjectedIntlProps> = (
     tidsperiode,
     annenForelderSamtidigUttakPeriode,
     navnPåForeldre,
-    color,
-    intl
+    color
 }) => {
+    const intl = useIntl();
+
     return (
         <li className={classnames(BEM.block, 'typo-normal', BEM.modifier(color))}>
             <div className={BEM.element('main-content')}>
@@ -124,4 +125,4 @@ const PeriodeListElement: React.FunctionComponent<Props & InjectedIntlProps> = (
     );
 };
 
-export default injectIntl(PeriodeListElement);
+export default PeriodeListElement;

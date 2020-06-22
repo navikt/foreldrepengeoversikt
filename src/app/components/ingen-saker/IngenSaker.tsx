@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { lenker } from '../../utils/lenker';
@@ -24,7 +24,7 @@ const IngenSaker = () => {
 
             <Veilederpanel kompakt={true} svg={<Veileder />}>
                 <Normaltekst className={cls.element('ingress')}>
-                    <FormattedHTMLMessage id="ingenSaker.ingress" />
+                    <FormattedMessage id="ingenSaker.ingress" values={{ b: (msg: any) => <b>{msg}</b> }} />
                 </Normaltekst>
             </Veilederpanel>
 

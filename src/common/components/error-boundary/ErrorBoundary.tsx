@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage, IntlShape } from 'react-intl';
 import Feilsidemelding from '../feilsidemelding/Feilsidemelding';
 import getMessage from 'common/util/i18nUtils';
 import Lenke from 'nav-frontend-lenker';
@@ -11,8 +11,11 @@ interface State {
     hasError: boolean;
 }
 
-type Props = InjectedIntlProps;
-class ErrorBoundary extends React.Component<InjectedIntlProps, State> {
+interface Props {
+    intl: IntlShape;
+}
+
+class ErrorBoundary extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {

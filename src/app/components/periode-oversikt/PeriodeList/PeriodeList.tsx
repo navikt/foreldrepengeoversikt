@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { guid } from 'nav-frontend-js-utils';
 
@@ -30,13 +30,10 @@ interface Props {
     navnPåForeldre: NavnPåForeldre;
 }
 
-const PeriodeList: React.StatelessComponent<Props & InjectedIntlProps> = ({
-    tittel,
-    perioder,
-    navnPåForeldre,
-    intl
-}) => {
+const PeriodeList: React.StatelessComponent<Props> = ({ tittel, perioder, navnPåForeldre }) => {
+    const intl = useIntl();
     const cls = BEMHelper('periode-list');
+
     return (
         <div className={cls.block}>
             <Normaltekst className={cls.element('tittel')}>{tittel}</Normaltekst>
@@ -156,4 +153,4 @@ const PeriodeList: React.StatelessComponent<Props & InjectedIntlProps> = ({
     );
 };
 
-export default injectIntl(PeriodeList);
+export default PeriodeList;

@@ -3,7 +3,7 @@ import { StønadskontoType, OppholdsÅrsak } from 'app/api/types/UttaksplanDto';
 import { Tidsperiode } from 'app/types/Tidsperiode';
 import { isEqual } from 'lodash';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
-import { InjectedIntl } from 'react-intl';
+import { IntlShape } from 'react-intl';
 import Periode, { PeriodeType, Uttaksperiode } from 'app/types/uttaksplan/Periode';
 import { Rolle } from 'app/types/Rolle';
 import { ANTALL_UTTAKSDAGER_PR_UKE } from './constants';
@@ -42,9 +42,9 @@ const finnNesteMuligeUttaksdag = (dato: string): string => {
     const nesteDag = moment.utc(dato).add(1, 'day');
     return nesteDag.isoWeekday() >= 6
         ? nesteDag
-            .add(1, 'weeks')
-            .startOf('isoWeek')
-            .format('YYYY-MM-DD')
+              .add(1, 'weeks')
+              .startOf('isoWeek')
+              .format('YYYY-MM-DD')
         : nesteDag.format('YYYY-MM-DD');
 };
 
@@ -89,7 +89,7 @@ export const getStønadskontoFarge = (
     }
 };
 
-export const getVarighetString = (antallDager: number, intl: InjectedIntl): string => {
+export const getVarighetString = (antallDager: number, intl: IntlShape): string => {
     const { uker, dager } = getUkerOgDagerFromDager(Math.abs(antallDager));
     const dagerStr = intl.formatMessage(
         { id: 'common.varighet.dager' },
@@ -109,7 +109,11 @@ export const getVarighetString = (antallDager: number, intl: InjectedIntl): stri
     return ukerStr;
 };
 
-export const getAntallUttaksdagerITidsperiode = (tidsperiode: Tidsperiode, graderingsprosent?: string, samtidiguttaksprosent?: number): number => {
+export const getAntallUttaksdagerITidsperiode = (
+    tidsperiode: Tidsperiode,
+    graderingsprosent?: string,
+    samtidiguttaksprosent?: number
+): number => {
     const fom = moment(tidsperiode.fom);
     const tom = moment(tidsperiode.tom);
     let antall = 0;
@@ -122,13 +126,17 @@ export const getAntallUttaksdagerITidsperiode = (tidsperiode: Tidsperiode, grade
     return justerForGraderingEllerSamtidigUttak(antall, graderingsprosent, samtidiguttaksprosent);
 };
 
-const justerForGraderingEllerSamtidigUttak = (antallDager: number, graderingsprosent: string | undefined, samtidiguttaksprosent: number | undefined) => {
+const justerForGraderingEllerSamtidigUttak = (
+    antallDager: number,
+    graderingsprosent: string | undefined,
+    samtidiguttaksprosent: number | undefined
+) => {
     if (samtidiguttaksprosent !== undefined && samtidiguttaksprosent > 0) {
-        return Math.floor(antallDager * samtidiguttaksprosent / 100);
+        return Math.floor((antallDager * samtidiguttaksprosent) / 100);
     }
 
     if (graderingsprosent !== undefined && parseFloat(graderingsprosent) > 0) {
-        return Math.floor(antallDager * parseFloat(graderingsprosent) / 100);
+        return Math.floor((antallDager * parseFloat(graderingsprosent)) / 100);
     }
 
     return antallDager;

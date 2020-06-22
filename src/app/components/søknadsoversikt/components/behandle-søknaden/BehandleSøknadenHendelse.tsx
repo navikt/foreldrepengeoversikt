@@ -2,7 +2,7 @@ import React from 'react';
 import SøknadsoversiktHendelseListeItem from '../SøknadsoversiktHendelseListeItem';
 import Icon from 'nav-frontend-ikoner-assets';
 import { UttaksplanColor } from 'app/types/uttaksplan/UttaksplanColor';
-import { injectIntl, InjectedIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import moment from 'moment';
 import { formatDate } from 'app/components/saksoversikt/utils';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -11,7 +11,6 @@ import Arbeidsforhold from 'app/types/Arbeidsforhold';
 interface Props {
     behandlingsdato: string;
     arbeidsforhold: Arbeidsforhold[] | undefined;
-    intl: InjectedIntl;
 }
 
 const getIkon = (behandlingsdato: string) => {
@@ -25,7 +24,8 @@ const getIkon = (behandlingsdato: string) => {
 export const behandleSøknadenHendelseErOk = (behandlingsdato: string) =>
     moment().isSameOrAfter(behandlingsdato, 'days');
 
-const BehandleSøknadenHendelse: React.FunctionComponent<Props> = ({ behandlingsdato, arbeidsforhold, intl }) => {
+const BehandleSøknadenHendelse: React.FunctionComponent<Props> = ({ behandlingsdato, arbeidsforhold }) => {
+    const intl = useIntl();
     const harArbeidsforhold = arbeidsforhold !== undefined && arbeidsforhold.length > 0;
 
     return (
@@ -59,4 +59,4 @@ const BehandleSøknadenHendelse: React.FunctionComponent<Props> = ({ behandlings
     );
 };
 
-export default injectIntl(BehandleSøknadenHendelse);
+export default BehandleSøknadenHendelse;

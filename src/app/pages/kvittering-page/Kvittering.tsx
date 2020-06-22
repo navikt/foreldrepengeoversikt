@@ -43,7 +43,7 @@ class KvitteringPage extends React.Component<Props, State> {
     }
 
     getOriginOfEttersendelse() {
-        const { state } = this.props.history.location;
+        const { state } = this.props.history.location as any;
 
         return state.ettersendelseOrigin;
     }

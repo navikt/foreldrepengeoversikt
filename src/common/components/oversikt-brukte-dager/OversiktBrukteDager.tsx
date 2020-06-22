@@ -1,5 +1,5 @@
 import React from 'react';
-import { InjectedIntlProps, injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 
 import BEMHelper from 'common/util/bem';
@@ -31,15 +31,14 @@ interface Props {
     navnPåForeldre: NavnPåForeldre;
 }
 
-
-const OversiktBrukteDager: React.StatelessComponent<Props & InjectedIntlProps> = ({
+const OversiktBrukteDager: React.StatelessComponent<Props> = ({
     resterendeStønadskonter,
     brukteDager,
     navnPåForeldre,
     erDeltUttak,
-    erFarMedmor,
-    intl
+    erFarMedmor
 }) => {
+    const intl = useIntl();
     // TODO utled situasjon
     const situasjon = ForeldreparSituasjon.farOgMor;
     const info = getSituasjonForelderSvg(situasjon);
@@ -77,4 +76,4 @@ const OversiktBrukteDager: React.StatelessComponent<Props & InjectedIntlProps> =
     );
 };
 
-export default injectIntl(OversiktBrukteDager);
+export default OversiktBrukteDager;

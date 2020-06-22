@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Modal from 'nav-frontend-modal';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 import getMessage from 'common/util/i18nUtils';
@@ -12,10 +12,9 @@ import classNames from 'classnames';
 import './byttBrowserModal.less';
 import AdvarselIkonSirkel from 'app/components/ikoner/uttaksplanIkon/ikoner/AdvarselIkonSirkel';
 
-type Props = InjectedIntlProps;
-
-const ByttBrowserModal: React.FunctionComponent<Props> = ({ intl }) => {
+const ByttBrowserModal: React.FunctionComponent = () => {
     const [isOpen, toggleIsOpen] = React.useState(shouldChangeBrowser());
+    const intl = useIntl();
     const cls = BEMHelper('bytt-browser-modal');
     return (
         <Modal
@@ -26,10 +25,10 @@ const ByttBrowserModal: React.FunctionComponent<Props> = ({ intl }) => {
             onRequestClose={() => undefined}>
             <AdvarselIkonSirkel width="42" height="42" className={classNames(cls.element('ikon'), 'blokk-m')} />
             <Systemtittel className="blokk-m">
-                <FormattedHTMLMessage id="byttBrowser.tittel" />
+                <FormattedMessage id="byttBrowser.tittel" />
             </Systemtittel>
             <Normaltekst className="blokk-m">
-                <FormattedHTMLMessage id="byttBrowser.ingress" />
+                <FormattedMessage id="byttBrowser.ingress" />
             </Normaltekst>
             <div className={cls.element('ok-knapp')}>
                 <Hovedknapp className={cls.element('ok-knapp')} onClick={() => toggleIsOpen(false)}>
@@ -39,4 +38,4 @@ const ByttBrowserModal: React.FunctionComponent<Props> = ({ intl }) => {
         </Modal>
     );
 };
-export default injectIntl(ByttBrowserModal);
+export default ByttBrowserModal;
