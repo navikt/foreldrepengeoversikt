@@ -33,7 +33,7 @@ interface Props {
 }
 
 class Foreldrepengeoversikt extends React.Component<Props> {
-    componentWillMount(): void {
+    componentDidMount(): void {
         this.fetchData();
     }
 
@@ -97,7 +97,7 @@ const mapStateToProps = (state: AppState) => {
                 oppslag.status === FetchStatus.UNFETCHED ||
                 oppslag.status === FetchStatus.IN_PROGRESS ||
                 getErrorCode(oppslag) === 401
-        )
+        ),
     };
 };
 
@@ -113,10 +113,7 @@ const mapDispatchToProps = (dispatch: (action: ApiAction) => void) => ({
     },
     requestHistorikk: () => {
         dispatch({ type: ApiActionTypes.GET_HISTORIKK_REQUEST });
-    }
+    },
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Foreldrepengeoversikt);
+export default connect(mapStateToProps, mapDispatchToProps)(Foreldrepengeoversikt);
