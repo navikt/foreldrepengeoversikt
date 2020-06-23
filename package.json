@@ -113,7 +113,7 @@
         "@navikt/fnrvalidator": "^1.1.2",
         "@formatjs/intl-pluralrules": "^2.2.6",
         "@formatjs/intl-relativetimeformat": "^5.2.6",
-        "@sentry/browser": "^5.17.0",
+        "@sentry/browser": "^5.18.0",
         "axios": "^0.19.2",
         "babel-runtime": "^6.26.0",
         "bytes": "^3.1.0",
