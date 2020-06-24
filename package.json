@@ -32,7 +32,7 @@
         "@types/jest": "^26.0.0",
         "@types/jsdom": "^16.2.3",
         "@types/lodash": "^4.14.156",
-        "@types/react": "^16.9.38",
+        "@types/react": "^16.9.41",
         "@types/react-collapse": "^5.0.0",
         "@types/react-document-title": "^2.0.4",
         "@types/react-dom": "^16.9.8",
