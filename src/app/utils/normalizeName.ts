@@ -22,6 +22,10 @@ const COMMA = ',';
 const HYPHEN = '-';
 
 const normalizeName = (name: string) => {
+    if (!name) {
+        return 'Ukjent arbeidsgiver';
+    }
+
     return name
         .split(COMMA)
         .map((chunkOfName) =>
