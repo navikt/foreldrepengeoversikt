@@ -1,0 +1,13 @@
+{
+    "namespace": "teamforeldrepenger",
+    "ingresses": [
+        "https://foreldrepenger-q.nav.no",
+        "https://foreldrepenger.dev-sbs.nais.io"
+    ],
+    "env": {
+        "APPRES_CMS_URL": "https://www-q1.nav.no/dekoratoren",
+        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api/rest",
+        "LOGINSERVICE_URL": "https://loginservice-q.nav.no/login",
+        "FP_UTTAK_SERVICE_URL": "https://fp-uttak-service-q.nav.no"
+    }
+}
