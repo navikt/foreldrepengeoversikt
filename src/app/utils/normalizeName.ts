@@ -22,7 +22,7 @@ const COMMA = ',';
 const HYPHEN = '-';
 
 const normalizeName = (navn: string) => {
-    if (!navn) {
+    if (!navn || typeof navn !== 'string') {
         return 'Ukjent arbeidsgiver';
     }
 
