@@ -120,21 +120,17 @@ const normalizeName = (navn: string) => {
 
     return navn
         .split(COMMA)
-        .map((chunkOfName) => {
-            if (chunkOfName) {
-                return chunkOfName
-                    .split(SPACE)
-                    .map((word, wordIndex) =>
-                        word
-                            .split(HYPHEN)
-                            .map(normalizeWord(wordIndex === 0))
-                            .join(HYPHEN)
-                    )
-                    .join(SPACE);
-            }
-
-            return '';
-        })
+        .map((chunkOfName) =>
+            (chunkOfName || '')
+                .split(SPACE)
+                .map((word, wordIndex) =>
+                    word
+                        .split(HYPHEN)
+                        .map(normalizeWord(wordIndex === 0))
+                        .join(HYPHEN)
+                )
+                .join(SPACE)
+        )
         .join(COMMA);
 };
 
