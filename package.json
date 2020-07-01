@@ -123,7 +123,7 @@
         "express": "^4.17.1",
         "history": "^5.0.0",
         "intl": "^1.2.5",
-        "intl-locales-supported": "^1.8.10",
+        "intl-locales-supported": "^1.8.11",
         "loadash": "^1.0.0",
         "lodash.throttle": "^4.1.1",
         "moment": "^2.27.0",
