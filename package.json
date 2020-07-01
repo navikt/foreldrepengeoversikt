@@ -110,7 +110,7 @@
         "webpack-dev-server": "^3.11.0"
     },
     "dependencies": {
-        "@formatjs/intl-pluralrules": "^2.2.9",
+        "@formatjs/intl-pluralrules": "^2.2.11",
         "@formatjs/intl-relativetimeformat": "^5.2.9",
         "@navikt/fnrvalidator": "^1.1.2",
         "@sentry/browser": "^5.18.1",
