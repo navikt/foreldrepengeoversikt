@@ -21,12 +21,12 @@ const SPACE = ' ';
 const COMMA = ',';
 const HYPHEN = '-';
 
-const normalizeName = (name: string) => {
-    if (!name) {
+const normalizeName = (navn: string) => {
+    if (!navn) {
         return 'Ukjent arbeidsgiver';
     }
 
-    return name
+    return navn
         .split(COMMA)
         .map((chunkOfName) =>
             chunkOfName
