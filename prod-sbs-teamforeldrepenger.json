@@ -1,5 +1,4 @@
 {
-    "namespace" : "teamforeldrepenger",
     "ingresses": [
         "https://foreldrepenger.nav.no",
         "https://foreldrepenger.prod-sbs.nais.io"

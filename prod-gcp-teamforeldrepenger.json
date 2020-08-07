@@ -1,7 +1,6 @@
 {
     "gcp" : "true",
     "uttak": "fp-uttak-service.nav.no",
-    "namespace": "teamforeldrepenger",
     "ingresses": [
         "https://foreldrepenger.nav.no"
     ],
