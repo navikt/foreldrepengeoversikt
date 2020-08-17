@@ -217,7 +217,9 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({
 
             {sakErFerdigBehandlet && (
                 <Lenkeknapp
-                    url={`${Environment.KLAGE_URL}/?referanse=${sak.saksnummer}&tema=FOR&stonad=${getStønadstype()}`}
+                    url={`${Environment.KLAGE_URL}/klage?referanse=${
+                        sak.saksnummer
+                    }&tema=FOR&stonad=${getStønadstype()}`}
                 >
                     Jeg vil klage
                 </Lenkeknapp>
