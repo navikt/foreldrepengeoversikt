@@ -40,6 +40,8 @@ import './saksinformasjonPanel.less';
 import Søknadsoversikt from '../søknadsoversikt/Søknadsoversikt';
 import { FagsakStatus } from 'app/api/types/sak/FagsakStatus';
 import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
+import Lenkeknapp from '../lenkeknapp/Lenkeknapp';
+import Environment from 'app/Environment';
 
 interface Props {
     søkerinfo?: Søkerinfo;
@@ -85,11 +87,24 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({
         historikkInnslagListe.find(
             (innslag) => isInnsendingInnslag(innslag) && innslag.hendelse === HendelseType.ENDRING_FORELDREPENGER
         ) !== undefined;
+
     const navigateToEttersendelse = () =>
         history.push({
             pathname: Routes.ETTERSENDELSE,
             search: new URLSearchParams({ saksnummer: sak.saksnummer! }).toString(),
         });
+
+    const getStønadstype = () => {
+        if (erForeldrepengesak(sak)) {
+            return 'foreldrepenger';
+        }
+
+        if (erSvangerskapepengesak(sak)) {
+            return 'svangerskapspenger';
+        }
+
+        return 'engangsstønad';
+    };
 
     const cls = BEMHelper('saksinformasjon-panel');
     return (
@@ -198,6 +213,14 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({
                     søker={søkerinfo ? søkerinfo.person : undefined}
                     hendelser={utledHendelser(sak.behandlinger, historikkInnslagListe)}
                 />
+            )}
+
+            {sakErFerdigBehandlet && (
+                <Lenkeknapp
+                    url={`${Environment.KLAGE_URL}/?referanse=${sak.saksnummer}&tema=FOR&stonad=${getStønadstype()}`}
+                >
+                    Jeg vil klage
+                </Lenkeknapp>
             )}
         </div>
     );
