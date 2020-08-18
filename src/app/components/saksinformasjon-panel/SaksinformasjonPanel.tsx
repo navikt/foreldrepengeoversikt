@@ -221,7 +221,7 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({
                         sak.saksnummer
                     }&tema=FOR&stonad=${getStønadstype()}`}
                 >
-                    Jeg vil klage
+                    Send inn klage på vedtak
                 </Lenkeknapp>
             )}
         </div>
