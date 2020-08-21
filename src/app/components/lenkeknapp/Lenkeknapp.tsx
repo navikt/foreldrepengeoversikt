@@ -12,7 +12,7 @@ interface Props {
 const Lenkeknapp: FunctionComponent<Props> = ({ url, type, children }) => (
     <Lenke
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener"
         className={classnames('knapp', 'lenkeknapp', `knapp--${type || 'standard'}`)}
         href={url}
     >
