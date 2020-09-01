@@ -4,7 +4,7 @@
     "ingresses": ["https://foreldrepenger.dev.nav.no"],
     "env": {
         "APPRES_CMS_URL": "https://dekoratoren.dev.nav.no",
-        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.dev.nav.no/rest",
+        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.dev.adeo.no/rest",
         "LOGINSERVICE_URL": "https://loginservice.dev.nav.no/login",
         "FP_UTTAK_SERVICE_URL": "https://fp-uttak-service.dev.nav.no",
         "KLAGE_URL": "https://klage-dittnav.dev.nav.no"
