@@ -67,7 +67,7 @@
         "fs-extra": "^9.0.1",
         "html-webpack-harddisk-plugin": "^1.0.2",
         "html-webpack-plugin": "^4.3.0",
-        "jest": "^26.1.0",
+        "jest": "^26.4.2",
         "jest-css-modules": "^2.1.0",
         "jsdom": "^16.2.2",
         "less": "^3.11.3",
