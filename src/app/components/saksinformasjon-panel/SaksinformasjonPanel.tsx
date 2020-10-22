@@ -40,8 +40,6 @@ import './saksinformasjonPanel.less';
 import Søknadsoversikt from '../søknadsoversikt/Søknadsoversikt';
 import { FagsakStatus } from 'app/api/types/sak/FagsakStatus';
 import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
-import Lenkeknapp from '../lenkeknapp/Lenkeknapp';
-import Environment from 'app/Environment';
 
 interface Props {
     søkerinfo?: Søkerinfo;
@@ -93,18 +91,6 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({
             pathname: Routes.ETTERSENDELSE,
             search: new URLSearchParams({ saksnummer: sak.saksnummer! }).toString(),
         });
-
-    const getStønadstype = () => {
-        if (erForeldrepengesak(sak)) {
-            return 'foreldrepenger';
-        }
-
-        if (erSvangerskapepengesak(sak)) {
-            return 'svangerskapspenger';
-        }
-
-        return 'engangsstønad';
-    };
 
     const cls = BEMHelper('saksinformasjon-panel');
     return (
@@ -213,14 +199,6 @@ const SaksinformasjonPanel: React.StatelessComponent<Props> = ({
                     søker={søkerinfo ? søkerinfo.person : undefined}
                     hendelser={utledHendelser(sak.behandlinger, historikkInnslagListe)}
                 />
-            )}
-
-            {harEnAvsluttetBehandling(sak) && (
-                <Lenkeknapp
-                    url={`${Environment.KLAGE_URL}/?saksnummer=${sak.saksnummer}&tema=FOR&ytelse=${getStønadstype()}`}
-                >
-                    Send inn klage på vedtak
-                </Lenkeknapp>
             )}
         </div>
     );

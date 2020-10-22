@@ -39,6 +39,7 @@ import MinidialogContainer from 'app/components/minidialog-container/MinidialogC
 
 import './dineForeldrepenger.less';
 import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
+import SpørsmålEllerKlage from 'app/components/spørsmålEllerKlage/SpørsmålEllerKlage';
 
 interface Props {
     saker: SakBase[];
@@ -162,7 +163,11 @@ export class DineForeldrepenger extends React.Component<Props> {
                                 {this.renderSaksoversiktList(nyesteSak)}
                             </>
                         )}
-
+                        {nyesteSak && (
+                            <>
+                                <SpørsmålEllerKlage sak={nyesteSak} />
+                            </>
+                        )}
                         <MediaQuery maxWidth={1114}>{this.renderSidepanel(nyesteSak)}</MediaQuery>
                         <RelatertInformasjon />
                     </div>

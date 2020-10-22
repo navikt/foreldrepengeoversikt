@@ -25,7 +25,7 @@ interface Props {
     manglendeVedlegg: ManglendeVedlegg[];
 }
 
-const Saksoversikt: React.StatelessComponent<Props> = ({
+const Saksoversikt: React.FunctionComponent<Props> = ({
     sak,
     historikkInnslagListe,
     withHeader = false,
