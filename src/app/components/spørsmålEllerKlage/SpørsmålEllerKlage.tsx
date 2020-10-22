@@ -11,6 +11,7 @@ import SpørsmålIkon from '../ikoner/SpørsmålIkon';
 
 import './spørsmålEllerKlage.less';
 import { erForeldrepengesak, erSvangerskapepengesak } from 'app/utils/sakerUtils';
+import BEMHelper from 'common/util/bem';
 
 interface SpørsmålEllerKlageProps {
     sak: SakBase;
@@ -29,26 +30,30 @@ const SpørsmålEllerKlage: React.FunctionComponent<SpørsmålEllerKlageProps> =
         return 'engangsstønad';
     };
 
+    const bem = BEMHelper('spørsmålEllerKlage');
+
     return (
         <Panel>
-            <div className="container">
-                <SpørsmålIkon />
+            <div className={bem.element('container')}>
+                <div className={bem.element('ikon')}>
+                    <SpørsmålIkon />
+                </div>
                 <div>
-                    <Undertittel tag="h2" className="blokk-m">
-                        <FormattedMessage id="saksoversikt.spårsmålEllerKlage.spørsmål.tittel" />
+                    <Undertittel className="blokk-xs">
+                        <FormattedMessage id="saksoversikt.spørsmålEllerKlage.spørsmål.tittel" />
                     </Undertittel>
                     <Normaltekst>
                         <FormattedMessage
-                            id="saksoversikt.spårsmålEllerKlage.spørsmål.text"
+                            id="saksoversikt.spørsmålEllerKlage.spørsmål.text"
                             values={{
                                 lenke: (
                                     <Lenke href={lenker.skrivTilOss}>
-                                        <FormattedMessage id="saksoversikt.spårsmålEllerKlage.spørsmål.text.lenke" />
+                                        <FormattedMessage id="saksoversikt.spørsmålEllerKlage.spørsmål.text.lenke" />
                                     </Lenke>
                                 ),
                                 andreLenke: (
                                     <Lenke href={lenker.kontaktOss}>
-                                        <FormattedMessage id="saksoversikt.spårsmålEllerKlage.spørsmål.text.andreLenke" />
+                                        <FormattedMessage id="saksoversikt.spørsmålEllerKlage.spørsmål.text.andreLenke" />
                                     </Lenke>
                                 ),
                             }}
@@ -56,27 +61,29 @@ const SpørsmålEllerKlage: React.FunctionComponent<SpørsmålEllerKlageProps> =
                     </Normaltekst>
                 </div>
             </div>
-            <div className="separator" />
-            <div className="container">
-                <KlageIkon />
+            <hr />
+            <div className={bem.element('container')}>
+                <div className={bem.element('ikon')}>
+                    <KlageIkon />
+                </div>
                 <div>
-                    <Undertittel tag="h2" className="blokk-m">
-                        <FormattedMessage id="saksoversikt.spårsmålEllerKlage.klage.tittel" />
+                    <Undertittel className="blokk-xs">
+                        <FormattedMessage id="saksoversikt.spørsmålEllerKlage.klage.tittel" />
                     </Undertittel>
                     <Normaltekst>
                         <FormattedMessage
-                            id="saksoversikt.spårsmålEllerKlage.klage.text"
+                            id="saksoversikt.spørsmålEllerKlage.klage.text"
                             values={{
                                 lenke: (
                                     <Lenke href={lenker.klageRettigheter}>
-                                        <FormattedMessage id="saksoversikt.spårsmålEllerKlage.klage.text.lenke" />
+                                        <FormattedMessage id="saksoversikt.spørsmålEllerKlage.klage.text.lenke" />
                                     </Lenke>
                                 ),
                                 andreLenke: (
                                     <Lenke
                                         href={`${Environment.KLAGE_URL}/?saksnummer=${sak.saksnummer}&tema=FOR&ytelse=${getStønadstype}`}
                                     >
-                                        <FormattedMessage id="saksoversikt.spårsmålEllerKlage.klage.text.andreLenke" />
+                                        <FormattedMessage id="saksoversikt.spørsmålEllerKlage.klage.text.andreLenke" />
                                     </Lenke>
                                 ),
                             }}
