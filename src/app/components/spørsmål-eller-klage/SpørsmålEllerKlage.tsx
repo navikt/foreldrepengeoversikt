@@ -8,10 +8,10 @@ import Environment from 'app/Environment';
 import { SakBase } from 'app/api/types/sak/Sak';
 import KlageIkon from '../ikoner/KlageIkon';
 import SpørsmålIkon from '../ikoner/SpørsmålIkon';
-
-import './spørsmålEllerKlage.less';
 import { erForeldrepengesak, erSvangerskapepengesak } from 'app/utils/sakerUtils';
 import BEMHelper from 'common/util/bem';
+
+import './spørsmålEllerKlage.less';
 
 interface SpørsmålEllerKlageProps {
     sak: SakBase;

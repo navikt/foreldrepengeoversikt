@@ -37,9 +37,9 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedMessage } from 'react-intl';
 import MinidialogContainer from 'app/components/minidialog-container/MinidialogContainer';
 import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
+import SpørsmålEllerKlage from 'app/components/spørsmål-eller-klage/SpørsmålEllerKlage';
 
 import './dineForeldrepenger.less';
-import SpørsmålEllerKlage from 'app/components/spørsmål-eller-klage/SpørsmålEllerKlage';
 
 interface Props {
     saker: SakBase[];
