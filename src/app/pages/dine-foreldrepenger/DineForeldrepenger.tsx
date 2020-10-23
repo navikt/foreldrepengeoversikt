@@ -36,10 +36,10 @@ import { Søkerinfo } from 'app/types/Søkerinfo';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedMessage } from 'react-intl';
 import MinidialogContainer from 'app/components/minidialog-container/MinidialogContainer';
+import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 
 import './dineForeldrepenger.less';
-import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
-import SpørsmålEllerKlage from 'app/components/spørsmålEllerKlage/SpørsmålEllerKlage';
+import SpørsmålEllerKlage from 'app/components/spørsmål-eller-klage/SpørsmålEllerKlage';
 
 interface Props {
     saker: SakBase[];
