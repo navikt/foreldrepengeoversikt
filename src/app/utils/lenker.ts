@@ -56,4 +56,7 @@ export const lenker = {
     svangerskapspengesøknad: 'https://svangerskapspengesoknad.nav.no',
     hvaSøkerDu: 'https://familie.nav.no/hva-soker-du',
     sendeInntektsmelding: 'https://www.nav.no/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/inntektsmelding',
+    skrivTilOss: 'https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss',
+    kontaktOss: 'https://www.nav.no/person/kontakt-oss/nb/',
+    klageRettigheter: 'https://www.nav.no/no/nav-og-samfunn/kontakt-nav/klage-ris-og-ros/klagerettigheter',
 };
