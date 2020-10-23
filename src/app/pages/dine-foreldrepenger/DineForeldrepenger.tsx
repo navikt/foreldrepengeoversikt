@@ -37,7 +37,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedMessage } from 'react-intl';
 import MinidialogContainer from 'app/components/minidialog-container/MinidialogContainer';
 import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
-import SpørsmålEllerKlage from 'app/components/spørsmål-eller-klage/SpørsmålEllerKlage';
+import InfoOmKlage from 'app/components/info-om-klage/InfoOmKlage';
 
 import './dineForeldrepenger.less';
 
@@ -165,7 +165,7 @@ export class DineForeldrepenger extends React.Component<Props> {
                         )}
                         {nyesteSak && (
                             <>
-                                <SpørsmålEllerKlage sak={nyesteSak} />
+                                <InfoOmKlage sak={nyesteSak} />
                             </>
                         )}
                         <MediaQuery maxWidth={1114}>{this.renderSidepanel(nyesteSak)}</MediaQuery>

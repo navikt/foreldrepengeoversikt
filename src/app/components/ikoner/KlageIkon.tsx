@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function KlageIkon() {
+const KlageIkon = () => {
     return (
         <svg width={50} height={56} viewBox="0 0 50 56" fill="none">
             <path d="M3.773 0h36.791l7.55 7.513v46.014H3.773V0z" fill="#E7E9E9" />
@@ -18,6 +18,6 @@ function KlageIkon() {
             />
         </svg>
     );
-}
+};
 
 export default KlageIkon;

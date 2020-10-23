@@ -6,18 +6,18 @@ import Lenke from 'nav-frontend-lenker';
 import { lenker } from '../../utils/lenker';
 import Environment from 'app/Environment';
 import { SakBase } from 'app/api/types/sak/Sak';
-import KlageIkon from '../ikoner/KlageIkon';
-import SpørsmålIkon from '../ikoner/SpørsmålIkon';
 import { erForeldrepengesak, erSvangerskapepengesak } from 'app/utils/sakerUtils';
 import BEMHelper from 'common/util/bem';
+import SpørsmålIkon from '../ikoner/SpørsmålIkon';
+import KlageIkon from '../ikoner/KlageIkon';
 
-import './spørsmålEllerKlage.less';
+import './infoOmKlage.less';
 
-interface SpørsmålEllerKlageProps {
+interface Props {
     sak: SakBase;
 }
 
-const SpørsmålEllerKlage: React.FunctionComponent<SpørsmålEllerKlageProps> = ({ sak }) => {
+const InfoOmKlage: React.FunctionComponent<Props> = ({ sak }) => {
     const getStønadstype = () => {
         if (erForeldrepengesak(sak)) {
             return 'foreldrepenger';
@@ -30,7 +30,7 @@ const SpørsmålEllerKlage: React.FunctionComponent<SpørsmålEllerKlageProps> =
         return 'engangsstønad';
     };
 
-    const bem = BEMHelper('spørsmålEllerKlage');
+    const bem = BEMHelper('infoOmKlage');
 
     return (
         <Panel>
@@ -95,4 +95,4 @@ const SpørsmålEllerKlage: React.FunctionComponent<SpørsmålEllerKlageProps> =
     );
 };
 
-export default SpørsmålEllerKlage;
+export default InfoOmKlage;
