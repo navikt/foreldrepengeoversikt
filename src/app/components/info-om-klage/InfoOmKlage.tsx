@@ -1,5 +1,4 @@
 import React from 'react';
-import Panel from 'nav-frontend-paneler';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
@@ -33,7 +32,7 @@ const InfoOmKlage: React.FunctionComponent<Props> = ({ sak }) => {
     const bem = BEMHelper('infoOmKlage');
 
     return (
-        <Panel>
+        <div style={{ backgroundColor: 'white', padding: '2rem' }}>
             <div className={bem.element('container')}>
                 <div className={bem.element('ikon')}>
                     <SpørsmålIkon />
@@ -91,7 +90,7 @@ const InfoOmKlage: React.FunctionComponent<Props> = ({ sak }) => {
                     </Normaltekst>
                 </div>
             </div>
-        </Panel>
+        </div>
     );
 };
 
