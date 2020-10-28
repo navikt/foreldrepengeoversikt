@@ -80,7 +80,9 @@ const InfoOmKlage: React.FunctionComponent<Props> = ({ sak }) => {
                                 ),
                                 andreLenke: (
                                     <Lenke
-                                        href={`${Environment.KLAGE_URL}/?saksnummer=${sak.saksnummer}&tema=FOR&ytelse=${getStønadstype}`}
+                                        href={`${Environment.KLAGE_URL}/?saksnummer=${
+                                            sak.saksnummer
+                                        }&tema=FOR&ytelse=${getStønadstype()}`}
                                     >
                                         <FormattedMessage id="saksoversikt.spørsmålEllerKlage.klage.text.andreLenke" />
                                     </Lenke>
