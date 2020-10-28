@@ -32,7 +32,7 @@ const InfoOmKlage: React.FunctionComponent<Props> = ({ sak }) => {
     const bem = BEMHelper('infoOmKlage');
 
     return (
-        <div style={{ backgroundColor: 'white', padding: '2rem' }}>
+        <div className={bem.block}>
             <div className={bem.element('container')}>
                 <div className={bem.element('ikon')}>
                     <SpørsmålIkon />
