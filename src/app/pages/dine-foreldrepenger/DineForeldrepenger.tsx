@@ -38,6 +38,7 @@ import { FormattedMessage } from 'react-intl';
 import MinidialogContainer from 'app/components/minidialog-container/MinidialogContainer';
 import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 import InfoOmKlage from 'app/components/info-om-klage/InfoOmKlage';
+import { Element } from 'nav-frontend-typografi';
 
 import './dineForeldrepenger.less';
 
@@ -142,6 +143,7 @@ export class DineForeldrepenger extends React.Component<Props> {
         const cls = BEMHelper('dine-foreldrepenger');
         return (
             <>
+                <Element>NY TEKST HER</Element>
                 <Header saker={saker} history={this.props.history} />
                 <div className={cls.block}>
                     <div className={cls.element('main-content')}>
