@@ -124,7 +124,7 @@ const normalizeName = (navn: string) => {
             (chunkOfName || '')
                 .split(SPACE)
                 .map((word, wordIndex) =>
-                    word
+                    (word || '')
                         .split(HYPHEN)
                         .map(normalizeWord(wordIndex === 0))
                         .join(HYPHEN)
