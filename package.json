@@ -103,7 +103,7 @@
         "svg-inline-loader": "^0.8.2",
         "svg-sprite-loader": "^5.0.0",
         "terser-webpack-plugin": "^4.1.0",
-        "ts-jest": "^26.3.0",
+        "ts-jest": "^26.4.4",
         "typescript": "^3.9.7",
         "wait-on": "^5.2.0",
         "webpack": "^4.44.1",
