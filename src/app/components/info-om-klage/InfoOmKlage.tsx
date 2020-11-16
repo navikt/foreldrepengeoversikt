@@ -87,6 +87,11 @@ const InfoOmKlage: React.FunctionComponent<Props> = ({ sak }) => {
                                         <FormattedMessage id="saksoversikt.spørsmålEllerKlage.klage.text.andreLenke" />
                                     </Lenke>
                                 ),
+                                saksbehandlingsTidLenke: (
+                                    <Lenke href={lenker.saksbehandlingsTid}>
+                                        <FormattedMessage id="saksoversikt.spørsmålEllerKlage.klage.text.saksbehandlingsTidLenke" />
+                                    </Lenke>
+                                ),
                             }}
                         ></FormattedMessage>
                     </Normaltekst>

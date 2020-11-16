@@ -59,4 +59,5 @@ export const lenker = {
     skrivTilOss: 'https://mininnboks.nav.no/sporsmal/skriv/FMLI',
     kontaktOss: 'https://www.nav.no/person/kontakt-oss/nb/',
     klageRettigheter: 'https://www.nav.no/no/nav-og-samfunn/kontakt-nav/klage-ris-og-ros/klagerettigheter',
+    saksbehandlingsTid: 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav/klage-og-anke_kap',
 };
