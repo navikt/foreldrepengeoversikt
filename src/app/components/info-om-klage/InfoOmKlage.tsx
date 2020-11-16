@@ -60,7 +60,7 @@ const InfoOmKlage: React.FunctionComponent<Props> = ({ sak }) => {
                     </Normaltekst>
                 </div>
             </div>
-            <hr />
+            <div className={bem.element('divider')} />
             <div className={bem.element('container')}>
                 <div className={bem.element('ikon')}>
                     <KlageIkon />
