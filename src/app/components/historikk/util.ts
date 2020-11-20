@@ -6,7 +6,7 @@ import {
     HistorikkInnslagType,
     HistorikkInnslag,
     HendelseType,
-    InntektsmeldingInnslag,
+    isInntektsmeldingInnslag,
     isMinidialogInnslag,
     isInnsendingInnslag,
 } from 'app/api/types/historikk/HistorikkInnslag';
@@ -83,8 +83,8 @@ const historikkInnslagTilHendelse = (historikkInnslag: HistorikkInnslag): Hendel
         type: historikkInnslag.type,
         beskrivelse: getBeskrivelseForHistorikkInnslag(historikkInnslag),
         brukerInitiertHendelse: historikkInnslag.type === HistorikkInnslagType.søknad,
-        skjemanumre: (historikkInnslag as Innsendingsinnslag).vedlegg,
-        arbeidsgiver: (historikkInnslag as InntektsmeldingInnslag).arbeidsgiver,
+        skjemanumre: isInnsendingInnslag(historikkInnslag) ? historikkInnslag.ikkeOpplastedeVedlegg : undefined,
+        arbeidsgiver: isInntektsmeldingInnslag(historikkInnslag) ? historikkInnslag.arbeidsgiver : undefined,
     };
 };
 

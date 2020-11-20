@@ -18,7 +18,8 @@ export interface HistorikkInnslag {
 export interface Innsendingsinnslag extends HistorikkInnslag {
     type: HistorikkInnslagType.søknad;
     hendelse: HendelseType;
-    vedlegg?: Skjemanummer[];
+    ikkeOpplastedeVedlegg?: Skjemanummer[];
+    opplastedeVedlegg?: Skjemanummer[];
     behandlingsdato: string;
     referanseId: string;
     dialogId?: string;
@@ -46,6 +47,10 @@ export const isMinidialogInnslag = (historikkInnslag: HistorikkInnslag): histori
 
 export const isInnsendingInnslag = (historikkInnslag: HistorikkInnslag): historikkInnslag is Innsendingsinnslag =>
     historikkInnslag.type === HistorikkInnslagType.søknad;
+
+export const isInntektsmeldingInnslag = (
+    historikkInnslag: HistorikkInnslag
+): historikkInnslag is InntektsmeldingInnslag => historikkInnslag.type === HistorikkInnslagType.inntekt;
 
 export enum HendelseType {
     TILBAKEKREVING_SPM = 'TILBAKEKREVING_SPM ',
