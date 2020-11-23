@@ -9,9 +9,11 @@ import {
     isInntektsmeldingInnslag,
     isMinidialogInnslag,
     isInnsendingInnslag,
+    isEttersendelseHendelse,
 } from 'app/api/types/historikk/HistorikkInnslag';
 import { erBehandlingAvsluttet } from 'app/utils/sakerUtils';
 import moment from 'moment';
+import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 
 export const formaterDatoForHendelse = (dato: string) => {
     return formatDate(dato, 'D. MMMM YYYY [kl.] HH:mm:ss');
@@ -77,13 +79,25 @@ const behandlingsResultatTilHendelse = (behandling: Behandling): Hendelse => {
     };
 };
 
+const getRelevanteSkjemanumre = (historikkInnslag: HistorikkInnslag): Skjemanummer[] | undefined => {
+    if (isInnsendingInnslag(historikkInnslag)) {
+        if (isEttersendelseHendelse(historikkInnslag.hendelse)) {
+            return historikkInnslag.opplastedeVedlegg;
+        }
+
+        return historikkInnslag.ikkeOpplastedeVedlegg;
+    }
+
+    return undefined;
+};
+
 const historikkInnslagTilHendelse = (historikkInnslag: HistorikkInnslag): Hendelse => {
     return {
         dato: historikkInnslag.opprettet,
         type: historikkInnslag.type,
         beskrivelse: getBeskrivelseForHistorikkInnslag(historikkInnslag),
         brukerInitiertHendelse: historikkInnslag.type === HistorikkInnslagType.søknad,
-        skjemanumre: isInnsendingInnslag(historikkInnslag) ? historikkInnslag.ikkeOpplastedeVedlegg : undefined,
+        skjemanumre: getRelevanteSkjemanumre(historikkInnslag),
         arbeidsgiver: isInntektsmeldingInnslag(historikkInnslag) ? historikkInnslag.arbeidsgiver : undefined,
     };
 };

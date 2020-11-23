@@ -15,6 +15,7 @@ import { formaterDatoForHendelse } from './util';
 
 import './historikk.less';
 import { HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
+import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 
 export interface Hendelse {
     dato: string;
@@ -23,7 +24,7 @@ export interface Hendelse {
     arbeidsgiver?: {
         navn: string;
     };
-    skjemanumre?: string[];
+    skjemanumre?: Skjemanummer[];
     brukerInitiertHendelse: boolean;
 }
 

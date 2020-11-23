@@ -52,6 +52,14 @@ export const isInntektsmeldingInnslag = (
     historikkInnslag: HistorikkInnslag
 ): historikkInnslag is InntektsmeldingInnslag => historikkInnslag.type === HistorikkInnslagType.inntekt;
 
+export const isEttersendelseHendelse = (hendelse: HendelseType): boolean => {
+    return (
+        hendelse === HendelseType.ETTERSENDING_ENGANGSSTØNAD ||
+        hendelse === HendelseType.ETTERSENDING_FORELDREPENGER ||
+        hendelse === HendelseType.ETTERSENDING_SVANGERSKAPSPENGER
+    );
+};
+
 export enum HendelseType {
     TILBAKEKREVING_SPM = 'TILBAKEKREVING_SPM ',
     TILBAKEKREVING_SVAR = 'TILBAKEKREVING_SVAR',
