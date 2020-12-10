@@ -18,7 +18,7 @@ AxiosApiInterceptor.interceptors.response.use(
         return response;
     },
     (response: AxiosError) => {
-        if (response.response && response.response.status === 401) {
+        if (response.response && (response.response.status === 401 || response.response.status === 403)) {
             redirectToLogin();
         }
         return Promise.reject(response);
