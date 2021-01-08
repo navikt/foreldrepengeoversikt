@@ -6,7 +6,6 @@ export default interface Behandling {
     status: BehandlingStatus;
     tema: BehandlingTema;
     type: BehandlingType;
-    årsak: BehandlingÅrsak | null;
     behandlingResultat: BehandlingResultatType;
     inntektsmeldinger: string[];
 }
@@ -41,37 +40,6 @@ export enum BehandlingStatus {
     FATTER_VEDTAK = 'FVED',
     IVERKSETTER_VEDTAK = 'IVED',
     AVSLUTTET = 'AVSLU',
-}
-
-export enum BehandlingÅrsak {
-    ANNET = 'RE-ANNET',
-    BEREGNINGSGRUNNLAG = 'RE-BER-GRUN',
-    BERØRT_BEHANDLING = 'BERØRT-BEHANDLING',
-    DØD = 'RE-DØD',
-    ENDRET_INNTEKTSMELDING = 'RE-END-INNTEKTSMELD',
-    ENDRING_BEREGNINGSGRUNNLAG = 'RE-ENDR-BER-GRUN',
-    ENDRING_FRA_BRUKER = 'RE-END-FRA-BRUKER',
-    ETTER_KLAGE = 'ETTER_KLAGE',
-    FEIL_ELLER_ENDRET_FAKTA = 'RE-FEFAKTA',
-    FEIL_LOVANVENDELSE = 'RE-LOV',
-    FEIL_REGELVERKSFORSTÅELSE = 'RE-RGLF',
-    FORDELING_STØNADSPERIODE = 'RE-FRDLING',
-    HENDELSE_FØDSEL = 'RE-HENDELSE-FØDSEL',
-    INNTEKT = 'RE-INNTK',
-    KLAGE = 'RE-KLAG',
-    KØET_BEHANDLING = 'KØET_BEHANDLING',
-    MANGLENDE_FØDSEL = 'RE-MF',
-    MANGLENDE_FØDSEL_TERMIN = 'RE-MFIP',
-    MEDLEMSKAP = 'RE-MDL',
-    OPPTJENING = 'RE-OPTJ',
-    PROSESSURELL_FEIL = 'RE-PRSSL',
-    REGISTER_OPPLYSNING = 'RE-REGISTEROPPL',
-    RELASJON_TIL_BARNET = 'RE-SRTB',
-    SØKNADSFRIST = 'RE-FRIST',
-    TILSTØTENDE_YTELSE_INNVILGET = 'RE-TILST-YT-INNVIL',
-    TILSTØTENDE_YTELSE_OPPHØRT = 'RE-TILST-YT-OPPH',
-    ULIKT_ANTALL_BARN = 'RE-AVAB',
-    YTELSE = 'RE-YTELSE',
 }
 
 export enum BehandlingType {

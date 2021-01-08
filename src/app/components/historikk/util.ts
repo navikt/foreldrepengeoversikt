@@ -1,5 +1,5 @@
 import { Hendelse } from './HistorikkElement';
-import Behandling, { BehandlingResultatType, BehandlingÅrsak } from '../../api/types/sak/Behandling';
+import Behandling, { BehandlingResultatType } from '../../api/types/sak/Behandling';
 import { formatDate } from '../saksoversikt/utils';
 import {
     Innsendingsinnslag,
@@ -34,8 +34,6 @@ const erHendelseRelevant = (h: Hendelse): boolean => {
             .includes(h.type) ||
         h.type === 'søknad-sendt' ||
         h.type === 'inntektsmelding-motatt' ||
-        h.type === BehandlingÅrsak.ENDRET_INNTEKTSMELDING ||
-        h.type === BehandlingÅrsak.ENDRING_FRA_BRUKER ||
         h.type === HistorikkInnslagType.søknad ||
         h.type === HistorikkInnslagType.inntekt ||
         h.type === HistorikkInnslagType.minidialog

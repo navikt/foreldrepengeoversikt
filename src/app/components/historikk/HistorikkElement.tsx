@@ -7,19 +7,19 @@ import Snakkeboble from 'nav-frontend-snakkeboble';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import BEMHelper from 'common/util/bem';
-import { BehandlingResultatType, BehandlingÅrsak } from '../../api/types/sak/Behandling';
+import { BehandlingResultatType } from '../../api/types/sak/Behandling';
 import Person from 'app/types/Person';
 import normalizeName from 'app/utils/normalizeName';
 
 import { formaterDatoForHendelse } from './util';
 
 import './historikk.less';
-import { HendelseType } from 'app/api/types/historikk/HistorikkInnslag';
+import { HendelseType, HistorikkInnslagType } from 'app/api/types/historikk/HistorikkInnslag';
 import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
 
 export interface Hendelse {
     dato: string;
-    type: BehandlingÅrsak | BehandlingResultatType | string;
+    type: HendelseType | BehandlingResultatType | HistorikkInnslagType | 'inntektsmelding-motatt' | 'søknad-sendt';
     beskrivelse: string;
     arbeidsgiver?: {
         navn: string;

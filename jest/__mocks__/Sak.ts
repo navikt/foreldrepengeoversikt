@@ -3,7 +3,6 @@ import Behandling, {
     BehandlingResultatType,
     BehandlingStatus,
     BehandlingTema,
-    BehandlingÅrsak,
     BehandlingType,
 } from '../../src/app/api/types/sak/Behandling';
 import SakBase, { SakType } from 'app/api/types/sak/Sak';
@@ -16,7 +15,6 @@ export const engangssønadBehandlingMock: Behandling = {
     status: BehandlingStatus.OPPRETTET,
     tema: BehandlingTema.ENGANGSTØNAD,
     type: BehandlingType.ENGANGSSØNAD,
-    årsak: BehandlingÅrsak.YTELSE,
     behandlingResultat: BehandlingResultatType.INNVILGET,
     inntektsmeldinger: [],
 };
@@ -29,7 +27,6 @@ export const foreldrepengesoknadBehandlingMock: Behandling = {
     status: BehandlingStatus.OPPRETTET,
     tema: BehandlingTema.FORELDREPENGER,
     type: BehandlingType.FORELDREPENGESØKNAD,
-    årsak: BehandlingÅrsak.YTELSE,
     behandlingResultat: BehandlingResultatType.INNVILGET,
     inntektsmeldinger: [],
 };
@@ -42,7 +39,6 @@ export const svpBehandligMock: Behandling = {
     status: BehandlingStatus.OPPRETTET,
     tema: BehandlingTema.UDEFINERT,
     type: BehandlingType.SVANGERSKAPSPENGESØKNAD,
-    årsak: BehandlingÅrsak.YTELSE,
     behandlingResultat: BehandlingResultatType.INNVILGET,
     inntektsmeldinger: [],
 };
@@ -55,7 +51,6 @@ export const endringssøknadBehandlingMock: Behandling = {
     status: BehandlingStatus.OPPRETTET,
     tema: BehandlingTema.FORELDREPENGER,
     type: BehandlingType.FORELDREPENGESØKNAD,
-    årsak: BehandlingÅrsak.ENDRING_FRA_BRUKER,
     behandlingResultat: BehandlingResultatType.INNVILGET,
     inntektsmeldinger: [],
 };
