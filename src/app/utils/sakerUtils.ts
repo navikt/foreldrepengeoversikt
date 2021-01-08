@@ -1,6 +1,6 @@
 import SakBase, { SakType } from '../api/types/sak/Sak';
 import { FagsakStatus } from '../api/types/sak/FagsakStatus';
-import Behandling, { BehandlingStatus, BehandlingÅrsak, BehandlingType } from '../api/types/sak/Behandling';
+import Behandling, { BehandlingStatus, BehandlingType } from '../api/types/sak/Behandling';
 import { StorageKvittering } from '../api/types/StorageKvittering';
 
 export const sakByDescendingOrder = (a: SakBase, b: SakBase) => b.opprettet.localeCompare(a.opprettet);
@@ -44,9 +44,7 @@ export const getAlleBehandlinger = (saker: SakBase[]): Behandling[] => {
 };
 
 export const harSendtInnEndringssøknad = (sak: SakBase) => {
-    return sak.behandlinger === undefined
-        ? false
-        : sak.behandlinger.some((b: Behandling) => b.årsak === BehandlingÅrsak.ENDRING_FRA_BRUKER);
+    return sak.mottattEndringssøknad;
 };
 
 export const erForeldrepengesak = (sak: SakBase): boolean => {
@@ -87,6 +85,7 @@ export const opprettFiktivSak = (storageKvittering: StorageKvittering): SakBase 
     saksnummer: undefined,
     type: SakType.SAK,
     opprettet: storageKvittering.innsendingstidspunkt,
+    mottattEndringssøknad: false,
 });
 
 export const harSøkt = (sak: SakBase): boolean => {

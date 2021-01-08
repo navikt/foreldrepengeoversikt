@@ -12,6 +12,7 @@ export interface SakBase {
     saksnummer?: string;
     opprettet: string;
     annenPart?: AnnenPart;
+    mottattEndringssøknad: boolean;
 }
 
 export default interface Sak extends SakBase {

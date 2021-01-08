@@ -4,11 +4,11 @@ import Behandling, {
     BehandlingStatus,
     BehandlingTema,
     BehandlingÅrsak,
-    BehandlingType
+    BehandlingType,
 } from '../../src/app/api/types/sak/Behandling';
 import SakBase, { SakType } from 'app/api/types/sak/Sak';
 
-export const engangssønadBehandligMock: Behandling = {
+export const engangssønadBehandlingMock: Behandling = {
     opprettetTidspunkt: '2019-01-01',
     endretTidspunkt: '2019-01-02',
     behandlendeEnhet: '4833',
@@ -18,7 +18,7 @@ export const engangssønadBehandligMock: Behandling = {
     type: BehandlingType.ENGANGSSØNAD,
     årsak: BehandlingÅrsak.YTELSE,
     behandlingResultat: BehandlingResultatType.INNVILGET,
-    inntektsmeldinger: []
+    inntektsmeldinger: [],
 };
 
 export const foreldrepengesoknadBehandlingMock: Behandling = {
@@ -31,7 +31,7 @@ export const foreldrepengesoknadBehandlingMock: Behandling = {
     type: BehandlingType.FORELDREPENGESØKNAD,
     årsak: BehandlingÅrsak.YTELSE,
     behandlingResultat: BehandlingResultatType.INNVILGET,
-    inntektsmeldinger: []
+    inntektsmeldinger: [],
 };
 
 export const svpBehandligMock: Behandling = {
@@ -44,10 +44,10 @@ export const svpBehandligMock: Behandling = {
     type: BehandlingType.SVANGERSKAPSPENGESØKNAD,
     årsak: BehandlingÅrsak.YTELSE,
     behandlingResultat: BehandlingResultatType.INNVILGET,
-    inntektsmeldinger: []
+    inntektsmeldinger: [],
 };
 
-export const endringssøknadBehandligMock: Behandling = {
+export const endringssøknadBehandlingMock: Behandling = {
     opprettetTidspunkt: '2019-01-01',
     endretTidspunkt: '2019-01-02',
     behandlendeEnhet: '4833',
@@ -57,13 +57,14 @@ export const endringssøknadBehandligMock: Behandling = {
     type: BehandlingType.FORELDREPENGESØKNAD,
     årsak: BehandlingÅrsak.ENDRING_FRA_BRUKER,
     behandlingResultat: BehandlingResultatType.INNVILGET,
-    inntektsmeldinger: []
+    inntektsmeldinger: [],
 };
 
 const infotrygd: SakBase = {
     type: SakType.SAK,
     saksnummer: '123',
-    opprettet: '2018-09-01'
+    opprettet: '2018-09-01',
+    mottattEndringssøknad: false,
 };
 
 const fpsakSVP: SakBase = {
@@ -71,7 +72,8 @@ const fpsakSVP: SakBase = {
     saksnummer: '234',
     opprettet: '2018-10-01',
     status: FagsakStatus.OPPRETTET,
-    behandlinger: [svpBehandligMock]
+    behandlinger: [svpBehandligMock],
+    mottattEndringssøknad: false,
 };
 
 const fpsakFP: SakBase = {
@@ -79,7 +81,8 @@ const fpsakFP: SakBase = {
     saksnummer: '234',
     opprettet: '2018-10-01',
     status: FagsakStatus.OPPRETTET,
-    behandlinger: [foreldrepengesoknadBehandlingMock]
+    behandlinger: [foreldrepengesoknadBehandlingMock],
+    mottattEndringssøknad: false,
 };
 
 const fpsakES: SakBase = {
@@ -87,7 +90,8 @@ const fpsakES: SakBase = {
     saksnummer: '234',
     opprettet: '2018-10-01',
     status: FagsakStatus.OPPRETTET,
-    behandlinger: [engangssønadBehandligMock]
+    behandlinger: [engangssønadBehandlingMock],
+    mottattEndringssøknad: false,
 };
 
 const fpsakEndring: SakBase = {
@@ -95,7 +99,8 @@ const fpsakEndring: SakBase = {
     saksnummer: '234',
     opprettet: '2018-10-01',
     status: FagsakStatus.OPPRETTET,
-    behandlinger: [endringssøknadBehandligMock]
+    behandlinger: [endringssøknadBehandlingMock],
+    mottattEndringssøknad: true,
 };
 
 const SakerMock = { fpsakSVP, fpsakES, fpsakFP, fpsakEndring, infotrygd };
