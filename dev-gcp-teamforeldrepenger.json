@@ -5,6 +5,7 @@
     "api" : "foreldrepengesoknad-api.dev.nav.no",
     "dekoratoren" : "dekoratoren.dev.nav.no",
     "klage": "klage-dittnav.dev.nav.no",
+    "uttak": "fp-uttak-service.dev.nav.no",
     "ingresses": ["https://foreldrepenger.dev.nav.no"],
     "env": {
         "APPRES_CMS_URL": "https://dekoratoren.dev.nav.no",

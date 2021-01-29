@@ -12,6 +12,7 @@ spec:
       external:
         - host:  {{dekoratoren}}
         - host:  {{klage}}
+        - host:  {{uttak}}
         - host:  {{api}}
         - host:  {{loginservice}}
         - host:  {{nav}}
