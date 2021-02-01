@@ -1,5 +1,5 @@
 {
-    "dekoratoren": "www.nav.no",
+    "dekoratoren": "www.nav.no/dekoratoren",
     "uttak": "fp-uttak-service.nav.no",
     "ingresses": ["https://foreldrepenger.nav.no"],
     "env": {

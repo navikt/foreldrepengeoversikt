@@ -1,6 +1,4 @@
 {
-    "dekoratoren": "www.nav.no",
-    "uttak": "uttak-service",
     "ingresses": ["https://foreldrepenger.nav.no"],
     "env": {
         "APPRES_CMS_URL": "https://www.nav.no/dekoratoren",
