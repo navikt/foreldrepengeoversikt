@@ -12,7 +12,7 @@ interface Props {
     søker?: Person;
 }
 
-const SøkNåPanel: React.StatelessComponent<Props> = ({ søker }) => {
+const SøkNåPanel: React.FunctionComponent<Props> = ({ søker }) => {
     return (
         <AlertStripe type="advarsel">
             <Undertittel className="blokk-s">

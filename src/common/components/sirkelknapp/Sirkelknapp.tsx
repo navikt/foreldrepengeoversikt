@@ -27,7 +27,7 @@ export interface SirkelknappProps {
     size?: 'normal' | 'stor';
 }
 
-const Sirkelknapp: React.StatelessComponent<SirkelknappProps> = ({
+const Sirkelknapp: React.FunctionComponent<SirkelknappProps> = ({
     onClick,
     ariaLabel,
     ikon,

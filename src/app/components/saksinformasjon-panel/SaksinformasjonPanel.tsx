@@ -49,7 +49,7 @@ interface Props {
     manglendeVedlegg: ManglendeVedlegg[];
 }
 
-const SaksinformasjonPanel: React.StatelessComponent<Props> = ({
+const SaksinformasjonPanel: React.FunctionComponent<Props> = ({
     søkerinfo,
     sak,
     history,

@@ -56,7 +56,7 @@ export const getStønadskontoNavn = (intl: IntlShape, konto: StønadskontoType, 
     return intl.formatMessage({ id: `stønadskontotype.${konto}` });
 };
 
-const Kontostatus: React.StatelessComponent<Props> = ({ uttak, navnPåForeldre, erEndringssøknad }) => {
+const Kontostatus: React.FunctionComponent<Props> = ({ uttak, navnPåForeldre, erEndringssøknad }) => {
     const intl = useIntl();
 
     if (erEndringssøknad && uttak.konto === StønadskontoType.ForeldrepengerFørFødsel) {

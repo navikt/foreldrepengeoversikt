@@ -12,7 +12,7 @@ export interface Props {
     erDeltUttak: boolean;
 }
 
-const Uttaksoppsummering: React.StatelessComponent<Props> = ({
+const Uttaksoppsummering: React.FunctionComponent<Props> = ({
     resterendeStønadskonter,
     navnPåForeldre,
     erDeltUttak,

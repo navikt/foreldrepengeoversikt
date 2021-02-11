@@ -7,34 +7,11 @@
         padding-left: 0;
         list-style: none;
         padding-bottom: 0.5rem;
-        background: linear-gradient(
-            to right,
-            transparent 0%,
-            transparent calc(50% - 0.81px),
-            @navGra20 calc(50% - 0.8px),
-            @navGra20 calc(50% + 0.8px),
-            transparent calc(50% + 0.81px),
-            transparent 100%
-        );
     }
 
     &__ettersendelse-info,
     &__ingen-hendelser {
         margin-top: 1.5rem;
-    }
-
-    @media (max-width: 745px) {
-        &__liste {
-            background: linear-gradient(
-                to right,
-                transparent 0%,
-                transparent calc(20px - 0.81px),
-                @navGra20 calc(20px - 0.8px),
-                @navGra20 calc(20px + 0.8px),
-                transparent calc(20px + 0.81px),
-                transparent 100%
-            );
-        }
     }
 }
 
@@ -46,17 +23,8 @@
     .snakkeboble {
         .snakkeboble-content();
 
-        &-panel {
-            flex: 0 1 43.25%;
-        }
-
-        @media (max-width: 745px) {
-            padding: 0;
-            justify-content: flex-start;
-            &-panel {
-                flex: 0 1 100%;
-            }
-        }
+        padding: 0;
+        justify-content: flex-start;
     }
 
     &__tilleggsinformasjon {

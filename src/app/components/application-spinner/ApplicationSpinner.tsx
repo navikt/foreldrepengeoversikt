@@ -4,7 +4,7 @@ import BEMHelper from '../../../common/util/bem';
 
 import './applicationSpinner.less';
 
-const ApplicationSpinner: React.StatelessComponent = () => {
+const ApplicationSpinner: React.FunctionComponent = () => {
     const cls = BEMHelper('applicationSpinner');
     return (
         <div className={cls.block}>

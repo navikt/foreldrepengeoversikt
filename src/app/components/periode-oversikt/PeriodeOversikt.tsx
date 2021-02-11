@@ -16,7 +16,7 @@ interface Props {
     fremtidigePerioder?: Periode[];
 }
 
-const PeriodeOversikt: React.StatelessComponent<Props> = ({
+const PeriodeOversikt: React.FunctionComponent<Props> = ({
     tidligerePerioder = [],
     nåværendePerioder = [],
     fremtidigePerioder = [],

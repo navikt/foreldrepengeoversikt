@@ -15,7 +15,7 @@ interface Props {
     navigateToEttersendelse: () => void;
 }
 
-const Søknadsoversikt: React.StatelessComponent<Props> = ({
+const Søknadsoversikt: React.FunctionComponent<Props> = ({
     søknadsDato,
     arbeidsforhold,
     brukerHarSendtSøknad,

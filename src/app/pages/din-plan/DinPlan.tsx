@@ -34,7 +34,7 @@ interface Props {
     sak?: SakBase;
 }
 
-export const DinPlan: React.StatelessComponent<Props> = ({ history, sak, søker }) => {
+export const DinPlan: React.FunctionComponent<Props> = ({ history, sak, søker }) => {
     if (sak === undefined || søker === undefined || sak.perioder === undefined || sak.saksgrunnlag === undefined) {
         history.push(Routes.DINE_FORELDREPENGER);
         return null;

@@ -15,7 +15,7 @@ interface Props {
 
 const bem = BEMHelper('collapseToggler');
 
-const CollapseToggler: React.StatelessComponent<Props> = (props) => {
+const CollapseToggler: React.FunctionComponent<Props> = (props) => {
     const { isOpen = false, children, onToggle, contentId } = props;
     return (
         <button

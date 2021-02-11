@@ -21,7 +21,7 @@ interface Props {
     manglendeVedlegg: ManglendeVedlegg[];
 }
 
-const EkspanderbarSaksoversikt: React.StatelessComponent<Props> = ({
+const EkspanderbarSaksoversikt: React.FunctionComponent<Props> = ({
     sak,
     søkerinfo,
     history,

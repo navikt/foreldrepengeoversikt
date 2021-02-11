@@ -40,7 +40,7 @@ const getAktiveArbeidsforhold = (
     );
 };
 
-const SøknadsoversiktHendelseListe: React.StatelessComponent<Props> = ({
+const SøknadsoversiktHendelseListe: React.FunctionComponent<Props> = ({
     søknadsDato,
     arbeidsforhold,
     inntektsmeldinger,

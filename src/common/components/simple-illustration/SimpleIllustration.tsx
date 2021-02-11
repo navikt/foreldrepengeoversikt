@@ -13,7 +13,7 @@ interface Dialog {
     text: string | React.ReactNode;
 }
 
-const SimpleIllustration: React.StatelessComponent<Props> = ({ dialog, veileder }) => {
+const SimpleIllustration: React.FunctionComponent<Props> = ({ dialog, veileder }) => {
     return (
         <div className="simpleIllustration">
             {dialog && (

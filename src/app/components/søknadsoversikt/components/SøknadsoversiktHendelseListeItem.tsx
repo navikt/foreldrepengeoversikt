@@ -19,7 +19,7 @@ interface Props {
 
 const cls = BEMHelper('søknadsoversiktHendelseListItem');
 
-const SøknadsoversiktHendelseListeItem: React.StatelessComponent<Props> = ({
+const SøknadsoversiktHendelseListeItem: React.FunctionComponent<Props> = ({
     ikon,
     color,
     tittel,

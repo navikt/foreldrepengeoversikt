@@ -20,7 +20,7 @@ interface Props {
     onDelete?: (files: Attachment[]) => void;
 }
 
-const AttachmentListElement: React.StatelessComponent<Props> = ({ attachment, showFileSize, onDelete }) => {
+const AttachmentListElement: React.FunctionComponent<Props> = ({ attachment, showFileSize, onDelete }) => {
     const intl = useIntl();
     const BEM = BEMHelper('attachment');
     const cls = classnames(BEM.block, {

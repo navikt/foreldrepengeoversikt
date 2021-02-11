@@ -15,7 +15,7 @@ interface Props {
     minidialogInnslag: MinidialogInnslag;
 }
 
-const MinidialogLenkepanel: React.StatelessComponent<Props> = ({ tittel, minidialogInnslag }) => {
+const MinidialogLenkepanel: React.FunctionComponent<Props> = ({ tittel, minidialogInnslag }) => {
     const linkCreator = (props: any) => (
         <Link
             to={{

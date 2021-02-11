@@ -30,7 +30,7 @@ interface Props {
     navnPåForeldre: NavnPåForeldre;
 }
 
-const PeriodeList: React.StatelessComponent<Props> = ({ tittel, perioder, navnPåForeldre }) => {
+const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder, navnPåForeldre }) => {
     const intl = useIntl();
     const cls = BEMHelper('periode-list');
 

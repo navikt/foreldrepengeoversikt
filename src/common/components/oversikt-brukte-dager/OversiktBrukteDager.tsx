@@ -31,7 +31,7 @@ interface Props {
     navnPåForeldre: NavnPåForeldre;
 }
 
-const OversiktBrukteDager: React.StatelessComponent<Props> = ({
+const OversiktBrukteDager: React.FunctionComponent<Props> = ({
     resterendeStønadskonter,
     brukteDager,
     navnPåForeldre,

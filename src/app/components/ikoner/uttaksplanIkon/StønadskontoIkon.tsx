@@ -15,7 +15,7 @@ export interface Props {
     navnPåForeldre: NavnPåForeldre;
 }
 
-const StønadskontoIkon: React.StatelessComponent<Props> = ({ konto, forelder, gradert, navnPåForeldre }) => {
+const StønadskontoIkon: React.FunctionComponent<Props> = ({ konto, forelder, gradert, navnPåForeldre }) => {
     const intl = useIntl();
 
     return (

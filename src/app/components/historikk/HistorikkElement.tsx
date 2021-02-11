@@ -59,7 +59,7 @@ const getInnslagTittel = (hendelse: Hendelse): React.ReactNode => {
     return <FormattedMessage id={`historikk.${hendelse.beskrivelse}`} />;
 };
 
-const HistorikkElement: React.StatelessComponent<Props> = (props: Props) => {
+const HistorikkElement: React.FunctionComponent<Props> = (props: Props) => {
     const { hendelse } = props;
 
     const cls = BEMHelper('historikk-element');

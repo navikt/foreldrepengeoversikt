@@ -8,7 +8,7 @@ interface Props {
     text: string | React.ReactNode;
 }
 
-const SpeechBubble: React.StatelessComponent<Props> = ({ title = null, text }) => (
+const SpeechBubble: React.FunctionComponent<Props> = ({ title = null, text }) => (
     <div className={`speechBubble speechBubble--white`}>
         <div className="speechBubble__content">
             {title && (

@@ -12,7 +12,7 @@ export interface Props {
     animated?: boolean;
 }
 
-const CollapseContainer: React.StatelessComponent<Props> = ({
+const CollapseContainer: React.FunctionComponent<Props> = ({
     children,
     animated = true,
     isOpen = false,

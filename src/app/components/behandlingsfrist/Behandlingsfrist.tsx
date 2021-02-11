@@ -13,7 +13,7 @@ interface Props {
     behandlingsdato: string;
 }
 
-const Behandlingsfrist: React.StatelessComponent<Props> = ({ behandlingsdato, harLøpendeArbeidsforhold }) => {
+const Behandlingsfrist: React.FunctionComponent<Props> = ({ behandlingsdato, harLøpendeArbeidsforhold }) => {
     const cls = BEMHelper('behandlingsfrist');
     return (
         <AlertStripe className={cls.block} type="info">
