@@ -8,6 +8,6 @@
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice.nav.no/login",
         "FP_UTTAK_SERVICE_URL": "https://foreldrepengesoknad-api.nav.no",
-        "KLAGE_URL": "https://klage-dittnav.nav.no"
+        "KLAGE_URL": "https://klage.nav.no"
     }
 }

@@ -5,7 +5,6 @@ import Lenke from 'nav-frontend-lenker';
 import { lenker } from '../../utils/lenker';
 import Environment from 'app/Environment';
 import { SakBase } from 'app/api/types/sak/Sak';
-import { erForeldrepengesak, erSvangerskapepengesak } from 'app/utils/sakerUtils';
 import BEMHelper from 'common/util/bem';
 import SpørsmålIkon from '../ikoner/SpørsmålIkon';
 import KlageIkon from '../ikoner/KlageIkon';
@@ -17,18 +16,6 @@ interface Props {
 }
 
 const InfoOmKlage: React.FunctionComponent<Props> = ({ sak }) => {
-    const getStønadstype = () => {
-        if (erForeldrepengesak(sak)) {
-            return 'foreldrepenger';
-        }
-
-        if (erSvangerskapepengesak(sak)) {
-            return 'svangerskapspenger';
-        }
-
-        return 'engangsstønad';
-    };
-
     const bem = BEMHelper('infoOmKlage');
 
     return (
@@ -80,9 +67,7 @@ const InfoOmKlage: React.FunctionComponent<Props> = ({ sak }) => {
                                 ),
                                 andreLenke: (
                                     <Lenke
-                                        href={`${Environment.KLAGE_URL}/?saksnummer=${
-                                            sak.saksnummer
-                                        }&tema=FOR&ytelse=${getStønadstype()}`}
+                                        href={`${Environment.KLAGE_URL}/ny?saksnummer=${sak.saksnummer}&tema=FOR&tittel=FORELDREPENGER`}
                                     >
                                         <FormattedMessage id="saksoversikt.spørsmålEllerKlage.klage.text.andreLenke" />
                                     </Lenke>
