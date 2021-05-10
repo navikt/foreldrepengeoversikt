@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import BEMHelper from 'common/util/bem';
 import SidepanelElement from './SidepanelElement';
 import { lenker } from '../../utils/lenker';
-import ChatIkon from '../ikoner/sidepanel/ChatIkon';
 import SøkIkon from '../ikoner/sidepanel/SøkIkon';
 import UtbetalingerIkon from '../ikoner/sidepanel/UtbetalingerIkon';
 import { finnNesteUtbetalingsdato } from 'app/utils/dateUtils';
@@ -52,13 +51,6 @@ const Sidepanel: FunctionComponent<Props> = ({ sak }) => {
                     }}
                 />
             )}
-            <SidepanelElement
-                icon={<ChatIkon />}
-                lenke={{
-                    lenketekst: 'sidepanel.chat',
-                    href: lenker.chat,
-                }}
-            />
         </aside>
     );
 };
