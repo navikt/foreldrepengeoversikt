@@ -75,6 +75,7 @@
     "ettersendelse.vedlegg.select.label": "Velg hvilket dokument du vil ettersende. Du kan velge flere dokumenter.",
     "feilside.bobletekst": "noe gikk galt.",
     "feilside.bobletittel": "Oops,",
+    "feilside.bobletittel.errorPage": "Uffda,",
     "feilside.ingress.lenke": "kontakt brukerstøtte",
     "feilside.ingress": "Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, {lenke}.",
     "feilside.tittel": "Det oppstod en feil",

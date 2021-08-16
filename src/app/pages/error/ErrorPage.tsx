@@ -29,7 +29,7 @@ const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearEr
         <div className={cls.block}>
             <Feilsidemelding
                 illustrasjon={{
-                    tittel: getMessage(intl, 'feilside.bobletittel'),
+                    tittel: getMessage(intl, 'feilside.bobletittel.errorPage'),
                     tekst: getMessage(intl, 'feilside.bobletekst'),
                 }}
                 tittel={getMessage(intl, 'feilside.tittel')}
