@@ -56,12 +56,12 @@ class Foreldrepengeoversikt extends React.Component<Props> {
         }
 
         if (ettersendelse.status === FetchStatus.FAILURE) {
+            const errorMessage = extractErrorMessage(ettersendelse.error);
+
             return (
                 <ErrorPage
                     uuid={extractUUID(ettersendelse.error)}
-                    errorMessage={
-                        getErrorCode(ettersendelse) === 413 ? extractErrorMessage(ettersendelse.error) : undefined
-                    }
+                    errorMessage={errorMessage ? errorMessage : undefined}
                 />
             );
         }
