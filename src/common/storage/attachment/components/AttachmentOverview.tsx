@@ -92,6 +92,7 @@ class AttachmentOverview extends React.Component<Props> {
                             <Block margin="xs" visible={showErrorMessage} animated={false}>
                                 <AlertstripeWithCloseButton
                                     lukknappProps={{
+                                        children: 'Opplasting av vedlegg feilet',
                                         hvit: true,
                                         type: 'button',
                                     }}

@@ -149,11 +149,21 @@ export const fyllInnHull = (periodeAcc: Periode[], periode: Periode, index: numb
             tom: finnForrigeMuligeUttaksdag(nestePeriode.tidsperiode.fom),
         };
 
-        periodeAcc.push({
-            type: PeriodeType.Hull,
-            tidsperiode,
-            antallUttaksdager: getAntallUttaksdagerITidsperiode(tidsperiode),
-        });
+        const erEtter1Oktober2021 = moment(new Date()).isSameOrAfter(new Date('2021-10-01'));
+
+        if (!erEtter1Oktober2021) {
+            periodeAcc.push({
+                type: PeriodeType.PeriodeUtenUttak,
+                tidsperiode,
+                antallUttaksdager: getAntallUttaksdagerITidsperiode(tidsperiode),
+            });
+        } else {
+            periodeAcc.push({
+                type: PeriodeType.Hull,
+                tidsperiode,
+                antallUttaksdager: getAntallUttaksdagerITidsperiode(tidsperiode),
+            });
+        }
     }
     return periodeAcc;
 };

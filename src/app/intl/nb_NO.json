@@ -32,6 +32,8 @@
     "dineForeldrepenger.ingenSaker": "Du har ingen søknader hos NAV akkurat nå.",
     "dinPlan.hull.beskrivelse": "{antallDager} dager uten registrert periode eller utsettelse",
     "dinPlan.hull": "Tapte foreldrepenger",
+    "dinPlan.periodeUtenUttak.beskrivelse": "{antallDager} dager uten uttak av foreldrepenger",
+    "dinPlan.periodeUtenUttak": "Periode uten uttak av foreldrepenger",
     "dinPlan.opphold.beskrivelse": "{navn} har ikke fått innvilget perioden",
     "dinPlan.opphold": "{kvote}",
     "dinPlan.pageTitle": "Deres dager med foreldrepenger",

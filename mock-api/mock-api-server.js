@@ -7,7 +7,7 @@ const morgan = require('morgan');
 
 require('dotenv').config();
 
-const allowCrossDomain = function(req, res, next) {
+const allowCrossDomain = function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8880');
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-XSRF-TOKEN,Location');
@@ -15,8 +15,8 @@ const allowCrossDomain = function(req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 };
-const delayAllResponses = function(millis) {
-    return function(req, res, next) {
+const delayAllResponses = function (millis) {
+    return function (req, res, next) {
         setTimeout(next, millis);
     };
 };
@@ -76,7 +76,7 @@ router.post('/rest/soknad/ettersend', (req, res) => {
         jornalId: '123',
         leveranseStatus: 'SENDT_OG_FORSØKT_BEHANDLET_FPSAK',
         mottattDato: '2019-01-01',
-        referanseId: '123'
+        referanseId: '123',
     };
     res.send(kvittering);
 });

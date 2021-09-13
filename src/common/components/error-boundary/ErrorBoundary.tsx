@@ -9,6 +9,7 @@ import * as Sentry from '@sentry/browser';
 interface State {
     eventId: string | null;
     hasError: boolean;
+    error: Error | null;
 }
 
 interface Props {
@@ -21,6 +22,7 @@ class ErrorBoundary extends React.Component<Props, State> {
         this.state = {
             eventId: null,
             hasError: false,
+            error: null,
         };
     }
 
@@ -32,6 +34,7 @@ class ErrorBoundary extends React.Component<Props, State> {
         });
 
         this.setState({ hasError: true });
+        this.setState({ error });
     }
 
     render() {
@@ -57,6 +60,7 @@ class ErrorBoundary extends React.Component<Props, State> {
                         }}
                     />
                 }
+                stacktrace={this.state.error}
             />
         );
     }

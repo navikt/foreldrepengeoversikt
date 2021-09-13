@@ -45,6 +45,7 @@ export enum PeriodeType {
     Utsettelse = 'UTSETTELSE',
     Opphold = 'OPPHOLD',
     TaptPeriode = 'TAPT_PERIODE',
+    PeriodeUtenUttak = 'PeriodeUtenUttak',
 }
 
 export function isUtsettelsesperiode(periode: Periode): periode is Utsettelsesperiode {

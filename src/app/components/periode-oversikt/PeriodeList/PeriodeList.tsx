@@ -100,6 +100,22 @@ const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder, navnPå
                                         tidsperiode={p.tidsperiode}
                                     />
                                 );
+                            case PeriodeType.PeriodeUtenUttak:
+                                return (
+                                    <PeriodeListElement
+                                        key={guid()}
+                                        tittel={<FormattedMessage id="dinPlan.periodeUtenUttak" />}
+                                        ikon={getIkon(p)}
+                                        beskrivelse={
+                                            <FormattedMessage
+                                                id="dinPlan.periodeUtenUttak.beskrivelse"
+                                                values={{ antallDager: p.antallUttaksdager }}
+                                            />
+                                        }
+                                        color={UttaksplanColor.transparent}
+                                        tidsperiode={p.tidsperiode}
+                                    />
+                                );
                             case PeriodeType.Opphold:
                                 const kvote = getStønadskontoTypeFromOppholdsÅrsak(
                                     (p as Oppholdsperiode).oppholdsårsak

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import * as classnames from 'classnames';
+import classnames from 'classnames';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Lenke from 'nav-frontend-lenker';
 

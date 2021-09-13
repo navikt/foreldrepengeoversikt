@@ -5,17 +5,17 @@ module.exports = {
         '\\.(css|jpg|png|svg|less)$': '<rootDir>/jest/mockFile.js',
         'nav-(.*)-style': '<rootDir>/jest/mockFile.js',
         '^uttaksplan/(.*)': '<rootDir>/src/uttaksplan/$1',
-        '^common/(.*)': '<rootDir>/src/common/$1'
+        '^common/(.*)': '<rootDir>/src/common/$1',
     },
     moduleDirectories: ['node_modules', 'src'],
     globals: {
         'ts-jest': {
             babelConfig: true,
-            tsConfig: './tsconfig.json'
-        }
+            tsConfig: './tsconfig.json',
+        },
     },
     rootDir: '../',
     coverageReporters: ['text-summary'],
     preset: 'ts-jest/presets/js-with-babel',
-    testMatch: null
+    testMatch: null,
 };

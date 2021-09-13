@@ -1,12 +1,12 @@
 const path = require('path');
 const fs = require('fs');
 
-const getFilePath = function(filnavn) {
+const getFilePath = function (filnavn) {
     var directories = ['./mock-api/', 'mock_data', filnavn];
     return directories.join(path.sep);
 };
 
-const getFileContent = function(filnavn) {
+const getFileContent = function (filnavn) {
     const fileName = getFilePath(filnavn);
     if (!fs.existsSync(fileName)) {
         return {};
@@ -19,31 +19,31 @@ const getFileContent = function(filnavn) {
     }
 };
 
-const getSokerinfo = function() {
+const getSokerinfo = function () {
     return getFileContent('sokerinfo.json');
 };
 
-const getSaker = function() {
+const getSaker = function () {
     return getFileContent('saker.json');
 };
 
-const getKvitteringStorage = function() {
+const getKvitteringStorage = function () {
     return getFileContent('storage_kvittering.json');
 };
 
-const getHistorikk = function() {
+const getHistorikk = function () {
     return getFileContent('historikk.json');
 };
 
-const getMinidialog = function() {
+const getMinidialog = function () {
     return getFileContent('miniDialog.json');
 };
 
-const getManglendeVedlegg = function() {
+const getManglendeVedlegg = function () {
     return getFileContent('manglendeVedlegg.json');
 };
 
-const getUttaksplan = function() {
+const getUttaksplan = function () {
     const fileName = getFilePath('uttaksplan.json');
     if (!fs.existsSync(fileName)) {
         return {};
@@ -63,5 +63,5 @@ module.exports = {
     getHistorikk,
     getMinidialog,
     getUttaksplan,
-    getManglendeVedlegg
+    getManglendeVedlegg,
 };

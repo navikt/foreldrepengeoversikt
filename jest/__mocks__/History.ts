@@ -4,7 +4,7 @@ export const historyMock: any = {
     push: jest.fn(),
     location: {
         state: {
-            sak: SakerMock.infotrygd
-        }
-    }
+            sak: SakerMock.infotrygd,
+        },
+    },
 };

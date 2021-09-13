@@ -1,5 +1,5 @@
-import { Kjønn } from "app/api/types/personinfo/Kjønn";
-import Person from "app/types/Person";
+import { Kjønn } from 'app/api/types/personinfo/Kjønn';
+import Person from 'app/types/Person';
 
 export const søkerMock: Person = {
     fnr: '12345678910',

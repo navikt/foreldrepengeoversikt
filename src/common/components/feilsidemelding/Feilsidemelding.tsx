@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
+import { Innholdstittel, Ingress, Normaltekst } from 'nav-frontend-typografi';
 import { VeilederProps } from '../veileder/Veileder';
 import VeilederMedSnakkeboble from '../veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import Block from 'common/components/block/Block';
@@ -23,9 +23,17 @@ export interface Props {
     tittel: React.ReactNode;
     ingress: React.ReactNode;
     uuid?: string;
+    stacktrace: Error | null;
 }
 
-const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress, uuid }: Props) => {
+const Feilsidemelding: React.FunctionComponent<Props> = ({
+    containerId,
+    illustrasjon,
+    tittel,
+    ingress,
+    uuid,
+    stacktrace,
+}) => {
     const cls = BEMHelper('feilsidemelding');
     return (
         <div className={cls.block} id={containerId}>
@@ -60,6 +68,12 @@ const Feilsidemelding = ({ containerId, illustrasjon, tittel, ingress, uuid }: P
                         <Ingress>
                             <FormattedMessage id="feilside.uuid" values={{ uuid }} />
                         </Ingress>
+                    </Block>
+                )}
+                {stacktrace && (
+                    <Block margin="l">
+                        <Normaltekst>{stacktrace.message}</Normaltekst>
+                        <Normaltekst>{stacktrace.stack}</Normaltekst>
                     </Block>
                 )}
             </div>

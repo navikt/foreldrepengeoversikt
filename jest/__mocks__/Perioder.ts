@@ -8,12 +8,12 @@ export const uttaksperiodeMock: Uttaksperiode = {
     gjelderAnnenPart: false,
     tidsperiode: {
         fom: '01-01-2019',
-        tom: '02-01-2019'
+        tom: '02-01-2019',
     },
     forelder: Rolle.mor,
     antallUttaksdager: 0,
     stønadskontotype: StønadskontoType.Mødrekvote,
     graderingInnvilget: false,
     graderingsprosent: '0',
-    samtidigUttak: false
+    samtidigUttak: false,
 };

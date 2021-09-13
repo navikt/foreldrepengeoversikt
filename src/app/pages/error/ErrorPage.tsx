@@ -50,6 +50,7 @@ const ErrorPage: React.FunctionComponent<Props> = ({ errorMessage, uuid, clearEr
                     )
                 }
                 uuid={uuid}
+                stacktrace={null}
             />
         </div>
     );
