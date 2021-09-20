@@ -1,14 +1,20 @@
 require('dotenv').config();
 const mustacheExpress = require('mustache-express');
-var path = require('path');
 
 const configureDevServer = (decoratorFragments) => ({
     before: (app) => {
         app.engine('html', mustacheExpress());
         app.set('views', `${__dirname}/../../../dist/dev`);
         app.set('view engine', 'mustache');
-        app.get('/dist/js/settings.js', (req, res) => {
-            res.sendFile(path.resolve(`${__dirname}/../../../dist/js/settings.js`));
+        app.get(['/dist/settings.js'], (req, res) => {
+            res.set('content-type', 'application/javascript');
+            res.send(`window.appSettings = {
+                REST_API_URL: '${process.env.FORELDREPENGESOKNAD_API_URL}',
+                LOGIN_URL: '${process.env.LOGINSERVICE_URL}',
+                UTTAK_API_URL: '${process.env.FP_UTTAK_SERVICE_URL}',
+                APPRES_CMS_URL: '${process.env.APPRES_CMS_URL}',
+                KLAGE_URL: '${process.env.KLAGE_URL}'
+            };`);
         });
         app.get(/^\/(?!.*dist).*$/, (req, res) => {
             res.render('index.html', Object.assign(decoratorFragments));
