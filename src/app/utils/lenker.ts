@@ -37,8 +37,7 @@ export const annenInformasjonLenker = {
     },
     meldFraOmEndringer: {
         text: 'Meld fra om endringer',
-        href:
-            'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Relatert+informasjon/du-har-plikt-til-%C3%A5-gi-nav-riktige-opplysninger',
+        href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Relatert+informasjon/du-har-plikt-til-%C3%A5-gi-nav-riktige-opplysninger',
     },
 };
 
