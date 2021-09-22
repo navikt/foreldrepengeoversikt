@@ -6,7 +6,7 @@ const configureDevServer = (decoratorFragments) => ({
         app.engine('html', mustacheExpress());
         app.set('views', `${__dirname}/../../../dist/dev`);
         app.set('view engine', 'mustache');
-        app.get(['/dist/settings.js'], (req, res) => {
+        app.get(['/dist/settings.js'], (_req, res) => {
             res.set('content-type', 'application/javascript');
             res.send(`window.appSettings = {
                 REST_API_URL: '${process.env.FORELDREPENGESOKNAD_API_URL}',
@@ -16,7 +16,7 @@ const configureDevServer = (decoratorFragments) => ({
                 KLAGE_URL: '${process.env.KLAGE_URL}'
             };`);
         });
-        app.get(/^\/(?!.*dist).*$/, (req, res) => {
+        app.get(/^\/(?!.*dist).*$/, (_req, res) => {
             res.render('index.html', Object.assign(decoratorFragments));
         });
     },

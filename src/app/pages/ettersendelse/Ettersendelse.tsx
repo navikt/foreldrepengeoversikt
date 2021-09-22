@@ -113,8 +113,15 @@ export class Ettersendelse extends React.Component<Props, State> {
     }
 
     render() {
-        const { intl, sak, attachments, addAttachment, deleteAttachment, editAttachment, isReadyToSendAttachments } =
-            this.props;
+        const {
+            intl,
+            sak,
+            attachments,
+            addAttachment,
+            deleteAttachment,
+            editAttachment,
+            isReadyToSendAttachments,
+        } = this.props;
         const { attachmentSkjemanummer, sendingEttersendelse } = this.state;
 
         if (!sak) {

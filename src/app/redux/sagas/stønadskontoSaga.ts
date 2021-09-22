@@ -49,8 +49,9 @@ export function* getTilgjengeligeStønadskontoer(sak: Sak) {
             startdatoUttak,
         });
 
-        let tilgjengeligeStønadskontoer: TilgjengeligStønadskonto[] =
-            stønadskontoerDtoTilTilgjengeligStønadskontoMapper(response.data);
+        let tilgjengeligeStønadskontoer: TilgjengeligStønadskonto[] = stønadskontoerDtoTilTilgjengeligStønadskontoMapper(
+            response.data
+        );
 
         const annenForelderErUkjent = sak.annenPart === undefined;
 
@@ -62,8 +63,9 @@ export function* getTilgjengeligeStønadskontoer(sak: Sak) {
             );
 
             if (!morErUfør) {
-                tilgjengeligeStønadskontoer =
-                    justerTilgjengeligeStøndakontoerNårMorIkkeHarRettOgIkkeErUfør(tilgjengeligeStønadskontoer);
+                tilgjengeligeStønadskontoer = justerTilgjengeligeStøndakontoerNårMorIkkeHarRettOgIkkeErUfør(
+                    tilgjengeligeStønadskontoer
+                );
             }
         }
 
