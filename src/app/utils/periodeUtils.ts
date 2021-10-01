@@ -151,7 +151,7 @@ export const fyllInnHull = (periodeAcc: Periode[], periode: Periode, index: numb
 
         const erEtter1Oktober2021 = moment(new Date()).isSameOrAfter(new Date('2021-10-01'));
 
-        if (!erEtter1Oktober2021) {
+        if (erEtter1Oktober2021) {
             periodeAcc.push({
                 type: PeriodeType.PeriodeUtenUttak,
                 tidsperiode,
