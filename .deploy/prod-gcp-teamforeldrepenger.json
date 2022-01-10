@@ -1,7 +1,9 @@
 {
-    "gcp": "true",
+    "nav": "www.nav.no",
+    "loginservice": "loginservice.nav.no",
+    "api": "foreldrepengesoknad-api.nav.no",
     "dekoratoren": "www.nav.no/dekoratoren",
-    "uttak": "fp-uttak-service.nav.no",
+    "klage": "klage.nav.no",
     "ingresses": ["https://foreldrepenger.nav.no"],
     "env": {
         "APPRES_CMS_URL": "https://www.nav.no/dekoratoren",
