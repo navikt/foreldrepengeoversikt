@@ -1,5 +1,4 @@
-FROM node:17.4-slim
-
+FROM node:alpine
 WORKDIR /usr/src/app
 
 COPY dist ./dist
