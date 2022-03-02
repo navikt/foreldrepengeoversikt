@@ -8,6 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import BEMHelper from 'common/util/bem';
 
 import './feilsidemelding.less';
+import Panel from 'nav-frontend-paneler';
 
 export interface Props {
     containerId?: string;
@@ -71,10 +72,14 @@ const Feilsidemelding: React.FunctionComponent<Props> = ({
                     </Block>
                 )}
                 {stacktrace && (
-                    <Block margin="l">
-                        <Normaltekst>{stacktrace.message}</Normaltekst>
-                        <Normaltekst>{stacktrace.stack}</Normaltekst>
-                    </Block>
+                    <Panel border={true}>
+                        <Block margin="xs">
+                            <Normaltekst>{stacktrace.message}</Normaltekst>
+                        </Block>
+                        <Block>
+                            <Normaltekst>{stacktrace.stack}</Normaltekst>
+                        </Block>
+                    </Panel>
                 )}
             </div>
         </div>
