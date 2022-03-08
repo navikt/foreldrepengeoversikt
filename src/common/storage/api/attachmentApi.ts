@@ -5,7 +5,7 @@ import axios from 'axios';
 function saveAttachment(attachment: Attachment) {
     const config = {
         withCredentials: true,
-        timeout: 120 * 1000,
+        timeout: 60 * 1000,
         headers: {
             'content-type': 'multipart/form-data',
         },
