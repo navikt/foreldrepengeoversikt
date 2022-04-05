@@ -44,7 +44,7 @@ export const annenInformasjonLenker = {
 export const lenker = {
     utsettelse: 'https://familie.nav.no/soke-om-foreldrepenger',
     endringssøknad: 'https://foreldrepengesoknad.nav.no',
-    saksoversikt: 'https://tjenester.nav.no/saksoversikt/app/tema/FOR',
+    saksoversikt: 'https://person.nav.no/mine-saker/tema/FOR',
     brukerstøtte:
         'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749',
     lesMerOmForeldrepenger: 'https://familie.nav.no',
