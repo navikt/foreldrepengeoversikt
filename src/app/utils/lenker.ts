@@ -1,7 +1,7 @@
 export const headerLinks = {
     dittNav: {
         text: 'Ditt Nav',
-        href: 'https://tjenester.nav.no/dittnav',
+        href: 'https://www.nav.no/person/dittnav',
         external: true,
     },
     innsyn: {
@@ -21,7 +21,7 @@ export const annenInformasjonLenker = {
     },
     klagePåSøknad: {
         text: 'Slik klager du',
-        href: 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Klage+ris+og+ros',
+        href: 'https://www.nav.no/person/kontakt-oss/nb/tilbakemeldinger',
     },
     kontaktOss: {
         text: 'Hvordan søke om endring?',
@@ -37,7 +37,7 @@ export const annenInformasjonLenker = {
     },
     meldFraOmEndringer: {
         text: 'Meld fra om endringer',
-        href: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Relatert+informasjon/du-har-plikt-til-%C3%A5-gi-nav-riktige-opplysninger',
+        href: 'https://www.nav.no/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger',
     },
 };
 
@@ -46,17 +46,17 @@ export const lenker = {
     endringssøknad: 'https://foreldrepengesoknad.nav.no',
     saksoversikt: 'https://person.nav.no/mine-saker/tema/FOR',
     brukerstøtte:
-        'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749',
+        'https://www.nav.no/no/nav-og-samfunn/kontakt-nav/teknisk-brukerstotte/hjelp-til-personbruker',
     lesMerOmForeldrepenger: 'https://familie.nav.no',
     søkOmForeldrepenger: 'https://foreldrepengesoknad.nav.no',
     chat: 'https://www.nav.no/person/kontakt-oss/chat/familie',
-    utbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/#',
+    utbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt',
     søk: 'https://foreldrepengesoknad.nav.no',
     svangerskapspengesøknad: 'https://svangerskapspengesoknad.nav.no',
     hvaSøkerDu: 'https://familie.nav.no/hva-soker-du',
     sendeInntektsmelding: 'https://www.nav.no/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/inntektsmelding',
-    skrivTilOss: 'https://mininnboks.nav.no/sporsmal/skriv/FMLI',
-    kontaktOss: 'https://www.nav.no/person/kontakt-oss/nb/',
+    skrivTilOss: 'https://innboks.nav.no/s/skriv-til-oss?category=Familie',
+    kontaktOss: 'https://www.nav.no/person/kontakt-oss',
     klageRettigheter: 'https://www.nav.no/no/nav-og-samfunn/kontakt-nav/klage-ris-og-ros/klagerettigheter',
     saksbehandlingsTid: 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav/klage-og-anke_kap',
 };
