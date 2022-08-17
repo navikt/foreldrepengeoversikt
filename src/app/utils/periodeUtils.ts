@@ -73,8 +73,13 @@ export const getStønadskontoFarge = (
         case StønadskontoType.AktivitetsfriKvote:
             return UttaksplanColor.blue;
         case StønadskontoType.Mødrekvote:
-        case StønadskontoType.Foreldrepenger:
         case StønadskontoType.ForeldrepengerFørFødsel:
+            return UttaksplanColor.purple;
+        case StønadskontoType.Foreldrepenger:
+            if (forelder && forelder === Rolle.farMedmor) {
+                return UttaksplanColor.blue;
+            }
+
             return UttaksplanColor.purple;
         case StønadskontoType.Fellesperiode:
         case StønadskontoType.Flerbarnsdager:

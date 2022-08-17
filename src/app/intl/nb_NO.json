@@ -224,6 +224,8 @@
     "søkNåPanel.tittel": "Send inn søknad",
     "stønadskontotype.AKTIVITETSFRI_FLERBARNSDAGER": "Flerbarnsuker uten aktivitetskrav",
     "stønadskontotype.AKTIVITETSFRI_KVOTE": "Foreldrepenger uten aktivitetskrav",
+    "stønadskontotype.AKTIVITETSFRI_KVOTE_BFHR": "Foreldrepenger",
+    "stønadskontotype.AKTIVITETSKRAV_KVOTE_BFHR": "Foreldrepenger med aktivitetskrav",
     "stønadskontotype.FEDREKVOTE": "Fars kvote",
     "stønadskontotype.FELLESPERIODE": "Fellesperiode",
     "stønadskontotype.FLERBARNSDAGER": "Flerbarnsuker",

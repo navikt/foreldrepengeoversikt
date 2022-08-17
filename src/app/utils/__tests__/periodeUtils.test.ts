@@ -109,6 +109,8 @@ describe('periodeUtils', () => {
                 fom: '2019-01-01',
                 tom: '2019-01-02',
             },
+            fom: '2019-01-01',
+            tom: '2019-01-02',
             morsAktivitet: MorsAktivitetDto.Arbeid,
         };
         const perioder = [mockPeriode, { ...mockPeriode, periode: { fom: '2019-01-03', tom: '2019-01-04' } }];

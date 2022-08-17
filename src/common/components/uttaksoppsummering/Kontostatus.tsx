@@ -16,6 +16,8 @@ export interface Props {
     uttak: TilgjengeligStønadskonto;
     navnPåForeldre: NavnPåForeldre;
     erEndringssøknad: boolean;
+    erFarEllerMedmor: boolean;
+    erAleneOmOmsorg: boolean;
 }
 
 const BEM = BEMHelper('kontostatus');
@@ -35,7 +37,13 @@ export const getNavnGenitivEierform = (navn: string, locale: string): string => 
     return `${navn}s`;
 };
 
-export const getStønadskontoNavn = (intl: IntlShape, konto: StønadskontoType, navnPåForeldre: NavnPåForeldre) => {
+export const getStønadskontoNavn = (
+    intl: IntlShape,
+    konto: StønadskontoType,
+    navnPåForeldre: NavnPåForeldre,
+    erFarEllerMedmor: boolean,
+    erAleneOmOmsorg: boolean
+) => {
     let navn;
     switch (konto) {
         case StønadskontoType.Mødrekvote:
@@ -47,16 +55,33 @@ export const getStønadskontoNavn = (intl: IntlShape, konto: StønadskontoType, 
         default:
             navn = undefined;
     }
+
     if (navn) {
         return intl.formatMessage(
             { id: `stønadskontotype.foreldernavn.kvote` },
             { navn: getNavnGenitivEierform(navn, intl.locale) }
         );
     }
+
+    if (erFarEllerMedmor === true && erAleneOmOmsorg === false) {
+        if (konto === StønadskontoType.AktivitetsfriKvote) {
+            return intl.formatMessage({ id: 'stønadskontotype.AKTIVITETSFRI_KVOTE_BFHR' });
+        }
+        if (konto === StønadskontoType.Foreldrepenger) {
+            return intl.formatMessage({ id: 'stønadskontotype.AKTIVITETSKRAV_KVOTE_BFHR' });
+        }
+    }
+
     return intl.formatMessage({ id: `stønadskontotype.${konto}` });
 };
 
-const Kontostatus: React.FunctionComponent<Props> = ({ uttak, navnPåForeldre, erEndringssøknad }) => {
+const Kontostatus: React.FunctionComponent<Props> = ({
+    uttak,
+    navnPåForeldre,
+    erEndringssøknad,
+    erFarEllerMedmor,
+    erAleneOmOmsorg,
+}) => {
     const intl = useIntl();
 
     if (erEndringssøknad && uttak.konto === StønadskontoType.ForeldrepengerFørFødsel) {
@@ -69,11 +94,16 @@ const Kontostatus: React.FunctionComponent<Props> = ({ uttak, navnPåForeldre, e
     return (
         <Normaltekst className={BEM.block} tag="div">
             <div className={BEM.element('ikon')} aria-hidden={true} role="presentation">
-                <StønadskontoIkon konto={uttak.konto} navnPåForeldre={navnPåForeldre} />
+                <StønadskontoIkon
+                    konto={uttak.konto}
+                    navnPåForeldre={navnPåForeldre}
+                    erFarEllerMedmor={erFarEllerMedmor}
+                    erAleneOmOmsorg={erAleneOmOmsorg}
+                />
             </div>
             <div className={BEM.element('content')}>
                 <div className={kontoErOvertrukket ? BEM.element('kontoOvertrukket') : BEM.element('konto')}>
-                    {getStønadskontoNavn(intl, uttak.konto, navnPåForeldre)}
+                    {getStønadskontoNavn(intl, uttak.konto, navnPåForeldre, erFarEllerMedmor, erAleneOmOmsorg)}
                 </div>
                 <strong
                     className={kontoErOvertrukket ? BEM.element('dagerOvertrukket') : BEM.element('dager')}

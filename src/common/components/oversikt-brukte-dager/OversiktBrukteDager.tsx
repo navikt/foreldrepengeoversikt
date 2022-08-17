@@ -29,6 +29,7 @@ interface Props {
         farMedmor: number;
     };
     navnPåForeldre: NavnPåForeldre;
+    erAleneOmOmsorg: boolean;
 }
 
 const OversiktBrukteDager: React.FunctionComponent<Props> = ({
@@ -37,6 +38,7 @@ const OversiktBrukteDager: React.FunctionComponent<Props> = ({
     navnPåForeldre,
     erDeltUttak,
     erFarMedmor,
+    erAleneOmOmsorg,
 }) => {
     const intl = useIntl();
     // TODO utled situasjon
@@ -70,6 +72,8 @@ const OversiktBrukteDager: React.FunctionComponent<Props> = ({
                     navnPåForeldre={navnPåForeldre}
                     resterendeStønadskonter={resterendeStønadskonter}
                     erDeltUttak={erDeltUttak}
+                    erFarEllerMedmor={erFarMedmor}
+                    erAleneOmOmsorg={erAleneOmOmsorg}
                 />
             </div>
         </div>

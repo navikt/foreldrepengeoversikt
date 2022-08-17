@@ -65,7 +65,7 @@ export const getAktivitetsFrieUkerForeldrepenger = (dekningsgrad: Dekningsgrad, 
     if (dekningsgrad === Dekningsgrad.HUNDRE_PROSENT) {
         return 15;
     }
-    return moment(startdatoUttak).isBefore(moment('2019-01-01')) ? 15 : 19;
+    return moment(startdatoUttak).isBefore('2019-01-01') ? 15 : 19;
 };
 
 export const opprettAktivitetsFriKonto = (
@@ -108,12 +108,12 @@ export const getResterendeStønadskontoer = (
     perioder: Periode[]
 ): TilgjengeligStønadskonto[] => {
     return getBrukteStønadskontoer(perioder).reduce(
-        (resterndeKontoer: TilgjengeligStønadskonto[], bruktKonto: TilgjengeligStønadskonto) => {
-            const kontoIndex = resterndeKontoer.findIndex(({ konto }) => konto === bruktKonto.konto);
+        (resterendeKontoer: TilgjengeligStønadskonto[], bruktKonto: TilgjengeligStønadskonto) => {
+            const kontoIndex = resterendeKontoer.findIndex(({ konto }) => konto === bruktKonto.konto);
             if (kontoIndex >= 0) {
-                resterndeKontoer[kontoIndex].dager -= bruktKonto.dager;
+                resterendeKontoer[kontoIndex].dager -= bruktKonto.dager;
             }
-            return resterndeKontoer;
+            return resterendeKontoer;
         },
         cloneDeep(tilgjengeligeKontoer)
     );

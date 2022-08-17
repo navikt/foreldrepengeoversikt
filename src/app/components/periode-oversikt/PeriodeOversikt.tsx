@@ -23,6 +23,12 @@ const PeriodeOversikt: React.FunctionComponent<Props> = ({
     søker,
     sak,
 }) => {
+    const { saksgrunnlag } = sak;
+    const erFarEllerMedmor = saksgrunnlag ? saksgrunnlag.grunnlag.søkerErFarEllerMedmor : false;
+    const erAleneOmOmsorg = saksgrunnlag
+        ? saksgrunnlag.grunnlag.morErAleneOmOmsorg || saksgrunnlag.grunnlag.farMedmorErAleneOmOmsorg
+        : false;
+
     return (
         <>
             {[...tidligerePerioder, ...nåværendePerioder, ...fremtidigePerioder].length === 0 && (
@@ -36,6 +42,8 @@ const PeriodeOversikt: React.FunctionComponent<Props> = ({
                     tittel={'Tidligere perioder'}
                     perioder={tidligerePerioder}
                     navnPåForeldre={getNavnPåForeldre(sak, søker)}
+                    erFarEllerMedmor={erFarEllerMedmor}
+                    erAleneOmOmsorg={erAleneOmOmsorg}
                 />
             )}
             {nåværendePerioder.length > 0 && (
@@ -43,6 +51,8 @@ const PeriodeOversikt: React.FunctionComponent<Props> = ({
                     tittel={'Nåværende periode'}
                     perioder={nåværendePerioder}
                     navnPåForeldre={getNavnPåForeldre(sak, søker)}
+                    erFarEllerMedmor={erFarEllerMedmor}
+                    erAleneOmOmsorg={erAleneOmOmsorg}
                 />
             )}
             {fremtidigePerioder.length > 0 && (
@@ -50,6 +60,8 @@ const PeriodeOversikt: React.FunctionComponent<Props> = ({
                     tittel={'Fremtidige perioder'}
                     perioder={fremtidigePerioder}
                     navnPåForeldre={getNavnPåForeldre(sak, søker)}
+                    erFarEllerMedmor={erFarEllerMedmor}
+                    erAleneOmOmsorg={erAleneOmOmsorg}
                 />
             )}
         </>

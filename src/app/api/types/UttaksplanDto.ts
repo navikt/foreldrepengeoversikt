@@ -35,6 +35,8 @@ export interface PeriodeDto {
         navn: string;
     };
     periode: Tidsperiode;
+    fom: string;
+    tom: string;
     morsAktivitet: MorsAktivitetDto;
     oppholdAarsak?: OppholdsÅrsak;
 }
@@ -61,6 +63,7 @@ export enum MorsAktivitetDto {
     ArbeidOgUtdanning = 'ARBEID_OG_UTDANNING',
     Uføre = 'UFØRE',
     SamtidigUttak = 'SAMTIDIGUTTAK',
+    IkkeOppgitt = 'IKKE_OPPGITT',
 }
 
 export enum StønadskontoType {

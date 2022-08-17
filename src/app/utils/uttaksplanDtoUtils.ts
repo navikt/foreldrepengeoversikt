@@ -89,7 +89,10 @@ export const erTaptPeriode = (perioder: PeriodeDto) => {
 };
 
 export const erLike = (periode1: PeriodeDto, periode2: PeriodeDto): boolean => {
-    return isEqual(getRelevanteFelterForSammenslåing(periode1), getRelevanteFelterForSammenslåing(periode2));
+    const felterPeriode1 = getRelevanteFelterForSammenslåing(periode1);
+    const felterPeriode2 = getRelevanteFelterForSammenslåing(periode2);
+
+    return isEqual(felterPeriode1, felterPeriode2);
 };
 
 const getRelevanteFelterForSammenslåing = ({
@@ -99,6 +102,8 @@ const getRelevanteFelterForSammenslåing = ({
     manueltBehandlet,
     arbeidsgiverInfo,
     uttakArbeidType,
+    fom,
+    tom,
     ...relevanteFelter
 }: PeriodeDto) => {
     return relevanteFelter;

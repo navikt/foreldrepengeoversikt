@@ -1,4 +1,4 @@
-import { PeriodeDto } from 'app/api/types/UttaksplanDto';
+import { MorsAktivitetDto, PeriodeDto, StønadskontoType } from 'app/api/types/UttaksplanDto';
 import {
     PeriodeType,
     Utsettelsesperiode,
@@ -47,6 +47,14 @@ const periodeDtoUToOppholdsperiode = (
     };
 };
 
+const getStønadskontoType = (stønadskontoType: StønadskontoType, morsAktivitet: MorsAktivitetDto) => {
+    if (morsAktivitet === MorsAktivitetDto.IkkeOppgitt) {
+        return StønadskontoType.AktivitetsfriKvote;
+    }
+
+    return stønadskontoType;
+};
+
 const periodeDtoUTottaksperiode = (uttaksperiodeDto: PeriodeDto, søkerErFarEllerMedmor: boolean): Uttaksperiode => {
     return {
         type: PeriodeType.Uttak,
@@ -58,7 +66,7 @@ const periodeDtoUTottaksperiode = (uttaksperiodeDto: PeriodeDto, søkerErFarElle
             getGraderingsprosent(uttaksperiodeDto),
             uttaksperiodeDto.samtidigUttaksprosent
         ),
-        stønadskontotype: uttaksperiodeDto.stønadskontotype,
+        stønadskontotype: getStønadskontoType(uttaksperiodeDto.stønadskontotype, uttaksperiodeDto.morsAktivitet),
         graderingInnvilget:
             uttaksperiodeDto.graderingInnvilget !== undefined ? uttaksperiodeDto.graderingInnvilget : false,
         graderingsprosent: getGraderingsprosent(uttaksperiodeDto) || '0',

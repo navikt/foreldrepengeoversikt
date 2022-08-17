@@ -43,6 +43,9 @@ export const DinPlan: React.FunctionComponent<Props> = ({ history, sak, søker }
     const { perioder, tilgjengeligeKontoer } = sak;
     const cls = BEMHelper('din-plan');
 
+    const søkerErFarEllerMedmor = sak.saksgrunnlag.grunnlag.søkerErFarEllerMedmor;
+    const farMedmorErAleneOmOmsorg = sak.saksgrunnlag.grunnlag.farMedmorErAleneOmOmsorg;
+    const morErAleneOmOmsorg = sak.saksgrunnlag.grunnlag.morErAleneOmOmsorg;
     return (
         <Page
             className={cls.block}
@@ -66,7 +69,8 @@ export const DinPlan: React.FunctionComponent<Props> = ({ history, sak, søker }
                         farMedmor: getTotaltBrukteDager(Rolle.farMedmor, perioder),
                     }}
                     erDeltUttak={erEksisterendeSakErDeltUttak(sak.saksgrunnlag.grunnlag)}
-                    erFarMedmor={sak.saksgrunnlag.grunnlag.søkerErFarEllerMedmor}
+                    erFarMedmor={søkerErFarEllerMedmor}
+                    erAleneOmOmsorg={farMedmorErAleneOmOmsorg || morErAleneOmOmsorg}
                     navnPåForeldre={getNavnPåForeldre(sak, søker)}
                 />
             )}

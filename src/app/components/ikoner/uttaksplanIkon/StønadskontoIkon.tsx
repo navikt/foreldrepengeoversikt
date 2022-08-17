@@ -13,14 +13,26 @@ export interface Props {
     forelder?: Rolle;
     gradert?: boolean;
     navnPåForeldre: NavnPåForeldre;
+    erFarEllerMedmor: boolean;
+    erAleneOmOmsorg: boolean;
 }
 
-const StønadskontoIkon: React.FunctionComponent<Props> = ({ konto, forelder, gradert, navnPåForeldre }) => {
+const StønadskontoIkon: React.FunctionComponent<Props> = ({
+    konto,
+    forelder,
+    gradert,
+    navnPåForeldre,
+    erFarEllerMedmor,
+    erAleneOmOmsorg,
+}) => {
     const intl = useIntl();
 
     return (
         <IconBox color={getStønadskontoFarge(konto, forelder, true)} stripes={gradert}>
-            <UttaksplanIkon ikon={UttaksplanIkonKeys.uttak} title={getStønadskontoNavn(intl, konto, navnPåForeldre)} />
+            <UttaksplanIkon
+                ikon={UttaksplanIkonKeys.uttak}
+                title={getStønadskontoNavn(intl, konto, navnPåForeldre, erFarEllerMedmor, erAleneOmOmsorg)}
+            />
         </IconBox>
     );
 };

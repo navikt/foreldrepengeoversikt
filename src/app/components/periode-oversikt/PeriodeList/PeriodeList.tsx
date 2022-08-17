@@ -23,14 +23,23 @@ import {
 } from '../../../utils/periodeUtils';
 
 import './periodeList.less';
+import { Rolle } from 'app/types/Rolle';
 
 interface Props {
     tittel: string | React.ReactNode;
     perioder: Periode[];
     navnPåForeldre: NavnPåForeldre;
+    erFarEllerMedmor: boolean;
+    erAleneOmOmsorg: boolean;
 }
 
-const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder, navnPåForeldre }) => {
+const PeriodeList: React.FunctionComponent<Props> = ({
+    tittel,
+    perioder,
+    navnPåForeldre,
+    erFarEllerMedmor,
+    erAleneOmOmsorg,
+}) => {
     const intl = useIntl();
     const cls = BEMHelper('periode-list');
 
@@ -49,9 +58,11 @@ const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder, navnPå
                                         tittel={getStønadskontoNavn(
                                             intl,
                                             (p as Uttaksperiode).stønadskontotype,
-                                            navnPåForeldre
+                                            navnPåForeldre,
+                                            erFarEllerMedmor,
+                                            erAleneOmOmsorg
                                         )}
-                                        ikon={getIkon(p)}
+                                        ikon={getIkon(p, erFarEllerMedmor)}
                                         beskrivelse={getBeskrivelse(p, navnPåForeldre, intl)}
                                         tidsperiode={p.tidsperiode}
                                         annenForelderSamtidigUttakPeriode={getAnnenPartsPeriodeMedSamtidigUttak(
@@ -61,7 +72,7 @@ const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder, navnPå
                                         navnPåForeldre={navnPåForeldre}
                                         color={getStønadskontoFarge(
                                             (p as Uttaksperiode).stønadskontotype,
-                                            undefined,
+                                            erFarEllerMedmor ? Rolle.farMedmor : Rolle.mor,
                                             true
                                         )}
                                     />
@@ -78,7 +89,7 @@ const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder, navnPå
                                                 }}
                                             />
                                         }
-                                        ikon={getIkon(p)}
+                                        ikon={getIkon(p, erFarEllerMedmor)}
                                         beskrivelse={getBeskrivelse(p, navnPåForeldre, intl)}
                                         tidsperiode={p.tidsperiode}
                                         color={UttaksplanColor.green}
@@ -105,7 +116,7 @@ const PeriodeList: React.FunctionComponent<Props> = ({ tittel, perioder, navnPå
                                     <PeriodeListElement
                                         key={guid()}
                                         tittel={<FormattedMessage id="dinPlan.periodeUtenUttak" />}
-                                        ikon={getIkon(p)}
+                                        ikon={getIkon(p, erFarEllerMedmor)}
                                         beskrivelse={
                                             <FormattedMessage
                                                 id="dinPlan.periodeUtenUttak.beskrivelse"

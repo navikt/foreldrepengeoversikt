@@ -58,6 +58,7 @@ const SaksinformasjonPanel: React.FunctionComponent<Props> = ({
 }) => {
     const erSakForeldrepengesak = erForeldrepengesak(sak);
     const { perioder, status } = sak;
+
     const initiellForeldrepengesøknadHendelse = historikkInnslagListe
         .filter(({ saksnr }) => sak.saksnummer === saksnr)
         .sort((a, b) => (moment(a.opprettet).isSameOrBefore(moment(b.opprettet)) ? 1 : -1))

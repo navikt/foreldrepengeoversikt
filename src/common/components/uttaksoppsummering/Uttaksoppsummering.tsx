@@ -10,12 +10,16 @@ export interface Props {
     resterendeStønadskonter: TilgjengeligStønadskonto[];
     navnPåForeldre: NavnPåForeldre;
     erDeltUttak: boolean;
+    erFarEllerMedmor: boolean;
+    erAleneOmOmsorg: boolean;
 }
 
 const Uttaksoppsummering: React.FunctionComponent<Props> = ({
     resterendeStønadskonter,
     navnPåForeldre,
     erDeltUttak,
+    erFarEllerMedmor,
+    erAleneOmOmsorg,
 }) => (
     <section>
         <Undertittel tag="h2" className="blokk-xs">
@@ -28,7 +32,14 @@ const Uttaksoppsummering: React.FunctionComponent<Props> = ({
         </Undertittel>
         <TilesList columns={2}>
             {resterendeStønadskonter.map((u, idx) => (
-                <Kontostatus key={idx} uttak={u} navnPåForeldre={navnPåForeldre} erEndringssøknad={true} />
+                <Kontostatus
+                    key={idx}
+                    uttak={u}
+                    navnPåForeldre={navnPåForeldre}
+                    erEndringssøknad={true}
+                    erFarEllerMedmor={erFarEllerMedmor}
+                    erAleneOmOmsorg={erAleneOmOmsorg}
+                />
             ))}
         </TilesList>
     </section>
