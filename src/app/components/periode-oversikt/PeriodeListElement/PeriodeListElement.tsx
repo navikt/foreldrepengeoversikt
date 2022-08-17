@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import classnames from 'classnames';
-import { Element, Normaltekst, EtikettLiten } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import moment from 'moment';
 
 import BEMHelper from 'common/util/bem';
@@ -37,9 +37,9 @@ const renderDagMnd = (dato: string, visÅr = true): JSX.Element => {
                 {d.get('date')}. {d.format('MMM')}
             </span>
             {visÅr && (
-                <EtikettLiten tag="span" className={BEM.element('dagmnd__mnd')}>
+                <Normaltekst tag="span" className={BEM.element('dagmnd__mnd')}>
                     <abbr title={`${d.format('MMM')} ${d.format('YYYY')}`}>{d.format('YYYY')}</abbr>
-                </EtikettLiten>
+                </Normaltekst>
             )}
         </div>
     ) : (

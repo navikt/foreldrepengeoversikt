@@ -31,7 +31,7 @@ class KvitteringPage extends React.Component<Props, State> {
         super(props);
         this.state = {
             attachments: [],
-            ...this.props.history.location.state,
+            ...(this.props.history.location.state as any),
         };
 
         if (!this.state.kvittering) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { EtikettLiten, Ingress } from 'nav-frontend-typografi';
+import { Ingress, Normaltekst } from 'nav-frontend-typografi';
 import classnames from 'classnames';
 
 import './etikett.less';
@@ -13,7 +13,7 @@ interface EtikettProps {
 const Etikett = ({ className, etikett, value }: EtikettProps) => {
     return (
         <div className={classnames('etikett', className)}>
-            <EtikettLiten>{etikett}</EtikettLiten>
+            <Normaltekst>{etikett}</Normaltekst>
             <Ingress>{value}</Ingress>
         </div>
     );
