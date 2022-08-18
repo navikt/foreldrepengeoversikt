@@ -1,0 +1,16 @@
+version: '3'
+services:
+  foreldrepengeoversikt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: foreldrepengeoversikt
+    ports:
+      - "9066:8080"
+    restart: on-failure
+    environment:
+      - "APPRES_CMS_URL=https://www.nav.no/dekoratoren"
+      - "FORELDREPENGESOKNAD_API_URL=http://localhost:9002/rest"
+      - "LOGINSERVICE_URL=http://localhost:8060/rest/token-mock/hent-token"
+      - "FP_UTTAK_SERVICE_URL=http://localhost:9002/rest"
+      - "KLAGE_URL=https://klage.nav.no"
