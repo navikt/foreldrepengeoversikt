@@ -1,0 +1,15 @@
+.se-søknad {
+    display: flex;
+    align-items: center;
+}
+
+.se-søknad__ikon {
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.se-søknad__linkPanel {
+    color: var(--navds-semantic-color-interaction-primary);
+    margin-bottom: 1rem;
+}

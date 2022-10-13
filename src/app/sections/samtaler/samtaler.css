@@ -1,0 +1,15 @@
+.samtaler {
+    display: flex;
+    align-items: center;
+}
+
+.samtaler__ikon {
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.samtaler__linkPanel {
+    color: var(--navds-semantic-color-interaction-primary);
+    margin-bottom: 1rem;
+}

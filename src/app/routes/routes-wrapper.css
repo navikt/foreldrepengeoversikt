@@ -1,0 +1,11 @@
+.routesWrapper {
+    max-width: 820px;
+    margin: 0 auto;
+    background-color: var(--navds-global-color-green-100);
+}
+
+@media (max-width: 768px) {
+    .routesWrapper {
+        max-width: 100%;
+    }
+}

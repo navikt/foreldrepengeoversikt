@@ -1,0 +1,9 @@
+.oppgaver__linkPanel {
+    color: var(--navds-semantic-color-interaction-primary);
+    border-color: var(--navds-semantic-color-interaction-primary);
+    margin-bottom: 1rem;
+}
+
+.oppgaver__tekst {
+    margin-bottom: 1rem;
+}

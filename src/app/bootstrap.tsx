@@ -2,10 +2,7 @@ import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import * as Sentry from '@sentry/browser';
 import '@navikt/ds-css';
-
-import IntlProvider from './intl/IntlProvider';
-import Foreldrepengeoversikt from './Foreldrepengeoversikt';
-import ByttBrowserModal from './components/bytt-browser-modal/ByttBrowserModal';
+import AppContainer from './AppContainer';
 
 if (!Intl.PluralRules) {
     require('@formatjs/intl-pluralrules/polyfill');
@@ -22,9 +19,4 @@ Sentry.init({
 const container = document.getElementById('app');
 const root = createRoot(container!);
 
-root.render(
-    <IntlProvider locale="nb">
-        <ByttBrowserModal />
-        <Foreldrepengeoversikt />
-    </IntlProvider>
-);
+root.render(<AppContainer />);

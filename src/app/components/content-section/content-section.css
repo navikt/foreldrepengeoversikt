@@ -1,0 +1,27 @@
+.content-section {
+    margin-bottom: 2rem;
+}
+
+.content-section--bg-white {
+    background-color: var(--navds-global-color-white);
+}
+
+.content-section--bg-blue {
+    background-color: var(--navds-global-color-lightblue-50);
+}
+
+.content-section--padding-large {
+    padding: 2rem;
+}
+
+.content-section--padding-default {
+    padding: 1rem;
+}
+
+.content-section--padding-none {
+    padding: 0;
+}
+
+.content-section__heading {
+    margin-bottom: 1rem;
+}
