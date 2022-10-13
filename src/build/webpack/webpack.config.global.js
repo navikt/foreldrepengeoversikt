@@ -25,21 +25,8 @@ const webpackConfig = {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                include: [
-                    path.resolve(__dirname, './../../app'),
-                    path.resolve(__dirname, './../../common'),
-                    path.resolve(__dirname, './../../storage'),
-                ],
-                loader: require.resolve('awesome-typescript-loader'),
-            },
-            {
-                enforce: 'pre',
-                test: /\.(js|ts|tsx)$/,
+                use: 'ts-loader',
                 exclude: /node_modules/,
-                loader: 'eslint-loader',
-                options: {
-                    cache: true,
-                },
             },
             {
                 test: /\.js$/,
@@ -47,8 +34,16 @@ const webpackConfig = {
                 exclude: /node_modules/,
             },
             {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
                 test: /\.less$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.svg$/,
@@ -59,9 +54,8 @@ const webpackConfig = {
     plugins: [
         new CaseSensitivePathsPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css?[hash]-[chunkhash]-[name]',
-            disable: false,
-            allChunks: true,
+            filename: 'css/[name].css?[fullhash]-[chunkhash]-[contenthash]-[name]',
+            linkType: 'text/css',
         }),
         new SpriteLoaderPlugin(),
     ],

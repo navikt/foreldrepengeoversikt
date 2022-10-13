@@ -1,45 +1,42 @@
 [
     {
         "type": "FPSAK",
-        "saksnummer": "142637418",
+        "saksnummer": "352001004",
         "status": "LOP",
-        "opprettet": "2020-03-09",
+        "opprettet": "2021-09-09",
+        "annenPart": {
+            "fnr": "18107820597",
+            "aktørId": "2669988401444",
+            "navn": {
+                "fornavn": "BLÅØYD",
+                "etternavn": "TRANFLASKE"
+            }
+        },
+        "behandlingTema": "FORP_FODS",
         "behandlinger": [
             {
-                "opprettetTidspunkt": "2020-03-19T06:34:25.269",
-                "endretTidspunkt": "2020-03-20T08:29:12.118",
+                "opprettetTidspunkt": "2021-09-09T14:41:41.068",
+                "endretTidspunkt": "2021-09-09T14:41:53.615",
                 "status": "AVSLU",
                 "type": "FP",
                 "tema": "FORP_FODS",
-                "årsak": "RE-FRDLING",
-                "behandlingResultat": "FORELDREPENGER_ENDRET",
-                "behandlendeEnhet": "4849",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Tromsø",
+                "behandlingResultat": "INGEN_ENDRING",
+                "behandlendeEnhet": "4842",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Stord",
                 "inntektsmeldinger": []
             },
             {
-                "opprettetTidspunkt": "2020-03-09T13:19:06.823",
-                "endretTidspunkt": "2020-03-09T13:21:58.897",
+                "opprettetTidspunkt": "2021-09-09T13:41:43.383",
+                "endretTidspunkt": "2021-09-09T13:46:34.376",
                 "status": "AVSLU",
                 "type": "FP",
                 "tema": "FORP_FODS",
                 "behandlingResultat": "INNVILGET",
-                "behandlendeEnhet": "4849",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Tromsø",
-                "inntektsmeldinger": ["466991530"]
-            },
-            {
-                "opprettetTidspunkt": "2020-03-30T08:04:45.685",
-                "endretTidspunkt": "2020-03-30T08:10:07.367",
-                "status": "AVSLU",
-                "type": "FP",
-                "tema": "FORP_FODS",
-                "årsak": "RE-FRDLING",
-                "behandlingResultat": "FORELDREPENGER_ENDRET",
-                "behandlendeEnhet": "4849",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Tromsø",
-                "inntektsmeldinger": []
+                "behandlendeEnhet": "4842",
+                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Stord",
+                "inntektsmeldinger": ["510542665"]
             }
-        ]
+        ],
+        "mottattEndringssøknad": false
     }
 ]

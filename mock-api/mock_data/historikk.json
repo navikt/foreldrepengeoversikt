@@ -2,107 +2,26 @@
     {
         "type": "inntekt",
         "arbeidsgiver": {
-            "navn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET"
+            "navn": "SJOKKERENDE ELEKTRIKER"
         },
-        "aktørId": "1673534379597",
-        "journalpostId": "466991530",
-        "saksnr": "142637418",
-        "opprettet": "2020-03-09T13:19:07.403847",
-        "referanseId": "GLNUN3FEYIAH"
-    },
-    {
-        "type": "minidialog",
-        "fnr": "17066425606",
-        "hendelse": "TILBAKEKREVING_SPM",
-        "gyldigTil": "2020-04-20",
-        "journalpostId": "467009751",
-        "tekst": "tekst",
-        "dialogId": "142637418",
-        "aktørId": "1673534379597",
-        "saksnr": "142637418",
-        "opprettet": "2020-03-20T08:29:24.746904",
-        "aktiv": false
+        "aktørId": "2967782074433",
+        "journalpostId": "510542665",
+        "saksnr": "352001004",
+        "opprettet": "2021-09-09T13:41:44.771508",
+        "referanseId": "AR0008110"
     },
     {
         "type": "søknad",
-        "hendelse": "ETTERSENDING_FORELDREPENGER",
-        "aktørId": "1673534379597",
-        "journalpostId": "467009756",
-        "saksnr": "142637418",
-        "opprettet": "2020-03-20T08:39:11.017699",
-        "referanseId": "ca735819-f8e8-4df8-8f8c-4fa95d16c671",
-        "vedlegg": ["I000114"]
-    },
-    {
-        "type": "søknad",
-        "hendelse": "ETTERSENDING_FORELDREPENGER",
-        "aktørId": "1673534379597",
-        "journalpostId": "467012313",
-        "saksnr": "142637418",
-        "opprettet": "2020-03-30T14:36:46.068024",
-        "referanseId": "90ae7727-832d-4590-8eeb-06ff567db3b7",
-        "vedlegg": ["I000114"]
-    },
-    {
-        "type": "minidialog",
-        "fnr": "17066425606",
-        "hendelse": "TILBAKEKREVING_SPM",
-        "gyldigTil": "2020-04-21",
-        "journalpostId": "467012453",
-        "tekst": "tekst",
-        "dialogId": "142637418",
-        "aktørId": "1673534379597",
-        "saksnr": "142637418",
-        "opprettet": "2020-03-31T14:08:46.722774",
-        "aktiv": false
-    },
-    {
-        "type": "minidialog",
-        "fnr": "17066425606",
-        "hendelse": "TILBAKEKREVING_SPM",
-        "gyldigTil": "2020-04-21",
-        "journalpostId": "467012454",
-        "tekst": "tekst",
-        "dialogId": "142637418",
-        "aktørId": "1673534379597",
-        "saksnr": "142637418",
-        "opprettet": "2020-03-31T14:09:06.453037",
-        "aktiv": false
-    },
-    {
-        "type": "søknad",
-        "hendelse": "ETTERSENDING_FORELDREPENGER",
-        "aktørId": "1673534379597",
-        "journalpostId": "467012641",
-        "saksnr": "142637418",
-        "opprettet": "2020-04-02T09:35:18.662262",
-        "referanseId": "52751bcb-9339-40e4-967f-24a9a85054fa",
-        "vedlegg": ["I000114"]
-    },
-    {
-        "type": "minidialog",
-        "fnr": "17066425606",
-        "hendelse": "TILBAKEKREVING_FATTET_VEDTAK",
-        "gyldigTil": "2999-12-12",
-        "journalpostId": "1234567890",
-        "tekst": "TODO",
-        "dialogId": "999",
-        "aktørId": "1673534379597",
-        "saksnr": "142637418",
-        "opprettet": "2020-04-02T11:07:03.364958",
-        "aktiv": true
-    },
-    {
-        "type": "minidialog",
-        "fnr": "17066425606",
-        "hendelse": "TILBAKEKREVING_FATTET_VEDTAK",
-        "gyldigTil": "2999-12-12",
-        "journalpostId": "1234567890",
-        "tekst": "TODO",
-        "dialogId": "142637418",
-        "aktørId": "1673534379597",
-        "saksnr": "142637418",
-        "opprettet": "2020-04-02T11:11:39.034136",
-        "aktiv": true
+        "fnr": "23028218850",
+        "hendelse": "INITIELL_FORELDREPENGER",
+        "aktørId": "2967782074433",
+        "journalpostId": "510542667",
+        "saksnr": "352001004",
+        "opprettet": "2021-09-09T13:43:17.305149",
+        "referanseId": "e0953cb3-8b6d-4318-899a-0fecd97571e7",
+        "vedlegg": [],
+        "opplastedeVedlegg": [],
+        "ikkeOpplastedeVedlegg": [],
+        "behandlingsdato": "2021-07-21"
     }
 ]

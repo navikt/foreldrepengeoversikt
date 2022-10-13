@@ -1,20 +1,34 @@
 {
     "søker": {
-        "fnr": "17066425606",
-        "fornavn": "LUNKEN",
-        "etternavn": "TRANE",
+        "fnr": "23028218850",
+        "fornavn": "STERK",
+        "etternavn": "KOPP",
         "kjønn": "K",
-        "fødselsdato": "1964-06-17",
-        "land": "NO",
-        "ikkeNordiskEøsLand": false
+        "fødselsdato": "1982-02-23",
+        "ikkeNordiskEøsLand": false,
+        "barn": [
+            {
+                "fnr": "08092150438",
+                "fødselsdato": "2021-09-08",
+                "annenForelder": {
+                    "fnr": "18107820597",
+                    "fødselsdato": "1978-10-18",
+                    "fornavn": "BLÅØYD",
+                    "etternavn": "TRANFLASKE"
+                },
+                "fornavn": "SMEKKER",
+                "etternavn": "MASKIN",
+                "kjønn": "K"
+            }
+        ]
     },
     "arbeidsforhold": [
         {
-            "arbeidsgiverId": "973861778",
+            "arbeidsgiverId": "947064649",
             "arbeidsgiverIdType": "orgnr",
-            "arbeidsgiverNavn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET",
+            "arbeidsgiverNavn": "SJOKKERENDE ELEKTRIKER",
             "stillingsprosent": 100,
-            "fom": "2018-01-01"
+            "fom": "2001-09-09"
         }
     ]
 }
