@@ -1,12 +1,19 @@
+import { bemUtils } from '@navikt/fp-common';
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import ForeldrepengesøknadRoutes from './routes/ForeldrepengeoversiktRoutes';
+import ForeldrepengeoversiktRoutes from './routes/ForeldrepengeoversiktRoutes';
+
+import './styles/app.css';
 
 const Foreldrepengeoversikt: React.FunctionComponent = () => {
+    const bem = bemUtils('app');
+
     return (
-        <BrowserRouter>
-            <ForeldrepengesøknadRoutes />
-        </BrowserRouter>
+        <div className={bem.block}>
+            <BrowserRouter>
+                <ForeldrepengeoversiktRoutes />
+            </BrowserRouter>
+        </div>
     );
 };
 

@@ -6,7 +6,7 @@ import { bemUtils } from '@navikt/fp-common';
 
 import './routes-wrapper.css';
 
-const ForeldrepengesøknadRoutes = () => {
+const ForeldrepengeoversiktRoutes = () => {
     const bem = bemUtils('routesWrapper');
 
     return (
@@ -19,4 +19,4 @@ const ForeldrepengesøknadRoutes = () => {
     );
 };
 
-export default ForeldrepengesøknadRoutes;
+export default ForeldrepengeoversiktRoutes;

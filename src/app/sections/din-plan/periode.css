@@ -1,0 +1,26 @@
+.periode {
+    padding: 1rem;
+    margin: 0 -1rem 1.5rem -1rem;
+}
+
+.periode--uttak {
+    background-color: var(--navds-semantic-color-feedback-success-background);
+    border-top: 1px solid var(--navds-semantic-color-feedback-success-border);
+    border-bottom: 1px solid var(--navds-semantic-color-feedback-success-border);
+}
+
+.periode--ikke-uttak {
+    background-color: white;
+}
+
+.periode__innhold {
+    display: flex;
+}
+
+.periode__innhold-tekst {
+    margin-left: 1rem;
+}
+
+.periode__innhold-tekst > p {
+    margin-bottom: 0.25rem;
+}
