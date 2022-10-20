@@ -1,5 +1,8 @@
 .content-section {
     margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--navds-global-color-green-200);
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
 }
 
 .content-section--bg-white {
@@ -7,7 +10,7 @@
 }
 
 .content-section--bg-blue {
-    background-color: var(--navds-global-color-lightblue-50);
+    background-color: var(--navds-global-color-lightblue-100);
 }
 
 .content-section--padding-large {

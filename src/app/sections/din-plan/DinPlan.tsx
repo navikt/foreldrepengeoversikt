@@ -12,17 +12,14 @@ const DinPlan = () => {
 
     return (
         <>
-            <BodyLong className={bem.element('ingress')}>
-                Du har søkt om planen nedenfor. Planen er ikke vedtatt av NAV ennå.
-            </BodyLong>
-            <Button
-                variant="secondary"
-                className={bem.element('endre-knapp')}
-                icon={<Edit aria-hidden />}
-                iconPosition="right"
-            >
-                Endre perioder
-            </Button>
+            <div className={bem.element('header')}>
+                <div className={bem.element('header-tekst')}>
+                    <BodyLong>Du har søkt om planen nedenfor. Planen er ikke vedtatt av NAV ennå.</BodyLong>
+                </div>
+                <Button variant="secondary" icon={<Edit aria-hidden />} iconPosition="right">
+                    Endre perioder
+                </Button>
+            </div>
             <Periode tidsperiode={{ fom: '2022-01-01', tom: '2022-02-01' }} navnForelder="Leah" />
             <Periode tidsperiode={{ fom: '2022-01-01', tom: '2022-02-01' }} navnForelder="Leah" ikkeUttak={true} />
             <Periode tidsperiode={{ fom: '2022-01-01', tom: '2022-02-01' }} navnForelder="Leah" />

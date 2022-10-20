@@ -10,6 +10,6 @@
 }
 
 .se-søknad__linkPanel {
+    border-radius: 0.5rem;
     color: var(--navds-semantic-color-interaction-primary);
-    margin-bottom: 1rem;
 }

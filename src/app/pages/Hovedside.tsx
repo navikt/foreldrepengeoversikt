@@ -12,7 +12,7 @@ const Hovedside = () => {
     return (
         <>
             <Topp />
-            <ContentSection backgroundColor="blue">
+            <ContentSection heading="Oppgaver" backgroundColor="blue">
                 <Oppgaver />
             </ContentSection>
             <ContentSection heading="Dette skjer i saken">

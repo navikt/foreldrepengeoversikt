@@ -8,7 +8,7 @@ const Oppgaver = () => {
     const bem = bemUtils('oppgaver');
 
     return (
-        <>
+        <div className={bem.block}>
             <div className={bem.element('tekst')}>
                 <BodyLong>NAV kan ikke behandle søknaden din før vi har fått nødvendig dokumentasjon</BodyLong>
             </div>
@@ -23,7 +23,7 @@ const Oppgaver = () => {
                 <LinkPanel.Title>Send info til arbeidsgiver om inntektsmelding</LinkPanel.Title>
                 <LinkPanel.Description>Noe beskrivelse</LinkPanel.Description>
             </LinkPanel>
-        </>
+        </div>
     );
 };
 
