@@ -11,7 +11,7 @@
         "dev-api": "node ./mock-api/mock-api-server.js",
         "start": "node ./src/build/scripts/start-dev.js",
         "dev": "node ./src/build/scripts/start-dev-nodecorator.js",
-        "jest": "jest --config ./jest/jest.config.js --maxWorkers 2",
+        "jest": "jest --config ./jest/jest.config.js --maxWorkers 2 --passWithNoTests",
         "jest-update-snapshot": "jest --config --updateSnapshot ./jest/jest.config.js",
         "jest-watch": "jest --watch --verbose --config ./jest/jest.config.js",
         "jest-coverage": "jest --config ./jest/jest.config.js --coverage --collectCoverageFrom=src/**/*.{ts,tsx} --collectCoverageFrom=!src/**/*.d.{ts,tsx}"
