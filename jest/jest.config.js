@@ -15,6 +15,7 @@ module.exports = {
         },
     },
     rootDir: '../',
+    roots: ['<rootDir>/src/app/'],
     coverageReporters: ['text-summary'],
     preset: 'ts-jest/presets/js-with-babel',
     testMatch: null,

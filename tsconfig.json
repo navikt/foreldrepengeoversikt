@@ -38,6 +38,6 @@
         "cypress",
         "dist",
         "**.js",
-        "old/"
+        "old"
     ]
 }
