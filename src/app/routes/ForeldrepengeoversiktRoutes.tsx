@@ -5,8 +5,13 @@ import Hovedside from 'app/pages/Hovedside';
 import { bemUtils } from '@navikt/fp-common';
 
 import './routes-wrapper.css';
+import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 
-const ForeldrepengeoversiktRoutes = () => {
+interface Props {
+    søkerinfo: SøkerinfoDTO;
+}
+
+const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinfo }) => {
     const bem = bemUtils('routesWrapper');
 
     return (
