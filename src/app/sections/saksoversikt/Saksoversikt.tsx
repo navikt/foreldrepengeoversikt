@@ -1,7 +1,12 @@
 import React from 'react';
+import Tidslinje from './tidslinje/Tidslinje';
 
 const Saksoversikt = () => {
-    return <div>Saksoversikt</div>;
+    return (
+        <div>
+            <Tidslinje />
+        </div>
+    );
 };
 
 export default Saksoversikt;

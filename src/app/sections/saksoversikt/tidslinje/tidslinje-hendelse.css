@@ -1,0 +1,32 @@
+.tidslinje-hendelse {
+    display: flex;
+    align-items: flex-start;
+    margin: 3rem 0;
+    position: relative;
+}
+
+.tidslinje-hendelse:before {
+    content: '';
+    width: 0;
+    height: 100%;
+    position: absolute;
+    border: 1px solid black;
+    top: 0;
+    left: 27px;
+    z-index: 0;
+}
+
+.tidslinje-hendelse__ikon--completed {
+    color: var(--navds-global-color-green-600);
+    width: 3.5rem;
+}
+
+.tidslinje-hendelse__ikon--warning {
+    color: var(--navds-global-color-orange-400);
+    width: 3.5rem;
+}
+
+.tidslinje-hendelse__ikon--incomplete {
+    color: var(--navds-global-color-gray-500);
+    width: 3.5rem;
+}
