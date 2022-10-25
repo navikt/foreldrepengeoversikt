@@ -34,7 +34,7 @@ const getIkon = (type: TidslinjeHendelseType) => {
 const TidslinjeHendelse: React.FunctionComponent<Props> = ({ type, date, title, children }) => {
     return (
         <div className={bem.block}>
-            <div>{getIkon(type)}</div>
+            <div className={bem.element('ikon')}>{getIkon(type)}</div>
             <div>
                 <Heading size="small">{title}</Heading>
                 {children}
