@@ -10,10 +10,9 @@ const useSøkerinfo = () => {
     };
 };
 
-const useGetSaker = (enabled: boolean) => {
+const useGetSaker = () => {
     const { data, error } = useRequest<any>('/innsyn/v2/saker', {
         config: { withCredentials: true },
-        isSuspended: !enabled,
     });
 
     return {

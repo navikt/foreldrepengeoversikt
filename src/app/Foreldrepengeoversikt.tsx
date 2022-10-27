@@ -11,6 +11,7 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
     const bem = bemUtils('app');
 
     const { søkerinfoData, søkerinfoError } = Api.useSøkerinfo();
+    const { sakerData, sakerError } = Api.useGetSaker();
 
     useEffect(() => {
         if (søkerinfoError) {
@@ -18,9 +19,15 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
                 'Vi klarte ikke å hente informasjon om deg. Prøv igjen om noen minutter og hvis problemet vedvarer kontakt brukerstøtte.'
             );
         }
-    }, [søkerinfoError]);
 
-    if (!søkerinfoData) {
+        if (sakerError) {
+            throw new Error(
+                'Vi opplever problemer med å hente informasjon om din sak. Prøv igjen om noen minutter og hvis problemet vedvarer kontakt brukerstøtte.'
+            );
+        }
+    }, [søkerinfoError, sakerError]);
+
+    if (!søkerinfoData || !sakerData) {
         return (
             <div style={{ textAlign: 'center', padding: '12rem 0' }}>
                 <Loader type="XXL" />
