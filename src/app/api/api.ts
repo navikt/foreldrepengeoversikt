@@ -1,3 +1,4 @@
+import { SakOppslag } from 'app/types/SakOppslag';
 import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 import { useRequest } from './useRequest';
 
@@ -11,7 +12,7 @@ const useSøkerinfo = () => {
 };
 
 const useGetSaker = () => {
-    const { data, error } = useRequest<any>('/innsyn/v2/saker', {
+    const { data, error } = useRequest<SakOppslag>('/innsyn/v2/saker', {
         config: { withCredentials: true },
     });
 

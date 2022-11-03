@@ -1,5 +1,9 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { bemUtils, formatDateExtended, Tidsperiode } from '@navikt/fp-common';
+import { bemUtils, formatDateExtended } from '@navikt/fp-common';
+import { Periode } from 'app/types/Periode';
+import { StønadskontoType } from 'app/types/StønadskontoType';
+import { UtsettelseÅrsakType } from 'app/types/UtsettelseÅrsakType';
+import { isUtsettelsesperiode, isUttaksperiode } from 'app/utils/periodeUtils';
 import ForelderMorIkon from 'assets/ForelderMorIkon';
 import classNames from 'classnames';
 import React from 'react';
@@ -7,23 +11,59 @@ import React from 'react';
 import './periode.css';
 
 interface Props {
-    tidsperiode: Tidsperiode;
+    periode: Periode;
     navnForelder: string;
     ikkeUttak?: boolean;
 }
 
-const Periode: React.FunctionComponent<Props> = ({ tidsperiode, navnForelder, ikkeUttak = false }) => {
+const getPeriodeTittel = (periode: Periode): string => {
+    if (isUttaksperiode(periode)) {
+        const { kontoType } = periode;
+
+        switch (kontoType) {
+            case StønadskontoType.Fedrekvote:
+                return 'Fedrekvote';
+            case StønadskontoType.Mødrekvote:
+                return 'Mødrekvote';
+            case StønadskontoType.Fellesperiode:
+                return 'Fellesperiode';
+            case StønadskontoType.Foreldrepenger:
+                return 'Foreldrepenger';
+            case StønadskontoType.ForeldrepengerFørFødsel:
+                return 'Foreldrepenger før fødsel';
+            default:
+                return '';
+        }
+    }
+
+    if (isUtsettelsesperiode(periode)) {
+        const { utsettelseÅrsak } = periode;
+
+        switch (utsettelseÅrsak) {
+            case UtsettelseÅrsakType.Arbeid:
+                return 'Utsetter grunnet arbeid';
+            case UtsettelseÅrsakType.Fri:
+                return 'Periode uten uttak';
+            default:
+                return '';
+        }
+    }
+
+    return '';
+};
+
+const Periode: React.FunctionComponent<Props> = ({ periode, navnForelder, ikkeUttak = false }) => {
     const bem = bemUtils('periode');
+    const { fom, tom } = periode;
+    const tittel = getPeriodeTittel(periode);
 
     return (
         <div className={classNames(bem.block, ikkeUttak ? bem.modifier('ikke-uttak') : bem.modifier('uttak'))}>
-            <Heading size="small">Foreldrepenger før fødsel</Heading>
+            <Heading size="small">{tittel}</Heading>
             <div className={bem.element('innhold')}>
                 <ForelderMorIkon />
                 <div className={bem.element('innhold-tekst')}>
-                    <BodyShort>
-                        {`${formatDateExtended(tidsperiode.fom)} - ${formatDateExtended(tidsperiode.tom)}`}
-                    </BodyShort>
+                    <BodyShort>{`${formatDateExtended(fom)} - ${formatDateExtended(tom)}`}</BodyShort>
                     <BodyShort size="small">3 uker</BodyShort>
                     <BodyShort size="small">{navnForelder}</BodyShort>
                 </div>

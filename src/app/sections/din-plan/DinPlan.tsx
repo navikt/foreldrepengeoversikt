@@ -3,11 +3,18 @@ import { bemUtils } from '@navikt/fp-common';
 import { Next } from '@navikt/ds-icons';
 import React from 'react';
 import { Edit } from '@navikt/ds-icons';
-import Periode from './Periode';
+import { default as PeriodeComponent } from './Periode';
+import { Periode } from 'app/types/Periode';
 
 import './din-plan.css';
+import { isUtsettelsesperiode } from 'app/utils/periodeUtils';
+import { UtsettelseÅrsakType } from 'app/types/UtsettelseÅrsakType';
 
-const DinPlan = () => {
+interface Props {
+    vedtattUttaksplan: Periode[];
+}
+
+const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan }) => {
     const bem = bemUtils('din-plan');
 
     return (
@@ -20,9 +27,15 @@ const DinPlan = () => {
                     Endre perioder
                 </Button>
             </div>
-            <Periode tidsperiode={{ fom: '2022-01-01', tom: '2022-02-01' }} navnForelder="Leah" />
-            <Periode tidsperiode={{ fom: '2022-01-01', tom: '2022-02-01' }} navnForelder="Leah" ikkeUttak={true} />
-            <Periode tidsperiode={{ fom: '2022-01-01', tom: '2022-02-01' }} navnForelder="Leah" />
+            {vedtattUttaksplan.map((periode) => {
+                let ikkeUttak = false;
+
+                if (isUtsettelsesperiode(periode) && periode.utsettelseÅrsak === UtsettelseÅrsakType.Fri) {
+                    ikkeUttak = true;
+                }
+
+                return <PeriodeComponent periode={periode} navnForelder="Leah" ikkeUttak={ikkeUttak} />;
+            })}
             <div>
                 <Link href="#">
                     Se hele planen <Next />

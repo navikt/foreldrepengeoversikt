@@ -1,42 +1,90 @@
-[
-    {
-        "type": "FPSAK",
-        "saksnummer": "352001004",
-        "status": "LOP",
-        "opprettet": "2021-09-09",
-        "annenPart": {
-            "fnr": "18107820597",
-            "aktørId": "2669988401444",
-            "navn": {
-                "fornavn": "BLÅØYD",
-                "etternavn": "TRANFLASKE"
-            }
-        },
-        "behandlingTema": "FORP_FODS",
-        "behandlinger": [
-            {
-                "opprettetTidspunkt": "2021-09-09T14:41:41.068",
-                "endretTidspunkt": "2021-09-09T14:41:53.615",
-                "status": "AVSLU",
-                "type": "FP",
-                "tema": "FORP_FODS",
-                "behandlingResultat": "INGEN_ENDRING",
-                "behandlendeEnhet": "4842",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Stord",
-                "inntektsmeldinger": []
+{
+    "foreldrepenger": [
+        {
+            "saksnummer": "352009729",
+            "sakAvsluttet": false,
+            "sisteSøknadMottattDato": "2022-10-31",
+            "kanSøkeOmEndring": true,
+            "sakTilhørerMor": false,
+            "gjelderAdopsjon": false,
+            "morUføretrygd": false,
+            "harAnnenForelderTilsvarendeRettEØS": false,
+            "ønskerJustertUttakVedFødsel": false,
+            "rettighetType": "BARE_SØKER_RETT",
+            "annenPart": {
+                "type": "person",
+                "fnr": "02077505663",
+                "fornavn": "Oransje",
+                "etternavn": "Bankboks"
             },
-            {
-                "opprettetTidspunkt": "2021-09-09T13:41:43.383",
-                "endretTidspunkt": "2021-09-09T13:46:34.376",
-                "status": "AVSLU",
-                "type": "FP",
-                "tema": "FORP_FODS",
-                "behandlingResultat": "INNVILGET",
-                "behandlendeEnhet": "4842",
-                "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Stord",
-                "inntektsmeldinger": ["510542665"]
-            }
-        ],
-        "mottattEndringssøknad": false
-    }
-]
+            "familiehendelse": {
+                "fødselsdato": "2022-10-10",
+                "termindato": "2022-10-10",
+                "antallBarn": 1
+            },
+            "gjeldendeVedtak": {
+                "perioder": [
+                    {
+                        "fom": "2022-10-17",
+                        "tom": "2022-11-20",
+                        "kontoType": "FORELDREPENGER",
+                        "resultat": {
+                            "innvilget": true,
+                            "trekkerMinsterett": true
+                        },
+                        "morsAktivitet": "IKKE_OPPGITT",
+                        "flerbarnsdager": false
+                    },
+                    {
+                        "fom": "2022-11-21",
+                        "tom": "2022-12-09",
+                        "kontoType": "FORELDREPENGER",
+                        "resultat": {
+                            "innvilget": true,
+                            "trekkerMinsterett": true
+                        },
+                        "morsAktivitet": "IKKE_OPPGITT",
+                        "flerbarnsdager": false
+                    },
+                    {
+                        "fom": "2022-12-12",
+                        "tom": "2023-05-19",
+                        "kontoType": "FORELDREPENGER",
+                        "resultat": {
+                            "innvilget": true,
+                            "trekkerMinsterett": false
+                        },
+                        "morsAktivitet": "ARBEID",
+                        "flerbarnsdager": false
+                    },
+                    {
+                        "fom": "2023-05-22",
+                        "tom": "2023-06-22",
+                        "resultat": {
+                            "innvilget": true,
+                            "trekkerMinsterett": true
+                        },
+                        "utsettelseÅrsak": "FRI",
+                        "morsAktivitet": "TRENGER_HJELP",
+                        "flerbarnsdager": false
+                    },
+                    {
+                        "fom": "2023-06-23",
+                        "tom": "2023-07-28",
+                        "kontoType": "FORELDREPENGER",
+                        "resultat": {
+                            "innvilget": true,
+                            "trekkerMinsterett": false
+                        },
+                        "morsAktivitet": "UTDANNING",
+                        "flerbarnsdager": false
+                    }
+                ]
+            },
+            "barn": [],
+            "dekningsgrad": "HUNDRE"
+        }
+    ],
+    "engangsstønad": [],
+    "svangerskapspenger": []
+}

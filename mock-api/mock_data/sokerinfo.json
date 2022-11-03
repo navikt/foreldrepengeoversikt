@@ -1,34 +1,23 @@
 {
     "søker": {
-        "fnr": "23028218850",
-        "fornavn": "STERK",
-        "etternavn": "KOPP",
-        "kjønn": "K",
-        "fødselsdato": "1982-02-23",
+        "fnr": "16510281520",
+        "fornavn": "Parodisk",
+        "etternavn": "Pose",
+        "kjønn": "M",
+        "fødselsdato": "2002-11-16",
         "ikkeNordiskEøsLand": false,
-        "barn": [
-            {
-                "fnr": "08092150438",
-                "fødselsdato": "2021-09-08",
-                "annenForelder": {
-                    "fnr": "18107820597",
-                    "fødselsdato": "1978-10-18",
-                    "fornavn": "BLÅØYD",
-                    "etternavn": "TRANFLASKE"
-                },
-                "fornavn": "SMEKKER",
-                "etternavn": "MASKIN",
-                "kjønn": "K"
-            }
-        ]
+        "bankkonto": {
+            "kontonummer": "",
+            "banknavn": ""
+        }
     },
     "arbeidsforhold": [
         {
-            "arbeidsgiverId": "947064649",
+            "arbeidsgiverId": "896929119",
             "arbeidsgiverIdType": "orgnr",
-            "arbeidsgiverNavn": "SJOKKERENDE ELEKTRIKER",
+            "arbeidsgiverNavn": "SAUEFABRIKK",
             "stillingsprosent": 100,
-            "fom": "2001-09-09"
+            "fom": "2017-03-24"
         }
     ]
 }
