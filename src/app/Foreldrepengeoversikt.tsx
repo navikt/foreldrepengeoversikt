@@ -12,6 +12,7 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
 
     const { søkerinfoData, søkerinfoError } = Api.useSøkerinfo();
     const { sakerData, sakerError } = Api.useGetSaker();
+    const { dokumenterData, dokumenterError } = Api.useGetDokumenter();
 
     useEffect(() => {
         if (søkerinfoError) {
@@ -25,9 +26,13 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
                 'Vi opplever problemer med å hente informasjon om din sak. Prøv igjen om noen minutter og hvis problemet vedvarer kontakt brukerstøtte.'
             );
         }
-    }, [søkerinfoError, sakerError]);
 
-    if (!søkerinfoData || !sakerData) {
+        if (dokumenterError) {
+            throw new Error('Vi klarte ikke å hente opp dokumenter i din sak.');
+        }
+    }, [søkerinfoError, sakerError, dokumenterError]);
+
+    if (!søkerinfoData || !sakerData || !dokumenterData) {
         return (
             <div style={{ textAlign: 'center', padding: '12rem 0' }}>
                 <Loader type="XXL" />

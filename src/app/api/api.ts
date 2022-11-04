@@ -22,9 +22,21 @@ const useGetSaker = () => {
     };
 };
 
+const useGetDokumenter = () => {
+    const { data, error } = useRequest<any>('/rest/dokument/alle', {
+        config: { withCredentials: true },
+    });
+
+    return {
+        dokumenterData: data,
+        dokumenterError: error,
+    };
+};
+
 const Api = {
     useSøkerinfo,
     useGetSaker,
+    useGetDokumenter,
 };
 
 export default Api;
