@@ -23,7 +23,7 @@ const useGetSaker = () => {
 };
 
 const useGetDokumenter = () => {
-    const { data, error } = useRequest<any>('/rest/dokument/alle', {
+    const { data, error } = useRequest<any>('/dokument/alle', {
         config: { withCredentials: true },
     });
 
