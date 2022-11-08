@@ -1,3 +1,4 @@
+import { Dokument } from 'app/types/Dokument';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 import { useRequest } from './useRequest';
@@ -23,7 +24,7 @@ const useGetSaker = () => {
 };
 
 const useGetDokumenter = () => {
-    const { data, error } = useRequest<any>('/dokument/alle', {
+    const { data, error } = useRequest<Dokument[]>('/dokument/alle', {
         config: { withCredentials: true },
     });
 

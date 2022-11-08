@@ -43,7 +43,11 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
     return (
         <div className={bem.block}>
             <BrowserRouter>
-                <ForeldrepengeoversiktRoutes søkerinfo={søkerinfoData} foreldrepengerSaker={sakerData.foreldrepenger} />
+                <ForeldrepengeoversiktRoutes
+                    søkerinfo={søkerinfoData}
+                    foreldrepengerSaker={sakerData.foreldrepenger}
+                    dokumenter={dokumenterData}
+                />
             </BrowserRouter>
         </div>
     );

@@ -1,11 +1,16 @@
 import { Button } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
+import { Dokument } from 'app/types/Dokument';
 import React from 'react';
-import Dokument from './Dokument';
+import { default as DokumentComponent } from './Dokument';
 
 import './dokumentoversikt.css';
 
-const Dokumentoversikt = () => {
+interface Props {
+    dokumenter: Dokument[];
+}
+
+const Dokumentoversikt: React.FunctionComponent<Props> = ({ dokumenter }) => {
     const bem = bemUtils('dokumentoversikt');
 
     return (
@@ -13,9 +18,9 @@ const Dokumentoversikt = () => {
             <Button variant="secondary" className={bem.element('ettersend-knapp')}>
                 Ettersend dokumenter
             </Button>
-            <Dokument name="Foreldrepengesøknad" />
-            <Dokument name="Timelister" />
-            <Dokument name="Terminbekreftelse" />
+            {dokumenter.map((dokument) => {
+                return <DokumentComponent dokument={dokument} />;
+            })}
         </>
     );
 };

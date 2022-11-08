@@ -1,23 +1,25 @@
 import { BodyShort, Link } from '@navikt/ds-react';
 import React from 'react';
 import { FileContentFilled } from '@navikt/ds-icons';
-import { bemUtils } from '@navikt/fp-common';
+import { bemUtils, formatDate } from '@navikt/fp-common';
+import { Dokument } from 'app/types/Dokument';
 
 import './dokument.css';
 
 interface Props {
-    name: string;
+    dokument: Dokument;
 }
 
-const Dokument: React.FunctionComponent<Props> = ({ name }) => {
+const Dokument: React.FunctionComponent<Props> = ({ dokument }) => {
     const bem = bemUtils('dokument');
+    const { tittel } = dokument;
 
     return (
         <div className={bem.block}>
             <FileContentFilled className={bem.element('ikon')} />
             <div className={bem.element('content')}>
-                <Link>{name}</Link>
-                <BodyShort size="small">Fra deg 15.06.2023 kl 12:31</BodyShort>
+                <Link href={dokument.url}>{tittel}</Link>
+                <BodyShort size="small">Fra deg {`${formatDate(dokument.mottatt)}`}</BodyShort>
             </div>
         </div>
     );

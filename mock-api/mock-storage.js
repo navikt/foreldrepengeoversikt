@@ -23,6 +23,10 @@ const getSokerinfo = function () {
     return getFileContent('sokerinfo.json');
 };
 
+const getDokumenter = function () {
+    return getFileContent('dokumenter.json');
+};
+
 const getSaker = function () {
     return getFileContent('saker.json');
 };
@@ -63,5 +67,6 @@ module.exports = {
     getHistorikk,
     getMinidialog,
     getUttaksplan,
+    getDokumenter,
     getManglendeVedlegg,
 };

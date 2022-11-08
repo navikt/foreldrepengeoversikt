@@ -35,6 +35,10 @@ router.get(['/rest/sokerinfo'], (req, res) => {
     res.send(MockStorage.getSokerinfo());
 });
 
+router.get(['/rest/dokument/alle'], (req, res) => {
+    res.send(MockStorage.getDokumenter());
+});
+
 router.post('/rest/engangsstonad', (req, res) => res.sendStatus(200));
 
 router.get('/rest/innsyn/v2/saker', (req, res) => {

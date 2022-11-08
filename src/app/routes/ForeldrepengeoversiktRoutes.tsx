@@ -7,13 +7,19 @@ import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 import { Sak } from 'app/types/Sak';
 
 import './routes-wrapper.css';
+import { Dokument } from 'app/types/Dokument';
 
 interface Props {
     søkerinfo: SøkerinfoDTO;
     foreldrepengerSaker: Sak[];
+    dokumenter: Dokument[];
 }
 
-const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinfo, foreldrepengerSaker }) => {
+const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
+    søkerinfo,
+    dokumenter,
+    foreldrepengerSaker,
+}) => {
     const bem = bemUtils('routesWrapper');
 
     return (
@@ -21,7 +27,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
             <Routes>
                 <Route
                     path={OversiktRoutes.HOVEDSIDE}
-                    element={<Hovedside foreldrepengerSaker={foreldrepengerSaker} />}
+                    element={<Hovedside foreldrepengerSaker={foreldrepengerSaker} dokumenter={dokumenter} />}
                 />
                 <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />
             </Routes>

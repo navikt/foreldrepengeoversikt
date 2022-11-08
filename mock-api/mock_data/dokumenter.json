@@ -1,0 +1,44 @@
+[
+    {
+        "type": "UTGÅENDE_DOKUMENT",
+        "mottatt": "2022-10-31T15:17:45",
+        "saksnummer": "352009729",
+        "tittel": "Innvilgelsesbrev Foreldrepenger",
+        "url": "https://foreldrepengesoknad-api.dev.nav.no/rest/dokument/hent-dokument/573788741/599052286"
+    },
+    {
+        "type": "UTGÅENDE_DOKUMENT",
+        "mottatt": "2022-10-31T15:15:21",
+        "saksnummer": "352009729",
+        "tittel": "Etterlys inntektsmelding",
+        "url": "https://foreldrepengesoknad-api.dev.nav.no/rest/dokument/hent-dokument/573788740/599052285"
+    },
+    {
+        "type": "INNGÅENDE_DOKUMENT",
+        "mottatt": "2022-10-31T15:14:43",
+        "saksnummer": "352009729",
+        "tittel": "Søknad om foreldrepenger ved fødsel",
+        "url": "https://foreldrepengesoknad-api.dev.nav.no/rest/dokument/hent-dokument/573788739/599052283"
+    },
+    {
+        "type": "INNGÅENDE_DOKUMENT",
+        "mottatt": "2022-10-31T15:14:43",
+        "saksnummer": "352009729",
+        "tittel": "Bekreftelse fra studiested/skole",
+        "url": "https://foreldrepengesoknad-api.dev.nav.no/rest/dokument/hent-dokument/573788739/599052281"
+    },
+    {
+        "type": "INNGÅENDE_DOKUMENT",
+        "mottatt": "2022-10-31T15:14:43",
+        "saksnummer": "352009729",
+        "tittel": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+        "url": "https://foreldrepengesoknad-api.dev.nav.no/rest/dokument/hent-dokument/573788739/599052282"
+    },
+    {
+        "type": "INNGÅENDE_DOKUMENT",
+        "mottatt": "2022-10-31T15:14:43",
+        "saksnummer": "352009729",
+        "tittel": "Dokumentasjon av mors utdanning, arbeid eller sykdom",
+        "url": "https://foreldrepengesoknad-api.dev.nav.no/rest/dokument/hent-dokument/573788739/599052284"
+    }
+]

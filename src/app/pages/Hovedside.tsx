@@ -6,14 +6,16 @@ import Saksoversikt from 'app/sections/saksoversikt/Saksoversikt';
 import Samtaler from 'app/sections/samtaler/Samtaler';
 import SeSøknad from 'app/sections/se-søknad/SeSøknad';
 import Topp from 'app/sections/topp/Topp';
+import { Dokument } from 'app/types/Dokument';
 import { Sak } from 'app/types/Sak';
 import React from 'react';
 
 interface Props {
     foreldrepengerSaker: Sak[];
+    dokumenter: Dokument[];
 }
 
-const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker }) => {
+const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker, dokumenter }) => {
     const vedtattUttaksplan =
         foreldrepengerSaker.length > 0 ? foreldrepengerSaker[0].gjeldendeVedtak.perioder : undefined;
 
@@ -27,7 +29,7 @@ const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker }) => {
                 <Saksoversikt />
             </ContentSection>
             <ContentSection heading="Dokumenter">
-                <Dokumentoversikt />
+                <Dokumentoversikt dokumenter={dokumenter} />
             </ContentSection>
             <ContentSection padding="none">
                 <Samtaler />
