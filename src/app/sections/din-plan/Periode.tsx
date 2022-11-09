@@ -1,12 +1,15 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { bemUtils, formatDateExtended } from '@navikt/fp-common';
+import { bemUtils, formatDateExtended, intlUtils } from '@navikt/fp-common';
 import { Periode } from 'app/types/Periode';
 import { StønadskontoType } from 'app/types/StønadskontoType';
 import { UtsettelseÅrsakType } from 'app/types/UtsettelseÅrsakType';
+import { getAntallUttaksdagerITidsperiode, getVarighetString } from 'app/utils/dateUtils';
 import { isUtsettelsesperiode, isUttaksperiode } from 'app/utils/periodeUtils';
 import ForelderMorIkon from 'assets/ForelderMorIkon';
 import classNames from 'classnames';
+import dayjs from 'dayjs';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 import './periode.css';
 
@@ -54,8 +57,14 @@ const getPeriodeTittel = (periode: Periode): string => {
 
 const Periode: React.FunctionComponent<Props> = ({ periode, navnForelder, ikkeUttak = false }) => {
     const bem = bemUtils('periode');
+    const intl = useIntl();
     const { fom, tom } = periode;
     const tittel = getPeriodeTittel(periode);
+    const antallDagerIPeriode = getAntallUttaksdagerITidsperiode({
+        fom: dayjs(periode.fom).toDate(),
+        tom: dayjs(periode.tom).toDate(),
+    });
+    const varighetString = getVarighetString(antallDagerIPeriode, intl);
 
     return (
         <div className={classNames(bem.block, ikkeUttak ? bem.modifier('ikke-uttak') : bem.modifier('uttak'))}>
@@ -64,7 +73,7 @@ const Periode: React.FunctionComponent<Props> = ({ periode, navnForelder, ikkeUt
                 <ForelderMorIkon />
                 <div className={bem.element('innhold-tekst')}>
                     <BodyShort>{`${formatDateExtended(fom)} - ${formatDateExtended(tom)}`}</BodyShort>
-                    <BodyShort size="small">3 uker</BodyShort>
+                    <BodyShort size="small">{intlUtils(intl, varighetString)}</BodyShort>
                     <BodyShort size="small">{navnForelder}</BodyShort>
                 </div>
             </div>

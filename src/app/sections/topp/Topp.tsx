@@ -5,20 +5,26 @@ import React from 'react';
 
 import './topp.css';
 
-const Topp = () => {
+interface Props {
+    saksnummer: string | undefined;
+}
+
+const Topp: React.FunctionComponent<Props> = ({ saksnummer }) => {
     const bem = bemUtils('topp');
 
     return (
-        <div className={bem.block}>
-            <Heading size="large">Dine foreldrepenger</Heading>
-            <div className={bem.element('content')}>
-                <div>
-                    <BodyShort>Saksnummer 2754463986</BodyShort>
-                    <BodyShort>Termindato 13. okt 2022</BodyShort>
+        <section>
+            <div className={bem.block}>
+                <Heading size="large">Dine foreldrepenger</Heading>
+                <div className={bem.element('content')}>
+                    <div>
+                        {saksnummer && <BodyShort>Saksnummer {saksnummer}</BodyShort>}
+                        <BodyShort>Termindato 13. okt 2022</BodyShort>
+                    </div>
+                    <TeddyBearCot />
                 </div>
-                <TeddyBearCot />
             </div>
-        </div>
+        </section>
     );
 };
 

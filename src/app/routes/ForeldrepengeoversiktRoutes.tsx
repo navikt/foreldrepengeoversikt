@@ -27,7 +27,13 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
             <Routes>
                 <Route
                     path={OversiktRoutes.HOVEDSIDE}
-                    element={<Hovedside foreldrepengerSaker={foreldrepengerSaker} dokumenter={dokumenter} />}
+                    element={
+                        <Hovedside
+                            foreldrepengerSaker={foreldrepengerSaker}
+                            dokumenter={dokumenter}
+                            navnPåSøker={søkerinfo.søker.fornavn}
+                        />
+                    }
                 />
                 <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />
             </Routes>

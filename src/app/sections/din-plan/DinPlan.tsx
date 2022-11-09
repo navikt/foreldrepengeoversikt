@@ -12,9 +12,10 @@ import { UtsettelseÅrsakType } from 'app/types/UtsettelseÅrsakType';
 
 interface Props {
     vedtattUttaksplan: Periode[];
+    navnPåSøker: string;
 }
 
-const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan }) => {
+const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, navnPåSøker }) => {
     const bem = bemUtils('din-plan');
 
     return (
@@ -34,7 +35,7 @@ const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan }) => {
                     ikkeUttak = true;
                 }
 
-                return <PeriodeComponent periode={periode} navnForelder="Leah" ikkeUttak={ikkeUttak} />;
+                return <PeriodeComponent periode={periode} navnForelder={navnPåSøker} ikkeUttak={ikkeUttak} />;
             })}
             <div>
                 <Link href="#">

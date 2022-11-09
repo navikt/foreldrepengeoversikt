@@ -1,3 +1,4 @@
+import { intlUtils } from '@navikt/fp-common';
 import ContentSection from 'app/components/content-section/ContextSection';
 import DinPlan from 'app/sections/din-plan/DinPlan';
 import Dokumentoversikt from 'app/sections/dokumentoversikt/Dokumentoversikt';
@@ -9,26 +10,33 @@ import Topp from 'app/sections/topp/Topp';
 import { Dokument } from 'app/types/Dokument';
 import { Sak } from 'app/types/Sak';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 interface Props {
     foreldrepengerSaker: Sak[];
     dokumenter: Dokument[];
+    navnPåSøker: string;
 }
 
-const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker, dokumenter }) => {
-    const vedtattUttaksplan =
-        foreldrepengerSaker.length > 0 ? foreldrepengerSaker[0].gjeldendeVedtak.perioder : undefined;
+const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker, dokumenter, navnPåSøker }) => {
+    const gjeldendeSak = foreldrepengerSaker.length > 0 ? foreldrepengerSaker[0] : undefined;
+    let gjeldendeVedtak = undefined;
+    const intl = useIntl();
+
+    if (gjeldendeSak) {
+        gjeldendeVedtak = gjeldendeSak.gjeldendeVedtak;
+    }
 
     return (
         <>
-            <Topp />
-            <ContentSection heading="Oppgaver" backgroundColor="blue">
+            <Topp saksnummer={gjeldendeSak?.saksnummer} />
+            <ContentSection heading={intlUtils(intl, 'hovedside.oppgaver')} backgroundColor="blue">
                 <Oppgaver />
             </ContentSection>
-            <ContentSection heading="Dette skjer i saken">
+            <ContentSection heading={intlUtils(intl, 'hovedside.saksoversikt')}>
                 <Saksoversikt />
             </ContentSection>
-            <ContentSection heading="Dokumenter">
+            <ContentSection heading={intlUtils(intl, 'hovedside.dokumentoversikt')}>
                 <Dokumentoversikt dokumenter={dokumenter} />
             </ContentSection>
             <ContentSection padding="none">
@@ -37,9 +45,9 @@ const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker, dokume
             <ContentSection padding="none">
                 <SeSøknad />
             </ContentSection>
-            {vedtattUttaksplan && (
-                <ContentSection heading="Din Plan" padding="large">
-                    <DinPlan vedtattUttaksplan={vedtattUttaksplan} />
+            {gjeldendeVedtak && (
+                <ContentSection heading={intlUtils(intl, 'hovedside.dinPlan')} padding="large">
+                    <DinPlan vedtattUttaksplan={gjeldendeVedtak.perioder} navnPåSøker={navnPåSøker} />
                 </ContentSection>
             )}
         </>
