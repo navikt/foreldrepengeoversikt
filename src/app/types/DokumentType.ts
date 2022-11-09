@@ -1,4 +1,4 @@
 export enum DokumentType {
-    'INNGÅENDE_DOKUMENT',
-    'UTGÅENDE_DOKUMENT',
+    'INNGÅENDE_DOKUMENT' = 'INNGÅENDE_DOKUMENT',
+    'UTGÅENDE_DOKUMENT' = 'UTGÅENDE_DOKUMENT',
 }
