@@ -1,7 +1,7 @@
 import { Alert } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
+import Sorry from 'assets/Sorry';
 import React from 'react';
-import sorry from './../.../../../../assets/sorry.jpg';
 
 import './samtaler-page.css';
 
@@ -10,7 +10,9 @@ const SamtalerPage = () => {
 
     return (
         <div className={bem.block}>
-            <img src={sorry} width={639} />
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Sorry />
+            </div>
             <Alert variant="info" fullWidth>
                 Vi jobber med å implementere denne siden. Vi beklager problemer det kan medføre.
             </Alert>

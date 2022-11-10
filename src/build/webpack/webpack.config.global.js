@@ -49,14 +49,6 @@ const webpackConfig = {
                 test: /\.svg$/,
                 loader: 'svg-sprite-loader',
             },
-            {
-                test: /\.(png|jpe?g)$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                    },
-                ],
-            },
         ],
     },
     plugins: [

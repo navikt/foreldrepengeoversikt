@@ -3,6 +3,7 @@ import { bemUtils } from '@navikt/fp-common';
 import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Api from './api/api';
+import ScrollToTop from './components/scroll-to-top/ScrollToTop';
 import ForeldrepengeoversiktRoutes from './routes/ForeldrepengeoversiktRoutes';
 
 import './styles/app.css';
@@ -43,6 +44,7 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
     return (
         <div className={bem.block}>
             <BrowserRouter>
+                <ScrollToTop />
                 <ForeldrepengeoversiktRoutes
                     søkerinfo={søkerinfoData}
                     foreldrepengerSaker={sakerData.foreldrepenger}
