@@ -28,7 +28,9 @@ const Dokument: React.FunctionComponent<Props> = ({ dokument }) => {
         <div className={bem.block}>
             <FileContentFilled className={bem.element('ikon')} />
             <div className={bem.element('content')}>
-                <Link href={dokument.url}>{tittel}</Link>
+                <Link href={dokument.url} target="_blank">
+                    {tittel}
+                </Link>
                 <BodyShort size="small">{dokumentTypeTekst}</BodyShort>
             </div>
         </div>

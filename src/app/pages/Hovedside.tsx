@@ -19,9 +19,9 @@ interface Props {
 }
 
 const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker, dokumenter, navnPåSøker }) => {
+    const intl = useIntl();
     const gjeldendeSak = foreldrepengerSaker.length > 0 ? foreldrepengerSaker[0] : undefined;
     let gjeldendeVedtak = undefined;
-    const intl = useIntl();
 
     if (gjeldendeSak) {
         gjeldendeVedtak = gjeldendeSak.gjeldendeVedtak;

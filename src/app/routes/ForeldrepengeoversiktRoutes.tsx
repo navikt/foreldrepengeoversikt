@@ -5,9 +5,12 @@ import Hovedside from 'app/pages/Hovedside';
 import { bemUtils } from '@navikt/fp-common';
 import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 import { Sak } from 'app/types/Sak';
+import { Dokument } from 'app/types/Dokument';
+import SamtalerPage from 'app/pages/samtaler/SamtalerPage';
+import SeSøknadPage from 'app/pages/se-søknad-page/SeSøknadPage';
 
 import './routes-wrapper.css';
-import { Dokument } from 'app/types/Dokument';
+import DinPlanPage from 'app/pages/din-plan-page/DinPlanPage';
 
 interface Props {
     søkerinfo: SøkerinfoDTO;
@@ -35,6 +38,9 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
                         />
                     }
                 />
+                <Route path={OversiktRoutes.SAMTALER} element={<SamtalerPage />} />
+                <Route path={OversiktRoutes.SE_SØKNAD} element={<SeSøknadPage />} />
+                <Route path={OversiktRoutes.DIN_PLAN} element={<DinPlanPage />} />
                 <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />
             </Routes>
         </div>
