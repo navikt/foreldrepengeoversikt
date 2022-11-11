@@ -12,7 +12,7 @@ const SeSøknad = () => {
 
     return (
         <LinkPanel as={Link} to={OversiktRoutes.SE_SØKNAD} border={false} className={bem.element('linkPanel')}>
-            <LinkPanel.Title>
+            <LinkPanel.Title as="h2">
                 <div className={bem.block}>
                     <div className={bem.element('ikon')}>
                         <List />

@@ -28,7 +28,7 @@ const ContentSection: FunctionComponent<Props> = ({
             className={classNames(bem.block, bem.modifier(`bg-${backgroundColor}`), bem.modifier(`padding-${padding}`))}
         >
             {heading && (
-                <Heading size="medium" className={bem.element('heading')}>
+                <Heading size="medium" level="2" className={bem.element('heading')}>
                     {heading}
                 </Heading>
             )}

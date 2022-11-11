@@ -36,7 +36,9 @@ const TidslinjeHendelse: React.FunctionComponent<Props> = ({ type, date, title, 
         <div className={bem.block}>
             <div className={bem.element('ikon')}>{getIkon(type)}</div>
             <div>
-                <Heading size="small">{title}</Heading>
+                <Heading level="3" size="small">
+                    {title}
+                </Heading>
                 {children}
                 <BodyShort size="small">{formatDateExtended(date)}</BodyShort>
             </div>

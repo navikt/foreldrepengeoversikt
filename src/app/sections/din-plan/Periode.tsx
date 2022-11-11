@@ -68,7 +68,9 @@ const Periode: React.FunctionComponent<Props> = ({ periode, navnForelder, ikkeUt
 
     return (
         <div className={classNames(bem.block, ikkeUttak ? bem.modifier('ikke-uttak') : bem.modifier('uttak'))}>
-            <Heading size="small">{tittel}</Heading>
+            <Heading level="3" size="small">
+                {tittel}
+            </Heading>
             <div className={bem.element('innhold')}>
                 <ForelderMorIkon />
                 <div className={bem.element('innhold-tekst')}>
