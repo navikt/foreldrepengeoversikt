@@ -1,4 +1,5 @@
 import { BodyLong, Button, Link } from '@navikt/ds-react';
+import { Link as RouterLink } from 'react-router-dom';
 import { bemUtils } from '@navikt/fp-common';
 import { Next } from '@navikt/ds-icons';
 import React from 'react';
@@ -7,10 +8,9 @@ import { default as PeriodeComponent } from './Periode';
 import { Periode } from 'app/types/Periode';
 import { isUtsettelsesperiode } from 'app/utils/periodeUtils';
 import { UtsettelseÅrsakType } from 'app/types/UtsettelseÅrsakType';
-import { useNavigate } from 'react-router-dom';
+import OversiktRoutes from 'app/routes/routes';
 
 import './din-plan.css';
-import OversiktRoutes from 'app/routes/routes';
 
 interface Props {
     vedtattUttaksplan: Periode[];
@@ -19,7 +19,6 @@ interface Props {
 
 const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, navnPåSøker }) => {
     const bem = bemUtils('din-plan');
-    const navigate = useNavigate();
 
     return (
         <>
@@ -41,7 +40,7 @@ const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, navnPåSø
                 return <PeriodeComponent periode={periode} navnForelder={navnPåSøker} ikkeUttak={ikkeUttak} />;
             })}
             <div>
-                <Link onClick={() => navigate(OversiktRoutes.DIN_PLAN)}>
+                <Link as={RouterLink} to={OversiktRoutes.DIN_PLAN}>
                     Se hele planen <Next />
                 </Link>
             </div>

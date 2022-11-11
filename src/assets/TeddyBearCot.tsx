@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const TeddyBearCot = () => (
-    <svg width={137} height={102} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={137} height={102} fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
         <path
             d="M43 51.714c6.036 0 10.929-5.394 10.929-12.047 0-6.654-4.893-12.048-10.929-12.048-6.036 0-10.929 5.394-10.929 12.048 0 6.653 4.893 12.047 10.929 12.047Z"
             fill="#D47B00"

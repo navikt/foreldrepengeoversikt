@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const ChatGroupBubble = () => (
-    <svg width={24} height={24} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={24} height={24} fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
         <path
             d="M2.127 12.145C.733 10.877 0 9.255 0 7.43 0 3.402 3.893 0 8.5 0S17 3.402 17 7.429c0 4.093-3.716 7.552-8.115 7.552a8.372 8.372 0 0 1-3.233-.65l-4.32 1.632a.567.567 0 0 1-.621-.152.578.578 0 0 1-.087-.638l1.503-3.028Z"
             fill="#66C786"

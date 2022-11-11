@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const ForelderMorIkon = () => (
-    <svg width={29} height={45} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={29} height={45} fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
         <path
             fillRule="evenodd"
             clipRule="evenodd"
