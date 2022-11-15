@@ -1,82 +1,68 @@
 {
     "foreldrepenger": [
         {
-            "saksnummer": "352009729",
+            "saksnummer": "352009416",
             "sakAvsluttet": false,
-            "sisteSøknadMottattDato": "2022-10-31",
+            "sisteSøknadMottattDato": "2022-10-11",
             "kanSøkeOmEndring": true,
-            "sakTilhørerMor": false,
+            "sakTilhørerMor": true,
             "gjelderAdopsjon": false,
             "morUføretrygd": false,
             "harAnnenForelderTilsvarendeRettEØS": false,
             "ønskerJustertUttakVedFødsel": false,
-            "rettighetType": "BARE_SØKER_RETT",
-            "annenPart": {
-                "type": "person",
-                "fnr": "02077505663",
-                "fornavn": "Oransje",
-                "etternavn": "Bankboks"
-            },
-            "familiehendelse": {
-                "fødselsdato": "2022-10-10",
-                "termindato": "2022-10-10",
-                "antallBarn": 1
-            },
+            "rettighetType": "BEGGE_RETT",
+            "annenPart": { "type": "person", "fnr": "15118804322", "fornavn": "Vis", "etternavn": "Tyr" },
+            "familiehendelse": { "termindato": "2022-10-12", "antallBarn": 1 },
             "gjeldendeVedtak": {
                 "perioder": [
                     {
-                        "fom": "2022-10-17",
-                        "tom": "2022-11-20",
-                        "kontoType": "FORELDREPENGER",
-                        "resultat": {
-                            "innvilget": true,
-                            "trekkerMinsterett": true
-                        },
-                        "morsAktivitet": "IKKE_OPPGITT",
+                        "fom": "2022-09-21",
+                        "tom": "2022-10-11",
+                        "kontoType": "FORELDREPENGER_FØR_FØDSEL",
+                        "resultat": { "innvilget": true, "trekkerMinsterett": true },
                         "flerbarnsdager": false
                     },
                     {
-                        "fom": "2022-11-21",
-                        "tom": "2022-12-09",
-                        "kontoType": "FORELDREPENGER",
-                        "resultat": {
-                            "innvilget": true,
-                            "trekkerMinsterett": true
-                        },
-                        "morsAktivitet": "IKKE_OPPGITT",
+                        "fom": "2022-10-12",
+                        "tom": "2022-11-22",
+                        "kontoType": "MØDREKVOTE",
+                        "resultat": { "innvilget": true, "trekkerMinsterett": true },
                         "flerbarnsdager": false
                     },
                     {
-                        "fom": "2022-12-12",
-                        "tom": "2023-05-19",
-                        "kontoType": "FORELDREPENGER",
-                        "resultat": {
-                            "innvilget": true,
-                            "trekkerMinsterett": false
-                        },
-                        "morsAktivitet": "ARBEID",
+                        "fom": "2022-11-23",
+                        "tom": "2022-12-13",
+                        "kontoType": "MØDREKVOTE",
+                        "resultat": { "innvilget": true, "trekkerMinsterett": true },
                         "flerbarnsdager": false
                     },
                     {
-                        "fom": "2023-05-22",
-                        "tom": "2023-06-22",
-                        "resultat": {
-                            "innvilget": true,
-                            "trekkerMinsterett": true
+                        "fom": "2022-12-28",
+                        "tom": "2023-01-30",
+                        "kontoType": "MØDREKVOTE",
+                        "resultat": { "innvilget": true, "trekkerMinsterett": true },
+                        "gradering": {
+                            "arbeidstidprosent": 50,
+                            "aktivitet": {
+                                "type": "ORDINÆRT_ARBEID",
+                                "arbeidsgiver": { "id": "947064649", "type": "ORGANISASJON" }
+                            }
                         },
-                        "utsettelseÅrsak": "FRI",
-                        "morsAktivitet": "TRENGER_HJELP",
                         "flerbarnsdager": false
                     },
                     {
-                        "fom": "2023-06-23",
-                        "tom": "2023-07-28",
-                        "kontoType": "FORELDREPENGER",
-                        "resultat": {
-                            "innvilget": true,
-                            "trekkerMinsterett": false
-                        },
-                        "morsAktivitet": "UTDANNING",
+                        "fom": "2023-01-31",
+                        "tom": "2023-02-20",
+                        "kontoType": "FELLESPERIODE",
+                        "resultat": { "innvilget": true, "trekkerMinsterett": true },
+                        "flerbarnsdager": false
+                    },
+                    {
+                        "fom": "2023-02-21",
+                        "tom": "2023-02-27",
+                        "kontoType": "FELLESPERIODE",
+                        "resultat": { "innvilget": true, "trekkerMinsterett": true },
+                        "gradering": { "arbeidstidprosent": 50, "aktivitet": { "type": "FRILANS" } },
                         "flerbarnsdager": false
                     }
                 ]

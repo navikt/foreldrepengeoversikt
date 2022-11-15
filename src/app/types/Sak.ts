@@ -1,4 +1,5 @@
 import { Dekningsgrad } from './Dekningsgrad';
+import { Periode } from './Periode';
 import { Person } from './Person';
 import { RettighetType } from './RettighetType';
 
@@ -16,7 +17,7 @@ export interface Sak {
     annenPart: Person;
     familiehendelse: any;
     gjeldendeVedtak: {
-        perioder: any[];
+        perioder: Periode[];
     };
     barn: Person[];
     dekningsgrad: Dekningsgrad;

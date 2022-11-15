@@ -23,6 +23,18 @@ const useGetSaker = () => {
     };
 };
 
+const useGetAnnenPartsVedtak = (isSuspended: boolean) => {
+    const { data, error } = useRequest<any>('/innsyn/v2/annenPartVedtak', {
+        config: { withCredentials: true },
+        isSuspended,
+    });
+
+    return {
+        annenPartsVedakData: data,
+        annenPartsVedtakError: error,
+    };
+};
+
 const useGetDokumenter = () => {
     const { data, error } = useRequest<Dokument[]>('/dokument/alle', {
         config: { withCredentials: true },
@@ -50,6 +62,7 @@ const Api = {
     useGetSaker,
     useGetDokumenter,
     useGetHistorikk,
+    useGetAnnenPartsVedtak,
 };
 
 export default Api;

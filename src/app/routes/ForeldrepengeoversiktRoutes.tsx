@@ -5,7 +5,6 @@ import Hovedside from 'app/pages/Hovedside';
 import { bemUtils } from '@navikt/fp-common';
 import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 import { Sak } from 'app/types/Sak';
-import { Dokument } from 'app/types/Dokument';
 import SamtalerPage from 'app/pages/samtaler/SamtalerPage';
 import SeSøknadPage from 'app/pages/se-søknad-page/SeSøknadPage';
 
@@ -15,14 +14,9 @@ import DinPlanPage from 'app/pages/din-plan-page/DinPlanPage';
 interface Props {
     søkerinfo: SøkerinfoDTO;
     foreldrepengerSaker: Sak[];
-    dokumenter: Dokument[];
 }
 
-const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
-    søkerinfo,
-    dokumenter,
-    foreldrepengerSaker,
-}) => {
+const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinfo, foreldrepengerSaker }) => {
     const bem = bemUtils('routesWrapper');
 
     return (
@@ -31,11 +25,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
                 <Route
                     path={OversiktRoutes.HOVEDSIDE}
                     element={
-                        <Hovedside
-                            foreldrepengerSaker={foreldrepengerSaker}
-                            dokumenter={dokumenter}
-                            navnPåSøker={søkerinfo.søker.fornavn}
-                        />
+                        <Hovedside foreldrepengerSaker={foreldrepengerSaker} navnPåSøker={søkerinfo.søker.fornavn} />
                     }
                 />
                 <Route path={OversiktRoutes.SAMTALER} element={<SamtalerPage />} />

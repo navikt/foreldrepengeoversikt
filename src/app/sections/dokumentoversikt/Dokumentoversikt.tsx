@@ -1,17 +1,22 @@
-import { Button } from '@navikt/ds-react';
+import { Button, Loader } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
-import { Dokument } from 'app/types/Dokument';
+import Api from 'app/api/api';
 import React from 'react';
 import { default as DokumentComponent } from './Dokument';
 
 import './dokumentoversikt.css';
 
-interface Props {
-    dokumenter: Dokument[];
-}
-
-const Dokumentoversikt: React.FunctionComponent<Props> = ({ dokumenter }) => {
+const Dokumentoversikt: React.FunctionComponent = () => {
     const bem = bemUtils('dokumentoversikt');
+    const { dokumenterData: dokumenter, dokumenterError } = Api.useGetDokumenter();
+
+    if (dokumenterError) {
+        return <div>Vi klarte ikke å hente dokumentene for din sak</div>;
+    }
+
+    if (!dokumenter) {
+        return <Loader aria-label="Laster dokumenter" />;
+    }
 
     return (
         <>
@@ -19,7 +24,7 @@ const Dokumentoversikt: React.FunctionComponent<Props> = ({ dokumenter }) => {
                 Ettersend dokumenter
             </Button>
             {dokumenter.map((dokument) => {
-                return <DokumentComponent dokument={dokument} />;
+                return <DokumentComponent key={dokument.url} dokument={dokument} />;
             })}
         </>
     );

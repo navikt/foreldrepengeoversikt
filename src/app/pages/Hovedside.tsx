@@ -7,18 +7,17 @@ import Saksoversikt from 'app/sections/saksoversikt/Saksoversikt';
 import Samtaler from 'app/sections/samtaler/Samtaler';
 import SeSøknad from 'app/sections/se-søknad/SeSøknad';
 import Topp from 'app/sections/topp/Topp';
-import { Dokument } from 'app/types/Dokument';
 import { Sak } from 'app/types/Sak';
+import { slåSammenLikePerioder } from 'app/utils/planUtils';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
 interface Props {
     foreldrepengerSaker: Sak[];
-    dokumenter: Dokument[];
     navnPåSøker: string;
 }
 
-const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker, dokumenter, navnPåSøker }) => {
+const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker, navnPåSøker }) => {
     const intl = useIntl();
     const gjeldendeSak = foreldrepengerSaker.length > 0 ? foreldrepengerSaker[0] : undefined;
     let gjeldendeVedtak = undefined;
@@ -37,7 +36,7 @@ const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker, dokume
                 <Saksoversikt />
             </ContentSection>
             <ContentSection heading={intlUtils(intl, 'hovedside.dokumentoversikt')}>
-                <Dokumentoversikt dokumenter={dokumenter} />
+                <Dokumentoversikt />
             </ContentSection>
             <ContentSection padding="none">
                 <Samtaler />
@@ -47,7 +46,10 @@ const Hovedside: React.FunctionComponent<Props> = ({ foreldrepengerSaker, dokume
             </ContentSection>
             {gjeldendeVedtak && (
                 <ContentSection heading={intlUtils(intl, 'hovedside.dinPlan')} padding="large">
-                    <DinPlan vedtattUttaksplan={gjeldendeVedtak.perioder} navnPåSøker={navnPåSøker} />
+                    <DinPlan
+                        vedtattUttaksplan={slåSammenLikePerioder(gjeldendeVedtak.perioder)}
+                        navnPåSøker={navnPåSøker}
+                    />
                 </ContentSection>
             )}
         </>

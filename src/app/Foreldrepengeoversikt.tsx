@@ -13,8 +13,8 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
 
     const { søkerinfoData, søkerinfoError } = Api.useSøkerinfo();
     const { sakerData, sakerError } = Api.useGetSaker();
-    const { dokumenterData, dokumenterError } = Api.useGetDokumenter();
     const { historikkData, historikkError } = Api.useGetHistorikk();
+    const { annenPartsVedakData, annenPartsVedtakError } = Api.useGetAnnenPartsVedtak(true);
 
     useEffect(() => {
         if (søkerinfoError) {
@@ -29,16 +29,18 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
             );
         }
 
-        if (dokumenterError) {
-            throw new Error('Vi klarte ikke å hente opp dokumenter i din sak.');
-        }
-
         if (historikkError) {
             throw new Error('Vi klarte ikke å hente opp historikken for din sak.');
         }
-    }, [søkerinfoError, sakerError, dokumenterError, historikkError]);
 
-    if (!søkerinfoData || !sakerData || !dokumenterData || !historikkData) {
+        if (annenPartsVedtakError) {
+            throw new Error('Vi klarte ikke å hente opp informasjon om den andre forelderen.');
+        }
+    }, [søkerinfoError, sakerError, historikkError, annenPartsVedtakError]);
+
+    console.log(annenPartsVedakData);
+
+    if (!søkerinfoData || !sakerData || !historikkData) {
         return (
             <div style={{ textAlign: 'center', padding: '12rem 0' }}>
                 <Loader type="XXL" />
@@ -50,11 +52,7 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
         <div className={bem.block}>
             <BrowserRouter>
                 <ScrollToTop />
-                <ForeldrepengeoversiktRoutes
-                    søkerinfo={søkerinfoData}
-                    foreldrepengerSaker={sakerData.foreldrepenger}
-                    dokumenter={dokumenterData}
-                />
+                <ForeldrepengeoversiktRoutes søkerinfo={søkerinfoData} foreldrepengerSaker={sakerData.foreldrepenger} />
             </BrowserRouter>
         </div>
     );

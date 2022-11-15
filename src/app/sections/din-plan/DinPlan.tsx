@@ -30,14 +30,16 @@ const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, navnPåSø
                     Endre perioder
                 </Button>
             </div>
-            {vedtattUttaksplan.map((periode) => {
+            {vedtattUttaksplan.map((periode, index) => {
                 let ikkeUttak = false;
 
                 if (isUtsettelsesperiode(periode) && periode.utsettelseÅrsak === UtsettelseÅrsakType.Fri) {
                     ikkeUttak = true;
                 }
 
-                return <PeriodeComponent periode={periode} navnForelder={navnPåSøker} ikkeUttak={ikkeUttak} />;
+                return (
+                    <PeriodeComponent key={index} periode={periode} navnForelder={navnPåSøker} ikkeUttak={ikkeUttak} />
+                );
             })}
             <div>
                 <Link as={RouterLink} to={OversiktRoutes.DIN_PLAN}>

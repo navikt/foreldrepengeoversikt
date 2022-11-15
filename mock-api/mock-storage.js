@@ -27,6 +27,10 @@ const getDokumenter = function () {
     return getFileContent('dokumenter.json');
 };
 
+const getAnnenPartsVedtak = function () {
+    return getFileContent('annenPartsVedtak.json');
+};
+
 const getSaker = function () {
     return getFileContent('saker.json');
 };
@@ -69,4 +73,5 @@ module.exports = {
     getUttaksplan,
     getDokumenter,
     getManglendeVedlegg,
+    getAnnenPartsVedtak,
 };

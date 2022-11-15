@@ -1,5 +1,5 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { bemUtils, formatDateExtended, intlUtils } from '@navikt/fp-common';
+import { bemUtils, formatDateExtended } from '@navikt/fp-common';
 import { Periode } from 'app/types/Periode';
 import { StønadskontoType } from 'app/types/StønadskontoType';
 import { UtsettelseÅrsakType } from 'app/types/UtsettelseÅrsakType';
@@ -75,7 +75,7 @@ const Periode: React.FunctionComponent<Props> = ({ periode, navnForelder, ikkeUt
                 <ForelderMorIkon />
                 <div className={bem.element('innhold-tekst')}>
                     <BodyShort>{`${formatDateExtended(fom)} - ${formatDateExtended(tom)}`}</BodyShort>
-                    <BodyShort size="small">{intlUtils(intl, varighetString)}</BodyShort>
+                    <BodyShort size="small">{varighetString}</BodyShort>
                     <BodyShort size="small">{navnForelder}</BodyShort>
                 </div>
             </div>
