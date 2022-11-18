@@ -4,7 +4,7 @@ import TidslinjeHendelse from './TidslinjeHendelse';
 
 const Tidslinje = () => {
     return (
-        <>
+        <div>
             <TidslinjeHendelse type="incomplete" title="Du vil få et vedtak" date={new Date()}>
                 NAV bruker vanligvis ca 4 uker på å behandle søknaden.
             </TidslinjeHendelse>
@@ -14,7 +14,7 @@ const Tidslinje = () => {
             <TidslinjeHendelse type="completed" title="Søknad sendt" date={new Date()}>
                 <Link href="#">Se hva du har søkt om</Link>
             </TidslinjeHendelse>
-        </>
+        </div>
     );
 };
 
