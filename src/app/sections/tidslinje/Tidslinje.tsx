@@ -1,8 +1,19 @@
-import { Link } from '@navikt/ds-react';
+import { Link, Loader } from '@navikt/ds-react';
+import Api from 'app/api/api';
 import React from 'react';
 import TidslinjeHendelse from './TidslinjeHendelse';
 
 const Tidslinje = () => {
+    const { tidslinjeHendelserData, tidslinjeHendelserError } = Api.useGetTidslinjeHendelser();
+
+    if (!tidslinjeHendelserData) {
+        return <Loader size="large" aria-label="Henter status for din søknad" />;
+    }
+
+    if (tidslinjeHendelserError) {
+        return <div>Klarte ikke å hente status for din søknad</div>;
+    }
+
     return (
         <div>
             <TidslinjeHendelse type="incomplete" title="Du vil få et vedtak" date={new Date()}>

@@ -73,6 +73,10 @@ router.get('/rest/innsyn/uttaksplan', (req, res) => {
     res.send(MockStorage.getUttaksplan());
 });
 
+router.get('/rest/innsyn/tidslinje', (req, res) => {
+    res.send(MockStorage.getTidslinjeHendelser());
+});
+
 const vedleggUpload = multer({ dest: './dist/vedlegg/' });
 router.post('/rest/storage/vedlegg', vedleggUpload.single('vedlegg'), (req, res) => {
     res.setHeader('Location', `http://localhost:8080/foreldrepengesoknad/dist/vedlegg/${req.body.id}`);

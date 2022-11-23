@@ -51,6 +51,10 @@ const getManglendeVedlegg = function () {
     return getFileContent('manglendeVedlegg.json');
 };
 
+const getTidslinjeHendelser = function () {
+    return getFileContent('tidslinjeHendelser.json');
+};
+
 const getUttaksplan = function () {
     const fileName = getFilePath('uttaksplan.json');
     if (!fs.existsSync(fileName)) {
@@ -74,4 +78,5 @@ module.exports = {
     getDokumenter,
     getManglendeVedlegg,
     getAnnenPartsVedtak,
+    getTidslinjeHendelser,
 };

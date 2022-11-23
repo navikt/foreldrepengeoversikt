@@ -17,7 +17,7 @@ const Dokumentoversikt: React.FunctionComponent = () => {
     }
 
     if (!dokumenter) {
-        return <Loader aria-label="Laster dokumenter" />;
+        return <Loader size="large" aria-label="Henter dokumenter" />;
     }
 
     return (

@@ -46,11 +46,23 @@ const useGetDokumenter = () => {
     };
 };
 
+const useGetTidslinjeHendelser = () => {
+    const { data, error } = useRequest<Dokument[]>('/innsyn/tidslinje', {
+        config: { withCredentials: true },
+    });
+
+    return {
+        tidslinjeHendelserData: data,
+        tidslinjeHendelserError: error,
+    };
+};
+
 const Api = {
     useSøkerinfo,
     useGetSaker,
     useGetDokumenter,
     useGetAnnenPartsVedtak,
+    useGetTidslinjeHendelser,
 };
 
 export default Api;
