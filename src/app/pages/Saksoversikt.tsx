@@ -33,9 +33,11 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ foreldrepengerSaker, nav
             <ContentSection heading={intlUtils(intl, 'saksoversikt.oppgaver')} backgroundColor="blue">
                 <Oppgaver />
             </ContentSection>
-            <ContentSection heading={intlUtils(intl, 'saksoversikt.tidslinje')}>
-                <Tidslinje />
-            </ContentSection>
+            {gjeldendeSak && (
+                <ContentSection heading={intlUtils(intl, 'saksoversikt.tidslinje')}>
+                    <Tidslinje saksnummer={gjeldendeSak.saksnummer} />
+                </ContentSection>
+            )}
             <ContentSection heading={intlUtils(intl, 'saksoversikt.dokumentoversikt')}>
                 <Dokumentoversikt />
             </ContentSection>

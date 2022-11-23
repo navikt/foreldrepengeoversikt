@@ -3,8 +3,12 @@ import Api from 'app/api/api';
 import React from 'react';
 import TidslinjeHendelse from './TidslinjeHendelse';
 
-const Tidslinje = () => {
-    const { tidslinjeHendelserData, tidslinjeHendelserError } = Api.useGetTidslinjeHendelser();
+interface Props {
+    saksnummer: string;
+}
+
+const Tidslinje: React.FunctionComponent<Props> = ({ saksnummer }) => {
+    const { tidslinjeHendelserData, tidslinjeHendelserError } = Api.useGetTidslinjeHendelser(saksnummer);
 
     if (!tidslinjeHendelserData) {
         return <Loader size="large" aria-label="Henter status for din søknad" />;

@@ -46,9 +46,9 @@ const useGetDokumenter = () => {
     };
 };
 
-const useGetTidslinjeHendelser = () => {
+const useGetTidslinjeHendelser = (saksnr: string) => {
     const { data, error } = useRequest<Dokument[]>('/innsyn/tidslinje', {
-        config: { withCredentials: true },
+        config: { withCredentials: true, params: { saksnummer: saksnr } },
     });
 
     return {
