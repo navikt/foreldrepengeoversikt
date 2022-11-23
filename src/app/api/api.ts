@@ -46,22 +46,10 @@ const useGetDokumenter = () => {
     };
 };
 
-const useGetHistorikk = () => {
-    const { data, error } = useRequest<any>('/historikk', {
-        config: { withCredentials: true },
-    });
-
-    return {
-        historikkData: data,
-        historikkError: error,
-    };
-};
-
 const Api = {
     useSøkerinfo,
     useGetSaker,
     useGetDokumenter,
-    useGetHistorikk,
     useGetAnnenPartsVedtak,
 };
 

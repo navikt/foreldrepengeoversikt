@@ -9,6 +9,7 @@ import SamtalerPage from 'app/pages/samtaler/SamtalerPage';
 import SeSøknadPage from 'app/pages/se-søknad-page/SeSøknadPage';
 import { default as SakComponent } from 'app/pages/Sak';
 import DinPlanPage from 'app/pages/din-plan-page/DinPlanPage';
+import DokumenterPage from 'app/pages/dokumenter-page/DokumenterPage';
 
 import './routes-wrapper.css';
 
@@ -30,9 +31,8 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
     return (
         <div className={bem.block}>
             <Routes>
-                <Route path={OversiktRoutes.SAKSOVERSIKT} element={<SakComponent />}>
+                <Route path={`/:saksnummer${OversiktRoutes.SAKSOVERSIKT}`} element={<SakComponent />}>
                     <Route
-                        path={OversiktRoutes.SAKSOVERSIKT}
                         index
                         element={
                             <Saksoversikt
@@ -44,6 +44,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
                     <Route path={OversiktRoutes.SAMTALER} element={<SamtalerPage />} />
                     <Route path={OversiktRoutes.SE_SØKNAD} element={<SeSøknadPage />} />
                     <Route path={OversiktRoutes.DIN_PLAN} element={<DinPlanPage />} />
+                    <Route path={OversiktRoutes.DOKUMENTER} element={<DokumenterPage />} />
                 </Route>
                 <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />
             </Routes>

@@ -1,7 +1,9 @@
 import { Button, Loader } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import Api from 'app/api/api';
+import OversiktRoutes from 'app/routes/routes';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { default as DokumentComponent } from './Dokument';
 
 import './dokumentoversikt.css';
@@ -23,9 +25,14 @@ const Dokumentoversikt: React.FunctionComponent = () => {
             <Button variant="secondary" className={bem.element('ettersend-knapp')}>
                 Ettersend dokumenter
             </Button>
-            {dokumenter.map((dokument) => {
+            {dokumenter.map((dokument, index) => {
+                if (index >= 3) {
+                    return null;
+                }
+
                 return <DokumentComponent key={dokument.url} dokument={dokument} />;
             })}
+            <Link to={OversiktRoutes.DOKUMENTER}>Se liste over alle dokumenter</Link>
         </>
     );
 };

@@ -1,9 +1,10 @@
 enum OversiktRoutes {
     HOVEDSIDE = '/',
-    SAKSOVERSIKT = '/:saksnummer',
-    SAMTALER = '/:saksnummer/samtaler',
-    SE_SØKNAD = '/:saksnummer/se-soknad',
-    DIN_PLAN = '/:saksnummer/din-plan',
+    SAKSOVERSIKT = '/',
+    SAMTALER = 'samtaler',
+    SE_SØKNAD = 'se-soknad',
+    DIN_PLAN = 'din-plan',
+    DOKUMENTER = 'dokumenter',
 }
 
 export default OversiktRoutes;
