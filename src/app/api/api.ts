@@ -1,6 +1,7 @@
 import { Dokument } from 'app/types/Dokument';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
+import { Tidslinjehendelse } from 'app/types/Tidslinjehendelse';
 import { useRequest } from './useRequest';
 
 const useSøkerinfo = () => {
@@ -47,7 +48,7 @@ const useGetDokumenter = () => {
 };
 
 const useGetTidslinjeHendelser = (saksnr: string) => {
-    const { data, error } = useRequest<Dokument[]>('/innsyn/tidslinje', {
+    const { data, error } = useRequest<Tidslinjehendelse[]>('/innsyn/tidslinje', {
         config: { withCredentials: true, params: { saksnummer: saksnr } },
     });
 

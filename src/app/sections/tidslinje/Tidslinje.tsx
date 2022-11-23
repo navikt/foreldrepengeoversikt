@@ -1,11 +1,22 @@
-import { Link, Loader } from '@navikt/ds-react';
+import { Loader } from '@navikt/ds-react';
 import Api from 'app/api/api';
+import { TidslinjehendelseType } from 'app/types/TidslinjehendelseType';
 import React from 'react';
+import DokumentHendelse from './DokumentHendelse';
 import TidslinjeHendelse from './TidslinjeHendelse';
 
 interface Props {
     saksnummer: string;
 }
+
+const getTidslinjehendelseTittel = (hendelsetype: TidslinjehendelseType): string => {
+    switch (hendelsetype) {
+        case TidslinjehendelseType.FØRSTEGANGSSØKNAD:
+            return 'Søknad om foreldrepenger';
+        default:
+            return '';
+    }
+};
 
 const Tidslinje: React.FunctionComponent<Props> = ({ saksnummer }) => {
     const { tidslinjeHendelserData, tidslinjeHendelserError } = Api.useGetTidslinjeHendelser(saksnummer);
@@ -20,15 +31,23 @@ const Tidslinje: React.FunctionComponent<Props> = ({ saksnummer }) => {
 
     return (
         <div>
-            <TidslinjeHendelse type="incomplete" title="Du vil få et vedtak" date={new Date()}>
-                NAV bruker vanligvis ca 4 uker på å behandle søknaden.
-            </TidslinjeHendelse>
-            <TidslinjeHendelse type="warning" title="Søknad sendt" date={new Date()}>
-                NAV venter på <Link href="#">inntektsmelding</Link> fra din arbeidsgiver
-            </TidslinjeHendelse>
-            <TidslinjeHendelse type="completed" title="Søknad sendt" date={new Date()}>
-                <Link href="#">Se hva du har søkt om</Link>
-            </TidslinjeHendelse>
+            {tidslinjeHendelserData.map((hendelse) => {
+                return (
+                    <TidslinjeHendelse
+                        date={hendelse.opprettet}
+                        type="completed"
+                        title={getTidslinjehendelseTittel(hendelse.tidslinjeHendelseType)}
+                    >
+                        <div>{hendelse.aktørType}</div>
+                        <ul>
+                            {hendelse.dokumenter.length > 0 &&
+                                hendelse.dokumenter.map((dokument) => {
+                                    return <DokumentHendelse dokument={dokument} key={dokument.url} />;
+                                })}
+                        </ul>
+                    </TidslinjeHendelse>
+                );
+            })}
         </div>
     );
 };

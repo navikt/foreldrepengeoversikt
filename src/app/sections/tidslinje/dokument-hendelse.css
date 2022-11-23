@@ -1,0 +1,9 @@
+.dokument-hendelse {
+    display: flex;
+}
+
+.dokument-hendelse__ikon {
+    color: var(--navds-semantic-color-link);
+    margin-top: 6px;
+    margin-right: 0.5rem;
+}
