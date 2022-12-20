@@ -184,7 +184,11 @@ const PeriodeList: React.FunctionComponent<Props> = ({
                                                         ? 'dinPlan.overføring.farMedmor'
                                                         : 'dinPlan.overføring.mor'
                                                 }
-                                                values={{ navn: getNavnPåForelderForPeriode(p, navnPåForeldre) }}
+                                                values={{
+                                                    navn: erFarEllerMedmor
+                                                        ? navnPåForeldre.mor
+                                                        : navnPåForeldre.farMedmor,
+                                                }}
                                             />
                                         }
                                         ikon={getIkon(p, erFarEllerMedmor)}
