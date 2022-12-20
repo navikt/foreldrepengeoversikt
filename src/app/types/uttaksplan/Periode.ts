@@ -3,6 +3,7 @@ import {
     StønadskontoType,
     UtsettelsePeriodeType,
     OppholdsÅrsak,
+    OverføringsÅrsak,
 } from 'app/api/types/UttaksplanDto';
 import { Tidsperiode } from '../Tidsperiode';
 import { Rolle } from '../Rolle';
@@ -34,6 +35,11 @@ export interface Oppholdsperiode extends Periode {
     oppholdsårsak: OppholdsÅrsak;
 }
 
+export interface Overføringsperiode extends Periode {
+    overføringsÅrsak: OverføringsÅrsak;
+    stønadskontotype: StønadskontoType;
+}
+
 export interface TaptPeriode extends Periode {
     type: PeriodeType.TaptPeriode;
     stønadskontotype: StønadskontoType;
@@ -46,6 +52,7 @@ export enum PeriodeType {
     Opphold = 'OPPHOLD',
     TaptPeriode = 'TAPT_PERIODE',
     PeriodeUtenUttak = 'PeriodeUtenUttak',
+    Overføring = 'OVERFØRING',
 }
 
 export function isUtsettelsesperiode(periode: Periode): periode is Utsettelsesperiode {

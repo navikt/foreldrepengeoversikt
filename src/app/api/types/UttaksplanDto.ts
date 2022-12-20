@@ -39,6 +39,7 @@ export interface PeriodeDto {
     tom: string;
     morsAktivitet: MorsAktivitetDto;
     oppholdAarsak?: OppholdsÅrsak;
+    overfoeringAarsak?: OverføringsÅrsak;
 }
 
 type UttaksperioderDto = PeriodeDto[];
@@ -51,6 +52,13 @@ export enum OppholdsÅrsak {
     UTTAK_MØDREKVOTE_ANNEN_FORELDER = 'UTTAK_MØDREKVOTE_ANNEN_FORELDER',
     UTTAK_FEDREKVOTE_ANNEN_FORELDER = 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
     UTTAK_FELLESP_ANNEN_FORELDER = 'UTTAK_FELLESP_ANNEN_FORELDER',
+}
+
+export enum OverføringsÅrsak {
+    institusjonsoppholdAnnenForelder = 'INSTITUSJONSOPPHOLD_ANNEN_FORELDER',
+    sykdomAnnenForelder = 'SYKDOM_ANNEN_FORELDER',
+    aleneomsorg = 'ALENEOMSORG',
+    ikkeRettAnnenForelder = 'IKKE_RETT_ANNEN_FORELDER',
 }
 
 export enum MorsAktivitetDto {

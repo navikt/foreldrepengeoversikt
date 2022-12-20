@@ -18,6 +18,7 @@ import { SøkerinfoDTO } from 'app/api/types/personinfo/SøkerinfoDto';
 import { getSøkerinfoFromDTO } from 'app/utils/søkerinfoDtoMapper';
 import { getTilgjengeligeStønadskontoer } from './stønadskontoSaga';
 import { cleanupUttaksplanDto } from 'app/utils/uttaksplanDtoUtils';
+import { sorterPerioder } from 'app/utils/dateUtils';
 
 function* getPersoninfoSaga(_: GetSøkerinfoRequest) {
     try {
@@ -57,6 +58,7 @@ function* uttaksplanTilSakMapper(sak: SakBase) {
 
             sak.perioder = cleanupUttaksplanDto(sak.saksgrunnlag!.perioder)
                 .map((p) => uttaksperiodeDtoToPeriode(p, sak.saksgrunnlag!.grunnlag.søkerErFarEllerMedmor))
+                .sort(sorterPerioder)
                 .reduce(fyllInnHull, []);
         }
         return sak;

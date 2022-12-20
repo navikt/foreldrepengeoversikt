@@ -20,10 +20,10 @@ import {
     getAnnenPartsPeriodeMedSamtidigUttak,
     getStønadskontoFarge,
     getNavnPåForelderForPeriode,
+    getFargeForPeriode,
 } from '../../../utils/periodeUtils';
 
 import './periodeList.less';
-import { Rolle } from 'app/types/Rolle';
 
 interface Props {
     tittel: string | React.ReactNode;
@@ -72,8 +72,8 @@ const PeriodeList: React.FunctionComponent<Props> = ({
                                         navnPåForeldre={navnPåForeldre}
                                         color={getStønadskontoFarge(
                                             (p as Uttaksperiode).stønadskontotype,
-                                            erFarEllerMedmor ? Rolle.farMedmor : Rolle.mor,
-                                            true
+                                            p.forelder,
+                                            false
                                         )}
                                     />
                                 );
@@ -171,6 +171,26 @@ const PeriodeList: React.FunctionComponent<Props> = ({
                                         }
                                         tidsperiode={p.tidsperiode}
                                         color={UttaksplanColor.yellow}
+                                    />
+                                );
+                            case PeriodeType.Overføring:
+                                return (
+                                    <PeriodeListElement
+                                        key={guid()}
+                                        tittel={
+                                            <FormattedMessage
+                                                id={
+                                                    erFarEllerMedmor
+                                                        ? 'dinPlan.overføring.farMedmor'
+                                                        : 'dinPlan.overføring.mor'
+                                                }
+                                                values={{ navn: getNavnPåForelderForPeriode(p, navnPåForeldre) }}
+                                            />
+                                        }
+                                        ikon={getIkon(p, erFarEllerMedmor)}
+                                        beskrivelse={getBeskrivelse(p, navnPåForeldre, intl)}
+                                        tidsperiode={p.tidsperiode}
+                                        color={getFargeForPeriode(p)}
                                     />
                                 );
                         }

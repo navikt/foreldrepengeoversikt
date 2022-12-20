@@ -228,3 +228,11 @@ export const erGradert = (periode: Periode) => {
 export const getNavnPåForelderForPeriode = (periode: Periode, navnPåForeldre: NavnPåForeldre) => {
     return periode.forelder === Rolle.mor ? navnPåForeldre.mor : navnPåForeldre.farMedmor;
 };
+
+export const getFargeForPeriode = (periode: Periode): UttaksplanColor => {
+    if (periode.forelder && periode.forelder === Rolle.farMedmor) {
+        return UttaksplanColor.blue;
+    }
+
+    return UttaksplanColor.purple;
+};

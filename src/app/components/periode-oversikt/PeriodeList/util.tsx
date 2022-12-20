@@ -17,18 +17,15 @@ import SykdomIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/SykdomIkon';
 import FerieIkon from 'app/components/ikoner/uttaksplanIkon/ikoner/FerieIkon';
 import { Tidsperiode } from 'app/types/Tidsperiode';
 import moment from 'moment';
-import { Rolle } from 'app/types/Rolle';
 
 export const getIconFarge = (periode: Periode, erFarEllerMedmor: boolean) => {
     switch (periode.type) {
         case PeriodeType.Uttak:
-            return getStønadskontoFarge(
-                (periode as Uttaksperiode).stønadskontotype,
-                erFarEllerMedmor ? Rolle.farMedmor : Rolle.mor,
-                true
-            );
+            return getStønadskontoFarge((periode as Uttaksperiode).stønadskontotype, periode.forelder, true);
         case PeriodeType.Utsettelse:
             return UttaksplanColor.green;
+        case PeriodeType.Overføring:
+            return erFarEllerMedmor ? UttaksplanColor.blue : UttaksplanColor.purple;
         default:
             return UttaksplanColor.transparent;
     }
