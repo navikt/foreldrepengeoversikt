@@ -1,16 +1,14 @@
 .content-section {
     margin-bottom: 2rem;
     border-radius: 0.5rem;
-    border: 1px solid var(--navds-global-color-green-200);
-    box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
 }
 
 .content-section--bg-white {
-    background-color: var(--navds-global-color-white);
+    background-color: var(--a-white);
 }
 
 .content-section--bg-blue {
-    background-color: var(--navds-global-color-lightblue-100);
+    background-color: var(--a-lightblue-100);
 }
 
 .content-section--padding-large {

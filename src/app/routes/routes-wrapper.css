@@ -1,7 +1,7 @@
 .routesWrapper {
     max-width: 704px;
     margin: 0 auto;
-    background-color: var(--navds-global-color-green-100);
+    background-color: var(--a-blue-50);
 }
 
 @media (max-width: 768px) {

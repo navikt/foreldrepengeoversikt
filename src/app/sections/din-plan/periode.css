@@ -4,9 +4,9 @@
 }
 
 .periode--uttak {
-    background-color: var(--navds-semantic-color-feedback-success-background);
-    border-top: 1px solid var(--navds-semantic-color-feedback-success-border);
-    border-bottom: 1px solid var(--navds-semantic-color-feedback-success-border);
+    background-color: var(--a-green-50);
+    border-top: 1px solid var(--a-surface-success);
+    border-bottom: 1px solid var(--a-surface-success);
 }
 
 .periode--ikke-uttak {

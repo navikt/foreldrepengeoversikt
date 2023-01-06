@@ -1,5 +1,5 @@
 import { intlUtils } from '@navikt/fp-common';
-import ContentSection from 'app/components/content-section/ContextSection';
+import ContentSection from 'app/components/content-section/ContentSection';
 import DinPlan from 'app/sections/din-plan/DinPlan';
 import Dokumentoversikt from 'app/sections/dokumentoversikt/Dokumentoversikt';
 import Oppgaver from 'app/sections/oppgaver/Oppgaver';

@@ -2,11 +2,11 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 1rem;
-    border-bottom: 1px solid var(--navds-semantic-color-divider);
+    border-bottom: 1px solid var(--a-surface-neutral);
 }
 
 .dokument__ikon {
-    color: var(--navds-semantic-color-link);
+    color: var(--a-surface-action);
     margin-top: 6px;
     margin-right: 1rem;
 }

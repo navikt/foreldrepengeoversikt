@@ -10,6 +10,6 @@
 }
 
 .samtaler__linkPanel {
-    color: var(--navds-semantic-color-interaction-primary);
+    color: var(--a-surface-action);
     border-radius: 0.5rem;
 }

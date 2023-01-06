@@ -3,7 +3,7 @@
 }
 
 .dokument-hendelse__ikon {
-    color: var(--navds-semantic-color-link);
+    color: var(--a-surface-action);
     margin-top: 6px;
     margin-right: 0.5rem;
 }
