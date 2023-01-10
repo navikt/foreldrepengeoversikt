@@ -9,6 +9,7 @@ import { ManglendeVedlegg } from 'app/api/types/sak/ManglendeVedlegg';
 export interface ApiState {
     søkerinfo: FetchState<Søkerinfo>;
     saker: FetchState<SakBase[]>;
+    sakerv2: FetchState<any>;
     storageKvittering: FetchState<StorageKvittering>;
     historikk: FetchState<HistorikkInnslag[]>;
     minidialogInnslagListe: FetchState<MinidialogInnslag[]>;
@@ -20,6 +21,9 @@ const getDefaultState = (): ApiState => ({
         status: FetchStatus.UNFETCHED,
     },
     saker: {
+        status: FetchStatus.UNFETCHED,
+    },
+    sakerv2: {
         status: FetchStatus.UNFETCHED,
     },
     storageKvittering: {
@@ -86,6 +90,31 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
             return {
                 ...state,
                 saker: {
+                    status: FetchStatus.FAILURE,
+                    error: action.payload.error,
+                },
+            };
+        case ApiActionTypes.GET_SAKER_V2_REQUEST:
+            return {
+                ...state,
+                sakerv2: {
+                    status: FetchStatus.IN_PROGRESS,
+                },
+            };
+
+        case ApiActionTypes.GET_SAKER_V2_SUCCESS:
+            return {
+                ...state,
+                sakerv2: {
+                    status: FetchStatus.SUCCESS,
+                    data: action.payload,
+                },
+            };
+
+        case ApiActionTypes.GET_SAKER_V2_FAILURE:
+            return {
+                ...state,
+                sakerv2: {
                     status: FetchStatus.FAILURE,
                     error: action.payload.error,
                 },

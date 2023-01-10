@@ -27,6 +27,10 @@ const getSaker = function () {
     return getFileContent('saker.json');
 };
 
+const getSakerv2 = function () {
+    return getFileContent('sakerv2.json');
+};
+
 const getKvitteringStorage = function () {
     return getFileContent('storage_kvittering.json');
 };
@@ -59,6 +63,7 @@ const getUttaksplan = function () {
 module.exports = {
     getSokerinfo,
     getSaker,
+    getSakerv2,
     getKvitteringStorage,
     getHistorikk,
     getMinidialog,

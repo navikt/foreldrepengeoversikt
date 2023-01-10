@@ -29,6 +29,7 @@ interface Props {
     requestSaker: () => void;
     requestStorageKvittering: () => void;
     requestHistorikk: () => void;
+    requestSakerv2: () => void;
 }
 
 class Foreldrepengeoversikt extends React.Component<Props> {
@@ -40,6 +41,7 @@ class Foreldrepengeoversikt extends React.Component<Props> {
         if (this.props.søkerinfo.status === FetchStatus.UNFETCHED) {
             this.props.requestPersoninfo();
             this.props.requestSaker();
+            this.props.requestSakerv2();
             this.props.requestStorageKvittering();
             this.props.requestHistorikk();
         }
@@ -112,6 +114,9 @@ const mapDispatchToProps = (dispatch: (action: ApiAction) => void) => ({
     },
     requestHistorikk: () => {
         dispatch({ type: ApiActionTypes.GET_HISTORIKK_REQUEST });
+    },
+    requestSakerv2: () => {
+        dispatch({ type: ApiActionTypes.GET_SAKER_V2_REQUEST });
     },
 });
 

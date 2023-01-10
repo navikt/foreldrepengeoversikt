@@ -50,6 +50,24 @@ function* getSakerSaga(_: GetSakerRequest) {
     }
 }
 
+function* getSakerv2Saga(_: GetSakerRequest) {
+    try {
+        const response = yield call(Api.getSakerv2);
+        let saker: any[] = response.data;
+        if (saker) {
+            saker = yield all(saker.map(uttaksplanTilSakMapper));
+            const foreldrepengesaker = saker.filter(erForeldrepengesak);
+
+            for (const foreldrepengesak of foreldrepengesaker) {
+                foreldrepengesak.tilgjengeligeKontoer = yield call(getTilgjengeligeStønadskontoer, foreldrepengesak);
+            }
+        }
+        yield put({ type: ApiActionTypes.GET_SAKER_V2_SUCCESS, payload: { saker } });
+    } catch (error) {
+        yield put({ type: ApiActionTypes.GET_SAKER_V2_FAILURE, payload: { error } });
+    }
+}
+
 function* uttaksplanTilSakMapper(sak: SakBase) {
     try {
         if (sak.saksnummer && sak.type === SakType.FPSAK && erForeldrepengesak(sak)) {
@@ -129,6 +147,7 @@ function* getManglendeVedlegg(sakerSuccess: GetSakerSuccess) {
 function* apiSaga() {
     yield all([takeLatest(ApiActionTypes.GET_SØKERINFO_REQUEST, getPersoninfoSaga)]);
     yield all([takeLatest(ApiActionTypes.GET_SAKER_REQUEST, getSakerSaga)]);
+    yield all([takeLatest(ApiActionTypes.GET_SAKER_V2_REQUEST, getSakerv2Saga)]);
     yield all([takeLatest(ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST, getStorageKvittering)]);
     yield all([takeLatest(ApiActionTypes.GET_HISTORIKK_REQUEST, getHistorikk)]);
     yield all([takeLatest(ApiActionTypes.GET_MINIDIALOG_REQUEST, getMiniDialog)]);

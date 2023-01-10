@@ -36,6 +36,10 @@ router.get('/rest/innsyn/saker', (req, res) => {
     res.send(MockStorage.getSaker());
 });
 
+router.get('/rest/innsyn/v2/saker', (req, res) => {
+    res.send(MockStorage.getSakerv2());
+});
+
 router.get('/rest/historikk', (req, res) => {
     res.send(MockStorage.getHistorikk());
 });

@@ -26,6 +26,10 @@ const getSaker = () => {
     return AxiosApiInterceptor.get('innsyn/saker');
 };
 
+const getSakerv2 = () => {
+    return AxiosApiInterceptor.get('innsyn/v2/saker');
+};
+
 const sendEttersending = (ettersending: EttersendingDto) => {
     return AxiosApiInterceptor.post('/soknad/ettersend', ettersending, {
         timeout: 120 * 1000,
@@ -94,6 +98,7 @@ function getUttakskontoer({
 
 const Api = {
     getSaker,
+    getSakerv2,
     getPersoninfo,
     sendEttersending,
     getStorageKvittering,

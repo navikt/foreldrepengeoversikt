@@ -10,8 +10,11 @@ export enum ApiActionTypes {
     'GET_SØKERINFO_SUCCESS' = 'getPersoninfoSuccess',
     'GET_SØKERINFO_FAILURE' = 'getPersoninfoFailure',
     'GET_SAKER_REQUEST' = 'getSakerRequest',
-    'GET_SAKER_SUCCESS' = 'getSøkerInfoSuccess',
-    'GET_SAKER_FAILURE' = 'getSøkerInfoFailure',
+    'GET_SAKER_SUCCESS' = 'getSakerSuccess',
+    'GET_SAKER_FAILURE' = 'getSakerFailure',
+    'GET_SAKER_V2_REQUEST' = 'getSakerv2Request',
+    'GET_SAKER_V2_SUCCESS' = 'getSakerv2Success',
+    'GET_SAKER_V2_FAILURE' = 'getSakerv2Failure',
     'GET_STORAGE_KVITTERING_REQUEST' = 'ggetStorageKvitteringRequest',
     'GET_STORAGE_KVITTERING_SUCCESS' = 'getStorageKvitteringSuccess',
     'GET_STORAGE_KVITTERING_FAILURE' = 'getStorageKvitteringFailure',
@@ -58,6 +61,26 @@ export interface GetSakerSuccess {
 
 export interface GetSakerFailure {
     type: ApiActionTypes.GET_SAKER_FAILURE;
+    payload: {
+        error: FetchError;
+    };
+}
+
+export interface GetSakerV2Request {
+    type: ApiActionTypes.GET_SAKER_V2_REQUEST;
+}
+
+export interface GetSakerV2Success {
+    type: ApiActionTypes.GET_SAKER_V2_SUCCESS;
+    payload: {
+        foreldrepenger: any;
+        engangsstønad: any;
+        svangerskapspenger: any;
+    };
+}
+
+export interface GetSakerV2Failure {
+    type: ApiActionTypes.GET_SAKER_V2_FAILURE;
     payload: {
         error: FetchError;
     };
@@ -146,6 +169,9 @@ type ApiAction =
     | GetSakerRequest
     | GetSakerSuccess
     | GetSakerFailure
+    | GetSakerV2Failure
+    | GetSakerV2Request
+    | GetSakerV2Success
     | GetStorageKvitteringRequest
     | GetStorageKvitteringSuccess
     | GetStorageKvitteringFailure
