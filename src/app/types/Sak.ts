@@ -1,4 +1,5 @@
 import { Dekningsgrad } from './Dekningsgrad';
+import { Familiehendelse } from './Familiehendelse';
 import { Periode } from './Periode';
 import { Person } from './Person';
 import { RettighetType } from './RettighetType';
@@ -15,7 +16,7 @@ export interface Sak {
     ønskerJustertUttakVedFødsel: boolean;
     rettighetType: RettighetType;
     annenPart: Person;
-    familiehendelse: any;
+    familiehendelse: Familiehendelse;
     gjeldendeVedtak: {
         perioder: Periode[];
     };
