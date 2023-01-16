@@ -5,10 +5,13 @@
     margin-bottom: 2rem;
 }
 
+.header__content {
+    display: flex;
+}
+
 .header__wrapper {
     max-width: 704px;
     margin: 0 auto;
-    display: flex;
 }
 
 .header__title-container {
