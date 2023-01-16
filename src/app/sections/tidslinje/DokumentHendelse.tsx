@@ -1,6 +1,6 @@
 import { Link } from '@navikt/ds-react';
 import React from 'react';
-import { FileContentFilled } from '@navikt/ds-icons';
+import { FileContent } from '@navikt/ds-icons';
 import { bemUtils } from '@navikt/fp-common';
 import { Dokument as DokumentHendelse } from 'app/types/Dokument';
 
@@ -16,12 +16,10 @@ const DokumentHendelse: React.FunctionComponent<Props> = ({ dokument }) => {
 
     return (
         <li className={bem.block}>
-            <FileContentFilled className={bem.element('ikon')} />
-            <div className={bem.element('content')}>
-                <Link href={dokument.url} className={bem.element('ikon')} target="_blank">
-                    {tittel}
-                </Link>
-            </div>
+            <FileContent className={bem.element('ikon')} />
+            <Link href={dokument.url} className={bem.element('ikon')} target="_blank">
+                {tittel}
+            </Link>
         </li>
     );
 };

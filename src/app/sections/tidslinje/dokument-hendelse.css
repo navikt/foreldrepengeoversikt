@@ -1,9 +1,10 @@
 .dokument-hendelse {
     display: flex;
+    align-items: center;
 }
 
 .dokument-hendelse__ikon {
     color: var(--a-surface-action);
-    margin-top: 6px;
-    margin-right: 0.5rem;
+    /* margin-top: 6px; */
+    margin-right: 6px;
 }

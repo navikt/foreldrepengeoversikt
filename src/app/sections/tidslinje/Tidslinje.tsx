@@ -38,8 +38,7 @@ const Tidslinje: React.FunctionComponent<Props> = ({ saksnummer }) => {
                         type="completed"
                         title={getTidslinjehendelseTittel(hendelse.tidslinjeHendelseType)}
                     >
-                        <div>{hendelse.aktørType}</div>
-                        <ul>
+                        <ul style={{ listStyle: 'none', padding: '0' }}>
                             {hendelse.dokumenter.length > 0 &&
                                 hendelse.dokumenter.map((dokument) => {
                                     return <DokumentHendelse dokument={dokument} key={dokument.url} />;
