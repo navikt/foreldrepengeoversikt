@@ -30,7 +30,7 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ foreldrepengerSaker, nav
     return (
         <>
             <Topp saksnummer={gjeldendeSak?.saksnummer} />
-            <ContentSection heading={intlUtils(intl, 'saksoversikt.oppgaver')} backgroundColor="blue">
+            <ContentSection heading={intlUtils(intl, 'saksoversikt.oppgaver')} backgroundColor="yellow">
                 <Oppgaver />
             </ContentSection>
             {gjeldendeSak && (

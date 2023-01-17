@@ -5,7 +5,7 @@ import React, { FunctionComponent } from 'react';
 
 import './content-section.css';
 
-type BackgroundColor = 'white' | 'blue';
+type BackgroundColor = 'white' | 'yellow';
 type Padding = 'default' | 'none' | 'large';
 
 interface Props {

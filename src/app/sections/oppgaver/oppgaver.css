@@ -3,8 +3,6 @@
 }
 
 .oppgaver__linkPanel {
-    color: var(--a-surface-action);
-    border-color: var(--a-surface-action);
     margin-bottom: 1rem;
 }
 
