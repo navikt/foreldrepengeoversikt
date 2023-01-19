@@ -9,7 +9,7 @@ dayjs.extend(isoWeek);
 
 type VarighetFormat = 'full' | 'normal';
 
-export const getUkerOgDagerFromDager = (dager: number): { uker: number; dager: number } => {
+export const getUkerOgDagerFromDager = (dager: number): { dager: number; uker: number } => {
     const uker = Math.floor(dager / 5);
     return {
         dager: dager - uker * 5,

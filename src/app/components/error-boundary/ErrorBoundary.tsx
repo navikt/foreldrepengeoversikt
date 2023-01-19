@@ -2,9 +2,9 @@ import React from 'react';
 import * as Sentry from '@sentry/browser';
 
 interface State {
+    error: Error | null;
     eventId: string | null;
     hasError: boolean;
-    error: Error | null;
 }
 
 class ErrorBoundary extends React.Component<any, State> {

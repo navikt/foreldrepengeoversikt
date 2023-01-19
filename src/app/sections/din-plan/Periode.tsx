@@ -14,9 +14,9 @@ import { useIntl } from 'react-intl';
 import './periode.css';
 
 interface Props {
-    periode: Periode;
-    navnForelder: string;
     ikkeUttak?: boolean;
+    navnForelder: string;
+    periode: Periode;
 }
 
 const getPeriodeTittel = (periode: Periode): string => {

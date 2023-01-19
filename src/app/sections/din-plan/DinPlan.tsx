@@ -13,8 +13,8 @@ import OversiktRoutes from 'app/routes/routes';
 import './din-plan.css';
 
 interface Props {
-    vedtattUttaksplan: Periode[];
     navnPåSøker: string;
+    vedtattUttaksplan: Periode[];
 }
 
 const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, navnPåSøker }) => {

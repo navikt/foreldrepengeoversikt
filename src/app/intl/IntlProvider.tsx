@@ -5,13 +5,13 @@ import nbMessages from './nb_NO.json';
 import { allCommonMessages, Locale } from '@navikt/fp-common';
 
 interface Props {
-    locale: Locale;
     children: React.ReactNode;
+    locale: Locale;
 }
 
 dayjs.locale('nb');
 
-const getLanguageMessages = (locale: Locale) => {
+const getLanguageMessages = (_locale: Locale) => {
     return { ...nbMessages, ...allCommonMessages.nb };
 };
 

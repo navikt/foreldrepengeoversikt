@@ -7,9 +7,9 @@ import PreviousLink from '../previous-link/PreviousLink';
 import './header.css';
 
 interface Props {
-    route: string;
     externalURL?: boolean;
     linkLabel: string;
+    route: string;
 }
 
 const Header: React.FunctionComponent<Props> = ({ route, externalURL = false, linkLabel }) => {

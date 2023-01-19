@@ -1,5 +1,5 @@
-import { BodyShort, Heading } from '@navikt/ds-react';
 import { bemUtils, formatDateExtended } from '@navikt/fp-common';
+import { BodyShort, Heading } from '@navikt/ds-react';
 import { Success, Warning, Clock } from '@navikt/ds-icons';
 import React from 'react';
 
@@ -8,10 +8,10 @@ import './tidslinje-hendelse.css';
 type TidslinjeHendelseType = 'completed' | 'incomplete' | 'warning';
 
 interface Props {
-    type: TidslinjeHendelseType;
-    title: string;
-    date: Date;
     children: React.ReactNode;
+    date: Date;
+    title: string;
+    type: TidslinjeHendelseType;
 }
 
 const bem = bemUtils('tidslinje-hendelse');

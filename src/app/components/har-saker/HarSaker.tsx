@@ -1,5 +1,5 @@
 import { Heading } from '@navikt/ds-react';
-import { bemUtils, formatDate } from '@navikt/fp-common';
+import { bemUtils, formatDate, guid } from '@navikt/fp-common';
 import { GruppertSak } from 'app/types/GruppertSak';
 import EtBarn from 'assets/EtBarn';
 import React from 'react';
@@ -24,7 +24,7 @@ const HarSaker: React.FunctionComponent<Props> = ({ grupperteSaker }) => {
                             {`${gruppering.antallBarn} barn med termin ${formatDate(gruppering.familiehendelsedato)}`}
                         </Heading>
                         {gruppering.saker.map((sak) => {
-                            return <SakLink sak={sak} />;
+                            return <SakLink key={guid()} sak={sak} />;
                         })}
                     </div>
                 );

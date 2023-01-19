@@ -1,7 +1,6 @@
 .routesWrapper {
     max-width: 704px;
     margin: 0 auto;
-    background-color: var(--a-blue-50);
 }
 
 @media (max-width: 768px) {

@@ -8,7 +8,7 @@ module.exports = {
         'plugin:jest-dom/recommended',
         'plugin:testing-library/react',
     ],
-    plugins: ['jest-dom', 'testing-library'],
+    plugins: ['jest-dom', 'testing-library', 'typescript-sort-keys'],
     parserOptions: {
         ecmaVersion: 2018,
         sourceType: 'module',
@@ -17,6 +17,7 @@ module.exports = {
         '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-var-requires': 'off',
+        'typescript-sort-keys/interface': 'error',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-unused-vars': [

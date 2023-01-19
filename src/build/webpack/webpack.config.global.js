@@ -2,6 +2,7 @@ const path = require('path');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const webpackConfig = {
     entry: {
@@ -58,6 +59,10 @@ const webpackConfig = {
             linkType: 'text/css',
         }),
         new SpriteLoaderPlugin(),
+        new ESLintPlugin({
+            extensions: ['js', 'jsx', 'ts', 'tsx'],
+            failOnWarning: false,
+        }),
     ],
 };
 

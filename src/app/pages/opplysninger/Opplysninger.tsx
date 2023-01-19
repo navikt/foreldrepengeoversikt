@@ -2,11 +2,15 @@ import { Alert } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import Sorry from 'assets/Sorry';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
-import './se-søknad-page.css';
+import './opplysninger.css';
 
-const SeSøknadPage = () => {
-    const bem = bemUtils('se-søknad-page');
+const Opplysninger = () => {
+    const bem = bemUtils('opplysninger');
+    const params = useParams();
+
+    console.log(params);
 
     return (
         <div className={bem.block}>
@@ -20,4 +24,4 @@ const SeSøknadPage = () => {
     );
 };
 
-export default SeSøknadPage;
+export default Opplysninger;

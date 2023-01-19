@@ -1,10 +1,9 @@
-import { intlUtils } from '@navikt/fp-common';
+import { bemUtils, intlUtils } from '@navikt/fp-common';
 import ContentSection from 'app/components/content-section/ContentSection';
+import SeDokumenter from 'app/components/se-dokumenter/SeDokumenter';
+import SeOpplysninger from 'app/components/se-opplysninger/SeOpplysninger';
 import DinPlan from 'app/sections/din-plan/DinPlan';
-import Dokumentoversikt from 'app/sections/dokumentoversikt/Dokumentoversikt';
 import Oppgaver from 'app/sections/oppgaver/Oppgaver';
-import Samtaler from 'app/sections/samtaler/Samtaler';
-import SeSøknad from 'app/sections/se-søknad/SeSøknad';
 import Tidslinje from 'app/sections/tidslinje/Tidslinje';
 import Topp from 'app/sections/topp/Topp';
 import { Sak } from 'app/types/Sak';
@@ -13,6 +12,8 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Outlet } from 'react-router-dom';
 
+import './saksoversikt.css';
+
 interface Props {
     foreldrepengerSaker: Sak[];
     navnPåSøker: string;
@@ -20,6 +21,7 @@ interface Props {
 
 const Saksoversikt: React.FunctionComponent<Props> = ({ foreldrepengerSaker, navnPåSøker }) => {
     const intl = useIntl();
+    const bem = bemUtils('saksoversikt');
     const gjeldendeSak = foreldrepengerSaker.length > 0 ? foreldrepengerSaker[0] : undefined;
     let gjeldendeVedtak = undefined;
 
@@ -28,7 +30,7 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ foreldrepengerSaker, nav
     }
 
     return (
-        <>
+        <div className={bem.block}>
             <Topp saksnummer={gjeldendeSak?.saksnummer} />
             <ContentSection heading={intlUtils(intl, 'saksoversikt.oppgaver')} backgroundColor="yellow">
                 <Oppgaver />
@@ -38,14 +40,11 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ foreldrepengerSaker, nav
                     <Tidslinje saksnummer={gjeldendeSak.saksnummer} />
                 </ContentSection>
             )}
-            <ContentSection heading={intlUtils(intl, 'saksoversikt.dokumentoversikt')}>
-                <Dokumentoversikt />
+            <ContentSection padding="none">
+                <SeDokumenter />
             </ContentSection>
             <ContentSection padding="none">
-                <Samtaler />
-            </ContentSection>
-            <ContentSection padding="none">
-                <SeSøknad />
+                <SeOpplysninger />
             </ContentSection>
             {gjeldendeVedtak && (
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.dinPlan')} padding="large">
@@ -56,7 +55,7 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ foreldrepengerSaker, nav
                 </ContentSection>
             )}
             <Outlet />
-        </>
+        </div>
     );
 };
 

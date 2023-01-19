@@ -1,4 +1,5 @@
 import { Loader } from '@navikt/ds-react';
+import { guid } from '@navikt/fp-common';
 import Api from 'app/api/api';
 import { TidslinjehendelseType } from 'app/types/TidslinjehendelseType';
 import React from 'react';
@@ -37,6 +38,7 @@ const Tidslinje: React.FunctionComponent<Props> = ({ saksnummer }) => {
                         date={hendelse.opprettet}
                         type="completed"
                         title={getTidslinjehendelseTittel(hendelse.tidslinjeHendelseType)}
+                        key={guid()}
                     >
                         <ul style={{ listStyle: 'none', padding: '0' }}>
                             {hendelse.dokumenter.length > 0 &&

@@ -9,9 +9,9 @@ type BackgroundColor = 'white' | 'yellow';
 type Padding = 'default' | 'none' | 'large';
 
 interface Props {
-    heading?: string;
-    children: React.ReactNode;
     backgroundColor?: BackgroundColor;
+    children: React.ReactNode;
+    heading?: string;
     padding?: Padding;
 }
 

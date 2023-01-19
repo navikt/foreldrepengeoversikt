@@ -7,12 +7,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import './previous-link.css';
 
 interface Props {
-    className?: string;
-    route: string;
-    externalURL?: boolean;
     ariaLabel?: string;
+    className?: string;
+    externalURL?: boolean;
     linkLabel: string;
     onClick?: (route: string, event: React.SyntheticEvent) => void;
+    route: string;
 }
 
 const Breadcrumb: React.FunctionComponent<Props> = ({ route, externalURL = false, linkLabel, ariaLabel, onClick }) => {
