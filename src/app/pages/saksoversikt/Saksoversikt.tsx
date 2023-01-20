@@ -2,6 +2,7 @@ import { bemUtils, intlUtils } from '@navikt/fp-common';
 import ContentSection from 'app/components/content-section/ContentSection';
 import SeDokumenter from 'app/components/se-dokumenter/SeDokumenter';
 import SeOpplysninger from 'app/components/se-opplysninger/SeOpplysninger';
+import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import DinPlan from 'app/sections/din-plan/DinPlan';
 import Oppgaver from 'app/sections/oppgaver/Oppgaver';
 import Tidslinje from 'app/sections/tidslinje/Tidslinje';
@@ -22,6 +23,8 @@ interface Props {
 const Saksoversikt: React.FunctionComponent<Props> = ({ foreldrepengerSaker, navnPåSøker }) => {
     const intl = useIntl();
     const bem = bemUtils('saksoversikt');
+    useSetBackgroundColor('blue');
+
     const gjeldendeSak = foreldrepengerSaker.length > 0 ? foreldrepengerSaker[0] : undefined;
     let gjeldendeVedtak = undefined;
 

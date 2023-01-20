@@ -1,15 +1,18 @@
 import { Loader } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
+import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Api from './api/api';
 import ScrollToTop from './components/scroll-to-top/ScrollToTop';
+import { useGetBackgroundColor } from './hooks/useGetBackgroundColor';
 import ForeldrepengeoversiktRoutes from './routes/ForeldrepengeoversiktRoutes';
 
 import './styles/app.css';
 
 const Foreldrepengeoversikt: React.FunctionComponent = () => {
     const bem = bemUtils('app');
+    const backgroundColor = useGetBackgroundColor();
 
     const { søkerinfoData, søkerinfoError } = Api.useSøkerinfo();
     const { sakerData, sakerError } = Api.useGetSaker();
@@ -44,7 +47,9 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
     }
 
     return (
-        <div className={bem.block}>
+        <div
+            className={classNames(bem.block, backgroundColor === 'white' ? bem.element('white') : bem.element('blue'))}
+        >
             <BrowserRouter>
                 <ScrollToTop />
                 <ForeldrepengeoversiktRoutes søkerinfo={søkerinfoData} foreldrepengerSaker={sakerData.foreldrepenger} />

@@ -1,6 +1,7 @@
 import { Button, Loader } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import Api from 'app/api/api';
+import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import OversiktRoutes from 'app/routes/routes';
 import Dokument from 'app/sections/dokumentoversikt/Dokument';
 import React from 'react';
@@ -10,6 +11,8 @@ import './dokumenter-page.css';
 
 const DokumenterPage: React.FunctionComponent = () => {
     const bem = bemUtils('dokumenter-page');
+    useSetBackgroundColor('white');
+
     const { dokumenterData: dokumenter, dokumenterError } = Api.useGetDokumenter();
 
     if (dokumenterError) {

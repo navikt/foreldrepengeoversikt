@@ -1,5 +1,6 @@
 import { Heading } from '@navikt/ds-react';
 import { bemUtils, formatDate, guid } from '@navikt/fp-common';
+import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import { GruppertSak } from 'app/types/GruppertSak';
 import EtBarn from 'assets/EtBarn';
 import React from 'react';
@@ -13,6 +14,7 @@ interface Props {
 
 const HarSaker: React.FunctionComponent<Props> = ({ grupperteSaker }) => {
     const bem = bemUtils('har-saker');
+    useSetBackgroundColor('blue');
 
     return (
         <>
