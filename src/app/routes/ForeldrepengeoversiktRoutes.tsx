@@ -42,8 +42,6 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
     const navigate = useNavigate();
     const path = location.pathname;
 
-    console.log(path);
-
     useEffect(() => {
         if (foreldrepengerSaker.length === 1) {
             navigate(foreldrepengerSaker[0].saksnummer);

@@ -16,7 +16,7 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
 
     const { søkerinfoData, søkerinfoError } = Api.useSøkerinfo();
     const { sakerData, sakerError } = Api.useGetSaker();
-    const { annenPartsVedakData, annenPartsVedtakError } = Api.useGetAnnenPartsVedtak(true);
+    const { annenPartsVedtakError } = Api.useGetAnnenPartsVedtak(true);
 
     useEffect(() => {
         if (søkerinfoError) {
@@ -35,8 +35,6 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
             throw new Error('Vi klarte ikke å hente opp informasjon om den andre forelderen.');
         }
     }, [søkerinfoError, sakerError, annenPartsVedtakError]);
-
-    console.log(annenPartsVedakData);
 
     if (!søkerinfoData || !sakerData) {
         return (
