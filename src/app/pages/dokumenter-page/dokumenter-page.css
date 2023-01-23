@@ -1,3 +1,12 @@
 .dokumenter-page__ettersend-knapp {
-    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.dokumenter-page__ikke-alle-dokumenter {
+    background-color: var(--a-gray-50);
+    padding: 2.5rem;
+    max-width: 430px;
+    margin-top: 3rem;
 }

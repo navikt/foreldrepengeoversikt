@@ -6,5 +6,6 @@
 @media (max-width: 768px) {
     .routesWrapper {
         max-width: 100%;
+        padding: 0 1rem;
     }
 }

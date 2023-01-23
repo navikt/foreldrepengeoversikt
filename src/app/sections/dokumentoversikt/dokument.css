@@ -1,16 +1,25 @@
 .dokument {
     display: flex;
-    align-items: flex-start;
-    margin-bottom: 1rem;
+    align-items: center;
     border-bottom: 1px solid var(--a-surface-neutral);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .dokument__ikon {
     color: var(--a-surface-action);
-    margin-top: 6px;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
+}
+
+.dokument__link-icon {
+    display: flex;
+    align-items: center;
+    width: 22rem;
 }
 
 .dokument__content {
-    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
