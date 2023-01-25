@@ -13,7 +13,7 @@ const Oppgaver = () => {
                 <BodyLong>NAV kan ikke behandle søknaden din før vi har fått nødvendig dokumentasjon</BodyLong>
             </div>
             <LinkPanel className={bem.element('linkPanel')} href="#">
-                <LinkPanel.Title>Last opp terminbrekreftelse</LinkPanel.Title>
+                <LinkPanel.Title>Last opp terminbekreftelse</LinkPanel.Title>
             </LinkPanel>
             <LinkPanel className={bem.element('linkPanel')} href="#">
                 <LinkPanel.Title>Send meldekort</LinkPanel.Title>

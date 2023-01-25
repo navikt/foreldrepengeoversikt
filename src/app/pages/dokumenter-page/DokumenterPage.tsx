@@ -1,26 +1,31 @@
 import { BodyShort, Button, Loader } from '@navikt/ds-react';
-import { bemUtils } from '@navikt/fp-common';
+import { bemUtils, guid } from '@navikt/fp-common';
 import Api from 'app/api/api';
 import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
-import Dokument from 'app/sections/dokumentoversikt/Dokument';
+import Dokument from 'app/components/dokument/Dokument';
 import React from 'react';
 import { Upload } from '@navikt/ds-icons';
 
 import './dokumenter-page.css';
+import { grupperDokumenterPåTidspunkt } from 'app/utils/dokumenterUtils';
+import GrupperteDokumenter from 'app/components/grupperte-dokumenter/GrupperteDokumenter';
 
 const DokumenterPage: React.FunctionComponent = () => {
     const bem = bemUtils('dokumenter-page');
     useSetBackgroundColor('white');
 
-    const { dokumenterData: dokumenter, dokumenterError } = Api.useGetDokumenter();
+    const { dokumenterData, dokumenterError } = Api.useGetDokumenter();
 
     if (dokumenterError) {
         return <div>Vi klarte ikke å hente dokumentene for din sak</div>;
     }
 
-    if (!dokumenter) {
+    if (!dokumenterData) {
         return <Loader size="large" aria-label="Henter dokumenter" />;
     }
+
+    const dokumenterGruppertPåTidspunkt = grupperDokumenterPåTidspunkt(dokumenterData);
+    console.log(dokumenterGruppertPåTidspunkt);
 
     return (
         <>
@@ -32,12 +37,14 @@ const DokumenterPage: React.FunctionComponent = () => {
             >
                 Last opp dokument
             </Button>
-            {dokumenter.map((dokument, index) => {
-                if (index >= 3) {
-                    return null;
-                }
+            {Object.entries(dokumenterGruppertPåTidspunkt).map((dokument) => {
+                const dokumenter = dokument[1];
 
-                return <Dokument key={dokument.url} dokument={dokument} />;
+                if (dokumenter.length === 1) {
+                    return <Dokument key={guid()} dokument={dokumenter[0]} />;
+                } else {
+                    return <GrupperteDokumenter key={guid()} dokumenter={dokumenter} />;
+                }
             })}
             <div className={bem.element('ikke-alle-dokumenter')}>
                 <BodyShort>Det er to typer dokumenter vi foreløpig ikke kan vise deg:</BodyShort>

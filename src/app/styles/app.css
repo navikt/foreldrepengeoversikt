@@ -4,6 +4,7 @@
 
 .app__blue {
     background-color: var(--a-blue-50);
+    height: 100%;
 }
 
 .app__white {

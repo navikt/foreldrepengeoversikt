@@ -9,7 +9,15 @@ interface Props {
 }
 
 const getAvsender = (type: DokumentType) => {
-    return type === DokumentType.INNGÅENDE_DOKUMENT ? 'Du' : 'NAV';
+    if (type === DokumentType.INNGÅENDE_DOKUMENT) {
+        return 'Du';
+    }
+
+    if (type === DokumentType.UTGÅENDE_DOKUMENT) {
+        return 'NAV';
+    }
+
+    return 'Arbeidsgiver';
 };
 
 const DokumentAvsender: React.FunctionComponent<Props> = ({ type }) => {
