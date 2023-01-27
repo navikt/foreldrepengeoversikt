@@ -12,6 +12,18 @@ interface Props {
     grupperteSaker: GruppertSak[];
 }
 
+const getHeading = (type: 'fødsel' | 'termin' | 'adopsjon', antallBarn: number, familiehendelsedato: string) => {
+    if (type === 'fødsel') {
+        return `${antallBarn} barn født ${formatDate(familiehendelsedato)}`;
+    }
+
+    if (type === 'termin') {
+        return `${antallBarn} barn med termin ${formatDate(familiehendelsedato)}`;
+    }
+
+    return `${antallBarn} barn med omsorgsovertakelse ${formatDate(familiehendelsedato)}`;
+};
+
 const HarSaker: React.FunctionComponent<Props> = ({ grupperteSaker }) => {
     const bem = bemUtils('har-saker');
     useSetBackgroundColor('blue');
@@ -23,7 +35,7 @@ const HarSaker: React.FunctionComponent<Props> = ({ grupperteSaker }) => {
                     <div className={bem.block} key={gruppering.familiehendelsedato}>
                         <Heading size="medium" level="2" className={bem.element('tittel')}>
                             <EtBarn />{' '}
-                            {`${gruppering.antallBarn} barn med termin ${formatDate(gruppering.familiehendelsedato)}`}
+                            {getHeading(gruppering.type, gruppering.antallBarn, gruppering.familiehendelsedato)}
                         </Heading>
                         {gruppering.saker.map((sak) => {
                             return <SakLink key={guid()} sak={sak} />;

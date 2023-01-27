@@ -1,9 +1,12 @@
 .grupperte-dokumenter__header {
-    color: var(--a-surface-action);
     display: flex;
     border-bottom: 1px solid var(--a-surface-neutral);
 };
 
-.dokument__ikon {
+.grupperte-dokumenter__ikon {
     margin-right: 0.5rem;
+}
+
+.grupperte-dokumenter__content {
+    border-bottom: none;
 }

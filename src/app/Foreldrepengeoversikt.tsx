@@ -9,6 +9,7 @@ import { useGetBackgroundColor } from './hooks/useGetBackgroundColor';
 import ForeldrepengeoversiktRoutes from './routes/ForeldrepengeoversiktRoutes';
 
 import './styles/app.css';
+import { mapSakerDTOToSaker } from './utils/sakerUtils';
 
 const Foreldrepengeoversikt: React.FunctionComponent = () => {
     const bem = bemUtils('app');
@@ -44,13 +45,15 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
         );
     }
 
+    const saker = mapSakerDTOToSaker(sakerData);
+
     return (
         <div
             className={classNames(bem.block, backgroundColor === 'white' ? bem.element('white') : bem.element('blue'))}
         >
             <BrowserRouter>
                 <ScrollToTop />
-                <ForeldrepengeoversiktRoutes søkerinfo={søkerinfoData} foreldrepengerSaker={sakerData.foreldrepenger} />
+                <ForeldrepengeoversiktRoutes søkerinfo={søkerinfoData} saker={saker} />
             </BrowserRouter>
         </div>
     );

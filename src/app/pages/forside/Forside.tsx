@@ -1,23 +1,24 @@
 import React from 'react';
 import HarIkkeSaker from 'app/components/har-ikke-saker/HarIkkeSaker';
-import { Sak } from 'app/types/Sak';
 import HarSaker from 'app/components/har-saker/HarSaker';
 import { grupperSakerPåBarn } from 'app/utils/sakerUtils';
-
-import './forside.css';
+import { SakOppslag } from 'app/types/SakOppslag';
 import { bemUtils } from '@navikt/fp-common';
 
+import './forside.css';
+
 interface Props {
-    saker: Sak[];
+    saker: SakOppslag;
 }
 
 const Forside: React.FunctionComponent<Props> = ({ saker }) => {
     const grupperteSaker = grupperSakerPåBarn(saker);
     const bem = bemUtils('forside');
+    console.log(grupperteSaker);
 
     return (
         <div className={bem.block}>
-            {saker.length > 0 ? <HarSaker grupperteSaker={grupperteSaker} /> : <HarIkkeSaker />}
+            {saker.foreldrepenger.length > 0 ? <HarSaker grupperteSaker={grupperteSaker} /> : <HarIkkeSaker />}
         </div>
     );
 };

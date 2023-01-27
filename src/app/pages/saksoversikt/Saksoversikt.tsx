@@ -4,10 +4,8 @@ import SeDokumenter from 'app/components/se-dokumenter/SeDokumenter';
 import SeOpplysninger from 'app/components/se-opplysninger/SeOpplysninger';
 import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import DinPlan from 'app/sections/din-plan/DinPlan';
-import Oppgaver from 'app/sections/oppgaver/Oppgaver';
 import Tidslinje from 'app/sections/tidslinje/Tidslinje';
-import Topp from 'app/sections/topp/Topp';
-import { Sak } from 'app/types/Sak';
+import { SakOppslag } from 'app/types/SakOppslag';
 import { slåSammenLikePerioder } from 'app/utils/planUtils';
 import React from 'react';
 import { useIntl } from 'react-intl';
@@ -16,16 +14,17 @@ import { Outlet } from 'react-router-dom';
 import './saksoversikt.css';
 
 interface Props {
-    foreldrepengerSaker: Sak[];
     navnPåSøker: string;
+    saker: SakOppslag;
 }
 
-const Saksoversikt: React.FunctionComponent<Props> = ({ foreldrepengerSaker, navnPåSøker }) => {
+const Saksoversikt: React.FunctionComponent<Props> = ({ saker, navnPåSøker }) => {
     const intl = useIntl();
     const bem = bemUtils('saksoversikt');
     useSetBackgroundColor('blue');
+    const { foreldrepenger } = saker;
 
-    const gjeldendeSak = foreldrepengerSaker.length > 0 ? foreldrepengerSaker[0] : undefined;
+    const gjeldendeSak = foreldrepenger.length > 0 ? foreldrepenger[0] : undefined;
     let gjeldendeVedtak = undefined;
 
     if (gjeldendeSak) {
@@ -34,10 +33,6 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ foreldrepengerSaker, nav
 
     return (
         <div className={bem.block}>
-            <Topp saksnummer={gjeldendeSak?.saksnummer} />
-            <ContentSection heading={intlUtils(intl, 'saksoversikt.oppgaver')} backgroundColor="yellow">
-                <Oppgaver />
-            </ContentSection>
             {gjeldendeSak && (
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.tidslinje')}>
                     <Tidslinje saksnummer={gjeldendeSak.saksnummer} />

@@ -1,6 +1,7 @@
 import { ExternalLink } from '@navikt/ds-icons';
 import { Alert, BodyShort, Button, Heading, Link } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
+import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import React from 'react';
 import ContentSection from '../content-section/ContentSection';
 
@@ -8,6 +9,7 @@ import './har-ikke-saker.css';
 
 const HarIkkeSaker = () => {
     const bem = bemUtils('har-ikke-saker');
+    useSetBackgroundColor('blue');
 
     return (
         <>

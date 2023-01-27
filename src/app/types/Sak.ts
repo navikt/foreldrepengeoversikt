@@ -3,8 +3,9 @@ import { Familiehendelse } from './Familiehendelse';
 import { Periode } from './Periode';
 import { Person } from './Person';
 import { RettighetType } from './RettighetType';
+import { Ytelse } from './Ytelse';
 
-export interface Sak {
+export interface SakDTO {
     saksnummer: string;
     sakAvsluttet: boolean;
     sisteSøknadMottattDato: string;
@@ -22,4 +23,8 @@ export interface Sak {
     };
     barn: Person[];
     dekningsgrad: Dekningsgrad;
+}
+
+export interface Sak extends SakDTO {
+    ytelse: Ytelse.FORELDREPENGER;
 }
