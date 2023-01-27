@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import OversiktRoutes from './routes';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import Saksoversikt from 'app/pages/saksoversikt/Saksoversikt';
@@ -40,27 +40,31 @@ const getHeaderRouteInfo = (path: string) => {
 
 const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinfo, saker }) => {
     const bem = bemUtils('routesWrapper');
+    const [hasNavigated, setHasNavigated] = useState(false);
     const navigate = useNavigate();
     const path = location.pathname;
 
     useEffect(() => {
-        const antallSaker = getAntallSaker(saker);
-        const { foreldrepenger, engangsstønad, svangerskapspenger } = saker;
+        if (!hasNavigated) {
+            setHasNavigated(true);
+            const antallSaker = getAntallSaker(saker);
+            const { foreldrepenger, engangsstønad, svangerskapspenger } = saker;
 
-        if (antallSaker === 1) {
-            if (foreldrepenger.length === 1) {
-                navigate(foreldrepenger[0].saksnummer);
-            }
+            if (antallSaker === 1) {
+                if (foreldrepenger.length === 1) {
+                    navigate(foreldrepenger[0].saksnummer);
+                }
 
-            if (engangsstønad.length === 1) {
-                navigate(engangsstønad[0].saksnummer);
-            }
+                if (engangsstønad.length === 1) {
+                    navigate(engangsstønad[0].saksnummer);
+                }
 
-            if (svangerskapspenger.length === 1) {
-                navigate(svangerskapspenger[0].saksnummer);
+                if (svangerskapspenger.length === 1) {
+                    navigate(svangerskapspenger[0].saksnummer);
+                }
             }
         }
-    }, [navigate, saker]);
+    }, [navigate, saker, hasNavigated]);
 
     const headerRouteInfo = getHeaderRouteInfo(path);
 

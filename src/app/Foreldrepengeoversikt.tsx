@@ -1,7 +1,7 @@
 import { Loader } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Api from './api/api';
 import ScrollToTop from './components/scroll-to-top/ScrollToTop';
@@ -37,15 +37,22 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
         }
     }, [søkerinfoError, sakerError, annenPartsVedtakError]);
 
-    if (!søkerinfoData || !sakerData) {
+    const saker = useMemo(() => {
+        if (sakerData) {
+            console.log('wut?');
+            return mapSakerDTOToSaker(sakerData);
+        }
+
+        return undefined;
+    }, [sakerData]);
+
+    if (!søkerinfoData || !sakerData || !saker) {
         return (
             <div style={{ textAlign: 'center', padding: '12rem 0' }}>
                 <Loader type="XXL" />
             </div>
         );
     }
-
-    const saker = mapSakerDTOToSaker(sakerData);
 
     return (
         <div
