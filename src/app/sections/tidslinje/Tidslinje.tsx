@@ -13,11 +13,13 @@ interface Props {
 const getTidslinjehendelseTittel = (hendelsetype: TidslinjehendelseType): string => {
     switch (hendelsetype) {
         case TidslinjehendelseType.FØRSTEGANGSSØKNAD:
-            return 'Søknad om foreldrepenger';
+            return 'Du har sendt oss en søknad';
         case TidslinjehendelseType.INNTEKTSMELDING:
-            return 'Vi mottok inntektsmelding';
+            return 'NAV mottok inntektsmelding';
         case TidslinjehendelseType.VEDTAK:
-            return 'Vi har fattet vedtak';
+            return 'NAV har fattet vedtak';
+        case TidslinjehendelseType.ETTERSENDING:
+            return 'Du har ettersendt dokumentasjon';
         default:
             return '';
     }
