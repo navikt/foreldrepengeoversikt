@@ -14,6 +14,10 @@ const getTidslinjehendelseTittel = (hendelsetype: TidslinjehendelseType): string
     switch (hendelsetype) {
         case TidslinjehendelseType.FØRSTEGANGSSØKNAD:
             return 'Søknad om foreldrepenger';
+        case TidslinjehendelseType.INNTEKTSMELDING:
+            return 'Vi mottok inntektsmelding';
+        case TidslinjehendelseType.VEDTAK:
+            return 'Vi har fattet vedtak';
         default:
             return '';
     }
