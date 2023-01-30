@@ -18,13 +18,10 @@ spec:
       disableAutoScaling: true
   liveness:
       path: /health/isAlive
-      initialDelay: 60
+      initialDelay: 30
   readiness:
       path: /health/isReady
-      initialDelay: 60
-  prometheus:
-      enabled: false
-      path: /internal/actuator/prometheus
+      initialDelay: 30s
   ingresses:
 {{#each ingresses as |url|}}
     - {{url}}
