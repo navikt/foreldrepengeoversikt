@@ -18,10 +18,14 @@ spec:
       disableAutoScaling: true
   liveness:
       path: /health/isAlive
-      initialDelay: 30
+      initialDelay: 10
+      timeout: 1
+      periodSeconds: 5
+      failureThreshold: 10
   readiness:
       path: /health/isReady
-      initialDelay: 30s
+      initialDelay: 10
+      timeout: 1
   ingresses:
 {{#each ingresses as |url|}}
     - {{url}}
