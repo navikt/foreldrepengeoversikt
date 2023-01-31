@@ -29,7 +29,9 @@ jobs:
                       ${{ runner.os }}-build-${{ env.cache-name }}-
                       ${{ runner.os }}-build-
                       ${{ runner.os }}-
-
+            - run: |
+                node --version
+                npm --version
             - run: npm install
             - run: npm run jest
             - run: |
