@@ -19,7 +19,6 @@ jobs:
       node-version: '17.8.0'
       build-image: ${{ github.ref_name == 'master' }} # default: true
       push-image: ${{ github.ref_name == 'master' }} # default: false
-      legacy-peer-deps: false
     secrets: inherit
 
   create-issue:
