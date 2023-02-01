@@ -9,7 +9,7 @@ import { SakOppslag } from 'app/types/SakOppslag';
 import { slåSammenLikePerioder } from 'app/utils/planUtils';
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 
 import './saksoversikt.css';
 
@@ -22,9 +22,10 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ saker, navnPåSøker }) 
     const intl = useIntl();
     const bem = bemUtils('saksoversikt');
     useSetBackgroundColor('blue');
+    const params = useParams();
     const { foreldrepenger } = saker;
 
-    const gjeldendeSak = foreldrepenger.length > 0 ? foreldrepenger[0] : undefined;
+    const gjeldendeSak = foreldrepenger.find((fp) => fp.saksnummer === params.saksnummer);
     let gjeldendeVedtak = undefined;
 
     if (gjeldendeSak) {
