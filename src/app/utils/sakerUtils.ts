@@ -7,9 +7,12 @@ import { SvangerskapspengeSak, SvangerskapspengeSakDTO } from 'app/types/Svanger
 import { Ytelse } from 'app/types/Ytelse';
 import dayjs from 'dayjs';
 
+export const getAlleSaker = (saker: SakOppslag) => {
+    return [...saker.engangsstønad, ...saker.foreldrepenger, ...saker.svangerskapspenger];
+};
+
 export const grupperSakerPåBarn = (saker: SakOppslag): GruppertSak[] => {
-    const { foreldrepenger, svangerskapspenger, engangsstønad } = saker;
-    const alleSaker = [...foreldrepenger, ...svangerskapspenger, ...engangsstønad];
+    const alleSaker = getAlleSaker(saker);
 
     return alleSaker.reduce((result, sak) => {
         const familiehendelsedato = getFamiliehendelseDato(sak.familiehendelse);
