@@ -64,7 +64,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
                 }
             }
         }
-    }, [navigate, saker, hasNavigated]);
+    }, [navigate, saker]);
 
     const headerRouteInfo = getHeaderRouteInfo(path);
 
