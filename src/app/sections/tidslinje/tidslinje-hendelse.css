@@ -23,6 +23,11 @@
     z-index: 0;
 }
 
+.tidslinje-hendelse:first-child:before {
+    top: 24px;
+    border: 1px solid var(--a-gray-600);
+}
+
 .tidslinje-hendelse:last-child:before {
     height: 27px;
 }

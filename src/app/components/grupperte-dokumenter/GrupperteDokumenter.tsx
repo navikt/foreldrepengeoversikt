@@ -17,11 +17,11 @@ const GrupperteDokumenter: React.FunctionComponent<Props> = ({ dokumenter }) => 
     return (
         <Accordion>
             <Accordion.Item>
-                <Accordion.Header className={bem.element('header')}>
-                    <div style={{ display: 'flex', marginLeft: '0', paddingLeft: '0' }}>
-                        <Folder style={{ marginRight: '1rem' }} />
+                <Accordion.Header>
+                    <span className={bem.element('header-content')}>
+                        <Folder className={bem.element('ikon')} />
                         <BodyShort>Innsendt søknad - {formatDateExtended(dokumenter[0].mottatt)}</BodyShort>
-                    </div>
+                    </span>
                 </Accordion.Header>
                 <Accordion.Content className={bem.element('content')}>
                     {dokumenter.map((dokument) => {

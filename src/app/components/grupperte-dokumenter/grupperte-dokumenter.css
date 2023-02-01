@@ -1,7 +1,6 @@
-.grupperte-dokumenter__header {
+.grupperte-dokumenter__header-content {
     display: flex;
-    border-bottom: 1px solid var(--a-surface-neutral);
-};
+}
 
 .grupperte-dokumenter__ikon {
     margin-right: 0.5rem;
