@@ -84,32 +84,6 @@ export const mapSakerDTOToSaker = (saker: SakOppslagDTO): SakOppslag => {
     };
 };
 
-// export const grupperSakerPåBarn = (saker: Sak[]): GruppertSak[] => {
-//     return saker.reduce((result, sak) => {
-//         const familiehendelsedato = getFamiliehendelseDato(sak.familiehendelse);
-//         const relevantSak = result.find((gruppertSak) => findRelevantSak(gruppertSak, familiehendelsedato));
-
-//         if (relevantSak) {
-//             relevantSak.saker.push(sak);
-//         }
-
-//         if (relevantSak && result.includes(relevantSak)) {
-//             return result;
-//         } else {
-//             const gruppertSak: GruppertSak = {
-//                 antallBarn: sak.familiehendelse.antallBarn,
-//                 familiehendelsedato,
-//                 saker: [sak],
-//                 type: utledGruppertSakType(sak.familiehendelse, sak.gjelderAdopsjon),
-//             };
-
-//             result.push(gruppertSak);
-
-//             return result;
-//         }
-//     }, [] as GruppertSak[]);
-// };
-
 export const getAntallSaker = (saker: SakOppslag) => {
     const { foreldrepenger, svangerskapspenger, engangsstønad } = saker;
     return foreldrepenger.length + svangerskapspenger.length + engangsstønad.length;
