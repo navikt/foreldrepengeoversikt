@@ -6,6 +6,7 @@ import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import DinPlan from 'app/sections/din-plan/DinPlan';
 import Tidslinje from 'app/sections/tidslinje/Tidslinje';
 import { SakOppslag } from 'app/types/SakOppslag';
+import { Ytelse } from 'app/types/Ytelse';
 import { slåSammenLikePerioder } from 'app/utils/planUtils';
 import React from 'react';
 import { useIntl } from 'react-intl';
@@ -23,12 +24,13 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ saker, navnPåSøker }) 
     const bem = bemUtils('saksoversikt');
     useSetBackgroundColor('blue');
     const params = useParams();
-    const { foreldrepenger } = saker;
+    const { foreldrepenger, svangerskapspenger, engangsstønad } = saker;
+    const alleSaker = [...foreldrepenger, ...svangerskapspenger, ...engangsstønad];
 
-    const gjeldendeSak = foreldrepenger.find((fp) => fp.saksnummer === params.saksnummer);
+    const gjeldendeSak = alleSaker.find((fp) => fp.saksnummer === params.saksnummer);
     let gjeldendeVedtak = undefined;
 
-    if (gjeldendeSak) {
+    if (gjeldendeSak && gjeldendeSak.ytelse === Ytelse.FORELDREPENGER) {
         gjeldendeVedtak = gjeldendeSak.gjeldendeVedtak;
     }
 
