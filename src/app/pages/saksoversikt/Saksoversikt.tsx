@@ -35,7 +35,7 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ saker, navnPåSøker }) 
         <div className={bem.block}>
             {gjeldendeSak && (
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.tidslinje')}>
-                    <Tidslinje saksnummer={gjeldendeSak.saksnummer} />
+                    <Tidslinje />
                 </ContentSection>
             )}
             <ContentSection padding="none">

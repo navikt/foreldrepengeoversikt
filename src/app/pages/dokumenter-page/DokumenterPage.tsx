@@ -5,14 +5,16 @@ import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import Dokument from 'app/components/dokument/Dokument';
 import React from 'react';
 import { Upload } from '@navikt/ds-icons';
-
-import './dokumenter-page.css';
 import { grupperDokumenterPåTidspunkt } from 'app/utils/dokumenterUtils';
 import GrupperteDokumenter from 'app/components/grupperte-dokumenter/GrupperteDokumenter';
+
+import './dokumenter-page.css';
+import { useParams } from 'react-router-dom';
 
 const DokumenterPage: React.FunctionComponent = () => {
     const bem = bemUtils('dokumenter-page');
     useSetBackgroundColor('white');
+    const params = useParams();
 
     const { dokumenterData, dokumenterError } = Api.useGetDokumenter();
 
@@ -24,8 +26,9 @@ const DokumenterPage: React.FunctionComponent = () => {
         return <Loader size="large" aria-label="Henter dokumenter" />;
     }
 
-    const dokumenterGruppertPåTidspunkt = grupperDokumenterPåTidspunkt(dokumenterData);
-    console.log(dokumenterGruppertPåTidspunkt);
+    const dokumenterForSak = dokumenterData.filter((dok) => dok.saksnummer === params.saksnummer);
+
+    const dokumenterGruppertPåTidspunkt = grupperDokumenterPåTidspunkt(dokumenterForSak);
 
     return (
         <>

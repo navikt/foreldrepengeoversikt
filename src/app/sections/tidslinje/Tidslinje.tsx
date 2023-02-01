@@ -1,14 +1,11 @@
-import { Loader } from '@navikt/ds-react';
+import { BodyShort, Loader } from '@navikt/ds-react';
 import { guid } from '@navikt/fp-common';
 import Api from 'app/api/api';
 import { TidslinjehendelseType } from 'app/types/TidslinjehendelseType';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import DokumentHendelse from './DokumentHendelse';
 import TidslinjeHendelse from './TidslinjeHendelse';
-
-interface Props {
-    saksnummer: string;
-}
 
 const getTidslinjehendelseTittel = (hendelsetype: TidslinjehendelseType): string => {
     switch (hendelsetype) {
@@ -25,15 +22,16 @@ const getTidslinjehendelseTittel = (hendelsetype: TidslinjehendelseType): string
     }
 };
 
-const Tidslinje: React.FunctionComponent<Props> = ({ saksnummer }) => {
-    const { tidslinjeHendelserData, tidslinjeHendelserError } = Api.useGetTidslinjeHendelser(saksnummer);
+const Tidslinje: React.FunctionComponent = () => {
+    const params = useParams();
+    const { tidslinjeHendelserData, tidslinjeHendelserError } = Api.useGetTidslinjeHendelser(params.saksnummer!);
+
+    if (tidslinjeHendelserError) {
+        return <BodyShort>Vi har problemer med å hente informasjon om hva som skjer i saken din.</BodyShort>;
+    }
 
     if (!tidslinjeHendelserData) {
         return <Loader size="large" aria-label="Henter status for din søknad" />;
-    }
-
-    if (tidslinjeHendelserError) {
-        return <div>Klarte ikke å hente status for din søknad</div>;
     }
 
     return (

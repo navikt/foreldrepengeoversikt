@@ -39,7 +39,6 @@ const Foreldrepengeoversikt: React.FunctionComponent = () => {
 
     const saker = useMemo(() => {
         if (sakerData) {
-            console.log('wut?');
             return mapSakerDTOToSaker(sakerData);
         }
 

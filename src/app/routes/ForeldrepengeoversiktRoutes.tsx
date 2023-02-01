@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import OversiktRoutes from './routes';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import Saksoversikt from 'app/pages/saksoversikt/Saksoversikt';
@@ -40,13 +40,13 @@ const getHeaderRouteInfo = (path: string) => {
 
 const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinfo, saker }) => {
     const bem = bemUtils('routesWrapper');
-    const [hasNavigated, setHasNavigated] = useState(false);
+    const hasNavigated = useRef(false);
     const navigate = useNavigate();
     const path = location.pathname;
 
     useEffect(() => {
-        if (!hasNavigated) {
-            setHasNavigated(true);
+        if (!hasNavigated.current) {
+            hasNavigated.current = true;
             const antallSaker = getAntallSaker(saker);
             const { foreldrepenger, engangsstønad, svangerskapspenger } = saker;
 

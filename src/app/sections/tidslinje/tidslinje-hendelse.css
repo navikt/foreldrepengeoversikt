@@ -23,11 +23,6 @@
     z-index: 0;
 }
 
-.tidslinje-hendelse:first-child:before {
-    top: 0px;
-    border: none;
-}
-
 .tidslinje-hendelse:last-child:before {
     height: 27px;
 }

@@ -14,7 +14,6 @@ interface Props {
 const Forside: React.FunctionComponent<Props> = ({ saker }) => {
     const grupperteSaker = grupperSakerPåBarn(saker);
     const bem = bemUtils('forside');
-    console.log(grupperteSaker);
 
     return (
         <div className={bem.block}>
