@@ -8,7 +8,7 @@ import Tidslinje from 'app/sections/tidslinje/Tidslinje';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { Ytelse } from 'app/types/Ytelse';
 import { slåSammenLikePerioder } from 'app/utils/planUtils';
-import { getAlleSaker } from 'app/utils/sakerUtils';
+import { getAlleYtelser } from 'app/utils/sakerUtils';
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Outlet, useParams } from 'react-router-dom';
@@ -25,7 +25,7 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ saker, navnPåSøker }) 
     const bem = bemUtils('saksoversikt');
     useSetBackgroundColor('blue');
     const params = useParams();
-    const alleSaker = getAlleSaker(saker);
+    const alleSaker = getAlleYtelser(saker);
 
     const gjeldendeSak = alleSaker.find((fp) => fp.saksnummer === params.saksnummer);
     let gjeldendeVedtak = undefined;
