@@ -27,7 +27,7 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ saker, navnPåSøker }) 
     const params = useParams();
     const alleSaker = getAlleYtelser(saker);
 
-    const gjeldendeSak = alleSaker.find((fp) => fp.saksnummer === params.saksnummer);
+    const gjeldendeSak = alleSaker.find((sak) => sak.saksnummer === params.saksnummer);
     let gjeldendeVedtak = undefined;
 
     if (gjeldendeSak && gjeldendeSak.ytelse === Ytelse.FORELDREPENGER) {
@@ -36,11 +36,9 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ saker, navnPåSøker }) 
 
     return (
         <div className={bem.block}>
-            {gjeldendeSak && (
-                <ContentSection heading={intlUtils(intl, 'saksoversikt.tidslinje')}>
-                    <Tidslinje />
-                </ContentSection>
-            )}
+            <ContentSection heading={intlUtils(intl, 'saksoversikt.tidslinje')}>
+                <Tidslinje />
+            </ContentSection>
             <ContentSection padding="none">
                 <SeDokumenter />
             </ContentSection>
