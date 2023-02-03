@@ -11,12 +11,16 @@ const getTidslinjehendelseTittel = (hendelsetype: TidslinjehendelseType): string
     switch (hendelsetype) {
         case TidslinjehendelseType.FØRSTEGANGSSØKNAD:
             return 'Du har sendt oss en søknad';
+        case TidslinjehendelseType.FØRSTEGANGSSØKNAD_NY:
+            return 'Du har sendt oss en ny førstegangssøknad';
         case TidslinjehendelseType.INNTEKTSMELDING:
             return 'NAV mottok inntektsmelding';
         case TidslinjehendelseType.VEDTAK:
             return 'NAV har fattet vedtak';
         case TidslinjehendelseType.ETTERSENDING:
             return 'Du har ettersendt dokumentasjon';
+        case TidslinjehendelseType.UTGÅENDE_INNHENT_OPPLYSNINGER:
+            return 'NAV har etterspurt opplysninger';
         default:
             return '';
     }
