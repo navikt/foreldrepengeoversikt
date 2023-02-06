@@ -1,4 +1,6 @@
 {
+    "byttBrowser.ingress": "For at du skal få den beste brukeropplevelsen så anbefaler vi at du bruker en moderne nettleser som støtter moderne webstandarder, og som er betydelig sikrere.",
+    "byttBrowser.tittel": "Vi ser du en utdatert nettleser.",
     "varighet.dager": "{dager, plural, one {# dag} other {# dager}}",
     "varighet.uker": "{uker, plural, one {# uke} other {# uker}}",
     "varighet.ukerogdager": "{uker, plural, zero {} one {# uke} other {# uker}} {dager, plural, =0 {} one {og # dag} other {og # dager}}",
