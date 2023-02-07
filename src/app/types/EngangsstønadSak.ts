@@ -7,7 +7,7 @@ export interface EngangsstønadSakDTO {
     sakAvsluttet: boolean;
     gjelderAdopsjon: boolean;
     familiehendelse: Familiehendelse;
-    åpenBehandling: ÅpenBehandling;
+    åpenBehandling?: ÅpenBehandling;
 }
 
 export interface EngangsstønadSak extends EngangsstønadSakDTO {

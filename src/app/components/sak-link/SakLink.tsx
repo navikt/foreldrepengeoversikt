@@ -1,5 +1,6 @@
-import { Heading, LinkPanel } from '@navikt/ds-react';
+import { Heading, LinkPanel, Tag } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
+import { BehandlingTilstand } from 'app/types/BehandlingTilstand';
 import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
 import { Sak } from 'app/types/Sak';
 import { SvangerskapspengeSak } from 'app/types/SvangerskapspengeSak';
@@ -24,14 +25,33 @@ const getHeading = (ytelse: Ytelse) => {
     }
 };
 
+const getTag = (sak: Sak | EngangsstønadSak | SvangerskapspengeSak) => {
+    if (sak.åpenBehandling) {
+        if (!sak.sakAvsluttet) {
+            if (sak.åpenBehandling.tilstand === BehandlingTilstand.UNDER_BEHANDLING) {
+                return <Tag variant="warning">Under behandling</Tag>;
+            }
+        }
+
+        if (sak.sakAvsluttet) {
+            return <Tag variant="success">Avsluttet</Tag>;
+        }
+    }
+
+    return <Tag variant="success">Aktiv</Tag>;
+};
+
 const SakLink: React.FunctionComponent<Props> = ({ sak }) => {
     const bem = bemUtils('sak-link');
 
     return (
         <LinkPanel as={Link} to={`${sak.saksnummer}`} className={bem.block}>
-            <Heading level="3" size="medium">
-                {getHeading(sak.ytelse)}
-            </Heading>
+            <div className={bem.element('content')}>
+                <Heading level="3" size="medium">
+                    {getHeading(sak.ytelse)}
+                </Heading>
+                {getTag(sak)}
+            </div>
         </LinkPanel>
     );
 };
