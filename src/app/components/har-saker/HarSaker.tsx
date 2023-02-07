@@ -13,6 +13,10 @@ interface Props {
 }
 
 const getHeading = (type: 'fødsel' | 'termin' | 'adopsjon', antallBarn: number, familiehendelsedato: string) => {
+    if (antallBarn === 0) {
+        return `Barn med termin ${formatDate(familiehendelsedato)}`;
+    }
+
     if (type === 'fødsel') {
         return `${antallBarn} barn født ${formatDate(familiehendelsedato)}`;
     }
