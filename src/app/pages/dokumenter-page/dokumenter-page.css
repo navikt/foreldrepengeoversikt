@@ -5,9 +5,13 @@
 }
 
 .dokumenter-page__ikke-alle-dokumenter {
-    background-color: var(--a-gray-50);
-    padding: 2.5rem;
-    padding-bottom: 1rem;
-    max-width: 430px;
-    margin: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.dokumenter-page__dokumenter-liste {
+    background-color: var(--a-white);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }

@@ -1,4 +1,4 @@
-import { BodyShort, Button, Loader } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading, Loader } from '@navikt/ds-react';
 import { bemUtils, guid } from '@navikt/fp-common';
 import Api from 'app/api/api';
 import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 
 const DokumenterPage: React.FunctionComponent = () => {
     const bem = bemUtils('dokumenter-page');
-    useSetBackgroundColor('white');
+    useSetBackgroundColor('blue');
     const params = useParams();
 
     const { dokumenterData, dokumenterError } = Api.useGetDokumenter();
@@ -32,25 +32,29 @@ const DokumenterPage: React.FunctionComponent = () => {
 
     return (
         <>
-            <Button
-                variant="secondary"
-                icon={<Upload />}
-                iconPosition="right"
-                className={bem.element('ettersend-knapp')}
-            >
-                Last opp dokument
-            </Button>
-            {Object.entries(dokumenterGruppertPåTidspunkt).map((dokument) => {
-                const dokumenter = dokument[1];
+            <div className={bem.element('dokumenter-liste')}>
+                <Button
+                    variant="secondary"
+                    icon={<Upload />}
+                    iconPosition="right"
+                    className={bem.element('ettersend-knapp')}
+                >
+                    Last opp dokument
+                </Button>
+                {Object.entries(dokumenterGruppertPåTidspunkt).map((dokument) => {
+                    const dokumenter = dokument[1];
 
-                if (dokumenter.length === 1) {
-                    return <Dokument key={guid()} dokument={dokumenter[0]} />;
-                } else {
-                    return <GrupperteDokumenter key={guid()} dokumenter={dokumenter} />;
-                }
-            })}
-            <div className={bem.element('ikke-alle-dokumenter')}>
-                <BodyShort>Det er to typer dokumenter vi foreløpig ikke kan vise deg:</BodyShort>
+                    if (dokumenter.length === 1) {
+                        return <Dokument key={guid()} dokument={dokumenter[0]} />;
+                    } else {
+                        return <GrupperteDokumenter key={guid()} dokumenter={dokumenter} />;
+                    }
+                })}
+            </div>
+            <Alert variant="info" className={bem.element('ikke-alle-dokumenter')}>
+                <Heading level="3" size="small">
+                    Derfor finner du ikke alle dokumentene
+                </Heading>
                 <ul>
                     <li>
                         <BodyShort>Papirer du har sendt til NAV i posten</BodyShort>
@@ -62,7 +66,7 @@ const DokumenterPage: React.FunctionComponent = () => {
                         </BodyShort>
                     </li>
                 </ul>
-            </div>
+            </Alert>
         </>
     );
 };
