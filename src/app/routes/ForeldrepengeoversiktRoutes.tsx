@@ -20,29 +20,10 @@ interface Props {
     søkerinfo: SøkerinfoDTO;
 }
 
-const getHeaderRouteInfo = (path: string) => {
-    if (path.includes('dokumenter')) {
-        const previousPage = path.split('/dokumenter')[0];
-        return { route: previousPage, label: 'Min sak', isExternalURL: false };
-    }
-
-    if (path.includes('opplysninger')) {
-        const previousPage = path.split('/opplysninger')[0];
-        return { route: previousPage, label: 'Min sak', isExternalURL: false };
-    }
-
-    if (path.length > 1) {
-        return { route: OversiktRoutes.HOVEDSIDE, label: 'Mine foreldrepenger', isExternalURL: false };
-    }
-
-    return { route: 'https://www.nav.no/no/ditt-nav', label: 'Min side', isExternalURL: true };
-};
-
 const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinfo, saker }) => {
     const bem = bemUtils('routesWrapper');
     const hasNavigated = useRef(false);
     const navigate = useNavigate();
-    const path = location.pathname;
 
     useEffect(() => {
         if (!hasNavigated.current) {
@@ -66,15 +47,9 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
         }
     }, [navigate, saker]);
 
-    const headerRouteInfo = getHeaderRouteInfo(path);
-
     return (
         <>
-            <Header
-                route={headerRouteInfo.route}
-                linkLabel={headerRouteInfo.label}
-                externalURL={headerRouteInfo.isExternalURL}
-            />
+            <Header />
             <div className={bem.block}>
                 <Routes>
                     <Route path="/" element={<Forside saker={saker} />} />
