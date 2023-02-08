@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Button, Heading, Loader } from '@navikt/ds-react';
+import { Alert, BodyLong, Button, Heading, Loader } from '@navikt/ds-react';
 import { bemUtils, guid } from '@navikt/fp-common';
 import Api from 'app/api/api';
 import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
@@ -53,19 +53,13 @@ const DokumenterPage: React.FunctionComponent = () => {
             </div>
             <Alert variant="info" className={bem.element('ikke-alle-dokumenter')}>
                 <Heading level="3" size="small">
-                    Derfor finner du ikke alle dokumentene
+                    Er det noen dokumenter du savner?
                 </Heading>
-                <ul>
-                    <li>
-                        <BodyShort>Papirer du har sendt til NAV i posten</BodyShort>
-                    </li>
-                    <li>
-                        <BodyShort>
-                            Dokumenter som gjelder saken din, men som er sendt av andre på vegne av deg. Det kan for
-                            eksempel være en lege, advokat, verge eller fullmektig.
-                        </BodyShort>
-                    </li>
-                </ul>
+                <BodyLong>
+                    Vi har foreløpig ikke mulighet til å vise papirer du har sendt til NAV i posten, eller dokumenter
+                    som gjelder saken din, men som er sendt av andre på vegne av deg. Det kan for eksempel være en lege,
+                    advokat, verge eller fullmektig.
+                </BodyLong>
             </Alert>
         </>
     );
