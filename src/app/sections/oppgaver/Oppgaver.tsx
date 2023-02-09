@@ -22,6 +22,10 @@ const Oppgaver: React.FunctionComponent<Props> = ({ minidialogerData, minidialog
     if (!minidialogerData) {
         return <Loader size="large" aria-label="Henter status for dine oppgaver" />;
     }
+
+    if (minidialogerData === undefined || minidialogerData.length === 0) {
+        return <BodyShort>Du har ingen utestående oppgaver.</BodyShort>;
+    }
     return (
         <div className={bem.block}>
             <div className={bem.element('header')}>

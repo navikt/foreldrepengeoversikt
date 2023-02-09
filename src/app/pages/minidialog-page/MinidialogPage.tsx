@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { intlUtils } from '@navikt/fp-common';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import MinidialogSkjema from 'app/components/minidialog-skjema/MinidialogSkjema';
@@ -7,7 +7,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import OversiktRoutes from 'app/routes/routes';
 import { getAlleYtelser } from 'app/utils/sakerUtils';
 import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
-// import { Heading } from '@navikt/ds-react';
 import EttersendingDto from 'app/types/EttersendingDTO';
 import { useIntl } from 'react-intl';
 import ContentSection from 'app/components/content-section/ContentSection';
@@ -25,32 +24,41 @@ const MinidialogPage: React.FunctionComponent<Props> = ({ fnr, minidialoger, sak
     const alleSaker = getAlleYtelser(saker);
     const sak = alleSaker.find((s) => s.saksnummer === params.saksnummer);
     const minidialog = minidialoger ? minidialoger.find((d) => d.saksnr === params.saksnummer) : undefined;
+    const [isSendingEttersendelse, setIsSendingEttersendelse] = useState(false);
+    const [ettersendelseErSendt, setEttersendelseErSendt] = useState(false);
     useSetBackgroundColor('blue');
     const intl = useIntl();
 
     const sendEttersendelse = (ettersendelse: EttersendingDto) => {
-        console.log('sending... ');
-        Api.sendEttersending(ettersendelse, fnr);
-        console.log('sendt!');
+        setIsSendingEttersendelse(true);
+        Api.sendEttersending(ettersendelse, fnr)
+            .then(() => {
+                setIsSendingEttersendelse(false);
+                setEttersendelseErSendt(true);
+            })
+            .catch((_error) => {
+                throw new Error(
+                    `Vi klarte ikke å sende inn informasjonen din. Prøv igjen senere og hvis problemet vedvarer kontakt brukerstøtte.`
+                );
+            });
     };
 
     if (!minidialog || !sak) {
         navigate(OversiktRoutes.SAKSOVERSIKT);
         return null;
     }
+
     const sakstype = sak ? sak.ytelse : undefined;
     // const bem = bemUtils('minidialog');
 
     return (
         <ContentSection heading={intlUtils(intl, 'miniDialog.tilbakekreving.undertittel')}>
-            {/* <Block padBottom="l">
-                <Heading size="large">{intlUtils(intl, 'miniDialog.tilbakekreving.undertittel')}</Heading>
-            </Block> */}
             <MinidialogSkjema
-                sakstype={sakstype!} //TODO, er den alltid ikke undefined?
+                sakstype={sakstype!}
                 minidialog={minidialog}
                 onSubmit={sendEttersendelse}
-                // isSendingEttersendelse={isSendingEttersendelse}
+                isSendingEttersendelse={isSendingEttersendelse}
+                ettersendelseErSendt={ettersendelseErSendt}
             />
         </ContentSection>
     );

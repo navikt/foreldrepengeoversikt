@@ -5,20 +5,29 @@ import './minidialogSkjema.css';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { bemUtils, formatDate, intlUtils } from '@navikt/fp-common';
 import { JaNeiSpørsmål } from 'app/types/JaNeiSpørsmål';
-import { Button, Chat, GuidePanel, Radio, RadioGroup, Textarea } from '@navikt/ds-react';
+import { Alert, Button, Chat, GuidePanel, Radio, RadioGroup, Textarea } from '@navikt/ds-react';
 import { Ytelse } from 'app/types/Ytelse';
 import EttersendingDto from 'app/types/EttersendingDTO';
 import { Attachment } from 'app/types/Attachment';
 import { isAttachmentWithError } from 'app/utils/attachementUtils';
 import { Block } from '@navikt/fp-common';
 import { Skjemanummer } from 'app/types/Skjemanummer';
+import { Link } from 'react-router-dom';
 interface Props {
+    ettersendelseErSendt: boolean;
+    isSendingEttersendelse: boolean;
     minidialog: MinidialogInnslag;
     onSubmit: (ettersendelse: EttersendingDto) => void;
     sakstype: Ytelse;
 }
 
-const MinidialogSkjema: React.FunctionComponent<Props> = ({ sakstype, minidialog, onSubmit }) => {
+const MinidialogSkjema: React.FunctionComponent<Props> = ({
+    ettersendelseErSendt,
+    isSendingEttersendelse,
+    sakstype,
+    minidialog,
+    onSubmit,
+}) => {
     const intl = useIntl();
     const [fritekst, updateFritekst] = useState('');
     const [svar, setSvar] = useState<string | undefined>(undefined);
@@ -39,6 +48,20 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({ sakstype, minidialog
     };
 
     const bem = bemUtils('minidialogSkjema');
+    if (ettersendelseErSendt) {
+        return (
+            <div>
+                <Block padBottom="l">
+                    <Alert variant="success">Svaret ditt er sendt.</Alert>
+                </Block>
+                <Block padBottom="l">
+                    <Link to={`/${minidialog.saksnr}`} className={bem.element('linkPanel')}>
+                        Gå tilbake til saken
+                    </Link>
+                </Block>
+            </div>
+        );
+    }
     return (
         <form
             className={bem.block}
@@ -96,8 +119,9 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({ sakstype, minidialog
             {svar !== undefined && (
                 <Block padBottom="l">
                     <div className={bem.element('btn')}>
-                        {/* <Button disabled={isSendingEttersendelse}> */}
-                        <Button>{intlUtils(intl, 'miniDialog.tilbakekreving.sendButton')}</Button>
+                        <Button disabled={isSendingEttersendelse}>
+                            {intlUtils(intl, 'miniDialog.tilbakekreving.sendButton')}
+                        </Button>
                     </div>
                 </Block>
             )}
