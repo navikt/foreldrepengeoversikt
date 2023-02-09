@@ -18,6 +18,7 @@ const Oppgaver: React.FunctionComponent<Props> = ({ minidialogerData, minidialog
         return <BodyShort>Vi har problemer med å hente informasjon om oppgavene i saken din.</BodyShort>;
     }
 
+    //TODO: Hvis ingen oppgaver - vis informasjon om det?
     if (!minidialogerData) {
         return <Loader size="large" aria-label="Henter status for dine oppgaver" />;
     }

@@ -113,7 +113,13 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
                         <Route path={OversiktRoutes.DOKUMENTER} element={<DokumenterPage />} />
                         <Route
                             path=":oppgaveId"
-                            element={<MinidialogPage minidialoger={minidialogerData} saker={saker} />}
+                            element={
+                                <MinidialogPage
+                                    minidialoger={minidialogerData}
+                                    saker={saker}
+                                    fnr={søkerinfo.søker.fnr}
+                                />
+                            }
                         />
                     </Route>
                     <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />

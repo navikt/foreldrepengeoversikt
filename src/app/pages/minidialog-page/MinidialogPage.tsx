@@ -11,13 +11,15 @@ import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import EttersendingDto from 'app/types/EttersendingDTO';
 import { useIntl } from 'react-intl';
 import ContentSection from 'app/components/content-section/ContentSection';
+import Api from 'app/api/api';
 
 interface Props {
+    fnr: string;
     minidialoger: MinidialogInnslag[] | undefined;
     saker: SakOppslag;
 }
 
-const MinidialogPage: React.FunctionComponent<Props> = ({ minidialoger, saker }) => {
+const MinidialogPage: React.FunctionComponent<Props> = ({ fnr, minidialoger, saker }) => {
     const params = useParams();
     const navigate = useNavigate();
     const alleSaker = getAlleYtelser(saker);
@@ -26,7 +28,11 @@ const MinidialogPage: React.FunctionComponent<Props> = ({ minidialoger, saker })
     useSetBackgroundColor('blue');
     const intl = useIntl();
 
-    const sendEttersendelse = (ettersendelse: EttersendingDto) => console.log('sending: ', ettersendelse);
+    const sendEttersendelse = (ettersendelse: EttersendingDto) => {
+        console.log('sending... ');
+        Api.sendEttersending(ettersendelse, fnr);
+        console.log('sendt!');
+    };
 
     if (!minidialog || !sak) {
         navigate(OversiktRoutes.SAKSOVERSIKT);
