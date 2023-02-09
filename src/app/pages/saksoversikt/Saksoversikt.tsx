@@ -4,11 +4,14 @@ import SeDokumenter from 'app/components/se-dokumenter/SeDokumenter';
 import SeOpplysninger from 'app/components/se-opplysninger/SeOpplysninger';
 import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import DinPlan from 'app/sections/din-plan/DinPlan';
+import Oppgaver from 'app/sections/oppgaver/Oppgaver';
 import Tidslinje from 'app/sections/tidslinje/Tidslinje';
+import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { Ytelse } from 'app/types/Ytelse';
 import { slåSammenLikePerioder } from 'app/utils/planUtils';
 import { getAlleYtelser } from 'app/utils/sakerUtils';
+import { AxiosError } from 'axios';
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Outlet, useParams } from 'react-router-dom';
@@ -16,11 +19,13 @@ import { Outlet, useParams } from 'react-router-dom';
 import './saksoversikt.css';
 
 interface Props {
+    minidialogerData: MinidialogInnslag[] | undefined;
+    minidialogerError: AxiosError | null;
     navnPåSøker: string;
     saker: SakOppslag;
 }
 
-const Saksoversikt: React.FunctionComponent<Props> = ({ saker, navnPåSøker }) => {
+const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidialogerError, navnPåSøker, saker }) => {
     const intl = useIntl();
     const bem = bemUtils('saksoversikt');
     useSetBackgroundColor('blue');
@@ -36,6 +41,11 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ saker, navnPåSøker }) 
 
     return (
         <div className={bem.block}>
+            {(minidialogerData || minidialogerError) && (
+                <ContentSection heading={intlUtils(intl, 'saksoversikt.oppgaver')} backgroundColor={'yellow'}>
+                    <Oppgaver minidialogerData={minidialogerData} minidialogerError={minidialogerError} />
+                </ContentSection>
+            )}
             <ContentSection heading={intlUtils(intl, 'saksoversikt.tidslinje')}>
                 <Tidslinje />
             </ContentSection>
