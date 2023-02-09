@@ -6,12 +6,14 @@ import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import DinPlan from 'app/sections/din-plan/DinPlan';
 import Oppgaver from 'app/sections/oppgaver/Oppgaver';
 import Tidslinje from 'app/sections/tidslinje/Tidslinje';
+import { HendelseType } from 'app/types/HendelseType';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { Ytelse } from 'app/types/Ytelse';
 import { slåSammenLikePerioder } from 'app/utils/planUtils';
 import { getAlleYtelser } from 'app/utils/sakerUtils';
 import { AxiosError } from 'axios';
+import dayjs from 'dayjs';
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Outlet, useParams } from 'react-router-dom';
@@ -39,11 +41,25 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
         gjeldendeVedtak = gjeldendeSak.gjeldendeVedtak;
     }
 
+    const aktiveMinidialogerForSaken = minidialogerData
+        ? minidialogerData.filter(
+              ({ gyldigTil, aktiv, hendelse, saksnr }) =>
+                  aktiv &&
+                  saksnr === gjeldendeSak!.saksnummer &&
+                  dayjs(gyldigTil).isSameOrAfter(new Date(), 'days') &&
+                  hendelse !== HendelseType.TILBAKEKREVING_FATTET_VEDTAK
+          )
+        : undefined;
+
     return (
         <div className={bem.block}>
-            {(minidialogerData || minidialogerError) && (
+            {((aktiveMinidialogerForSaken && aktiveMinidialogerForSaken.length > 0) || minidialogerError) && (
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.oppgaver')} backgroundColor={'yellow'}>
-                    <Oppgaver minidialogerData={minidialogerData} minidialogerError={minidialogerError} />
+                    <Oppgaver
+                        minidialogerData={aktiveMinidialogerForSaken}
+                        minidialogerError={minidialogerError}
+                        saksnummer={gjeldendeSak!.saksnummer}
+                    />
                 </ContentSection>
             )}
             <ContentSection heading={intlUtils(intl, 'saksoversikt.tidslinje')}>

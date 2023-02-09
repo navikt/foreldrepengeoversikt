@@ -1,28 +1,16 @@
-/* .minidalog-lenkepanel {
-  
-} */
+.oppgave-lenkepanel__linkPanel {
+    border-radius: 0.5rem;
+}
 
-.minidalog-lenkepanel__content {
+.oppgave-lenkepanel__content {
     display: flex;
     flex-flow: row;
     justify-content: center;
 }
 
-.minidalog-lenkepanel__icon {
-    /* align-self: center;
-    margin-left: 2rem;
-    margin-right: 2rem; */
-    position: relative;
-    z-index: 2;
-    background-color: white;
-    padding-top: 4px;
-    padding-bottom: 4px;
+.oppgave-lenkepanel__icon {
+    align-self: center;
+    margin-left: 0.5rem;
+    margin-right: 1.5rem;
 }
 
-.tidslinje-hendelse__ikon svg {
-    position: relative;
-    z-index: 2;
-    background-color: white;
-    padding-top: 4px;
-    padding-bottom: 4px;
-}
