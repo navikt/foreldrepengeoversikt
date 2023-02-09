@@ -1,28 +1,39 @@
-import { BodyLong, LinkPanel } from '@navikt/ds-react';
-import { bemUtils } from '@navikt/fp-common';
+import { BodyLong } from '@navikt/ds-react';
+import { bemUtils, guid } from '@navikt/fp-common';
+import { HendelseType } from 'app/types/HendelseType';
+import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
+import dayjs from 'dayjs';
 import React from 'react';
-
+import OppgaveLenkepanel from '../oppgave-lenkepanel/OppgaveLenkepanel';
 import './oppgaver.css';
-
-const Oppgaver = () => {
+interface Props {
+    minidialoger: MinidialogInnslag[];
+}
+const Oppgaver: React.FunctionComponent<Props> = ({ minidialoger }) => {
     const bem = bemUtils('oppgaver');
-
     return (
         <div className={bem.block}>
-            <div className={bem.element('tekst')}>
-                <BodyLong>NAV kan ikke behandle søknaden din før vi har fått nødvendig dokumentasjon</BodyLong>
+            <div className={bem.element('header')}>
+                <div>
+                    <BodyLong>NAV kan ikke behandle søknaden din før vi har fått nødvendig informasjon:</BodyLong>
+                </div>
             </div>
-            <LinkPanel className={bem.element('linkPanel')} href="#">
-                <LinkPanel.Title>Last opp terminbekreftelse</LinkPanel.Title>
-            </LinkPanel>
-            <LinkPanel className={bem.element('linkPanel')} href="#">
-                <LinkPanel.Title>Send meldekort</LinkPanel.Title>
-                <LinkPanel.Description>Noe beskrivelse</LinkPanel.Description>
-            </LinkPanel>
-            <LinkPanel className={bem.element('linkPanel')} href="#">
-                <LinkPanel.Title>Send info til arbeidsgiver om inntektsmelding</LinkPanel.Title>
-                <LinkPanel.Description>Noe beskrivelse</LinkPanel.Description>
-            </LinkPanel>
+            <>
+                {minidialoger
+                    .filter(
+                        ({ gyldigTil, aktiv, hendelse }) =>
+                            aktiv &&
+                            dayjs(gyldigTil).isSameOrAfter(new Date(), 'days') &&
+                            hendelse !== HendelseType.TILBAKEKREVING_FATTET_VEDTAK
+                    )
+                    .map((minidialog) => (
+                        <OppgaveLenkepanel
+                            key={guid()}
+                            tittel="Svar på varsel om tilbakebetaling"
+                            minidialogInnslag={minidialog}
+                        />
+                    ))}
+            </>
         </div>
     );
 };

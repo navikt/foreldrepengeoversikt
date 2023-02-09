@@ -1,4 +1,5 @@
 import { Dokument } from 'app/types/Dokument';
+import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { SakOppslagDTO } from 'app/types/SakOppslag';
 import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 import { Tidslinjehendelse } from 'app/types/Tidslinjehendelse';
@@ -58,12 +59,24 @@ const useGetTidslinjeHendelser = (saksnr: string) => {
     };
 };
 
+const useGetMinidialog = () => {
+    const { data, error } = useRequest<MinidialogInnslag[]>('/minidialog', {
+        config: { withCredentials: true },
+    });
+
+    return {
+        minidialogData: data,
+        minidialogError: error,
+    };
+};
+
 const Api = {
     useSøkerinfo,
     useGetSaker,
     useGetDokumenter,
     useGetAnnenPartsVedtak,
     useGetTidslinjeHendelser,
+    useGetMinidialog,
 };
 
 export default Api;

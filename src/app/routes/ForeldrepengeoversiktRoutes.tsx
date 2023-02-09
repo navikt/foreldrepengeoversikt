@@ -14,13 +14,16 @@ import { SakOppslag } from 'app/types/SakOppslag';
 
 import './routes-wrapper.css';
 import { getAntallSaker } from 'app/utils/sakerUtils';
+import MinidialogPage from 'app/pages/minidialog-page/MinidialogPage';
+import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 
 interface Props {
+    minidialoger: MinidialogInnslag[] | undefined;
     saker: SakOppslag;
     søkerinfo: SøkerinfoDTO;
 }
 
-const getHeaderRouteInfo = (path: string) => {
+const getHeaderRouteInfo = (path: string, minidialogerIds: string[] | undefined) => {
     if (path.includes('dokumenter')) {
         const previousPage = path.split('/dokumenter')[0];
         return { route: previousPage, label: 'Min sak', isExternalURL: false };
@@ -31,6 +34,12 @@ const getHeaderRouteInfo = (path: string) => {
         return { route: previousPage, label: 'Min sak', isExternalURL: false };
     }
 
+    const currentOppgaveRoute = minidialogerIds && minidialogerIds.find((id) => path.includes(id));
+    if (currentOppgaveRoute) {
+        const previousPage = path.split(`/${currentOppgaveRoute}`)[0];
+        return { route: previousPage, label: 'Min sak', isExternalURL: false };
+    }
+
     if (path.length > 1) {
         return { route: OversiktRoutes.HOVEDSIDE, label: 'Mine foreldrepenger', isExternalURL: false };
     }
@@ -38,7 +47,7 @@ const getHeaderRouteInfo = (path: string) => {
     return { route: 'https://www.nav.no/no/ditt-nav', label: 'Min side', isExternalURL: true };
 };
 
-const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinfo, saker }) => {
+const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinfo, saker, minidialoger }) => {
     const bem = bemUtils('routesWrapper');
     const hasNavigated = useRef(false);
     const navigate = useNavigate();
@@ -66,7 +75,9 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
         }
     }, [navigate, saker]);
 
-    const headerRouteInfo = getHeaderRouteInfo(path);
+    const minidialogerIds = minidialoger?.map((oppgave) => oppgave.dialogId);
+
+    const headerRouteInfo = getHeaderRouteInfo(path, minidialogerIds);
 
     return (
         <>
@@ -79,10 +90,23 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
                 <Routes>
                     <Route path="/" element={<Forside saker={saker} />} />
                     <Route path="/:saksnummer" element={<SakComponent />}>
-                        <Route index element={<Saksoversikt saker={saker} navnPåSøker={søkerinfo.søker.fornavn} />} />
+                        <Route
+                            index
+                            element={
+                                <Saksoversikt
+                                    saker={saker}
+                                    navnPåSøker={søkerinfo.søker.fornavn}
+                                    minidialoger={minidialoger}
+                                />
+                            }
+                        />
                         <Route path={OversiktRoutes.OPPLYSNINGER} element={<Opplysninger />} />
                         <Route path={OversiktRoutes.DIN_PLAN} element={<DinPlanPage />} />
                         <Route path={OversiktRoutes.DOKUMENTER} element={<DokumenterPage />} />
+                        <Route
+                            path=":oppgaveId"
+                            element={<MinidialogPage minidialoger={minidialoger} saker={saker} />}
+                        />
                     </Route>
                     <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />
                 </Routes>

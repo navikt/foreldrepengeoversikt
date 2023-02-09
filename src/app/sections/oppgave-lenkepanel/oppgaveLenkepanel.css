@@ -1,0 +1,28 @@
+/* .minidalog-lenkepanel {
+  
+} */
+
+.minidalog-lenkepanel__content {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+
+.minidalog-lenkepanel__icon {
+    /* align-self: center;
+    margin-left: 2rem;
+    margin-right: 2rem; */
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.tidslinje-hendelse__ikon svg {
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
