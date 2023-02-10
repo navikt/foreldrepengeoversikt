@@ -14,14 +14,24 @@ import { SakOppslag } from 'app/types/SakOppslag';
 
 import './routes-wrapper.css';
 import { getAntallSaker } from 'app/utils/sakerUtils';
+import MinidialogPage from 'app/pages/minidialog-page/MinidialogPage';
+import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
+import { AxiosError } from 'axios';
 import EttersendingPage from 'app/pages/ettersending/EttersendingPage';
 
 interface Props {
+    minidialogerData: MinidialogInnslag[] | undefined;
+    minidialogerError: AxiosError | null;
     saker: SakOppslag;
     søkerinfo: SøkerinfoDTO;
 }
 
-const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinfo, saker }) => {
+const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
+    søkerinfo,
+    saker,
+    minidialogerData,
+    minidialogerError,
+}) => {
     const bem = bemUtils('routesWrapper');
     const hasNavigated = useRef(false);
     const navigate = useNavigate();
@@ -48,17 +58,39 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
         }
     }, [navigate, saker]);
 
+    const minidialogerIds = minidialogerData ? minidialogerData.map((oppgave) => oppgave.dialogId) : [];
+
     return (
         <>
-            <Header />
+            <Header minidialogerIds={minidialogerIds} />
             <div className={bem.block}>
                 <Routes>
                     <Route path="/" element={<Forside saker={saker} />} />
                     <Route path="/:saksnummer" element={<SakComponent />}>
-                        <Route index element={<Saksoversikt saker={saker} navnPåSøker={søkerinfo.søker.fornavn} />} />
+                        <Route
+                            index
+                            element={
+                                <Saksoversikt
+                                    saker={saker}
+                                    navnPåSøker={søkerinfo.søker.fornavn}
+                                    minidialogerData={minidialogerData}
+                                    minidialogerError={minidialogerError}
+                                />
+                            }
+                        />
                         <Route path={OversiktRoutes.OPPLYSNINGER} element={<Opplysninger />} />
                         <Route path={OversiktRoutes.DIN_PLAN} element={<DinPlanPage />} />
                         <Route path={OversiktRoutes.DOKUMENTER} element={<DokumenterPage />} />
+                        <Route
+                            path=":oppgaveId"
+                            element={
+                                <MinidialogPage
+                                    minidialoger={minidialogerData}
+                                    saker={saker}
+                                    fnr={søkerinfo.søker.fnr}
+                                />
+                            }
+                        />
                         <Route path={OversiktRoutes.ETTERSEND} element={<EttersendingPage saker={saker} />} />
                     </Route>
                     <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />

@@ -1,7 +1,10 @@
 import { Dokument } from 'app/types/Dokument';
+import EttersendingDto from 'app/types/EttersendingDTO';
+import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { SakOppslagDTO } from 'app/types/SakOppslag';
 import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 import { Tidslinjehendelse } from 'app/types/Tidslinjehendelse';
+import getAxiosInstance from './apiInterceptor';
 import { useRequest } from './useRequest';
 
 const useSøkerinfo = () => {
@@ -58,12 +61,37 @@ const useGetTidslinjeHendelser = (saksnr: string) => {
     };
 };
 
+const useGetMinidialog = () => {
+    const { data, error } = useRequest<MinidialogInnslag[]>('/minidialog', {
+        config: { withCredentials: true },
+    });
+
+    return {
+        minidialogData: data,
+        minidialogError: error,
+    };
+};
+
+function sendEttersending(ettersending: EttersendingDto, fnr: string) {
+    const url = '/soknad/ettersend';
+
+    return getAxiosInstance(fnr).post(url, ettersending, {
+        withCredentials: true,
+        timeout: 120 * 1000,
+        headers: {
+            'content-type': 'application/json;',
+        },
+    });
+}
+
 const Api = {
     useSøkerinfo,
     useGetSaker,
     useGetDokumenter,
     useGetAnnenPartsVedtak,
     useGetTidslinjeHendelser,
+    useGetMinidialog,
+    sendEttersending,
 };
 
 export default Api;

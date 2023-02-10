@@ -3,9 +3,10 @@ import dayjs from 'dayjs';
 import { IntlShape } from 'react-intl';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isoWeek);
+dayjs.extend(isSameOrAfter);
 
 type VarighetFormat = 'full' | 'normal';
 

@@ -6,17 +6,17 @@ export enum InnsendingsType {
 }
 
 export interface Attachment {
-    id: string;
+    beskrivelse?: string;
+    error?: any;
+    file: File;
     filename: string;
     filesize: number;
-    file: File;
+    id: string;
+    innsendingsType?: InnsendingsType;
+    pending: boolean;
+    skjemanummer: Skjemanummer;
+    type: AttachmentType;
+    uploaded: boolean;
     url?: string;
     uuid?: string;
-    pending: boolean;
-    uploaded: boolean;
-    type: AttachmentType;
-    skjemanummer: Skjemanummer;
-    innsendingsType?: InnsendingsType;
-    error?: any;
-    beskrivelse?: string;
 }
