@@ -13,6 +13,9 @@ import { isAttachmentWithError } from 'app/utils/attachementUtils';
 import { Block } from '@navikt/fp-common';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { Link } from 'react-router-dom';
+import { EttersendingFormComponents, EttersendingFormField } from 'app/pages/ettersending/ettersendFormConfig';
+import FormikFileUploader from '../formik-file-uploader/FormikFileUploader';
+import { AttachmentType } from 'app/types/AttachmentType';
 interface Props {
     ettersendelseErSendt: boolean;
     isSendingEttersendelse: boolean;
@@ -105,6 +108,30 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                             label={intlUtils(intl, 'minidialog.tilbakekreving.tilbakekreving.label')}
                             value={fritekst}
                             onChange={(e: any) => updateFritekst(e.target.value)}
+                        />
+                        <EttersendingFormComponents.FormikWrapper
+                            initialValues={{ type: '', vedlegg: [] }}
+                            onSubmit={() => null}
+                            renderForm={({ values }) => {
+                                return (
+                                    <>
+                                        <EttersendingFormComponents.Form
+                                            includeButtons={false}
+                                            includeValidationSummary={true}
+                                        >
+                                            <FormikFileUploader
+                                                name={EttersendingFormField.vedlegg}
+                                                attachments={values.vedlegg || []}
+                                                label="Last opp dokumentasjon"
+                                                attachmentType={AttachmentType.TILBAKEBETALING}
+                                                skjemanummer={Skjemanummer.TILBAKEBETALING}
+                                                legend=""
+                                                buttonLabel="Last opp dokumentasajon"
+                                            />
+                                        </EttersendingFormComponents.Form>
+                                    </>
+                                );
+                            }}
                         />
                     </div>
                 </Block>
