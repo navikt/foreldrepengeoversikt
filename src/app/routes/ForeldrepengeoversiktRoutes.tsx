@@ -34,7 +34,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
 
             if (antallSaker === 1) {
                 if (foreldrepenger.length === 1) {
-                    navigate(foreldrepenger[0].saksnummer);
+                    //navigate(foreldrepenger[0].saksnummer);
                 }
 
                 if (engangsstønad.length === 1) {
@@ -59,7 +59,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
                         <Route path={OversiktRoutes.OPPLYSNINGER} element={<Opplysninger />} />
                         <Route path={OversiktRoutes.DIN_PLAN} element={<DinPlanPage />} />
                         <Route path={OversiktRoutes.DOKUMENTER} element={<DokumenterPage />} />
-                        <Route path={OversiktRoutes.ETTERSEND} element={<EttersendingPage />} />
+                        <Route path={OversiktRoutes.ETTERSEND} element={<EttersendingPage saker={saker} />} />
                     </Route>
                     <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />
                 </Routes>

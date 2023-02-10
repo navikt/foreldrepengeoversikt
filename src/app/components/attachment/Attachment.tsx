@@ -1,12 +1,13 @@
 import React from 'react';
-import classnames from 'classnames';
-import { useIntl } from 'react-intl';
-import { bemUtils, intlUtils, SlettKnapp, VedleggIkon } from '@navikt/fp-common';
+import { bemUtils } from '@navikt/fp-common';
 import { Attachment as AttachmentType } from 'app/types/Attachment';
-import { Link, Loader } from '@navikt/ds-react';
+import { Button, Link, Loader } from '@navikt/ds-react';
 import { bytesString } from 'app/utils/attachmentUtils';
+import { FileSuccess } from '@navikt/ds-icons';
+import { Delete } from '@navikt/ds-icons';
 
 import './attachment.css';
+import classNames from 'classnames';
 
 export interface Props {
     attachment: AttachmentType;
@@ -15,20 +16,16 @@ export interface Props {
 }
 
 const Attachment: React.FunctionComponent<Props> = ({ attachment, showFileSize, onDelete }) => {
-    const intl = useIntl();
     const bem = bemUtils('attachment');
-    const cls = classnames(bem.block, {
-        [bem.modifier('pending')]: attachment.pending,
-    });
 
     return (
-        <div className={cls}>
+        <div className={bem.block}>
             {attachment.pending && (
                 <div className={bem.element('spinner')}>
                     <Loader size="small" />
                 </div>
             )}
-            <VedleggIkon className={bem.element('icon')} width={20} height={20} />
+            <FileSuccess height="24" width="24" className={attachment.pending ? bem.modifier('pending') : undefined} />
             <div className={bem.element('filename')}>
                 {attachment.url ? (
                     <Link href={attachment.url} target="_blank">
@@ -40,12 +37,16 @@ const Attachment: React.FunctionComponent<Props> = ({ attachment, showFileSize, 
                 {showFileSize && <div>{bytesString(attachment.filesize)}</div>}
             </div>
             {onDelete && (
-                <span className={bem.element('deleteButton')}>
-                    <SlettKnapp
-                        onClick={() => onDelete(attachment)}
-                        ariaLabel={intlUtils(intl, 'vedlegg.arialabel.slett', { navn: attachment.filename })}
-                    />
-                </span>
+                <div
+                    className={classNames(
+                        bem.element('delete-button'),
+                        attachment.pending ? bem.modifier('pending') : undefined
+                    )}
+                >
+                    <Button variant="tertiary" icon={<Delete aria-hidden />} onClick={() => onDelete(attachment)}>
+                        Slett vedlegg
+                    </Button>
+                </div>
             )}
         </div>
     );
