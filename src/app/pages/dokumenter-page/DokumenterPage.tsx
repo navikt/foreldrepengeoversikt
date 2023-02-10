@@ -1,15 +1,16 @@
-import { Alert, BodyLong, Button, Heading, Loader } from '@navikt/ds-react';
+import { Alert, BodyLong, Heading, LinkPanel, Loader } from '@navikt/ds-react';
 import { bemUtils, guid } from '@navikt/fp-common';
 import Api from 'app/api/api';
 import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import Dokument from 'app/components/dokument/Dokument';
 import React from 'react';
-import { Upload } from '@navikt/ds-icons';
 import { grupperDokumenterPåTidspunkt } from 'app/utils/dokumenterUtils';
 import GrupperteDokumenter from 'app/components/grupperte-dokumenter/GrupperteDokumenter';
+import { useParams } from 'react-router-dom';
 
 import './dokumenter-page.css';
-import { useParams } from 'react-router-dom';
+import OversiktRoutes from 'app/routes/routes';
+import { Link } from 'react-router-dom';
 
 const DokumenterPage: React.FunctionComponent = () => {
     const bem = bemUtils('dokumenter-page');
@@ -32,15 +33,15 @@ const DokumenterPage: React.FunctionComponent = () => {
 
     return (
         <>
+            <LinkPanel
+                as={Link}
+                to={`../${OversiktRoutes.ETTERSEND}`}
+                border={false}
+                className={bem.element('ettersend')}
+            >
+                <LinkPanel.Title as="h2">Ettersend dokumenter</LinkPanel.Title>
+            </LinkPanel>
             <div className={bem.element('dokumenter-liste')}>
-                <Button
-                    variant="secondary"
-                    icon={<Upload />}
-                    iconPosition="right"
-                    className={bem.element('ettersend-knapp')}
-                >
-                    Last opp dokument
-                </Button>
                 {Object.entries(dokumenterGruppertPåTidspunkt).map((dokument) => {
                     const dokumenter = dokument[1];
 

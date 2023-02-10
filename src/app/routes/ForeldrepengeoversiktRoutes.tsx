@@ -14,6 +14,7 @@ import { SakOppslag } from 'app/types/SakOppslag';
 
 import './routes-wrapper.css';
 import { getAntallSaker } from 'app/utils/sakerUtils';
+import EttersendingPage from 'app/pages/ettersending/EttersendingPage';
 
 interface Props {
     saker: SakOppslag;
@@ -58,6 +59,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({ søkerinf
                         <Route path={OversiktRoutes.OPPLYSNINGER} element={<Opplysninger />} />
                         <Route path={OversiktRoutes.DIN_PLAN} element={<DinPlanPage />} />
                         <Route path={OversiktRoutes.DOKUMENTER} element={<DokumenterPage />} />
+                        <Route path={OversiktRoutes.ETTERSEND} element={<EttersendingPage />} />
                     </Route>
                     <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />
                 </Routes>

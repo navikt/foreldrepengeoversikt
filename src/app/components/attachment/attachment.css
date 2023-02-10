@@ -1,0 +1,29 @@
+.attachmentButton {
+    display: flex;
+    height: 4rem;
+    border: 2px dashed #c6c2bf;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+}
+
+.attachmentList {
+    margin: 0;
+    padding: 0;
+}
+
+.attachmentList > li {
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    list-style-type: none;
+}
+
+.attachmentList > li:last-child {
+    margin-bottom: 0;
+}
+
+.attachment {
+    position: relative;
+    padding-left: 1rem;
+}
