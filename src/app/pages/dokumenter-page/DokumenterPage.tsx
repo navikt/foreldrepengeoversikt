@@ -1,19 +1,20 @@
-import { BodyShort, Button, Loader } from '@navikt/ds-react';
+import { Alert, BodyLong, Heading, LinkPanel, Loader } from '@navikt/ds-react';
 import { bemUtils, guid } from '@navikt/fp-common';
 import Api from 'app/api/api';
 import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import Dokument from 'app/components/dokument/Dokument';
 import React from 'react';
-import { Upload } from '@navikt/ds-icons';
 import { grupperDokumenterPåTidspunkt } from 'app/utils/dokumenterUtils';
 import GrupperteDokumenter from 'app/components/grupperte-dokumenter/GrupperteDokumenter';
+import { useParams } from 'react-router-dom';
 
 import './dokumenter-page.css';
-import { useParams } from 'react-router-dom';
+import OversiktRoutes from 'app/routes/routes';
+import { Link } from 'react-router-dom';
 
 const DokumenterPage: React.FunctionComponent = () => {
     const bem = bemUtils('dokumenter-page');
-    useSetBackgroundColor('white');
+    useSetBackgroundColor('blue');
     const params = useParams();
 
     const { dokumenterData, dokumenterError } = Api.useGetDokumenter();
@@ -32,37 +33,35 @@ const DokumenterPage: React.FunctionComponent = () => {
 
     return (
         <>
-            <Button
-                variant="secondary"
-                icon={<Upload />}
-                iconPosition="right"
-                className={bem.element('ettersend-knapp')}
+            <LinkPanel
+                as={Link}
+                to={`../${OversiktRoutes.ETTERSEND}`}
+                border={false}
+                className={bem.element('ettersend')}
             >
-                Last opp dokument
-            </Button>
-            {Object.entries(dokumenterGruppertPåTidspunkt).map((dokument) => {
-                const dokumenter = dokument[1];
+                <LinkPanel.Title as="h2">Ettersend dokumenter</LinkPanel.Title>
+            </LinkPanel>
+            <div className={bem.element('dokumenter-liste')}>
+                {Object.entries(dokumenterGruppertPåTidspunkt).map((dokument) => {
+                    const dokumenter = dokument[1];
 
-                if (dokumenter.length === 1) {
-                    return <Dokument key={guid()} dokument={dokumenter[0]} />;
-                } else {
-                    return <GrupperteDokumenter key={guid()} dokumenter={dokumenter} />;
-                }
-            })}
-            <div className={bem.element('ikke-alle-dokumenter')}>
-                <BodyShort>Det er to typer dokumenter vi foreløpig ikke kan vise deg:</BodyShort>
-                <ul>
-                    <li>
-                        <BodyShort>Papirer du har sendt til NAV i posten</BodyShort>
-                    </li>
-                    <li>
-                        <BodyShort>
-                            Dokumenter som gjelder saken din, men som er sendt av andre på vegne av deg. Det kan for
-                            eksempel være en lege, advokat, verge eller fullmektig.
-                        </BodyShort>
-                    </li>
-                </ul>
+                    if (dokumenter.length === 1) {
+                        return <Dokument key={guid()} dokument={dokumenter[0]} />;
+                    } else {
+                        return <GrupperteDokumenter key={guid()} dokumenter={dokumenter} />;
+                    }
+                })}
             </div>
+            <Alert variant="info" className={bem.element('ikke-alle-dokumenter')}>
+                <Heading level="3" size="small">
+                    Er det noen dokumenter du savner?
+                </Heading>
+                <BodyLong>
+                    Vi har foreløpig ikke mulighet til å vise papirer du har sendt til NAV i posten, eller dokumenter
+                    som gjelder saken din, men som er sendt av andre på vegne av deg. Det kan for eksempel være en lege,
+                    advokat, verge eller fullmektig.
+                </BodyLong>
+            </Alert>
         </>
     );
 };

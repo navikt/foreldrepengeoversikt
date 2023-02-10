@@ -1,3 +1,10 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background-color: var(--a-blue-50);
+}
+
 .app {
     padding-bottom: 0.125rem;
 }

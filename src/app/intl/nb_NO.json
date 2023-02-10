@@ -25,5 +25,6 @@
     "minidialog.tilbakekreving.tilbakekreving.label": "Svar på tilbakebetalingen: ",
     "miniDialog.tilbakekreving.sendButton": "Send",
     "minidialog.tilbakekreving.veilederpanel": "Saken vil bli behandlet med de opplysningene vi har tilgjengelig. Vi sender deg et vedtak når saken er ferdig behandlet.",
-    "miniDialog.tilbakekreving.radioPanelGruppe.legend": "Ønsker du å uttale deg i saken før vi behandler den?"
+    "miniDialog.tilbakekreving.radioPanelGruppe.legend": "Ønsker du å uttale deg i saken før vi behandler den?",
+    "pictureScanningGuide.apneLabel": "Les mer om hvordan du tar et bra bilde av vedlegget"
 }

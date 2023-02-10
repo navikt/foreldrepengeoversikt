@@ -3,5 +3,5 @@ import { Periode } from './Periode';
 
 export interface ÅpenBehandling {
     tilstand: BehandlingTilstand;
-    søknadsperioder: Periode[];
+    søknadsperioder?: Periode[];
 }

@@ -4,6 +4,7 @@ import { Periode } from './Periode';
 import { Person } from './Person';
 import { RettighetType } from './RettighetType';
 import { Ytelse } from './Ytelse';
+import { ÅpenBehandling } from './ÅpenBehandling';
 
 export interface SakDTO {
     saksnummer: string;
@@ -23,6 +24,7 @@ export interface SakDTO {
     };
     barn: Person[];
     dekningsgrad: Dekningsgrad;
+    åpenBehandling?: ÅpenBehandling;
 }
 
 export interface Sak extends SakDTO {

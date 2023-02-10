@@ -1,6 +1,5 @@
 .content-section {
     margin-bottom: 2rem;
-    border-radius: 0.5rem;
 }
 
 .content-section--bg-white {
@@ -22,6 +21,14 @@
 
 .content-section--padding-none {
     padding: 0;
+}
+
+.content-section--corner-style-rounded {
+    border-radius: 0.5rem;
+}
+
+.content-section--corner-style-square {
+    border-radius: 0;
 }
 
 .content-section__heading {
