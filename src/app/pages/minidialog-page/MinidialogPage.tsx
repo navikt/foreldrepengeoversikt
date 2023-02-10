@@ -50,7 +50,6 @@ const MinidialogPage: React.FunctionComponent<Props> = ({ fnr, minidialoger, sak
     }
 
     const sakstype = sak ? sak.ytelse : undefined;
-    // const bem = bemUtils('minidialog');
 
     return (
         <ContentSection>

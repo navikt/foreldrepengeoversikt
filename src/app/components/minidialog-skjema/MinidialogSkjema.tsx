@@ -1,9 +1,8 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import HvaLeggerNAVVektPå from './hva-legger-nav-vekt-på/HvaLeggerNAVVektPå';
-import './minidialogSkjema.css';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
-import { bemUtils, formatDate, intlUtils } from '@navikt/fp-common';
+import { formatDate, intlUtils } from '@navikt/fp-common';
 import { Alert, Button, Chat, GuidePanel } from '@navikt/ds-react';
 import { Ytelse } from 'app/types/Ytelse';
 import EttersendingDto from 'app/types/EttersendingDTO';
@@ -38,7 +37,6 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
         onSubmit(submitData);
     };
 
-    const bem = bemUtils('minidialogSkjema');
     if (ettersendelseErSendt) {
         return (
             <div>
@@ -46,9 +44,7 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                     <Alert variant="success">Svaret ditt er sendt.</Alert>
                 </Block>
                 <Block padBottom="l">
-                    <Link to={`/${minidialog.saksnr}`} className={bem.element('linkPanel')}>
-                        Gå tilbake til saken
-                    </Link>
+                    <Link to={`/${minidialog.saksnr}`}>Gå tilbake til saken</Link>
                 </Block>
             </div>
         );
@@ -72,7 +68,6 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                                 avatarBgColor="rgba(255, 236, 204, 1)"
                                 backgroundColor="rgba(255, 249, 240, 1)"
                                 timestamp={formatDate(minidialog.opprettet)}
-                                className={bem.element('snakkeBoble')}
                             >
                                 <Chat.Bubble>
                                     {intlUtils(intl, 'miniDialog.tilbakekreving.tittel', { sakstype })}
@@ -110,11 +105,9 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                             </div>
                         </Block>
                         <Block padBottom="l" visible={formvalues.brukerØnskerÅUttaleSeg !== YesOrNo.UNANSWERED}>
-                            <div className={bem.element('btn')}>
-                                <Button type="submit" disabled={isSendingEttersendelse}>
-                                    {intlUtils(intl, 'miniDialog.tilbakekreving.sendButton')}
-                                </Button>
-                            </div>
+                            <Button type="submit" disabled={isSendingEttersendelse}>
+                                {intlUtils(intl, 'miniDialog.tilbakekreving.sendButton')}
+                            </Button>
                         </Block>
                     </MinidialogFormComponents.Form>
                 );

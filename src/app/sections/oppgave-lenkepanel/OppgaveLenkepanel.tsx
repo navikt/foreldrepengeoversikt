@@ -19,7 +19,9 @@ const OppgaveLenkepanel: React.FunctionComponent<Props> = ({ tittel, minidialogI
                 <div className={bem.element('content')}>
                     <DialogReport className={bem.element('icon')}></DialogReport>
                     <div>
-                        <LinkPanel.Title as="h2">{tittel}</LinkPanel.Title>
+                        <LinkPanel.Title as="h3" className={bem.element('title')}>
+                            {tittel}
+                        </LinkPanel.Title>
                         <LinkPanel.Description>
                             <div className={bem.block}>{formatDate(minidialogInnslag.opprettet)}</div>
                         </LinkPanel.Description>
