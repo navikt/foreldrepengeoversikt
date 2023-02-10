@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { intlUtils } from '@navikt/fp-common';
+import { Block, intlUtils } from '@navikt/fp-common';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import MinidialogSkjema from 'app/components/minidialog-skjema/MinidialogSkjema';
 import { SakOppslag } from 'app/types/SakOppslag';
@@ -11,6 +11,7 @@ import EttersendingDto from 'app/types/EttersendingDTO';
 import { useIntl } from 'react-intl';
 import ContentSection from 'app/components/content-section/ContentSection';
 import Api from 'app/api/api';
+import { Heading } from '@navikt/ds-react';
 
 interface Props {
     fnr: string;
@@ -52,7 +53,10 @@ const MinidialogPage: React.FunctionComponent<Props> = ({ fnr, minidialoger, sak
     // const bem = bemUtils('minidialog');
 
     return (
-        <ContentSection heading={intlUtils(intl, 'miniDialog.tilbakekreving.undertittel')}>
+        <ContentSection>
+            <Block padBottom="xl">
+                <Heading size="medium">{intlUtils(intl, 'miniDialog.tilbakekreving.undertittel')}</Heading>
+            </Block>
             <MinidialogSkjema
                 sakstype={sakstype!}
                 minidialog={minidialog}

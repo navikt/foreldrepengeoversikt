@@ -58,13 +58,11 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
         }
     }, [navigate, saker]);
 
-    // const minidialogerIds = minidialogerData?.map((oppgave) => oppgave.dialogId);
-
-    // const headerRouteInfo = getHeaderRouteInfo(path, minidialogerIds);
+    const minidialogerIds = minidialogerData ? minidialogerData.map((oppgave) => oppgave.dialogId) : [];
 
     return (
         <>
-            <Header />
+            <Header minidialogerIds={minidialogerIds} />
             <div className={bem.block}>
                 <Routes>
                     <Route path="/" element={<Forside saker={saker} />} />

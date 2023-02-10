@@ -57,7 +57,6 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
         <MinidialogFormComponents.FormikWrapper
             initialValues={{
                 tilbakemelding: '',
-                // vedleggType: '',
                 vedlegg: [],
                 brukerØnskerÅUttaleSeg: YesOrNo.UNANSWERED,
             }}
@@ -80,7 +79,7 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                                 </Chat.Bubble>
                             </Chat>
                         </Block>
-                        <Block padBottom="l">
+                        <Block padBottom="xl">
                             <HvaLeggerNAVVektPå />
                         </Block>
 
@@ -90,11 +89,11 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                                 legend={intlUtils(intl, 'miniDialog.tilbakekreving.radioPanelGruppe.legend')}
                             />
                         </Block>
-                        <Block padBottom="l" visible={brukerØnskerÅUttaleSeg === true}>
-                            <MinidialogFormComponents.TextField
+                        <Block padBottom="xl" visible={brukerØnskerÅUttaleSeg === true}>
+                            <MinidialogFormComponents.Textarea
                                 name={MinidialogFormField.tilbakemelding}
                                 label={intlUtils(intl, 'minidialog.tilbakekreving.tilbakekreving.label')}
-                            ></MinidialogFormComponents.TextField>
+                            ></MinidialogFormComponents.Textarea>
                             <FormikFileUploader
                                 name={MinidialogFormField.vedlegg}
                                 attachments={formvalues.vedlegg || []}
@@ -105,7 +104,7 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                                 buttonLabel="Last opp dokumentasajon"
                             />
                         </Block>
-                        <Block padBottom="l" visible={brukerØnskerÅUttaleSeg === false}>
+                        <Block padBottom="xl" visible={brukerØnskerÅUttaleSeg === false}>
                             <div className="blokk-xs">
                                 <GuidePanel>{intlUtils(intl, 'minidialog.tilbakekreving.veilederpanel')}</GuidePanel>
                             </div>

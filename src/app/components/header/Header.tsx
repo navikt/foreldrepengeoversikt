@@ -7,7 +7,7 @@ import PreviousLink from '../previous-link/PreviousLink';
 
 import './header.css';
 
-const getHeaderRouteInfo = (path: string) => {
+const getHeaderRouteInfo = (path: string, minidialogerIds: string[]) => {
     if (path.includes('dokumenter')) {
         const previousPage = path.split('/dokumenter')[0];
         return { route: previousPage, label: 'Min sak', isExternalURL: false };
@@ -18,6 +18,12 @@ const getHeaderRouteInfo = (path: string) => {
         return { route: previousPage, label: 'Min sak', isExternalURL: false };
     }
 
+    const currentOppgaveRoute = minidialogerIds && minidialogerIds.find((id) => path.includes(id));
+    if (currentOppgaveRoute) {
+        const previousPage = path.split(`/${currentOppgaveRoute}`)[0];
+        return { route: previousPage, label: 'Min sak', isExternalURL: false };
+    }
+
     if (path.length > 1) {
         return { route: OversiktRoutes.HOVEDSIDE, label: 'Mine foreldrepenger', isExternalURL: false };
     }
@@ -25,10 +31,14 @@ const getHeaderRouteInfo = (path: string) => {
     return { route: 'https://www.nav.no/no/ditt-nav', label: 'Min side', isExternalURL: true };
 };
 
-const Header: React.FunctionComponent = () => {
+interface Props {
+    minidialogerIds: string[];
+}
+
+const Header: React.FunctionComponent<Props> = ({ minidialogerIds }) => {
     const bem = bemUtils('header');
     const path = location.pathname;
-    const headerRouteInfo = getHeaderRouteInfo(path);
+    const headerRouteInfo = getHeaderRouteInfo(path, minidialogerIds);
     const { route, isExternalURL, label } = headerRouteInfo;
 
     return (
