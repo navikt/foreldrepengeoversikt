@@ -1,7 +1,8 @@
-import { BodyShort, ReadMore } from '@navikt/ds-react';
-import { intlUtils } from '@navikt/fp-common';
+import { ReadMore } from '@navikt/ds-react';
+import { bemUtils, intlUtils } from '@navikt/fp-common';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import './hvaLeggerNAVVektPå.css';
 
 const punktTekster = [
     'minidialog.hvaLeggerNAVVektPå.tilbakekreving.punkt1',
@@ -14,18 +15,17 @@ const punktTekster = [
 
 const HvaLeggerNAVVektPå: React.FunctionComponent = () => {
     const intl = useIntl();
+    const bem = bemUtils('hvaLeggerNAVVektPå');
 
     return (
         <ReadMore header={intlUtils(intl, 'minidialog.hvaLeggerNAVVektPå.tilbakekreving.tittel')}>
-            <BodyShort size="small">
-                <ul>
-                    {punktTekster.map((punkt, index) => (
-                        <li key={`${punkt}+${index}`}>
-                            <FormattedMessage id={punkt} />
-                        </li>
-                    ))}
-                </ul>
-            </BodyShort>
+            <ul className={bem.element('tekst')}>
+                {punktTekster.map((punkt, index) => (
+                    <li key={`${punkt}+${index}`}>
+                        <FormattedMessage id={punkt} />
+                    </li>
+                ))}
+            </ul>
         </ReadMore>
     );
 };
