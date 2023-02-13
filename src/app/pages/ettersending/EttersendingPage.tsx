@@ -1,4 +1,4 @@
-import { BodyLong, BodyShort, Button, Heading, ReadMore } from '@navikt/ds-react';
+import { Alert, BodyLong, BodyShort, Button, Heading, ReadMore } from '@navikt/ds-react';
 import { bemUtils, Block, intlUtils, PictureScanningGuide } from '@navikt/fp-common';
 import Api from 'app/api/api';
 import AttachmentList from 'app/components/attachment/AttachmentList';
@@ -6,6 +6,7 @@ import FormikFileUploader from 'app/components/formik-file-uploader/FormikFileUp
 import { Attachment } from 'app/types/Attachment';
 import { AttachmentType } from 'app/types/AttachmentType';
 import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
+import EttersendingDto from 'app/types/EttersendingDTO';
 import { Sak } from 'app/types/Sak';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { Skjemanummer } from 'app/types/Skjemanummer';
@@ -15,6 +16,7 @@ import { getAlleYtelser } from 'app/utils/sakerUtils';
 import { getRelevanteSkjemanummer } from 'app/utils/skjemanummerUtils';
 import React, { useState } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { EttersendingFormComponents, EttersendingFormField, EttersendingFormData } from './ettersendFormConfig';
 
@@ -61,6 +63,7 @@ interface Props {
 const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
     const bem = bemUtils('ettersending-page');
     const [isEttersending, setIsEttersending] = useState(false);
+    const [ettersendingDone, setEttersendingDone] = useState(false);
     const intl = useIntl();
     const params = useParams();
     const alleYtelser = getAlleYtelser(saker);
@@ -68,7 +71,7 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
     const onSubmit = (values: EttersendingFormData) => {
         setIsEttersending(true);
 
-        const valuesToSend = {
+        const valuesToSend: EttersendingDto = {
             saksnummer: sak!.saksnummer,
             type: sak!.ytelse,
             vedlegg: values.vedlegg,
@@ -76,8 +79,22 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
 
         Api.sendEttersending(valuesToSend).then(() => {
             setIsEttersending(false);
+            setEttersendingDone(true);
         });
     };
+
+    if (ettersendingDone) {
+        return (
+            <div>
+                <Block padBottom="l">
+                    <Alert variant="success">Dokumentene er sendt</Alert>
+                </Block>
+                <Block padBottom="l">
+                    <Link to={`/${sak!.saksnummer}`}>{intlUtils(intl, 'miniDialog.kvittering.gåTilbakeTilSaken')}</Link>
+                </Block>
+            </div>
+        );
+    }
 
     return (
         <EttersendingFormComponents.FormikWrapper
