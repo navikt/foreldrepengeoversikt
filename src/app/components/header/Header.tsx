@@ -13,6 +13,11 @@ const getHeaderRouteInfo = (path: string, minidialogerIds: string[]) => {
         return { route: previousPage, label: 'Min sak', isExternalURL: false };
     }
 
+    if (path.includes('ettersend')) {
+        const previousPage = path.split('/ettersend')[0];
+        return { route: `${previousPage}/${OversiktRoutes.DOKUMENTER}`, label: 'Dokumenter', isExternalURL: false };
+    }
+
     if (path.includes('opplysninger')) {
         const previousPage = path.split('/opplysninger')[0];
         return { route: previousPage, label: 'Min sak', isExternalURL: false };

@@ -1,4 +1,6 @@
 import { getTypedFormComponents } from '@navikt/sif-common-formik-ds/lib';
+import { Attachment } from 'app/types/Attachment';
+import { Skjemanummer } from 'app/types/Skjemanummer';
 
 export enum EttersendingFormField {
     type = 'type',
@@ -6,8 +8,8 @@ export enum EttersendingFormField {
 }
 
 export interface EttersendingFormData {
-    [EttersendingFormField.type]: any;
-    [EttersendingFormField.vedlegg]: any[];
+    [EttersendingFormField.type]: Skjemanummer;
+    [EttersendingFormField.vedlegg]: Attachment[];
 }
 
 export const EttersendingFormComponents = getTypedFormComponents<EttersendingFormField, EttersendingFormData>();

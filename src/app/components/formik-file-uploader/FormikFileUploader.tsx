@@ -132,6 +132,13 @@ const FormikFileUploader: React.FunctionComponent<Props> = ({
                         alleNyeGyldigeVedlegg.forEach((nyttVedlegg) => push(nyttVedlegg));
                         lastOppVedlegg(alleNyeGyldigeVedlegg, replace, remove, setErrors, attachments.length, intl);
                     }}
+                    validate={() => {
+                        if (attachments.length === 0) {
+                            return 'Du må laste opp minst et vedlegg';
+                        }
+
+                        return undefined;
+                    }}
                     legend={legend}
                     buttonLabel={buttonLabel}
                     onClick={onFileInputClick}
@@ -152,7 +159,7 @@ const FormikFileUploader: React.FunctionComponent<Props> = ({
                     }}
                 />
             </Block>
-            <Block>
+            <Block padBottom="l">
                 <ReadMore header={intlUtils(intl, 'pictureScanningGuide.apneLabel')}>
                     <PictureScanningGuide />
                 </ReadMore>

@@ -1,9 +1,8 @@
 {
     "foreldrepenger": [
         {
-            "saksnummer": "352009416",
+            "saksnummer": "352011079",
             "sakAvsluttet": false,
-            "sisteSøknadMottattDato": "2022-10-11",
             "kanSøkeOmEndring": true,
             "sakTilhørerMor": true,
             "gjelderAdopsjon": false,
@@ -13,101 +12,94 @@
             "rettighetType": "BEGGE_RETT",
             "annenPart": {
                 "type": "person",
-                "fnr": "15118804322",
-                "fornavn": "Vis",
-                "etternavn": "Tyr"
+                "fnr": "03506715317",
+                "fornavn": "Aritmetisk",
+                "etternavn": "Okse"
             },
             "familiehendelse": {
-                "termindato": "2022-10-12",
+                "fødselsdato": "2022-07-01",
+                "termindato": "2022-07-01",
                 "antallBarn": 1
             },
             "gjeldendeVedtak": {
                 "perioder": [
                     {
-                        "fom": "2022-09-21",
-                        "tom": "2022-10-11",
+                        "fom": "2022-06-10",
+                        "tom": "2022-06-30",
                         "kontoType": "FORELDREPENGER_FØR_FØDSEL",
                         "resultat": {
                             "innvilget": true,
-                            "trekkerMinsterett": true
+                            "trekkerMinsterett": true,
+                            "trekkerDager": true,
+                            "årsak": "ANNET"
                         },
                         "flerbarnsdager": false
                     },
                     {
-                        "fom": "2022-10-12",
-                        "tom": "2022-11-22",
+                        "fom": "2022-07-01",
+                        "tom": "2022-08-11",
                         "kontoType": "MØDREKVOTE",
                         "resultat": {
                             "innvilget": true,
-                            "trekkerMinsterett": true
+                            "trekkerMinsterett": true,
+                            "trekkerDager": true,
+                            "årsak": "ANNET"
                         },
                         "flerbarnsdager": false
                     },
                     {
-                        "fom": "2022-11-23",
-                        "tom": "2022-12-13",
+                        "fom": "2022-08-12",
+                        "tom": "2022-10-13",
                         "kontoType": "MØDREKVOTE",
                         "resultat": {
                             "innvilget": true,
-                            "trekkerMinsterett": true
+                            "trekkerMinsterett": true,
+                            "trekkerDager": true,
+                            "årsak": "ANNET"
                         },
                         "flerbarnsdager": false
                     },
                     {
-                        "fom": "2022-12-28",
-                        "tom": "2023-01-30",
-                        "kontoType": "MØDREKVOTE",
-                        "resultat": {
-                            "innvilget": true,
-                            "trekkerMinsterett": true
-                        },
-                        "gradering": {
-                            "arbeidstidprosent": 50,
-                            "aktivitet": {
-                                "type": "ORDINÆRT_ARBEID",
-                                "arbeidsgiver": {
-                                    "id": "947064649",
-                                    "type": "ORGANISASJON"
-                                }
-                            }
-                        },
-                        "flerbarnsdager": false
-                    },
-                    {
-                        "fom": "2023-01-31",
-                        "tom": "2023-02-20",
+                        "fom": "2022-10-14",
+                        "tom": "2022-12-19",
                         "kontoType": "FELLESPERIODE",
                         "resultat": {
                             "innvilget": true,
-                            "trekkerMinsterett": true
+                            "trekkerMinsterett": true,
+                            "trekkerDager": true,
+                            "årsak": "ANNET"
                         },
                         "flerbarnsdager": false
                     },
                     {
-                        "fom": "2023-02-21",
-                        "tom": "2023-02-27",
+                        "fom": "2022-12-20",
+                        "tom": "2023-02-02",
                         "kontoType": "FELLESPERIODE",
                         "resultat": {
-                            "innvilget": true,
-                            "trekkerMinsterett": true
-                        },
-                        "gradering": {
-                            "arbeidstidprosent": 50,
-                            "aktivitet": {
-                                "type": "FRILANS"
-                            }
+                            "innvilget": false,
+                            "trekkerMinsterett": true,
+                            "trekkerDager": false,
+                            "årsak": "ANNET"
                         },
                         "flerbarnsdager": false
                     }
                 ]
             },
-            "barn": [],
+            "barn": [
+                {
+                    "type": "person",
+                    "fnr": "01472254177",
+                    "fornavn": "Magnífico",
+                    "etternavn": "Fattigmannskost",
+                    "fødselsdato": "2022-07-01"
+                }
+            ],
             "dekningsgrad": "HUNDRE"
         },
         {
-            "saksnummer": "352009416",
+            "saksnummer": "352011080",
             "sakAvsluttet": false,
-            "sisteSøknadMottattDato": "2022-10-11",
+            "sisteSøknadMottattDato": "2023-01-31",
             "kanSøkeOmEndring": true,
             "sakTilhørerMor": true,
             "gjelderAdopsjon": false,
@@ -117,89 +109,62 @@
             "rettighetType": "BEGGE_RETT",
             "annenPart": {
                 "type": "person",
-                "fnr": "15118804322",
-                "fornavn": "Vis",
-                "etternavn": "Tyr"
+                "fnr": "03506715317",
+                "fornavn": "Aritmetisk",
+                "etternavn": "Okse"
             },
             "familiehendelse": {
-                "termindato": "2021-10-12",
+                "fødselsdato": "2023-01-10",
+                "termindato": "2023-01-10",
                 "antallBarn": 1
             },
             "gjeldendeVedtak": {
                 "perioder": [
                     {
-                        "fom": "2022-09-21",
-                        "tom": "2022-10-11",
+                        "fom": "2022-12-20",
+                        "tom": "2023-01-09",
                         "kontoType": "FORELDREPENGER_FØR_FØDSEL",
                         "resultat": {
                             "innvilget": true,
-                            "trekkerMinsterett": true
+                            "trekkerMinsterett": true,
+                            "trekkerDager": true,
+                            "årsak": "ANNET"
                         },
                         "flerbarnsdager": false
                     },
                     {
-                        "fom": "2022-10-12",
-                        "tom": "2022-11-22",
-                        "kontoType": "MØDREKVOTE",
-                        "resultat": {
-                            "innvilget": true,
-                            "trekkerMinsterett": true
-                        },
-                        "flerbarnsdager": false
-                    },
-                    {
-                        "fom": "2022-11-23",
-                        "tom": "2022-12-13",
-                        "kontoType": "MØDREKVOTE",
-                        "resultat": {
-                            "innvilget": true,
-                            "trekkerMinsterett": true
-                        },
-                        "flerbarnsdager": false
-                    },
-                    {
-                        "fom": "2022-12-28",
-                        "tom": "2023-01-30",
-                        "kontoType": "MØDREKVOTE",
-                        "resultat": {
-                            "innvilget": true,
-                            "trekkerMinsterett": true
-                        },
-                        "gradering": {
-                            "arbeidstidprosent": 50,
-                            "aktivitet": {
-                                "type": "ORDINÆRT_ARBEID",
-                                "arbeidsgiver": {
-                                    "id": "947064649",
-                                    "type": "ORGANISASJON"
-                                }
-                            }
-                        },
-                        "flerbarnsdager": false
-                    },
-                    {
-                        "fom": "2023-01-31",
+                        "fom": "2023-01-10",
                         "tom": "2023-02-20",
-                        "kontoType": "FELLESPERIODE",
+                        "kontoType": "MØDREKVOTE",
                         "resultat": {
                             "innvilget": true,
-                            "trekkerMinsterett": true
+                            "trekkerMinsterett": true,
+                            "trekkerDager": true,
+                            "årsak": "ANNET"
                         },
                         "flerbarnsdager": false
                     },
                     {
                         "fom": "2023-02-21",
-                        "tom": "2023-02-27",
+                        "tom": "2023-04-24",
+                        "kontoType": "MØDREKVOTE",
+                        "resultat": {
+                            "innvilget": true,
+                            "trekkerMinsterett": true,
+                            "trekkerDager": true,
+                            "årsak": "ANNET"
+                        },
+                        "flerbarnsdager": false
+                    },
+                    {
+                        "fom": "2023-04-25",
+                        "tom": "2023-08-14",
                         "kontoType": "FELLESPERIODE",
                         "resultat": {
                             "innvilget": true,
-                            "trekkerMinsterett": true
-                        },
-                        "gradering": {
-                            "arbeidstidprosent": 50,
-                            "aktivitet": {
-                                "type": "FRILANS"
-                            }
+                            "trekkerMinsterett": true,
+                            "trekkerDager": true,
+                            "årsak": "ANNET"
                         },
                         "flerbarnsdager": false
                     }

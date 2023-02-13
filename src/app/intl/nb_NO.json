@@ -34,6 +34,7 @@
     "miniDialog.kvittering.svaretErSendt": "Svaret ditt er sendt.",
     "miniDialog.kvittering.gåTilbakeTilSaken": "Gå tilbake til saken",
     "pictureScanningGuide.apneLabel": "Les mer om hvordan du tar et bra bilde av vedlegget",
+    "ettersendelse.select.defaultValue": "Velg type vedlegg",
     "ettersendelse.I000001": "Tilretteleggings- og omplasseringsskjema for frilans eller selvstendig",
     "ettersendelse.I000007": "Inntektsopplysninger for selvstendig næringsdrivende eller frilansere",
     "ettersendelse.I000023": "Dokumentasjon av sykdom",
