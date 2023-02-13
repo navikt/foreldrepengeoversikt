@@ -72,8 +72,8 @@ const useGetMinidialog = () => {
     };
 };
 
-const sendEttersending = (ettersending: EttersendingDto) => {
-    return getAxiosInstance().post('/soknad/ettersend', ettersending, {
+const sendEttersending = (ettersending: EttersendingDto, fnr?: string) => {
+    return getAxiosInstance(fnr).post('/soknad/ettersend', ettersending, {
         timeout: 30 * 1000,
         withCredentials: true,
     });
