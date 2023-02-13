@@ -24,6 +24,9 @@ import getMessage from 'common/util/i18nUtils';
 import HvaLeggerNAVVektPå from './hva-legger-nav-vekt-på/HvaLeggerNAVVektPå';
 
 import './minidialogSkjema.less';
+import { replaceInvisibleCharsWithSpace } from 'app/utils/formUtils';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { validateTextInputField } from 'app/utils/validationUtils';
 
 interface Props {
     sak: SakBase;
@@ -50,6 +53,8 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
     const intl = useIntl();
     const [fritekst, updateFritekst] = useState('');
     const [svar, update] = useState<string | undefined>(undefined);
+    const [valideringsFeil, setValideringsFeil] = useState<string | undefined>(undefined);
+
     const brukerØnskerÅUttaleSeg = svar === JaNeiSpørsmål.JA;
     const submitData: EttersendingDto = {
         vedlegg: brukerØnskerÅUttaleSeg ? attachments.filter((a: Attachment) => !isAttachmentWithError(a)) : [],
@@ -60,7 +65,7 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
             dokumentType: Skjemanummer.TILBAKEBETALING,
             overskrift: 'Svar på tilbakebetalingen',
             tekst: brukerØnskerÅUttaleSeg
-                ? fritekst
+                ? replaceInvisibleCharsWithSpace(fritekst)
                 : 'Jeg ønsker ikke å uttale meg. Saken vil bli behandlet med de opplysningene som NAV har tilgjengelig.',
         },
     };
@@ -72,8 +77,19 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
             onSubmit={(event: FormEvent) => {
                 event.stopPropagation();
                 event.preventDefault();
-
-                return onSubmit(submitData);
+                const valideringsFeil =
+                    brukerØnskerÅUttaleSeg && !!fritekst
+                        ? validateTextInputField(
+                              fritekst,
+                              getMessage(intl, 'minidialog.tilbakekreving.tilbakekreving.label').replace(':', ''),
+                              intl
+                          )
+                        : undefined;
+                if (valideringsFeil !== undefined) {
+                    setValideringsFeil(valideringsFeil);
+                } else {
+                    return onSubmit(submitData);
+                }
             }}
         >
             <Snakkeboble topp={formaterDatoForHendelse(minidialog.opprettet)} pilHoyre={false} ikonClass={'nav'}>
@@ -127,6 +143,11 @@ const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = (
                         />
                     )}
                 </>
+            )}
+            {svar === JaNeiSpørsmål.JA && valideringsFeil && (
+                <AlertStripe className="blokk-s" type="feil">
+                    <div>{valideringsFeil}</div>
+                </AlertStripe>
             )}
             {svar !== undefined && (
                 <div className={cls.element('btn')}>
