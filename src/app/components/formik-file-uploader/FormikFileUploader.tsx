@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { ArrayHelpers, useFormikContext } from 'formik';
-import { Block, intlUtils, PictureScanningGuide } from '@navikt/fp-common';
+import { ArrayHelpers } from 'formik';
+import { Block, intlUtils } from '@navikt/fp-common';
 import { IntlShape, useIntl } from 'react-intl';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { AttachmentType } from 'app/types/AttachmentType';
 import { Attachment } from 'app/types/Attachment';
 import { FormikFileInput } from '@navikt/sif-common-formik-ds/lib';
-import { BodyShort, ReadMore } from '@navikt/ds-react';
-import { deleteAttachment, isAttachmentWithError, mapFilTilVedlegg } from 'app/utils/attachmentUtils';
-import AttachmentList from '../attachment/AttachmentList';
+import { BodyShort } from '@navikt/ds-react';
+import { mapFilTilVedlegg } from 'app/utils/attachmentUtils';
 import AttachmentApi from 'app/api/attachmentApi';
 
 export type FieldArrayReplaceFn = (index: number, value: any) => void;
@@ -117,7 +116,6 @@ const FormikFileUploader: React.FunctionComponent<Props> = ({
     ...otherProps
 }) => {
     const intl = useIntl();
-    const { setFieldValue } = useFormikContext<any>();
     const [errors, setErrors] = useState<string[]>([]);
 
     return (
@@ -149,20 +147,6 @@ const FormikFileUploader: React.FunctionComponent<Props> = ({
                     }
                     {...otherProps}
                 />
-            </Block>
-            <Block padBottom="l" visible={attachments.length > 0}>
-                <AttachmentList
-                    attachments={attachments.filter((a) => !isAttachmentWithError(a))}
-                    showFileSize={true}
-                    onDelete={(file: Attachment) => {
-                        setFieldValue(name, deleteAttachment(attachments, file));
-                    }}
-                />
-            </Block>
-            <Block padBottom="l">
-                <ReadMore header={intlUtils(intl, 'pictureScanningGuide.apneLabel')}>
-                    <PictureScanningGuide />
-                </ReadMore>
             </Block>
         </>
     );

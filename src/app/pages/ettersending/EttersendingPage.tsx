@@ -1,13 +1,16 @@
-import { BodyLong, BodyShort, Button, Heading } from '@navikt/ds-react';
-import { bemUtils } from '@navikt/fp-common';
+import { BodyLong, BodyShort, Button, Heading, ReadMore } from '@navikt/ds-react';
+import { bemUtils, Block, intlUtils, PictureScanningGuide } from '@navikt/fp-common';
 import Api from 'app/api/api';
+import AttachmentList from 'app/components/attachment/AttachmentList';
 import FormikFileUploader from 'app/components/formik-file-uploader/FormikFileUploader';
+import { Attachment } from 'app/types/Attachment';
 import { AttachmentType } from 'app/types/AttachmentType';
 import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
 import { Sak } from 'app/types/Sak';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { SvangerskapspengeSak } from 'app/types/SvangerskapspengeSak';
+import { deleteAttachment, isAttachmentWithError } from 'app/utils/attachmentUtils';
 import { getAlleYtelser } from 'app/utils/sakerUtils';
 import { getRelevanteSkjemanummer } from 'app/utils/skjemanummerUtils';
 import React, { useState } from 'react';
@@ -16,6 +19,12 @@ import { useParams } from 'react-router-dom';
 import { EttersendingFormComponents, EttersendingFormField, EttersendingFormData } from './ettersendFormConfig';
 
 import './ettersending-page.css';
+
+export const getListOfUniqueSkjemanummer = (attachments: Attachment[]) => {
+    return attachments
+        .map((a: Attachment) => a.skjemanummer)
+        .filter((s: Skjemanummer, index, self) => self.indexOf(s) === index);
+};
 
 export const getAttachmentTypeSelectOptions = (
     intl: IntlShape,
@@ -74,7 +83,7 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
         <EttersendingFormComponents.FormikWrapper
             initialValues={{ type: Skjemanummer.ANNET, vedlegg: [] }}
             onSubmit={onSubmit}
-            renderForm={({ values }) => {
+            renderForm={({ values, setFieldValue }) => {
                 return (
                     <>
                         <Heading size="large" level="2">
@@ -104,6 +113,32 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                                 legend=""
                                 buttonLabel="Last opp dokument"
                             />
+                            <Block padBottom="l" visible={values.vedlegg!.length > 0}>
+                                {getListOfUniqueSkjemanummer(values.vedlegg!).map((skjemanummer: Skjemanummer) => (
+                                    <div className={bem.element('vedleggsliste')} key={skjemanummer}>
+                                        <Heading size="small" level="2" className={bem.element('vedleggsliste-tittel')}>
+                                            {intlUtils(intl, `ettersendelse.${skjemanummer}`)}
+                                        </Heading>
+                                        <AttachmentList
+                                            attachments={values.vedlegg!.filter(
+                                                (a) => !isAttachmentWithError(a) && a.skjemanummer === skjemanummer
+                                            )}
+                                            showFileSize={true}
+                                            onDelete={(file: Attachment) => {
+                                                setFieldValue(
+                                                    EttersendingFormField.vedlegg,
+                                                    deleteAttachment(values.vedlegg!, file)
+                                                );
+                                            }}
+                                        />
+                                    </div>
+                                ))}
+                            </Block>
+                            <Block padBottom="l">
+                                <ReadMore header={intlUtils(intl, 'pictureScanningGuide.apneLabel')}>
+                                    <PictureScanningGuide />
+                                </ReadMore>
+                            </Block>
                             <Button type="submit" loading={isEttersending} disabled={isEttersending}>
                                 Send dokumenter
                             </Button>

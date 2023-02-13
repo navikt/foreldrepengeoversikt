@@ -4,7 +4,7 @@ import { Attachment } from 'app/types/Attachment';
 import EttersendingDto from 'app/types/EttersendingDTO';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { Ytelse } from 'app/types/Ytelse';
-import { isAttachmentWithError } from 'app/utils/attachementUtils';
+import { isAttachmentWithError } from 'app/utils/attachmentUtils';
 import { replaceInvisibleCharsWithSpace } from 'app/utils/formUtils';
 import { MinidialogFormData } from './minidialogSkjemaConfig';
 
