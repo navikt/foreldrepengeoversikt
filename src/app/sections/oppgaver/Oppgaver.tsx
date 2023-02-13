@@ -1,8 +1,9 @@
 import { BodyLong, BodyShort, Loader } from '@navikt/ds-react';
-import { bemUtils, guid } from '@navikt/fp-common';
+import { bemUtils, guid, intlUtils } from '@navikt/fp-common';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { AxiosError } from 'axios';
 import React from 'react';
+import { useIntl } from 'react-intl';
 import OppgaveLenkepanel from '../oppgave-lenkepanel/OppgaveLenkepanel';
 import './oppgaver.css';
 interface Props {
@@ -12,9 +13,9 @@ interface Props {
 }
 const Oppgaver: React.FunctionComponent<Props> = ({ minidialogerData, minidialogerError }) => {
     const bem = bemUtils('oppgaver');
-
+    const intl = useIntl();
     if (minidialogerError) {
-        return <BodyShort>Vi har problemer med å hente informasjon om oppgavene i saken din.</BodyShort>;
+        return <BodyShort>{intlUtils(intl, 'oppgaver.feilVedHentingAvOppgaver')}</BodyShort>;
     }
 
     if (!minidialogerData) {
@@ -25,14 +26,14 @@ const Oppgaver: React.FunctionComponent<Props> = ({ minidialogerData, minidialog
         <div className={bem.block}>
             <div className={bem.element('header')}>
                 <div>
-                    <BodyLong>NAV kan ikke behandle søknaden din før vi har fått nødvendig informasjon:</BodyLong>
+                    <BodyLong>{intlUtils(intl, 'oppgaver.informasjonTilBruker')}</BodyLong>
                 </div>
             </div>
             <>
                 {minidialogerData.map((minidialog) => (
                     <OppgaveLenkepanel
                         key={guid()}
-                        tittel="Svar på varsel om tilbakebetaling"
+                        tittel={intlUtils(intl, 'oppgaver.tittel.tilbakebetaling')}
                         minidialogInnslag={minidialog}
                     />
                 ))}

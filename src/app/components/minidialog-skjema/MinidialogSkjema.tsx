@@ -15,6 +15,7 @@ import { MinidialogFormComponents, MinidialogFormField } from './minidialogSkjem
 import { mapMinidialogInputTilDTO } from './minidialogskjemaUtils';
 import { YesOrNo } from '@navikt/sif-common-formik-ds/lib';
 import { convertYesOrNoOrUndefinedToBoolean } from 'app/utils/formUtils';
+import { validateFritekstFelt } from 'app/utils/validationUtils';
 
 interface Props {
     ettersendelseErSendt: boolean;
@@ -41,10 +42,12 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
         return (
             <div>
                 <Block padBottom="l">
-                    <Alert variant="success">Svaret ditt er sendt.</Alert>
+                    <Alert variant="success"> {intlUtils(intl, 'miniDialog.kvittering.svaretErSendt')}</Alert>
                 </Block>
                 <Block padBottom="l">
-                    <Link to={`/${minidialog.saksnr}`}>Gå tilbake til saken</Link>
+                    <Link to={`/${minidialog.saksnr}`}>
+                        {intlUtils(intl, 'miniDialog.kvittering.gåTilbakeTilSaken')}
+                    </Link>
                 </Block>
             </div>
         );
@@ -88,15 +91,19 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                             <MinidialogFormComponents.Textarea
                                 name={MinidialogFormField.tilbakemelding}
                                 label={intlUtils(intl, 'minidialog.tilbakekreving.tilbakekreving.label')}
+                                validate={validateFritekstFelt(
+                                    intl,
+                                    intlUtils(intl, 'minidialog.tilbakekreving.tilbakekreving.label').replace(':', '')
+                                )}
                             ></MinidialogFormComponents.Textarea>
                             <FormikFileUploader
                                 name={MinidialogFormField.vedlegg}
                                 attachments={formvalues.vedlegg || []}
-                                label="Last opp dokumentasjon"
+                                label={intlUtils(intl, 'miniDialog.lastOppDokumentasjon')}
                                 attachmentType={AttachmentType.TILBAKEBETALING}
                                 skjemanummer={Skjemanummer.TILBAKEBETALING}
                                 legend=""
-                                buttonLabel="Last opp dokumentasajon"
+                                buttonLabel={intlUtils(intl, 'miniDialog.lastOppDokumentasjon')}
                             />
                         </Block>
                         <Block padBottom="xl" visible={brukerØnskerÅUttaleSeg === false}>
