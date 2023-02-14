@@ -18,7 +18,7 @@ interface Props {
     vedtattUttaksplan?: Periode[];
 }
 
-const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, navnPåSøker }) => {
+const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, ikkeVedtattUttaksplan, navnPåSøker }) => {
     const bem = bemUtils('din-plan');
     const erUttaksplanVedtatt = vedtattUttaksplan ? true : false;
 
@@ -38,6 +38,24 @@ const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, navnPåSø
             </div>
             {vedtattUttaksplan &&
                 vedtattUttaksplan.map((periode, index) => {
+                    let ikkeUttak = false;
+
+                    if (isUtsettelsesperiode(periode) && periode.utsettelseÅrsak === UtsettelseÅrsakType.Fri) {
+                        ikkeUttak = true;
+                    }
+
+                    return (
+                        <PeriodeComponent
+                            key={index}
+                            periode={periode}
+                            navnForelder={navnPåSøker}
+                            ikkeUttak={ikkeUttak}
+                        />
+                    );
+                })}
+            {ikkeVedtattUttaksplan &&
+                ikkeVedtattUttaksplan.length > 0 &&
+                ikkeVedtattUttaksplan.map((periode, index) => {
                     let ikkeUttak = false;
 
                     if (isUtsettelsesperiode(periode) && periode.utsettelseÅrsak === UtsettelseÅrsakType.Fri) {

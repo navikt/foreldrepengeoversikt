@@ -16,7 +16,7 @@ import { AxiosError } from 'axios';
 import dayjs from 'dayjs';
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Outlet, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import './saksoversikt.css';
 
@@ -93,7 +93,6 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
                     />
                 </ContentSection>
             )}
-            <Outlet />
         </div>
     );
 };
