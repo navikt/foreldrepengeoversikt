@@ -44,7 +44,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
 
             if (antallSaker === 1) {
                 if (foreldrepenger.length === 1) {
-                    //navigate(foreldrepenger[0].saksnummer);
+                    navigate(foreldrepenger[0].saksnummer);
                 }
 
                 if (engangsstønad.length === 1) {
