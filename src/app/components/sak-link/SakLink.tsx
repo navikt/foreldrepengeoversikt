@@ -28,7 +28,12 @@ const getHeading = (ytelse: Ytelse) => {
 const getTag = (sak: Sak | EngangsstønadSak | SvangerskapspengeSak) => {
     if (sak.åpenBehandling) {
         if (!sak.sakAvsluttet) {
-            if (sak.åpenBehandling.tilstand === BehandlingTilstand.UNDER_BEHANDLING) {
+            if (
+                sak.åpenBehandling.tilstand === BehandlingTilstand.UNDER_BEHANDLING ||
+                sak.åpenBehandling.tilstand === BehandlingTilstand.VENTER_PÅ_INNTEKTSMELDING ||
+                sak.åpenBehandling.tilstand === BehandlingTilstand.VENTER_PÅ_DOKUMENTASJON ||
+                sak.åpenBehandling.tilstand === BehandlingTilstand.TIDLIG_SØKNAD
+            ) {
                 return <Tag variant="warning">Under behandling</Tag>;
             }
         }
