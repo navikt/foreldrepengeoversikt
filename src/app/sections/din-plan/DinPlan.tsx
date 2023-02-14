@@ -13,34 +13,46 @@ import OversiktRoutes from 'app/routes/routes';
 import './din-plan.css';
 
 interface Props {
+    ikkeVedtattUttaksplan?: Periode[];
     navnPåSøker: string;
-    vedtattUttaksplan: Periode[];
+    vedtattUttaksplan?: Periode[];
 }
 
 const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, navnPåSøker }) => {
     const bem = bemUtils('din-plan');
+    const erUttaksplanVedtatt = vedtattUttaksplan ? true : false;
 
     return (
         <>
             <div className={bem.element('header')}>
                 <div className={bem.element('header-tekst')}>
-                    <BodyLong>Du har søkt om planen nedenfor. Planen er ikke vedtatt av NAV ennå.</BodyLong>
+                    <BodyLong>
+                        {erUttaksplanVedtatt
+                            ? 'Dine perioder med foreldrepenger'
+                            : 'Du har søkt om planen nedenfor. Planen er ikke vedtatt av NAV ennå.'}
+                    </BodyLong>
                 </div>
                 <Button variant="secondary" icon={<Edit aria-hidden />} iconPosition="right">
                     Endre perioder
                 </Button>
             </div>
-            {vedtattUttaksplan.map((periode, index) => {
-                let ikkeUttak = false;
+            {vedtattUttaksplan &&
+                vedtattUttaksplan.map((periode, index) => {
+                    let ikkeUttak = false;
 
-                if (isUtsettelsesperiode(periode) && periode.utsettelseÅrsak === UtsettelseÅrsakType.Fri) {
-                    ikkeUttak = true;
-                }
+                    if (isUtsettelsesperiode(periode) && periode.utsettelseÅrsak === UtsettelseÅrsakType.Fri) {
+                        ikkeUttak = true;
+                    }
 
-                return (
-                    <PeriodeComponent key={index} periode={periode} navnForelder={navnPåSøker} ikkeUttak={ikkeUttak} />
-                );
-            })}
+                    return (
+                        <PeriodeComponent
+                            key={index}
+                            periode={periode}
+                            navnForelder={navnPåSøker}
+                            ikkeUttak={ikkeUttak}
+                        />
+                    );
+                })}
             <div>
                 <Link as={RouterLink} to={OversiktRoutes.DIN_PLAN}>
                     Se hele planen <Next />

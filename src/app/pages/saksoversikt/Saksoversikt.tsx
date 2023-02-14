@@ -36,9 +36,14 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
 
     const gjeldendeSak = alleSaker.find((sak) => sak.saksnummer === params.saksnummer);
     let gjeldendeVedtak = undefined;
+    let ubehandletSøknad = undefined;
 
     if (gjeldendeSak && gjeldendeSak.ytelse === Ytelse.FORELDREPENGER) {
         gjeldendeVedtak = gjeldendeSak.gjeldendeVedtak;
+    }
+
+    if (gjeldendeSak && gjeldendeSak.ytelse === Ytelse.FORELDREPENGER && gjeldendeSak.åpenBehandling) {
+        ubehandletSøknad = gjeldendeSak.åpenBehandling;
     }
 
     const aktiveMinidialogerForSaken = minidialogerData
@@ -75,6 +80,15 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.dinPlan')} padding="large">
                     <DinPlan
                         vedtattUttaksplan={slåSammenLikePerioder(gjeldendeVedtak.perioder)}
+                        navnPåSøker={navnPåSøker}
+                    />
+                </ContentSection>
+            )}
+
+            {ubehandletSøknad && (
+                <ContentSection heading={intlUtils(intl, 'saksoversikt.dinPlan')} padding="large">
+                    <DinPlan
+                        ikkeVedtattUttaksplan={slåSammenLikePerioder(ubehandletSøknad.søknadsperioder || [])}
                         navnPåSøker={navnPåSøker}
                     />
                 </ContentSection>
