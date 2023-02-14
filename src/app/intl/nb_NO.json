@@ -11,6 +11,8 @@
     "varighet.separator--normal": ", ",
     "saksoversikt.oppgaver": "Oppgaver",
     "saksoversikt.tidslinje": "Dette skjer i saken",
+    "saksoversikt.snarveier": "Snarveier",
+    "saksoversikt.kontaktOss": "Finner du ikke det du leter etter? Ta kontakt med oss",
     "saksoversikt.dokumentoversikt": "Dokumenter",
     "saksoversikt.dinPlan": "Din plan",
     "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
@@ -62,5 +64,7 @@
     "ettersendelse.I000117": "Dokumentasjon på NAV tiltak som utgjør 100% arbeid",
     "valideringsfeil.fritekst.kanIkkeInneholdeTegn": "{ugyldigeTegn} er ugyldige tegn i feltet \"{feltNavn}\".",
     "valideringsfeil.fritekst.forKort": "Feltet \"{feltNavn}\" må inneholde minst 25 tegn.",
-    "valideringsfeil.fritekst.forLang": "Feltet \"{feltNavn}\" kan maksimalt inneholde 1000 tegn."
+    "valideringsfeil.fritekst.forLang": "Feltet \"{feltNavn}\" kan maksimalt inneholde 1000 tegn.",
+    "snarveier.saksbehandlingstider": "Saksbehandlingstider",
+    "snarveier.sendKlagePåSak": "Send klage på sak"
 }

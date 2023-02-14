@@ -1,0 +1,42 @@
+.snarveier {
+    background-color: var(--a-red-50);
+    padding: 2rem;
+}
+
+.snarveier__title {
+    margin-bottom: 1rem;
+}
+
+.snarveier__content {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.snarveier__wrapper {
+    max-width: 704px;
+    margin: 0 auto;
+}
+
+.snarveier__linkPanel_left {
+    margin-bottom: 1rem;
+    background-color: white;
+    float:left; 
+    display:flex;
+    width: 49%;
+    border-radius: 0.5rem;
+}
+
+.snarveier__linkPanel_right {
+    margin-bottom: 1rem;
+    background-color: white;
+    float:left; 
+    display:flex;
+    width: 49%;
+    border-radius: 0.5rem;
+}
+
+.snarveier__linkTitle {
+    font-size: large;
+}
+
