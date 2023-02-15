@@ -6,12 +6,12 @@ import { SakOppslag } from 'app/types/SakOppslag';
 import { useNavigate, useParams } from 'react-router-dom';
 import OversiktRoutes from 'app/routes/routes';
 import { getAlleYtelser } from 'app/utils/sakerUtils';
-import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
 import EttersendingDto from 'app/types/EttersendingDTO';
 import { useIntl } from 'react-intl';
 import ContentSection from 'app/components/content-section/ContentSection';
 import Api from 'app/api/api';
 import { Heading } from '@navikt/ds-react';
+import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
 
 interface Props {
     fnr: string;

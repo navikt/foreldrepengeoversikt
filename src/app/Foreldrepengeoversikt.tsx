@@ -6,12 +6,12 @@ import React, { useEffect, useMemo } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Api from './api/api';
 import ScrollToTop from './components/scroll-to-top/ScrollToTop';
-import { useGetBackgroundColor } from './hooks/useGetBackgroundColor';
+import { useGetBackgroundColor } from './hooks/useBackgroundColor';
 import ForeldrepengeoversiktRoutes from './routes/ForeldrepengeoversiktRoutes';
-
-import './styles/app.css';
 import { HendelseType } from './types/HendelseType';
 import { mapSakerDTOToSaker } from './utils/sakerUtils';
+
+import './styles/app.css';
 
 const Foreldrepengeoversikt: React.FunctionComponent = () => {
     const bem = bemUtils('app');

@@ -1,6 +1,6 @@
 import { Heading } from '@navikt/ds-react';
 import { bemUtils, formatDate, guid } from '@navikt/fp-common';
-import { useSetBackgroundColor } from 'app/hooks/useSetBackgroundColor';
+import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
 import { GruppertSak } from 'app/types/GruppertSak';
 import EtBarn from 'assets/EtBarn';
 import React from 'react';
