@@ -88,7 +88,7 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
             {ubehandletSøknad && (
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.dinPlan')} padding="large">
                     <DinPlan
-                        ikkeVedtattUttaksplan={slåSammenLikePerioder(ubehandletSøknad.søknadsperioder || [])}
+                        søktePerioder={slåSammenLikePerioder(ubehandletSøknad.søknadsperioder || [])}
                         navnPåSøker={navnPåSøker}
                     />
                 </ContentSection>

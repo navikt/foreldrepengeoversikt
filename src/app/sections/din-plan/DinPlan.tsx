@@ -13,12 +13,12 @@ import OversiktRoutes from 'app/routes/routes';
 import './din-plan.css';
 
 interface Props {
-    ikkeVedtattUttaksplan?: Periode[];
     navnPåSøker: string;
+    søktePerioder?: Periode[];
     vedtattUttaksplan?: Periode[];
 }
 
-const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, ikkeVedtattUttaksplan, navnPåSøker }) => {
+const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, søktePerioder, navnPåSøker }) => {
     const bem = bemUtils('din-plan');
     const erUttaksplanVedtatt = vedtattUttaksplan ? true : false;
 
@@ -53,9 +53,10 @@ const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, ikkeVedtat
                         />
                     );
                 })}
-            {ikkeVedtattUttaksplan &&
-                ikkeVedtattUttaksplan.length > 0 &&
-                ikkeVedtattUttaksplan.map((periode, index) => {
+            {!erUttaksplanVedtatt &&
+                søktePerioder &&
+                søktePerioder.length > 0 &&
+                søktePerioder.map((periode, index) => {
                     let ikkeUttak = false;
 
                     if (isUtsettelsesperiode(periode) && periode.utsettelseÅrsak === UtsettelseÅrsakType.Fri) {
