@@ -16,7 +16,7 @@ export const slåSammenLikePerioder = (plan: Periode[]) => {
         }
 
         if (erPerioderLike(forrigePeriode, periode) && erPerioderSammenhengende(forrigePeriode, periode)) {
-            forrigePeriode.tom = periode.tom;
+            forrigePeriode = { ...forrigePeriode, tom: periode.tom };
             return;
         } else {
             nyPlan.push(forrigePeriode);
@@ -24,6 +24,8 @@ export const slåSammenLikePerioder = (plan: Periode[]) => {
 
         forrigePeriode = periode;
     });
+
+    nyPlan.push(forrigePeriode);
 
     return nyPlan;
 };
