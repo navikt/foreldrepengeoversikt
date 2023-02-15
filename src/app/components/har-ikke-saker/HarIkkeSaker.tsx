@@ -26,7 +26,7 @@ const HarIkkeSaker = () => {
                     fødsel eller adopsjon.
                 </BodyShort>
                 <div className={bem.element('link')}>
-                    <Link href="#">
+                    <Link href="https://www.nav.no/foreldrepenger">
                         Les mer om foreldrepenger <ExternalLink />
                     </Link>
                 </div>
