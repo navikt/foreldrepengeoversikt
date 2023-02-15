@@ -18,8 +18,8 @@ const Dokument: React.FunctionComponent<Props> = ({ dokument }) => {
     return (
         <div className={bem.block}>
             <div className={bem.element('content')}>
+                <FileContent className={bem.element('ikon')} />
                 <div className={bem.element('link-icon')}>
-                    <FileContent className={bem.element('ikon')} />
                     <Link href={dokument.url} target="_blank">
                         {tittel}
                     </Link>

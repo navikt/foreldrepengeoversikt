@@ -15,9 +15,9 @@ const GrupperteDokumenter: React.FunctionComponent<Props> = ({ dokumenter }) => 
     const bem = bemUtils('grupperte-dokumenter');
 
     return (
-        <Accordion>
+        <Accordion className={bem.block}>
             <Accordion.Item>
-                <Accordion.Header>
+                <Accordion.Header className={bem.element('header')}>
                     <span className={bem.element('header-content')}>
                         <Folder className={bem.element('ikon')} />
                         <BodyShort>Innsendt søknad - {formatDateExtended(dokumenter[0].mottatt)}</BodyShort>
