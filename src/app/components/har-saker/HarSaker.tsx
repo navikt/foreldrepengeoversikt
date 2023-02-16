@@ -12,7 +12,7 @@ interface Props {
     grupperteSaker: GruppertSak[];
 }
 
-const getHeading = (type: 'fødsel' | 'termin' | 'adopsjon', antallBarn: number, familiehendelsedato: string) => {
+export const getHeading = (type: 'fødsel' | 'termin' | 'adopsjon', antallBarn: number, familiehendelsedato: string) => {
     if (antallBarn === 0) {
         return `Barn med termin ${formatDate(familiehendelsedato)}`;
     }

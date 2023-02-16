@@ -4,6 +4,7 @@ import SeDokumenter from 'app/components/se-dokumenter/SeDokumenter';
 import SeOpplysninger from 'app/components/se-opplysninger/SeOpplysninger';
 import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
+import { useSetSelectedSak } from 'app/hooks/useSelectedSak';
 import OversiktRoutes from 'app/routes/routes';
 import DinPlan from 'app/sections/din-plan/DinPlan';
 import Oppgaver from 'app/sections/oppgaver/Oppgaver';
@@ -37,15 +38,17 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
     const params = useParams();
     const alleSaker = getAlleYtelser(saker);
 
-    const gjeldendeSak = alleSaker.find((sak) => sak.saksnummer === params.saksnummer);
+    const gjeldendeSak = alleSaker.find((sak) => sak.saksnummer === params.saksnummer)!;
+    useSetSelectedSak(gjeldendeSak);
+
     let gjeldendeVedtak = undefined;
     let ubehandletSøknad = undefined;
 
-    if (gjeldendeSak && gjeldendeSak.ytelse === Ytelse.FORELDREPENGER) {
+    if (gjeldendeSak.ytelse === Ytelse.FORELDREPENGER) {
         gjeldendeVedtak = gjeldendeSak.gjeldendeVedtak;
     }
 
-    if (gjeldendeSak && gjeldendeSak.ytelse === Ytelse.FORELDREPENGER && gjeldendeSak.åpenBehandling) {
+    if (gjeldendeSak.ytelse === Ytelse.FORELDREPENGER && gjeldendeSak.åpenBehandling) {
         ubehandletSøknad = gjeldendeSak.åpenBehandling;
     }
 
@@ -53,7 +56,7 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
         ? minidialogerData.filter(
               ({ gyldigTil, aktiv, hendelse, saksnr }) =>
                   aktiv &&
-                  saksnr === gjeldendeSak!.saksnummer &&
+                  saksnr === gjeldendeSak.saksnummer &&
                   dayjs(gyldigTil).isSameOrAfter(new Date(), 'days') &&
                   hendelse !== HendelseType.TILBAKEKREVING_FATTET_VEDTAK
           )

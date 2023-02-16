@@ -29,7 +29,7 @@ export const grupperSakerPåBarn = (saker: SakOppslag): GruppertSak[] => {
                 antallBarn: sak.familiehendelse.antallBarn,
                 familiehendelsedato,
                 saker: [sak],
-                type: utledGruppertSakType(sak.familiehendelse, sak.gjelderAdopsjon),
+                type: utledFamiliesituasjon(sak.familiehendelse, sak.gjelderAdopsjon),
                 ytelse: sak.ytelse,
             };
 
@@ -103,7 +103,7 @@ const findRelevantSak = (gruppertSak: GruppertSak, familiehendelsedato: string) 
     return undefined;
 };
 
-const utledGruppertSakType = (familiehendelse: Familiehendelse, gjelderAdopsjon: boolean) => {
+export const utledFamiliesituasjon = (familiehendelse: Familiehendelse, gjelderAdopsjon: boolean) => {
     if (gjelderAdopsjon) {
         return 'adopsjon';
     }
