@@ -109,7 +109,7 @@ const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined
                 <TåteflaskeBaby />
                 <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '1rem' }}>
                     <Heading size="xlarge">{getSaksoversiktHeading(sak.ytelse)}</Heading>
-                    <BodyShort>{beskrivelse}</BodyShort>
+                    <BodyShort style={{ marginBottom: '1.5rem' }}>{beskrivelse}</BodyShort>
                     {renderTag(sak)}
                 </div>
             </div>
