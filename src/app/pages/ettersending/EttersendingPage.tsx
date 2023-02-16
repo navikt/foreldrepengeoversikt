@@ -7,12 +7,10 @@ import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
 import OversiktRoutes from 'app/routes/routes';
 import { Attachment } from 'app/types/Attachment';
 import { AttachmentType } from 'app/types/AttachmentType';
-import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
 import EttersendingDto from 'app/types/EttersendingDTO';
-import { Foreldrepengesak } from 'app/types/Foreldrepengesak';
+import { Sak } from 'app/types/Sak';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { Skjemanummer } from 'app/types/Skjemanummer';
-import { SvangerskapspengeSak } from 'app/types/SvangerskapspengeSak';
 import { deleteAttachment, isAttachmentWithError } from 'app/utils/attachmentUtils';
 import { getAlleYtelser } from 'app/utils/sakerUtils';
 import { getRelevanteSkjemanummer } from 'app/utils/skjemanummerUtils';
@@ -30,10 +28,7 @@ export const getListOfUniqueSkjemanummer = (attachments: Attachment[]) => {
         .filter((s: Skjemanummer, index, self) => self.indexOf(s) === index);
 };
 
-export const getAttachmentTypeSelectOptions = (
-    intl: IntlShape,
-    sak: Foreldrepengesak | EngangsstønadSak | SvangerskapspengeSak | undefined
-) => {
+export const getAttachmentTypeSelectOptions = (intl: IntlShape, sak: Sak | undefined) => {
     if (!sak) {
         return null;
     }
