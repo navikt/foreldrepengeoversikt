@@ -1,5 +1,5 @@
 import { EngangsstønadSak } from './EngangsstønadSak';
-import { Foreldrepengesak } from './Sak';
+import { Foreldrepengesak } from './Foreldrepengesak';
 import { SvangerskapspengeSak } from './SvangerskapspengeSak';
 import { Ytelse } from './Ytelse';
 

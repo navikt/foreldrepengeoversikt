@@ -9,7 +9,7 @@ import { Attachment } from 'app/types/Attachment';
 import { AttachmentType } from 'app/types/AttachmentType';
 import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
 import EttersendingDto from 'app/types/EttersendingDTO';
-import { Foreldrepengesak } from 'app/types/Sak';
+import { Foreldrepengesak } from 'app/types/Foreldrepengesak';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { SvangerskapspengeSak } from 'app/types/SvangerskapspengeSak';

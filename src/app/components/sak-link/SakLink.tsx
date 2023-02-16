@@ -2,7 +2,7 @@ import { Heading, LinkPanel, Tag } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import { BehandlingTilstand } from 'app/types/BehandlingTilstand';
 import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
-import { Foreldrepengesak } from 'app/types/Sak';
+import { Foreldrepengesak } from 'app/types/Foreldrepengesak';
 import { SvangerskapspengeSak } from 'app/types/SvangerskapspengeSak';
 import { Ytelse } from 'app/types/Ytelse';
 import React from 'react';

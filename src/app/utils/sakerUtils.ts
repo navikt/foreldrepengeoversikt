@@ -1,7 +1,7 @@
 import { EngangsstønadSak, EngangsstønadSakDTO } from 'app/types/EngangsstønadSak';
 import { Familiehendelse } from 'app/types/Familiehendelse';
 import { GruppertSak } from 'app/types/GruppertSak';
-import { Foreldrepengesak, ForeldrepengesakDTO } from 'app/types/Sak';
+import { Foreldrepengesak, ForeldrepengesakDTO } from 'app/types/Foreldrepengesak';
 import { SakOppslag, SakOppslagDTO } from 'app/types/SakOppslag';
 import { SvangerskapspengeSak, SvangerskapspengeSakDTO } from 'app/types/SvangerskapspengeSak';
 import { Ytelse } from 'app/types/Ytelse';

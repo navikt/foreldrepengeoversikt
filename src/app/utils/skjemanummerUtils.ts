@@ -1,5 +1,5 @@
 import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
-import { Foreldrepengesak } from 'app/types/Sak';
+import { Foreldrepengesak } from 'app/types/Foreldrepengesak';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { SvangerskapspengeSak } from 'app/types/SvangerskapspengeSak';
 import { Ytelse } from 'app/types/Ytelse';
