@@ -1,5 +1,5 @@
 import { selectedRouteAtom } from 'app/atoms/selectedRouteAtom';
-import SelectedRoute from 'app/types/SelectedRoute';
+import OversiktRoutes from 'app/routes/routes';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
@@ -8,7 +8,7 @@ export const useGetSelectedRoute = () => {
     return selectedRoute;
 };
 
-export const useSetSelectedRoute = (route: SelectedRoute) => {
+export const useSetSelectedRoute = (route: OversiktRoutes) => {
     const setSelectedRoute = useSetAtom(selectedRouteAtom);
 
     useEffect(() => {

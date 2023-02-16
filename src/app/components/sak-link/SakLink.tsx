@@ -50,7 +50,7 @@ const SakLink: React.FunctionComponent<Props> = ({ sak }) => {
     const bem = bemUtils('sak-link');
 
     return (
-        <LinkPanel as={Link} to={`${sak.saksnummer}`} className={bem.block}>
+        <LinkPanel as={Link} to={`/sak/${sak.saksnummer}`} className={bem.block}>
             <div className={bem.element('content')}>
                 <Heading level="3" size="medium">
                     {getHeading(sak.ytelse)}

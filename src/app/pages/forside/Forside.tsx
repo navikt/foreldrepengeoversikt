@@ -5,7 +5,7 @@ import { getAlleYtelser, grupperSakerPåBarn } from 'app/utils/sakerUtils';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { bemUtils } from '@navikt/fp-common';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
-import SelectedRoute from 'app/types/SelectedRoute';
+import OversiktRoutes from 'app/routes/routes';
 
 import './forside.css';
 
@@ -17,7 +17,7 @@ const Forside: React.FunctionComponent<Props> = ({ saker }) => {
     const grupperteSaker = grupperSakerPåBarn(saker);
     const bem = bemUtils('forside');
     const alleYtelser = getAlleYtelser(saker);
-    useSetSelectedRoute(SelectedRoute.HOVEDSIDE);
+    useSetSelectedRoute(OversiktRoutes.HOVEDSIDE);
 
     return (
         <div className={bem.block}>

@@ -1,7 +1,7 @@
 import { Alert } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
-import SelectedRoute from 'app/types/SelectedRoute';
+import OversiktRoutes from 'app/routes/routes';
 import Sorry from 'assets/Sorry';
 import React from 'react';
 
@@ -9,7 +9,7 @@ import './opplysninger.css';
 
 const Opplysninger = () => {
     const bem = bemUtils('opplysninger');
-    useSetSelectedRoute(SelectedRoute.OPPLYSNINGER);
+    useSetSelectedRoute(OversiktRoutes.OPPLYSNINGER);
 
     return (
         <div className={bem.block}>

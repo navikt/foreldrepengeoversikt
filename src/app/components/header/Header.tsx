@@ -2,25 +2,24 @@ import { BodyShort, Heading } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import { useGetSelectedRoute } from 'app/hooks/useSelectedRoute';
 import OversiktRoutes from 'app/routes/routes';
-import SelectedRoute from 'app/types/SelectedRoute';
 import TåteflaskeBaby from 'assets/TåteflaskeBaby';
 import React from 'react';
 import PreviousLink from '../previous-link/PreviousLink';
 
 import './header.css';
 
-const getHeaderRouteInfo = (path: string, minidialogerIds: string[], selectedRoute: SelectedRoute) => {
-    if (selectedRoute === SelectedRoute.DOKUMENTER) {
+const getHeaderRouteInfo = (path: string, minidialogerIds: string[], selectedRoute: OversiktRoutes) => {
+    if (selectedRoute === OversiktRoutes.DOKUMENTER) {
         const previousPage = path.split('/dokumenter')[0];
         return { route: previousPage, label: 'Min sak', isExternalURL: false };
     }
 
-    if (selectedRoute === SelectedRoute.ETTERSEND) {
+    if (selectedRoute === OversiktRoutes.ETTERSEND) {
         const previousPage = path.split('/ettersend')[0];
         return { route: `${previousPage}/${OversiktRoutes.DOKUMENTER}`, label: 'Dokumenter', isExternalURL: false };
     }
 
-    if (selectedRoute === SelectedRoute.OPPLYSNINGER) {
+    if (selectedRoute === OversiktRoutes.OPPLYSNINGER) {
         const previousPage = path.split('/opplysninger')[0];
         return { route: previousPage, label: 'Min sak', isExternalURL: false };
     }
@@ -31,17 +30,22 @@ const getHeaderRouteInfo = (path: string, minidialogerIds: string[], selectedRou
         return { route: previousPage, label: 'Min sak', isExternalURL: false };
     }
 
-    if (selectedRoute === SelectedRoute.HOVEDSIDE) {
+    if (selectedRoute === OversiktRoutes.SAKSOVERSIKT) {
         return { route: OversiktRoutes.HOVEDSIDE, label: 'Mine foreldrepenger', isExternalURL: false };
+    }
+
+    if (selectedRoute === OversiktRoutes.DIN_PLAN) {
+        const previousPage = path.split('/din-plan')[0];
+        return { route: previousPage, label: 'Min sak', isExternalURL: false };
     }
 
     return { route: 'https://www.nav.no/no/ditt-nav', label: 'Min side', isExternalURL: true };
 };
 
-const renderHeaderContent = (selectedRoute: SelectedRoute) => {
+const renderHeaderContent = (selectedRoute: OversiktRoutes) => {
     const bem = bemUtils('header');
 
-    if (selectedRoute === SelectedRoute.HOVEDSIDE) {
+    if (selectedRoute === OversiktRoutes.HOVEDSIDE) {
         return (
             <div className={bem.element('content')}>
                 <TåteflaskeBaby />
@@ -53,7 +57,7 @@ const renderHeaderContent = (selectedRoute: SelectedRoute) => {
         );
     }
 
-    if (selectedRoute === SelectedRoute.SAKSOVERSIKT) {
+    if (selectedRoute === OversiktRoutes.SAKSOVERSIKT) {
         return (
             <div className={bem.element('content')}>
                 <TåteflaskeBaby />

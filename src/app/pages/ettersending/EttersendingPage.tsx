@@ -4,13 +4,13 @@ import Api from 'app/api/api';
 import AttachmentList from 'app/components/attachment/AttachmentList';
 import FormikFileUploader from 'app/components/formik-file-uploader/FormikFileUploader';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
+import OversiktRoutes from 'app/routes/routes';
 import { Attachment } from 'app/types/Attachment';
 import { AttachmentType } from 'app/types/AttachmentType';
 import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
 import EttersendingDto from 'app/types/EttersendingDTO';
 import { Sak } from 'app/types/Sak';
 import { SakOppslag } from 'app/types/SakOppslag';
-import SelectedRoute from 'app/types/SelectedRoute';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { SvangerskapspengeSak } from 'app/types/SvangerskapspengeSak';
 import { deleteAttachment, isAttachmentWithError } from 'app/utils/attachmentUtils';
@@ -70,7 +70,7 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
     const params = useParams();
     const alleYtelser = getAlleYtelser(saker);
     const sak = alleYtelser.find((sak) => sak.saksnummer === params.saksnummer);
-    useSetSelectedRoute(SelectedRoute.ETTERSEND);
+    useSetSelectedRoute(OversiktRoutes.ETTERSEND);
     const onSubmit = (values: EttersendingFormData) => {
         setIsEttersending(true);
 

@@ -10,14 +10,13 @@ import OversiktRoutes from 'app/routes/routes';
 import { Link } from 'react-router-dom';
 import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
-import SelectedRoute from 'app/types/SelectedRoute';
 
 import './dokumenter-page.css';
 
 const DokumenterPage: React.FunctionComponent = () => {
     const bem = bemUtils('dokumenter-page');
     useSetBackgroundColor('blue');
-    useSetSelectedRoute(SelectedRoute.DOKUMENTER);
+    useSetSelectedRoute(OversiktRoutes.DOKUMENTER);
     const params = useParams();
 
     const { dokumenterData, dokumenterError } = Api.useGetDokumenter();

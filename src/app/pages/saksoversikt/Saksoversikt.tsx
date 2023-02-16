@@ -4,13 +4,13 @@ import SeDokumenter from 'app/components/se-dokumenter/SeDokumenter';
 import SeOpplysninger from 'app/components/se-opplysninger/SeOpplysninger';
 import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
+import OversiktRoutes from 'app/routes/routes';
 import DinPlan from 'app/sections/din-plan/DinPlan';
 import Oppgaver from 'app/sections/oppgaver/Oppgaver';
 import Tidslinje from 'app/sections/tidslinje/Tidslinje';
 import { HendelseType } from 'app/types/HendelseType';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { SakOppslag } from 'app/types/SakOppslag';
-import SelectedRoute from 'app/types/SelectedRoute';
 import { Ytelse } from 'app/types/Ytelse';
 import { slåSammenLikePerioder } from 'app/utils/planUtils';
 import { getAlleYtelser } from 'app/utils/sakerUtils';
@@ -33,7 +33,7 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
     const intl = useIntl();
     const bem = bemUtils('saksoversikt');
     useSetBackgroundColor('blue');
-    useSetSelectedRoute(SelectedRoute.SAKSOVERSIKT);
+    useSetSelectedRoute(OversiktRoutes.SAKSOVERSIKT);
     const params = useParams();
     const alleSaker = getAlleYtelser(saker);
 

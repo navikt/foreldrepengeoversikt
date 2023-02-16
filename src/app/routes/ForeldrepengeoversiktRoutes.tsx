@@ -46,15 +46,15 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
 
             if (antallSaker === 1) {
                 if (foreldrepenger.length === 1) {
-                    navigate(foreldrepenger[0].saksnummer);
+                    navigate(`${OversiktRoutes.SAKSOVERSIKT}/${foreldrepenger[0].saksnummer}`);
                 }
 
                 if (engangsstønad.length === 1) {
-                    navigate(engangsstønad[0].saksnummer);
+                    navigate(`${OversiktRoutes.SAKSOVERSIKT}/${engangsstønad[0].saksnummer}`);
                 }
 
                 if (svangerskapspenger.length === 1) {
-                    navigate(svangerskapspenger[0].saksnummer);
+                    navigate(`${OversiktRoutes.SAKSOVERSIKT}/${svangerskapspenger[0].saksnummer}`);
                 }
             }
         }
@@ -68,7 +68,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
             <div className={bem.block}>
                 <Routes>
                     <Route path="/" element={<Forside saker={saker} />} />
-                    <Route path="/:saksnummer" element={<SakComponent />}>
+                    <Route path="/sak/:saksnummer" element={<SakComponent />}>
                         <Route
                             index
                             element={

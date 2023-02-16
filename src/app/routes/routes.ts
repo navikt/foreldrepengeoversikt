@@ -1,6 +1,6 @@
 enum OversiktRoutes {
     HOVEDSIDE = '/',
-    SAKSOVERSIKT = '/',
+    SAKSOVERSIKT = '/sak',
     OPPLYSNINGER = 'opplysninger',
     DIN_PLAN = 'din-plan',
     DOKUMENTER = 'dokumenter',

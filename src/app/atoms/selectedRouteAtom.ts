@@ -1,4 +1,4 @@
-import SelectedRoute from 'app/types/SelectedRoute';
+import OversiktRoutes from 'app/routes/routes';
 import { atom } from 'jotai';
 
-export const selectedRouteAtom = atom(SelectedRoute.HOVEDSIDE);
+export const selectedRouteAtom = atom(OversiktRoutes.HOVEDSIDE);
