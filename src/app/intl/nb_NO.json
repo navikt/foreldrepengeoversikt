@@ -65,6 +65,17 @@
     "valideringsfeil.fritekst.kanIkkeInneholdeTegn": "{ugyldigeTegn} er ugyldige tegn i feltet \"{feltNavn}\".",
     "valideringsfeil.fritekst.forKort": "Feltet \"{feltNavn}\" må inneholde minst 25 tegn.",
     "valideringsfeil.fritekst.forLang": "Feltet \"{feltNavn}\" kan maksimalt inneholde 1000 tegn.",
+    "snarveier.lesMerOm": "Les mer om {ytelse}",
     "snarveier.saksbehandlingstider": "Saksbehandlingstider",
-    "snarveier.sendKlagePåSak": "Send klage på sak"
+    "snarveier.endringerIDinSituasjon": "Endringer i din situasjon",
+    "snarveier.slikKlagerDu": "Slik klager du",
+    "snarveier.pengestøtter": "pengestøtter",
+    "kontaktOss.chatMedOss": "Chat med oss",
+    "kontaktOss.skrivTilOss": "Skriv til oss",
+    "kontaktOss.skrivTilOss.del1": "Send beskjed eller nye opplysninger i saken din. Du kan også sende spørsmål.",
+    "kontaktOss.skrivTilOss.del2": " Svartid er 2 arbeidsdager. Vil du ha svar raskere, kan du bruke chat.",
+    "kontaktOss.informasjonOmChat": "Du møter først chatbot Frida som svarer deg. Du kan også be Frida om å få snakke med en veileder (hverdager 09.00-15.00).",
+    "kontaktOss.ringOss": "Ring oss på 55 55 33 33",
+    "kontaktOss.ringOss.åpningstider": "Åpningstider: hverdager 09.00-15.00. Vi kan ringe deg tilbake hvis ventetiden er over 5 min.",
+    "kontaktOss.ringOss.flereTelefonnummere": "Se flere telefonnummer"
 }

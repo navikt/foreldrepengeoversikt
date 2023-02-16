@@ -98,7 +98,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
                     <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />
                 </Routes>
             </div>
-            <Snarveier />
+            <Snarveier saker={saker} />
             <KontaktOss />
         </>
     );

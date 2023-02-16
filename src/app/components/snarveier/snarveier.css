@@ -1,5 +1,5 @@
 .snarveier {
-    background-color: var(--a-red-50);
+    background-color: var(--a-white);
     padding: 2rem;
 }
 
@@ -9,8 +9,8 @@
 
 .snarveier__content {
     display: flex;
-    justify-content: space-between;
-    
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .snarveier__wrapper {
@@ -18,25 +18,24 @@
     margin: 0 auto;
 }
 
-.snarveier__linkPanel_left {
+.snarveier__linkPanel {
     margin-bottom: 1rem;
-    background-color: white;
+    background-color: var(--a-gray-100);
     float:left; 
-    display:flex;
-    width: 49%;
+    width: 49%; 
     border-radius: 0.5rem;
-}
-
-.snarveier__linkPanel_right {
-    margin-bottom: 1rem;
-    background-color: white;
-    float:left; 
-    display:flex;
-    width: 49%;
-    border-radius: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .snarveier__linkTitle {
     font-size: large;
 }
 
+@media (max-width: 768px) {
+    
+    .snarveier__linkPanel {
+        width: 100%;
+    }
+ 
+}

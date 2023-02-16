@@ -1,6 +1,6 @@
 .kontaktOss {
-    padding: 2rem;
     background-color: var(--a-white);
+    padding: 2rem;
 }
 
 .kontaktOss__title {
@@ -34,12 +34,6 @@
     padding: 0.5rem;
 }
 
-.kontaktOss__content_text {
-    margin-top: 0.5rem;
-    font-size: medium;
-}
-
-
 .kontaktOss__content_right {
     margin-bottom: 1rem;
     float:left; 
@@ -47,6 +41,11 @@
     width: 31%;
     padding: 0.5rem;
 }
+
+.kontaktOss__content_text {
+    padding-top: 1rem;
+}
+
 
 .kontaktOss__linkTitle {
     font-weight: bold;
@@ -58,7 +57,27 @@
 }
 
 .kontaktOss__linkIcon{
-    margin-right: 0.5rem;
+    margin-right: 0.25rem;
 }
 
+@media (max-width: 768px) {
+    .kontaktOss {
+        display: inline-block;
+    }
+
+    .kontaktOss__content {
+        display: inline-block;
+    }
+    .kontaktOss__content_left {
+        width: 100%;
+    }
+
+    .kontaktOss__content_middle{
+        width: 100%;
+    }
+
+    .kontaktOss__content_right {
+        width: 100%;
+    }
+}
 
