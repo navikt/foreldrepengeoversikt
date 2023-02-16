@@ -18,6 +18,8 @@ import MinidialogPage from 'app/pages/minidialog-page/MinidialogPage';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { AxiosError } from 'axios';
 import EttersendingPage from 'app/pages/ettersending/EttersendingPage';
+import Snarveier from 'app/components/snarveier/Snarveier';
+import KontaktOss from 'app/sections/kontakt-oss/KontaktOss';
 
 interface Props {
     minidialogerData: MinidialogInnslag[] | undefined;
@@ -96,6 +98,8 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
                     <Route path="*" element={<Navigate to={OversiktRoutes.HOVEDSIDE} />} />
                 </Routes>
             </div>
+            <Snarveier saker={saker} />
+            <KontaktOss />
         </>
     );
 };
