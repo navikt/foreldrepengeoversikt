@@ -1,7 +1,7 @@
 import { EngangsstønadSak, EngangsstønadSakDTO } from 'app/types/EngangsstønadSak';
 import { Familiehendelse } from 'app/types/Familiehendelse';
 import { GruppertSak } from 'app/types/GruppertSak';
-import { Sak, SakDTO } from 'app/types/Sak';
+import { Foreldrepengesak, ForeldrepengesakDTO } from 'app/types/Sak';
 import { SakOppslag, SakOppslagDTO } from 'app/types/SakOppslag';
 import { SvangerskapspengeSak, SvangerskapspengeSakDTO } from 'app/types/SvangerskapspengeSak';
 import { Ytelse } from 'app/types/Ytelse';
@@ -41,9 +41,9 @@ export const grupperSakerPåBarn = (saker: SakOppslag): GruppertSak[] => {
 };
 
 const addYtelseToSak = (
-    saker: SakDTO[] | SvangerskapspengeSakDTO[] | EngangsstønadSakDTO[],
+    saker: ForeldrepengesakDTO[] | SvangerskapspengeSakDTO[] | EngangsstønadSakDTO[],
     ytelse: Ytelse
-): Sak[] | SvangerskapspengeSak[] | EngangsstønadSak[] => {
+): Foreldrepengesak[] | SvangerskapspengeSak[] | EngangsstønadSak[] => {
     if (ytelse === Ytelse.ENGANGSSTØNAD) {
         return saker.map(
             (sak) =>
@@ -69,13 +69,13 @@ const addYtelseToSak = (
             ({
                 ...sak,
                 ytelse,
-            } as Sak)
+            } as Foreldrepengesak)
     );
 };
 
 export const mapSakerDTOToSaker = (saker: SakOppslagDTO): SakOppslag => {
     return {
-        foreldrepenger: addYtelseToSak(saker.foreldrepenger, Ytelse.FORELDREPENGER) as Sak[],
+        foreldrepenger: addYtelseToSak(saker.foreldrepenger, Ytelse.FORELDREPENGER) as Foreldrepengesak[],
         engangsstønad: addYtelseToSak(saker.engangsstønad, Ytelse.ENGANGSSTØNAD) as EngangsstønadSak[],
         svangerskapspenger: addYtelseToSak(
             saker.svangerskapspenger,

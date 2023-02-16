@@ -6,7 +6,7 @@ import { RettighetType } from './RettighetType';
 import { Ytelse } from './Ytelse';
 import { ÅpenBehandling } from './ÅpenBehandling';
 
-export interface SakDTO {
+export interface ForeldrepengesakDTO {
     saksnummer: string;
     sakAvsluttet: boolean;
     sisteSøknadMottattDato: string;
@@ -27,6 +27,6 @@ export interface SakDTO {
     åpenBehandling?: ÅpenBehandling;
 }
 
-export interface Sak extends SakDTO {
+export interface Foreldrepengesak extends ForeldrepengesakDTO {
     ytelse: Ytelse.FORELDREPENGER;
 }

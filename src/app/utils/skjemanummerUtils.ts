@@ -1,10 +1,12 @@
 import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
-import { Sak } from 'app/types/Sak';
+import { Foreldrepengesak } from 'app/types/Sak';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { SvangerskapspengeSak } from 'app/types/SvangerskapspengeSak';
 import { Ytelse } from 'app/types/Ytelse';
 
-export const getRelevanteSkjemanummer = (sak: Sak | EngangsstønadSak | SvangerskapspengeSak): Skjemanummer[] => {
+export const getRelevanteSkjemanummer = (
+    sak: Foreldrepengesak | EngangsstønadSak | SvangerskapspengeSak
+): Skjemanummer[] => {
     const alleSkjemanummere = Object.values(Skjemanummer);
 
     if (sak.ytelse === Ytelse.FORELDREPENGER) {

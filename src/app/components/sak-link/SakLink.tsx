@@ -2,7 +2,7 @@ import { Heading, LinkPanel, Tag } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import { BehandlingTilstand } from 'app/types/BehandlingTilstand';
 import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
-import { Sak } from 'app/types/Sak';
+import { Foreldrepengesak } from 'app/types/Sak';
 import { SvangerskapspengeSak } from 'app/types/SvangerskapspengeSak';
 import { Ytelse } from 'app/types/Ytelse';
 import React from 'react';
@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import './sak-link.css';
 
 interface Props {
-    sak: Sak | EngangsstønadSak | SvangerskapspengeSak;
+    sak: Foreldrepengesak | EngangsstønadSak | SvangerskapspengeSak;
 }
 
 const getHeading = (ytelse: Ytelse) => {
@@ -25,7 +25,7 @@ const getHeading = (ytelse: Ytelse) => {
     }
 };
 
-const getTag = (sak: Sak | EngangsstønadSak | SvangerskapspengeSak) => {
+const getTag = (sak: Foreldrepengesak | EngangsstønadSak | SvangerskapspengeSak) => {
     if (sak.åpenBehandling) {
         if (!sak.sakAvsluttet) {
             if (
