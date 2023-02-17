@@ -74,7 +74,7 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
                 </ContentSection>
             )}
             <ContentSection cornerStyle="square" heading={intlUtils(intl, 'saksoversikt.tidslinje')}>
-                <Tidslinje />
+                <Tidslinje sak={gjeldendeSak!} />
             </ContentSection>
             <ContentSection padding="none">
                 <SeDokumenter />
