@@ -1,51 +1,66 @@
-import { BodyShort, Loader } from '@navikt/ds-react';
-import { guid } from '@navikt/fp-common';
+import { BodyShort, Link, Loader } from '@navikt/ds-react';
+import { Link as LinkInternal } from 'react-router-dom';
+import { bemUtils, guid, intlUtils } from '@navikt/fp-common';
 import Api from 'app/api/api';
-import { TidslinjehendelseType } from 'app/types/TidslinjehendelseType';
+import { Sak } from 'app/types/Sak';
+import { EngangsstønadSak } from 'app/types/EngangsstønadSak';
+import { SvangerskapspengeSak } from 'app/types/SvangerskapspengeSak';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import DokumentHendelse from './DokumentHendelse';
 import TidslinjeHendelse from './TidslinjeHendelse';
+import { ExternalLink, Next } from '@navikt/ds-icons';
+import {
+    VENTEÅRSAKER,
+    sorterTidslinjehendelser,
+    getTidslinjehendelseFraBehandlingPåVent,
+    getTidslinjehendelseStatus,
+    getTidslinjehendelseTittel,
+} from 'app/utils/tidslinjeUtils';
+import './tidslinje-hendelse.css';
+import { useIntl } from 'react-intl';
+import { TidslinjehendelseType } from 'app/types/TidslinjehendelseType';
+interface Params {
+    sak: Sak | EngangsstønadSak | SvangerskapspengeSak;
+}
 
-const getTidslinjehendelseTittel = (hendelsetype: TidslinjehendelseType): string => {
-    switch (hendelsetype) {
-        case TidslinjehendelseType.FØRSTEGANGSSØKNAD:
-            return 'Du har sendt oss en søknad';
-        case TidslinjehendelseType.FØRSTEGANGSSØKNAD_NY:
-            return 'Du har sendt oss en ny førstegangssøknad';
-        case TidslinjehendelseType.INNTEKTSMELDING:
-            return 'NAV mottok inntektsmelding';
-        case TidslinjehendelseType.VEDTAK:
-            return 'NAV har fattet vedtak';
-        case TidslinjehendelseType.ETTERSENDING:
-            return 'Du har ettersendt dokumentasjon';
-        case TidslinjehendelseType.UTGÅENDE_INNHENT_OPPLYSNINGER:
-            return 'NAV har etterspurt opplysninger';
-        default:
-            return '';
-    }
-};
-
-const Tidslinje: React.FunctionComponent = () => {
+const Tidslinje: React.FunctionComponent<Params> = ({ sak }) => {
     const params = useParams();
+    const intl = useIntl();
+    const bem = bemUtils('tidslinje-hendelse');
     const { tidslinjeHendelserData, tidslinjeHendelserError } = Api.useGetTidslinjeHendelser(params.saksnummer!);
+    const { manglendeVedleggData, manglendeVedleggError } = Api.useGetManglendeVedlegg(params.saksnummer!);
 
-    if (tidslinjeHendelserError) {
+    if (tidslinjeHendelserError || manglendeVedleggError) {
         return <BodyShort>Vi har problemer med å hente informasjon om hva som skjer i saken din.</BodyShort>;
     }
 
-    if (!tidslinjeHendelserData) {
+    if (!tidslinjeHendelserData || !manglendeVedleggData) {
         return <Loader size="large" aria-label="Henter status for din søknad" />;
     }
 
+    const åpenBehandlingPåVent =
+        sak.åpenBehandling && VENTEÅRSAKER.includes(sak.åpenBehandling.tilstand) ? sak.åpenBehandling : undefined;
+    const venteHendelse = åpenBehandlingPåVent
+        ? getTidslinjehendelseFraBehandlingPåVent(åpenBehandlingPåVent, intl)
+        : undefined;
+
+    const alleHendelser = venteHendelse ? tidslinjeHendelserData.concat([venteHendelse]) : tidslinjeHendelserData;
+    const sorterteHendelser = alleHendelser.sort(sorterTidslinjehendelser);
+
     return (
         <div>
-            {tidslinjeHendelserData.map((hendelse) => {
+            {sorterteHendelser.map((hendelse) => {
                 return (
                     <TidslinjeHendelse
                         date={hendelse.opprettet}
-                        type="completed"
-                        title={getTidslinjehendelseTittel(hendelse.tidslinjeHendelseType)}
+                        type={getTidslinjehendelseStatus(hendelse.tidslinjeHendelseType, hendelse.opprettet)}
+                        title={getTidslinjehendelseTittel(
+                            hendelse.tidslinjeHendelseType,
+                            intl,
+                            hendelse.tidligstBehandlingsDato,
+                            manglendeVedleggData
+                        )}
                         key={guid()}
                     >
                         <ul style={{ listStyle: 'none', padding: '0' }}>
@@ -53,6 +68,28 @@ const Tidslinje: React.FunctionComponent = () => {
                                 hendelse.dokumenter.map((dokument) => {
                                     return <DokumentHendelse dokument={dokument} key={dokument.url} />;
                                 })}
+                            {hendelse.tidslinjeHendelseType === TidslinjehendelseType.VENT_DOKUMENTASJON &&
+                                manglendeVedleggData &&
+                                manglendeVedleggData.length > 1 && (
+                                    <ul className={bem.element('dokument_liste')}>
+                                        {manglendeVedleggData.map((skjemaId) => {
+                                            return <li key={guid()}>{intlUtils(intl, `ettersendelse.${skjemaId}`)}</li>;
+                                        })}
+                                    </ul>
+                                )}
+                            {hendelse.merInformasjon && <BodyShort>{hendelse.merInformasjon}</BodyShort>}
+                            {hendelse.linkTittel && hendelse.eksternalUrl && (
+                                <Link href={hendelse.eksternalUrl} className={bem.element('link_external')}>
+                                    <BodyShort>{hendelse.linkTittel}</BodyShort>
+                                    <ExternalLink></ExternalLink>
+                                </Link>
+                            )}
+                            {hendelse.linkTittel && hendelse.internalUrl && (
+                                <LinkInternal to={hendelse.internalUrl} className={bem.element('link_internal')}>
+                                    <BodyShort>{hendelse.linkTittel}</BodyShort>
+                                    <Next className={bem.element('link_internal_icon')}></Next>
+                                </LinkInternal>
+                            )}
                         </ul>
                     </TidslinjeHendelse>
                 );

@@ -2,6 +2,7 @@ import { Dokument } from 'app/types/Dokument';
 import EttersendingDto from 'app/types/EttersendingDTO';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { SakOppslagDTO } from 'app/types/SakOppslag';
+import { Skjemanummer } from 'app/types/Skjemanummer';
 import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 import { Tidslinjehendelse } from 'app/types/Tidslinjehendelse';
 import getAxiosInstance from './apiInterceptor';
@@ -72,6 +73,17 @@ const useGetMinidialog = () => {
     };
 };
 
+const useGetManglendeVedlegg = (saksnr: string) => {
+    const { data, error } = useRequest<Skjemanummer[]>('/historikk/vedlegg', {
+        config: { withCredentials: true, params: { saksnummer: saksnr } },
+    });
+
+    return {
+        manglendeVedleggData: data,
+        manglendeVedleggError: error,
+    };
+};
+
 const sendEttersending = (ettersending: EttersendingDto, fnr?: string) => {
     return getAxiosInstance(fnr).post('/soknad/ettersend', ettersending, {
         timeout: 30 * 1000,
@@ -86,6 +98,7 @@ const Api = {
     useGetAnnenPartsVedtak,
     useGetTidslinjeHendelser,
     useGetMinidialog,
+    useGetManglendeVedlegg,
     sendEttersending,
 };
 

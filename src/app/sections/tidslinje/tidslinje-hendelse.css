@@ -46,3 +46,21 @@
     color: var(--a-gray-500);
     width: 3.5rem;
 }
+
+.tidslinje-hendelse__dokument_liste {
+    padding-bottom: 1rem; 
+}
+
+
+.tidslinje-hendelse__link_external {
+    padding-top: 1rem;
+}
+
+.tidslinje-hendelse__link_internal {
+    padding-top: 1rem; 
+    display: flex;
+}
+
+.tidslinje-hendelse__link_internal_icon {
+    padding-top: 0.25rem; 
+}

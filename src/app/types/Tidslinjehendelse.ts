@@ -9,4 +9,9 @@ export interface Tidslinjehendelse {
     tidslinjeHendelseType: TidslinjehendelseType;
     dokumenter: Dokument[];
     manglendeVedlegg: Dokument[];
+    merInformasjon?: string;
+    linkTittel?: string;
+    eksternalUrl?: string;
+    internalUrl?: string;
+    tidligstBehandlingsDato?: Date;
 }
