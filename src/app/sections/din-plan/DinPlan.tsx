@@ -10,17 +10,17 @@ import OversiktRoutes from 'app/routes/routes';
 
 import './din-plan.css';
 import PeriodeFelt from './PeriodeFelt';
-import { PeriodeDTO, Periode } from 'app/types/Periode';
+import { Periode, PeriodeForVisning } from 'app/types/Periode';
 import dayjs from 'dayjs';
 
 interface Props {
-    annenPartsPerioder: PeriodeDTO[] | undefined;
+    annenPartsPerioder: Periode[] | undefined;
     kjønnPåAnnenPart: Kjønn | undefined;
     kjønnPåSøker: Kjønn;
     navnPåAnnenPart: string | undefined;
     navnPåSøker: string;
-    søktePerioder?: PeriodeDTO[];
-    vedtattUttaksplan?: PeriodeDTO[];
+    søktePerioder?: Periode[];
+    vedtattUttaksplan?: Periode[];
 }
 
 const DinPlan: React.FunctionComponent<Props> = ({
@@ -39,14 +39,17 @@ const DinPlan: React.FunctionComponent<Props> = ({
         annenPartsPerioder !== undefined
             ? getPerioderForVisning(
                   annenPartsPerioder.filter((p) => p.resultat.innvilget === true),
+                  true,
                   true
               )
             : undefined;
-    const vedtattUttaksplanForVisning = vedtattUttaksplan ? getPerioderForVisning(vedtattUttaksplan, false) : undefined;
-    const søktePerioderForVisning = søktePerioder ? getPerioderForVisning(søktePerioder, false) : undefined;
+    const vedtattUttaksplanForVisning = vedtattUttaksplan
+        ? getPerioderForVisning(vedtattUttaksplan, false, true)
+        : undefined;
+    const søktePerioderForVisning = søktePerioder ? getPerioderForVisning(søktePerioder, false, false) : undefined;
     const navnPåAnnenPartForVisning = navnPåAnnenPart ? navnPåAnnenPart : 'Annen forelder';
     let perioderForVisning;
-    let annenPartsPlan: Periode[] = [];
+    let annenPartsPlan: PeriodeForVisning[] = [];
 
     if (erUttaksplanVedtatt && vedtattUttaksplanForVisning) {
         perioderForVisning = vedtattUttaksplanForVisning;

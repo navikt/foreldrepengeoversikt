@@ -1,6 +1,6 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
 import { bemUtils, formatDateExtended, Kjønn } from '@navikt/fp-common';
-import { Periode } from 'app/types/Periode';
+import { PeriodeForVisning } from 'app/types/Periode';
 import { StønadskontoType } from 'app/types/StønadskontoType';
 import { UtsettelseÅrsakType } from 'app/types/UtsettelseÅrsakType';
 import { getAntallUttaksdagerITidsperiode, getVarighetString } from 'app/utils/dateUtils';
@@ -22,10 +22,10 @@ interface Props {
     ikkeUttak?: boolean;
     kjønn: Kjønn;
     navnForelder: string;
-    periode: Periode;
+    periode: PeriodeForVisning;
 }
 
-const getPeriodeTittel = (periode: Periode): string => {
+const getPeriodeTittel = (periode: PeriodeForVisning): string => {
     if (isUttaksperiode(periode)) {
         const { kontoType } = periode;
 

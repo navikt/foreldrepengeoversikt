@@ -1,26 +1,26 @@
 import { guid } from '@navikt/fp-common';
 import { ISOStringToDate } from '@navikt/sif-common-formik-ds/lib';
-import { Periode, PeriodeDTO, Tidsperiode, Tidsperioden } from 'app/types/Periode';
+import { PeriodeForVisning, Periode, Tidsperiode, Tidsperioden } from 'app/types/Periode';
 import dayjs from 'dayjs';
 import { Uttaksdagen } from './Uttaksdagen';
 
-export const isUttaksperiode = (periode: Periode) => {
+export const isUttaksperiode = (periode: PeriodeForVisning) => {
     return periode.kontoType !== undefined;
 };
 
-export const isUtsettelsesperiode = (periode: Periode) => {
+export const isUtsettelsesperiode = (periode: PeriodeForVisning) => {
     return periode.utsettelseÅrsak !== undefined;
 };
 
-export const isOverføringsperiode = (periode: Periode) => {
+export const isOverføringsperiode = (periode: PeriodeForVisning) => {
     return periode.overføringÅrsak !== undefined;
 };
 
-export const isOppholdsperiode = (periode: Periode) => {
+export const isOppholdsperiode = (periode: PeriodeForVisning) => {
     return periode.oppholdÅrsak !== undefined;
 };
 
-export const isAvslåttPeriode = (periode: Periode) => {
+export const isAvslåttPeriode = (periode: PeriodeForVisning) => {
     return periode.resultat.innvilget === true;
 };
 
@@ -38,7 +38,11 @@ interface SplittetDatoType {
 }
 
 //TODO: hvordan vise oppholdsperioder til annen part, skal de vises som uttak for brukeren?
-export const getPerioderForVisning = (perioder: PeriodeDTO[], erAnnenPartsPeriode: boolean): Periode[] => {
+export const getPerioderForVisning = (
+    perioder: Periode[],
+    erAnnenPartsPeriode: boolean,
+    erVedtatt: boolean
+): PeriodeForVisning[] => {
     return perioder
         .map((periode) => {
             const { fom, tom, ...periodeRest } = periode;
@@ -50,6 +54,7 @@ export const getPerioderForVisning = (perioder: PeriodeDTO[], erAnnenPartsPeriod
                 },
                 gjelderAnnenPart: erAnnenPartsPeriode,
                 id: guid(),
+                erVedtatt: erVedtatt,
             };
         })
         .filter(
@@ -59,11 +64,11 @@ export const getPerioderForVisning = (perioder: PeriodeDTO[], erAnnenPartsPeriod
         );
 };
 
-const splittPeriodePåDatoer = (periode: Periode, alleDatoer: SplittetDatoType[]) => {
+const splittPeriodePåDatoer = (periode: PeriodeForVisning, alleDatoer: SplittetDatoType[]) => {
     const datoerIPerioden = alleDatoer.filter((datoWrapper) =>
         Tidsperioden(periode.tidsperiode).inneholderDato(datoWrapper.dato)
     );
-    const oppsplittetPeriode: Periode[] = [];
+    const oppsplittetPeriode: PeriodeForVisning[] = [];
 
     if (datoerIPerioden.length === 2) {
         return [periode];
@@ -97,7 +102,7 @@ const splittPeriodePåDatoer = (periode: Periode, alleDatoer: SplittetDatoType[]
     return oppsplittetPeriode.filter((p) => isValidTidsperiode(p.tidsperiode));
 };
 
-export const normaliserPerioder = (perioder: Periode[], annenPartsUttak: Periode[]) => {
+export const normaliserPerioder = (perioder: PeriodeForVisning[], annenPartsUttak: PeriodeForVisning[]) => {
     const perioderTidsperioder: SplittetDatoType[] = perioder.reduce((res, p) => {
         res.push({ dato: p.tidsperiode.fom!, erFom: true });
         res.push({ dato: p.tidsperiode.tom!, erFom: false });
@@ -122,8 +127,8 @@ export const normaliserPerioder = (perioder: Periode[], annenPartsUttak: Periode
         return d1.dato.getTime() - d2.dato.getTime();
     });
 
-    const normaliserteEgnePerioder: Periode[] = [];
-    const normaliserteAnnenPartsPerioder: Periode[] = [];
+    const normaliserteEgnePerioder: PeriodeForVisning[] = [];
+    const normaliserteAnnenPartsPerioder: PeriodeForVisning[] = [];
 
     perioder.forEach((p) => {
         const oppsplittetPeriode = splittPeriodePåDatoer(p, alleDatoer);

@@ -1,9 +1,9 @@
 import { DekningsgradDTO } from './DekningsgradDTO';
-import { PeriodeDTO } from './Periode';
+import { Periode } from './Periode';
 
 export interface AnnenPartVedtakDTO {
     antallBarn?: number;
     dekningsgrad: DekningsgradDTO;
-    perioder: PeriodeDTO[];
+    perioder: Periode[];
     termindato?: string;
 }

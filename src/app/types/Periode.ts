@@ -35,7 +35,7 @@ export interface Tidsperiode {
     fom: Date | undefined;
     tom: Date | undefined;
 }
-export interface PeriodeDTO {
+export interface Periode {
     angittAvAnnenPart?: boolean;
     flerbarnsdager: boolean;
     fom: string;
@@ -50,13 +50,10 @@ export interface PeriodeDTO {
     utsettelseÅrsak?: UtsettelseÅrsakType;
 }
 
-export interface Periode extends Omit<PeriodeDTO, 'fom' | 'tom'> {
+export interface PeriodeForVisning extends Omit<Periode, 'fom' | 'tom'> {
+    erSamtidigUttak?: boolean;
+    erVedtatt: boolean;
     gjelderAnnenPart: boolean;
     id: string;
     tidsperiode: Tidsperiode;
-}
-
-export interface PeriodeForVisning extends Periode {
-    erSamtidigUttak: boolean;
-    erVedtatt: boolean;
 }
