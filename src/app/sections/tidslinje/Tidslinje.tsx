@@ -1,4 +1,4 @@
-import { BodyShort, Link, Loader } from '@navikt/ds-react';
+import { BodyShort, Button, Link, Loader } from '@navikt/ds-react';
 import { Link as LinkInternal } from 'react-router-dom';
 import { bemUtils, guid, intlUtils } from '@navikt/fp-common';
 import Api from 'app/api/api';
@@ -9,7 +9,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import DokumentHendelse from './DokumentHendelse';
 import TidslinjeHendelse from './TidslinjeHendelse';
-import { ExternalLink, Next } from '@navikt/ds-icons';
+import { ExternalLink } from '@navikt/ds-icons';
 import {
     VENTEÅRSAKER,
     sorterTidslinjehendelser,
@@ -71,23 +71,31 @@ const Tidslinje: React.FunctionComponent<Params> = ({ sak }) => {
                             {hendelse.tidslinjeHendelseType === TidslinjehendelseType.VENT_DOKUMENTASJON &&
                                 manglendeVedleggData &&
                                 manglendeVedleggData.length > 1 && (
-                                    <ul className={bem.element('dokument_liste')}>
-                                        {manglendeVedleggData.map((skjemaId) => {
-                                            return <li key={guid()}>{intlUtils(intl, `ettersendelse.${skjemaId}`)}</li>;
-                                        })}
-                                    </ul>
+                                    <div>
+                                        <div>{intlUtils(intl, 'tidslinje.VENT_DOKUMENTASJON.flereVedlegg.tittel')}</div>
+                                        <ul>
+                                            {manglendeVedleggData.map((skjemaId) => {
+                                                return (
+                                                    <li key={guid()}>{intlUtils(intl, `ettersendelse.${skjemaId}`)}</li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </div>
                                 )}
-                            {hendelse.merInformasjon && <BodyShort>{hendelse.merInformasjon}</BodyShort>}
+                            {hendelse.merInformasjon && (
+                                <BodyShort className={bem.element('mer_informasjon')}>
+                                    {hendelse.merInformasjon}
+                                </BodyShort>
+                            )}
                             {hendelse.linkTittel && hendelse.eksternalUrl && (
-                                <Link href={hendelse.eksternalUrl} className={bem.element('link_external')}>
+                                <Link href={hendelse.eksternalUrl}>
                                     <BodyShort>{hendelse.linkTittel}</BodyShort>
                                     <ExternalLink></ExternalLink>
                                 </Link>
                             )}
                             {hendelse.linkTittel && hendelse.internalUrl && (
-                                <LinkInternal to={hendelse.internalUrl} className={bem.element('link_internal')}>
-                                    <BodyShort>{hendelse.linkTittel}</BodyShort>
-                                    <Next className={bem.element('link_internal_icon')}></Next>
+                                <LinkInternal to={hendelse.internalUrl}>
+                                    <Button>{hendelse.linkTittel}</Button>
                                 </LinkInternal>
                             )}
                         </ul>
