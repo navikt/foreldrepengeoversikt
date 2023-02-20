@@ -104,6 +104,7 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                                 skjemanummer={Skjemanummer.TILBAKEBETALING}
                                 legend=""
                                 buttonLabel={intlUtils(intl, 'miniDialog.lastOppDokumentasjon')}
+                                validateHasAttachment={false}
                             />
                         </Block>
                         <Block padBottom="xl" visible={brukerØnskerÅUttaleSeg === false}>

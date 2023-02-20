@@ -127,6 +127,7 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                                 skjemanummer={values.type!}
                                 legend=""
                                 buttonLabel="Last opp dokument"
+                                validateHasAttachment={true}
                             />
                             <Block padBottom="l" visible={values.vedlegg!.length > 0}>
                                 {getListOfUniqueSkjemanummer(values.vedlegg!).map((skjemanummer: Skjemanummer) => (

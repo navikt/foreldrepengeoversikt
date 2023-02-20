@@ -23,6 +23,7 @@ export interface Props {
     name: any;
     onFileInputClick?: () => void;
     skjemanummer: Skjemanummer;
+    validateHasAttachment: boolean;
 }
 
 const VALID_EXTENSIONS = ['.pdf', '.jpeg', '.jpg', '.png'];
@@ -113,6 +114,7 @@ const FormikFileUploader: React.FunctionComponent<Props> = ({
     skjemanummer,
     legend,
     buttonLabel,
+    validateHasAttachment,
     ...otherProps
 }) => {
     const intl = useIntl();
@@ -131,7 +133,7 @@ const FormikFileUploader: React.FunctionComponent<Props> = ({
                         lastOppVedlegg(alleNyeGyldigeVedlegg, replace, remove, setErrors, attachments.length, intl);
                     }}
                     validate={() => {
-                        if (attachments.length === 0) {
+                        if (validateHasAttachment && attachments.length === 0) {
                             return 'Du må laste opp minst et vedlegg';
                         }
 
