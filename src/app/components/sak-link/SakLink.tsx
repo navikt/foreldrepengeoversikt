@@ -26,13 +26,20 @@ const getHeading = (ytelse: Ytelse) => {
 const getTag = (sak: Sak) => {
     if (sak.åpenBehandling) {
         if (!sak.sakAvsluttet) {
-            if (
-                sak.åpenBehandling.tilstand === BehandlingTilstand.UNDER_BEHANDLING ||
-                sak.åpenBehandling.tilstand === BehandlingTilstand.VENTER_PÅ_INNTEKTSMELDING ||
-                sak.åpenBehandling.tilstand === BehandlingTilstand.VENTER_PÅ_DOKUMENTASJON ||
-                sak.åpenBehandling.tilstand === BehandlingTilstand.TIDLIG_SØKNAD
-            ) {
+            if (sak.åpenBehandling.tilstand === BehandlingTilstand.UNDER_BEHANDLING) {
                 return <Tag variant="warning">Under behandling</Tag>;
+            }
+
+            if (sak.åpenBehandling.tilstand === BehandlingTilstand.VENTER_PÅ_INNTEKTSMELDING) {
+                return <Tag variant="warning">Venter på inntektsmelding fra arbeidsgiver</Tag>;
+            }
+
+            if (sak.åpenBehandling.tilstand === BehandlingTilstand.VENTER_PÅ_DOKUMENTASJON) {
+                return <Tag variant="warning">Venter på nødvendig dokumentasjon</Tag>;
+            }
+
+            if (sak.åpenBehandling.tilstand === BehandlingTilstand.TIDLIG_SØKNAD) {
+                return <Tag variant="warning">Søknaden vil bli behandlet senere</Tag>;
             }
         }
 
