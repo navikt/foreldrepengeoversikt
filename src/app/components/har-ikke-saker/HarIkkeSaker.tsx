@@ -30,7 +30,9 @@ const HarIkkeSaker = () => {
                         Les mer om foreldrepenger <ExternalLink />
                     </Link>
                 </div>
-                <Button>Søk om foreldrepenger</Button>
+                <Button as="a" href="https://foreldrepengesoknad.nav.no">
+                    Søk om foreldrepenger
+                </Button>
             </ContentSection>
         </>
     );
