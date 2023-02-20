@@ -134,7 +134,7 @@ const FormikFileUploader: React.FunctionComponent<Props> = ({
                     }}
                     validate={() => {
                         if (validateHasAttachment && attachments.length === 0) {
-                            return 'Du må laste opp minst et vedlegg';
+                            return 'Du må laste opp minst ett dokument';
                         }
 
                         return undefined;
