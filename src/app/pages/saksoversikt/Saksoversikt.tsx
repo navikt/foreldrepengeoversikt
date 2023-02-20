@@ -1,4 +1,6 @@
-import { bemUtils, intlUtils } from '@navikt/fp-common';
+import { Loader } from '@navikt/ds-react';
+import { bemUtils, intlUtils, Kjønn } from '@navikt/fp-common';
+import Api from 'app/api/api';
 import ContentSection from 'app/components/content-section/ContentSection';
 import SeDokumenter from 'app/components/se-dokumenter/SeDokumenter';
 import SeOpplysninger from 'app/components/se-opplysninger/SeOpplysninger';
@@ -13,24 +15,31 @@ import { HendelseType } from 'app/types/HendelseType';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { Ytelse } from 'app/types/Ytelse';
+import { getKjønnFromFnr } from 'app/utils/personUtils';
 import { slåSammenLikePerioder } from 'app/utils/planUtils';
-import { getAlleYtelser } from 'app/utils/sakerUtils';
+import { getAlleYtelser, getFamiliehendelseDato } from 'app/utils/sakerUtils';
 import { AxiosError } from 'axios';
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
-
 import './saksoversikt.css';
 
 interface Props {
+    kjønnPåSøker: Kjønn;
     minidialogerData: MinidialogInnslag[] | undefined;
     minidialogerError: AxiosError | null;
     navnPåSøker: string;
     saker: SakOppslag;
 }
 
-const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidialogerError, navnPåSøker, saker }) => {
+const Saksoversikt: React.FunctionComponent<Props> = ({
+    minidialogerData,
+    minidialogerError,
+    navnPåSøker,
+    kjønnPåSøker,
+    saker,
+}) => {
     const intl = useIntl();
     const bem = bemUtils('saksoversikt');
     useSetBackgroundColor('blue');
@@ -43,9 +52,21 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
 
     let gjeldendeVedtak = undefined;
     let ubehandletSøknad = undefined;
+    let familiehendelsesdato = undefined;
+    let annenPartFnr = undefined;
+    let annenPartVedtakIsSuspended = true;
+    let navnPåAnnenPart = undefined;
+    let kjønnPåAnnenPart = undefined;
 
     if (gjeldendeSak.ytelse === Ytelse.FORELDREPENGER) {
         gjeldendeVedtak = gjeldendeSak.gjeldendeVedtak;
+        familiehendelsesdato = getFamiliehendelseDato(gjeldendeSak.familiehendelse);
+        annenPartFnr = gjeldendeSak.annenPart && gjeldendeSak.annenPart.fnr ? gjeldendeSak.annenPart.fnr : undefined;
+        annenPartVedtakIsSuspended =
+            annenPartFnr === undefined || annenPartFnr === '' || familiehendelsesdato === undefined;
+        navnPåAnnenPart =
+            gjeldendeSak.annenPart && gjeldendeSak.annenPart.fornavn ? gjeldendeSak.annenPart.fornavn : undefined;
+        kjønnPåAnnenPart = gjeldendeSak.annenPart ? getKjønnFromFnr(gjeldendeSak.annenPart.fnr) : undefined;
     }
 
     if (gjeldendeSak.ytelse === Ytelse.FORELDREPENGER && gjeldendeSak.åpenBehandling) {
@@ -61,6 +82,22 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
                   hendelse !== HendelseType.TILBAKEKREVING_FATTET_VEDTAK
           )
         : undefined;
+
+    const { annenPartsVedakData, annenPartsVedtakError } = Api.useGetAnnenPartsVedtak(annenPartVedtakIsSuspended);
+
+    useEffect(() => {
+        if (annenPartsVedtakError) {
+            throw new Error('Vi klarte ikke å hente opp informasjon om den andre forelderen.');
+        }
+    }, [annenPartsVedtakError]);
+
+    if (!annenPartsVedakData) {
+        return (
+            <div style={{ textAlign: 'center', padding: '12rem 0' }}>
+                <Loader type="XXL" />
+            </div>
+        );
+    }
 
     return (
         <div className={bem.block}>
@@ -85,8 +122,12 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
             {gjeldendeVedtak && (
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.dinPlan')} padding="large">
                     <DinPlan
-                        vedtattUttaksplan={slåSammenLikePerioder(gjeldendeVedtak.perioder)}
+                        annenPartsPerioder={annenPartsVedakData.perioder}
+                        kjønnPåAnnenPart={kjønnPåAnnenPart}
+                        kjønnPåSøker={kjønnPåSøker}
+                        navnPåAnnenPart={navnPåAnnenPart}
                         navnPåSøker={navnPåSøker}
+                        vedtattUttaksplan={slåSammenLikePerioder(gjeldendeVedtak.perioder)}
                     />
                 </ContentSection>
             )}
@@ -94,8 +135,12 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
             {ubehandletSøknad && (
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.dinPlan')} padding="large">
                     <DinPlan
-                        søktePerioder={slåSammenLikePerioder(ubehandletSøknad.søknadsperioder || [])}
+                        annenPartsPerioder={annenPartsVedakData.perioder}
+                        kjønnPåAnnenPart={kjønnPåAnnenPart}
+                        kjønnPåSøker={kjønnPåSøker}
+                        navnPåAnnenPart={navnPåAnnenPart}
                         navnPåSøker={navnPåSøker}
+                        søktePerioder={slåSammenLikePerioder(ubehandletSøknad.søknadsperioder || [])}
                     />
                 </ContentSection>
             )}

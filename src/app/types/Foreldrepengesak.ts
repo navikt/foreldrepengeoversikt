@@ -1,6 +1,6 @@
 import { Dekningsgrad } from './Dekningsgrad';
 import { Familiehendelse } from './Familiehendelse';
-import { Periode } from './Periode';
+import { PeriodeDTO } from './Periode';
 import { Person } from './Person';
 import { RettighetType } from './RettighetType';
 import { Ytelse } from './Ytelse';
@@ -20,7 +20,7 @@ export interface ForeldrepengesakDTO {
     annenPart: Person;
     familiehendelse: Familiehendelse;
     gjeldendeVedtak: {
-        perioder: Periode[];
+        perioder: PeriodeDTO[];
     };
     barn: Person[];
     dekningsgrad: Dekningsgrad;

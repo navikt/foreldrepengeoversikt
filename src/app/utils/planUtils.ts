@@ -1,14 +1,14 @@
-import { Periode } from 'app/types/Periode';
+import { PeriodeDTO } from 'app/types/Periode';
 import dayjs from 'dayjs';
 import { Uttaksdagen } from './Uttaksdagen';
 
-export const slåSammenLikePerioder = (plan: Periode[]) => {
+export const slåSammenLikePerioder = (plan: PeriodeDTO[]) => {
     if (plan.length <= 0) {
         return plan;
     }
 
     let forrigePeriode = plan[0];
-    const nyPlan: Periode[] = [];
+    const nyPlan: PeriodeDTO[] = [];
 
     plan.forEach((periode, index) => {
         if (index === 0) {
@@ -30,20 +30,20 @@ export const slåSammenLikePerioder = (plan: Periode[]) => {
     return nyPlan;
 };
 
-const erPerioderSammenhengende = (p1: Periode, p2: Periode) => {
+const erPerioderSammenhengende = (p1: PeriodeDTO, p2: PeriodeDTO) => {
     const p1NesteUttaksdato = Uttaksdagen(dayjs(p1.tom).toDate()).neste();
     const p2Startdato = p2.fom;
     return dayjs(p1NesteUttaksdato).isSame(p2Startdato, 'day');
 };
 
-const erPerioderLike = (periodeA: Periode, periodeB: Periode) => {
+const erPerioderLike = (periodeA: PeriodeDTO, periodeB: PeriodeDTO) => {
     const periodeFootprintA = getPeriodeFootprint(periodeA);
     const periodeFootprintB = getPeriodeFootprint(periodeB);
 
     return periodeFootprintA === periodeFootprintB;
 };
 
-const getPeriodeFootprint = (periode: Periode) => {
+const getPeriodeFootprint = (periode: PeriodeDTO) => {
     const { fom, tom, ...rest } = periode;
     const sortedPeriode: any = {};
 

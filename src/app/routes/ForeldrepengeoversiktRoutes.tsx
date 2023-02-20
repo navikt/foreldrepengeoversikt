@@ -20,6 +20,7 @@ import { AxiosError } from 'axios';
 import EttersendingPage from 'app/pages/ettersending/EttersendingPage';
 import Snarveier from 'app/components/snarveier/Snarveier';
 import KontaktOss from 'app/sections/kontakt-oss/KontaktOss';
+import { getKjønnFromFnr } from 'app/utils/personUtils';
 
 interface Props {
     minidialogerData: MinidialogInnslag[] | undefined;
@@ -37,6 +38,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
     const bem = bemUtils('routesWrapper');
     const hasNavigated = useRef(false);
     const navigate = useNavigate();
+    const kjønnPåSøker = getKjønnFromFnr(søkerinfo.søker.fnr);
 
     useEffect(() => {
         if (!hasNavigated.current) {
@@ -77,6 +79,7 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
                                     navnPåSøker={søkerinfo.søker.fornavn}
                                     minidialogerData={minidialogerData}
                                     minidialogerError={minidialogerError}
+                                    kjønnPåSøker={kjønnPåSøker!}
                                 />
                             }
                         />

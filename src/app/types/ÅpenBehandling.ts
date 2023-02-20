@@ -1,7 +1,7 @@
 import { BehandlingTilstand } from './BehandlingTilstand';
-import { Periode } from './Periode';
+import { PeriodeDTO } from './Periode';
 
 export interface ÅpenBehandling {
     tilstand: BehandlingTilstand;
-    søknadsperioder?: Periode[];
+    søknadsperioder?: PeriodeDTO[];
 }
