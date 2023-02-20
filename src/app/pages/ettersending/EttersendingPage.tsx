@@ -88,7 +88,9 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                     <Alert variant="success">Dokumentene er sendt</Alert>
                 </Block>
                 <Block padBottom="l">
-                    <Link to={`/${sak!.saksnummer}`}>{intlUtils(intl, 'miniDialog.kvittering.gåTilbakeTilSaken')}</Link>
+                    <Link to={`/sak/${sak!.saksnummer}`}>
+                        {intlUtils(intl, 'miniDialog.kvittering.gåTilbakeTilSaken')}
+                    </Link>
                 </Block>
             </div>
         );
@@ -101,9 +103,6 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
             renderForm={({ values, setFieldValue }) => {
                 return (
                     <>
-                        <Heading size="large" level="2">
-                            Last opp dokumenter
-                        </Heading>
                         <EttersendingFormComponents.Form includeButtons={false} includeValidationSummary={true}>
                             <BodyLong className={bem.element('beskrivelse')}>
                                 Dokumentene du laster opp vil bli lagt ved søknaden din. Du må velge hva dokumentene
@@ -155,9 +154,11 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                                     <PictureScanningGuide />
                                 </ReadMore>
                             </Block>
-                            <Button type="submit" loading={isEttersending} disabled={isEttersending}>
-                                Send dokumenter
-                            </Button>
+                            <Block padBottom="l">
+                                <Button type="submit" loading={isEttersending} disabled={isEttersending}>
+                                    Send dokumenter
+                                </Button>
+                            </Block>
                         </EttersendingFormComponents.Form>
                     </>
                 );

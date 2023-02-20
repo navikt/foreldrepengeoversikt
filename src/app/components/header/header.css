@@ -18,3 +18,16 @@
     margin-top: 6px;
     padding-left: 2rem;
 }
+
+.header__text-with-bar {
+    display: flex;
+}
+
+.header__divider {
+    margin: 0 0.75rem;
+    color: var(--a-text-subtle);
+}
+
+.header__divider-text {
+    color: var(--a-text-subtle);
+}

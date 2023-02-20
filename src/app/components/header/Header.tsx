@@ -87,13 +87,35 @@ const renderTag = (sak: Sak) => {
 const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined) => {
     const bem = bemUtils('header');
 
-    if (selectedRoute === OversiktRoutes.HOVEDSIDE) {
+    if (selectedRoute === OversiktRoutes.DOKUMENTER) {
         return (
             <div className={bem.element('content')}>
-                <TåteflaskeBaby />
-                <div className={bem.element('title-container')}>
-                    <Heading size="xlarge">Foreldrepengene mine</Heading>
-                    <BodyShort>PENGESTØTTE</BodyShort>
+                <div>
+                    <Heading size="xlarge">Dokumenter</Heading>
+                    <div className={bem.element('text-with-bar')}>
+                        <BodyShort>{`SAKSNR ${sak?.saksnummer}`}</BodyShort>
+                        <div className={bem.element('divider')}>|</div>
+                        <BodyShort className={bem.element('divider-text')}>
+                            Liste over dokumenter som tilhører saken
+                        </BodyShort>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (selectedRoute === OversiktRoutes.ETTERSEND) {
+        return (
+            <div className={bem.element('content')}>
+                <div>
+                    <Heading size="xlarge">Last opp dokumenter</Heading>
+                    <div className={bem.element('text-with-bar')}>
+                        <BodyShort>{`SAKSNR ${sak?.saksnummer}`}</BodyShort>
+                        <div className={bem.element('divider')}>|</div>
+                        <BodyShort className={bem.element('divider-text')}>
+                            Ettersend dokumenter som tilhører saken
+                        </BodyShort>
+                    </div>
                 </div>
             </div>
         );
