@@ -66,6 +66,9 @@ const DinPlan: React.FunctionComponent<Props> = ({
         annenPartsPlan = normaliserteAnnenPartsPerioder;
     }
 
+    //TODO : Lag ny liste med perioderForVisning som inneholder kun annen parts perioder som ikke overlapper,
+    //       , mer brukerns perioder som overlapper med annen part og finn ut hvordan periodene som overlapper skal vises.
+
     return (
         <>
             <div className={bem.element('header')}>
