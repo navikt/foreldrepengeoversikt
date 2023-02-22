@@ -13,7 +13,7 @@ import { ExternalLink } from '@navikt/ds-icons';
 import {
     VENTEÅRSAKER,
     sorterTidslinjehendelser,
-    getTidslinjehendelseFraBehandlingPåVent,
+    getTidslinjehendelserFraBehandlingPåVent,
     getTidslinjehendelseStatus,
     getTidslinjehendelseTittel,
 } from 'app/utils/tidslinjeUtils';
@@ -41,11 +41,11 @@ const Tidslinje: React.FunctionComponent<Params> = ({ sak }) => {
 
     const åpenBehandlingPåVent =
         sak.åpenBehandling && VENTEÅRSAKER.includes(sak.åpenBehandling.tilstand) ? sak.åpenBehandling : undefined;
-    const venteHendelse = åpenBehandlingPåVent
-        ? getTidslinjehendelseFraBehandlingPåVent(åpenBehandlingPåVent, intl)
+    const venteHendelser = åpenBehandlingPåVent
+        ? getTidslinjehendelserFraBehandlingPåVent(åpenBehandlingPåVent, manglendeVedleggData, intl)
         : undefined;
 
-    const alleHendelser = venteHendelse ? tidslinjeHendelserData.concat([venteHendelse]) : tidslinjeHendelserData;
+    const alleHendelser = venteHendelser ? tidslinjeHendelserData.concat(venteHendelser) : tidslinjeHendelserData;
     const sorterteHendelser = alleHendelser.sort(sorterTidslinjehendelser);
 
     return (
