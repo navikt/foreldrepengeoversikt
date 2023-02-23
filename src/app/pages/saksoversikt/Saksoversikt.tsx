@@ -13,7 +13,6 @@ import { HendelseType } from 'app/types/HendelseType';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { SakOppslag } from 'app/types/SakOppslag';
 import { Ytelse } from 'app/types/Ytelse';
-import { slåSammenLikePerioder } from 'app/utils/planUtils';
 import { getAlleYtelser } from 'app/utils/sakerUtils';
 import { AxiosError } from 'axios';
 import dayjs from 'dayjs';
@@ -30,7 +29,7 @@ interface Props {
     saker: SakOppslag;
 }
 
-const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidialogerError, navnPåSøker, saker }) => {
+const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidialogerError, saker, navnPåSøker }) => {
     const intl = useIntl();
     const bem = bemUtils('saksoversikt');
     useSetBackgroundColor('blue');
@@ -40,17 +39,6 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
 
     const gjeldendeSak = alleSaker.find((sak) => sak.saksnummer === params.saksnummer)!;
     useSetSelectedSak(gjeldendeSak);
-
-    let gjeldendeVedtak = undefined;
-    let ubehandletSøknad = undefined;
-
-    if (gjeldendeSak.ytelse === Ytelse.FORELDREPENGER) {
-        gjeldendeVedtak = gjeldendeSak.gjeldendeVedtak;
-    }
-
-    if (gjeldendeSak.ytelse === Ytelse.FORELDREPENGER && gjeldendeSak.åpenBehandling) {
-        ubehandletSøknad = gjeldendeSak.åpenBehandling;
-    }
 
     const aktiveMinidialogerForSaken = minidialogerData
         ? minidialogerData.filter(
@@ -82,21 +70,9 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
             <ContentSection padding="none">
                 <SeOpplysninger />
             </ContentSection>
-            {gjeldendeVedtak && (
+            {gjeldendeSak.ytelse === Ytelse.FORELDREPENGER && (
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.dinPlan')} padding="large">
-                    <DinPlan
-                        vedtattUttaksplan={slåSammenLikePerioder(gjeldendeVedtak.perioder)}
-                        navnPåSøker={navnPåSøker}
-                    />
-                </ContentSection>
-            )}
-
-            {ubehandletSøknad && (
-                <ContentSection heading={intlUtils(intl, 'saksoversikt.dinPlan')} padding="large">
-                    <DinPlan
-                        søktePerioder={slåSammenLikePerioder(ubehandletSøknad.søknadsperioder || [])}
-                        navnPåSøker={navnPåSøker}
-                    />
+                    <DinPlan sak={gjeldendeSak} visHelePlanen={false} navnPåSøker={navnPåSøker} />
                 </ContentSection>
             )}
         </div>

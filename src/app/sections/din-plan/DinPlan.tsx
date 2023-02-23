@@ -1,27 +1,37 @@
-import { BodyLong, Button, Link } from '@navikt/ds-react';
-import { Link as RouterLink } from 'react-router-dom';
+import { BodyLong, Button } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
-import { Next } from '@navikt/ds-icons';
 import React from 'react';
 import { Edit } from '@navikt/ds-icons';
-import { default as PeriodeComponent } from './Periode';
-import { Periode } from 'app/types/Periode';
-import { isUtsettelsesperiode } from 'app/utils/periodeUtils';
-import { UtsettelseÅrsakType } from 'app/types/UtsettelseÅrsakType';
-import OversiktRoutes from 'app/routes/routes';
-
+import { finnFremtidigePerioder, finnNåværendePerioder, finnTidligerePerioder } from 'app/utils/periodeUtils';
 import './din-plan.css';
+import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
+import { Foreldrepengesak } from 'app/types/Foreldrepengesak';
+import { slåSammenLikePerioder } from 'app/utils/planUtils';
 
 interface Props {
     navnPåSøker: string;
-    søktePerioder?: Periode[];
-    vedtattUttaksplan?: Periode[];
+    sak: Foreldrepengesak;
+    visHelePlanen: boolean;
 }
 
-const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, søktePerioder, navnPåSøker }) => {
+const DinPlan: React.FunctionComponent<Props> = ({ sak, visHelePlanen, navnPåSøker }) => {
     const bem = bemUtils('din-plan');
+
+    let vedtattUttaksplan = undefined;
+    let søktePerioder = undefined;
+    if (sak.gjeldendeVedtak) {
+        vedtattUttaksplan = slåSammenLikePerioder(sak.gjeldendeVedtak.perioder);
+    }
+
+    if (sak.åpenBehandling && sak.åpenBehandling.søknadsperioder) {
+        søktePerioder = slåSammenLikePerioder(sak.åpenBehandling.søknadsperioder);
+    }
     const erUttaksplanVedtatt = vedtattUttaksplan ? true : false;
 
+    const planForVisning = erUttaksplanVedtatt ? vedtattUttaksplan : søktePerioder;
+    const tidligerePerioder = planForVisning ? finnTidligerePerioder(planForVisning) : undefined;
+    const nåværendePerioder = planForVisning ? finnNåværendePerioder(planForVisning) : undefined;
+    const fremtidligePerioder = planForVisning ? finnFremtidigePerioder(planForVisning) : undefined;
     return (
         <>
             <div className={bem.element('header')}>
@@ -36,47 +46,14 @@ const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, søktePeri
                     Endre perioder
                 </Button>
             </div>
-            {vedtattUttaksplan &&
-                vedtattUttaksplan.map((periode, index) => {
-                    let ikkeUttak = false;
-
-                    if (isUtsettelsesperiode(periode) && periode.utsettelseÅrsak === UtsettelseÅrsakType.Fri) {
-                        ikkeUttak = true;
-                    }
-
-                    return (
-                        <PeriodeComponent
-                            key={index}
-                            periode={periode}
-                            navnForelder={navnPåSøker}
-                            ikkeUttak={ikkeUttak}
-                        />
-                    );
-                })}
-            {!erUttaksplanVedtatt &&
-                søktePerioder &&
-                søktePerioder.length > 0 &&
-                søktePerioder.map((periode, index) => {
-                    let ikkeUttak = false;
-
-                    if (isUtsettelsesperiode(periode) && periode.utsettelseÅrsak === UtsettelseÅrsakType.Fri) {
-                        ikkeUttak = true;
-                    }
-
-                    return (
-                        <PeriodeComponent
-                            key={index}
-                            periode={periode}
-                            navnForelder={navnPåSøker}
-                            ikkeUttak={ikkeUttak}
-                        />
-                    );
-                })}
-            <div>
-                <Link as={RouterLink} to={OversiktRoutes.DIN_PLAN}>
-                    Se hele planen <Next />
-                </Link>
-            </div>
+            <PeriodeOversikt
+                tidligerePerioder={tidligerePerioder}
+                nåværendePerioder={nåværendePerioder}
+                fremtidigePerioder={fremtidligePerioder}
+                sak={sak}
+                visHelePlanen={visHelePlanen}
+                navnPåSøker={navnPåSøker}
+            />
         </>
     );
 };
