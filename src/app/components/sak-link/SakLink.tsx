@@ -42,10 +42,10 @@ const getTag = (sak: Sak) => {
                 return <Tag variant="warning">Søknaden vil bli behandlet senere</Tag>;
             }
         }
+    }
 
-        if (sak.sakAvsluttet) {
-            return <Tag variant="success">Avsluttet</Tag>;
-        }
+    if (sak.sakAvsluttet) {
+        return <Tag variant="success">Avsluttet</Tag>;
     }
 
     return <Tag variant="success">Aktiv</Tag>;
