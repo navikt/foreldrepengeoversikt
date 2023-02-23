@@ -1,6 +1,4 @@
 .dokument {
-    display: flex;
-    align-items: center;
     border-bottom: 1px solid var(--a-surface-neutral);
     padding-bottom: 1rem;
     margin-bottom: 1rem;
@@ -12,15 +10,12 @@
 }
 
 .dokument__link-icon {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
     max-width: 32rem;
 }
 
 .dokument__content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     width: 100%;
+    display: grid;
+    grid-template-columns: 0.5fr 8fr 2fr 1fr;
+    align-items: center;
 }
