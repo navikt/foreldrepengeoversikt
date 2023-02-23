@@ -26,15 +26,27 @@ interface Props {
     saker: SakOppslag;
 }
 
+const getKlageLink = (ytelse: Ytelse | undefined) => {
+    if (ytelse === Ytelse.ENGANGSSTØNAD) {
+        return NavRoutes.KLAGERETTIGHETER_ES;
+    }
+
+    if (ytelse === Ytelse.SVANGERSKAPSPENGER) {
+        return NavRoutes.KLAGERETTIGHETER_SVP;
+    }
+
+    return NavRoutes.KLAGERETTIGHETER_FP;
+};
+
 const Snarveier: React.FunctionComponent<Props> = ({ saker }) => {
     const bem = bemUtils('snarveier');
     const intl = useIntl();
     const path = location.pathname;
     const alleSaker = getAlleYtelser(saker);
     const currentSak = alleSaker.find((sak) => path.includes(sak.saksnummer));
-    const stønadstype = currentSak ? currentSak.ytelse : undefined;
+    const ytelse = currentSak ? currentSak.ytelse : undefined;
     const ytelseTekst = currentSak !== undefined ? currentSak.ytelse : intlUtils(intl, 'snarveier.pengestøtter');
-    const lesMerLink = getLesMerLink(stønadstype);
+    const lesMerLink = getLesMerLink(ytelse);
     return (
         <div className={bem.block}>
             <div className={bem.element('wrapper')}>
@@ -65,7 +77,7 @@ const Snarveier: React.FunctionComponent<Props> = ({ saker }) => {
                             <div>{intlUtils(intl, 'snarveier.endringerIDinSituasjon')}</div>
                         </LinkPanel.Title>
                     </LinkPanel>
-                    <LinkPanel href={NavRoutes.KLAGERETTIGHETER} border={false} className={bem.element('linkPanel')}>
+                    <LinkPanel href={getKlageLink(ytelse)} border={false} className={bem.element('linkPanel')}>
                         <LinkPanel.Title className={bem.element('linkTitle')}>
                             <div>{intlUtils(intl, 'snarveier.slikKlagerDu')}</div>
                         </LinkPanel.Title>

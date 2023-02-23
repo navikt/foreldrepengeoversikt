@@ -9,7 +9,9 @@ enum OversiktRoutes {
 
 export enum NavRoutes {
     SAKSBEHANDLINGSTIDER = 'https://www.nav.no/saksbehandlingstider#foreldrepenger',
-    KLAGERETTIGHETER = 'https://klage.nav.no/nb/familie',
+    KLAGERETTIGHETER_FP = 'https://klage.nav.no/nb/familie',
+    KLAGERETTIGHETER_SVP = 'https://klage.nav.no/nb/familie',
+    KLAGERETTIGHETER_ES = 'https://klage.nav.no/nb/familie',
     CHAT_MED_OSS = 'https://www.nav.no/person/kontakt-oss/chat/familie',
     SKRIV_TIL_OSS = 'https://innboks.nav.no/s/skriv-til-oss?category=Familie',
     RING_OSS = 'tel:55553333',
