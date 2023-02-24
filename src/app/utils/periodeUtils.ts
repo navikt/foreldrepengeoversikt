@@ -63,11 +63,18 @@ export const getFelterForSammenligningAvDuplikatePerioderPgaArbeidsforhold = ({
     return uttaksperiodeDtoUtenArbeidsgiverInfo;
 };
 
-export const getCleanedPlanForVisning = (plan: Periode[] | undefined): Periode[] | undefined => {
+export const getCleanedPlanForVisning = (
+    plan: Periode[] | undefined,
+    erPlanVedtatt: boolean
+): Periode[] | undefined => {
     if (plan === undefined) {
         return undefined;
     }
-    return plan.filter((periode) => periode.resultat && periode.resultat.innvilget && !isOppholdsperiode(periode));
+    if (erPlanVedtatt) {
+        return plan.filter((periode) => periode.resultat && periode.resultat.innvilget && !isOppholdsperiode(periode));
+    } else {
+        return plan.filter((periode) => !isOppholdsperiode(periode));
+    }
 };
 
 const finnForrigeMuligeUttaksdag = (dato: Date): Date => {

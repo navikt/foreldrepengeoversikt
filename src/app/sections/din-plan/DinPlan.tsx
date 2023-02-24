@@ -35,7 +35,7 @@ const DinPlan: React.FunctionComponent<Props> = ({ sak, visHelePlanen, navnPåS�
     const erUttaksplanVedtatt = vedtattUttaksplan ? true : false;
 
     const planForVisning = erUttaksplanVedtatt ? vedtattUttaksplan : søktePerioder;
-    const filtrertPlan = getCleanedPlanForVisning(planForVisning);
+    const filtrertPlan = getCleanedPlanForVisning(planForVisning, erUttaksplanVedtatt);
     const planMedHull = filtrertPlan; //TODO fyllInnHull(filtrertPlan);
     const tidligerePerioder = planMedHull ? finnTidligerePerioder(planMedHull) : undefined;
     const nåværendePerioder = planMedHull ? finnNåværendePerioder(planMedHull) : undefined;
