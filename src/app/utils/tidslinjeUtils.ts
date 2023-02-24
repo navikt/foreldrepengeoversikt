@@ -104,11 +104,33 @@ export const getTidligstBehandlingsDatoForTidligSøknad = (åpenBehandling: Åpe
     return Uttaksdagen(førsteUttaksdagISaken!).trekkFra(4 * UTTAKSDAGER_PER_UKE);
 };
 
-export const getTidslinjehendelseFraBehandlingPåVent = (
+export const getTidslinjehendelserFraBehandlingPåVent = (
     åpenBehandling: ÅpenBehandling,
+    manglendeVedleggData: Skjemanummer[],
     intl: IntlShape
-): Tidslinjehendelse => {
-    return {
+): Tidslinjehendelse[] => {
+    let hendelseVenterPåDokumentasjon = undefined;
+    if (
+        åpenBehandling.tilstand === BehandlingTilstand.VENTER_PÅ_INNTEKTSMELDING &&
+        manglendeVedleggData &&
+        manglendeVedleggData.length > 0
+    ) {
+        const behandlingTilstand = BehandlingTilstand.VENTER_PÅ_DOKUMENTASJON;
+        hendelseVenterPåDokumentasjon = {
+            type: 'søknad',
+            opprettet: new Date(),
+            aktørType: getAktørtypeAvVenteårsak(åpenBehandling.tilstand),
+            tidslinjeHendelseType: getTidslinjeHendelstypeAvVenteårsak(behandlingTilstand),
+            dokumenter: [],
+            manglendeVedlegg: [],
+            merInformasjon: intlUtils(intl, `tidslinje.${behandlingTilstand}.informasjon`),
+            linkTittel: intlUtils(intl, `tidslinje.${behandlingTilstand}.linkTittel`),
+            eksternalUrl: getTidlinjeHendelseEksternUrl(behandlingTilstand),
+            internalUrl: OversiktRoutes.ETTERSEND,
+            tidligstBehandlingsDato: undefined,
+        };
+    }
+    const tidslinjeHendelse = {
         type: 'søknad',
         opprettet: new Date(),
         aktørType: getAktørtypeAvVenteårsak(åpenBehandling.tilstand),
@@ -127,6 +149,12 @@ export const getTidslinjehendelseFraBehandlingPåVent = (
                 ? getTidligstBehandlingsDatoForTidligSøknad(åpenBehandling)
                 : undefined,
     };
+
+    if (hendelseVenterPåDokumentasjon) {
+        return [tidslinjeHendelse, hendelseVenterPåDokumentasjon];
+    }
+
+    return [tidslinjeHendelse];
 };
 
 export const sorterTidslinjehendelser = (h1: Tidslinjehendelse, h2: Tidslinjehendelse) => {

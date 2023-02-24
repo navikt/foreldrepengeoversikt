@@ -73,9 +73,23 @@ const addYtelseToSak = (
     );
 };
 
+const fjernAvslåttePerioder = (saker: Foreldrepengesak[]) => {
+    return saker.map((sak) => {
+        if (sak.gjeldendeVedtak) {
+            const innvilgedePerioder = sak.gjeldendeVedtak.perioder.filter((periode) => periode.resultat.innvilget);
+
+            return { ...sak, gjeldendeVedtak: { ...sak.gjeldendeVedtak, perioder: innvilgedePerioder } };
+        }
+
+        return sak;
+    });
+};
+
 export const mapSakerDTOToSaker = (saker: SakOppslagDTO): SakOppslag => {
     return {
-        foreldrepenger: addYtelseToSak(saker.foreldrepenger, Ytelse.FORELDREPENGER) as Foreldrepengesak[],
+        foreldrepenger: fjernAvslåttePerioder(
+            addYtelseToSak(saker.foreldrepenger, Ytelse.FORELDREPENGER) as Foreldrepengesak[]
+        ),
         engangsstønad: addYtelseToSak(saker.engangsstønad, Ytelse.ENGANGSSTØNAD) as EngangsstønadSak[],
         svangerskapspenger: addYtelseToSak(
             saker.svangerskapspenger,

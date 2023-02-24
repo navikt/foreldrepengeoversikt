@@ -151,7 +151,7 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                             </Block>
                             <Block padBottom="l">
                                 <ReadMore header={intlUtils(intl, 'pictureScanningGuide.apneLabel')}>
-                                    <PictureScanningGuide />
+                                    <PictureScanningGuide backgroundColor="white" />
                                 </ReadMore>
                             </Block>
                             <Block padBottom="l">
