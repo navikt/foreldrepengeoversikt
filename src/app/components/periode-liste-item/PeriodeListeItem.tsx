@@ -4,9 +4,14 @@ import StønadskontoIkon from 'app/components/stønadskonto-ikon/StønadskontoIk
 import UtsettelseIkon from 'app/components/utsettelse-ikon/UtsettelseIkon';
 import { Periode as PeriodeListeItem } from 'app/types/Periode';
 import { StønadskontoType } from 'app/types/StønadskontoType';
-import { UtsettelseÅrsakType } from 'app/types/UtsettelseÅrsakType';
 import { getAntallUttaksdagerITidsperiode, getVarighetString } from 'app/utils/dateUtils';
-import { isOppholdsperiode, isOverføringsperiode, isUtsettelsesperiode, isUttaksperiode } from 'app/utils/periodeUtils';
+import {
+    getPeriodeTittel,
+    isOppholdsperiode,
+    isOverføringsperiode,
+    isUtsettelsesperiode,
+    isUttaksperiode,
+} from 'app/utils/periodeUtils';
 import { NavnPåForeldre } from 'app/utils/personUtils';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
@@ -51,52 +56,6 @@ export const getPeriodeIkon = (
     return undefined;
 };
 
-const getPeriodeTittel = (periode: PeriodeListeItem): string => {
-    if (isUttaksperiode(periode)) {
-        const { kontoType } = periode;
-
-        switch (kontoType) {
-            case StønadskontoType.Fedrekvote:
-                return 'Fedrekvote';
-            case StønadskontoType.Mødrekvote:
-                return 'Mødrekvote';
-            case StønadskontoType.Fellesperiode:
-                return 'Fellesperiode';
-            case StønadskontoType.Foreldrepenger:
-                return 'Foreldrepenger';
-            case StønadskontoType.ForeldrepengerFørFødsel:
-                return 'Foreldrepenger før fødsel';
-            default:
-                return '';
-        }
-    }
-    if (isUtsettelsesperiode(periode)) {
-        const { utsettelseÅrsak } = periode;
-        switch (utsettelseÅrsak) {
-            case UtsettelseÅrsakType.Arbeid:
-                return 'Utsettelse på grunn av arbeid';
-            case UtsettelseÅrsakType.Sykdom:
-                return 'Utsettelse på grunn av sykdom';
-            case UtsettelseÅrsakType.InstitusjonSøker:
-                return 'Utsettelse på grunn av innleggelse i helseinstitusjon';
-            case UtsettelseÅrsakType.InstitusjonBarnet:
-                return 'Utsettelse på grunn av at barnet er innlagt i helseinstitusjon';
-            case UtsettelseÅrsakType.HvØvelse:
-                return 'Utsettelse på grunn av HV Øvelse';
-            case UtsettelseÅrsakType.NavTiltak:
-                return 'Utsettelse på grunn av NAV tiltak som utgjør 100% arbeid';
-            case UtsettelseÅrsakType.Ferie:
-                return 'Utsettelse på grunn av ferie';
-            case UtsettelseÅrsakType.Fri:
-                return 'Utsettelse';
-            default:
-                return '';
-        }
-    }
-
-    return '';
-};
-
 const PeriodeListeItem: React.FunctionComponent<Props> = ({
     periode,
     erFarEllerMedmor,
@@ -106,7 +65,8 @@ const PeriodeListeItem: React.FunctionComponent<Props> = ({
     const bem = bemUtils('periode');
     const intl = useIntl();
     const { fom, tom } = periode;
-    const tittel = getPeriodeTittel(periode);
+
+    const tittel = getPeriodeTittel(intl, periode, navnPåForeldre, erFarEllerMedmor, erAleneOmOmsorg);
     const antallDagerIPeriode = getAntallUttaksdagerITidsperiode({
         fom: dayjs(periode.fom).toDate(),
         tom: dayjs(periode.tom).toDate(),

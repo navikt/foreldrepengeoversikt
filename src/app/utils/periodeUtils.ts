@@ -160,7 +160,7 @@ const prettifyProsent = (pst: number | undefined): number | undefined => {
     return nbr;
 };
 
-export const getStønadskontoNavn = (
+export const getStønadskontoForelderNavn = (
     intl: IntlShape,
     konto: StønadskontoType,
     navnPåForeldre: NavnPåForeldre,
@@ -234,7 +234,7 @@ export const getPeriodeTittel = (
     erAleneOmOmsorg?: boolean
 ): string => {
     if (isUttaksperiode(periode)) {
-        const tittelMedNavn = getStønadskontoNavn(
+        const tittelMedNavn = getStønadskontoForelderNavn(
             intl,
             periode.kontoType!,
             navnPåForeldre,
@@ -267,15 +267,13 @@ export const getPeriodeTittel = (
         return tittel;
     }
     if (isOverføringsperiode(periode)) {
-        return getStønadskontoNavn(intl, periode.kontoType!, navnPåForeldre);
+        return getStønadskontoForelderNavn(intl, periode.kontoType!, navnPåForeldre);
     }
     if (isUtsettelsesperiode(periode)) {
         if (periode.utsettelseÅrsak) {
-            return intlUtils(intl, 'uttaksplan.periodeliste.utsettelsesårsak', {
-                årsak: intlUtils(intl, `uttaksplan.utsettelsesårsak.${periode.utsettelseÅrsak}`),
-            });
+            return intlUtils(intl, `uttaksplan.utsettelsesårsak.${periode.utsettelseÅrsak}`);
         }
-        return intlUtils(intl, 'uttaksplan.periodeliste.utsettelsesårsak.ukjent');
+        return intlUtils(intl, 'uttaksplan.utsettelsesårsak.ukjent');
     }
     //TODO getOppholdskontoNavn
     return '';
