@@ -75,9 +75,13 @@ const addYtelseToSak = (
 
 const fjernAvslåttePerioder = (saker: Foreldrepengesak[]) => {
     return saker.map((sak) => {
-        const innvilgedePerioder = sak.gjeldendeVedtak.perioder.filter((periode) => periode.resultat.innvilget);
+        if (sak.gjeldendeVedtak) {
+            const innvilgedePerioder = sak.gjeldendeVedtak.perioder.filter((periode) => periode.resultat.innvilget);
 
-        return { ...sak, gjeldendeVedtak: { ...sak.gjeldendeVedtak, perioder: innvilgedePerioder } };
+            return { ...sak, gjeldendeVedtak: { ...sak.gjeldendeVedtak, perioder: innvilgedePerioder } };
+        }
+
+        return sak;
     });
 };
 

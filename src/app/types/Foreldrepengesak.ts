@@ -19,7 +19,7 @@ export interface ForeldrepengesakDTO {
     rettighetType: RettighetType;
     annenPart: Person;
     familiehendelse: Familiehendelse;
-    gjeldendeVedtak: {
+    gjeldendeVedtak?: {
         perioder: Periode[];
     };
     barn: Person[];
