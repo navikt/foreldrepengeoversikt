@@ -45,7 +45,7 @@ const DinPlan: React.FunctionComponent<Props> = ({ sak, visHelePlanen, navnPåS�
                 <div className={bem.element('header-tekst')}>
                     <BodyLong>
                         {erUttaksplanVedtatt
-                            ? 'Dine perioder med foreldrepenger'
+                            ? 'Du har fått vedtatt planen nedenfor.'
                             : 'Du har søkt om planen nedenfor. Planen er ikke vedtatt av NAV ennå.'}
                     </BodyLong>
                 </div>

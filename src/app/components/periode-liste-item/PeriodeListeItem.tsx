@@ -108,7 +108,7 @@ const getPeriodeTittel = (periode: PeriodeListeItem): string => {
             case UtsettelseÅrsakType.Ferie:
                 return 'Utsettelse på grunn av ferie';
             case UtsettelseÅrsakType.Fri:
-                return 'Periode uten uttak';
+                return 'Utsettelse';
             default:
                 return '';
         }
