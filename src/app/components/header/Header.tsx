@@ -129,9 +129,13 @@ const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined
         return (
             <div className={bem.element('content')}>
                 <TåteflaskeBaby />
-                <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '1rem', marginBottom: '1rem' }}>
                     <Heading size="xlarge">{getSaksoversiktHeading(sak.ytelse)}</Heading>
-                    <BodyShort style={{ marginBottom: '1.5rem' }}>{beskrivelse}</BodyShort>
+                    <div className={bem.element('text-with-bar')}>
+                        <BodyShort>{`SAKSNR ${sak?.saksnummer}`}</BodyShort>
+                        <div className={bem.element('divider')}>|</div>
+                        <BodyShort className={bem.element('divider-text')}>{beskrivelse}</BodyShort>
+                    </div>
                     {renderTag(sak)}
                 </div>
             </div>
