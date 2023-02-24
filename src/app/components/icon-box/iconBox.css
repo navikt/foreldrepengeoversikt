@@ -1,0 +1,30 @@
+.iconBox__icon-purple{
+    background-color: var(--a-purple-400);
+    border-radius: 0.5rem;
+    width: 5.5%;
+}
+
+.iconBox__icon-blue {
+    background-color: var(--a-blue-400);
+    border-radius: 0.5rem;
+    width: 5.5%;
+}
+
+.iconBox__icon-green {
+    background-color: var(--a-green-400);
+    border-radius: 0.5rem;
+    width: 5.5%;
+}
+
+.iconBox__icon-purpleBlue {
+    background-color: var(--a-blue-400);
+    border-radius: 0.5rem;
+    width: 5.5%;
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--a-blue-400),
+        var(--a-blue-400) 50%,
+        var(--a-purple-400)50%,
+        var(--a-purple-400) 100%
+    );
+}

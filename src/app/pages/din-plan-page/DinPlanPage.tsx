@@ -1,18 +1,26 @@
-import { BodyShort } from '@navikt/ds-react';
-import { bemUtils } from '@navikt/fp-common';
+import ContentSection from 'app/components/content-section/ContentSection';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
+import { useGetSelectedSak } from 'app/hooks/useSelectedSak';
 import OversiktRoutes from 'app/routes/routes';
+import DinPlan from 'app/sections/din-plan/DinPlan';
+import { Ytelse } from 'app/types/Ytelse';
 import React from 'react';
+interface Props {
+    navnPåSøker: string;
+}
 
-const DinPlanPage = () => {
-    const bem = bemUtils('din-plan-page');
+const DinPlanPage: React.FunctionComponent<Props> = ({ navnPåSøker }) => {
     useSetSelectedRoute(OversiktRoutes.DIN_PLAN);
+    const sak = useGetSelectedSak();
 
-    return (
-        <div className={bem.block}>
-            <BodyShort>Din plan</BodyShort>
-        </div>
-    );
+    if (sak && sak.ytelse === Ytelse.FORELDREPENGER) {
+        return (
+            <ContentSection heading="Din plan" padding="large">
+                <DinPlan sak={sak} visHelePlanen={true} navnPåSøker={navnPåSøker}></DinPlan>
+            </ContentSection>
+        );
+    }
+    return <div></div>;
 };
 
 export default DinPlanPage;

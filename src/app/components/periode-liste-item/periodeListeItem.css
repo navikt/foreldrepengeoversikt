@@ -1,0 +1,77 @@
+.periode__box {
+    box-shadow: 0 2px 4px 0 var(--a-gray-200);
+    border-top: 1rem;
+    border-left: 0.5rem solid transparent;
+    border-radius: 0.35rem;
+    padding-right: 0.5rem;
+}
+
+.periode {
+    padding: 1rem;
+    margin: 0 -1rem 1.5rem -1rem;
+}
+
+.periode_navnPåEier {
+    font-style: italic;
+}
+.periode--uttak {
+    background-color: white;
+    border: 2px solid var(--a-gray-100);
+    box-shadow: 10px;
+    border-radius: 0.5rem;
+}
+
+.periode--ikke-uttak {
+    background-color: white;
+}
+
+.periode__ikon-blue{
+    background-color: var(--a-purple-400);
+    border-radius: 0.5rem;
+    width: 5.5%;
+}
+
+.periode__ikon-purple {
+    background-color: var(--a-blue-400);
+    border-radius: 0.5rem;
+    width: 5.5%;
+}
+
+.periode__ikon-blue-purple {
+    background-color: var(--a-blue-400);
+    border-radius: 0.5rem;
+    width: 5.5%;
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--a-blue-400),
+        var(--a-blue-400) 50%,
+        var(--a-purple-400)50%,
+        var(--a-purple-400) 100%
+    );
+}
+
+.periode__innhold {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    margin: 0;
+}
+.periode__innhold-tekst-left {
+    margin-left: 1rem;
+    width: 47.25%;
+}
+
+.periode__innhold-tekst-right {
+    margin-left: 1rem;
+    width: 47.25%;
+    text-align:right
+}
+
+.periode__innhold-tekst > p {
+    margin-bottom: 0.25rem;
+}
+
+.periode__innhold-tekst > p {
+    margin-bottom: 0.25rem;
+}
+
