@@ -35,7 +35,27 @@ const getKlageLink = (ytelse: Ytelse | undefined) => {
         return NavRoutes.KLAGERETTIGHETER_SVP;
     }
 
-    return NavRoutes.KLAGERETTIGHETER_FP;
+    if (ytelse === Ytelse.FORELDREPENGER) {
+        return NavRoutes.KLAGERETTIGHETER_FP;
+    }
+
+    return NavRoutes.KLAGERETTIGHETER;
+};
+
+const getSaksbehandlingstidLink = (ytelse: Ytelse | undefined) => {
+    if (ytelse === Ytelse.ENGANGSSTØNAD) {
+        return NavRoutes.SAKSBEHANDLINGSTIDER_ES;
+    }
+
+    if (ytelse === Ytelse.SVANGERSKAPSPENGER) {
+        return NavRoutes.SAKSBEHANDLINGSTIDER_SVP;
+    }
+
+    if (ytelse === Ytelse.FORELDREPENGER) {
+        return NavRoutes.SAKSBEHANDLINGSTIDER_FP;
+    }
+
+    return NavRoutes.SAKSBEHANDLINGSTIDER;
 };
 
 const Snarveier: React.FunctionComponent<Props> = ({ saker }) => {
@@ -60,7 +80,7 @@ const Snarveier: React.FunctionComponent<Props> = ({ saker }) => {
                         </LinkPanel.Title>
                     </LinkPanel>
                     <LinkPanel
-                        href={NavRoutes.SAKSBEHANDLINGSTIDER}
+                        href={getSaksbehandlingstidLink(ytelse)}
                         border={false}
                         className={bem.element('linkPanel')}
                     >
