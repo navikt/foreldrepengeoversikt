@@ -10,8 +10,8 @@ export interface Periode {
     fom: string;
     tom: string;
     resultat: PeriodeResultat;
-    kontoType: StønadskontoType;
-    flerbarnsdager: boolean;
+    kontoType?: StønadskontoType;
+    flerbarnsdager?: boolean;
     gradering?: Gradering;
     oppholdÅrsak?: OppholdÅrsakType;
     utsettelseÅrsak?: UtsettelseÅrsakType;
@@ -19,4 +19,9 @@ export interface Periode {
     samtidigUttak?: number;
     morsAktivitet?: MorsAktivitet;
     angittAvAnnenPart?: boolean;
+}
+
+export enum PeriodeHullType {
+    PERIODE_UTEN_UTTAK = 'Periode uten uttak',
+    TAPTE_DAGER = 'Tapte dager',
 }

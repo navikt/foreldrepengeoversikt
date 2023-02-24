@@ -31,7 +31,7 @@ export const getPeriodeIkon = (
     if (isUttaksperiode(periode)) {
         return (
             <StønadskontoIkon
-                konto={periode.kontoType}
+                konto={periode.kontoType!}
                 gradert={!!periode.gradering}
                 navnPåForeldre={navnPåForeldre}
                 erFarEllerMedmor={erFarEllerMedmor}
@@ -40,7 +40,7 @@ export const getPeriodeIkon = (
         );
     }
     if (isOverføringsperiode(periode)) {
-        return <StønadskontoIkon konto={periode.kontoType} navnPåForeldre={navnPåForeldre} />;
+        return <StønadskontoIkon konto={periode.kontoType!} navnPåForeldre={navnPåForeldre} />;
     }
     if (isUtsettelsesperiode(periode)) {
         return <UtsettelseIkon årsak={periode.utsettelseÅrsak!} />;
@@ -138,11 +138,11 @@ const PeriodeListeItem: React.FunctionComponent<Props> = ({
     const ikonColor = getPeriodeIkonColor(periode);
     console.log(ikonColor);
     return (
-        <div className={classNames(bem.block)}>
+        <div className={classNames(`${bem.block} ${bem.element('box')}`)}>
             <div className={bem.element('innhold')}>
                 {visStønadskontoIkon && (
                     <StønadskontoIkon
-                        konto={periode.kontoType}
+                        konto={periode.kontoType!}
                         gradert={!!periode.gradering}
                         navnPåForeldre={navnPåForeldre}
                         erFarEllerMedmor={erFarEllerMedmor}

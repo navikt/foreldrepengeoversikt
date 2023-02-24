@@ -1,3 +1,11 @@
+.periode__box {
+    box-shadow: 0 2px 4px 0 var(--a-gray-200);
+    border-top: 1rem;
+    border-left: 0.5rem solid transparent;
+    border-radius: 0.35rem;
+    padding-right: 0.5rem;
+}
+
 .periode {
     padding: 1rem;
     margin: 0 -1rem 1.5rem -1rem;

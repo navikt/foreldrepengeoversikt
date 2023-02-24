@@ -2,7 +2,12 @@ import { BodyLong, Button } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import React from 'react';
 import { Edit } from '@navikt/ds-icons';
-import { finnFremtidigePerioder, finnNåværendePerioder, finnTidligerePerioder } from 'app/utils/periodeUtils';
+import {
+    finnFremtidigePerioder,
+    finnNåværendePerioder,
+    finnTidligerePerioder,
+    getCleanedPlanForVisning,
+} from 'app/utils/periodeUtils';
 import './din-plan.css';
 import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
 import { Foreldrepengesak } from 'app/types/Foreldrepengesak';
@@ -29,9 +34,11 @@ const DinPlan: React.FunctionComponent<Props> = ({ sak, visHelePlanen, navnPåS�
     const erUttaksplanVedtatt = vedtattUttaksplan ? true : false;
 
     const planForVisning = erUttaksplanVedtatt ? vedtattUttaksplan : søktePerioder;
-    const tidligerePerioder = planForVisning ? finnTidligerePerioder(planForVisning) : undefined;
-    const nåværendePerioder = planForVisning ? finnNåværendePerioder(planForVisning) : undefined;
-    const fremtidligePerioder = planForVisning ? finnFremtidigePerioder(planForVisning) : undefined;
+    const filtrertPlan = getCleanedPlanForVisning(planForVisning);
+    const planMedHull = filtrertPlan; //TODO fyllInnHull(filtrertPlan);
+    const tidligerePerioder = planMedHull ? finnTidligerePerioder(planMedHull) : undefined;
+    const nåværendePerioder = planMedHull ? finnNåværendePerioder(planMedHull) : undefined;
+    const fremtidligePerioder = planMedHull ? finnFremtidigePerioder(planMedHull) : undefined;
     return (
         <>
             <div className={bem.element('header')}>
