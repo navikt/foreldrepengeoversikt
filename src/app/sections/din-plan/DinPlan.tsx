@@ -43,11 +43,9 @@ const DinPlan: React.FunctionComponent<Props> = ({ sak, visHelePlanen, navnPåS�
         <>
             <div className={bem.element('header')}>
                 <div className={bem.element('header-tekst')}>
-                    <BodyLong>
-                        {erUttaksplanVedtatt
-                            ? 'Du har fått vedtatt planen nedenfor.'
-                            : 'Du har søkt om planen nedenfor. Planen er ikke vedtatt av NAV ennå.'}
-                    </BodyLong>
+                    {erUttaksplanVedtatt && <BodyLong> Du har fått vedtatt planen nedenfor. </BodyLong>}
+                    {!erUttaksplanVedtatt && <BodyLong> Du har søkt om planen nedenfor. </BodyLong>}
+                    {!erUttaksplanVedtatt && <BodyLong> Planen er ikke vedtatt av NAV ennå. </BodyLong>}
                 </div>
                 <Button variant="secondary" icon={<Edit aria-hidden />} iconPosition="right">
                     Endre perioder
