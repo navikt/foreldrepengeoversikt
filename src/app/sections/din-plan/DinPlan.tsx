@@ -1,4 +1,4 @@
-import { BodyLong, Button } from '@navikt/ds-react';
+import { BodyLong, Button, Link } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import React from 'react';
 import { Edit } from '@navikt/ds-icons';
@@ -8,6 +8,7 @@ import {
     finnTidligerePerioder,
     getCleanedPlanForVisning,
 } from 'app/utils/periodeUtils';
+import { NavRoutes } from 'app/routes/routes';
 import './din-plan.css';
 import PeriodeOversikt from 'app/components/periode-oversikt/PeriodeOversikt';
 import { Foreldrepengesak } from 'app/types/Foreldrepengesak';
@@ -56,7 +57,13 @@ const DinPlan: React.FunctionComponent<Props> = ({ sak, visHelePlanen, navnPåS�
                     {!erUttaksplanVedtatt && <BodyLong> Planen er ikke vedtatt av NAV ennå. </BodyLong>}
                 </div>
                 {(visHelePlanen || !kunTidligerePerioderFinnes) && (
-                    <Button variant="secondary" icon={<Edit aria-hidden />} iconPosition="right">
+                    <Button
+                        as={Link}
+                        href={NavRoutes.FORELDREPENGESOKNAD}
+                        variant="secondary"
+                        icon={<Edit aria-hidden />}
+                        iconPosition="right"
+                    >
                         Endre plan
                     </Button>
                 )}

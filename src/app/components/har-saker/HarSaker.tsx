@@ -18,22 +18,14 @@ export const getHeading = (type: 'fødsel' | 'termin' | 'adopsjon', antallBarn: 
     }
 
     if (type === 'fødsel') {
-        if (antallBarn === 1) {
-            return `Barn født ${formatDate(familiehendelsedato)}`;
-        }
-
-        return `${antallBarn} barn født ${formatDate(familiehendelsedato)}`;
+        return `Barn født ${formatDate(familiehendelsedato)}`;
     }
 
     if (type === 'termin') {
-        if (antallBarn === 1) {
-            return `Barn med termin ${formatDate(familiehendelsedato)}`;
-        }
-
-        return `${antallBarn} barn med termin ${formatDate(familiehendelsedato)}`;
+        return `Barn med termin ${formatDate(familiehendelsedato)}`;
     }
 
-    return `${antallBarn} barn med omsorgsovertakelse ${formatDate(familiehendelsedato)}`;
+    return `Barn med omsorgsovertakelse ${formatDate(familiehendelsedato)}`;
 };
 
 const HarSaker: React.FunctionComponent<Props> = ({ grupperteSaker }) => {

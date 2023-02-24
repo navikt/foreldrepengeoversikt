@@ -8,10 +8,14 @@ enum OversiktRoutes {
 }
 
 export enum NavRoutes {
-    SAKSBEHANDLINGSTIDER = 'https://www.nav.no/saksbehandlingstider#foreldrepenger',
-    KLAGERETTIGHETER_FP = 'https://klage.nav.no/nb/familie',
-    KLAGERETTIGHETER_SVP = 'https://klage.nav.no/nb/familie',
-    KLAGERETTIGHETER_ES = 'https://klage.nav.no/nb/familie',
+    SAKSBEHANDLINGSTIDER = 'https://www.nav.no/saksbehandlingstider',
+    SAKSBEHANDLINGSTIDER_FP = 'https://www.nav.no/saksbehandlingstider#foreldrepenger',
+    SAKSBEHANDLINGSTIDER_SVP = 'https://www.nav.no/saksbehandlingstider#svangerskapspenger',
+    SAKSBEHANDLINGSTIDER_ES = 'https://www.nav.no/saksbehandlingstider#engangsstonad',
+    KLAGERETTIGHETER = 'https://klage.nav.no/nb/familie',
+    KLAGERETTIGHETER_FP = 'https://klage.nav.no/nb/familie/foreldrepenger',
+    KLAGERETTIGHETER_SVP = 'https://klage.nav.no/nb/familie/svangerskapspenger',
+    KLAGERETTIGHETER_ES = 'https://klage.nav.no/nb/familie/engangsstonad',
     CHAT_MED_OSS = 'https://www.nav.no/person/kontakt-oss/chat/familie',
     SKRIV_TIL_OSS = 'https://innboks.nav.no/s/skriv-til-oss?category=Familie',
     RING_OSS = 'tel:55553333',
@@ -23,6 +27,7 @@ export enum NavRoutes {
     MELD_FRA_OM_ENDRINGER = 'https://www.nav.no/no/nav-og-samfunn/om-nav/relatert-informasjon/du-har-plikt-til-a-gi-nav-riktige-opplysninger',
     VENT_INNTEKTSMELDING = 'https://www.nav.no/arbeidsgiver/inntektsmelding',
     VENT_MELDEKORT = 'https://www.nav.no/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/meldekort-hvordan-gjor-du-det',
+    FORELDREPENGESOKNAD = 'https://foreldrepengesoknad.nav.no',
 }
 
 export default OversiktRoutes;

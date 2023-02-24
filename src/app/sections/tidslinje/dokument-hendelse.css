@@ -5,6 +5,5 @@
 
 .dokument-hendelse__ikon {
     color: var(--a-surface-action);
-    /* margin-top: 6px; */
-    margin-right: 6px;
+    min-width: 24px;
 }
