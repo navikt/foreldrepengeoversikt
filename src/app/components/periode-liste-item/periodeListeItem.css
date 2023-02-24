@@ -11,6 +11,9 @@
     margin: 0 -1rem 1.5rem -1rem;
 }
 
+.periode_navnPåEier {
+    font-style: italic;
+}
 .periode--uttak {
     background-color: white;
     border: 2px solid var(--a-gray-100);

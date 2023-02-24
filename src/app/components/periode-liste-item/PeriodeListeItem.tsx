@@ -51,26 +51,6 @@ export const getPeriodeIkon = (
     return undefined;
 };
 
-const getPeriodeIkonColor = (periode: PeriodeListeItem): string => {
-    if (isUttaksperiode(periode)) {
-        const { kontoType } = periode;
-
-        switch (kontoType) {
-            case StønadskontoType.Fedrekvote:
-            case StønadskontoType.Foreldrepenger:
-                return 'blue';
-            case StønadskontoType.Mødrekvote:
-            case StønadskontoType.ForeldrepengerFørFødsel:
-                return 'purple';
-            case StønadskontoType.Fellesperiode:
-                return 'blue-purple';
-            default:
-                return 'blue';
-        }
-    }
-    return 'green';
-};
-
 const getPeriodeTittel = (periode: PeriodeListeItem): string => {
     if (isUttaksperiode(periode)) {
         const { kontoType } = periode;
@@ -135,8 +115,7 @@ const PeriodeListeItem: React.FunctionComponent<Props> = ({
     const varighetString = getVarighetString(antallDagerIPeriode, intl);
     const visStønadskontoIkon = isUttaksperiode(periode) || isOverføringsperiode(periode) || isOppholdsperiode(periode);
     const visUtsettelsesIkon = isUtsettelsesperiode(periode);
-    const ikonColor = getPeriodeIkonColor(periode);
-    console.log(ikonColor);
+
     return (
         <div className={classNames(`${bem.block} ${bem.element('box')}`)}>
             <div className={bem.element('innhold')}>

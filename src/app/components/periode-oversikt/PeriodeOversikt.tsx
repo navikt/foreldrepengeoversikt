@@ -34,7 +34,7 @@ const PeriodeOversikt: React.FunctionComponent<Props> = ({
     const navnPåForeldre = getNavnPåForeldre(sak, navnPåSøker);
     const bem = bemUtils('periodeOversikt');
     return (
-        <>
+        <div className={bem.block}>
             {[...nåværendePerioder, ...fremtidigePerioder].length === 0 && !visHelePlanen && (
                 <Alert className={bem.element('alert')} variant="info">
                     {intlUtils(intl, 'periodeOversikt.ingenPerioder.visKunNåværendeOgNeste')}
@@ -75,11 +75,11 @@ const PeriodeOversikt: React.FunctionComponent<Props> = ({
                 />
             )}
             {!visHelePlanen && (
-                <Link as={RouterLink} to={OversiktRoutes.DIN_PLAN}>
+                <Link className={bem.element('seHelePlanen')} as={RouterLink} to={OversiktRoutes.DIN_PLAN}>
                     Se hele planen <Next />
                 </Link>
             )}
-        </>
+        </div>
     );
 };
 export default PeriodeOversikt;

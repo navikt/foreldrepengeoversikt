@@ -39,17 +39,27 @@ const DinPlan: React.FunctionComponent<Props> = ({ sak, visHelePlanen, navnPåS�
     const tidligerePerioder = planMedHull ? finnTidligerePerioder(planMedHull) : undefined;
     const nåværendePerioder = planMedHull ? finnNåværendePerioder(planMedHull) : undefined;
     const fremtidligePerioder = planMedHull ? finnFremtidigePerioder(planMedHull) : undefined;
+    const kunTidligerePerioderFinnes =
+        (nåværendePerioder === undefined || nåværendePerioder.length === 0) &&
+        (fremtidligePerioder === undefined || fremtidligePerioder.length === 0);
+    let tekstForVedtattPlan = '';
+    if (visHelePlanen || !kunTidligerePerioderFinnes) {
+        tekstForVedtattPlan = 'Du har fått vedtatt planen nedenfor.';
+    }
+
     return (
         <>
             <div className={bem.element('header')}>
                 <div className={bem.element('header-tekst')}>
-                    {erUttaksplanVedtatt && <BodyLong> Du har fått vedtatt planen nedenfor. </BodyLong>}
+                    {erUttaksplanVedtatt && <BodyLong> {tekstForVedtattPlan} </BodyLong>}
                     {!erUttaksplanVedtatt && <BodyLong> Du har søkt om planen nedenfor. </BodyLong>}
                     {!erUttaksplanVedtatt && <BodyLong> Planen er ikke vedtatt av NAV ennå. </BodyLong>}
                 </div>
-                <Button variant="secondary" icon={<Edit aria-hidden />} iconPosition="right">
-                    Endre perioder
-                </Button>
+                {(visHelePlanen || !kunTidligerePerioderFinnes) && (
+                    <Button variant="secondary" icon={<Edit aria-hidden />} iconPosition="right">
+                        Endre plan
+                    </Button>
+                )}
             </div>
             <PeriodeOversikt
                 tidligerePerioder={tidligerePerioder}

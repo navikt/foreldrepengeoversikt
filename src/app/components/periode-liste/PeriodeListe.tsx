@@ -1,10 +1,10 @@
 import { Periode } from 'app/types/Periode';
 import * as React from 'react';
-import { NavnPåForeldre } from 'app/utils/personUtils';
 import PeriodeListeItem from '../periode-liste-item/PeriodeListeItem';
 import { BodyShort } from '@navikt/ds-react';
 import './periode-liste.css';
 import { bemUtils } from '@navikt/fp-common';
+import { NavnPåForeldre } from 'app/utils/personUtils';
 
 interface Props {
     erAleneOmOmsorg: boolean;
