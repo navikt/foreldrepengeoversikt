@@ -8,7 +8,7 @@ import { default as PeriodeComponent } from './Periode';
 import { Periode } from 'app/types/Periode';
 import { isUtsettelsesperiode } from 'app/utils/periodeUtils';
 import { UtsettelseÅrsakType } from 'app/types/UtsettelseÅrsakType';
-import OversiktRoutes from 'app/routes/routes';
+import OversiktRoutes, { NavRoutes } from 'app/routes/routes';
 
 import './din-plan.css';
 
@@ -32,7 +32,13 @@ const DinPlan: React.FunctionComponent<Props> = ({ vedtattUttaksplan, søktePeri
                             : 'Du har søkt om planen nedenfor. Planen er ikke vedtatt av NAV ennå.'}
                     </BodyLong>
                 </div>
-                <Button variant="secondary" icon={<Edit aria-hidden />} iconPosition="right">
+                <Button
+                    as={Link}
+                    href={NavRoutes.FORELDREPENGESOKNAD}
+                    variant="secondary"
+                    icon={<Edit aria-hidden />}
+                    iconPosition="right"
+                >
                     Endre perioder
                 </Button>
             </div>
