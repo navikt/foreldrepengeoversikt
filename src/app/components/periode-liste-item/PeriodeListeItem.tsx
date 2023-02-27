@@ -2,11 +2,12 @@ import { BodyShort, Heading } from '@navikt/ds-react';
 import { bemUtils, formatDateExtended } from '@navikt/fp-common';
 import StønadskontoIkon from 'app/components/stønadskonto-ikon/StønadskontoIkon';
 import UtsettelseIkon from 'app/components/utsettelse-ikon/UtsettelseIkon';
-import { Periode as PeriodeListeItem } from 'app/types/Periode';
+import { Periode } from 'app/types/Periode';
 import { StønadskontoType } from 'app/types/StønadskontoType';
 import { getAntallUttaksdagerITidsperiode, getVarighetString } from 'app/utils/dateUtils';
 import {
     getPeriodeTittel,
+    isAvslåttPeriode,
     isOppholdsperiode,
     isOverføringsperiode,
     isUtsettelsesperiode,
@@ -24,11 +25,11 @@ interface Props {
     erAleneOmOmsorg: boolean;
     erFarEllerMedmor: boolean;
     navnPåForeldre: NavnPåForeldre;
-    periode: PeriodeListeItem;
+    periode: Periode;
 }
 
 export const getPeriodeIkon = (
-    periode: PeriodeListeItem,
+    periode: Periode,
     navnPåForeldre: NavnPåForeldre,
     erFarEllerMedmor?: boolean,
     erAleneOmOmsorg?: boolean
@@ -91,9 +92,9 @@ const PeriodeListeItem: React.FunctionComponent<Props> = ({
     const varighetString = getVarighetString(antallDagerIPeriode, intl);
     const visStønadskontoIkon = isUttaksperiode(periode) || isOverføringsperiode(periode) || isOppholdsperiode(periode);
     const visUtsettelsesIkon = isUtsettelsesperiode(periode);
-
+    const classNameInnvilget = isAvslåttPeriode(periode) ? bem.modifier('ikke-innvilget') : bem.modifier('innvilget');
     return (
-        <div className={classNames(`${bem.block} ${bem.element('box')}`)}>
+        <div className={classNames(`${bem.block} ${bem.element('box')} ${classNameInnvilget}`)}>
             <div className={bem.element('innhold')}>
                 {visStønadskontoIkon && (
                     <StønadskontoIkon

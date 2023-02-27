@@ -10,6 +10,7 @@ import { dateToISOString, ISOStringToDate } from '@navikt/sif-common-formik-ds/l
 import { isEqual } from 'lodash';
 import { PeriodeResultat } from 'app/types/PeriodeResultat';
 import { MorsAktivitet } from 'app/types/MorsAktivitet';
+import { PeriodeResultatÅrsak } from 'app/types/PeriodeResultatÅrsak';
 
 export const isUttaksperiode = (periode: Periode) => {
     return periode.kontoType !== undefined;
@@ -25,6 +26,10 @@ export const isOverføringsperiode = (periode: Periode) => {
 
 export const isOppholdsperiode = (periode: Periode) => {
     return periode.oppholdÅrsak !== undefined;
+};
+
+export const isAvslåttPeriode = (periode: Periode) => {
+    return periode.resultat && periode.resultat.innvilget !== true;
 };
 
 export const finnTidligerePerioder = (perioder: Periode[]): Periode[] => {
@@ -64,6 +69,47 @@ export const getFelterForSammenligningAvDuplikatePerioderPgaArbeidsforhold = ({
     return uttaksperiodeDtoUtenArbeidsgiverInfo;
 };
 
+export const gyldigePerioderForVisning = (periode: Periode, erPlanVedtatt: boolean): boolean => {
+    if (!erPlanVedtatt) {
+        return true;
+    }
+    if (periode.resultat.innvilget) return true;
+
+    if (
+        periode.resultat &&
+        periode.resultat.årsak !== PeriodeResultatÅrsak.AVSLAG_HULL_MELLOM_FORELDRENES_PERIODER &&
+        periode.resultat.trekkerDager === true
+    ) {
+        return true;
+    }
+    return false;
+};
+
+const filterAvslåttePeriodeMedInnvilgetPeriodeISammeTidsperiode = (
+    periode: Periode,
+    index: number,
+    perioder: Periode[]
+) => {
+    const likePerioder = perioder.filter(
+        (periode2, index_periode2) =>
+            index !== index_periode2 &&
+            dayjs(periode.fom).isSame(periode2.fom, 'd') &&
+            dayjs(periode.tom).isSame(periode2.tom, 'd')
+    );
+
+    if (likePerioder.length === 0) {
+        return true;
+    }
+
+    const innvilgedePerioder = likePerioder.filter(periodeErInnvilget);
+
+    if (periodeErInnvilget(periode) === false && innvilgedePerioder.length > 0) {
+        return false;
+    }
+
+    return true;
+};
+
 export const getCleanedPlanForVisning = (
     plan: Periode[] | undefined,
     erPlanVedtatt: boolean
@@ -71,10 +117,19 @@ export const getCleanedPlanForVisning = (
     if (plan === undefined) {
         return undefined;
     }
+    const filtrertPlan = plan.filter((periode) => !isOppholdsperiode(periode));
     if (erPlanVedtatt) {
-        return plan.filter((periode) => periode.resultat && periode.resultat.innvilget && !isOppholdsperiode(periode));
+        const utenOverlappendeAvslåttePerioder = filtrertPlan.filter((p, index) =>
+            filterAvslåttePeriodeMedInnvilgetPeriodeISammeTidsperiode(p, index, plan)
+        );
+
+        const gyldigePerioder = utenOverlappendeAvslåttePerioder.filter((p) =>
+            gyldigePerioderForVisning(p, erPlanVedtatt)
+        );
+
+        return gyldigePerioder;
     } else {
-        return plan.filter((periode) => !isOppholdsperiode(periode));
+        return filtrertPlan;
     }
 };
 
@@ -239,6 +294,9 @@ export const getPeriodeTittel = (
     erFarEllerMedmor?: boolean,
     erAleneOmOmsorg?: boolean
 ): string => {
+    if (isAvslåttPeriode(periode)) {
+        return intlUtils(intl, 'uttaksplan.avslåttPeriode');
+    }
     if (isUttaksperiode(periode)) {
         const tittelMedNavn = getStønadskontoForelderNavn(
             intl,
@@ -292,3 +350,5 @@ export const getPeriodeTittel = (
     //TODO getOppholdskontoNavn
     return '';
 };
+
+const periodeErInnvilget = (periode: Periode): boolean => periode.resultat && periode.resultat.innvilget;

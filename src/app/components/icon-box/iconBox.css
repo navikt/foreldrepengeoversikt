@@ -28,3 +28,9 @@
         var(--a-purple-400) 100%
     );
 }
+
+.iconBox__icon-gray {
+    background-color: var(--a-gray-400);
+    border-radius: 0.5rem;
+    width: 5.5%;
+}

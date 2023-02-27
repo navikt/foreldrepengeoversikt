@@ -14,15 +14,12 @@
 .periode_navnPåEier {
     font-style: italic;
 }
-.periode--uttak {
+.periode--innvilget {
     background-color: white;
-    border: 2px solid var(--a-gray-100);
-    box-shadow: 10px;
-    border-radius: 0.5rem;
 }
 
-.periode--ikke-uttak {
-    background-color: white;
+.periode--ikke-innvilget{
+    background-color: var(--a-gray-100);
 }
 
 .periode__ikon-blue{
