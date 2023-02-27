@@ -3,6 +3,7 @@ import { bemUtils, Block, intlUtils, PictureScanningGuide } from '@navikt/fp-com
 import Api from 'app/api/api';
 import AttachmentList from 'app/components/attachment/AttachmentList';
 import FormikFileUploader from 'app/components/formik-file-uploader/FormikFileUploader';
+import ScrollToTop from 'app/components/scroll-to-top/ScrollToTop';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
 import OversiktRoutes from 'app/routes/routes';
 import { Attachment } from 'app/types/Attachment';
@@ -84,6 +85,7 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
     if (ettersendingDone) {
         return (
             <div>
+                <ScrollToTop />
                 <Block padBottom="l">
                     <Alert variant="success">Dokumentene er sendt</Alert>
                 </Block>
