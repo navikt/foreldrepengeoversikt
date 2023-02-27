@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dokument as DokumentType } from 'app/types/Dokument';
 import Dokument from '../dokument/Dokument';
-import { bemUtils, formatDateExtended, guid } from '@navikt/fp-common';
+import { bemUtils, guid } from '@navikt/fp-common';
 import { Accordion, BodyShort } from '@navikt/ds-react';
 
 import './grupperte-dokumenter.css';
@@ -20,7 +20,7 @@ const GrupperteDokumenter: React.FunctionComponent<Props> = ({ dokumenter }) => 
                 <Accordion.Header className={bem.element('header')}>
                     <span className={bem.element('header-content')}>
                         <Folder className={bem.element('ikon')} />
-                        <BodyShort>Innsendt søknad - {formatDateExtended(dokumenter[0].mottatt)}</BodyShort>
+                        <BodyShort>{dokumenter.length} dokumenter</BodyShort>
                     </span>
                 </Accordion.Header>
                 <Accordion.Content className={bem.element('content')}>
