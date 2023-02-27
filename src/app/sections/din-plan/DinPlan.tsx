@@ -15,12 +15,13 @@ import { Foreldrepengesak } from 'app/types/Foreldrepengesak';
 import { slåSammenLikePerioder } from 'app/utils/planUtils';
 
 interface Props {
+    navnAnnenForelder: string;
     navnPåSøker: string;
     sak: Foreldrepengesak;
     visHelePlanen: boolean;
 }
 
-const DinPlan: React.FunctionComponent<Props> = ({ sak, visHelePlanen, navnPåSøker }) => {
+const DinPlan: React.FunctionComponent<Props> = ({ sak, visHelePlanen, navnPåSøker, navnAnnenForelder }) => {
     const bem = bemUtils('din-plan');
 
     let vedtattUttaksplan = undefined;
@@ -75,6 +76,7 @@ const DinPlan: React.FunctionComponent<Props> = ({ sak, visHelePlanen, navnPåS�
                 sak={sak}
                 visHelePlanen={visHelePlanen}
                 navnPåSøker={navnPåSøker}
+                navnAnnenForelder={navnAnnenForelder}
             />
         </>
     );

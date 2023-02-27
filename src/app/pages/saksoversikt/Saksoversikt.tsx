@@ -12,8 +12,9 @@ import Tidslinje from 'app/sections/tidslinje/Tidslinje';
 import { HendelseType } from 'app/types/HendelseType';
 import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
 import { SakOppslag } from 'app/types/SakOppslag';
+import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 import { Ytelse } from 'app/types/Ytelse';
-import { getAlleYtelser } from 'app/utils/sakerUtils';
+import { getAlleYtelser, getNavnAnnenForelder } from 'app/utils/sakerUtils';
 import { AxiosError } from 'axios';
 import dayjs from 'dayjs';
 import React from 'react';
@@ -25,20 +26,23 @@ import './saksoversikt.css';
 interface Props {
     minidialogerData: MinidialogInnslag[] | undefined;
     minidialogerError: AxiosError | null;
-    navnPåSøker: string;
     saker: SakOppslag;
+    søkerinfo: SøkerinfoDTO;
 }
 
-const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidialogerError, saker, navnPåSøker }) => {
+const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidialogerError, saker, søkerinfo }) => {
     const intl = useIntl();
     const bem = bemUtils('saksoversikt');
     useSetBackgroundColor('blue');
     useSetSelectedRoute(OversiktRoutes.SAKSOVERSIKT);
+    const navnPåSøker = søkerinfo.søker.fornavn;
     const params = useParams();
     const alleSaker = getAlleYtelser(saker);
 
     const gjeldendeSak = alleSaker.find((sak) => sak.saksnummer === params.saksnummer)!;
     useSetSelectedSak(gjeldendeSak);
+
+    const navnAnnenForelder = getNavnAnnenForelder(søkerinfo, gjeldendeSak);
 
     const aktiveMinidialogerForSaken = minidialogerData
         ? minidialogerData.filter(
@@ -72,7 +76,12 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
             </ContentSection> */}
             {gjeldendeSak.ytelse === Ytelse.FORELDREPENGER && (
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.dinPlan')} padding="large">
-                    <DinPlan sak={gjeldendeSak} visHelePlanen={false} navnPåSøker={navnPåSøker} />
+                    <DinPlan
+                        sak={gjeldendeSak}
+                        visHelePlanen={false}
+                        navnPåSøker={navnPåSøker}
+                        navnAnnenForelder={navnAnnenForelder}
+                    />
                 </ContentSection>
             )}
         </div>

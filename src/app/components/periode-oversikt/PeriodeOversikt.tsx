@@ -13,6 +13,7 @@ import OversiktRoutes from 'app/routes/routes';
 import './periodeOversikt.css';
 interface Props {
     fremtidigePerioder?: Periode[];
+    navnAnnenForelder: string;
     navnPåSøker: string;
     nåværendePerioder?: Periode[];
     sak: Foreldrepengesak;
@@ -25,13 +26,14 @@ const PeriodeOversikt: React.FunctionComponent<Props> = ({
     nåværendePerioder = [],
     fremtidigePerioder = [],
     navnPåSøker,
+    navnAnnenForelder,
     sak,
     visHelePlanen,
 }) => {
     const intl = useIntl();
     const erFarEllerMedmor = !sak.sakTilhørerMor;
     const erAleneOmOmsorg = sak.rettighetType === RettighetType.ALENEOMSORG;
-    const navnPåForeldre = getNavnPåForeldre(sak, navnPåSøker);
+    const navnPåForeldre = getNavnPåForeldre(sak, navnPåSøker, navnAnnenForelder);
     const bem = bemUtils('periodeOversikt');
     return (
         <div className={bem.block}>

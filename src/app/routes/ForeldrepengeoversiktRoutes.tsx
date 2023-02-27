@@ -73,17 +73,17 @@ const ForeldrepengeoversiktRoutes: React.FunctionComponent<Props> = ({
                             index
                             element={
                                 <Saksoversikt
-                                    saker={saker}
-                                    navnPåSøker={søkerinfo.søker.fornavn}
                                     minidialogerData={minidialogerData}
                                     minidialogerError={minidialogerError}
+                                    saker={saker}
+                                    søkerinfo={søkerinfo}
                                 />
                             }
                         />
                         <Route path={OversiktRoutes.OPPLYSNINGER} element={<Opplysninger />} />
                         <Route
                             path={OversiktRoutes.DIN_PLAN}
-                            element={<DinPlanPage navnPåSøker={søkerinfo.søker.fornavn} />}
+                            element={<DinPlanPage navnPåSøker={søkerinfo.søker.fornavn} søkerinfo={søkerinfo} />}
                         />
                         <Route path={OversiktRoutes.DOKUMENTER} element={<DokumenterPage />} />
                         <Route

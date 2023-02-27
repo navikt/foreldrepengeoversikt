@@ -6,6 +6,7 @@ import { SakOppslag, SakOppslagDTO } from 'app/types/SakOppslag';
 import { SvangerskapspengeSak, SvangerskapspengeSakDTO } from 'app/types/SvangerskapspengeSak';
 import { Ytelse } from 'app/types/Ytelse';
 import dayjs from 'dayjs';
+import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
 
 export const getAlleYtelser = (saker: SakOppslag) => {
     return [...saker.engangsstønad, ...saker.foreldrepenger, ...saker.svangerskapspenger];
@@ -125,4 +126,17 @@ export const getFamiliehendelseDato = (familiehendelse: Familiehendelse): string
     }
 
     return termindato!;
+};
+
+export const getNavnAnnenForelder = (
+    søkerinfo: SøkerinfoDTO,
+    sak: Foreldrepengesak | EngangsstønadSak | SvangerskapspengeSak | undefined
+) => {
+    const fødselsdatoFraSak = sak ? sak.familiehendelse.fødselsdato : undefined;
+    const barn =
+        søkerinfo.søker.barn && fødselsdatoFraSak
+            ? søkerinfo.søker.barn.find((b) => dayjs(b.fødselsdato).isSame(fødselsdatoFraSak, 'd'))
+            : undefined;
+    const annenForelderNavn = barn && barn.annenForelder ? barn.annenForelder.fornavn : undefined;
+    return annenForelderNavn !== undefined && annenForelderNavn.trim() !== '' ? annenForelderNavn : 'Annen forelder';
 };
