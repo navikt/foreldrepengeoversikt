@@ -1,10 +1,15 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { bemUtils, formatDateExtended } from '@navikt/fp-common';
+import { bemUtils } from '@navikt/fp-common';
 import StønadskontoIkon from 'app/components/stønadskonto-ikon/StønadskontoIkon';
 import UtsettelseIkon from 'app/components/utsettelse-ikon/UtsettelseIkon';
 import { Periode } from 'app/types/Periode';
 import { StønadskontoType } from 'app/types/StønadskontoType';
-import { getAntallUttaksdagerITidsperiode, getVarighetString } from 'app/utils/dateUtils';
+import {
+    getAntallUttaksdagerITidsperiode,
+    getVarighetString,
+    ISOStringToDate,
+    måned3bokstaver,
+} from 'app/utils/dateUtils';
 import {
     getPeriodeTittel,
     isAvslåttPeriode,
@@ -82,7 +87,8 @@ const PeriodeListeItem: React.FunctionComponent<Props> = ({
     const bem = bemUtils('periode');
     const intl = useIntl();
     const { fom, tom } = periode;
-
+    const fomDate = ISOStringToDate(fom);
+    const tomDate = ISOStringToDate(tom);
     const tittel = getPeriodeTittel(intl, periode, navnPåForeldre, erFarEllerMedmor, erAleneOmOmsorg);
     const antallDagerIPeriode = getAntallUttaksdagerITidsperiode({
         fom: dayjs(periode.fom).toDate(),
@@ -108,14 +114,30 @@ const PeriodeListeItem: React.FunctionComponent<Props> = ({
                     />
                 )}
                 {visUtsettelsesIkon && <UtsettelseIkon årsak={periode.utsettelseÅrsak!} />}
-                <div className={bem.element('innhold-tekst-left')}>
-                    <Heading level="3" size="small">
-                        {tittel}
-                    </Heading>
-                    <BodyShort size="small">{`${varighetString} - ${navnSøker}`}</BodyShort>
+                <div className={bem.element('innhold-tekst-periodetittel')}>
+                    <Heading size="small">{tittel}</Heading>
+                    <div className={bem.element('beskrivelse')}>
+                        <BodyShort size="small">{`${varighetString} -`}</BodyShort>
+                        <BodyShort className={bem.modifier('eierNavn')} size="small">
+                            {`${navnSøker}`}
+                        </BodyShort>
+                    </div>
                 </div>
-                <div className={bem.element('innhold-tekst-right')}>
-                    <BodyShort>{`${formatDateExtended(fom)} - ${formatDateExtended(tom)}`}</BodyShort>
+                <div className={bem.element('innhold-tekst-date')}>
+                    <BodyShort size="small">
+                        {dayjs(fomDate).get('date')}. {måned3bokstaver(dayjs(fomDate))}.
+                    </BodyShort>
+                    <BodyShort size="small" className={bem.modifier('year')}>
+                        {dayjs(fomDate).get('year')}
+                    </BodyShort>
+                </div>
+                <div className={bem.element('innhold-tekst-date')}>
+                    <BodyShort size="small">
+                        {dayjs(tomDate).get('date')}. {måned3bokstaver(dayjs(tomDate))}.
+                    </BodyShort>
+                    <BodyShort size="small" className={bem.modifier('year')}>
+                        {dayjs(tomDate).get('year')}
+                    </BodyShort>
                 </div>
             </div>
         </div>

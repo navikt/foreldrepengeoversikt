@@ -1,29 +1,24 @@
-.iconBox__icon-purple{
+.iconBox__icon {
+    max-width: 32px;
+    max-height: 32px;
+    border-radius: 0.5rem;
+}
+
+
+.iconBox--purple{
     background-color: var(--a-purple-400);
-    border-radius: 0.5rem;
-    max-width: 32px;
-    max-height: 32px;
 }
 
-.iconBox__icon-blue {
+.iconBox--blue {
     background-color: var(--a-blue-400);
-    border-radius: 0.5rem;
-    max-width: 32px;
-    max-height: 32px;
 }
 
-.iconBox__icon-green {
+.iconBox--green {
     background-color: var(--a-green-400);
-    border-radius: 0.5rem;
-    max-width: 32px;
-    max-height: 32px;
 }
 
-.iconBox__icon-purpleBlue {
+.iconBox--purpleBlue {
     background-color: var(--a-blue-400);
-    border-radius: 0.5rem;
-    max-width: 32px;
-    max-height: 32px;
     background: repeating-linear-gradient(
         -45deg,
         var(--a-blue-400),
@@ -33,9 +28,7 @@
     );
 }
 
-.iconBox__icon-gray {
+.iconBox--gray {
     background-color: var(--a-gray-400);
-    border-radius: 0.5rem;
-    max-width: 32px;
-    max-height: 32px;
 }
+

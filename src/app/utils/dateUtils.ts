@@ -1,16 +1,25 @@
 import { TidsperiodeDate } from '@navikt/fp-common';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { IntlShape } from 'react-intl';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isBetween from 'dayjs/plugin/isBetween';
+import { isISODateString } from '@navikt/ds-datepicker';
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isoWeek);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isBetween);
 
 type VarighetFormat = 'full' | 'normal';
+
+export const måned3bokstaver = (dato: Dayjs): string => {
+    return dato.format('MMM').substr(0, 3);
+};
+
+export const år = (dato: Dayjs): string => {
+    return dato.format('YYYY');
+};
 
 export const getUkerOgDagerFromDager = (dager: number): { dager: number; uker: number } => {
     const uker = Math.floor(dager / 5);
@@ -77,4 +86,14 @@ export const getAntallUttaksdagerITidsperiode = (tidsperiode: TidsperiodeDate): 
     }
 
     return antall;
+};
+
+export const ISOStringToDate = (dateString: string | undefined): Date | undefined => {
+    if (dateString === undefined) {
+        return undefined;
+    }
+    if (isISODateString(dateString) && dayjs(dateString, 'YYYY-MM-DD', true).isValid()) {
+        return dayjs.utc(dateString).toDate();
+    }
+    return undefined;
 };
