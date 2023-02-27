@@ -41,17 +41,33 @@ export const getPeriodeIkon = (
                 navnPåForeldre={navnPåForeldre}
                 erFarEllerMedmor={erFarEllerMedmor}
                 erAleneOmOmsorg={erAleneOmOmsorg}
+                periodeResultat={periode.resultat}
+                morsAktivitet={periode.morsAktivitet}
             />
         );
     }
     if (isOverføringsperiode(periode)) {
-        return <StønadskontoIkon konto={periode.kontoType!} navnPåForeldre={navnPåForeldre} />;
+        return (
+            <StønadskontoIkon
+                konto={periode.kontoType!}
+                navnPåForeldre={navnPåForeldre}
+                periodeResultat={periode.resultat}
+                morsAktivitet={periode.morsAktivitet}
+            />
+        );
     }
     if (isUtsettelsesperiode(periode)) {
         return <UtsettelseIkon årsak={periode.utsettelseÅrsak!} />;
     }
     if (isOppholdsperiode(periode)) {
-        return <StønadskontoIkon konto={StønadskontoType.Foreldrepenger} navnPåForeldre={navnPåForeldre} />;
+        return (
+            <StønadskontoIkon
+                konto={StønadskontoType.Foreldrepenger}
+                navnPåForeldre={navnPåForeldre}
+                periodeResultat={periode.resultat}
+                morsAktivitet={periode.morsAktivitet}
+            />
+        );
     }
     return undefined;
 };
@@ -86,6 +102,8 @@ const PeriodeListeItem: React.FunctionComponent<Props> = ({
                         navnPåForeldre={navnPåForeldre}
                         erFarEllerMedmor={erFarEllerMedmor}
                         erAleneOmOmsorg={erAleneOmOmsorg}
+                        periodeResultat={periode.resultat}
+                        morsAktivitet={periode.morsAktivitet}
                     />
                 )}
                 {visUtsettelsesIkon && <UtsettelseIkon årsak={periode.utsettelseÅrsak!} />}

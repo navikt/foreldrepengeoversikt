@@ -1,3 +1,5 @@
+import { MorsAktivitet } from 'app/types/MorsAktivitet';
+import { PeriodeResultat } from 'app/types/PeriodeResultat';
 import { StønadskontoType } from 'app/types/StønadskontoType';
 import { getStønadskontoForelderNavn } from 'app/utils/periodeUtils';
 import { NavnPåForeldre } from 'app/utils/personUtils';
@@ -13,13 +15,17 @@ export interface Props {
     erFarEllerMedmor?: boolean;
     gradert?: boolean;
     konto: StønadskontoType;
+    morsAktivitet: MorsAktivitet | undefined;
     navnPåForeldre: NavnPåForeldre;
+    periodeResultat: PeriodeResultat | undefined;
 }
 
 const StønadskontoIkon: FunctionComponent<Props> = ({
     konto,
     gradert,
     navnPåForeldre,
+    periodeResultat,
+    morsAktivitet,
     erFarEllerMedmor,
     erAleneOmOmsorg,
 }) => {
@@ -29,7 +35,15 @@ const StønadskontoIkon: FunctionComponent<Props> = ({
         <IconBox color={getStønadskontoFarge(konto)} stripes={gradert}>
             <UttaksplanIkon
                 ikon={UttaksplanIkonKeys.uttak}
-                title={getStønadskontoForelderNavn(intl, konto, navnPåForeldre, erFarEllerMedmor, erAleneOmOmsorg)}
+                title={getStønadskontoForelderNavn(
+                    intl,
+                    konto,
+                    navnPåForeldre,
+                    periodeResultat,
+                    morsAktivitet,
+                    erFarEllerMedmor,
+                    erAleneOmOmsorg
+                )}
             />
         </IconBox>
     );

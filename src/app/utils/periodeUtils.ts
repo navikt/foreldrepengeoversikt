@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import { dateToISOString, ISOStringToDate } from '@navikt/sif-common-formik-ds/lib';
 import { isEqual } from 'lodash';
 import { PeriodeResultat } from 'app/types/PeriodeResultat';
+import { MorsAktivitet } from 'app/types/MorsAktivitet';
 
 export const isUttaksperiode = (periode: Periode) => {
     return periode.kontoType !== undefined;
@@ -164,6 +165,8 @@ export const getStønadskontoForelderNavn = (
     intl: IntlShape,
     konto: StønadskontoType,
     navnPåForeldre: NavnPåForeldre,
+    periodeResultat: PeriodeResultat | undefined,
+    morsAktivitet: MorsAktivitet | undefined,
     erFarEllerMedmor?: boolean,
     erAleneOmOmsorg?: boolean
 ) => {
@@ -188,10 +191,13 @@ export const getStønadskontoForelderNavn = (
     }
 
     if (erFarEllerMedmor === true && erAleneOmOmsorg === false) {
-        if (konto === StønadskontoType.AktivitetsfriKvote) {
-            return intl.formatMessage({ id: 'uttaksplan.stønadskontotype.AKTIVITETSFRI_KVOTE_BFHR' });
-        }
         if (konto === StønadskontoType.Foreldrepenger) {
+            if (
+                (periodeResultat && periodeResultat.trekkerMinsterett) ||
+                (!periodeResultat && morsAktivitet === MorsAktivitet.IkkeOppgitt)
+            ) {
+                return intl.formatMessage({ id: 'uttaksplan.stønadskontotype.AKTIVITETSFRI_KVOTE_BFHR' });
+            }
             return intl.formatMessage({ id: 'uttaksplan.stønadskontotype.AKTIVITETSKRAV_KVOTE_BFHR' });
         }
     }
@@ -238,6 +244,8 @@ export const getPeriodeTittel = (
             intl,
             periode.kontoType!,
             navnPåForeldre,
+            periode.resultat,
+            periode.morsAktivitet,
             erFarEllerMedmor,
             erAleneOmOmsorg
         );
@@ -267,7 +275,13 @@ export const getPeriodeTittel = (
         return tittel;
     }
     if (isOverføringsperiode(periode)) {
-        return getStønadskontoForelderNavn(intl, periode.kontoType!, navnPåForeldre);
+        return getStønadskontoForelderNavn(
+            intl,
+            periode.kontoType!,
+            navnPåForeldre,
+            periode.resultat,
+            periode.morsAktivitet
+        );
     }
     if (isUtsettelsesperiode(periode)) {
         if (periode.utsettelseÅrsak) {
