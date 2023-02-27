@@ -1,9 +1,8 @@
-import { BodyShort, Heading, Tag } from '@navikt/ds-react';
+import { BodyShort, Heading } from '@navikt/ds-react';
 import { bemUtils } from '@navikt/fp-common';
 import { useGetSelectedRoute } from 'app/hooks/useSelectedRoute';
 import { useGetSelectedSak } from 'app/hooks/useSelectedSak';
 import OversiktRoutes from 'app/routes/routes';
-import { BehandlingTilstand } from 'app/types/BehandlingTilstand';
 import { Sak } from 'app/types/Sak';
 import { Ytelse } from 'app/types/Ytelse';
 import { getFamiliehendelseDato, utledFamiliesituasjon } from 'app/utils/sakerUtils';
@@ -11,6 +10,7 @@ import TåteflaskeBaby from 'assets/TåteflaskeBaby';
 import React from 'react';
 import { getHeading } from '../har-saker/HarSaker';
 import PreviousLink from '../previous-link/PreviousLink';
+import StatusTag from '../status-tag/StatusTag';
 
 import './header.css';
 
@@ -58,30 +58,6 @@ const getSaksoversiktHeading = (ytelse: Ytelse) => {
     }
 
     return 'Foreldrepengesak';
-};
-
-const renderTag = (sak: Sak) => {
-    if (sak.åpenBehandling) {
-        if (!sak.sakAvsluttet) {
-            if (sak.åpenBehandling.tilstand === BehandlingTilstand.UNDER_BEHANDLING) {
-                return <Tag variant="warning">Under behandling</Tag>;
-            }
-
-            if (sak.åpenBehandling.tilstand === BehandlingTilstand.VENTER_PÅ_INNTEKTSMELDING) {
-                return <Tag variant="warning">Venter på inntektsmelding fra arbeidsgiver</Tag>;
-            }
-
-            if (sak.åpenBehandling.tilstand === BehandlingTilstand.VENTER_PÅ_DOKUMENTASJON) {
-                return <Tag variant="warning">Venter på nødvendig dokumentasjon</Tag>;
-            }
-
-            if (sak.åpenBehandling.tilstand === BehandlingTilstand.TIDLIG_SØKNAD) {
-                return <Tag variant="warning">Søknaden vil bli behandlet senere</Tag>;
-            }
-        }
-    }
-
-    return null;
 };
 
 const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined) => {
@@ -136,7 +112,7 @@ const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined
                         <div className={bem.element('divider')}>|</div>
                         <BodyShort className={bem.element('divider-text')}>{beskrivelse}</BodyShort>
                     </div>
-                    {renderTag(sak)}
+                    <StatusTag sak={sak} className={bem.element('tag')} />
                 </div>
             </div>
         );

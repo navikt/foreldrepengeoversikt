@@ -31,3 +31,7 @@
 .header__divider-text {
     color: var(--a-text-subtle);
 }
+
+.header__tag {
+    margin-top: 1rem;
+}
