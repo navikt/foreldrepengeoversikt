@@ -1,25 +1,29 @@
 .iconBox__icon-purple{
     background-color: var(--a-purple-400);
     border-radius: 0.5rem;
-    width: 5.5%;
+    max-width: 32px;
+    max-height: 32px;
 }
 
 .iconBox__icon-blue {
     background-color: var(--a-blue-400);
     border-radius: 0.5rem;
-    width: 5.5%;
+    max-width: 32px;
+    max-height: 32px;
 }
 
 .iconBox__icon-green {
     background-color: var(--a-green-400);
     border-radius: 0.5rem;
-    width: 5.5%;
+    max-width: 32px;
+    max-height: 32px;
 }
 
 .iconBox__icon-purpleBlue {
     background-color: var(--a-blue-400);
     border-radius: 0.5rem;
-    width: 5.5%;
+    max-width: 32px;
+    max-height: 32px;
     background: repeating-linear-gradient(
         -45deg,
         var(--a-blue-400),
@@ -32,5 +36,6 @@
 .iconBox__icon-gray {
     background-color: var(--a-gray-400);
     border-radius: 0.5rem;
-    width: 5.5%;
+    max-width: 32px;
+    max-height: 32px;
 }

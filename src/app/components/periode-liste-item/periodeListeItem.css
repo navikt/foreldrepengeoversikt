@@ -25,19 +25,16 @@
 .periode__ikon-blue{
     background-color: var(--a-purple-400);
     border-radius: 0.5rem;
-    width: 5.5%;
 }
 
 .periode__ikon-purple {
     background-color: var(--a-blue-400);
     border-radius: 0.5rem;
-    width: 5.5%;
 }
 
 .periode__ikon-blue-purple {
     background-color: var(--a-blue-400);
     border-radius: 0.5rem;
-    width: 5.5%;
     background: repeating-linear-gradient(
         -45deg,
         var(--a-blue-400),
@@ -48,20 +45,18 @@
 }
 
 .periode__innhold {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
+    display: grid;
+    grid-template-columns: 6% 54% 40%;
+    align-items: center;
     margin: 0;
 }
 .periode__innhold-tekst-left {
     margin-left: 1rem;
-    width: 47.25%;
 }
 
 .periode__innhold-tekst-right {
     margin-left: 1rem;
-    width: 47.25%;
-    text-align:right
+    text-align: right;
 }
 
 .periode__innhold-tekst > p {
