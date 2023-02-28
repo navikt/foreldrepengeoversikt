@@ -3,7 +3,6 @@ import { bemUtils } from '@navikt/fp-common';
 import StønadskontoIkon from 'app/components/stønadskonto-ikon/StønadskontoIkon';
 import UtsettelseIkon from 'app/components/utsettelse-ikon/UtsettelseIkon';
 import { Periode } from 'app/types/Periode';
-import { StønadskontoType } from 'app/types/StønadskontoType';
 import {
     getAntallUttaksdagerITidsperiode,
     getVarighetString,
@@ -33,51 +32,6 @@ interface Props {
     periode: Periode;
 }
 
-export const getPeriodeIkon = (
-    periode: Periode,
-    navnPåForeldre: NavnPåForeldre,
-    erFarEllerMedmor?: boolean,
-    erAleneOmOmsorg?: boolean
-): React.ReactNode | undefined => {
-    if (isUttaksperiode(periode)) {
-        return (
-            <StønadskontoIkon
-                konto={periode.kontoType!}
-                gradert={!!periode.gradering}
-                navnPåForeldre={navnPåForeldre}
-                erFarEllerMedmor={erFarEllerMedmor}
-                erAleneOmOmsorg={erAleneOmOmsorg}
-                periodeResultat={periode.resultat}
-                morsAktivitet={periode.morsAktivitet}
-            />
-        );
-    }
-    if (isOverføringsperiode(periode)) {
-        return (
-            <StønadskontoIkon
-                konto={periode.kontoType!}
-                navnPåForeldre={navnPåForeldre}
-                periodeResultat={periode.resultat}
-                morsAktivitet={periode.morsAktivitet}
-            />
-        );
-    }
-    if (isUtsettelsesperiode(periode)) {
-        return <UtsettelseIkon årsak={periode.utsettelseÅrsak!} />;
-    }
-    if (isOppholdsperiode(periode)) {
-        return (
-            <StønadskontoIkon
-                konto={StønadskontoType.Foreldrepenger}
-                navnPåForeldre={navnPåForeldre}
-                periodeResultat={periode.resultat}
-                morsAktivitet={periode.morsAktivitet}
-            />
-        );
-    }
-    return undefined;
-};
-
 const PeriodeListeItem: React.FunctionComponent<Props> = ({
     periode,
     erFarEllerMedmor,
@@ -96,8 +50,12 @@ const PeriodeListeItem: React.FunctionComponent<Props> = ({
     });
     const navnSøker = erFarEllerMedmor ? navnPåForeldre.farMedmor : navnPåForeldre.mor;
     const varighetString = getVarighetString(antallDagerIPeriode, intl);
-    const visStønadskontoIkon = isUttaksperiode(periode) || isOverføringsperiode(periode) || isOppholdsperiode(periode);
-    const visUtsettelsesIkon = isUtsettelsesperiode(periode);
+    const visStønadskontoIkon =
+        isUttaksperiode(periode) ||
+        isOverføringsperiode(periode) ||
+        isOppholdsperiode(periode) ||
+        isAvslåttPeriode(periode);
+    const visUtsettelsesIkon = !visStønadskontoIkon && isUtsettelsesperiode(periode);
     const classNameInnvilget = isAvslåttPeriode(periode) ? bem.modifier('ikke-innvilget') : bem.modifier('innvilget');
     return (
         <div className={classNames(`${bem.block} ${bem.element('box')} ${classNameInnvilget}`)}>

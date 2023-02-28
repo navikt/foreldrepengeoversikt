@@ -13,7 +13,7 @@ import { MorsAktivitet } from 'app/types/MorsAktivitet';
 import { PeriodeResultatÅrsak } from 'app/types/PeriodeResultatÅrsak';
 
 export const isUttaksperiode = (periode: Periode) => {
-    return periode.kontoType !== undefined;
+    return periode.kontoType !== undefined && periode.utsettelseÅrsak === undefined;
 };
 
 export const isUtsettelsesperiode = (periode: Periode) => {

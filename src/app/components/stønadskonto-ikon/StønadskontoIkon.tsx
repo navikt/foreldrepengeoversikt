@@ -32,7 +32,7 @@ const StønadskontoIkon: FunctionComponent<Props> = ({
     const intl = useIntl();
 
     return (
-        <IconBox color={getStønadskontoFarge(konto, periodeResultat)} stripes={gradert}>
+        <IconBox color={getStønadskontoFarge(konto)} stripes={gradert}>
             <UttaksplanIkon
                 ikon={UttaksplanIkonKeys.uttak}
                 title={getStønadskontoForelderNavn(
