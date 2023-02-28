@@ -1,9 +1,10 @@
-import { bemUtils, formatDateExtended } from '@navikt/fp-common';
+import { bemUtils } from '@navikt/fp-common';
 import { BodyShort, Heading } from '@navikt/ds-react';
 import { Success, Warning, Clock } from '@navikt/ds-icons';
 import React from 'react';
-
+import { formaterDato, formaterTid } from 'app/utils/dateUtils';
 import './tidslinje-hendelse.css';
+import dayjs from 'dayjs';
 
 type TidslinjeHendelseType = 'completed' | 'incomplete' | 'warning';
 
@@ -30,6 +31,14 @@ const getIkon = (type: TidslinjeHendelseType) => {
 };
 
 const TidslinjeHendelse: React.FunctionComponent<Props> = ({ type, date, title, children }) => {
+    let dateTekst = formaterDato(date, 'D. MMM YYYY').toUpperCase();
+    if (dayjs(date).isSame(new Date(), 'd')) {
+        dateTekst = 'I DAG';
+    }
+    if (dayjs(date).isSame(dayjs(new Date()).subtract(1, 'd'), 'd')) {
+        dateTekst = 'I GÅR';
+    }
+    const tidTekst = formaterTid(date);
     return (
         <div className={bem.block}>
             <div className={bem.element('ikon')}>{getIkon(type)}</div>
@@ -37,7 +46,7 @@ const TidslinjeHendelse: React.FunctionComponent<Props> = ({ type, date, title, 
                 <Heading level="3" size="small">
                     {title}
                 </Heading>
-                <BodyShort size="small">{formatDateExtended(date)}</BodyShort>
+                <BodyShort size="small" className={bem.element('date')}>{`${dateTekst} ${tidTekst}`}</BodyShort>
                 {children}
             </div>
         </div>

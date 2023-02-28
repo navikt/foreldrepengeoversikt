@@ -13,6 +13,14 @@ dayjs.extend(isBetween);
 
 type VarighetFormat = 'full' | 'normal';
 
+export const formaterDato = (dato: string | Date | undefined, datoformat?: string): string => {
+    return dayjs(dato).format(datoformat || 'dddd D. MMMM YYYY');
+};
+
+export const formaterTid = (dato: Date): string => {
+    return formaterDato(dato, 'KL.HH:MM');
+};
+
 export const måned3bokstaver = (dato: Dayjs): string => {
     return dato.format('MMM').substr(0, 3);
 };
