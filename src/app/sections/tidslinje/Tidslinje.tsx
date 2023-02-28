@@ -16,6 +16,7 @@ import {
     getTidslinjehendelserFraBehandlingPåVent,
     getTidslinjehendelseStatus,
     getTidslinjehendelseTittel,
+    getTidslinjehendelserDetaljer,
 } from 'app/utils/tidslinjeUtils';
 import './tidslinje-hendelse.css';
 import { useIntl } from 'react-intl';
@@ -41,11 +42,13 @@ const Tidslinje: React.FunctionComponent<Params> = ({ sak }) => {
 
     const åpenBehandlingPåVent =
         sak.åpenBehandling && VENTEÅRSAKER.includes(sak.åpenBehandling.tilstand) ? sak.åpenBehandling : undefined;
+
+    const tidslinjeHendelser = getTidslinjehendelserDetaljer(tidslinjeHendelserData, intl);
     const venteHendelser = åpenBehandlingPåVent
         ? getTidslinjehendelserFraBehandlingPåVent(åpenBehandlingPåVent, manglendeVedleggData, intl)
         : undefined;
 
-    const alleHendelser = venteHendelser ? tidslinjeHendelserData.concat(venteHendelser) : tidslinjeHendelserData;
+    const alleHendelser = venteHendelser ? tidslinjeHendelser.concat(venteHendelser) : tidslinjeHendelser;
     const sorterteHendelser = alleHendelser.sort(sorterTidslinjehendelser);
 
     return (
@@ -88,14 +91,14 @@ const Tidslinje: React.FunctionComponent<Params> = ({ sak }) => {
                                 </BodyShort>
                             )}
                             {hendelse.linkTittel && hendelse.eksternalUrl && (
-                                <Link href={hendelse.eksternalUrl}>
+                                <Link href={hendelse.eksternalUrl} className={bem.element('link')}>
                                     <BodyShort>{hendelse.linkTittel}</BodyShort>
                                     <ExternalLink></ExternalLink>
                                 </Link>
                             )}
                             {hendelse.linkTittel && hendelse.internalUrl && (
                                 <LinkInternal to={hendelse.internalUrl}>
-                                    <Button>{hendelse.linkTittel}</Button>
+                                    <Button className={bem.element('link')}>{hendelse.linkTittel}</Button>
                                 </LinkInternal>
                             )}
                         </ul>

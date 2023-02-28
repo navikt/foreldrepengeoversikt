@@ -49,5 +49,8 @@
 
 .tidslinje-hendelse__mer_informasjon{
     margin-top: 1rem; 
-    margin-bottom: 1rem; 
+}
+
+.tidslinje-hendelse__link{
+    margin-top: 1rem; 
 }

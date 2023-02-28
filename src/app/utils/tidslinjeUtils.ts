@@ -104,6 +104,24 @@ export const getTidligstBehandlingsDatoForTidligSøknad = (åpenBehandling: Åpe
     return Uttaksdagen(førsteUttaksdagISaken!).trekkFra(4 * UTTAKSDAGER_PER_UKE);
 };
 
+export const getTidslinjehendelserDetaljer = (
+    tidslinjeHendelserData: Tidslinjehendelse[],
+    intl: IntlShape
+): Tidslinjehendelse[] => {
+    return tidslinjeHendelserData.map((hendelse) => {
+        switch (hendelse.tidslinjeHendelseType) {
+            case TidslinjehendelseType.UTGÅENDE_INNHENT_OPPLYSNINGER:
+                return {
+                    ...hendelse,
+                    internalUrl: OversiktRoutes.ETTERSEND,
+                    linkTittel: intlUtils(intl, 'tidslinje.VENT_DOKUMENTASJON.linkTittel'),
+                };
+            default:
+                return hendelse;
+        }
+    });
+};
+
 export const getTidslinjehendelserFraBehandlingPåVent = (
     åpenBehandling: ÅpenBehandling,
     manglendeVedleggData: Skjemanummer[],
