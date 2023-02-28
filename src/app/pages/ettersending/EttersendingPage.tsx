@@ -114,8 +114,8 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                     <>
                         <EttersendingFormComponents.Form includeButtons={false} includeValidationSummary={true}>
                             <BodyLong className={bem.element('beskrivelse')}>
-                                Dokumentene du laster opp vil bli lagt ved søknaden din. Du må velge hva dokumentene
-                                inneholder for at saksbehandlerne i nav enkelt skal kunne behandle søknaden din.
+                                Dokumentene du laster opp vil bli lagt ved søknaden din. Velg hva dokumentene inneholder
+                                sånn at saken din kan behandles raskt.
                             </BodyLong>
                             <BodyShort className={bem.element('beskrivelse')}>
                                 Du kan laste opp dokumenter i formatene pdf, png og jpg.

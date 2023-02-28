@@ -44,7 +44,7 @@ const Attachment: React.FunctionComponent<Props> = ({ attachment, showFileSize, 
                     )}
                 >
                     <Button variant="tertiary" icon={<Delete aria-hidden />} onClick={() => onDelete(attachment)}>
-                        Slett vedlegg
+                        Slett dokument
                     </Button>
                 </div>
             )}
