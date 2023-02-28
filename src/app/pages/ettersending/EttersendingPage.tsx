@@ -58,8 +58,8 @@ interface Props {
     saker: SakOppslag;
 }
 
-const validerDokumentType = (value: Skjemanummer | string, intl: IntlShape, vedlegg: Attachment[]) => {
-    if (value === 'default' && vedlegg.length === 0) {
+const validerDokumentType = (value: Skjemanummer | string, intl: IntlShape, vedlegg: Attachment[] | undefined) => {
+    if (value === 'default' && (vedlegg === undefined || vedlegg.length === 0)) {
         return intlUtils(intl, 'ettersendelse.select.defaultValue');
     }
     return undefined;
