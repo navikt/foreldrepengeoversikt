@@ -58,8 +58,8 @@ interface Props {
     saker: SakOppslag;
 }
 
-const validerDokumentType = (value: Skjemanummer | string, intl: IntlShape) => {
-    if (value === 'default') {
+const validerDokumentType = (value: Skjemanummer | string, intl: IntlShape, vedlegg: Attachment[]) => {
+    if (value === 'default' && vedlegg.length === 0) {
         return intlUtils(intl, 'ettersendelse.select.defaultValue');
     }
     return undefined;
@@ -124,20 +124,22 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                                 className={bem.element('select')}
                                 label="Hva inneholder dokumentene dine?"
                                 name={EttersendingFormField.type}
-                                validate={(value) => validerDokumentType(value, intl)}
+                                validate={(value) => validerDokumentType(value, intl, values.vedlegg)}
                             >
                                 {getAttachmentTypeSelectOptions(intl, sak)}
                             </EttersendingFormComponents.Select>
-                            <FormikFileUploader
-                                name={EttersendingFormField.vedlegg}
-                                attachments={values.vedlegg || []}
-                                label="Last opp dokument"
-                                attachmentType={AttachmentType.MORS_AKTIVITET_DOKUMENTASJON}
-                                skjemanummer={values.type!}
-                                legend=""
-                                buttonLabel="Last opp dokument"
-                                validateHasAttachment={true}
-                            />
+                            {values.type !== 'default' && (
+                                <FormikFileUploader
+                                    name={EttersendingFormField.vedlegg}
+                                    attachments={values.vedlegg || []}
+                                    label="Last opp dokument"
+                                    attachmentType={AttachmentType.MORS_AKTIVITET_DOKUMENTASJON}
+                                    skjemanummer={values.type!}
+                                    legend=""
+                                    buttonLabel="Last opp dokument"
+                                    validateHasAttachment={true}
+                                />
+                            )}
                             <Block padBottom="l" visible={values.vedlegg!.length > 0}>
                                 {getListOfUniqueSkjemanummer(values.vedlegg!).map((skjemanummer: Skjemanummer) => (
                                     <div className={bem.element('vedleggsliste')} key={skjemanummer}>
