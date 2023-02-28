@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import * as Sentry from '@sentry/browser';
 import '@navikt/ds-css';
 import AppContainer from './AppContainer';
+import { initAmplitude } from './amplitude/amplitude';
 
 if (!Intl.PluralRules) {
     require('@formatjs/intl-pluralrules/polyfill');
@@ -15,6 +16,8 @@ Sentry.init({
     environment: window.location.hostname,
     integrations: [new Sentry.Integrations.Breadcrumbs({ console: false })],
 });
+
+initAmplitude();
 
 const container = document.getElementById('app');
 const root = createRoot(container!);

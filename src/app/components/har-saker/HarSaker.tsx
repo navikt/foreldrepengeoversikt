@@ -1,5 +1,6 @@
 import { Heading } from '@navikt/ds-react';
 import { bemUtils, formatDate, guid } from '@navikt/fp-common';
+import { logSidevisning } from 'app/amplitude/amplitude';
 import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
 import { GruppertSak } from 'app/types/GruppertSak';
 import EtBarn from 'assets/EtBarn';
@@ -31,6 +32,7 @@ export const getHeading = (type: 'fødsel' | 'termin' | 'adopsjon', antallBarn: 
 const HarSaker: React.FunctionComponent<Props> = ({ grupperteSaker }) => {
     const bem = bemUtils('har-saker');
     useSetBackgroundColor('blue');
+    logSidevisning('forside');
 
     return (
         <>
