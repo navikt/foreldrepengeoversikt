@@ -22,7 +22,7 @@ export interface Props {
     legend: string;
     name: any;
     onFileInputClick?: () => void;
-    skjemanummer: Skjemanummer;
+    skjemanummer: Skjemanummer | 'default';
     validateHasAttachment: boolean;
 }
 
@@ -33,8 +33,11 @@ const KILOBYTES_IN_BYTE = 0.0009765625;
 const mapFilerTilPendingVedlegg = (
     filer: File[],
     attachmentType: AttachmentType,
-    skjemanummer: Skjemanummer
-): Attachment[] => {
+    skjemanummer: Skjemanummer | 'default'
+): Attachment[] | undefined => {
+    if (skjemanummer === 'default') {
+        return undefined;
+    }
     return filer.map((fil) => {
         const nyttVedlegg = mapFilTilVedlegg(fil, attachmentType, skjemanummer);
         nyttVedlegg.pending = true;
@@ -128,12 +131,16 @@ const FormikFileUploader: React.FunctionComponent<Props> = ({
                     accept={VALID_EXTENSIONS.join(', ')}
                     onFilesSelect={(files: File[], { push, replace, remove }: ArrayHelpers) => {
                         const alleNyeVedlegg = mapFilerTilPendingVedlegg(files, attachmentType, skjemanummer);
-                        const alleNyeGyldigeVedlegg = sjekkVedlegg(alleNyeVedlegg, setErrors, intl);
-                        alleNyeGyldigeVedlegg.forEach((nyttVedlegg) => push(nyttVedlegg));
-                        lastOppVedlegg(alleNyeGyldigeVedlegg, replace, remove, setErrors, attachments.length, intl);
+                        const alleNyeGyldigeVedlegg = alleNyeVedlegg
+                            ? sjekkVedlegg(alleNyeVedlegg, setErrors, intl)
+                            : undefined;
+                        if (alleNyeGyldigeVedlegg !== undefined) {
+                            alleNyeGyldigeVedlegg.forEach((nyttVedlegg) => push(nyttVedlegg));
+                            lastOppVedlegg(alleNyeGyldigeVedlegg, replace, remove, setErrors, attachments.length, intl);
+                        }
                     }}
                     validate={() => {
-                        if (validateHasAttachment && attachments.length === 0) {
+                        if (skjemanummer !== 'default' && validateHasAttachment && attachments.length === 0) {
                             return 'Du må laste opp minst ett dokument';
                         }
 

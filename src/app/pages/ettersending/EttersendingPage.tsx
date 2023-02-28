@@ -36,7 +36,7 @@ export const getAttachmentTypeSelectOptions = (intl: IntlShape, sak: Sak | undef
 
     return (
         <>
-            <option value="default" disabled={true} hidden={true}>
+            <option value="default" disabled={false} hidden={false}>
                 {intl.formatMessage({ id: `ettersendelse.select.defaultValue` })}
             </option>
             {getRelevanteSkjemanummer(sak)
@@ -57,6 +57,13 @@ export const getAttachmentTypeSelectOptions = (intl: IntlShape, sak: Sak | undef
 interface Props {
     saker: SakOppslag;
 }
+
+const validerDokumentType = (value: Skjemanummer | string, intl: IntlShape) => {
+    if (value === 'default') {
+        return intlUtils(intl, 'ettersendelse.select.defaultValue');
+    }
+    return undefined;
+};
 
 const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
     const bem = bemUtils('ettersending-page');
@@ -100,7 +107,7 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
 
     return (
         <EttersendingFormComponents.FormikWrapper
-            initialValues={{ type: Skjemanummer.ANNET, vedlegg: [] }}
+            initialValues={{ type: 'default', vedlegg: [] }}
             onSubmit={onSubmit}
             renderForm={({ values, setFieldValue }) => {
                 return (
@@ -117,6 +124,7 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                                 className={bem.element('select')}
                                 label="Hva inneholder dokumentene dine?"
                                 name={EttersendingFormField.type}
+                                validate={(value) => validerDokumentType(value, intl)}
                             >
                                 {getAttachmentTypeSelectOptions(intl, sak)}
                             </EttersendingFormComponents.Select>

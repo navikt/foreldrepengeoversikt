@@ -8,7 +8,7 @@ export enum EttersendingFormField {
 }
 
 export interface EttersendingFormData {
-    [EttersendingFormField.type]: Skjemanummer;
+    [EttersendingFormField.type]: Skjemanummer | 'default';
     [EttersendingFormField.vedlegg]: Attachment[];
 }
 
