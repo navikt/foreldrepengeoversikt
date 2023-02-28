@@ -18,7 +18,7 @@ export const formaterDato = (dato: string | Date | undefined, datoformat?: strin
 };
 
 export const formaterTid = (dato: Date): string => {
-    return formaterDato(dato, 'KL.HH:MM');
+    return formaterDato(dato, 'KL.HH:mm');
 };
 
 export const måned3bokstaver = (dato: Dayjs): string => {
