@@ -119,7 +119,11 @@ export const utledFamiliesituasjon = (familiehendelse: Familiehendelse, gjelderA
 };
 
 export const getFamiliehendelseDato = (familiehendelse: Familiehendelse): string => {
-    const { fødselsdato, termindato } = familiehendelse;
+    const { fødselsdato, termindato, omsorgsovertakelse } = familiehendelse;
+
+    if (omsorgsovertakelse) {
+        return omsorgsovertakelse;
+    }
 
     if (fødselsdato) {
         return fødselsdato;
