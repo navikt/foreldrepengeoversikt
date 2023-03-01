@@ -15,7 +15,7 @@ export const initAmplitude = () => {
 };
 
 export enum AmplitudeEvents {
-    'sidevisning' = 'sidevisning',
+    'besøk' = 'besøk',
     'applikasjonStartet' = 'applikasjon-startet',
     'søknadStartet' = 'skjema startet',
     'søknadSendt' = 'skjema fullført',
@@ -47,6 +47,6 @@ export const logEvent = async (eventName: string, eventProperties?: EventPropert
     }
 };
 
-export const logSidevisning = (pageKey: string) => {
-    return logEvent(AmplitudeEvents.sidevisning, { pageKey });
+export const logBesøk = (side: string) => {
+    return logEvent(AmplitudeEvents.besøk, { side });
 };
