@@ -25,7 +25,7 @@ const PeriodeListe: React.FunctionComponent<Props> = ({
     return (
         <>
             <BodyShort className={bem.element('title')}>{tittel}</BodyShort>
-            <div>
+            <div className={bem.element('block')}>
                 {periodeListe &&
                     periodeListe.length > 0 &&
                     periodeListe.map((periode, index) => {
