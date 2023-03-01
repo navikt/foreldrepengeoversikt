@@ -1,7 +1,6 @@
 import { bemUtils, intlUtils } from '@navikt/fp-common';
 import ContentSection from 'app/components/content-section/ContentSection';
 import SeDokumenter from 'app/components/se-dokumenter/SeDokumenter';
-// import SeOpplysninger from 'app/components/se-opplysninger/SeOpplysninger';
 import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
 import { useSetSelectedSak } from 'app/hooks/useSelectedSak';
@@ -71,9 +70,6 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
             <ContentSection padding="none">
                 <SeDokumenter />
             </ContentSection>
-            {/* { <ContentSection padding="none">
-                <SeOpplysninger />
-            </ContentSection> */}
             {gjeldendeSak.ytelse === Ytelse.FORELDREPENGER && (
                 <ContentSection heading={intlUtils(intl, 'saksoversikt.dinPlan')} padding="large">
                     <DinPlan

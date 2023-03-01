@@ -21,6 +21,8 @@ import {
 import './tidslinje-hendelse.css';
 import { useIntl } from 'react-intl';
 import { TidslinjehendelseType } from 'app/types/TidslinjehendelseType';
+import NoeGikkGalt from 'app/components/noe-gikk-galt/NoeGikkGalt';
+
 interface Params {
     sak: Sak | EngangsstønadSak | SvangerskapspengeSak;
 }
@@ -33,7 +35,12 @@ const Tidslinje: React.FunctionComponent<Params> = ({ sak }) => {
     const { manglendeVedleggData, manglendeVedleggError } = Api.useGetManglendeVedlegg(params.saksnummer!);
 
     if (tidslinjeHendelserError || manglendeVedleggError) {
-        return <BodyShort>Vi har problemer med å hente informasjon om hva som skjer i saken din.</BodyShort>;
+        return (
+            <NoeGikkGalt>
+                Vi klarer ikke å vise informasjon om hva som skjer i saken din akkurat nå. Feilen er hos oss, ikke hos
+                deg. Prøv igjen senere.
+            </NoeGikkGalt>
+        );
     }
 
     if (!tidslinjeHendelserData || !manglendeVedleggData) {

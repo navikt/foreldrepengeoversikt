@@ -41,13 +41,14 @@ const useGetAnnenPartsVedtak = (isSuspended: boolean) => {
 };
 
 const useGetDokumenter = () => {
-    const { data, error } = useRequest<Dokument[]>('/dokument/alle', {
+    const { data, error, requestStatus } = useRequest<Dokument[]>('/dokument/alle', {
         config: { withCredentials: true },
     });
 
     return {
         dokumenterData: data,
         dokumenterError: error,
+        dokumenterStatus: requestStatus,
     };
 };
 

@@ -12,6 +12,8 @@ import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
 
 import './dokumenter-page.css';
+import NoeGikkGalt from 'app/components/noe-gikk-galt/NoeGikkGalt';
+import { RequestStatus } from 'app/types/RequestStatus';
 
 const DokumenterPage: React.FunctionComponent = () => {
     const bem = bemUtils('dokumenter-page');
@@ -19,17 +21,13 @@ const DokumenterPage: React.FunctionComponent = () => {
     useSetSelectedRoute(OversiktRoutes.DOKUMENTER);
     const params = useParams();
 
-    const { dokumenterData, dokumenterError } = Api.useGetDokumenter();
+    const { dokumenterData, dokumenterError, dokumenterStatus } = Api.useGetDokumenter();
 
-    if (dokumenterError) {
-        return <div>Vi klarte ikke å hente dokumentene for din sak</div>;
-    }
-
-    if (!dokumenterData) {
+    if (!dokumenterData && dokumenterStatus !== RequestStatus.FINISHED) {
         return <Loader size="large" aria-label="Henter dokumenter" />;
     }
 
-    const dokumenterForSak = dokumenterData.filter((dok) => dok.saksnummer === params.saksnummer);
+    const dokumenterForSak = (dokumenterData || []).filter((dok) => dok.saksnummer === params.saksnummer);
 
     const dokumenterGruppertPåTidspunkt = grupperDokumenterPåTidspunkt(dokumenterForSak);
 
@@ -43,27 +41,39 @@ const DokumenterPage: React.FunctionComponent = () => {
             >
                 <LinkPanel.Title as="h2">Ettersend dokumenter</LinkPanel.Title>
             </LinkPanel>
-            <div className={bem.element('dokumenter-liste')}>
-                {Object.entries(dokumenterGruppertPåTidspunkt).map((dokument) => {
-                    const dokumenter = dokument[1];
+            {!dokumenterError && (
+                <>
+                    <div className={bem.element('dokumenter-liste')}>
+                        {Object.entries(dokumenterGruppertPåTidspunkt).map((dokument) => {
+                            const dokumenter = dokument[1];
 
-                    if (dokumenter.length === 1) {
-                        return <Dokument key={guid()} dokument={dokumenter[0]} />;
-                    } else {
-                        return <GrupperteDokumenter key={guid()} dokumenter={dokumenter} />;
-                    }
-                })}
-            </div>
-            <Alert variant="info" className={bem.element('ikke-alle-dokumenter')}>
-                <Heading level="3" size="small">
-                    Er det noen dokumenter du savner?
-                </Heading>
-                <BodyLong>
-                    Vi har foreløpig ikke mulighet til å vise papirer du har sendt til NAV i posten, eller dokumenter
-                    som gjelder saken din, men som er sendt av andre på vegne av deg. Det kan for eksempel være en lege,
-                    advokat, verge eller fullmektig.
-                </BodyLong>
-            </Alert>
+                            if (dokumenter.length === 1) {
+                                return <Dokument key={guid()} dokument={dokumenter[0]} />;
+                            } else {
+                                return <GrupperteDokumenter key={guid()} dokumenter={dokumenter} />;
+                            }
+                        })}
+                    </div>
+                    <Alert variant="info" className={bem.element('ikke-alle-dokumenter')}>
+                        <Heading level="3" size="small">
+                            Er det noen dokumenter du savner?
+                        </Heading>
+                        <BodyLong>
+                            Vi har foreløpig ikke mulighet til å vise papirer du har sendt til NAV i posten, eller
+                            dokumenter som gjelder saken din, men som er sendt av andre på vegne av deg. Det kan for
+                            eksempel være en lege, advokat, verge eller fullmektig.
+                        </BodyLong>
+                    </Alert>
+                </>
+            )}
+            {dokumenterError && (
+                <div style={{ marginBottom: '2rem' }}>
+                    <NoeGikkGalt>
+                        Vi har problemer med å vise informasjon om dine dokumenter akkurat nå. Feilen er hos oss, ikke
+                        hos deg. Prøv igjen senere.
+                    </NoeGikkGalt>
+                </div>
+            )}
         </>
     );
 };
