@@ -9,6 +9,8 @@ import { IntlShape } from 'react-intl';
 import OversiktRoutes, { NavRoutes } from 'app/routes/routes';
 import { Uttaksdagen, UTTAKSDAGER_PER_UKE } from 'app/utils/Uttaksdagen';
 import { Skjemanummer } from 'app/types/Skjemanummer';
+import { Ytelse } from 'app/types/Ytelse';
+import { formaterDato } from './dateUtils';
 
 export const VENTEÅRSAKER = [
     BehandlingTilstand.VENTER_PÅ_INNTEKTSMELDING,
@@ -28,7 +30,8 @@ export const getTidslinjehendelseTittel = (
     hendelsetype: TidslinjehendelseType,
     intl: IntlShape,
     tidlistBehandlingsdato: Date | undefined,
-    manglendeVedleggData: Skjemanummer[] | undefined
+    manglendeVedleggData: Skjemanummer[] | undefined,
+    ytelse: Ytelse
 ): string => {
     if (hendelsetype === TidslinjehendelseType.VENTER_PGA_TIDLIG_SØKNAD && tidlistBehandlingsdato !== undefined) {
         return intlUtils(intl, 'tidslinje.tittel.VENTER_PGA_TIDLIG_SØKNAD', {
@@ -43,6 +46,9 @@ export const getTidslinjehendelseTittel = (
         const navnPåDokumentasjon = intlUtils(intl, `ettersendelse.${manglendeVedleggData[0]}`);
         const dokumentasjonLowerCase = navnPåDokumentasjon.charAt(0).toLowerCase() + navnPåDokumentasjon.slice(1);
         return intlUtils(intl, 'tidslinje.navVenterPå', { dokumentasjon: dokumentasjonLowerCase });
+    }
+    if (hendelsetype === TidslinjehendelseType.FØRSTEGANGSSØKNAD) {
+        return intlUtils(intl, 'tidslinje.tittel.FØRSTEGANGSSØKNAD', { ytelse });
     }
     return intlUtils(intl, `tidslinje.tittel.${hendelsetype}`);
 };
@@ -104,6 +110,13 @@ export const getTidligstBehandlingsDatoForTidligSøknad = (åpenBehandling: Åpe
     return Uttaksdagen(førsteUttaksdagISaken!).trekkFra(4 * UTTAKSDAGER_PER_UKE);
 };
 
+const getDatoForInnsendingAvFørsteSøknad = (tidslinjeHendelser: Tidslinjehendelse[]): Date | undefined => {
+    const hendelseFørsteSøknad = tidslinjeHendelser.find(
+        (hendelse) => hendelse.tidslinjeHendelseType === TidslinjehendelseType.FØRSTEGANGSSØKNAD
+    );
+    return hendelseFørsteSøknad ? hendelseFørsteSøknad.opprettet : undefined;
+};
+
 export const getTidslinjehendelserDetaljer = (
     tidslinjeHendelserData: Tidslinjehendelse[],
     intl: IntlShape
@@ -115,6 +128,16 @@ export const getTidslinjehendelserDetaljer = (
                     ...hendelse,
                     internalUrl: OversiktRoutes.ETTERSEND,
                     linkTittel: intlUtils(intl, 'tidslinje.VENT_DOKUMENTASJON.linkTittel'),
+                };
+            case TidslinjehendelseType.FØRSTEGANGSSØKNAD_NY:
+                const datoFørsteSøknad = getDatoForInnsendingAvFørsteSøknad(tidslinjeHendelserData);
+                return {
+                    ...hendelse,
+                    merInformasjon: datoFørsteSøknad
+                        ? intlUtils(intl, 'tidslinje.merInformasjon.FØRSTEGANGSSØKNAD_NY', {
+                              datoFørsteSøknad: formaterDato(datoFørsteSøknad, 'DD. MMM YYYY'),
+                          })
+                        : intlUtils(intl, 'tidslinje.merInformasjon.FØRSTEGANGSSØKNAD_NY.ukjentDatoFørstSøknad'),
                 };
             default:
                 return hendelse;

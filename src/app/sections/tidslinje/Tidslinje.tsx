@@ -62,19 +62,16 @@ const Tidslinje: React.FunctionComponent<Params> = ({ sak }) => {
                             hendelse.tidslinjeHendelseType,
                             intl,
                             hendelse.tidligstBehandlingsDato,
-                            manglendeVedleggData
+                            manglendeVedleggData,
+                            sak.ytelse
                         )}
                         key={guid()}
                     >
                         <ul style={{ listStyle: 'none', padding: '0' }}>
-                            {hendelse.dokumenter.length > 0 &&
-                                hendelse.dokumenter.map((dokument) => {
-                                    return <DokumentHendelse dokument={dokument} key={dokument.url} />;
-                                })}
                             {hendelse.tidslinjeHendelseType === TidslinjehendelseType.VENT_DOKUMENTASJON &&
                                 manglendeVedleggData &&
                                 manglendeVedleggData.length > 1 && (
-                                    <div>
+                                    <div className={bem.element('manglende_vedlegg')}>
                                         <div>{intlUtils(intl, 'tidslinje.VENT_DOKUMENTASJON.flereVedlegg.tittel')}</div>
                                         <ul>
                                             {manglendeVedleggData.map((skjemaId) => {
@@ -90,8 +87,12 @@ const Tidslinje: React.FunctionComponent<Params> = ({ sak }) => {
                                     {hendelse.merInformasjon}
                                 </BodyShort>
                             )}
+                            {hendelse.dokumenter.length > 0 &&
+                                hendelse.dokumenter.map((dokument) => {
+                                    return <DokumentHendelse dokument={dokument} key={dokument.url} />;
+                                })}
                             {hendelse.linkTittel && hendelse.eksternalUrl && (
-                                <Link href={hendelse.eksternalUrl} className={bem.element('link')}>
+                                <Link href={hendelse.eksternalUrl}>
                                     <BodyShort>{hendelse.linkTittel}</BodyShort>
                                     <ExternalLink></ExternalLink>
                                 </Link>
