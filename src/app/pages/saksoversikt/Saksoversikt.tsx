@@ -1,5 +1,4 @@
 import { bemUtils, intlUtils } from '@navikt/fp-common';
-import { logBesøk } from 'app/amplitude/amplitude';
 import ContentSection from 'app/components/content-section/ContentSection';
 import SeDokumenter from 'app/components/se-dokumenter/SeDokumenter';
 import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
@@ -38,7 +37,6 @@ const Saksoversikt: React.FunctionComponent<Props> = ({ minidialogerData, minidi
     const navnPåSøker = søkerinfo.søker.fornavn;
     const params = useParams();
     const alleSaker = getAlleYtelser(saker);
-    logBesøk('saksoversikt');
 
     const gjeldendeSak = alleSaker.find((sak) => sak.saksnummer === params.saksnummer)!;
     useSetSelectedSak(gjeldendeSak);
