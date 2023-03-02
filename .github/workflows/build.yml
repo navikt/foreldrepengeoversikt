@@ -19,7 +19,6 @@ jobs:
       node-version: '17.8.0' # TODO: Bytt til samme versjon som DockerFile (16.19.0 ble brukt før i bygg)
       build-image: ${{ github.ref_name == 'master' }} # default: true
       push-image: ${{ github.ref_name == 'master' }} # default: false
-      clean-install: true
     secrets: inherit
 
   create-issue:
