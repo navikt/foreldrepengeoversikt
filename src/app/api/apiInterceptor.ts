@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import Environment from 'app/Environment';
 
 const apiBaseUrl = Environment.REST_API_URL;
@@ -6,7 +6,7 @@ const apiBaseUrl = Environment.REST_API_URL;
 const AxiosInstance = axios.create({ baseURL: apiBaseUrl });
 
 const getAxiosInstance = (fnr?: string) => {
-    AxiosInstance.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
+    AxiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
         config.timeout = 60 * 1000;
 
         if (process.env.NODE_ENV !== 'development' && fnr) {
