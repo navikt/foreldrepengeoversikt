@@ -12,27 +12,14 @@ on:
       - 'CODEOWNERS'
 
 jobs:
-    kompiler:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Sjekk ut kode
-              uses: actions/checkout@v2.3.4
-
-            - name: Hent tag
-              run: |
-                  echo 'TAG<<EOF' >> $GITHUB_ENV
-                  git log -1 --pretty=%ad --date=format:%Y%m%d%H%M%S-`echo $GITHUB_SHA | cut -c1-7`  >> $GITHUB_ENV
-                  echo 'EOF' >> $GITHUB_ENV
-
-            - name: Cache node modules
-              uses: actions/cache@v2.1.6
-              with:
-                  path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-build-${{ env.cache-name }}-
-                      ${{ runner.os }}-build-
-                      ${{ runner.os }}-
+  build-app:
+    name: Build
+    uses: navikt/fp-gha-workflows/.github/workflows/build-app-frontend-npm.yml@main
+    with:
+      node-version: '16.19.0' # TODO: Bytt til samme versjon som DockerFile (16.19.0 ble brukt før i bygg)
+      build-image: ${{ github.ref_name == 'master' }} # default: true
+      push-image: ${{ github.ref_name == 'master' }} # default: false
+    secrets: inherit
 
   create-issue:
     name: Issues
@@ -53,24 +40,10 @@ jobs:
       cluster: dev-gcp
     secrets: inherit
 
-            - name: Opprett issue, trigg deploy til dev-gcp
-              if: success()
-              uses: actions/github-script@v4.0.2
-              with:
-                  github-token: ${{secrets.NOTIFICATION}}
-                  script: |
-                      github.issues.create({
-                                 owner: context.issue.owner,
-                                 repo: context.issue.repo,
-                                 labels: ['bygg'],
-                                 title: 'Deploy av ${{ env.TAG }}',
-                                 body: '${{ github.sha }}',
-                               })
-                       .then(response => {
-                               const issue = { owner: context.issue.owner,
-                               repo: context.issue.repo,
-                               issue_number: response.data.number }
-                              github.issues.createComment({...issue,
-                                     title: 'Deploy av ${{ env.TAG }}',
-                                     body: '/promote dev-gcp '})
-                        });
+  snyk:
+     name: Snyk
+     needs: build-app
+     uses: navikt/fp-gha-workflows/.github/workflows/snyk-frontend.yml@main
+     with:
+       upload-sarif: ${{ github.ref_name == 'master' }}
+     secrets: inherit
