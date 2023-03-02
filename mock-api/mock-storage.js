@@ -23,6 +23,14 @@ const getSokerinfo = function () {
     return getFileContent('sokerinfo.json');
 };
 
+const getDokumenter = function () {
+    return getFileContent('dokumenter.json');
+};
+
+const getAnnenPartsVedtak = function () {
+    return getFileContent('annenPartsVedtak.json');
+};
+
 const getSaker = function () {
     return getFileContent('saker.json');
 };
@@ -41,6 +49,10 @@ const getMinidialog = function () {
 
 const getManglendeVedlegg = function () {
     return getFileContent('manglendeVedlegg.json');
+};
+
+const getTidslinjeHendelser = function () {
+    return getFileContent('tidslinjeHendelser.json');
 };
 
 const getUttaksplan = function () {
@@ -63,5 +75,8 @@ module.exports = {
     getHistorikk,
     getMinidialog,
     getUttaksplan,
+    getDokumenter,
     getManglendeVedlegg,
+    getAnnenPartsVedtak,
+    getTidslinjeHendelser,
 };

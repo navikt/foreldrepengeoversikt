@@ -1,3 +1,4 @@
+import { intlUtils } from '@navikt/fp-common';
 import { IntlShape } from 'react-intl';
 
 export type SkjemaelementFeil = string | undefined;
@@ -13,21 +14,31 @@ export const getIllegalChars = (value: any): string => {
     return Array.from(ugyldigStringSet).join('');
 };
 
-export const getIllegalCharsErrorMessage = (value: string, feltNavn: string, intl: IntlShape): string => {
+export const getIllegalCharsErrorMessage = (value: any, feltNavn: string, intl: IntlShape): string => {
     const ugyldigeTegn = getIllegalChars(value).replace(/[\t]/g, 'Tabulatortegn');
-    return intl.formatMessage(
-        {
-            id: 'valideringsfeil.fritekst.kanIkkeInneholdeTegn',
-        },
-        { ugyldigeTegn: ugyldigeTegn, feltNavn: feltNavn }
-    );
+    return intlUtils(intl, 'valideringsfeil.fritekst.kanIkkeInneholdeTegn', {
+        feltNavn: feltNavn,
+        ugyldigeTegn: ugyldigeTegn,
+    });
 };
 
 export const validateTextHasLegalChars = (value: any): boolean => textRegex.test(value);
 
-export const validateTextInputField = (value: string, feltNavn: string, intl: IntlShape): SkjemaelementFeil => {
+export const validateTextInputField = (value: any, feltNavn: string, intl: IntlShape): SkjemaelementFeil => {
     if (!validateTextHasLegalChars(value)) {
         return getIllegalCharsErrorMessage(value, feltNavn, intl);
     }
     return undefined;
+};
+
+export const validateFritekstFelt = (intl: IntlShape, label: string) => (inputText: string) => {
+    if (inputText.length < 25) {
+        return intlUtils(intl, 'valideringsfeil.fritekst.forKort', { feltNavn: label });
+    }
+
+    if (inputText.length > 1000) {
+        return intlUtils(intl, 'valideringsfeil.fritekst.forLang', { feltNavn: label });
+    }
+
+    return validateTextInputField(inputText, label, intl);
 };

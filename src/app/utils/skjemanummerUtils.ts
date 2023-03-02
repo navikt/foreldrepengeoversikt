@@ -1,4 +1,21 @@
-import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
+import { Sak } from 'app/types/Sak';
+import { Skjemanummer } from 'app/types/Skjemanummer';
+import { Ytelse } from 'app/types/Ytelse';
+
+export const getRelevanteSkjemanummer = (sak: Sak): Skjemanummer[] => {
+    const alleSkjemanummere = Object.values(Skjemanummer);
+
+    if (sak.ytelse === Ytelse.FORELDREPENGER) {
+        return sak.kanSøkeOmEndring
+            ? alleSkjemanummere.filter(isSkjemanummerForEndringssøknadForeldrepenger)
+            : alleSkjemanummere.filter(skjemanummerForFørstegangssøknadForeldrepenger);
+    }
+
+    if (sak.ytelse === Ytelse.ENGANGSSTØNAD) {
+        return alleSkjemanummere.filter(isSkjemanummerForEngangsstønad);
+    }
+    return alleSkjemanummere.filter(isSkjemanummerForSvangerskapspengesoknad);
+};
 
 export const skjemanummerForFørstegangssøknadForeldrepenger = (skjemanummer: Skjemanummer): boolean => {
     switch (skjemanummer) {

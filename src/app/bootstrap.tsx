@@ -1,19 +1,13 @@
 import * as React from 'react';
-import { Provider } from 'react-redux';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import * as Sentry from '@sentry/browser';
-
-import IntlProvider from './intl/IntlProvider';
-import Foreldrepengeoversikt from './Foreldrepengeoversikt';
-import store from './redux/store';
-import ErrorBoundary from 'common/components/error-boundary/ErrorBoundary';
-import ByttBrowserModal from 'common/components/bytt-browser-modal/ByttBrowserModal';
-
-import './styles/app.less';
+import '@navikt/ds-css';
+import AppContainer from './AppContainer';
+import { initAmplitude } from './amplitude/amplitude';
 
 if (!Intl.PluralRules) {
     require('@formatjs/intl-pluralrules/polyfill');
-    require('@formatjs/intl-pluralrules/dist/locale-data/nb');
+    require('@formatjs/intl-pluralrules/locale-data/nb');
 }
 
 Sentry.init({
@@ -23,15 +17,9 @@ Sentry.init({
     integrations: [new Sentry.Integrations.Breadcrumbs({ console: false })],
 });
 
-const root = document.getElementById('app');
-render(
-    <IntlProvider>
-        <ErrorBoundary>
-            <Provider store={store}>
-                <ByttBrowserModal />
-                <Foreldrepengeoversikt />
-            </Provider>
-        </ErrorBoundary>
-    </IntlProvider>,
-    root
-);
+initAmplitude();
+
+const container = document.getElementById('app');
+const root = createRoot(container!);
+
+root.render(<AppContainer />);

@@ -1,118 +1,85 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { Loader } from '@navikt/ds-react';
+import { bemUtils } from '@navikt/fp-common';
+import classNames from 'classnames';
+import dayjs from 'dayjs';
+import React, { useEffect, useMemo } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Api from './api/api';
+import ScrollToTop from './components/scroll-to-top/ScrollToTop';
+import { useGetBackgroundColor } from './hooks/useBackgroundColor';
+import ForeldrepengeoversiktRoutes from './routes/ForeldrepengeoversiktRoutes';
+import { HendelseType } from './types/HendelseType';
+import { mapSakerDTOToSaker } from './utils/sakerUtils';
 
-import DineForeldrepenger from './pages/dine-foreldrepenger/DineForeldrepenger';
-import Ettersendelse from './pages/ettersendelse/Ettersendelse';
-import ErrorPage from './pages/error/ErrorPage';
-import KvitteringPage from './pages/kvittering-page/Kvittering';
+import './styles/app.css';
 
-import ApplicationSpinner from './components/application-spinner/ApplicationSpinner';
-import { Routes } from './utils/routes';
+const Foreldrepengeoversikt: React.FunctionComponent = () => {
+    const bem = bemUtils('app');
+    const backgroundColor = useGetBackgroundColor();
 
-import ApiAction, { ApiActionTypes } from './redux/types/ApiAction';
-import FetchState, { FetchStatus, PostState, GetFailure } from './redux/types/FetchState';
-import { extractUUID, extractErrorMessage } from 'common/util/errorUtil';
-import { getErrorCode } from './redux/util/fetchFromState';
-import { AppState } from './redux/store';
-import DinPlan from './pages/din-plan/DinPlan';
-import MinidialogPage from './pages/minidialog/MinidialogPage';
-import EttersendingDto from './api/types/ettersending/EttersendingDto';
-import { Søkerinfo } from './types/Søkerinfo';
+    const { søkerinfoData, søkerinfoError } = Api.useSøkerinfo();
+    const { sakerData, sakerError } = Api.useGetSaker();
+    const { annenPartsVedtakError } = Api.useGetAnnenPartsVedtak(true);
+    const { minidialogData, minidialogError } = Api.useGetMinidialog();
 
-interface Props {
-    søkerinfo: FetchState<Søkerinfo>;
-    ettersendelse: PostState<EttersendingDto>;
-    shouldRenderApplicationSpinner: boolean;
-    feiletOppslag: GetFailure;
-    requestPersoninfo: () => void;
-    requestSaker: () => void;
-    requestStorageKvittering: () => void;
-    requestHistorikk: () => void;
-}
-
-class Foreldrepengeoversikt extends React.Component<Props> {
-    componentDidMount(): void {
-        this.fetchData();
-    }
-
-    fetchData(): void {
-        if (this.props.søkerinfo.status === FetchStatus.UNFETCHED) {
-            this.props.requestPersoninfo();
-            this.props.requestSaker();
-            this.props.requestStorageKvittering();
-            this.props.requestHistorikk();
-        }
-    }
-
-    render() {
-        const { ettersendelse, feiletOppslag, shouldRenderApplicationSpinner } = this.props;
-        if (shouldRenderApplicationSpinner) {
-            return <ApplicationSpinner />;
-        }
-
-        if (feiletOppslag) {
-            return <ErrorPage uuid={extractUUID(feiletOppslag.error)} />;
-        }
-
-        if (ettersendelse.status === FetchStatus.FAILURE) {
-            const errorMessage = extractErrorMessage(ettersendelse.error);
-
-            return (
-                <ErrorPage
-                    uuid={extractUUID(ettersendelse.error)}
-                    errorMessage={errorMessage ? errorMessage : undefined}
-                />
+    useEffect(() => {
+        if (søkerinfoError) {
+            throw new Error(
+                'Vi klarte ikke å hente informasjon om deg. Prøv igjen om noen minutter og hvis problemet vedvarer kontakt brukerstøtte.'
             );
         }
 
+        if (sakerError) {
+            throw new Error(
+                'Vi opplever problemer med å hente informasjon om din sak. Prøv igjen om noen minutter og hvis problemet vedvarer kontakt brukerstøtte.'
+            );
+        }
+
+        if (annenPartsVedtakError) {
+            throw new Error('Vi klarte ikke å hente opp informasjon om den andre forelderen.');
+        }
+    }, [søkerinfoError, sakerError, annenPartsVedtakError]);
+
+    const saker = useMemo(() => {
+        if (sakerData) {
+            return mapSakerDTOToSaker(sakerData);
+        }
+
+        return undefined;
+    }, [sakerData]);
+
+    if (!søkerinfoData || !sakerData || !saker || (!minidialogData && !minidialogError)) {
         return (
-            <Router>
-                <Switch>
-                    <Route path={Routes.ETTERSENDELSE} render={(props) => <Ettersendelse {...props} />} />
-                    <Route path={Routes.KVITTERING} render={(props) => <KvitteringPage {...props} />} />
-                    <Route path={Routes.DIN_PLAN} render={(props) => <DinPlan {...props} />} />
-                    <Route path={Routes.MINIDIALOG} exact={true} render={(props) => <MinidialogPage {...props} />} />
-                    <Route
-                        path={Routes.DINE_FORELDREPENGER}
-                        exact={true}
-                        render={(props) => <DineForeldrepenger {...props} />}
-                    />
-                    <Redirect to={Routes.DINE_FORELDREPENGER} />
-                </Switch>
-            </Router>
+            <div style={{ textAlign: 'center', padding: '12rem 0' }}>
+                <Loader type="XXL" />
+            </div>
         );
     }
-}
 
-const mapStateToProps = (state: AppState) => {
-    const { søkerinfo, saker, storageKvittering, historikk } = state.api;
-    return {
-        søkerinfo,
-        ettersendelse: state.innsending.ettersendelse,
-        feiletOppslag: [...Object.values(state.api)].find((oppslag) => oppslag.status === FetchStatus.FAILURE),
-        shouldRenderApplicationSpinner: [søkerinfo, saker, storageKvittering, historikk].some(
-            (oppslag) =>
-                oppslag.status === FetchStatus.UNFETCHED ||
-                oppslag.status === FetchStatus.IN_PROGRESS ||
-                getErrorCode(oppslag) === 401
-        ),
-    };
+    const aktiveMinidialoger = minidialogData
+        ? minidialogData.filter(
+              ({ gyldigTil, aktiv, hendelse }) =>
+                  aktiv &&
+                  dayjs(gyldigTil).isSameOrAfter(new Date(), 'days') &&
+                  hendelse !== HendelseType.TILBAKEKREVING_FATTET_VEDTAK
+          )
+        : undefined;
+
+    return (
+        <div
+            className={classNames(bem.block, backgroundColor === 'white' ? bem.element('white') : bem.element('blue'))}
+        >
+            <BrowserRouter>
+                <ScrollToTop />
+                <ForeldrepengeoversiktRoutes
+                    søkerinfo={søkerinfoData}
+                    saker={saker}
+                    minidialogerData={aktiveMinidialoger}
+                    minidialogerError={minidialogError}
+                />
+            </BrowserRouter>
+        </div>
+    );
 };
 
-const mapDispatchToProps = (dispatch: (action: ApiAction) => void) => ({
-    requestPersoninfo: () => {
-        dispatch({ type: ApiActionTypes.GET_SØKERINFO_REQUEST });
-    },
-    requestSaker: () => {
-        dispatch({ type: ApiActionTypes.GET_SAKER_REQUEST });
-    },
-    requestStorageKvittering: () => {
-        dispatch({ type: ApiActionTypes.GET_STORAGE_KVITTERING_REQUEST });
-    },
-    requestHistorikk: () => {
-        dispatch({ type: ApiActionTypes.GET_HISTORIKK_REQUEST });
-    },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Foreldrepengeoversikt);
+export default Foreldrepengeoversikt;

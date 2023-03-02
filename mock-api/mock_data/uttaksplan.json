@@ -1,6 +1,7 @@
 {
     "grunnlag": {
-        "fødselsdato": "2019-11-27",
+        "termindato": "2021-09-08",
+        "fødselsdato": "2021-09-08",
         "dekningsgrad": 100,
         "antallBarn": 1,
         "søkerErFarEllerMedmor": false,
@@ -19,20 +20,20 @@
             "stønadskontotype": "FORELDREPENGER_FØR_FØDSEL",
             "trekkDager": 15,
             "arbeidstidprosent": 0,
-            "utbetalingsprosent": 10,
+            "utbetalingsprosent": 100,
             "gjelderAnnenPart": false,
-            "manueltBehandlet": true,
+            "manueltBehandlet": false,
             "flerbarnsdager": false,
             "uttakArbeidType": "ORDINÆRT_ARBEID",
             "arbeidsgiverInfo": {
-                "id": "973861778",
+                "id": "947064649",
                 "type": "ORGANISASJON",
-                "navn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET"
+                "navn": "SJOKKERENDE ELEKTRIKER"
             },
             "periodeResultatÅrsak": "2006",
             "periode": {
-                "fom": "2019-11-06",
-                "tom": "2019-11-26"
+                "fom": "2021-08-18",
+                "tom": "2021-09-07"
             }
         },
         {
@@ -40,7 +41,7 @@
             "graderingInnvilget": false,
             "samtidigUttak": false,
             "stønadskontotype": "MØDREKVOTE",
-            "trekkDager": 3,
+            "trekkDager": 30,
             "arbeidstidprosent": 0,
             "utbetalingsprosent": 100,
             "gjelderAnnenPart": false,
@@ -48,37 +49,14 @@
             "flerbarnsdager": false,
             "uttakArbeidType": "ORDINÆRT_ARBEID",
             "arbeidsgiverInfo": {
-                "id": "973861778",
+                "id": "947064649",
                 "type": "ORGANISASJON",
-                "navn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET"
+                "navn": "SJOKKERENDE ELEKTRIKER"
             },
             "periodeResultatÅrsak": "2003",
             "periode": {
-                "fom": "2019-11-27",
-                "tom": "2019-11-30"
-            }
-        },
-        {
-            "periodeResultatType": "INNVILGET",
-            "graderingInnvilget": false,
-            "samtidigUttak": false,
-            "stønadskontotype": "MØDREKVOTE",
-            "trekkDager": 27,
-            "arbeidstidprosent": 0,
-            "utbetalingsprosent": 100,
-            "gjelderAnnenPart": false,
-            "manueltBehandlet": false,
-            "flerbarnsdager": false,
-            "uttakArbeidType": "ORDINÆRT_ARBEID",
-            "arbeidsgiverInfo": {
-                "id": "973861778",
-                "type": "ORGANISASJON",
-                "navn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET"
-            },
-            "periodeResultatÅrsak": "2003",
-            "periode": {
-                "fom": "2019-12-01",
-                "tom": "2020-01-07"
+                "fom": "2021-09-08",
+                "tom": "2021-10-19"
             }
         },
         {
@@ -94,14 +72,14 @@
             "flerbarnsdager": false,
             "uttakArbeidType": "ORDINÆRT_ARBEID",
             "arbeidsgiverInfo": {
-                "id": "973861778",
+                "id": "947064649",
                 "type": "ORGANISASJON",
-                "navn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET"
+                "navn": "SJOKKERENDE ELEKTRIKER"
             },
             "periodeResultatÅrsak": "2003",
             "periode": {
-                "fom": "2020-01-08",
-                "tom": "2020-03-10"
+                "fom": "2021-10-20",
+                "tom": "2021-12-21"
             }
         },
         {
@@ -109,7 +87,7 @@
             "graderingInnvilget": false,
             "samtidigUttak": false,
             "stønadskontotype": "FELLESPERIODE",
-            "trekkDager": 37,
+            "trekkDager": 80,
             "arbeidstidprosent": 0,
             "utbetalingsprosent": 100,
             "gjelderAnnenPart": false,
@@ -117,14 +95,14 @@
             "flerbarnsdager": false,
             "uttakArbeidType": "ORDINÆRT_ARBEID",
             "arbeidsgiverInfo": {
-                "id": "973861778",
+                "id": "947064649",
                 "type": "ORGANISASJON",
-                "navn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET"
+                "navn": "SJOKKERENDE ELEKTRIKER"
             },
             "periodeResultatÅrsak": "2002",
             "periode": {
-                "fom": "2020-03-11",
-                "tom": "2020-04-30"
+                "fom": "2022-01-12",
+                "tom": "2022-05-03"
             }
         }
     ]

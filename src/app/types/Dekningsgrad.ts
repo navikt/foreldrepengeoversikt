@@ -1,4 +1,4 @@
-export enum Dekningsgrad {
-    ÅTTI_PROSENT = 80,
-    HUNDRE_PROSENT = 100,
+export interface Dekningsgrad {
+    80: 'ÅTTI';
+    100: 'HUNDRE';
 }

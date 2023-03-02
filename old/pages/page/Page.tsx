@@ -1,0 +1,36 @@
+import * as React from 'react';
+import { Innholdstittel } from 'nav-frontend-typografi';
+import classNames from 'classnames';
+
+import BEMHelper from '../old/common/util/bem';
+import Søknadstittel from '../old/common/components/søknadstittel/Søknadstittel';
+import BackButton from '../old/common/components/back-button/BackButton';
+
+import './page.less';
+
+interface Props {
+    className?: string;
+    pageTitle: string | React.ReactNode;
+    icon?: () => React.ReactNode;
+    title?: string | React.ReactNode;
+    onBackClick?: () => void;
+}
+
+class Page extends React.Component<Props> {
+    render() {
+        const { className, onBackClick, icon, children, title } = this.props;
+        const cls = BEMHelper('page');
+        return (
+            <div className={classNames(cls.block, className)}>
+                <Søknadstittel>{this.props.pageTitle}</Søknadstittel>
+                <div className={cls.element('content')}>
+                    {onBackClick && <BackButton hidden={false} onClick={onBackClick} />}
+                    {icon && <div className={cls.element('icon')}>{icon && icon()}</div>}
+                    {title && <Innholdstittel className={cls.element('title')}>{title}</Innholdstittel>}
+                    {children}
+                </div>
+            </div>
+        );
+    }
+}
+export default Page;

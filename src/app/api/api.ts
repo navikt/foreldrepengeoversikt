@@ -1,107 +1,106 @@
-import Environment from '../Environment';
-import EttersendingDto from './types/ettersending/EttersendingDto';
-import AxiosApiInterceptor from './interceptor';
-import axios from 'axios';
-import { formaterDato } from 'app/utils/dateUtils';
-import { Dekningsgrad } from 'app/types/Dekningsgrad';
+import { Dokument } from 'app/types/Dokument';
+import EttersendingDto from 'app/types/EttersendingDTO';
+import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
+import { SakOppslagDTO } from 'app/types/SakOppslag';
+import { Skjemanummer } from 'app/types/Skjemanummer';
+import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
+import { Tidslinjehendelse } from 'app/types/Tidslinjehendelse';
+import getAxiosInstance from './apiInterceptor';
+import { useRequest } from './useRequest';
 
-export interface GetTilgjengeligeStønadskontoerParams {
-    antallBarn: number;
-    morHarRett: boolean;
-    farHarRett: boolean;
-    dekningsgrad: Dekningsgrad;
-    termindato?: string;
-    fødselsdato?: string;
-    omsorgsovertakelsesdato?: string;
-    morHarAleneomsorg?: boolean;
-    farHarAleneomsorg?: boolean;
-    startdatoUttak: string;
-}
+const useSøkerinfo = () => {
+    const { data, error } = useRequest<SøkerinfoDTO>('/sokerinfo', { config: { withCredentials: true } });
 
-const getPersoninfo = () => {
-    return AxiosApiInterceptor.get('/sokerinfo');
-};
-
-const getSaker = () => {
-    return AxiosApiInterceptor.get('innsyn/saker');
-};
-
-const sendEttersending = (ettersending: EttersendingDto) => {
-    return AxiosApiInterceptor.post('/soknad/ettersend', ettersending, {
-        timeout: 120 * 1000,
-    });
-};
-
-const getStorageKvittering = () => {
-    return AxiosApiInterceptor.get('/storage/kvittering/foreldrepenger', {
-        timeout: 15 * 1000,
-    });
-};
-
-const getHistorikk = () => {
-    return AxiosApiInterceptor.get('/historikk');
-};
-
-const getMiniDialog = () => {
-    return AxiosApiInterceptor.get('/minidialog');
-};
-
-const getUttaksplan = (saksnummer: string) => {
-    return AxiosApiInterceptor.get('innsyn/uttaksplan', {
-        params: { saksnummer },
-    });
-};
-
-const getManglendeVedlegg = (saksnummer: string) => {
-    return AxiosApiInterceptor.get('/historikk/vedlegg', {
-        params: { saksnummer },
-    });
-};
-
-function getUttakskontoer({
-    antallBarn,
-    farHarRett,
-    morHarRett,
-    dekningsgrad,
-    fødselsdato,
-    termindato,
-    omsorgsovertakelsesdato,
-    morHarAleneomsorg,
-    farHarAleneomsorg,
-    startdatoUttak,
-}: GetTilgjengeligeStønadskontoerParams) {
-    const fpUttakServiceDateFormat = 'YYYYMMDD';
-    const urlParams = {
-        farHarRett,
-        morHarRett,
-        morHarAleneomsorg: morHarAleneomsorg || false,
-        farHarAleneomsorg: farHarAleneomsorg || false,
-        dekningsgrad,
-        antallBarn,
-        fødselsdato: fødselsdato ? formaterDato(fødselsdato, fpUttakServiceDateFormat) : undefined,
-        termindato: termindato ? formaterDato(termindato, fpUttakServiceDateFormat) : undefined,
-        omsorgsovertakelseDato: omsorgsovertakelsesdato
-            ? formaterDato(omsorgsovertakelsesdato, fpUttakServiceDateFormat)
-            : undefined,
-        startdatoUttak: formaterDato(startdatoUttak, fpUttakServiceDateFormat),
+    return {
+        søkerinfoData: data,
+        søkerinfoError: error,
     };
+};
 
-    return axios.get(`${Environment.UTTAK_API_URL}/konto`, {
-        timeout: 15 * 1000,
-        params: urlParams,
+const useGetSaker = () => {
+    const { data, error } = useRequest<SakOppslagDTO>('/innsyn/v2/saker', {
+        config: { withCredentials: true },
     });
-}
+
+    return {
+        sakerData: data,
+        sakerError: error,
+    };
+};
+
+const useGetAnnenPartsVedtak = (isSuspended: boolean) => {
+    const { data, error } = useRequest<any>('/innsyn/v2/annenPartVedtak', {
+        config: { withCredentials: true },
+        isSuspended,
+    });
+
+    return {
+        annenPartsVedakData: data,
+        annenPartsVedtakError: error,
+    };
+};
+
+const useGetDokumenter = () => {
+    const { data, error, requestStatus } = useRequest<Dokument[]>('/dokument/alle', {
+        config: { withCredentials: true },
+    });
+
+    return {
+        dokumenterData: data,
+        dokumenterError: error,
+        dokumenterStatus: requestStatus,
+    };
+};
+
+const useGetTidslinjeHendelser = (saksnr: string) => {
+    const { data, error } = useRequest<Tidslinjehendelse[]>('/innsyn/tidslinje', {
+        config: { withCredentials: true, params: { saksnummer: saksnr } },
+    });
+
+    return {
+        tidslinjeHendelserData: data,
+        tidslinjeHendelserError: error,
+    };
+};
+
+const useGetMinidialog = () => {
+    const { data, error } = useRequest<MinidialogInnslag[]>('/minidialog', {
+        config: { withCredentials: true },
+    });
+
+    return {
+        minidialogData: data,
+        minidialogError: error,
+    };
+};
+
+const useGetManglendeVedlegg = (saksnr: string) => {
+    const { data, error } = useRequest<Skjemanummer[]>('/historikk/vedlegg', {
+        config: { withCredentials: true, params: { saksnummer: saksnr } },
+    });
+
+    return {
+        manglendeVedleggData: data,
+        manglendeVedleggError: error,
+    };
+};
+
+const sendEttersending = (ettersending: EttersendingDto, fnr?: string) => {
+    return getAxiosInstance(fnr).post('/soknad/ettersend', ettersending, {
+        timeout: 30 * 1000,
+        withCredentials: true,
+    });
+};
 
 const Api = {
-    getSaker,
-    getPersoninfo,
+    useSøkerinfo,
+    useGetSaker,
+    useGetDokumenter,
+    useGetAnnenPartsVedtak,
+    useGetTidslinjeHendelser,
+    useGetMinidialog,
+    useGetManglendeVedlegg,
     sendEttersending,
-    getStorageKvittering,
-    getHistorikk,
-    getMiniDialog,
-    getUttaksplan,
-    getUttakskontoer,
-    getManglendeVedlegg,
 };
 
 export default Api;

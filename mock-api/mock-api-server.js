@@ -8,7 +8,12 @@ const morgan = require('morgan');
 require('dotenv').config();
 
 const allowCrossDomain = function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8880');
+    const corsWhiteList = ['http://localhost:8080', 'http://localhost:8880']; // 8080 dev server with decorator, 8880 dev server without decorator
+
+    if (corsWhiteList.includes(req.headers.origin)) {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+    }
+
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-XSRF-TOKEN,Location');
     res.setHeader('Access-Control-Expose-Headers', 'Location');
@@ -30,9 +35,17 @@ router.get(['/rest/sokerinfo'], (req, res) => {
     res.send(MockStorage.getSokerinfo());
 });
 
+router.get(['/rest/dokument/alle'], (req, res) => {
+    res.send(MockStorage.getDokumenter());
+});
+
+router.get(['/rest/innsyn/v2/annenPartVedtak'], (req, res) => {
+    res.send(MockStorage.getAnnenPartsVedtak());
+});
+
 router.post('/rest/engangsstonad', (req, res) => res.sendStatus(200));
 
-router.get('/rest/innsyn/saker', (req, res) => {
+router.get('/rest/innsyn/v2/saker', (req, res) => {
     res.send(MockStorage.getSaker());
 });
 
@@ -58,6 +71,10 @@ router.get('/rest/storage/kvittering/foreldrepenger', (req, res) => {
 
 router.get('/rest/innsyn/uttaksplan', (req, res) => {
     res.send(MockStorage.getUttaksplan());
+});
+
+router.get('/rest/innsyn/tidslinje', (req, res) => {
+    res.send(MockStorage.getTidslinjeHendelser());
 });
 
 const vedleggUpload = multer({ dest: './dist/vedlegg/' });

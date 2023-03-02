@@ -1,27 +1,9 @@
-import { Kjønn } from 'app/api/types/personinfo/Kjønn';
-import Bankkonto from 'app/api/types/personinfo/Bankkonto';
+import { Kjønn } from '@navikt/fp-common';
 
-export interface PersonBase {
-    fnr: string;
-    fornavn: string;
-    mellomnavn?: string;
+export interface Person {
     etternavn: string;
-    kjønn: Kjønn;
+    fornavn: string;
     fødselsdato: string;
+    fnr: string;
+    kjønn: Kjønn;
 }
-
-interface Person extends PersonBase {
-    ikkeNordiskEøsLand: boolean;
-    erMyndig: boolean;
-    bankkonto?: Bankkonto;
-}
-
-export interface RegistrertBarn extends PersonBase {
-    annenForelder?: RegistrertAnnenForelder;
-}
-
-export interface RegistrertAnnenForelder extends Omit<PersonBase, 'kjønn'> {
-    harOpplystOmSinPågåendeSak?: boolean;
-}
-
-export default Person;

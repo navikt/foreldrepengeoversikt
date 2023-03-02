@@ -1,163 +1,127 @@
-import React, { useState, FormEvent } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Textarea, RadioPanelGruppe } from 'nav-frontend-skjema';
-import Snakkeboble from 'nav-frontend-snakkeboble';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import Veilederpanel from 'nav-frontend-veilederpanel';
-
-import { withAttachments, AttachmentFormProps } from 'app/components/attachmentForm/AttachmentForm';
-import SakBase from 'app/api/types/sak/Sak';
-import EttersendingDto from 'app/api/types/ettersending/EttersendingDto';
-import { formaterDatoForHendelse } from 'app/components/historikk/util';
-import { MinidialogInnslag } from 'app/api/types/historikk/HistorikkInnslag';
-
-import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
-import { Skjemanummer } from 'common/storage/attachment/types/Skjemanummer';
-import AttachmentList from 'common/storage/attachment/components/AttachmentList';
-import BEMHelper from 'common/util/bem';
-import { getEttersendingType as getSakstype } from '../../pages/ettersendelse/util';
-import VeilederNormal from 'common/components/veileder/VeilederNormalSvg';
-import { isAttachmentWithError } from 'common/storage/attachment/components/util';
-import { Attachment } from 'common/storage/attachment/types/Attachment';
-import getMessage from 'common/util/i18nUtils';
+import React from 'react';
+import { useIntl } from 'react-intl';
 import HvaLeggerNAVVektPå from './hva-legger-nav-vekt-på/HvaLeggerNAVVektPå';
-
-import './minidialogSkjema.less';
-import { replaceInvisibleCharsWithSpace } from 'app/utils/formUtils';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { validateTextInputField } from 'app/utils/validationUtils';
+import { MinidialogInnslag } from 'app/types/HistorikkInnslag';
+import { formatDate, intlUtils } from '@navikt/fp-common';
+import { Alert, Button, Chat, GuidePanel } from '@navikt/ds-react';
+import { Ytelse } from 'app/types/Ytelse';
+import EttersendingDto from 'app/types/EttersendingDTO';
+import { Block } from '@navikt/fp-common';
+import { Skjemanummer } from 'app/types/Skjemanummer';
+import { Link } from 'react-router-dom';
+import FormikFileUploader from '../formik-file-uploader/FormikFileUploader';
+import { AttachmentType } from 'app/types/AttachmentType';
+import { MinidialogFormComponents, MinidialogFormField } from './minidialogSkjemaConfig';
+import { mapMinidialogInputTilDTO } from './minidialogskjemaUtils';
+import { YesOrNo } from '@navikt/sif-common-formik-ds/lib';
+import { convertYesOrNoOrUndefinedToBoolean } from 'app/utils/formUtils';
+import { validateFritekstFelt } from 'app/utils/validationUtils';
 
 interface Props {
-    sak: SakBase;
+    ettersendelseErSendt: boolean;
+    isSendingEttersendelse: boolean;
     minidialog: MinidialogInnslag;
     onSubmit: (ettersendelse: EttersendingDto) => void;
-    isSendingEttersendelse: boolean;
+    sakstype: Ytelse;
 }
 
-export enum JaNeiSpørsmål {
-    JA = 'JA',
-    NEI = 'NEI',
-}
-
-const MinidialogSkjema: React.FunctionComponent<Props & AttachmentFormProps> = ({
-    sak,
-    minidialog,
-    attachments,
-    addAttachment,
-    deleteAttachment,
-    editAttachment,
-    onSubmit,
+const MinidialogSkjema: React.FunctionComponent<Props> = ({
+    ettersendelseErSendt,
     isSendingEttersendelse,
+    sakstype,
+    minidialog,
+    onSubmit,
 }) => {
     const intl = useIntl();
-    const [fritekst, updateFritekst] = useState('');
-    const [svar, update] = useState<string | undefined>(undefined);
-    const [valideringsFeil, setValideringsFeil] = useState<string | undefined>(undefined);
-
-    const brukerØnskerÅUttaleSeg = svar === JaNeiSpørsmål.JA;
-    const submitData: EttersendingDto = {
-        vedlegg: brukerØnskerÅUttaleSeg ? attachments.filter((a: Attachment) => !isAttachmentWithError(a)) : [],
-        saksnummer: minidialog.saksnr,
-        type: getSakstype(sak),
-        dialogId: minidialog.dialogId,
-        brukerTekst: {
-            dokumentType: Skjemanummer.TILBAKEBETALING,
-            overskrift: 'Svar på tilbakebetalingen',
-            tekst: brukerØnskerÅUttaleSeg
-                ? replaceInvisibleCharsWithSpace(fritekst)
-                : 'Jeg ønsker ikke å uttale meg. Saken vil bli behandlet med de opplysningene som NAV har tilgjengelig.',
-        },
+    const handleSubmit = (values: any) => {
+        const submitData = mapMinidialogInputTilDTO(values, minidialog.saksnr, sakstype, minidialog.dialogId);
+        onSubmit(submitData);
     };
 
-    const cls = BEMHelper('minidialog-skjema');
+    if (ettersendelseErSendt) {
+        return (
+            <div>
+                <Block padBottom="l">
+                    <Alert variant="success"> {intlUtils(intl, 'miniDialog.kvittering.svaretErSendt')}</Alert>
+                </Block>
+                <Block padBottom="l">
+                    <Link to={`/${minidialog.saksnr}`}>
+                        {intlUtils(intl, 'miniDialog.kvittering.gåTilbakeTilSaken')}
+                    </Link>
+                </Block>
+            </div>
+        );
+    }
     return (
-        <form
-            className={cls.block}
-            onSubmit={(event: FormEvent) => {
-                event.stopPropagation();
-                event.preventDefault();
-                const valideringsFeil =
-                    brukerØnskerÅUttaleSeg && !!fritekst
-                        ? validateTextInputField(
-                              fritekst,
-                              getMessage(intl, 'minidialog.tilbakekreving.tilbakekreving.label').replace(':', ''),
-                              intl
-                          )
-                        : undefined;
-                if (valideringsFeil !== undefined) {
-                    setValideringsFeil(valideringsFeil);
-                } else {
-                    return onSubmit(submitData);
-                }
+        <MinidialogFormComponents.FormikWrapper
+            initialValues={{
+                tilbakemelding: '',
+                vedlegg: [],
+                brukerØnskerÅUttaleSeg: YesOrNo.UNANSWERED,
             }}
-        >
-            <Snakkeboble topp={formaterDatoForHendelse(minidialog.opprettet)} pilHoyre={false} ikonClass={'nav'}>
-                <Normaltekst tag="p">
-                    <FormattedMessage id="miniDialog.tilbakekreving.tittel" values={{ sakstype: getSakstype(sak) }} />
-                </Normaltekst>
-            </Snakkeboble>
-            <Undertittel className="blokk-xs">
-                <FormattedMessage id="miniDialog.tilbakekreving.undertittel" />
-            </Undertittel>
-            <HvaLeggerNAVVektPå />
-            <RadioPanelGruppe
-                name="name"
-                className="blokk-xs"
-                radios={[
-                    { label: getMessage(intl, 'ja'), value: JaNeiSpørsmål.JA },
-                    { label: getMessage(intl, 'nei'), value: JaNeiSpørsmål.NEI },
-                ]}
-                legend={getMessage(intl, 'miniDialog.tilbakekreving.radioPanelGruppe.legend')}
-                checked={svar}
-                onChange={(_e: any, value: string) => update(value)}
-            />
-            {svar === JaNeiSpørsmål.NEI && (
-                <div className="blokk-xs">
-                    <Veilederpanel svg={<VeilederNormal />}>
-                        <FormattedMessage id="minidialog.tilbakekreving.veilederpanel" />
-                    </Veilederpanel>
-                </div>
-            )}
-            {svar === JaNeiSpørsmål.JA && (
-                <>
-                    <div className={cls.element('fritekstfelt')}>
-                        <Textarea
-                            label={getMessage(intl, 'minidialog.tilbakekreving.tilbakekreving.label')}
-                            value={fritekst}
-                            onChange={(e: any) => updateFritekst(e.target.value)}
-                        />
-                    </div>
-                    <AttachmentsUploader
-                        attachments={attachments}
-                        skjemanummer={Skjemanummer.TILBAKEBETALING}
-                        onFilesUploadStart={addAttachment}
-                        onFileUploadFinish={editAttachment}
-                        onFileDeleteStart={deleteAttachment}
-                    />
-                    {attachments.length > 0 && (
-                        <AttachmentList
-                            intlKey={`ettersendelse.${Skjemanummer.TILBAKEBETALING}`}
-                            onDelete={deleteAttachment}
-                            attachments={attachments}
-                        />
-                    )}
-                </>
-            )}
-            {svar === JaNeiSpørsmål.JA && valideringsFeil && (
-                <AlertStripe className="blokk-s" type="feil">
-                    <div>{valideringsFeil}</div>
-                </AlertStripe>
-            )}
-            {svar !== undefined && (
-                <div className={cls.element('btn')}>
-                    <Hovedknapp disabled={isSendingEttersendelse} spinner={isSendingEttersendelse}>
-                        <FormattedMessage id="miniDialog.tilbakekreving.sendButton" />
-                    </Hovedknapp>
-                </div>
-            )}
-        </form>
+            onSubmit={handleSubmit}
+            renderForm={({ values: formvalues }) => {
+                const brukerØnskerÅUttaleSeg = convertYesOrNoOrUndefinedToBoolean(formvalues.brukerØnskerÅUttaleSeg);
+                return (
+                    <MinidialogFormComponents.Form includeButtons={false} includeValidationSummary={true}>
+                        <Block padBottom="l">
+                            <Chat
+                                avatar="NAV"
+                                name="NAV"
+                                avatarBgColor="rgba(255, 236, 204, 1)"
+                                backgroundColor="rgba(255, 249, 240, 1)"
+                                timestamp={formatDate(minidialog.opprettet)}
+                            >
+                                <Chat.Bubble>
+                                    {intlUtils(intl, 'miniDialog.tilbakekreving.tittel', { sakstype })}
+                                </Chat.Bubble>
+                            </Chat>
+                        </Block>
+                        <Block padBottom="xl">
+                            <HvaLeggerNAVVektPå />
+                        </Block>
+
+                        <Block padBottom="l">
+                            <MinidialogFormComponents.YesOrNoQuestion
+                                name={MinidialogFormField.brukerØnskerÅUttaleSeg}
+                                legend={intlUtils(intl, 'miniDialog.tilbakekreving.radioPanelGruppe.legend')}
+                            />
+                        </Block>
+                        <Block padBottom="xl" visible={brukerØnskerÅUttaleSeg === true}>
+                            <MinidialogFormComponents.Textarea
+                                name={MinidialogFormField.tilbakemelding}
+                                label={intlUtils(intl, 'minidialog.tilbakekreving.tilbakekreving.label')}
+                                validate={validateFritekstFelt(
+                                    intl,
+                                    intlUtils(intl, 'minidialog.tilbakekreving.tilbakekreving.label').replace(':', '')
+                                )}
+                            ></MinidialogFormComponents.Textarea>
+                            <FormikFileUploader
+                                name={MinidialogFormField.vedlegg}
+                                attachments={formvalues.vedlegg || []}
+                                label={intlUtils(intl, 'miniDialog.lastOppDokumentasjon')}
+                                attachmentType={AttachmentType.TILBAKEBETALING}
+                                skjemanummer={Skjemanummer.TILBAKEBETALING}
+                                legend=""
+                                buttonLabel={intlUtils(intl, 'miniDialog.lastOppDokumentasjon')}
+                                validateHasAttachment={false}
+                            />
+                        </Block>
+                        <Block padBottom="xl" visible={brukerØnskerÅUttaleSeg === false}>
+                            <div className="blokk-xs">
+                                <GuidePanel>{intlUtils(intl, 'minidialog.tilbakekreving.veilederpanel')}</GuidePanel>
+                            </div>
+                        </Block>
+                        <Block padBottom="l" visible={formvalues.brukerØnskerÅUttaleSeg !== YesOrNo.UNANSWERED}>
+                            <Button type="submit" disabled={isSendingEttersendelse}>
+                                {intlUtils(intl, 'miniDialog.tilbakekreving.sendButton')}
+                            </Button>
+                        </Block>
+                    </MinidialogFormComponents.Form>
+                );
+            }}
+        />
     );
 };
 
-export default withAttachments<Props>(MinidialogSkjema);
+export default MinidialogSkjema;

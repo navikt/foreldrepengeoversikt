@@ -1,32 +1,32 @@
+import { ReadMore } from '@navikt/ds-react';
+import { bemUtils, intlUtils } from '@navikt/fp-common';
 import React from 'react';
-import CollapsableTextBlock from 'app/components/collapsable-text-block/CollapsableTextBlock';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage, useIntl } from 'react-intl';
+import './hvaLeggerNAVVektPå.css';
 
 const punktTekster = [
-    'minidialog.hvaLeggerNAVVektPå.punkt1',
-    'minidialog.hvaLeggerNAVVektPå.punkt2',
-    'minidialog.hvaLeggerNAVVektPå.punkt3',
-    'minidialog.hvaLeggerNAVVektPå.punkt4',
-    'minidialog.hvaLeggerNAVVektPå.punkt5',
-    'minidialog.hvaLeggerNAVVektPå.punkt6',
+    'minidialog.hvaLeggerNAVVektPå.tilbakekreving.punkt1',
+    'minidialog.hvaLeggerNAVVektPå.tilbakekreving.punkt2',
+    'minidialog.hvaLeggerNAVVektPå.tilbakekreving.punkt3',
+    'minidialog.hvaLeggerNAVVektPå.tilbakekreving.punkt4',
+    'minidialog.hvaLeggerNAVVektPå.tilbakekreving.punkt5',
+    'minidialog.hvaLeggerNAVVektPå.tilbakekreving.punkt6',
 ];
 
 const HvaLeggerNAVVektPå: React.FunctionComponent = () => {
     const intl = useIntl();
+    const bem = bemUtils('hvaLeggerNAVVektPå');
 
     return (
-        <CollapsableTextBlock title={intl.formatMessage({ id: 'minidialog.hvaLeggerNAVVektPå.tittel' })}>
-            <Normaltekst>
-                <ul>
-                    {punktTekster.map((punkt, index) => (
-                        <li key={`${punkt}+${index}`}>
-                            <FormattedMessage id={punkt} />
-                        </li>
-                    ))}
-                </ul>
-            </Normaltekst>
-        </CollapsableTextBlock>
+        <ReadMore header={intlUtils(intl, 'minidialog.hvaLeggerNAVVektPå.tilbakekreving.tittel')}>
+            <ul className={bem.element('tekst')}>
+                {punktTekster.map((punkt, index) => (
+                    <li key={`${punkt}+${index}`}>
+                        <FormattedMessage id={punkt} />
+                    </li>
+                ))}
+            </ul>
+        </ReadMore>
     );
 };
 
