@@ -33,6 +33,15 @@ const renderApp = (decoratorFragments) =>
     });
 
 const startServer = (html) => {
+    server.use((req, res, next) => {
+        if (req.hostname === 'foreldrepengeplanlegger.nav.no' && !/^\/health/.test(req.path)) {
+            console.log('Redirecter fra foreldrepengeplanlegger til produktsider');
+            res.redirect('https://www.nav.no/foreldrepenger#hvor-lenge');
+        } else {
+            next();
+        }
+    })
+
     server.use('/dist/js', express.static(path.resolve(__dirname, 'dist/js')));
     server.use('/dist/css', express.static(path.resolve(__dirname, 'dist/css')));
 

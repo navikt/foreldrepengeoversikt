@@ -6,13 +6,22 @@ import { erSammenhengende } from './periodeUtils';
 
 export const getPeriodetype = (
     periode: PeriodeDto
-): PeriodeType.Opphold | PeriodeType.Utsettelse | PeriodeType.Uttak | PeriodeType.TaptPeriode => {
+):
+    | PeriodeType.Opphold
+    | PeriodeType.Utsettelse
+    | PeriodeType.Uttak
+    | PeriodeType.TaptPeriode
+    | PeriodeType.Overføring => {
     if (erTaptPeriode(periode)) {
         return PeriodeType.TaptPeriode;
     }
 
     if (periode.oppholdAarsak) {
         return PeriodeType.Opphold;
+    }
+
+    if (periode.overfoeringAarsak) {
+        return PeriodeType.Overføring;
     }
 
     return periode.stønadskontotype && periode.utsettelsePeriodeType === undefined

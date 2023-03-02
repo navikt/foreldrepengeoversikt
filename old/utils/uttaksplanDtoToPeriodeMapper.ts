@@ -5,6 +5,7 @@ import {
     Uttaksperiode,
     Oppholdsperiode,
     TaptPeriode,
+    Overføringsperiode,
 } from 'app/types/uttaksplan/Periode';
 import { getAntallUttaksdagerITidsperiode } from 'app/utils/periodeUtils';
 import { getPeriodetype, getForelderForPeriode, getGraderingsprosent } from './uttaksplanDtoUtils';
@@ -22,8 +23,19 @@ export const uttaksperiodeDtoToPeriode = (uttaksperiodeDto: PeriodeDto, søkerEr
             return periodeDtoUToOppholdsperiode(uttaksperiodeDto, søkerErFarEllerMedmor);
         case PeriodeType.TaptPeriode:
             return periodeDtoUToTaptPeriode(uttaksperiodeDto, søkerErFarEllerMedmor);
+        case PeriodeType.Overføring:
+            return periodeDtoUToOverføring(uttaksperiodeDto, søkerErFarEllerMedmor);
     }
 };
+
+const periodeDtoUToOverføring = (uttaksperiodeDto: PeriodeDto, søkerErFarEllerMedmor: boolean): Overføringsperiode => ({
+    type: PeriodeType.Overføring,
+    tidsperiode: uttaksperiodeDto.periode,
+    antallUttaksdager: getAntallUttaksdagerITidsperiode(uttaksperiodeDto.periode),
+    forelder: getForelderForPeriode(uttaksperiodeDto, søkerErFarEllerMedmor),
+    overføringsÅrsak: uttaksperiodeDto.overfoeringAarsak!,
+    stønadskontotype: uttaksperiodeDto.stønadskontotype,
+});
 
 const periodeDtoUToTaptPeriode = (uttaksperiodeDto: PeriodeDto, søkerErFarEllerMedmor: boolean): TaptPeriode => ({
     type: PeriodeType.TaptPeriode,

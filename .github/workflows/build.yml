@@ -1,11 +1,15 @@
-name: Deployment pipeline q1
-
+name: Bygg og deploy
 on:
-    push:
-        branches:
-            - master
-env:
-    IMAGE_BASE: ghcr.io/${{ github.repository }}
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - '**.md'
+      - '**.MD'
+      - '.gitignore'
+      - '.editorconfig'
+      - 'LICENCE'
+      - 'CODEOWNERS'
 
 jobs:
     kompiler:
@@ -30,44 +34,24 @@ jobs:
                       ${{ runner.os }}-build-
                       ${{ runner.os }}-
 
-            - run: npm install --legacy-peer-deps
-            - run: npm run jest
-            - run: |
-                  npm run build
-                  echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
+  create-issue:
+    name: Issues
+    if: github.ref_name == 'master'
+    needs: build-app
+    uses: navikt/fp-gha-workflows/.github/workflows/issues.yml@main
+    with:
+      build-version: ${{ needs.build-app.outputs.build-version }}
+    secrets: inherit
 
-            - name: Login to GitHub Packages Docker Registry
-              uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9 # Use commit-sha1 instead of tag for security concerns
-              with:
-                  registry: ghcr.io
-                  username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
-
-            - name: Bygg, tag og push Docker image
-              run: |
-                  docker build --pull --tag ${IMAGE_BASE}:${TAG} --tag ${IMAGE_BASE}:latest .
-                  docker push ${IMAGE_BASE} --all-tags
-
-            - name: Lukk gamle bygg-issues
-              uses: actions/github-script@v4.0.2
-              with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  script: |
-                      github.issues.listForRepo({
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        state: 'open',
-                        labels: ['bygg']
-                      }).then(response => {
-                        response.data.forEach(issue => {
-                          github.issues.update({
-                            owner: context.repo.owner,
-                            repo: context.repo.repo,
-                            issue_number: issue.number,
-                            state: 'closed'
-                          });
-                        });
-                      });
+  promote:
+    name: Deploy til dev
+    if: github.ref_name == 'master'
+    needs: [ build-app, create-issue ]
+    uses: navikt/fp-gha-workflows/.github/workflows/promote.yml@main
+    with:
+      issue-number: ${{ needs.create-issue.outputs.issue-number }}
+      cluster: dev-gcp
+    secrets: inherit
 
             - name: Opprett issue, trigg deploy til dev-gcp
               if: success()
