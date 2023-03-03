@@ -14,11 +14,11 @@ const DEFAULT_OPTIONS: Options = {
     isSuspended: false,
 };
 
-export const useRequest = <T>(url: string, options: Options = DEFAULT_OPTIONS) => {
+export const useRequest = <T>(url: string, options: Options = DEFAULT_OPTIONS, fnr?: string) => {
     const [data, setData] = useState<T>();
     const [error, setError] = useState<AxiosError<any> | null>(null);
     const [requestStatus, setRequestStatus] = useState<RequestStatus>(RequestStatus.UNFETCHED);
-    const axiosInstance = getAxiosInstance();
+    const axiosInstance = getAxiosInstance(fnr);
 
     useEffect(() => {
         if (!options.isSuspended && requestStatus === RequestStatus.UNFETCHED) {

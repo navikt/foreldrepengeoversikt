@@ -10,18 +10,22 @@ import OversiktRoutes from 'app/routes/routes';
 import { Link } from 'react-router-dom';
 import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
 import { useSetSelectedRoute } from 'app/hooks/useSelectedRoute';
-
-import './dokumenter-page.css';
 import NoeGikkGalt from 'app/components/noe-gikk-galt/NoeGikkGalt';
 import { RequestStatus } from 'app/types/RequestStatus';
 
-const DokumenterPage: React.FunctionComponent = () => {
+import './dokumenter-page.css';
+
+interface Props {
+    fnr: string;
+}
+
+const DokumenterPage: React.FunctionComponent<Props> = ({ fnr }) => {
     const bem = bemUtils('dokumenter-page');
     useSetBackgroundColor('blue');
     useSetSelectedRoute(OversiktRoutes.DOKUMENTER);
     const params = useParams();
 
-    const { dokumenterData, dokumenterError, dokumenterStatus } = Api.useGetDokumenter();
+    const { dokumenterData, dokumenterError, dokumenterStatus } = Api.useGetDokumenter(fnr);
 
     if (!dokumenterData && dokumenterStatus !== RequestStatus.FINISHED) {
         return <Loader size="large" aria-label="Henter dokumenter" />;
