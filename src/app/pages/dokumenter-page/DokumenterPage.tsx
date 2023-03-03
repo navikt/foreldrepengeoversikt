@@ -39,7 +39,7 @@ const DokumenterPage: React.FunctionComponent = () => {
                 border={false}
                 className={bem.element('ettersend')}
             >
-                <LinkPanel.Title as="h2">Ettersend dokumenter</LinkPanel.Title>
+                <LinkPanel.Title as="h2">Last opp dokumenter</LinkPanel.Title>
             </LinkPanel>
             {!dokumenterError && (
                 <>

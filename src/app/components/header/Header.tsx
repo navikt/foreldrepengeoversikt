@@ -122,7 +122,7 @@ const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined
         <div className={bem.element('content')}>
             <TåteflaskeBaby />
             <div className={bem.element('title-container')}>
-                <Heading size="xlarge">Foreldrepengene mine</Heading>
+                <Heading size="xlarge">Oversikt over foreldrepenger</Heading>
                 <BodyShort>PENGESTØTTE</BodyShort>
             </div>
         </div>

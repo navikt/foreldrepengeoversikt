@@ -1,3 +1,4 @@
+import { Add } from '@navikt/ds-icons';
 import { Alert, BodyLong, BodyShort, Button, Heading, ReadMore } from '@navikt/ds-react';
 import { bemUtils, Block, intlUtils, PictureScanningGuide } from '@navikt/fp-common';
 import Api from 'app/api/api';
@@ -114,8 +115,8 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                     <>
                         <EttersendingFormComponents.Form includeButtons={false} includeValidationSummary={true}>
                             <BodyLong className={bem.element('beskrivelse')}>
-                                Dokumentene du laster opp vil bli lagt ved søknaden din. Velg hva dokumentene inneholder
-                                sånn at saken din kan behandles raskt.
+                                Dokumentene du laster opp vil bli lagt ved søknaden din. Du må velge hva dokumentene
+                                inneholder for at saksbehandlerene i NAV skal kunne behandle saken din.
                             </BodyLong>
                             <BodyShort className={bem.element('beskrivelse')}>
                                 Du kan laste opp dokumenter i formatene pdf, png og jpg.
@@ -167,8 +168,8 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                                 </ReadMore>
                             </Block>
                             <Block padBottom="l">
-                                <Button type="submit" loading={isEttersending} disabled={isEttersending}>
-                                    Send dokumenter
+                                <Button type="submit" icon={<Add />} loading={isEttersending} disabled={isEttersending}>
+                                    Legg ved sak
                                 </Button>
                             </Block>
                         </EttersendingFormComponents.Form>
