@@ -38,7 +38,7 @@ jobs:
     with:
       issue-number: ${{ needs.create-issue.outputs.issue-number }}
       environment: dev
-      platform: fss
+      platform: gcp
     secrets: inherit
 
   snyk:
