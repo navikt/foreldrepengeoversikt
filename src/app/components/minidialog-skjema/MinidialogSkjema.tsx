@@ -16,6 +16,10 @@ import { mapMinidialogInputTilDTO } from './minidialogskjemaUtils';
 import { YesOrNo } from '@navikt/sif-common-formik-ds/lib';
 import { convertYesOrNoOrUndefinedToBoolean } from 'app/utils/formUtils';
 import { validateFritekstFelt } from 'app/utils/validationUtils';
+import AttachmentList from '../attachment/AttachmentList';
+import { deleteAttachment, isAttachmentWithError } from 'app/utils/attachmentUtils';
+import { getListOfUniqueSkjemanummer } from 'app/pages/ettersending/EttersendingPage';
+import { Attachment } from 'app/types/Attachment';
 
 interface Props {
     ettersendelseErSendt: boolean;
@@ -60,8 +64,9 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                 brukerØnskerÅUttaleSeg: YesOrNo.UNANSWERED,
             }}
             onSubmit={handleSubmit}
-            renderForm={({ values: formvalues }) => {
-                const brukerØnskerÅUttaleSeg = convertYesOrNoOrUndefinedToBoolean(formvalues.brukerØnskerÅUttaleSeg);
+            renderForm={({ values, setFieldValue }) => {
+                const brukerØnskerÅUttaleSeg = convertYesOrNoOrUndefinedToBoolean(values.brukerØnskerÅUttaleSeg);
+                const finnesPendingVedlegg = values.vedlegg ? !!values.vedlegg.find((file) => file.pending) : false;
                 return (
                     <MinidialogFormComponents.Form includeButtons={false} includeValidationSummary={true}>
                         <Block padBottom="l">
@@ -98,7 +103,7 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                             ></MinidialogFormComponents.Textarea>
                             <FormikFileUploader
                                 name={MinidialogFormField.vedlegg}
-                                attachments={formvalues.vedlegg || []}
+                                attachments={values.vedlegg || []}
                                 label={intlUtils(intl, 'miniDialog.lastOppDokumentasjon')}
                                 attachmentType={AttachmentType.TILBAKEBETALING}
                                 skjemanummer={Skjemanummer.TILBAKEBETALING}
@@ -106,14 +111,36 @@ const MinidialogSkjema: React.FunctionComponent<Props> = ({
                                 buttonLabel={intlUtils(intl, 'miniDialog.lastOppDokumentasjon')}
                                 validateHasAttachment={false}
                             />
+                            <Block padBottom="l" visible={values.vedlegg!.length > 0}>
+                                {getListOfUniqueSkjemanummer(values.vedlegg!).map((skjemanummer: Skjemanummer) => (
+                                    <div key={skjemanummer}>
+                                        <AttachmentList
+                                            attachments={values.vedlegg!.filter(
+                                                (a) => !isAttachmentWithError(a) && a.skjemanummer === skjemanummer
+                                            )}
+                                            showFileSize={true}
+                                            onDelete={(file: Attachment) => {
+                                                setFieldValue(
+                                                    MinidialogFormField.vedlegg,
+                                                    deleteAttachment(values.vedlegg!, file)
+                                                );
+                                            }}
+                                        />
+                                    </div>
+                                ))}
+                            </Block>
                         </Block>
                         <Block padBottom="xl" visible={brukerØnskerÅUttaleSeg === false}>
                             <div className="blokk-xs">
                                 <GuidePanel>{intlUtils(intl, 'minidialog.tilbakekreving.veilederpanel')}</GuidePanel>
                             </div>
                         </Block>
-                        <Block padBottom="l" visible={formvalues.brukerØnskerÅUttaleSeg !== YesOrNo.UNANSWERED}>
-                            <Button type="submit" disabled={isSendingEttersendelse}>
+                        <Block padBottom="l" visible={values.brukerØnskerÅUttaleSeg !== YesOrNo.UNANSWERED}>
+                            <Button
+                                type="submit"
+                                loading={isSendingEttersendelse || finnesPendingVedlegg}
+                                disabled={isSendingEttersendelse || finnesPendingVedlegg}
+                            >
                                 {intlUtils(intl, 'miniDialog.tilbakekreving.sendButton')}
                             </Button>
                         </Block>

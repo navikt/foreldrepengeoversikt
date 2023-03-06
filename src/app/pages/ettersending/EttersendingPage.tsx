@@ -111,6 +111,7 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
             initialValues={{ type: 'default', vedlegg: [] }}
             onSubmit={onSubmit}
             renderForm={({ values, setFieldValue }) => {
+                const finnesPendingVedlegg = values.vedlegg ? !!values.vedlegg.find((file) => file.pending) : false;
                 return (
                     <>
                         <EttersendingFormComponents.Form includeButtons={false} includeValidationSummary={true}>
@@ -168,7 +169,12 @@ const EttersendingPage: React.FunctionComponent<Props> = ({ saker }) => {
                                 </ReadMore>
                             </Block>
                             <Block padBottom="l">
-                                <Button type="submit" icon={<Add />} loading={isEttersending} disabled={isEttersending}>
+                                <Button
+                                    type="submit"
+                                    icon={<Add />}
+                                    loading={isEttersending || finnesPendingVedlegg}
+                                    disabled={isEttersending || finnesPendingVedlegg}
+                                >
                                     Legg ved sak
                                 </Button>
                             </Block>
