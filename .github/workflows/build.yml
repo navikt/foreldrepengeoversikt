@@ -30,14 +30,13 @@ jobs:
       build-version: ${{ needs.build-app.outputs.build-version }}
     secrets: inherit
 
-  promote:
-    name: Deploy til dev
-    if: github.ref_name == 'master'
-    needs: [ build-app, create-issue ]
-    uses: navikt/fp-gha-workflows/.github/workflows/promote.yml@main
+  promote-dev:
+    name: Deploy dev
+    uses: navikt/fp-gha-workflows/.github/workflows/deploy-app.yml@main
     with:
       issue-number: ${{ needs.create-issue.outputs.issue-number }}
-      cluster: dev-gcp
+      environment: dev
+      platform: gcp
     secrets: inherit
 
   snyk:
