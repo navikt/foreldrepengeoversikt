@@ -10,5 +10,5 @@ export interface GruppertSak {
     type: 'fødsel' | 'termin' | 'adopsjon';
     saker: Array<Foreldrepengesak | SvangerskapspengeSak | EngangsstønadSak>;
     ytelse: Ytelse;
-    barn: BarnGruppering;
+    barn: BarnGruppering | undefined;
 }

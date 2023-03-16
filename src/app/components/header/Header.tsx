@@ -7,10 +7,12 @@ import { BarnGruppering } from 'app/types/BarnGruppering';
 import { GruppertSak } from 'app/types/GruppertSak';
 import { Sak } from 'app/types/Sak';
 import { Ytelse } from 'app/types/Ytelse';
+import { ISOStringToDate } from 'app/utils/dateUtils';
 import { getFamiliehendelseDato, utledFamiliesituasjon } from 'app/utils/sakerUtils';
 import TåteflaskeBaby from 'assets/TåteflaskeBaby';
 import React from 'react';
-import { getHeading } from '../har-saker/HarSaker';
+import { IntlShape, useIntl } from 'react-intl';
+import { formaterNavnPåBarn } from '../har-saker/HarSaker';
 import PreviousLink from '../previous-link/PreviousLink';
 import StatusTag from '../status-tag/StatusTag';
 
@@ -62,7 +64,12 @@ const getSaksoversiktHeading = (ytelse: Ytelse) => {
     return 'Foreldrepengesak';
 };
 
-const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined, barn: BarnGruppering | undefined) => {
+const renderHeaderContent = (
+    selectedRoute: OversiktRoutes,
+    sak: Sak | undefined,
+    barn: BarnGruppering | undefined,
+    intl: IntlShape
+) => {
     const bem = bemUtils('header');
 
     if (selectedRoute === OversiktRoutes.DOKUMENTER) {
@@ -102,8 +109,15 @@ const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined
     if (selectedRoute === OversiktRoutes.SAKSOVERSIKT && sak) {
         const situasjon = utledFamiliesituasjon(sak.familiehendelse, sak.gjelderAdopsjon);
         const familiehendelsedato = getFamiliehendelseDato(sak.familiehendelse);
-        const beskrivelse = getHeading(situasjon, sak.familiehendelse.antallBarn, familiehendelsedato, barn);
-
+        const beskrivelse = formaterNavnPåBarn(
+            barn?.fornavn,
+            barn?.fødselsdatoer,
+            ISOStringToDate(familiehendelsedato)!,
+            !!barn?.alleBarnaLever,
+            sak.ytelse === Ytelse.FORELDREPENGER ? sak.familiehendelse.antallBarn : 0,
+            intl,
+            situasjon
+        );
         return (
             <div className={bem.element('content')}>
                 <TåteflaskeBaby />
@@ -138,6 +152,7 @@ interface Props {
 
 const Header: React.FunctionComponent<Props> = ({ minidialogerIds, grupperteSaker }) => {
     const bem = bemUtils('header');
+    const intl = useIntl();
     const path = location.pathname;
     const selectedRoute = useGetSelectedRoute();
     const headerRouteInfo = getHeaderRouteInfo(path, minidialogerIds, selectedRoute);
@@ -152,7 +167,7 @@ const Header: React.FunctionComponent<Props> = ({ minidialogerIds, grupperteSake
         <div className={bem.block}>
             <div className={bem.element('wrapper')}>
                 <PreviousLink route={route} externalURL={isExternalURL} linkLabel={label} />
-                {renderHeaderContent(selectedRoute, sak, barnGrupperingForSak)}
+                {renderHeaderContent(selectedRoute, sak, barnGrupperingForSak, intl)}
             </div>
         </div>
     );

@@ -1,12 +1,12 @@
 import { Heading } from '@navikt/ds-react';
 import { bemUtils, formatDate, guid, intlUtils } from '@navikt/fp-common';
 import { useSetBackgroundColor } from 'app/hooks/useBackgroundColor';
-import { BarnGruppering } from 'app/types/BarnGruppering';
 import { GruppertSak } from 'app/types/GruppertSak';
+import { ISOStringToDate } from 'app/utils/dateUtils';
 import EtBarn from 'assets/EtBarn';
 import dayjs from 'dayjs';
 import React from 'react';
-import { IntlShape } from 'react-intl';
+import { IntlShape, useIntl } from 'react-intl';
 import SakLink from '../sak-link/SakLink';
 
 import './har-saker.css';
@@ -18,17 +18,14 @@ interface Props {
 export const formaterNavnPåBarn = (
     fornavn: string[] | undefined,
     fødselsdatoer: Date[] | undefined,
-    omsorgsovertagelsesdato: Date | undefined,
+    familiehendelsesdato: Date,
     alleBarnaLever: boolean,
     antallBarn: number,
-    intl: IntlShape
+    intl: IntlShape,
+    type: 'fødsel' | 'termin' | 'adopsjon'
 ): string => {
-    if (
-        fornavn === undefined ||
-        fornavn.length === 0 ||
-        !alleBarnaLever
-    ) {
-        return getTittelBarnNårNavnSkalIkkeVises(omsorgsovertagelsesdato, fødselsdatoer, antallBarn, intl);
+    if (fornavn === undefined || fornavn.length === 0 || !alleBarnaLever) {
+        return getTittelBarnNårNavnSkalIkkeVises(familiehendelsesdato, fødselsdatoer, antallBarn, intl, type);
     }
 
     if (fornavn.length > 1) {
@@ -72,92 +69,70 @@ export const formaterFødselsdatoerPåBarn = (fødselsdatoer: Date[] | undefined
 };
 
 export const getTittelBarnNårNavnSkalIkkeVises = (
-    omsorgsovertagelsesdato: Date | undefined,
+    familiehendelsedato: Date,
     fødselsdatoer: Date[] | undefined,
     antallBarn: number,
-    intl: IntlShape
+    intl: IntlShape,
+    type: 'fødsel' | 'termin' | 'adopsjon'
 ): string => {
     const barnTekst = getTekstForAntallBarn(antallBarn, intl);
-    if (antallBarn === 0||type === 'termin') {
-        return `Barn med termin ${formatDate(familiehendelsedato)}`;
+    if (antallBarn === 0 || type === 'termin') {
+        intlUtils(intl, 'barnHeader.terminBarn', {
+            barnTekst,
+            termindato: formatDate(familiehendelsedato),
+        });
     }
-
-    if (type === 'fødsel') {
-        return `Barn født ${formatDate(familiehendelsedato)}`;
-    }
-
-    if (type === 'termin') {
-        return `Barn med termin ${formatDate(familiehendelsedato)}`;
-    }
-
 
     if (type === 'adopsjon') {
-        return intlUtils(intl, 'velkommen.barnVelger.adoptertBarn', {
+        return intlUtils(intl, 'barnHeader.adoptertBarn', {
             adopsjonsdato: formatDate(familiehendelsedato),
         });
     } else {
         const fødselsdatoTekst = formaterFødselsdatoerPåBarn(fødselsdatoer);
-
-
         return fødselsdatoer !== undefined && fødselsdatoer.length > 0
-            ? intlUtils(intl, 'velkommen.barnVelger.fødtBarn.barn', {
+            ? intlUtils(intl, 'barnHeader.fødtBarn', {
                   barnTekst,
-                  fødselsdato: fødselsdatoTekst,
+                  fødselsdatoTekst,
               })
             : '';
     }
 };
 
-export const getHeading = (
-    type: 'fødsel' | 'termin' | 'adopsjon',
-    antallBarn: number,
-    familiehendelsedato: string,
-    barn: BarnGruppering | undefined
-) => {
-
-    export const getHeading = (type: 'fødsel' | 'termin' | 'adopsjon', antallBarn: number, familiehendelsedato: string) => {
-        if (antallBarn === 0) {
-            return `Barn med termin ${formatDate(familiehendelsedato)}`;
-        }
-    
-        if (type === 'fødsel') {
-            return `Barn født ${formatDate(familiehendelsedato)}`;
-        }
-    
-        if (type === 'termin') {
-            return `Barn med termin ${formatDate(familiehendelsedato)}`;
-        }
-    
-        return `Barn med omsorgsovertakelse ${formatDate(familiehendelsedato)}`;
-    return formaterNavnPåBarn(
-        barn.fornavn,
-        barn.etternavn,
-        barn.fødselsdatoer,
-        barn.omsorgsovertagelse,
-        barn.alleBarnaLever,
-        gruppering.antallBarn,
-        intl
-    );
-};
-
 const HarSaker: React.FunctionComponent<Props> = ({ grupperteSaker }) => {
     const bem = bemUtils('har-saker');
+    const intl = useIntl();
     useSetBackgroundColor('blue');
 
     return (
         <>
             {grupperteSaker.map((gruppering) => {
+                let undertittel = undefined;
+                if (gruppering.type === 'fødsel') {
+                    const fødtDatoTekst = formaterFødselsdatoerPåBarn(gruppering.barn?.fødselsdatoer);
+                    undertittel = `Født ${fødtDatoTekst}`;
+                } else if (gruppering.type === 'adopsjon') {
+                    undertittel = `Adoptert ${formatDate(gruppering.familiehendelsedato)}`;
+                }
                 return (
                     <div className={bem.block} key={gruppering.familiehendelsedato}>
                         <Heading size="medium" level="2" className={bem.element('tittel')}>
                             <EtBarn />
-                            {getHeading(
-                                gruppering.type,
+                            {formaterNavnPåBarn(
+                                gruppering.barn?.fornavn,
+                                gruppering.barn?.fødselsdatoer,
+                                ISOStringToDate(gruppering.familiehendelsedato)!,
+                                !!gruppering.barn?.alleBarnaLever,
                                 gruppering.antallBarn,
-                                gruppering.familiehendelsedato,
-                                gruppering.barn
+                                intl,
+                                gruppering.type
                             )}
                         </Heading>
+                        {undertittel && (
+                            <Heading size="small" level="3">
+                                {' '}
+                                {undertittel}
+                            </Heading>
+                        )}
                         {gruppering.saker.map((sak) => {
                             return <SakLink key={guid()} sak={sak} />;
                         })}

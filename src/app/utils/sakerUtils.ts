@@ -38,7 +38,7 @@ const getBarnGrupperingFraSak = (sak: Sak, registrerteBarn: Person[] | undefined
         fornavn: alleBarn
             ?.filter((b) => b.fornavn !== undefined && b.fornavn.trim() !== '')
             .map((b) => [b.fornavn, b.mellomnavn !== undefined ? b.mellomnavn : ''].join(' ')),
-        //TODO Legg til fødselsdatoer
+        fødselsdatoer: alleBarn.filter((b) => b.fødselsdato !== undefined).map((b) => ISOStringToDate(b.fødselsdato)!),
         alleBarnaLever: !!alleBarn?.every((barn) => getLeverPerson(barn)),
     };
 };
@@ -57,13 +57,14 @@ export const grupperSakerPåBarn = (registrerteBarn: Person[] | undefined, saker
         if (relevantSak && result.includes(relevantSak)) {
             return result;
         } else {
+            const type = utledFamiliesituasjon(sak.familiehendelse, sak.gjelderAdopsjon);
             const gruppertSak: GruppertSak = {
                 antallBarn: sak.familiehendelse.antallBarn,
                 familiehendelsedato,
                 saker: [sak],
-                type: utledFamiliesituasjon(sak.familiehendelse, sak.gjelderAdopsjon),
+                type,
                 ytelse: sak.ytelse,
-                barn: getBarnGrupperingFraSak(sak, registrerteBarn),
+                barn: type !== 'termin' ? getBarnGrupperingFraSak(sak, registrerteBarn) : undefined,
             };
 
             result.push(gruppertSak);
