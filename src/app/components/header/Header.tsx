@@ -3,6 +3,8 @@ import { bemUtils } from '@navikt/fp-common';
 import { useGetSelectedRoute } from 'app/hooks/useSelectedRoute';
 import { useGetSelectedSak } from 'app/hooks/useSelectedSak';
 import OversiktRoutes from 'app/routes/routes';
+import { BarnGruppering } from 'app/types/BarnGruppering';
+import { GruppertSak } from 'app/types/GruppertSak';
 import { Sak } from 'app/types/Sak';
 import { Ytelse } from 'app/types/Ytelse';
 import { getFamiliehendelseDato, utledFamiliesituasjon } from 'app/utils/sakerUtils';
@@ -60,7 +62,7 @@ const getSaksoversiktHeading = (ytelse: Ytelse) => {
     return 'Foreldrepengesak';
 };
 
-const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined) => {
+const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined, barn: BarnGruppering | undefined) => {
     const bem = bemUtils('header');
 
     if (selectedRoute === OversiktRoutes.DOKUMENTER) {
@@ -100,7 +102,7 @@ const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined
     if (selectedRoute === OversiktRoutes.SAKSOVERSIKT && sak) {
         const situasjon = utledFamiliesituasjon(sak.familiehendelse, sak.gjelderAdopsjon);
         const familiehendelsedato = getFamiliehendelseDato(sak.familiehendelse);
-        const beskrivelse = getHeading(situasjon, sak.familiehendelse.antallBarn, familiehendelsedato);
+        const beskrivelse = getHeading(situasjon, sak.familiehendelse.antallBarn, familiehendelsedato, barn);
 
         return (
             <div className={bem.element('content')}>
@@ -130,23 +132,27 @@ const renderHeaderContent = (selectedRoute: OversiktRoutes, sak: Sak | undefined
 };
 
 interface Props {
+    grupperteSaker: GruppertSak[];
     minidialogerIds: string[];
 }
 
-const Header: React.FunctionComponent<Props> = ({ minidialogerIds }) => {
+const Header: React.FunctionComponent<Props> = ({ minidialogerIds, grupperteSaker }) => {
     const bem = bemUtils('header');
     const path = location.pathname;
     const selectedRoute = useGetSelectedRoute();
     const headerRouteInfo = getHeaderRouteInfo(path, minidialogerIds, selectedRoute);
     const sak = useGetSelectedSak();
-
+    const sakIGrupperteSaker = sak
+        ? grupperteSaker.find((gruppe) => gruppe.saker.map((s) => s.saksnummer).includes(sak.saksnummer))
+        : undefined;
+    const barnGrupperingForSak = sakIGrupperteSaker?.barn;
     const { route, isExternalURL, label } = headerRouteInfo;
 
     return (
         <div className={bem.block}>
             <div className={bem.element('wrapper')}>
                 <PreviousLink route={route} externalURL={isExternalURL} linkLabel={label} />
-                {renderHeaderContent(selectedRoute, sak)}
+                {renderHeaderContent(selectedRoute, sak, barnGrupperingForSak)}
             </div>
         </div>
     );

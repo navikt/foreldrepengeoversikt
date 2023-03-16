@@ -1,3 +1,4 @@
+import { BarnGruppering } from './BarnGruppering';
 import { EngangsstønadSak } from './EngangsstønadSak';
 import { Foreldrepengesak } from './Foreldrepengesak';
 import { SvangerskapspengeSak } from './SvangerskapspengeSak';
@@ -9,4 +10,5 @@ export interface GruppertSak {
     type: 'fødsel' | 'termin' | 'adopsjon';
     saker: Array<Foreldrepengesak | SvangerskapspengeSak | EngangsstønadSak>;
     ytelse: Ytelse;
+    barn: BarnGruppering;
 }

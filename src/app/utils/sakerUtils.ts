@@ -7,12 +7,43 @@ import { SvangerskapspengeSak, SvangerskapspengeSakDTO } from 'app/types/Svanger
 import { Ytelse } from 'app/types/Ytelse';
 import dayjs from 'dayjs';
 import { SøkerinfoDTO } from 'app/types/SøkerinfoDTO';
+import { Sak } from 'app/types/Sak';
+import { Person } from 'app/types/Person';
+import { getErDatoInnenEnDagFraAnnenDato, ISOStringToDate } from './dateUtils';
+import { getLeverPerson } from './personUtils';
+import { BarnGruppering } from 'app/types/BarnGruppering';
 
-export const getAlleYtelser = (saker: SakOppslag) => {
+export const getAlleYtelser = (saker: SakOppslag): Sak[] => {
     return [...saker.engangsstønad, ...saker.foreldrepenger, ...saker.svangerskapspenger];
 };
 
-export const grupperSakerPåBarn = (saker: SakOppslag): GruppertSak[] => {
+const getBarnGrupperingFraSak = (sak: Sak, registrerteBarn: Person[] | undefined): BarnGruppering => {
+    const erForeldrepengesak = sak.ytelse === Ytelse.FORELDREPENGER;
+    const barnFnrFraSaken = erForeldrepengesak && sak.barn !== undefined ? sak.barn.map((b) => b.fnr).flat() : [];
+    const pdlBarnMedSammeFnr =
+        erForeldrepengesak && registrerteBarn ? registrerteBarn.filter((b) => barnFnrFraSaken.includes(b.fnr)) : [];
+    const fødselsdatoFraSak = ISOStringToDate(sak.familiehendelse.fødselsdato);
+    const pdlBarnMedSammeFødselsdato =
+        fødselsdatoFraSak !== undefined && registrerteBarn
+            ? registrerteBarn.filter(
+                  (barn) =>
+                      getErDatoInnenEnDagFraAnnenDato(ISOStringToDate(barn.fødselsdato), fødselsdatoFraSak) &&
+                      !pdlBarnMedSammeFnr?.find((pdlBarn) => pdlBarn.fnr === barn.fnr)
+              )
+            : [];
+
+    const alleBarn = pdlBarnMedSammeFnr.concat(pdlBarnMedSammeFødselsdato);
+
+    return {
+        fornavn: alleBarn
+            ?.filter((b) => b.fornavn !== undefined && b.fornavn.trim() !== '')
+            .map((b) => [b.fornavn, b.mellomnavn !== undefined ? b.mellomnavn : ''].join(' ')),
+        //TODO Legg til fødselsdatoer
+        alleBarnaLever: !!alleBarn?.every((barn) => getLeverPerson(barn)),
+    };
+};
+
+export const grupperSakerPåBarn = (registrerteBarn: Person[] | undefined, saker: SakOppslag): GruppertSak[] => {
     const alleSaker = getAlleYtelser(saker);
 
     return alleSaker.reduce((result, sak) => {
@@ -32,6 +63,7 @@ export const grupperSakerPåBarn = (saker: SakOppslag): GruppertSak[] => {
                 saker: [sak],
                 type: utledFamiliesituasjon(sak.familiehendelse, sak.gjelderAdopsjon),
                 ytelse: sak.ytelse,
+                barn: getBarnGrupperingFraSak(sak, registrerteBarn),
             };
 
             result.push(gruppertSak);
