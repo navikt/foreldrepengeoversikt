@@ -8,12 +8,11 @@ import { GruppertSak } from 'app/types/GruppertSak';
 import { Sak } from 'app/types/Sak';
 import { Ytelse } from 'app/types/Ytelse';
 import { ISOStringToDate } from 'app/utils/dateUtils';
-import { getFamiliehendelseDato, utledFamiliesituasjon } from 'app/utils/sakerUtils';
+import { getFamiliehendelseDato, getSakTittel, getSakUndertittel, utledFamiliesituasjon } from 'app/utils/sakerUtils';
 import TåteflaskeBaby from 'assets/TåteflaskeBaby';
 import classNames from 'classnames';
 import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
-import { getBarnTittel, getBarnUndertittel } from '../har-saker/HarSaker';
 import PreviousLink from '../previous-link/PreviousLink';
 import StatusTag from '../status-tag/StatusTag';
 
@@ -110,7 +109,7 @@ const renderHeaderContent = (
     if (selectedRoute === OversiktRoutes.SAKSOVERSIKT && sak) {
         const situasjon = utledFamiliesituasjon(sak.familiehendelse, sak.gjelderAdopsjon);
         const familiehendelsedato = ISOStringToDate(getFamiliehendelseDato(sak.familiehendelse));
-        const barnTittel = getBarnTittel(
+        const barnTittel = getSakTittel(
             barn?.fornavn,
             barn?.fødselsdatoer,
             familiehendelsedato!,
@@ -119,7 +118,7 @@ const renderHeaderContent = (
             intl,
             situasjon
         );
-        const barnUndertittel = getBarnUndertittel(
+        const barnUndertittel = getSakUndertittel(
             barn?.fornavn,
             barn?.fødselsdatoer,
             situasjon,
