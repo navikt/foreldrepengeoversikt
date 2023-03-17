@@ -17,6 +17,16 @@ export const getAlleYtelser = (saker: SakOppslag): Sak[] => {
     return [...saker.engangsstønad, ...saker.foreldrepenger, ...saker.svangerskapspenger];
 };
 
+export function sorterPersonEtterEldstOgNavn(p1: Person, p2: Person) {
+    if (dayjs(p1.fødselsdato).isAfter(p2.fødselsdato, 'd')) {
+        return 1;
+    } else if (dayjs(p1.fødselsdato).isBefore(p2.fødselsdato, 'd')) {
+        return -1;
+    } else {
+        return p1.fornavn < p2.fornavn ? -1 : 1;
+    }
+}
+
 const getBarnGrupperingFraSak = (sak: Sak, registrerteBarn: Person[] | undefined): BarnGruppering => {
     const erForeldrepengesak = sak.ytelse === Ytelse.FORELDREPENGER;
     const barnFnrFraSaken = erForeldrepengesak && sak.barn !== undefined ? sak.barn.map((b) => b.fnr).flat() : [];
@@ -33,12 +43,22 @@ const getBarnGrupperingFraSak = (sak: Sak, registrerteBarn: Person[] | undefined
             : [];
 
     const alleBarn = pdlBarnMedSammeFnr.concat(pdlBarnMedSammeFødselsdato);
+    alleBarn.sort(sorterPersonEtterEldstOgNavn);
+    const alleBarnFødselsdatoer = alleBarn
+        .filter((b) => b.fødselsdato !== undefined)
+        .map((b) => ISOStringToDate(b.fødselsdato)!);
+    let fødselsdatoer = [] as Date[];
+    if (alleBarnFødselsdatoer && alleBarnFødselsdatoer.length > 0) {
+        fødselsdatoer = alleBarnFødselsdatoer;
+    } else if (fødselsdatoFraSak) {
+        fødselsdatoer = [fødselsdatoFraSak];
+    }
 
     return {
         fornavn: alleBarn
             ?.filter((b) => b.fornavn !== undefined && b.fornavn.trim() !== '')
             .map((b) => [b.fornavn, b.mellomnavn !== undefined ? b.mellomnavn : ''].join(' ')),
-        fødselsdatoer: alleBarn.filter((b) => b.fødselsdato !== undefined).map((b) => ISOStringToDate(b.fødselsdato)!),
+        fødselsdatoer,
         alleBarnaLever: !!alleBarn?.every((barn) => getLeverPerson(barn)),
     };
 };

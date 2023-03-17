@@ -1,4 +1,8 @@
 {
+    "barn": "Barn",
+    "tvillinger": "Tvillinger",
+    "trillinger": "Trillinger",
+    "flerlinger": "Flerlinger",
     "Ja": "Ja",
     "Nei": "Nei",
     "barnHeader.terminBarn": "{barnTekst} med termin {termindato}",

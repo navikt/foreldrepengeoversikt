@@ -10,9 +10,10 @@ import { Ytelse } from 'app/types/Ytelse';
 import { ISOStringToDate } from 'app/utils/dateUtils';
 import { getFamiliehendelseDato, utledFamiliesituasjon } from 'app/utils/sakerUtils';
 import TåteflaskeBaby from 'assets/TåteflaskeBaby';
+import classNames from 'classnames';
 import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
-import { formaterNavnPåBarn } from '../har-saker/HarSaker';
+import { getBarnTittel, getBarnUndertittel } from '../har-saker/HarSaker';
 import PreviousLink from '../previous-link/PreviousLink';
 import StatusTag from '../status-tag/StatusTag';
 
@@ -108,15 +109,22 @@ const renderHeaderContent = (
 
     if (selectedRoute === OversiktRoutes.SAKSOVERSIKT && sak) {
         const situasjon = utledFamiliesituasjon(sak.familiehendelse, sak.gjelderAdopsjon);
-        const familiehendelsedato = getFamiliehendelseDato(sak.familiehendelse);
-        const beskrivelse = formaterNavnPåBarn(
+        const familiehendelsedato = ISOStringToDate(getFamiliehendelseDato(sak.familiehendelse));
+        const barnTittel = getBarnTittel(
             barn?.fornavn,
             barn?.fødselsdatoer,
-            ISOStringToDate(familiehendelsedato)!,
+            familiehendelsedato!,
             !!barn?.alleBarnaLever,
             sak.ytelse === Ytelse.FORELDREPENGER ? sak.familiehendelse.antallBarn : 0,
             intl,
             situasjon
+        );
+        const barnUndertittel = getBarnUndertittel(
+            barn?.fornavn,
+            barn?.fødselsdatoer,
+            situasjon,
+            familiehendelsedato!,
+            !!barn?.alleBarnaLever
         );
         return (
             <div className={bem.element('content')}>
@@ -125,8 +133,18 @@ const renderHeaderContent = (
                     <Heading size="xlarge">{getSaksoversiktHeading(sak.ytelse)}</Heading>
                     <div className={bem.element('text-with-bar')}>
                         <BodyShort>{`SAKSNR ${sak?.saksnummer}`}</BodyShort>
-                        <div className={bem.element('divider')}>|</div>
-                        <BodyShort className={bem.element('divider-text')}>{beskrivelse}</BodyShort>
+                        <hr
+                            className={classNames(
+                                bem.element('divider'),
+                                barnUndertittel ? bem.modifier('divider-long') : bem.modifier('divider-short')
+                            )}
+                        ></hr>
+                        <div>
+                            <BodyShort className={bem.element('divider-text')}>{barnTittel}</BodyShort>
+                            {barnUndertittel && (
+                                <BodyShort className={bem.element('divider-text')}>{barnUndertittel}</BodyShort>
+                            )}
+                        </div>
                     </div>
                     <StatusTag sak={sak} className={bem.element('tag')} />
                 </div>
