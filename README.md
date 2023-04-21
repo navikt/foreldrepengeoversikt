@@ -1,3 +1,5 @@
+Kodebasen er flyttet til et monorepo https://github.com/navikt/foreldrepengesoknad.
+
 # Innsyn for søknad om foreldrepenger
 
 Kildekoden til frontend-appen for ny innsynsløsning for
